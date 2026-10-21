@@ -1,17 +1,20 @@
-# laurum
+# Laurum
 
-A new Flutter project.
+Aplikasi kasir laundry untuk usaha rumahan (Flutter, Android dan iOS; saat ini hanya Android yang diuji). Offline-first (SQLite lokal, sinkron otomatis ke Supabase), login Google, dengan fitur AI pembaca pesan WhatsApp yang dikembangkan belakangan.
 
-## Getting Started
+## Status
+Tahap awal: tampilan Flutter di atas data dummy. Backend, AI, dan fitur Pro menyusul.
 
-This project is a starting point for a Flutter application.
+## Menjalankan
+```
+flutter pub get
+flutter run -t lib/main_dummy.dart     # mode data dummy
+dart run tool/check_all.dart           # format, analyze, lint, arsitektur, test
+```
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Dokumen
+- `docs/prd/prd-a-ui.md`: PRD tampilan
+- `docs/prd/prd-b-backend.md`: PRD sistem dan backend
+- `docs/design/`: `laurum-ready.pen` (acuan visual), `tokens.md`, `widget_registry.yaml`, `data_master.md`, `receipt_template.md`, `screens/` (spec layar), `proposals/`
+- `docs/prompts/`: prompt kerja agen per fase
+- `AGENTS.md`: aturan wajib untuk agen kode

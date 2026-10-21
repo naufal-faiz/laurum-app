@@ -1,1 +1,1 @@
-### Check AGENTS.md untuk arahan dan peraturan
+@AGENTS.md

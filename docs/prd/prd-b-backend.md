@@ -197,3 +197,14 @@ Tabel yang sama di SQLite dan Postgres. Kolom umum di semua tabel kecuali dicata
 3. Jalur WhatsApp untuk rilis publik: resmi (Cloud API) atau tetap tidak resmi?
 4. Kapan pindah ke Supabase Pro? Disarankan sebelum rilis publik luas.
 5. Crash reporting (Sentry/Crashlytics) atau cukup log lokal?
+
+## 17. Catatan iOS
+
+Aplikasi dibangun untuk Android dan iOS dari satu basis kode, tetapi **belum ada lingkungan uji iOS**. Hal yang berbeda dan harus diputuskan sebelum iOS dirilis:
+
+- **Printer thermal:** iOS tidak mengizinkan Bluetooth Classic (SPP) untuk aksesori non-MFi, hanya Bluetooth LE. Banyak printer thermal 58 mm murah memakai Classic. `PrintService` harus mendukung BLE (atau printer Wi-Fi/LAN) agar iOS berjalan; periksa tipe printer yang dipakai pengguna.
+- **Login:** App Store umumnya mewajibkan opsi login setara bila memakai login pihak ketiga (Guideline 4.8), misalnya Sign in with Apple. Supabase mendukungnya. Perlu keputusan sebelum rilis iOS.
+- **Sinkron latar:** `workmanager` di iOS dibatasi sistem dan tidak bisa dijadwalkan tiap 15 menit. Andalkan sinkron saat aplikasi aktif dan saat koneksi pulih.
+- **Izin:** string izin di `Info.plist` untuk kontak, Bluetooth, dan kamera; label privasi App Store.
+- **Biaya dan alat:** Apple Developer Program (berbayar tahunan) dan Mac untuk build rilis.
+- **Aturan kerja:** fitur platform-spesifik diuji di Android dulu dan ditandai "belum diuji di iOS" di spec layar.

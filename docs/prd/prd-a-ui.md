@@ -1,6 +1,6 @@
 # PRD A — Tampilan Aplikasi Laurum (Flutter)
 
-Versi 1.0 · 20 Oktober 2026 · Sumber desain: `Laurum_Ready.pen` (33 layar + 33 varian state). Pasangan dokumen: PRD B (Sistem dan Backend) dan Kit Agen (AGENTS.md, linter, registry).
+Versi 1.0 · 20 Oktober 2026 · Sumber desain: `laurum-ready.pen` (33 layar + 33 varian state). Pasangan dokumen: PRD B (Sistem dan Backend) dan Kit Agen (AGENTS.md, linter, registry).
 
 ## 1. Ringkasan
 
@@ -30,11 +30,11 @@ File bisa dibaca (format JSON, 8.939 node, 36 objek tingkat atas).
 
 **Dalam lingkup:** 33 layar dan state-nya, tema dan token, navigasi, katalog komponen, Widgetbook, data dummy dari DATA MASTER (Prompt 0 di dokumen sebelumnya), tes widget dasar.
 
-**Di luar lingkup fase ini:** backend nyata dan sinkronisasi (PRD B), AI nyata, printer Bluetooth nyata (diganti `FakePrintService`), Play Billing, notifikasi, dark mode, tablet/landscape, bahasa selain Indonesia, iOS.
+**Di luar lingkup fase ini:** backend nyata dan sinkronisasi (PRD B), AI nyata, printer Bluetooth nyata (diganti `FakePrintService`), Play Billing, notifikasi, dark mode, tablet/landscape, bahasa selain Indonesia.
 
 ## 4. Stack UI
 
-- Flutter stable terbaru, Android sebagai target utama (target API 36 untuk Play Store).
+- Flutter stable terbaru. Satu basis kode untuk **Android dan iOS**; pengujian awal hanya di Android (belum ada lingkungan uji iOS, lihat PRD B bagian 17). Target API 36 untuk Play Store.
 - `flutter_riverpod` (tanpa codegen), `go_router`, `equatable`, `intl` (locale `id_ID`), `ionicons`, `flutter_svg`.
 - Dev: `flutter_lints`, `custom_lint` + `riverpod_lint`, `widgetbook`.
 - Agen **tidak boleh menebak nomor versi**. Pasang dengan `flutter pub add <paket>` dan pakai versi yang di-resolve.
@@ -126,7 +126,7 @@ Nama layar mengikuti frame di `.pen`. Kolom Fase merujuk bagian 10.
 
 ## 10. Fase pengerjaan
 
-**Fase 0 — Inisiasi.** Buat proyek, pasang dependensi, bundel font, tema dan token, `analysis_options.yaml`, `tool/check_arch.dart`, `AGENTS.md`, folder `docs/design/` (registry, katalog, spec layar), skeleton Widgetbook, skrip `tool/check_all.sh`, CI. *Selesai bila* `flutter run -t lib/main_dummy.dart` menampilkan layar kosong bertema dan semua pemeriksaan hijau.
+**Fase 0 — Inisiasi.** Buat proyek, pasang dependensi, bundel font, tema dan token, `analysis_options.yaml`, `tool/check_arch.dart`, `AGENTS.md`, folder `docs/design/` (registry, katalog, spec layar), skeleton Widgetbook, skrip `tool/check_all.dart`, CI. *Selesai bila* `flutter run -t lib/main_dummy.dart` menampilkan layar kosong bertema dan semua pemeriksaan hijau.
 
 **Fase 1 — Komponen (sebelum layar apa pun).** Kerjakan per lapisan: atoms, molecules, organisms, templates. Per widget: file (≤100 baris), use-case Widgetbook (semua varian), tes widget, entri registry. **Gerbang:** kamu meninjau Widgetbook sebelum Fase 2 dimulai.
 

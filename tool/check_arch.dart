@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 const maxLines = 110;
@@ -59,7 +60,7 @@ Registry loadRegistry() {
 List<String> checkFile(String path, String text, Registry reg) {
   final out = <String>[];
   void add(int line, String msg) => out.add('$path:$line: $msg');
-  final lines = text.split('\n');
+  final lines = const LineSplitter().convert(text);
   if (lines.length > maxLines) add(lines.length, 'file ${lines.length} baris (maks $maxLines)');
   for (var i = 0; i < lines.length; i++) {
     final line = lines[i];
@@ -86,9 +87,10 @@ List<String> checkFile(String path, String text, Registry reg) {
     final name = m.group(1)!, base = m.group(2)!;
     final line = '\n'.allMatches(text.substring(0, m.start)).length + 1;
     final isPage = path.contains('/pages/') && RegExp(r'(Page|Sheet)$').hasMatch(name);
+    final isAppRoot = path == 'lib/app.dart';
     if (name.startsWith('_')) {
       add(line, 'widget privat dilarang: $name');
-    } else if (!isPage && !reg.all.contains(name)) {
+    } else if (!isPage && !isAppRoot && !reg.all.contains(name)) {
       add(line, 'widget tidak ada di registry: $name');
     }
     if (base.contains('Stateful') && !reg.stateful.contains(name)) {
