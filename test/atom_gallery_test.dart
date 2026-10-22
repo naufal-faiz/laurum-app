@@ -3,10 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 
+import '../widgetbook/atoms/app_avatar_use_case.dart';
+import '../widgetbook/atoms/app_badge_use_case.dart';
+import '../widgetbook/atoms/app_button_use_case.dart';
 import '../widgetbook/atoms/app_card_use_case.dart';
+import '../widgetbook/atoms/app_chip_use_case.dart';
 import '../widgetbook/atoms/app_divider_use_case.dart';
 import '../widgetbook/atoms/app_gap_use_case.dart';
+import '../widgetbook/atoms/app_icon_button_use_case.dart';
 import '../widgetbook/atoms/app_icon_use_case.dart';
+import '../widgetbook/atoms/app_status_text_use_case.dart';
+import '../widgetbook/atoms/app_switch_use_case.dart';
 import '../widgetbook/atoms/app_text_use_case.dart';
 
 void main() {
@@ -26,6 +33,13 @@ void main() {
     'app_icon': appIconUseCase,
     'app_gap': appGapUseCase,
     'app_divider': appDividerUseCase,
+    'app_avatar': appAvatarUseCase,
+    'app_badge': appBadgeUseCase,
+    'app_button': appButtonUseCase,
+    'app_chip': appChipUseCase,
+    'app_icon_button': appIconButtonUseCase,
+    'app_status_text': appStatusTextUseCase,
+    'app_switch': appSwitchUseCase,
     'app_card': appCardUseCase,
   }.entries) {
     testWidgets('${entry.key} gallery renders all variants', (tester) async {

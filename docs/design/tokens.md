@@ -103,3 +103,13 @@ Uang disimpan `int` rupiah dan berat `int` gram. Tidak ada `double` untuk uang.
 Nilai lama tidak diubah. Beberapa label mono di .pen memakai w600; monoLabel
 proyek tetap w400. Separator plTzD memakai chipIdle; AppDivider generik memakai
 border sesuai aturan pemisah di dokumen ini. Selisih dicatat di component_catalog.md.
+
+## Token kontrol Fase 1 (tambahan yang diperlukan, izin pengguna)
+- AppControlTokens: CTA 56 (B4bt3y); padding horizontal 12 dan gap ikon 8 (h8n1Hk).
+- Badge padding 2 vertikal / 10 horizontal (s9ip1); avatar 40 (SlEQS).
+- Switch: track tinggi 28, thumb 24, inset 2 (ZOUFH/qcTo3); lebar/area 48 memakai touchTarget.
+- AppButtonStyles memakai radius/warna lama dan border default Flutter 1 logical pixel
+  (sama dengan AppDimensions.line). Tidak ada token lama yang diubah.
+- Disabled: foreground ink3, latar chipIdle, border border; switch opacity 0.5.
+  Nilai opacity ini keputusan implementasi yang belum memiliki referensi disabled terverifikasi.
+- CTA/secondary tetap memakai cta w700 sesuai PRD meskipun frame memakai w600.

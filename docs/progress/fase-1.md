@@ -59,3 +59,38 @@ SELESAI untuk kelompok ini; menunggu tinjauan pengguna sebelum kelompok berikutn
 - Seluruh berkas Dart baru maksimal 100 baris. Registry dan aturan lint tidak diubah.
 
 Tinjau melalui flutter run -d chrome -t widgetbook/main.dart (target web sudah tersedia di workspace), atau lihat galeri PNG di test/goldens/.
+
+## 22 Oktober 2026 — kelompok atom kontrol
+
+Lingkup: AppButton, AppIconButton, AppChip, AppBadge, AppStatusText, AppAvatar, AppSwitch.
+Pengguna meminta melanjutkan pengembangan setelah pembacaan prompt terbaru.
+
+| Widget | Baris Dart |
+| --- | ---: |
+| AppButton | 54 |
+| AppIconButton | 40 |
+| AppChip | 40 |
+| AppBadge | 31 |
+| AppStatusText | 22 |
+| AppAvatar | 36 |
+| AppSwitch | 50 |
+
+- Tujuh use-case, tujuh tes widget dan tujuh golden baru; total 30 tes lulus.
+- check_all SEMUA HIJAU: format, flutter analyze, dart analyze, check_arch, test, repo_map.
+- Tidak mengubah registry/aturan lint atau menambah paket/provider/layar/fixture bisnis.
+- Token kontrol tambahan berdasarkan desain; nilai token lama tetap.
+- Semantik chip digabung untuk status selected dan aksi; switch menerima value/callback eksternal.
+- Screenshot Pencil dibandingkan dengan galeri Flutter; tidak ada overflow.
+- Referensi: B4bt3y/Ax5fO/h8n1Hk/azFlV/xpKx9/e32I1Q (tombol), jo0oP (ikon),
+  VFXLp/EciH5 (chip), s9ip1 (badge), G8xEZi (bayar), SlEQS (avatar), ZOUFH/qcTo3 (switch).
+- Selisih: CTA/secondary w700 token vs w600 desain; Ionicons mengganti glyph;
+  status bayar tanpa titik dekoratif, sesuai PRD berupa teks.
+- Disabled memakai token yang tersedia; opacity switch 0.5 belum punya frame acuan terverifikasi.
+- Referensi PNG: docs/progress/fase-1-controls-visuals/; detail API di component_catalog.md.
+- Android SDK 36.0.0/JDK 25 terdeteksi dan lisensi lengkap. Belum ada perangkat tersambung.
+- Build awal gagal karena NDK 28.2.13676358 belum terpasang dan SDK Manager baru memecah
+  identifier paket lama. Pemasangan langsung ndk/28.2.13676358 berhasil mulai mengunduh; dihentikan sekitar 14% atas permintaan pengguna. APK ditunda.
+- iOS belum diuji (Windows tanpa Xcode).
+- flutter build bundle -t widgetbook/main.dart: lulus.
+- Pengguna memilih menunda APK dan menutup kelompok widget; unduhan NDK dihentikan.
+- Kelompok kontrol selesai dan menunggu tinjauan. Tidak memulai kelompok selanjutnya.
