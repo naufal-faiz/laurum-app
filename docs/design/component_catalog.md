@@ -1,5 +1,62 @@
 # Katalog komponen Laurum
 
+## SectionHeader
+- Berkas: lib/shared/widgets/molecules/section_header.dart.
+- API dan contoh: title wajib; subtitle/actionLabel/onAction opsional. SectionHeader(title: title, actionLabel: label, onAction: onTap).
+- Varian: utama dan opsi tambahan pada API.
+- Galeri: widgetbook/molecules/section_header_use_case.dart; tes: test/section_header_test.dart.
+- Acuan Pencil: ogqS8; selisih dicatat di docs/progress/fase-1.md.
+
+## InfoRow
+- Berkas: lib/shared/widgets/molecules/info_row.dart.
+- API dan contoh: label/value wajib; icon opsional. InfoRow(label: label, value: formattedValue). Nilai sudah diformat oleh pemanggil.
+- Varian: utama dan opsi tambahan pada API.
+- Galeri: widgetbook/molecules/info_row_use_case.dart; tes: test/info_row_test.dart.
+- Acuan Pencil: pA7A7; selisih dicatat di docs/progress/fase-1.md.
+
+## StatTile
+- Berkas: lib/shared/widgets/molecules/stat_tile.dart.
+- API dan contoh: label/value wajib; description/icon opsional. StatTile(label: label, value: formattedValue).
+- Varian: utama dan opsi tambahan pada API.
+- Galeri: widgetbook/molecules/stat_tile_use_case.dart; tes: test/stat_tile_test.dart.
+- Acuan Pencil: C2MvH3; selisih dicatat di docs/progress/fase-1.md.
+
+## DateGroupHeader
+- Berkas: lib/shared/widgets/molecules/date_group_header.dart.
+- API dan contoh: label wajib; summary/summaryColor opsional. DateGroupHeader(label: Formatters.tanggal(date), summary: total).
+- Varian: utama dan opsi tambahan pada API.
+- Galeri: widgetbook/molecules/date_group_header_use_case.dart; tes: test/date_group_header_test.dart.
+- Acuan Pencil: DaGCC; selisih dicatat di docs/progress/fase-1.md.
+
+## ProgressRow
+- Berkas: lib/shared/widgets/molecules/progress_row.dart.
+- API dan contoh: label/progress (0..1) wajib; value opsional sudah diformat. ProgressRow(label: label, progress: fraction).
+- Varian: kosong, sebagian, penuh.
+- Galeri: widgetbook/molecules/progress_row_use_case.dart; tes: test/progress_row_test.dart.
+- Acuan Pencil: ZFy5T; selisih dicatat di docs/progress/fase-1.md.
+
+## MenuRow
+- Berkas: lib/shared/widgets/molecules/menu_row.dart.
+- API dan contoh: label/icon wajib; subtitle/onTap opsional. MenuRow(label: label, icon: AppIcons.service, onTap: action). Tidak menavigasi.
+- Varian: label, subtitle, disabled.
+- Galeri: widgetbook/molecules/menu_row_use_case.dart; tes: test/menu_row_test.dart.
+- Acuan Pencil: MkVX5; selisih dicatat di docs/progress/fase-1.md.
+
+## ToggleRow
+- Berkas: lib/shared/widgets/molecules/toggle_row.dart.
+- API dan contoh: label/value wajib; description/onChanged opsional. ToggleRow(label: label, value: enabled, onChanged: onToggle). icon opsional untuk ikon pendamping.
+- Varian: on/off, enabled/disabled.
+- Galeri: widgetbook/molecules/toggle_row_use_case.dart; tes: test/toggle_row_test.dart.
+- Acuan Pencil: SW1pv; selisih dicatat di docs/progress/fase-1.md.
+
+## LockedRow
+- Berkas: lib/shared/widgets/molecules/locked_row.dart.
+- API dan contoh: label/lockLabel wajib; description opsional. LockedRow(label: label, lockLabel: status). Tanpa callback/interaksi. icon opsional untuk ikon pendamping.
+- Varian: utama dan opsi tambahan pada API.
+- Galeri: widgetbook/molecules/locked_row_use_case.dart; tes: test/locked_row_test.dart.
+- Acuan Pencil: aSIwH; selisih dicatat di docs/progress/fase-1.md.
+
+
 Atom Fase 1 mengikuti registry; field stateful untuk lifecycle controller. Tanpa provider,
 model bisnis, navigasi, atau dependensi baru. Formatter Dart: `dart format`.
 Parameter warna/ukuran pada pemakaian harus berasal dari `core/theme`.

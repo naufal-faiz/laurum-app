@@ -127,3 +127,19 @@ Lingkup: AppTextField, AppSearchField, AppSkeleton, AppNumpadKey.
 - Pemeriksaan akhir 23 Oktober: check_all SEMUA HIJAU (format, flutter analyze,
   dart analyze, check_arch, 39 tes, repo_map 75 berkas); format Widgetbook juga lulus.
 - Kelompok selesai. Semua 17 atom registry tersedia; berhenti menunggu tinjauan pengguna.
+
+## Molecules M1 — 23 Oktober 2026
+- Delapan widget, delapan use-case semua varian, delapan tes perilaku dan delapan golden.
+- Acuan Pencil tersimpan di docs/progress/fase-1-m1-visuals/.
+- SectionHeader (ogqS8): judul sesuai section; garis bawah dan teks kanan statis pada frame belum menjadi opsi khusus (aksi opsional tersedia).
+- InfoRow (pA7A7): frame berupa ikon/alamat inline; API menyediakan pasangan label/nilai fleksibel untuk pemakaian umum.
+- StatTile (C2MvH3): padding 16 vs 14, nilai figure 24 vs frame sekitar 18, ikon tanpa kotak latar. Menggunakan token/atom yang tersedia.
+- DateGroupHeader (DaGCC): latar, dot 8, padding 10/16 sesuai; teks berasal dari pemanggil.
+- ProgressRow (ZFy5T): track pill 8 dan warna sesuai; label/nilai di atas track.
+- MenuRow (MkVX5): ikon langsung tanpa kotak latar frame; glyph Ionicons menggantikan Lucide.
+- ToggleRow (SW1pv): target switch 48 plus padding vertikal 6 menghasilkan baris minimum 60 vs frame 48; tidak memperkecil target sentuh.
+- LockedRow (aSIwH): label dan ikon lock sesuai; tinggi mengikuti isi/padding, bukan dikunci 48.
+- Tidak mengubah atoms. Opsi ikon pendamping tersedia pada ToggleRow/LockedRow. Data galeri teknis, bukan fixture bisnis.
+- AppBarRoot nanti memakai slot syncIndicator dari pemanggil agar tidak mengimpor molecule lain.
+- APK tetap ditunda; runtime iOS dan pembaca layar perangkat belum diuji.
+- Checkpoint M1: check_all SEMUA HIJAU, 55 tes, repo_map 102 berkas (23 Oktober).

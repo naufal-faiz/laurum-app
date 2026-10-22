@@ -1,0 +1,11 @@
+# Seluruh molecules, tiga titik simpan
+- M1: SectionHeader, InfoRow, StatTile, DateGroupHeader, ProgressRow, MenuRow, ToggleRow, LockedRow.
+- M2: LabeledField, BannerMessage, NoticeAi, CalloutAi, EmptyState, SyncIndicator.
+- M3: ChipBar, PeriodTabs, NominalChips, StepperField, AppBarSub, AppBarRoot, FooterBar.
+- Tiap kelompok: implementasi + use-case + tes/golden + katalog + perbandingan Pencil.
+- check_all hijau, update STATE dan commit feat: molecules M1/M2/M3 sebelum lanjut.
+- Molecules hanya mengimpor atoms/core; AppBarRoot menerima slot syncIndicator yang diisi SyncIndicator.
+- Data dan callback dari pemanggil. Tidak ada navigasi/provider/fitur/registry baru.
+- Atom kurang API: catat dan minta izin; jangan mengubah atom.
+- NoticeAi memakai kalimat persis K1Xa3y; warna/ukuran baru hanya core/theme.
+- APK tetap ditunda. Hentikan setelah M3 untuk tinjauan pengguna.
