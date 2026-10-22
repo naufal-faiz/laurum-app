@@ -71,7 +71,7 @@ void main() {
       currentDir = dir;
     }
     final count = f.readAsLinesSync().length;
-    body.writeln('- ${path.split('/').last} ($count): ${names.join(', ')}');
+    body.writeln('- ${path.split('/').last} ($count): ${names.join(', ')}'.trimRight());
   }
 
   final registry = _registry();
@@ -95,6 +95,6 @@ void main() {
     ..writeln()
     ..writeln('## Berkas (jumlah baris): nama deklarasi')
     ..write(body);
-  File('docs/REPO_MAP.md').writeAsStringSync('$out\n');
+  File('docs/REPO_MAP.md').writeAsStringSync('${out.toString().trimRight()}\n');
   stdout.writeln('REPO_MAP diperbarui: ${files.length} berkas');
 }

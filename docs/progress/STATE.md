@@ -2,7 +2,7 @@
 Ringkasan aktif; jejak rinci ada di docs/progress/fase-N.md. Maksimal sekitar 60 baris.
 
 Diperbarui: 2026-10-22 oleh Codex | Cabang: dev1
-Commit implementasi terakhir: 0495481 (enam atom pertama). Commit sinkronisasi: lihat git log -1.
+Commit implementasi terakhir: 0495481 (enam atom pertama). Commit sinkronisasi: 529f0eb. Perbaikan generator: lihat git log -1.
 
 ## Posisi
 Fase 1: kelompok atom pertama selesai, menunggu tinjauan pengguna.
@@ -17,7 +17,7 @@ Fondasi Fase 0 selesai; verifikasi build/perangkat Android masih tertunda.
 - Bundle Widgetbook berhasil dikompilasi pada pekerjaan sebelumnya.
 
 ## Sedang dikerjakan
-- Sinkronisasi panduan/progres dan REPO_MAP; bukan implementasi kelompok baru.
+- Sinkronisasi panduan/progres dan REPO_MAP selesai; generator merapikan whitespace. Menunggu tinjauan kelompok pertama.
 - Langkah berikutnya: tinjau kelompok pertama, lalu mulai kelompok pada docs/prompts/fase-1.md setelah pengguna mengizinkan.
 
 ## Antrean
@@ -38,6 +38,7 @@ Fondasi Fase 0 selesai; verifikasi build/perangkat Android masih tertunda.
 - check_all sinkronisasi: SEMUA HIJAU (format, flutter analyze, dart analyze, check_arch, 16 tes, repo_map 39 berkas).
 - SDK Android sudah dipasang menurut pengguna; belum diverifikasi, pengujian ditunda ke tahap berikutnya sesuai permintaan.
 - iOS belum diuji (Windows tanpa Xcode).
+- package-lock.json muncul sebagai berkas untracked pengguna; tidak diubah atau dimasukkan dalam commit tugas ini.
 - Akses visual Pencil sebelumnya berhasil lewat MCP visual_studio_code; konektor desktop pernah gagal.
 
 ## Lingkungan

@@ -34,8 +34,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_theme.dart (44): AppTheme
 
 ### lib/
-- main.dart (10): 
-- main_dummy.dart (4): 
+- main.dart (10):
+- main_dummy.dart (4):
 
 ### lib/shared/widgets/atoms/
 - app_card.dart (47): AppCardRail, AppCard
@@ -46,29 +46,28 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_text.dart (64): AppTextVariant, AppText
 
 ### test/
-- app_card_test.dart (51): 
-- app_divider_test.dart (41): 
-- app_gap_test.dart (33): 
-- app_icon_test.dart (29): 
+- app_card_test.dart (51):
+- app_divider_test.dart (41):
+- app_gap_test.dart (33):
+- app_icon_test.dart (29):
 - app_svg_test.dart (42): SvgTestBundle
-- app_text_test.dart (39): 
-- atom_gallery_test.dart (53): 
-- formatters_test.dart (40): 
-- widget_test.dart (22): 
+- app_text_test.dart (39):
+- atom_gallery_test.dart (53):
+- formatters_test.dart (40):
+- widget_test.dart (22):
 
 ### tool/
 - check_all.dart (37): Step
 - check_arch.dart (121): Rule, Registry
-- pen_frame.dart (27): 
-- repo_map.dart (100): 
+- pen_frame.dart (27):
+- repo_map.dart (100):
 
 ### widgetbook/atoms/
-- app_card_use_case.dart (25): 
-- app_divider_use_case.dart (34): 
-- app_gap_use_case.dart (28): 
-- app_icon_use_case.dart (31): 
-- app_text_use_case.dart (21): 
+- app_card_use_case.dart (25):
+- app_divider_use_case.dart (34):
+- app_gap_use_case.dart (28):
+- app_icon_use_case.dart (31):
+- app_text_use_case.dart (21):
 
 ### widgetbook/
-- main.dart (39): 
-
+- main.dart (39):
