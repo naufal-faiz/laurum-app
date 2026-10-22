@@ -1,5 +1,5 @@
 Baca AGENTS.md, docs/prd/prd-a-ui.md (bagian 5 dan 6), docs/design/tokens.md, dan docs/design/widget_registry.yaml. Kerjakan HANYA kelompok widget ini:
-AppButton, AppIconButton, AppChip, AppBadge, AppStatusText, AppAvatar, AppSwitch
+AppTextField, AppSearchField, AppSkeleton, AppNumpadKey
 
 Untuk setiap widget:
 1. Satu berkas, maksimal 100 baris (batas keras 110), format dengan dart format. Semua varian dan parameter sesuai PRD A bagian 5.2.

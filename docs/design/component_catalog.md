@@ -1,6 +1,6 @@
 # Katalog komponen Laurum
 
-Kelompok pertama Fase 1: enam atom di registry. Semua stateless, tanpa provider,
+Atom Fase 1 mengikuti registry; field stateful untuk lifecycle controller. Tanpa provider,
 model bisnis, navigasi, atau dependensi baru. Formatter Dart: `dart format`.
 Parameter warna/ukuran pada pemakaian harus berasal dari `core/theme`.
 
@@ -10,7 +10,7 @@ Parameter warna/ukuran pada pemakaian harus berasal dari `core/theme`.
 - Parameter: `data` wajib; `variant = body`, `color = AppColors.ink`,
   `textAlign`, `maxLines`, `overflow`, `semanticsLabel`, `key`.
 - Varian `AppTextVariant`: titleRoot, titleSub, section, figure, body,
-  bodyStrong, input, label, caption, cta, monoLabel, monoReceipt.
+  bodyStrong, input, label, caption, cta, numpad, monoLabel, monoReceipt.
 - Semua varian memakai AppTextStyles; Plus Jakarta Sans untuk UI, IBM Plex Mono
   hanya nomor nota, jam, label grafik, dan struk. Skala teks sistem tetap dihormati.
 - Contoh: `AppText(title, variant: AppTextVariant.titleRoot)`.
@@ -184,3 +184,65 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   chipIdle/border serta opacity 0.5 untuk switch. Perlu tinjauan visual pengguna.
 - Contoh Widgetbook bersifat galeri statis; callback contoh tidak menyimpan state.
   Tes memeriksa callback, sedangkan state layar nanti ditangani Riverpod pada Pages.
+
+## AppTextField
+- Berkas: lib/shared/widgets/atoms/app_text_field.dart (88 baris).
+- Parameter: label wajib (aksesibilitas, bukan label visual); value = ''; hint/errorText;
+  onChanged/onSubmitted; keyboardType/textInputAction/inputFormatters; enabled = true;
+  readOnly/obscureText = false; minLines/maxLines = 1; key.
+- Contoh: AppTextField(label: label, value: value, errorText: error, onChanged: onChange).
+- Varian galeri: kosong, terisi, error, disabled, readOnly, password, multiline.
+- Controller dimiliki widget dan dibuang di dispose. Perubahan value eksternal mengganti teks
+  dan memindah caret ke akhir; echo nilai yang sama tidak mengubah selection/composing.
+- Validasi/format bisnis milik pemanggil. Label visual disusun LabeledField pada tahap molecules.
+- obscureText dikontrol pemanggil; tombol toggle mata pada j6ZtZV belum disediakan.
+- Tes: entry/filter, submit, value eksternal, error, disposal dan opsi varian.
+- Acuan kmkgP/sfkVN/LRZzT: radius 8, borderStrong, input 16/24 w400.
+- Selisih: tinggi baku 48 mengikuti token, beberapa frame 44. Multiline galeri 72 cocok LRZzT,
+  tetapi isi rata atas dibanding contoh satu baris rata tengah di desain.
+
+## AppSearchField
+- Berkas: lib/shared/widgets/atoms/app_search_field.dart (88 baris).
+- Parameter: label dan clearLabel wajib; value = ''; hint; onChanged/onSubmitted; enabled = true; key.
+- Contoh: AppSearchField(label: label, clearLabel: clearLabel, value: query, onChanged: onQuery).
+- Varian galeri: kosong, terisi dengan clear, disabled terisi. Tidak ada debounce internal.
+- Controller internal, sinkronisasi value eksternal dan dispose seperti AppTextField.
+- Ikon search/close lewat AppIcon. Clear muncul saat teks ada, mengosongkan controller dan
+  memanggil onChanged('') sekali. Disabled mematikan ketikan dan clear.
+- ValueListenableBuilder memperbarui clear tanpa setState; TextInputAction.search untuk submit.
+- Suffix IconButton transparan + AppIcon menjaga border tetap terlihat.
+- Tes: entry, clear, submit, callback, sinkronisasi, selection, disabled dan disposal.
+- Acuan T24HQe: putih, radius 8, borderStrong, ikon 20, teks 16/24, tinggi 48.
+- Selisih: placeholder satu baris dibanding contoh panjang yang membungkus di frame;
+  clear tambahan saat terisi; glyph Ionicons sesuai Kit Agen.
+
+## AppSkeleton
+- Berkas: lib/shared/widgets/atoms/app_skeleton.dart (25 baris).
+- Parameter: width = double.infinity, height = AppInputStyles.skeletonHeight (20), key.
+- Contoh: AppSkeleton(width: AppInputStyles.skeletonShort).
+- Persegi panjang statis tanpa shimmer; radius input 8, chipIdle. Ukuran positif;
+  width default memerlukan parent berlebar terbatas. Dikecualikan dari semantik.
+- Galeri: 96x16, 192x22, lebar penuh x20 dan x48.
+- Tes: ukuran, warna, ExcludeSemantics dan tidak ada frame animasi terjadwal.
+- Acuan Q1YznQ/e48H25/dStCL/E2wCq; cocok ukuran/bentuk/warna.
+
+## AppNumpadKey
+- Berkas: lib/shared/widgets/atoms/app_numpad_key.dart (54 baris).
+- Parameter: value (AppNumpadKeyValue) wajib; onPressed/semanticLabel opsional; key.
+- Enum: zero sampai nine, tripleZero, decimal (koma), backspace.
+- semanticLabel wajib untuk backspace (assert); label lain dapat diganti untuk aksesibilitas.
+- Contoh: AppNumpadKey(AppNumpadKeyValue.decimal, onPressed: onDecimal).
+- Tidak merakit angka atau menghitung uang/berat; parent Numpad menentukan urutan dan aksi.
+- Tinggi minimum 56, radius 12, surfaceLow; token angka numpad 18/24 w700.
+- onPressed null menonaktifkan aksi; hapus melalui AppIcons.backspace.
+- Galeri 13 tombol + disabled; tes label/ikon, tinggi, callback dan disabled.
+- Acuan f0G1R/TU6VH/ONyEv; cocok ukuran/warna/tipografi, glyph hapus Ionicons berbeda dari Lucide.
+
+## Verifikasi visual kelompok input
+- Empat galeri Flutter dan perluasan AppText diperiksa tanpa overflow.
+- Screenshot MCP Pencil: docs/progress/fase-1-inputs-visuals/.
+- AppText mendapat varian numpad untuk memakai token baru tanpa gaya teks di luar tema.
+- Frame error/focus/disabled khusus field belum terverifikasi; menggunakan token errorTint,
+  error/errorInk, primary, chipIdle/ink3. State tersebut perlu tinjauan pengguna.
+- Contoh galeri adalah label teknis, bukan data bisnis. Keyboard/IME dan pembaca layar
+  Android/iOS belum diuji pada perangkat; tes widget dijalankan di Windows.

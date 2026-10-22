@@ -13,6 +13,7 @@ enum AppTextVariant {
   label,
   caption,
   cta,
+  numpad,
   monoLabel,
   monoReceipt;
 
@@ -27,6 +28,7 @@ enum AppTextVariant {
     label => AppTextStyles.label,
     caption => AppTextStyles.caption,
     cta => AppTextStyles.cta,
+    numpad => AppTextStyles.numpad,
     monoLabel => AppTextStyles.monoLabel,
     monoReceipt => AppTextStyles.monoReceipt,
   };

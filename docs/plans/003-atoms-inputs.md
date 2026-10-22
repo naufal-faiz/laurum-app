@@ -1,0 +1,11 @@
+# Atom input dan numpad
+- Lingkup: AppTextField, AppSearchField, AppSkeleton, AppNumpadKey.
+- AppTextField/SearchField memiliki controller internal, sinkronisasi value eksternal, dispose.
+- Tidak memakai setState/provider; search memakai ValueListenableBuilder untuk tombol clear.
+- Field: kosong/terisi/error/disabled/readOnly/password/multiline; search kosong/terisi/disabled.
+- Skeleton statis persegi panjang sesuai Pencil, ukuran diberikan pemanggil.
+- Numpad: digit, 000, koma dan hapus, callback tanpa logika uang/berat.
+- Tambahan token dasar mengikuti izin pengguna; nilai lama tidak berubah.
+- Referensi: T24HQe/kmkgP/LRZzT, Q1YznQ/e48H25/dStCL/E2wCq, f0G1R/TU6VH/ONyEv.
+- Buat empat use-case/tes/golden, katalog, progress dan STATE; check_all wajib hijau.
+- APK tetap ditunda; berhenti untuk tinjauan setelah kelompok selesai.

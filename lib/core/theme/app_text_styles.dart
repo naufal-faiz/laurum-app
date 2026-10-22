@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 
 abstract final class AppTextStyles {
   static const fontFamily = 'Plus Jakarta Sans';
+  static const numpad = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 18,
+    height: 24 / 18,
+    fontWeight: FontWeight.w700,
+  );
   static const monoFamily = 'IBM Plex Mono';
   static const titleRoot = TextStyle(
     fontFamily: fontFamily,

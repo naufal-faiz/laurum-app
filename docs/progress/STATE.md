@@ -1,49 +1,45 @@
 # STATE Laurum
-Ringkasan aktif; jejak rinci ada di docs/progress/fase-N.md. Maksimal sekitar 60 baris.
+Ringkasan aktif; jejak rinci ada di docs/progress/fase-N.md.
 
-Diperbarui: 2026-10-22 oleh Codex | Cabang: dev1
-Commit kelompok atom pertama: 0495481; sinkronisasi: 529f0eb/5480e07.
-Commit kelompok kontrol: lihat git log -1.
+Diperbarui: 2026-10-23 oleh Codex | Cabang: dev1
+Commit sebelumnya: cbd3678 (atom kontrol). Commit kelompok input: lihat git log -1.
 
 ## Posisi
-Fase 1: dua kelompok atom selesai (13/60 widget registry), menunggu tinjauan pengguna.
-Fondasi Fase 0 selesai; build/perangkat Android belum terverifikasi.
+Fase 1: semua 17 atom registry sudah diimplementasikan (17/60 widget total).
+Kelompok input selesai dan menunggu tinjauan pengguna; jangan mulai molecules.
 
 ## Selesai
-- Fondasi: application ID com.cashier.laurum, dependensi, font, tema, Formatters, ikon, app dummy.
-- Lint Riverpod terbukti via dart analyze; dua probe negatif dihapus (PRD A bagian 13).
-- Kelompok pertama: AppText, AppIcon, AppGap, AppDivider, AppCard, AppSvg.
-- Kelompok kontrol: AppButton (54), AppIconButton (40), AppChip (40), AppBadge (31), AppStatusText (22), AppAvatar (36), AppSwitch (50 baris).
-- Tujuh use-case/tes/golden baru; katalog, screenshot Pencil dan perbandingan visual tersedia.
-- check_all SEMUA HIJAU: format, flutter analyze, dart analyze, check_arch, 30 tes, repo_map (62 berkas).
-- flutter build bundle -t widgetbook/main.dart berhasil; semua galeri diperiksa tanpa overflow.
-- AppSvg siap tetapi belum ada SVG produksi; path kosong dan use-case ditunda.
+- Fondasi Fase 0: app dummy, dependensi/font, tema/formatter/ikon, application ID com.cashier.laurum.
+- Kelompok pertama enam atom dan kelompok kontrol tujuh atom selesai.
+- Kelompok input: AppTextField (88), AppSearchField (88), AppSkeleton (25), AppNumpadKey (54 baris).
+- Empat use-case/berkas tes/golden baru, katalog dan screenshot Pencil tersedia.
+- Varian AppText.numpad memakai token baru 18/24 w700; token lama tetap.
+- Controller field dimiliki/dispose oleh widget; tidak ada setState/provider pada atom.
+- Bundle Widgetbook berhasil; check_all SEMUA HIJAU: kedua analyzer, check_arch, 39 tes, repo_map 75 berkas.
+- AppSvg siap, tetapi belum ada SVG produksi; path kosong dan use-case ditunda.
 
 ## Sedang dikerjakan
-- Tidak ada implementasi aktif. Pengguna memilih menunda APK dan menutup kelompok widget.
-- Langkah berikutnya: tinjau Widgetbook kelompok kontrol. Jangan mulai kelompok lain tanpa instruksi.
-
-## Antrean
-1. Setelah tinjauan: ikuti prompt kelompok berikutnya; sisa atom registry AppTextField, AppSearchField, AppSkeleton, AppNumpadKey.
-2. Saat pengujian APK dilanjutkan: pasang NDK 28.2.13676358 lewat sdkmanager --install "ndk/28.2.13676358", lalu build APK dummy.
-3. Jalankan main_dummy pada HP/emulator Android bila tersedia; iOS memerlukan macOS/Xcode.
+- Tidak ada implementasi aktif; kelompok input ditutup untuk tinjauan pengguna.
+- Langkah berikutnya setelah persetujuan: kerjakan kelompok molecules yang ditentukan pengguna.
 
 ## Keputusan berlaku
-- custom_lint dilepas; riverpod_lint 3.1.9 native melalui dart analyze, tanpa override/downgrade.
-- Progress selalu di docs/progress; prompt hanya instruksi; REPO_MAP otomatis lewat check_all.
-- Token kontrol baru berdasarkan Pencil; token lama tidak diubah. Batas 100 baris (keras 110).
-- CTA/secondary memakai cta w700 sesuai PRD meski frame w600; ikon memakai Ionicons.
-- Status bayar tanpa titik dekoratif; disabled belum punya referensi khusus terverifikasi.
-- Widgetbook galeri statis; state kontrol tetap data/callback eksternal, tanpa provider di atom.
+- custom_lint dilepas; riverpod_lint 3.1.9 lewat dart analyze, tanpa override/downgrade.
+- Progress di docs/progress; prompt hanya instruksi; REPO_MAP otomatis lewat check_all.
+- Batas 100 baris (keras 110); satu kelompok per tinjauan. Tidak mengubah registry/aturan lint.
+- Field default tinggi 48 sesuai token, beberapa frame 44; skeleton statis sesuai desain.
+- Placeholder search satu baris; clear muncul saat berisi. Numpad hanya mengirim callback.
+- Field password menerima obscureText; toggle mata belum disediakan.
+- Frame khusus focus/error/disabled field belum terverifikasi, warna memakai token.
+- Glyph Ionicons menggantikan Lucide sesuai Kit Agen.
 - Formatter menerima WIB lokal; konversi UTC/WIB di satu titik saat Drift masuk.
 
-## Pemeriksaan dan batas
-- Android SDK 36.0.0/JDK 25/lisensi terdeteksi, tetapi tidak ada perangkat Android aktif.
-- Build awal gagal: sdkmanager baru tidak memasang NDK lewat identifier lama yang diminta Gradle.
-- Identifier ndk/28.2.13676358 berhasil mulai mengunduh (713 MB); dihentikan sekitar 14% atas permintaan pengguna. APK belum berhasil dibuat.
-- iOS belum diuji. Tidak ada perubahan Gradle atau downgrade untuk mengatasi NDK.
-- package-lock.json untracked tidak terkait tugas; tidak diubah atau dimasukkan commit.
-- Pencil sempat putus; screenshot akhirnya berhasil diambil dan disimpan sebagai bukti.
+## Antrean dan batas
+1. Tinjau kelompok input melalui Widgetbook; jangan melanjutkan kelompok lain otomatis.
+2. APK tetap ditunda. NDK 28.2.13676358 belum selesai diunduh (dihentikan atas permintaan pengguna).
+3. Saat APK dilanjutkan: sdkmanager --install "ndk/28.2.13676358", lalu build APK dummy.
+- Android SDK/JDK/lisensi terdeteksi; belum ada verifikasi runtime pada HP/emulator.
+- iOS dan keyboard/IME/aksesibilitas pada perangkat belum diuji.
+- package-lock.json untracked tidak terkait tugas, tidak diubah atau dimasukkan commit.
 
 ## Lingkungan
-Flutter 3.47.7 / Dart 3.13.5. Paket tetap sesuai pubspec.lock; tidak menambah dependensi pada kelompok ini.
+Flutter 3.47.7 / Dart 3.13.5, Windows. Tidak menambah dependensi dalam kelompok input.

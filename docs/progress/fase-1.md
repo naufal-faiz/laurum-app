@@ -94,3 +94,36 @@ Pengguna meminta melanjutkan pengembangan setelah pembacaan prompt terbaru.
 - flutter build bundle -t widgetbook/main.dart: lulus.
 - Pengguna memilih menunda APK dan menutup kelompok widget; unduhan NDK dihentikan.
 - Kelompok kontrol selesai dan menunggu tinjauan. Tidak memulai kelompok selanjutnya.
+
+## 23 Oktober 2026 — kelompok atom input
+
+Lingkup: AppTextField, AppSearchField, AppSkeleton, AppNumpadKey.
+
+| Widget | Baris Dart |
+| --- | ---: |
+| AppTextField | 88 |
+| AppSearchField | 88 |
+| AppSkeleton | 25 |
+| AppNumpadKey | 54 |
+
+- Empat use-case dan empat berkas tes baru (lima kasus), empat golden baru.
+- AppText diperluas dengan varian numpad 18/24 w700 dari desain; golden teks diperbarui.
+- Controller hanya pada field yang diizinkan registry; tanpa setState atau provider.
+- Tes mencakup entry/filter/submit, value eksternal, selection, clear, disposal, varian field,
+  skeleton statis dan seluruh key numpad. Pemeriksaan sebelumnya lulus 39 tes.
+- Bundle Widgetbook berhasil dikompilasi; pemeriksaan akhir check_all dijalankan kembali.
+- Semua galeri diperiksa tanpa overflow. Tombol clear diperbaiki agar tidak menutupi border.
+- Screenshot Pencil disimpan di docs/progress/fase-1-inputs-visuals/.
+- Acuan T24HQe/kmkgP/LRZzT (field), Q1YznQ/e48H25/dStCL/E2wCq (skeleton),
+  f0G1R/TU6VH/ONyEv (numpad). Warna/radius/tipografi sesuai token.
+- Selisih: field baku 48 vs beberapa frame 44; placeholder search satu baris vs frame
+  panjang membungkus; multiline rata atas vs contoh satu baris rata tengah; glyph Ionicons.
+- Toggle mata pada field password belum disediakan; obscureText dikontrol pemanggil.
+- Fokus/error/disabled menggunakan token, tetapi frame state khusus belum terverifikasi.
+- Tidak ada dependensi/registry/aturan lint baru; APK tetap ditunda sesuai keputusan pengguna.
+- Keyboard/IME dan aksesibilitas perangkat Android/iOS belum diuji.
+- Dokumentasi sempat tertunda karena batas penggunaan peninjau persetujuan otomatis;
+  dilanjutkan 23 Oktober setelah pengguna meminta continue.
+- Pemeriksaan akhir 23 Oktober: check_all SEMUA HIJAU (format, flutter analyze,
+  dart analyze, check_arch, 39 tes, repo_map 75 berkas); format Widgetbook juga lulus.
+- Kelompok selesai. Semua 17 atom registry tersedia; berhenti menunggu tinjauan pengguna.

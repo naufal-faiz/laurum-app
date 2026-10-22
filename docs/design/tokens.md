@@ -113,3 +113,13 @@ border sesuai aturan pemisah di dokumen ini. Selisih dicatat di component_catalo
 - Disabled: foreground ink3, latar chipIdle, border border; switch opacity 0.5.
   Nilai opacity ini keputusan implementasi yang belum memiliki referensi disabled terverifikasi.
 - CTA/secondary tetap memakai cta w700 sesuai PRD meskipun frame memakai w600.
+
+## Token input dan numpad Fase 1 (tambahan yang diperlukan, izin pengguna)
+- AppTextStyles.numpad: Plus Jakarta Sans 18/24 w700 (f0G1R/TU6VH),
+  melalui AppTextVariant.numpad. Token sebelumnya tetap.
+- AppInputStyles: padding field 12, padding ikon kiri 12/kanan 8, tinggi minimum 48;
+  borderStrong normal, primary fokus, error/errorInk + errorTint untuk error.
+- Skeleton lebar contoh 96/192, tinggi default 20 (Q1YznQ/e48H25/dStCL).
+- Numpad tinggi 56, radius numpad 12, surfaceLow; skeleton radius input 8, chipIdle.
+- Default field 48 mengikuti area sentuh baku, berbeda dari frame input 44.
+- State focus/disabled/error field mengikuti token; referensi screenshot khusus belum terverifikasi.
