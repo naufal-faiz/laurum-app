@@ -143,3 +143,15 @@ Lingkup: AppTextField, AppSearchField, AppSkeleton, AppNumpadKey.
 - AppBarRoot nanti memakai slot syncIndicator dari pemanggil agar tidak mengimpor molecule lain.
 - APK tetap ditunda; runtime iOS dan pembaca layar perangkat belum diuji.
 - Checkpoint M1: check_all SEMUA HIJAU, 55 tes, repo_map 102 berkas (23 Oktober).
+
+## Molecules M2 — 23 Oktober 2026
+- LabeledField, BannerMessage, NoticeAi, CalloutAi, EmptyState, SyncIndicator selesai diimplementasikan.
+- Enam galeri Flutter diperiksa tanpa overflow; referensi di docs/progress/fase-1-m2-visuals/.
+- LabeledField jbLdH: label 14/20 dan gap 6 cocok; atom field tetap 48 vs frame 44. Error wrapper tidak mengubah border child; pilih satu lokasi error agar tidak duplikat.
+- BannerMessage XFgML: info radius 12/padding 12/gap 8 sesuai. Warning/error memakai palet tema; frame khusus belum ditemukan.
+- NoticeAi K1Xa3y/FnvUf: kalimat persis, radius 12/padding 12 dan body 14/20 sesuai.
+- CalloutAi s45lh: isi dan label sesuai; ikon Ionicons 16 vs Lucide 12x15; jarak antarbaris mengikuti line height tanpa tambahan 2 px frame.
+- EmptyState nKUPl: lingkaran 64/ikon 28, heading dan gap sesuai; lebar teks responsif vs frame fixed 280.
+- SyncIndicator I3YmrS/ARosk: tersimpan/offline cocok padding 4/8, ikon 12, pill; glyph berbeda. Menyimpan/gagal belum memiliki frame terverifikasi, memakai chipIdle/errorTint dan ikon refresh/alert. Refresh statis, tanpa timer/provider.
+- Tidak ada perubahan atom atau kebutuhan widget di luar registry. iOS/perangkat tetap belum diuji.
+- Checkpoint M2: check_all SEMUA HIJAU; 67 tes, repo_map 121 berkas. Pengguna meminta AppChip tetap tanpa icon; selisih PeriodTabs dicatat pada M3.

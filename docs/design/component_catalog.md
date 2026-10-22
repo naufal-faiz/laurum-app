@@ -1,5 +1,51 @@
 # Katalog komponen Laurum
 
+
+## LabeledField
+- Berkas: lib/shared/widgets/molecules/labeled_field.dart.
+- API dan contoh: label dan child wajib; helperText/errorText opsional. LabeledField(label: label, child: AppTextField(label: label)). Error menggantikan helper.
+- Varian: utama/helper/error/disabled child.
+- Galeri: widgetbook/molecules/labeled_field_use_case.dart; tes: test/labeled_field_test.dart.
+- Acuan Pencil: jbLdH. Lihat catatan visual di docs/progress/fase-1.md.
+
+## BannerMessage
+- Berkas: lib/shared/widgets/molecules/banner_message.dart.
+- API dan contoh: message wajib; variant info (default), warning, error. BannerMessage(message: message, variant: BannerMessageVariant.warning).
+- Varian: info/warning/error.
+- Galeri: widgetbook/molecules/banner_message_use_case.dart; tes: test/banner_message_test.dart.
+- Acuan Pencil: XFgML. Lihat catatan visual di docs/progress/fase-1.md.
+
+## NoticeAi
+- Berkas: lib/shared/widgets/molecules/notice_ai.dart.
+- API dan contoh: Hanya key. NoticeAi() menampilkan kalimat tetap tanpa parameter pengganti.
+- Varian: kalimat tetap.
+- Galeri: widgetbook/molecules/notice_ai_use_case.dart; tes: test/notice_ai_test.dart.
+- Acuan Pencil: K1Xa3y. Lihat catatan visual di docs/progress/fase-1.md.
+
+## CalloutAi
+- Berkas: lib/shared/widgets/molecules/callout_ai.dart.
+- API dan contoh: message wajib; label default Periksa bagian ini; icon default location. CalloutAi(message: value). Hanya menampilkan, tidak mengubah data.
+- Varian: label dan ikon default/kustom.
+- Galeri: widgetbook/molecules/callout_ai_use_case.dart; tes: test/callout_ai_test.dart.
+- Acuan Pencil: s45lh. Lihat catatan visual di docs/progress/fase-1.md.
+
+## EmptyState
+- Berkas: lib/shared/widgets/molecules/empty_state.dart.
+- API dan contoh: title dan icon wajib; description/actionLabel/onAction opsional. EmptyState(title: title, icon: AppIcons.queue). Aksi membutuhkan actionLabel.
+- Varian: utama/deskripsi/aksi.
+- Galeri: widgetbook/molecules/empty_state_use_case.dart; tes: test/empty_state_test.dart.
+- Acuan Pencil: nKUPl. Lihat catatan visual di docs/progress/fase-1.md.
+
+## SyncIndicator
+- Berkas: lib/shared/widgets/molecules/sync_indicator.dart.
+- API dan contoh: state wajib: tersimpan, menyimpan, offline, gagal. SyncIndicator(state: SyncState.tersimpan). Status liveRegion, tanpa jaringan atau timer.
+- Varian: tersimpan/menyimpan/offline/gagal.
+- Galeri: widgetbook/molecules/sync_indicator_use_case.dart; tes: test/sync_indicator_test.dart.
+- Acuan Pencil: I3YmrS/ARosk. Lihat catatan visual di docs/progress/fase-1.md.
+
+LabeledField tidak mengubah dekorasi child: letakkan error pada wrapper ATAU AppTextField agar tidak ditampilkan dua kali. Label semantik child tetap diisi pemanggil.
+
+
 ## SectionHeader
 - Berkas: lib/shared/widgets/molecules/section_header.dart.
 - API dan contoh: title wajib; subtitle/actionLabel/onAction opsional. SectionHeader(title: title, actionLabel: label, onAction: onTap).

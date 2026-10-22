@@ -6,6 +6,8 @@ abstract final class AppMoleculeTokens {
   static const labelGap = 6.0;
   static const progressHeight = 8.0;
   static const syncIcon = 12.0;
+  static const emptyCircle = 64.0;
+  static const emptyIcon = 28.0;
   static const datePadding = EdgeInsets.symmetric(horizontal: 16, vertical: 10);
   static const rowPadding = EdgeInsets.symmetric(vertical: 6);
   static const noticePadding = EdgeInsets.all(12);

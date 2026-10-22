@@ -20,13 +20,14 @@ import 'atoms/app_switch_use_case.dart';
 import 'atoms/app_text_field_use_case.dart';
 import 'atoms/app_text_use_case.dart';
 import 'molecules/m1.dart';
+import 'molecules/m2.dart';
 
 void main() {
   runApp(
     ProviderScope(
       child: Widgetbook.material(
         directories: [
-          WidgetbookFolder(name: 'Molecules', children: m1Components),
+          WidgetbookFolder(name: 'Molecules', children: [...m1Components, ...m2Components]),
           WidgetbookFolder(
             name: 'Atoms',
             children: [
