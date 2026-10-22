@@ -15,6 +15,7 @@ const steps = <Step>[
   (name: 'Riverpod lint', cmd: 'dart', args: ['analyze']),
   (name: 'check_arch', cmd: 'dart', args: ['run', 'tool/check_arch.dart']),
   (name: 'test', cmd: 'flutter', args: ['test']),
+  (name: 'repo_map', cmd: 'dart', args: ['run', 'tool/repo_map.dart']),
 ];
 
 Future<void> main() async {
