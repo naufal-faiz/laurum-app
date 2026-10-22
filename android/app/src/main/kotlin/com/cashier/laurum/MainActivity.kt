@@ -1,4 +1,4 @@
-package com.example.laurum
+package com.cashier.laurum
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -72,7 +72,7 @@ Nilai `height` Flutter = tinggi baris / ukuran font.
 | Tinggi app bar | 64 |
 | Area sentuh | minimal 44, baku 48 |
 | Radius | kartu 16, tombol aksi 8, CTA dan secondary 14, input 8, chip dan badge pil (999), sheet atas 28, numpad 12, modal 16 |
-| Bayangan | app bar `0 1 7 #131B2E0A`; stepper `0 1 1.75 #0000000D`; footer sticky dan modal mengikuti frame `.pen` (Footer - Sticky Bottom Bar, State - modal). Catat nilainya di sini saat tema dibuat |
+| Bayangan | app bar `0 1 7 #131B2E0A`; stepper `0 1 1.75 #0000000D`; footer sticky `0 -4 14 #131B2E14` (frame Footer - Sticky Bottom Bar Menempel); modal tanpa bayangan (semua frame C/Modal pada State tidak memiliki effect) |
 
 Kartu memakai border `border`, bukan bayangan.
 
