@@ -28,12 +28,14 @@ Satu basis kode untuk Android dan iOS. Saat ini HANYA Android yang bisa diuji. J
 1. Baca spec layar dan daftar widget yang dipakai. Buka Widgetbook/registry untuk melihat API widget.
 2. Tulis rencana singkat: widget registry yang dipakai, provider, fixture, rute. Jika ada kebutuhan di luar registry, hentikan (aturan 2).
 3. Implementasi. Setelah tiap berkas: dart format.
-4. Jalankan: dart run tool/check_all.dart (format, analyze termasuk plugin Riverpod, check_arch, test). Semua harus hijau.
+4. Jalankan: dart run tool/check_all.dart (format, flutter analyze, dart analyze termasuk plugin Riverpod, check_arch, test). Semua harus hijau.
 5. Perbarui spec layar bila ada keputusan baru. Laporkan: berkas yang diubah, widget yang dipakai, selisih terhadap .pen, hal yang tidak pasti.
+
+6. Selalu catat kemajuan, keputusan, hasil pemeriksaan, dan pekerjaan tertunda di `docs/progress/fase-N.md` sesuai fase. Jangan menulis catatan progres di `docs/prompts/`. Perbarui catatan pada setiap tugas, termasuk saat terhambat.
 
 ## Dilarang tanpa izin
 Mengubah registry, tema/token, aturan lint, struktur folder, atau PRD. Menambah fitur di luar PRD (kurir, stok, jatuh tempo, paket layanan, dsb).
 
 ## Perintah
 flutter run -t lib/main_dummy.dart      # data dummy
-dart run tool/check_all.dart            # wajib hijau; flutter analyze termasuk lint Riverpod
+dart run tool/check_all.dart            # wajib hijau; dart analyze memeriksa lint Riverpod

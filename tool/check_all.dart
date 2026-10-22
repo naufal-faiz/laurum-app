@@ -1,7 +1,7 @@
 import 'dart:io';
 
 // Jalankan dari akar proyek: dart run tool/check_all.dart.
-// Plugin Riverpod berjalan di flutter analyze; tidak perlu custom_lint.
+// dart analyze menjalankan plugin Riverpod; flutter analyze tetap diperiksa.
 // Berhenti di kegagalan pertama, di Windows, macOS, maupun Linux.
 typedef Step = ({String name, String cmd, List<String> args});
 
@@ -11,7 +11,8 @@ const steps = <Step>[
     cmd: 'dart',
     args: ['format', '--set-exit-if-changed', 'lib', 'test', 'tool'],
   ),
-  (name: 'analyze (termasuk Riverpod)', cmd: 'flutter', args: ['analyze']),
+  (name: 'analyze', cmd: 'flutter', args: ['analyze']),
+  (name: 'Riverpod lint', cmd: 'dart', args: ['analyze']),
   (name: 'check_arch', cmd: 'dart', args: ['run', 'tool/check_arch.dart']),
   (name: 'test', cmd: 'flutter', args: ['test']),
 ];

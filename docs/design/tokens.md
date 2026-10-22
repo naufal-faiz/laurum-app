@@ -91,3 +91,15 @@ Kartu memakai border `border`, bukan bayangan.
 | Teks tombol dan judul | sentence case | `Simpan dan cetak` |
 
 Uang disimpan `int` rupiah dan berat `int` gram. Tidak ada `double` untuk uang.
+
+## Token dasar tambahan Fase 1 (izin pengguna, 22 Oktober 2026)
+
+- AppDimensions.iconSmall = 16 (ikon D4sARD/Gembok).
+- AppDimensions.iconAction = 20 (ikon sW6dC pada Antrean).
+- AppDimensions.icon = 24 (ikon navigasi qN76G).
+- AppDimensions.line = 1 (stroke kartu i1jkP/JrA3v dan separator plTzD).
+- AppBorders.card: border AppColors.border, satu logical pixel, tanpa bayangan.
+
+Nilai lama tidak diubah. Beberapa label mono di .pen memakai w600; monoLabel
+proyek tetap w400. Separator plTzD memakai chipIdle; AppDivider generik memakai
+border sesuai aturan pemisah di dokumen ini. Selisih dicatat di component_catalog.md.

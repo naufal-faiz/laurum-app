@@ -36,7 +36,7 @@ File bisa dibaca (format JSON, 8.939 node, 36 objek tingkat atas).
 
 - Flutter stable terbaru. Satu basis kode untuk **Android dan iOS**; pengujian awal hanya di Android (belum ada lingkungan uji iOS, lihat PRD B bagian 17). Target API 36 untuk Play Store.
 - `flutter_riverpod` (tanpa codegen), `go_router`, `equatable`, `intl` (locale `id_ID`), `ionicons`, `flutter_svg`.
-- Dev: `flutter_lints`, `riverpod_lint` (plugin analyzer native), `widgetbook`. Plugin Riverpod dikonfigurasi di `plugins` tingkat atas pada `analysis_options.yaml` dan berjalan dalam `flutter analyze`; `custom_lint` tidak dipakai.
+- Dev: `flutter_lints`, `riverpod_lint` (plugin analyzer native), `widgetbook`. Plugin Riverpod dikonfigurasi di `plugins` tingkat atas pada `analysis_options.yaml` dan diperiksa lewat `dart analyze`; `custom_lint` tidak dipakai.
 - Agen **tidak boleh menebak nomor versi**. Pasang dengan `flutter pub add <paket>` dan pakai versi yang di-resolve.
 - Font dibundel di `assets/fonts/`. Jangan pakai `google_fonts` runtime.
 
@@ -139,7 +139,7 @@ Nama layar mengikuti frame di `.pen`. Kolom Fase merujuk bagian 10.
 3. Semua teks, angka, dan format berasal dari fixture dan `Formatters`.
 4. Variasi state layar tersebut (kosong, error, loading, modal) ikut selesai.
 5. Alur dummy berfungsi (aksi mengubah state).
-6. `dart format`, `flutter analyze` (termasuk plugin Riverpod), `check_arch`, `flutter test` semuanya hijau.
+6. `dart format`, `flutter analyze`, `dart analyze` (plugin Riverpod), `check_arch`, `flutter test` semuanya hijau.
 7. Spec layar `docs/design/screens/NN-nama.md` diperbarui.
 
 ## 11. Penyimpangan dari desain .pen (disengaja)
@@ -167,6 +167,6 @@ Nama layar mengikuti frame di `.pen`. Kolom Fase merujuk bagian 10.
 
 - **Batas 100 baris vs kompleksitas layar.** Layar kompleks (Buat Transaksi, Laporan) harus dipecah ke organism. Jika agen merasa perlu widget baru, ia mengajukan usulan, bukan membuat sendiri.
 - **`AppTextField` stateful.** Pengecualian tunggal; alternatifnya `flutter_hooks` (`useTextEditingController`) bila kamu mau menghindari stateful sepenuhnya.
-- **Kompatibilitas lint Riverpod:** migrasi 22 Oktober 2026 disetujui ke plugin analyzer native karena `custom_lint` 0.8.1 dan `riverpod_lint` 3.1.9 meminta versi `analyzer_plugin` yang tidak kompatibel. Jangan gunakan dependency override atau versi lama sebagai jalan pintas. Verifikasi aktivasi dengan pelanggaran sengaja, lalu hapus pelanggaran dan jalankan seluruh pemeriksaan.
+- **Lint Riverpod (ditutup 22 Oktober 2026):** konfigurasi `plugins: riverpod_lint: 3.1.9` sesuai README versi terpasang. Pada Flutter 3.47.7 / Dart 3.13.5, `dart analyze` mendeteksi probe tanpa ProviderScope (`missing_provider_scope`) dan properti mutable publik Notifier (`avoid_public_notifier_properties`), sedangkan `flutter analyze` melaporkan bersih pada probe yang sama. Plugin dipertahankan; `check_all.dart` menjalankan keduanya agar lint Riverpod benar-benar diperiksa. Probe dihapus setelah pengujian. `custom_lint` tetap tidak dipakai; tidak ada override atau downgrade. `check_arch` tetap menegakkan aturan arsitektur utama. Fase 1 tidak terhalang masalah lint ini.
 - **Nama aplikasi dan application ID** (misalnya `com.<namamu>.laurum`) perlu diputuskan sebelum Fase 0.
 - **Impor kontak massal** memerlukan izin sensitif (lihat PRD B, bagian Play Store). UI tetap dibuat dulu dengan kontak dummy.

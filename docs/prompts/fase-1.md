@@ -1,9 +1,8 @@
 Baca AGENTS.md, docs/prd/prd-a-ui.md (bagian 5 dan 6), docs/design/tokens.md, dan docs/design/widget_registry.yaml. Kerjakan HANYA kelompok widget ini:
-
 AppText, AppIcon, AppGap, AppDivider, AppCard, AppSvg
 
 Untuk setiap widget:
-1. Satu berkas, maksimal 100 baris (batas keras 110). Semua varian dan parameter sesuai PRD A bagian 5.2.
+1. Satu berkas, maksimal 100 baris (batas keras 110) dengan prettier. Semua varian dan parameter sesuai PRD A bagian 5.2.
 2. Semua gaya dari core/theme; semua ikon lewat AppIcon. Tidak ada hex, TextStyle, atau Icon() langsung.
 3. Satu use-case Widgetbook yang menampilkan SEMUA varian.
 4. Satu tes widget yang memeriksa render varian utama.

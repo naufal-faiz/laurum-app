@@ -33,6 +33,7 @@ Jalankan prompt di bawah HANYA untuk langkah berstatus BELUM. Perbarui tabel ini
   Tidak ada SVG kustom, sehingga konstanta AppSvgs belum diperlukan.
 - Formatter tanggal/jam menerima waktu lokal usaha (WIB); tidak mengonversi
   berdasarkan zona waktu perangkat. Locale id_ID diinisialisasi saat startup.
+- Verifikasi lint 22 Oktober 2026 selesai: dart analyze mendeteksi missing_provider_scope dan avoid_public_notifier_properties pada probe sengaja; probe sudah dihapus. Plugin dipertahankan dan dart analyze masuk check_all. Fase 1 tidak perlu menunggu masalah lint ini.
 
 ### Versi hasil flutter pub add
 
