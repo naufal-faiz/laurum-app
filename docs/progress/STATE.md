@@ -38,3 +38,4 @@ Tiga kelompok yang diizinkan pengguna selesai diimplementasikan; menunggu tinjau
 
 - Uji Android ditutup pada verifikasi build; check_all tetap hijau (81 tes). Detail: docs/progress/android-validation.md. Opsi Kotlin incremental=false hanya sementara.
 
+- Baseline prompt 10: format tool/pen_frame.dart dari sesi sebelumnya dirapikan; check_all hijau, 81 tes.

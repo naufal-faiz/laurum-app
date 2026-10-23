@@ -21,8 +21,7 @@ void _texts(Map<String, dynamic> n, List<String> out) {
 
 void main(List<String> args) {
   final doc =
-      jsonDecode(File('docs/design/laurum-ready.pen').readAsStringSync())
-          as Map<String, dynamic>;
+      jsonDecode(File('docs/design/laurum-ready.pen').readAsStringSync()) as Map<String, dynamic>;
   final frames = _kids(doc);
   if (args.isEmpty) {
     frames.map((f) => '${f['name']}').forEach(stdout.writeln);
@@ -33,9 +32,7 @@ void main(List<String> args) {
       _kids(f).map((c) => '${c['name']}').forEach(stdout.writeln);
       continue;
     }
-    final scope = args.length > 1
-        ? _kids(f).where((c) => c['name'] == args[1])
-        : [f];
+    final scope = args.length > 1 ? _kids(f).where((c) => c['name'] == args[1]) : [f];
     for (final s in scope) {
       final out = <String>[];
       _texts(s, out);
