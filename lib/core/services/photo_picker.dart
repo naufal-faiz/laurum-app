@@ -3,7 +3,7 @@ abstract class PhotoPicker {
 }
 
 class FakePhotoPicker implements PhotoPicker {
-  FakePhotoPicker({this.defaultPath = 'assets/photos/sample_expense.jpg'});
+  FakePhotoPicker({this.defaultPath});
 
   final String? defaultPath;
   int pickPhotoCallCount = 0;

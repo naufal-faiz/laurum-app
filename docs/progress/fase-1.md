@@ -221,3 +221,139 @@ Lingkup: AppTextField, AppSearchField, AppSkeleton, AppNumpadKey.
 - Yang perlu ditinjau: kontrak baseline/delta; kontrak sementara Proposal/OrderEvent; distribusi diskon untuk ranking layanan.
 - Prompt berikutnya: docs/prompts/11-data-dummy.md. Tidak dikerjakan pada sesi ini.
 - Penutup prompt 10: check_all SEMUA HIJAU (format, flutter analyze, dart analyze, check_arch, 112 tes; repo_map 183 berkas). Ada 31 tes baru; semua 26 berkas domain 13–79 baris. INDEX SELESAI 2026-10-23; berhenti sebelum prompt 11.
+
+## Audit dan penyelesaian Prompt 11 — 23 Okt 2026
+
+### Temuan dan perbaikan
+- STATE tertinggal pada prompt 10, padahal prompt 11 SEDANG dan 46 berkas baru belum
+  di-commit. Checkpoint c985c36 menyimpan pekerjaan lama; baseline 132 tes hijau.
+- Empat regresi gagal pada kode lama: provider publik tidak memberi notifikasi, list
+  order dapat dimutasi tanpa notifikasi, retry save menggandakan item/ledger, dan
+  penghapusan pengeluaran awal tidak mengubah laporan. Keempatnya kini lulus.
+- Provider antarmuka meneruskan perubahan Notifier secara eksplisit. Delapan repository
+  (Business, Customer, Service, Order, Savings, Expense, Proposal, Report) diuji melalui
+  provider publik, termasuk isolasi dua ProviderContainer.
+- Provider Riverpod dipindah ke core/services/repository_providers.dart; antarmuka
+  core/domain/repositories tetap tanpa Flutter/Riverpod. main/main_dummy memakai override yang sama.
+- OrderStore immutable menyimpan order/item/payment/event dalam satu snapshot. Save
+  memvalidasi semua perubahan sebelum publish; ledger retry identik idempoten,
+  ID sama dengan isi berbeda ditolak, event gagal tidak bocor, status final dijaga.
+- Regresi tambahan membuktikan pembatalan order berbayar sebelumnya dapat melewati
+  koreksi ledger. Kini cancellation harus melunaskan net setiap metode ke nol dalam
+  save yang sama; hasil fungsi domain cancelOrder dapat disimpan bersama event.
+- Laporan memakai buildReport(snapshot kini) - buildReport(snapshot awal) + baseline;
+  pelunasan nota lama, edit/hapus pengeluaran, order baru dan pembatalan ikut berubah.
+  Revenue layanan mingguan juga berubah; Lainnya bukan alias Selimut tebal.
+- Soft-delete Customer/Service tidak kembali lewat includeInactive; sortOrder dan
+  updatedAt dipertahankan. Batas tanggal pengeluaran [from,to). Nomor nota tetap A-0143.
+- Mutasi tabungan terbaru dahulu; ledger immutable, retry tidak menggandakan saldo.
+  Telepon aktif pelanggan dicek unik. Saldo tidak dapat dibuat negatif melalui addEntry.
+- Tujuh fake layanan tersedia dan mencatat panggilan. Kontak berasal dari fixture,
+  FakeAuth memakai owner yang sama, PhotoPicker default null (tidak mengklaim aset
+  foto yang tidak ada), Sync stream ditutup ketika provider dibuang.
+- Pengguna menyetujui pelengkap DATA MASTER pada sesi ini. Nama generik, saldo,
+  14 pengeluaran dan dua usulan ditulis di sana; empat entri pengeluaran utama tetap.
+- A-0139 menunggu persetujuan batal, bukan sudah dibatalkan; mengganti pengisi A-0131
+  agar antrean tetap 12 (3+5+4), piutang tetap Rp400.500/5 nota. A-0115 kini punya
+  order/item/payment tabungan yang berpasangan dengan mutasi Pak Dedi.
+- Tidak menambahkan widget/layar, paket, atau mengubah atoms/molecules/token/lint/registry/PRD.
+
+### Batas, selisih visual, dan tinjauan
+- Tidak ada perubahan visual; tidak mengklaim perbandingan screenshot .pen baru pada
+  pekerjaan data ini. Angka mengacu DATA MASTER; 38/60 widget tetap.
+- Baseline laporan hanya Hari ini/Minggu ini/Bulan ini, tanggal dummy 16 Okt 2026.
+  Top services hanya Minggu ini; rentang lain ditolak UnsupportedError secara eksplisit.
+- Lainnya tidak memiliki kuantitas/satuan yang ditentukan: internal 0/kosong. UI laporan
+  berikutnya perlu menyembunyikan kuantitas agregat tersebut.
+- Customer history memakai ringkasan historis, bukan rekonstruksi semua order.
+  A-0143/A-0144 adalah skenario berikutnya, tidak dimuat di snapshot awal.
+- Antarmuka Order.saveOrder atomik untuk order/item/payment/event. Koordinasi transaksi
+  lintas Order dan Savings harus memakai hasil fungsi domain berpasangan pada alur kasir
+  berikutnya; transaksi database nyata masih di luar mode dummy.
+- Fake platform tidak mengakses perangkat/akun/jaringan. Android runtime dan iOS belum
+  diuji dalam sesi ini; build APK tidak dilanjutkan.
+- Codebase-memory dicoba sesuai skill tetapi Transport closed. Audit memakai REPO_MAP,
+  spec terbatas, kode yang berubah, dan regresi; tidak memakai subagen.
+
+### Berkas Dart prompt 11 setelah audit
+Semua maksimal 100 baris. Rincian berikut mencakup implementasi lama yang diselesaikan
+dan perbaikan audit (termasuk tes); widget/layar baru: tidak ada.
+
+| Berkas | Baris |
+| --- | ---: |
+| lib/core/domain/order_number_generator.dart | 35 |
+| lib/core/domain/repositories/business_repository.dart | 10 |
+| lib/core/domain/repositories/customer_repository.dart | 8 |
+| lib/core/domain/repositories/expense_repository.dart | 10 |
+| lib/core/domain/repositories/order_repository.dart | 33 |
+| lib/core/domain/repositories/proposal_repository.dart | 13 |
+| lib/core/domain/repositories/report_repository.dart | 10 |
+| lib/core/domain/repositories/savings_repository.dart | 9 |
+| lib/core/domain/repositories/service_repository.dart | 8 |
+| lib/core/services/auth_service.dart | 42 |
+| lib/core/services/contact_source.dart | 23 |
+| lib/core/services/export_service.dart | 19 |
+| lib/core/services/external_launcher.dart | 25 |
+| lib/core/services/photo_picker.dart | 16 |
+| lib/core/services/print_service.dart | 18 |
+| lib/core/services/repository_providers.dart | 41 |
+| lib/core/services/service_providers.dart | 38 |
+| lib/core/services/sync_service.dart | 42 |
+| lib/features/business/data/business_fixtures.dart | 21 |
+| lib/features/business/data/in_memory_business_repository.dart | 36 |
+| lib/features/customers/data/contact_fixtures.dart | 8 |
+| lib/features/customers/data/customer_fixtures.dart | 57 |
+| lib/features/customers/data/customer_history_fixtures.dart | 8 |
+| lib/features/customers/data/in_memory_customer_repository.dart | 76 |
+| lib/features/customers/data/in_memory_savings_repository.dart | 48 |
+| lib/features/customers/data/savings_fixtures.dart | 86 |
+| lib/features/expenses/data/expense_category_fixtures.dart | 35 |
+| lib/features/expenses/data/expense_fixtures.dart | 10 |
+| lib/features/expenses/data/in_memory_expense_repository.dart | 64 |
+| lib/features/expenses/data/prior_expense_fixtures.dart | 72 |
+| lib/features/expenses/data/week_expense_fixtures.dart | 48 |
+| lib/features/orders/data/in_memory_order_repository.dart | 91 |
+| lib/features/orders/data/order_event_fixtures.dart | 26 |
+| lib/features/orders/data/order_fixture_factory.dart | 26 |
+| lib/features/orders/data/order_fixtures.dart | 8 |
+| lib/features/orders/data/order_history_fixtures.dart | 43 |
+| lib/features/orders/data/order_item_fixtures.dart | 43 |
+| lib/features/orders/data/order_queue_fixtures.dart | 8 |
+| lib/features/orders/data/order_queue_process_fixtures.dart | 81 |
+| lib/features/orders/data/order_queue_ready_fixtures.dart | 42 |
+| lib/features/orders/data/order_store.dart | 20 |
+| lib/features/orders/data/order_store_write.dart | 86 |
+| lib/features/orders/data/payment_fixtures.dart | 31 |
+| lib/features/proposals/data/in_memory_proposal_repository.dart | 63 |
+| lib/features/proposals/data/proposal_fixtures.dart | 31 |
+| lib/features/reports/data/in_memory_report_repository.dart | 76 |
+| lib/features/reports/data/report_adjustments.dart | 16 |
+| lib/features/reports/data/report_fixtures.dart | 83 |
+| lib/features/reports/data/report_snapshot.dart | 21 |
+| lib/features/reports/data/report_top_services.dart | 35 |
+| lib/features/services/data/in_memory_service_repository.dart | 63 |
+| lib/features/services/data/service_fixtures.dart | 67 |
+| lib/main.dart | 16 |
+| lib/main_dummy.dart | 82 |
+| test/dummy_cancellation_ledger_test.dart | 35 |
+| test/dummy_catalog_integration_test.dart | 56 |
+| test/dummy_data_integration_test.dart | 64 |
+| test/dummy_fixture_integrity_test.dart | 51 |
+| test/dummy_live_creation_test.dart | 59 |
+| test/dummy_order_atomicity_test.dart | 77 |
+| test/dummy_provider_notifications_test.dart | 71 |
+| test/dummy_report_baseline_test.dart | 39 |
+| test/dummy_report_mutation_test.dart | 52 |
+| test/dummy_repository_regression_test.dart | 52 |
+| test/dummy_savings_integration_test.dart | 49 |
+| test/order_number_generator_test.dart | 34 |
+| test/platform_services_test.dart | 78 |
+
+### Bukti verifikasi akhir
+- Baseline agen lama: 132 tes lulus; empat regresi awal sengaja dijalankan dan gagal.
+- Regresi cancellation berbayar juga gagal sebelum guard koreksi ledger dipasang.
+- Setelah perbaikan: dart run tool/check_all.dart -> check_all: SEMUA HIJAU.
+- Format 207 berkas (0 changed); flutter analyze dan dart analyze tanpa isu;
+  check_arch OK; 146 tes lulus; REPO_MAP diperbarui 248 berkas.
+- Diff whitespace bersih. Tidak ada widget/layar baru; 67 berkas Dart prompt 11,
+  maksimum 91 baris. Commit akhir dicatat lewat git log; berikutnya 12-organisms-1.md.

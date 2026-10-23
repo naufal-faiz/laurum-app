@@ -16,8 +16,8 @@ final todayBaseline = ReportBaseline(
     cashIn: 343500,
     activeOutstanding: 400500,
     savingsBalance: 430000,
-    cashFromOrders: 343500,
-    newOutstanding: 31500,
+    cashFromOrders: 328500,
+    newOutstanding: 46500,
   ),
 );
 
@@ -30,9 +30,9 @@ final weekBaseline = ReportBaseline(
     cashIn: 1699500,
     activeOutstanding: 400500,
     savingsBalance: 430000,
-    cashFromOrders: 1374500,
+    cashFromOrders: 1574500,
     savingsUsed: 25000,
-    newOutstanding: 400500,
+    newOutstanding: 200500,
   ),
 );
 
@@ -74,10 +74,10 @@ final weekTopServicesFixtures = <ServiceRevenue>[
     revenue: 350000,
   ),
   const ServiceRevenue(
-    serviceId: 'srv-005',
+    serviceId: 'other',
     serviceName: 'Lainnya',
-    unit: 'pcs',
-    qtyMilli: 3900,
+    unit: '',
+    qtyMilli: 0,
     revenue: 78000,
   ),
 ];

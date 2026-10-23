@@ -9,15 +9,8 @@ abstract class ContactSource {
 }
 
 class FakeContactSource implements ContactSource {
-  FakeContactSource({List<ContactItem>? contacts})
-    : _contacts =
-          contacts ??
-          const [
-            ContactItem(name: 'Agus Pratama', phone: '0856-4400-1234'),
-            ContactItem(name: 'Danang Kos Putri', phone: '0857-2201-3344'),
-            ContactItem(name: 'Mbak Maya Laundry', phone: '0878-9900-1122'),
-            ContactItem(name: 'Siti Rohmah', phone: '0821-4455-6677'),
-          ];
+  FakeContactSource({List<ContactItem> contacts = const []})
+    : _contacts = List.unmodifiable(contacts);
 
   final List<ContactItem> _contacts;
   int getContactsCallCount = 0;

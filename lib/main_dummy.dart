@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/app.dart';
-import 'package:laurum/core/domain/repositories/repository_providers.dart';
+import 'package:laurum/core/services/auth_service.dart';
+import 'package:laurum/core/services/contact_source.dart';
+import 'package:laurum/core/services/repository_providers.dart';
+import 'package:laurum/core/services/service_providers.dart';
+import 'package:laurum/features/business/data/business_fixtures.dart';
 import 'package:laurum/features/business/data/in_memory_business_repository.dart';
+import 'package:laurum/features/customers/data/contact_fixtures.dart';
 import 'package:laurum/features/customers/data/in_memory_customer_repository.dart';
 import 'package:laurum/features/customers/data/in_memory_savings_repository.dart';
 import 'package:laurum/features/expenses/data/in_memory_expense_repository.dart';
@@ -13,29 +18,55 @@ import 'package:laurum/features/reports/data/in_memory_report_repository.dart';
 import 'package:laurum/features/services/data/in_memory_service_repository.dart';
 
 final dummyRepositoryOverrides = [
+  contactSourceProvider.overrideWith((ref) => FakeContactSource(contacts: contactFixtures)),
+  authServiceProvider.overrideWith((ref) => FakeAuthService(userId: dummyOwnerId)),
   businessRepositoryProvider.overrideWith(
-    (ref) => ref.watch(inMemoryBusinessRepositoryProvider.notifier),
+    (ref) {
+      ref.listen(inMemoryBusinessRepositoryProvider, (_, _) => ref.notifyListeners());
+      return ref.read(inMemoryBusinessRepositoryProvider.notifier);
+    },
   ),
   customerRepositoryProvider.overrideWith(
-    (ref) => ref.watch(inMemoryCustomerRepositoryProvider.notifier),
+    (ref) {
+      ref.listen(inMemoryCustomerRepositoryProvider, (_, _) => ref.notifyListeners());
+      return ref.read(inMemoryCustomerRepositoryProvider.notifier);
+    },
   ),
   serviceRepositoryProvider.overrideWith(
-    (ref) => ref.watch(inMemoryServiceRepositoryProvider.notifier),
+    (ref) {
+      ref.listen(inMemoryServiceRepositoryProvider, (_, _) => ref.notifyListeners());
+      return ref.read(inMemoryServiceRepositoryProvider.notifier);
+    },
   ),
   orderRepositoryProvider.overrideWith(
-    (ref) => ref.watch(inMemoryOrderRepositoryProvider.notifier),
+    (ref) {
+      ref.listen(inMemoryOrderRepositoryProvider, (_, _) => ref.notifyListeners());
+      return ref.read(inMemoryOrderRepositoryProvider.notifier);
+    },
   ),
   savingsRepositoryProvider.overrideWith(
-    (ref) => ref.watch(inMemorySavingsRepositoryProvider.notifier),
+    (ref) {
+      ref.listen(inMemorySavingsRepositoryProvider, (_, _) => ref.notifyListeners());
+      return ref.read(inMemorySavingsRepositoryProvider.notifier);
+    },
   ),
   expenseRepositoryProvider.overrideWith(
-    (ref) => ref.watch(inMemoryExpenseRepositoryProvider.notifier),
+    (ref) {
+      ref.listen(inMemoryExpenseRepositoryProvider, (_, _) => ref.notifyListeners());
+      return ref.read(inMemoryExpenseRepositoryProvider.notifier);
+    },
   ),
   proposalRepositoryProvider.overrideWith(
-    (ref) => ref.watch(inMemoryProposalRepositoryProvider.notifier),
+    (ref) {
+      ref.listen(inMemoryProposalRepositoryProvider, (_, _) => ref.notifyListeners());
+      return ref.read(inMemoryProposalRepositoryProvider.notifier);
+    },
   ),
   reportRepositoryProvider.overrideWith(
-    (ref) => ref.watch(inMemoryReportRepositoryProvider.notifier),
+    (ref) {
+      ref.listen(inMemoryReportRepositoryProvider, (_, _) => ref.notifyListeners());
+      return ref.read(inMemoryReportRepositoryProvider.notifier);
+    },
   ),
 ];
 

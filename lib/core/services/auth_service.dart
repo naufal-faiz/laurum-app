@@ -9,13 +9,14 @@ abstract class AuthService {
 class FakeAuthService implements AuthService {
   FakeAuthService({
     this.isSignedIn = true,
-    this.currentUserId = 'dummy-owner-id',
+    this.userId = 'fake-user',
   });
 
   @override
   bool isSignedIn;
   @override
-  String? currentUserId;
+  String? get currentUserId => isSignedIn ? userId : null;
+  final String userId;
 
   final List<String> authActionLogs = [];
 
@@ -23,7 +24,6 @@ class FakeAuthService implements AuthService {
   Future<bool> signInWithGoogle() async {
     authActionLogs.add('signInWithGoogle');
     isSignedIn = true;
-    currentUserId = 'dummy-owner-id';
     return true;
   }
 
@@ -31,14 +31,12 @@ class FakeAuthService implements AuthService {
   Future<void> signOut() async {
     authActionLogs.add('signOut');
     isSignedIn = false;
-    currentUserId = null;
   }
 
   @override
   Future<bool> deleteAccount() async {
     authActionLogs.add('deleteAccount');
     isSignedIn = false;
-    currentUserId = null;
     return true;
   }
 }

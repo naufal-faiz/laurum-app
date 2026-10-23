@@ -6,7 +6,7 @@ import 'package:laurum/features/expenses/data/expense_fixtures.dart';
 
 class InMemoryExpenseRepository extends Notifier<List<Expense>> implements ExpenseRepository {
   @override
-  List<Expense> build() => List.of(expenseFixtures);
+  List<Expense> build() => List.unmodifiable(expenseFixtures);
 
   @override
   Future<List<ExpenseCategory>> getCategories() async => List.unmodifiable(expenseCategoryFixtures);
@@ -16,7 +16,7 @@ class InMemoryExpenseRepository extends Notifier<List<Expense>> implements Expen
     return state.where((e) {
       if (e.deletedAt != null) return false;
       if (from != null && e.spentAt.isBefore(from)) return false;
-      if (to != null && e.spentAt.isAfter(to)) return false;
+      if (to != null && !e.spentAt.isBefore(to)) return false;
       return true;
     }).toList();
   }
@@ -25,18 +25,18 @@ class InMemoryExpenseRepository extends Notifier<List<Expense>> implements Expen
   Future<void> saveExpense(Expense expense) async {
     final idx = state.indexWhere((e) => e.id == expense.id);
     if (idx >= 0) {
-      state = [
+      state = List.unmodifiable([
         for (var i = 0; i < state.length; i++)
           if (i == idx) expense else state[i],
-      ];
+      ]);
     } else {
-      state = [...state, expense];
+      state = List.unmodifiable([...state, expense]);
     }
   }
 
   @override
   Future<void> deleteExpense(String id) async {
-    state = [
+    state = List.unmodifiable([
       for (final e in state)
         if (e.id == id)
           Expense(
@@ -49,11 +49,12 @@ class InMemoryExpenseRepository extends Notifier<List<Expense>> implements Expen
             vendor: e.vendor,
             note: e.note,
             photoPath: e.photoPath,
+            updatedAt: e.updatedAt,
             deletedAt: DateTime.now(),
           )
         else
           e,
-    ];
+    ]);
   }
 }
 

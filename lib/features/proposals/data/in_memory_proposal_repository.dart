@@ -6,7 +6,7 @@ import 'package:laurum/features/proposals/data/proposal_fixtures.dart';
 
 class InMemoryProposalRepository extends Notifier<List<Proposal>> implements ProposalRepository {
   @override
-  List<Proposal> build() => List.of(proposalFixtures);
+  List<Proposal> build() => List.unmodifiable(proposalFixtures);
 
   @override
   Future<List<Proposal>> getProposals({ProposalStatus? status}) async {
@@ -24,12 +24,12 @@ class InMemoryProposalRepository extends Notifier<List<Proposal>> implements Pro
   Future<void> saveProposal(Proposal proposal) async {
     final idx = state.indexWhere((p) => p.id == proposal.id);
     if (idx >= 0) {
-      state = [
+      state = List.unmodifiable([
         for (var i = 0; i < state.length; i++)
           if (i == idx) proposal else state[i],
-      ];
+      ]);
     } else {
-      state = [...state, proposal];
+      state = List.unmodifiable([...state, proposal]);
     }
   }
 
@@ -39,7 +39,7 @@ class InMemoryProposalRepository extends Notifier<List<Proposal>> implements Pro
     ProposalStatus status, {
     String? orderId,
   }) async {
-    state = [
+    state = List.unmodifiable([
       for (final p in state)
         if (p.id == id)
           Proposal(
@@ -53,7 +53,7 @@ class InMemoryProposalRepository extends Notifier<List<Proposal>> implements Pro
           )
         else
           p,
-    ];
+    ]);
   }
 }
 

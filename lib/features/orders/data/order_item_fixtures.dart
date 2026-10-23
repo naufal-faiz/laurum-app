@@ -24,11 +24,11 @@ OrderItem _it(
 );
 
 final orderItemFixtures = <OrderItem>[
+  _it('item-115', 'ord-0115', 'srv-004', 'Bed cover', 'pcs', 1000, 25000, 25000),
   _it('item-127', 'ord-0127', 'srv-004', 'Bed cover', 'pcs', 2000, 25000, 50000),
   _it('item-128', 'ord-0128', 'srv-004', 'Bed cover', 'pcs', 10000, 25000, 250000),
   _it('item-129', 'ord-0129', 'srv-001', 'Cuci kering lipat', 'kg', 6000, 6000, 36000),
   _it('item-130', 'ord-0130', 'srv-003', 'Cuci setrika', 'kg', 3000, 9000, 27000),
-  _it('item-131', 'ord-0131', 'srv-002', 'Cuci kiloan', 'kg', 3000, 7000, 21000),
   _it('item-132', 'ord-0132', 'srv-003', 'Cuci setrika', 'kg', 4000, 9000, 36000),
   _it('item-133', 'ord-0133', 'srv-001', 'Cuci kering lipat', 'kg', 5000, 6000, 30000),
   _it('item-134', 'ord-0134', 'srv-005', 'Selimut tebal', 'pcs', 1000, 20000, 20000),

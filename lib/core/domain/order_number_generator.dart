@@ -2,7 +2,14 @@ class OrderNumberGenerator {
   const OrderNumberGenerator({this.deviceCode = 'A'});
   final String deviceCode;
 
+  void _validateDevice() {
+    if (!RegExp(r'^[A-Z]+$').hasMatch(deviceCode)) {
+      throw ArgumentError('Device code must contain uppercase letters');
+    }
+  }
+
   String format(int sequence) {
+    _validateDevice();
     if (sequence < 1 || sequence > 9999) {
       throw ArgumentError('Sequence must be between 1 and 9999');
     }
@@ -10,20 +17,19 @@ class OrderNumberGenerator {
   }
 
   int? parseSequence(String orderNo) {
+    _validateDevice();
     final match = RegExp('^$deviceCode-(\\d{4})\$').firstMatch(orderNo);
     if (match == null) return null;
-    return int.tryParse(match.group(1)!);
+    final sequence = int.parse(match.group(1)!);
+    return sequence == 0 ? null : sequence;
   }
 
   String nextOrderNo(Iterable<String> existingOrderNos) {
-    var maxSeq = 0;
-    for (final no in existingOrderNos) {
-      final match = RegExp('^$deviceCode-(\\d{4})\$').firstMatch(no);
-      if (match != null) {
-        final seq = int.tryParse(match.group(1)!) ?? 0;
-        if (seq > maxSeq) maxSeq = seq;
-      }
+    var maxSequence = 0;
+    for (final number in existingOrderNos) {
+      final sequence = parseSequence(number);
+      if (sequence != null && sequence > maxSequence) maxSequence = sequence;
     }
-    return format(maxSeq + 1);
+    return format(maxSequence + 1);
   }
 }

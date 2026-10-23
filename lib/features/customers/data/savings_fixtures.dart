@@ -81,6 +81,6 @@ final savingsFixtures = <SavingsEntry>[
     kind: SavingsKind.setor,
     amount: 111500,
     method: PayMethod.transfer,
-    note: 'Setoran paket salon',
+    note: 'Setoran tabungan',
   ),
 ];

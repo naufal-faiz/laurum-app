@@ -28,7 +28,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order.dart (79): Order
 - order_event.dart (37): OrderEvent
 - order_item.dart (41): OrderItem
-- order_number_generator.dart (29): OrderNumberGenerator
+- order_number_generator.dart (35): OrderNumberGenerator
 - order_rules.dart (26):
 - payment.dart (37): Payment
 - payment_corrections.dart (42):
@@ -42,12 +42,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/core/domain/repositories/
 - business_repository.dart (10): BusinessRepository
 - customer_repository.dart (8): CustomerRepository
-- expense_repository.dart (9): ExpenseRepository
-- order_repository.dart (31): OrderRepository
+- expense_repository.dart (10): ExpenseRepository
+- order_repository.dart (33): OrderRepository
 - proposal_repository.dart (13): ProposalRepository
 - report_repository.dart (10): ReportRepository
-- repository_providers.dart (41): businessRepositoryProvider, customerRepositoryProvider, serviceRepositoryProvider, orderRepositoryProvider, savingsRepositoryProvider, expenseRepositoryProvider, proposalRepositoryProvider, reportRepositoryProvider
-- savings_repository.dart (8): SavingsRepository
+- savings_repository.dart (9): SavingsRepository
 - service_repository.dart (8): ServiceRepository
 
 ### lib/core/domain/
@@ -66,13 +65,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_svgs.dart (4): AppSvgs
 
 ### lib/core/services/
-- auth_service.dart (44): AuthService, FakeAuthService
-- contact_source.dart (30): ContactItem, ContactSource, FakeContactSource
+- auth_service.dart (42): AuthService, FakeAuthService
+- contact_source.dart (23): ContactItem, ContactSource, FakeContactSource
 - export_service.dart (19): ExportService, FakeExportService
 - external_launcher.dart (25): ExternalLauncher, FakeExternalLauncher
 - photo_picker.dart (16): PhotoPicker, FakePhotoPicker
 - print_service.dart (18): PrintService, FakePrintService
-- service_providers.dart (36): printServiceProvider, externalLauncherProvider, contactSourceProvider, photoPickerProvider, exportServiceProvider, authServiceProvider, syncServiceProvider
+- repository_providers.dart (41): businessRepositoryProvider, customerRepositoryProvider, serviceRepositoryProvider, orderRepositoryProvider, savingsRepositoryProvider, expenseRepositoryProvider, proposalRepositoryProvider, reportRepositoryProvider
+- service_providers.dart (38): printServiceProvider, externalLauncherProvider, contactSourceProvider, photoPickerProvider, exportServiceProvider, authServiceProvider, syncServiceProvider
 - sync_service.dart (42): SyncServiceStatus, SyncService, FakeSyncService
 
 ### lib/core/theme/
@@ -95,43 +95,52 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - in_memory_business_repository.dart (36): BusinessState, InMemoryBusinessRepository, inMemoryBusinessRepositoryProvider
 
 ### lib/features/customers/data/
-- customer_fixtures.dart (60):
-- in_memory_customer_repository.dart (60): InMemoryCustomerRepository, inMemoryCustomerRepositoryProvider
-- in_memory_savings_repository.dart (34): InMemorySavingsRepository, inMemorySavingsRepositoryProvider
+- contact_fixtures.dart (8):
+- customer_fixtures.dart (57):
+- customer_history_fixtures.dart (8):
+- in_memory_customer_repository.dart (76): InMemoryCustomerRepository, inMemoryCustomerRepositoryProvider
+- in_memory_savings_repository.dart (48): InMemorySavingsRepository, inMemorySavingsRepositoryProvider
 - savings_fixtures.dart (86):
 
 ### lib/features/expenses/data/
 - expense_category_fixtures.dart (35):
 - expense_fixtures.dart (10):
-- in_memory_expense_repository.dart (63): InMemoryExpenseRepository, inMemoryExpenseRepositoryProvider
+- in_memory_expense_repository.dart (64): InMemoryExpenseRepository, inMemoryExpenseRepositoryProvider
 - prior_expense_fixtures.dart (72):
 - week_expense_fixtures.dart (48):
 
 ### lib/features/orders/data/
-- in_memory_order_repository.dart (101): InMemoryOrderRepository, inMemoryOrderRepositoryProvider
+- in_memory_order_repository.dart (91): InMemoryOrderRepository, inMemoryOrderRepositoryProvider
+- order_event_fixtures.dart (26):
+- order_fixture_factory.dart (26):
 - order_fixtures.dart (8):
-- order_history_fixtures.dart (71):
+- order_history_fixtures.dart (43):
 - order_item_fixtures.dart (43):
 - order_queue_fixtures.dart (8):
-- order_queue_process_fixtures.dart (104):
-- order_queue_ready_fixtures.dart (65):
-- payment_fixtures.dart (30):
+- order_queue_process_fixtures.dart (81):
+- order_queue_ready_fixtures.dart (42):
+- order_store.dart (20): OrderStore
+- order_store_write.dart (86):
+- payment_fixtures.dart (31):
 
 ### lib/features/proposals/data/
 - in_memory_proposal_repository.dart (63): InMemoryProposalRepository, inMemoryProposalRepositoryProvider
 - proposal_fixtures.dart (31):
 
 ### lib/features/reports/data/
-- in_memory_report_repository.dart (65): InMemoryReportRepository, inMemoryReportRepositoryProvider
+- in_memory_report_repository.dart (76): InMemoryReportRepository, inMemoryReportRepositoryProvider
+- report_adjustments.dart (16):
 - report_fixtures.dart (83):
+- report_snapshot.dart (21):
+- report_top_services.dart (35):
 
 ### lib/features/services/data/
-- in_memory_service_repository.dart (60): InMemoryServiceRepository, inMemoryServiceRepositoryProvider
+- in_memory_service_repository.dart (63): InMemoryServiceRepository, inMemoryServiceRepositoryProvider
 - service_fixtures.dart (67):
 
 ### lib/
 - main.dart (16):
-- main_dummy.dart (51):
+- main_dummy.dart (82):
 
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
@@ -213,7 +222,17 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - domain_savings_test.dart (87):
 - domain_schedule_test.dart (35):
 - domain_top_services_test.dart (34):
-- dummy_data_integration_test.dart (151):
+- dummy_cancellation_ledger_test.dart (35):
+- dummy_catalog_integration_test.dart (56):
+- dummy_data_integration_test.dart (64):
+- dummy_fixture_integrity_test.dart (51):
+- dummy_live_creation_test.dart (59):
+- dummy_order_atomicity_test.dart (77):
+- dummy_provider_notifications_test.dart (71):
+- dummy_report_baseline_test.dart (39):
+- dummy_report_mutation_test.dart (52):
+- dummy_repository_regression_test.dart (52):
+- dummy_savings_integration_test.dart (49):
 - empty_state_test.dart (28):
 - footer_bar_test.dart (30):
 - formatters_test.dart (40):
@@ -226,7 +245,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - notice_ai_test.dart (20):
 - order_number_generator_test.dart (34):
 - period_tabs_test.dart (29):
-- platform_services_test.dart (72):
+- platform_services_test.dart (78):
 - progress_row_test.dart (23):
 - section_header_test.dart (26):
 - stat_tile_test.dart (24):

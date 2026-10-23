@@ -5,38 +5,53 @@ import 'package:laurum/features/customers/data/customer_fixtures.dart';
 
 class InMemoryCustomerRepository extends Notifier<List<Customer>> implements CustomerRepository {
   @override
-  List<Customer> build() => List.of(customerFixtures);
+  List<Customer> build() => List.unmodifiable(customerFixtures);
 
   @override
   Future<List<Customer>> getCustomers({bool includeInactive = false}) async {
-    if (includeInactive) return state;
-    return state.where((c) => c.isActive && c.deletedAt == null).toList();
+    return List.unmodifiable(
+      state.where((c) => c.deletedAt == null && (includeInactive || c.isActive)),
+    );
   }
 
   @override
   Future<Customer?> getCustomerById(String id) async {
-    final match = state.where((c) => c.id == id);
+    final match = state.where((c) => c.id == id && c.deletedAt == null);
     return match.isEmpty ? null : match.first;
   }
 
   @override
   Future<void> saveCustomer(Customer customer) async {
+    final phone = customer.phone.replaceAll(RegExp(r'\D'), '');
+    if (phone.isNotEmpty &&
+        customer.isActive &&
+        customer.deletedAt == null &&
+        state.any(
+          (c) =>
+              c.id != customer.id &&
+              c.ownerId == customer.ownerId &&
+              c.isActive &&
+              c.deletedAt == null &&
+              c.phone.replaceAll(RegExp(r'\D'), '') == phone,
+        )) {
+      throw StateError('Active customer phone must be unique');
+    }
     final idx = state.indexWhere((c) => c.id == customer.id);
     if (idx >= 0) {
-      state = [
+      state = List.unmodifiable([
         for (var i = 0; i < state.length; i++)
           if (i == idx) customer else state[i],
-      ];
+      ]);
     } else {
-      state = [...state, customer];
+      state = List.unmodifiable([...state, customer]);
     }
   }
 
   @override
   Future<void> deleteCustomer(String id) async {
-    state = [
+    state = List.unmodifiable([
       for (final c in state)
-        if (c.id == id)
+        if (c.id == id && c.deletedAt == null)
           Customer(
             id: c.id,
             ownerId: c.ownerId,
@@ -46,11 +61,12 @@ class InMemoryCustomerRepository extends Notifier<List<Customer>> implements Cus
             address: c.address,
             notes: c.notes,
             isActive: false,
+            updatedAt: c.updatedAt,
             deletedAt: DateTime.now(),
           )
         else
           c,
-    ];
+    ]);
   }
 }
 

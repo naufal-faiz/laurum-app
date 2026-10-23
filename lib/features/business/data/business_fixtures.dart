@@ -11,7 +11,7 @@ final businessProfileFixture = BusinessProfile(
   address: 'Jl. Melati No. 4, Sukajadi, Bandung',
   phone: '0812-3456-7890',
   receiptFooter: 'Terima kasih atas kepercayaan Anda',
-  receiptNote: 'Barang tidak diambil >30 hari di luar tanggung jawab',
+  receiptNote: 'Pakaian bersih, wangi & rapi',
 );
 
 final receiptSettingsFixture = ReceiptSettings(

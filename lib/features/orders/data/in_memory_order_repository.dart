@@ -5,50 +5,44 @@ import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/core/domain/repositories/order_repository.dart';
+import 'package:laurum/features/orders/data/order_event_fixtures.dart';
 import 'package:laurum/features/orders/data/order_fixtures.dart';
 import 'package:laurum/features/orders/data/order_item_fixtures.dart';
+import 'package:laurum/features/orders/data/order_store.dart';
+import 'package:laurum/features/orders/data/order_store_write.dart';
 import 'package:laurum/features/orders/data/payment_fixtures.dart';
 
-class InMemoryOrderRepository extends Notifier<List<Order>> implements OrderRepository {
-  final List<OrderItem> _items = List.of(orderItemFixtures);
-  final List<Payment> _payments = List.of(paymentFixtures);
-  final List<OrderEvent> _events = [];
-
+class InMemoryOrderRepository extends Notifier<OrderStore> implements OrderRepository {
   @override
-  List<Order> build() => List.of(orderFixtures);
-
+  OrderStore build() => OrderStore(
+    orders: orderFixtures,
+    items: orderItemFixtures,
+    payments: paymentFixtures,
+    events: orderEventFixtures,
+  );
   @override
-  Future<List<Order>> getOrders({OrderStatus? status}) async {
-    if (status == null) return state;
-    return state.where((o) => o.status == status).toList();
-  }
-
+  Future<List<Order>> getOrders({OrderStatus? status}) async => List.unmodifiable(
+    state.orders.where((o) => o.deletedAt == null && (status == null || o.status == status)),
+  );
   @override
-  Future<Order?> getOrderById(String id) async {
-    final match = state.where((o) => o.id == id);
-    return match.isEmpty ? null : match.first;
-  }
-
+  Future<Order?> getOrderById(String id) async =>
+      state.orders.where((o) => o.id == id && o.deletedAt == null).firstOrNull;
   @override
-  Future<Order?> getOrderByOrderNo(String orderNo) async {
-    final match = state.where((o) => o.orderNo == orderNo);
-    return match.isEmpty ? null : match.first;
-  }
-
+  Future<Order?> getOrderByOrderNo(String orderNo) async =>
+      state.orders.where((o) => o.orderNo == orderNo && o.deletedAt == null).firstOrNull;
   @override
-  Future<List<OrderItem>> getItemsByOrderId(String orderId) async =>
-      _items.where((i) => i.orderId == orderId).toList();
-
+  Future<List<OrderItem>> getItemsByOrderId(String orderId) async => List.unmodifiable(
+    state.items.where((i) => i.orderId == orderId && i.deletedAt == null),
+  );
   @override
-  Future<List<Payment>> getPaymentsByOrderId(String orderId) async =>
-      _payments.where((p) => p.orderId == orderId).toList();
-
+  Future<List<Payment>> getPaymentsByOrderId(String orderId) async => List.unmodifiable(
+    state.payments.where((p) => p.orderId == orderId && p.deletedAt == null),
+  );
   @override
-  Future<List<Payment>> getAllPayments() async => List.unmodifiable(_payments);
-
+  Future<List<Payment>> getAllPayments() async => state.payments;
   @override
   Future<List<OrderEvent>> getEventsByOrderId(String orderId) async =>
-      _events.where((e) => e.orderId == orderId).toList();
+      List.unmodifiable(state.events.where((e) => e.orderId == orderId));
 
   @override
   Future<void> saveOrder(
@@ -57,18 +51,13 @@ class InMemoryOrderRepository extends Notifier<List<Order>> implements OrderRepo
     List<Payment>? payments,
     List<OrderEvent>? events,
   }) async {
-    if (items != null) _items.addAll(items);
-    if (payments != null) _payments.addAll(payments);
-    if (events != null) _events.addAll(events);
-    final idx = state.indexWhere((o) => o.id == order.id);
-    if (idx >= 0) {
-      state = [
-        for (var i = 0; i < state.length; i++)
-          if (i == idx) order else state[i],
-      ];
-    } else {
-      state = [...state, order];
-    }
+    state = writeOrderStore(
+      state,
+      order,
+      items: items,
+      payments: payments ?? [],
+      events: events ?? [],
+    );
   }
 
   @override
@@ -77,25 +66,26 @@ class InMemoryOrderRepository extends Notifier<List<Order>> implements OrderRepo
     OrderStatus status, {
     OrderEvent? event,
   }) async {
-    if (event != null) _events.add(event);
-    state = [
-      for (final o in state)
-        if (o.id == orderId) o.withStatus(status) else o,
-    ];
+    final order = state.orders.where((o) => o.id == orderId).firstOrNull;
+    if (order == null) throw StateError('Order not found');
+    state = writeOrderStore(state, order.withStatus(status), events: [?event]);
   }
 
   @override
   Future<void> addPayment(Payment payment) async {
-    _payments.add(payment);
-    state = List.of(state);
+    final order = state.orders.where((o) => o.id == payment.orderId).firstOrNull;
+    if (order == null) throw StateError('Order not found');
+    state = writeOrderStore(state, order, payments: [payment]);
   }
 
   @override
   Future<void> addEvent(OrderEvent event) async {
-    _events.add(event);
+    final order = state.orders.where((o) => o.id == event.orderId).firstOrNull;
+    if (order == null) throw StateError('Order not found');
+    state = writeOrderStore(state, order, events: [event]);
   }
 }
 
-final inMemoryOrderRepositoryProvider = NotifierProvider<InMemoryOrderRepository, List<Order>>(
+final inMemoryOrderRepositoryProvider = NotifierProvider<InMemoryOrderRepository, OrderStore>(
   InMemoryOrderRepository.new,
 );

@@ -6,6 +6,7 @@ import 'package:laurum/core/services/external_launcher.dart';
 import 'package:laurum/core/services/photo_picker.dart';
 import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/services/sync_service.dart';
+import 'package:laurum/features/customers/data/contact_fixtures.dart';
 
 void main() {
   group('Fake Platform Services', () {
@@ -27,7 +28,7 @@ void main() {
     });
 
     test('FakeContactSource returns fixture contacts and logs call', () async {
-      final source = FakeContactSource();
+      final source = FakeContactSource(contacts: contactFixtures);
       final contacts = await source.getContacts();
       expect(contacts.length, 4);
       expect(contacts.first.name, 'Agus Pratama');
@@ -37,7 +38,7 @@ void main() {
     test('FakePhotoPicker logs calls and returns default path', () async {
       final picker = FakePhotoPicker();
       final path = await picker.pickPhoto();
-      expect(path, 'assets/photos/sample_expense.jpg');
+      expect(path, isNull);
       expect(picker.pickPhotoCallCount, 1);
     });
 
@@ -63,7 +64,12 @@ void main() {
     test('FakeSyncService emits status transitions and logs calls', () async {
       final sync = FakeSyncService();
       expect(sync.currentStatus, SyncServiceStatus.tersimpan);
+      final statuses = <SyncServiceStatus>[];
+      final subscription = sync.statusStream.listen(statuses.add);
       await sync.syncNow();
+      await Future<void>.delayed(Duration.zero);
+      expect(statuses, [SyncServiceStatus.menyimpan, SyncServiceStatus.tersimpan]);
+      await subscription.cancel();
       expect(sync.syncCallCount, 1);
       expect(sync.currentStatus, SyncServiceStatus.tersimpan);
       sync.dispose();

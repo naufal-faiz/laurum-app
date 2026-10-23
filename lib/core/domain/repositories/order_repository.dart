@@ -13,6 +13,8 @@ abstract class OrderRepository {
   Future<List<Payment>> getAllPayments();
   Future<List<OrderEvent>> getEventsByOrderId(String orderId);
 
+  // Atomic snapshot save: items replace the order's items; ledgers append idempotently.
+  // Reusing a ledger ID with different contents is rejected.
   Future<void> saveOrder(
     Order order, {
     List<OrderItem>? items,

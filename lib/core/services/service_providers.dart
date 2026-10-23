@@ -32,5 +32,7 @@ final authServiceProvider = Provider<AuthService>((ref) {
 });
 
 final syncServiceProvider = Provider<SyncService>((ref) {
-  return FakeSyncService();
+  final service = FakeSyncService();
+  ref.onDispose(service.dispose);
+  return service;
 });
