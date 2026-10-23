@@ -1,6 +1,57 @@
 # Katalog komponen Laurum
 
 
+## ChipBar
+- Berkas: lib/shared/widgets/molecules/chip_bar.dart.
+- API dan contoh: labels wajib; selectedIndex opsional; onSelected(int) opsional. ChipBar(labels: labels, selectedIndex: index, onSelected: select). Scroll horizontal; tanpa state internal.
+- Varian: selected/unselected/disabled/scroll.
+- Galeri: widgetbook/molecules/chip_bar_use_case.dart; tes: test/chip_bar_test.dart.
+- Acuan Pencil: XNjrV; selisih visual di docs/progress/fase-1.md.
+
+## PeriodTabs
+- Berkas: lib/shared/widgets/molecules/period_tabs.dart.
+- API dan contoh: labels dan selectedIndex wajib; onSelected(int) opsional. PeriodTabs(labels: labels, selectedIndex: index, onSelected: select). Pilihan periode ditentukan pemanggil.
+- Varian: setiap pilihan aktif dan disabled; tanpa ikon sesuai keputusan pengguna.
+- Galeri: widgetbook/molecules/period_tabs_use_case.dart; tes: test/period_tabs_test.dart.
+- Acuan Pencil: XNjrV; selisih visual di docs/progress/fase-1.md.
+
+## NominalChips
+- Berkas: lib/shared/widgets/molecules/nominal_chips.dart.
+- API dan contoh: amounts List<int> rupiah wajib; onSelected(int rupiah), selectedAmount opsional; increment default true. NominalChips(amounts: amounts, onSelected: addAmount). Tidak menghitung saldo.
+- Varian: increment/nominal, selected/disabled.
+- Galeri: widgetbook/molecules/nominal_chips_use_case.dart; tes: test/nominal_chips_test.dart.
+- Acuan Pencil: rtceE; selisih visual di docs/progress/fase-1.md.
+
+## StepperField
+- Berkas: lib/shared/widgets/molecules/stepper_field.dart.
+- API dan contoh: value (sudah diformat), decreaseLabel, increaseLabel, editLabel wajib; onDecrease/onIncrease/onEdit opsional. StepperField(value: Formatters.berat(grams), decreaseLabel: minus, increaseLabel: plus, editLabel: edit, onIncrease: increment).
+- Varian: aktif, disabled, hanya tambah.
+- Galeri: widgetbook/molecules/stepper_field_use_case.dart; tes: test/stepper_field_test.dart.
+- Acuan Pencil: K8zXI; selisih visual di docs/progress/fase-1.md.
+
+## AppBarSub
+- Berkas: lib/shared/widgets/molecules/app_bar_sub.dart.
+- API dan contoh: title/backLabel wajib; onBack dan trailing slot opsional. AppBarSub(title: title, backLabel: backLabel, onBack: callback). Tanpa navigasi.
+- Varian: utama/dengan trailing.
+- Galeri: widgetbook/molecules/app_bar_sub_use_case.dart; tes: test/app_bar_sub_test.dart.
+- Acuan Pencil: WiQtw; selisih visual di docs/progress/fase-1.md.
+
+## AppBarRoot
+- Berkas: lib/shared/widgets/molecules/app_bar_root.dart.
+- API dan contoh: title, accountLabel, syncIndicator Widget wajib; onAccount opsional. AppBarRoot(title: title, accountLabel: account, syncIndicator: SyncIndicator(state: state), onAccount: openAccount). Slot menjaga larangan impor antarmolecules.
+- Varian: empat status SyncIndicator.
+- Galeri: widgetbook/molecules/app_bar_root_use_case.dart; tes: test/app_bar_root_test.dart.
+- Acuan Pencil: C1rcX; selisih visual di docs/progress/fase-1.md.
+
+## FooterBar
+- Berkas: lib/shared/widgets/molecules/footer_bar.dart.
+- API dan contoh: child wajib; summary Widget opsional. FooterBar(summary: AppText(total), child: AppButton(label, onPressed: submit)). Pemanggil menempatkan sticky; SafeArea bawah disediakan.
+- Varian: aksi tunggal, summary, dua aksi.
+- Galeri: widgetbook/molecules/footer_bar_use_case.dart; tes: test/footer_bar_test.dart.
+- Acuan Pencil: uqTPF; selisih visual di docs/progress/fase-1.md.
+
+
+
 ## LabeledField
 - Berkas: lib/shared/widgets/molecules/labeled_field.dart.
 - API dan contoh: label dan child wajib; helperText/errorText opsional. LabeledField(label: label, child: AppTextField(label: label)). Error menggantikan helper.

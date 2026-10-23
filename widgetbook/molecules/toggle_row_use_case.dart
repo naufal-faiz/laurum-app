@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/molecules/toggle_row.dart';
 import 'package:widgetbook/widgetbook.dart';
@@ -11,6 +12,7 @@ final toggleRowUseCase = WidgetbookUseCase(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: AppSpacing.cardGap,
       children: [
+        ToggleRow(label: 'With icon', value: true, icon: AppIcons.location, onChanged: (_) {}),
         for (final enabled in [true, false])
           for (final value in [true, false])
             ToggleRow(

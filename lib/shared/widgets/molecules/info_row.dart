@@ -20,7 +20,7 @@ class InfoRow extends StatelessWidget {
       ],
       Expanded(child: AppText(label, color: AppColors.ink2)),
       const SizedBox(width: AppMoleculeTokens.gap),
-      Flexible(
+      Expanded(
         child: AppText(value, variant: AppTextVariant.bodyStrong, textAlign: TextAlign.end),
       ),
     ],

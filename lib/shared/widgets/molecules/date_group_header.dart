@@ -27,7 +27,7 @@ class DateGroupHeader extends StatelessWidget {
         const SizedBox(width: AppMoleculeTokens.gap),
         Expanded(child: AppText(label, variant: AppTextVariant.bodyStrong)),
         if (summary != null)
-          Flexible(
+          Expanded(
             child: AppText(
               summary!,
               variant: AppTextVariant.label,

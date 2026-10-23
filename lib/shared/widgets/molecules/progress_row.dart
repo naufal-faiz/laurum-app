@@ -19,7 +19,10 @@ class ProgressRow extends StatelessWidget {
       Row(
         children: [
           Expanded(child: AppText(label, variant: AppTextVariant.bodyStrong)),
-          if (value != null) Flexible(child: AppText(value!, variant: AppTextVariant.label)),
+          if (value != null)
+            Expanded(
+              child: AppText(value!, variant: AppTextVariant.label, textAlign: TextAlign.end),
+            ),
         ],
       ),
       LinearProgressIndicator(

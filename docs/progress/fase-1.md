@@ -155,3 +155,32 @@ Lingkup: AppTextField, AppSearchField, AppSkeleton, AppNumpadKey.
 - SyncIndicator I3YmrS/ARosk: tersimpan/offline cocok padding 4/8, ikon 12, pill; glyph berbeda. Menyimpan/gagal belum memiliki frame terverifikasi, memakai chipIdle/errorTint dan ikon refresh/alert. Refresh statis, tanpa timer/provider.
 - Tidak ada perubahan atom atau kebutuhan widget di luar registry. iOS/perangkat tetap belum diuji.
 - Checkpoint M2: check_all SEMUA HIJAU; 67 tes, repo_map 121 berkas. Pengguna meminta AppChip tetap tanpa icon; selisih PeriodTabs dicatat pada M3.
+
+## Molecules M3 — 23 Oktober 2026
+- Tujuh widget M3 dibuat; 21/21 molecules tersedia, masing-masing satu galeri dan tes perilaku/golden.
+- Galeri ToggleRow/LockedRow juga dilengkapi opsi ikon pendamping.
+- Seluruh galeri diperiksa pada viewport 390x900 tanpa overflow. Referensi: docs/progress/fase-1-m3-visuals/.
+- ChipBar/PeriodTabs XNjrV: tinggi 48/gap 8/pill/palet sesuai; ikon info/check tidak tampil. Pengguna meminta AppChip tetap, selisih diterima untuk tinjauan.
+- NominalChips rtceE: tinggi/pill/warna sesuai; lebar mengikuti label dan membungkus, bukan tiga chip sama lebar. Nilai int rupiah lewat Formatters.
+- StepperField K8zXI: tombol 48, simbol teks 18, gap 4 dan radius sesuai; bayangan frame belum diterapkan, padding nilai 16 vs sekitar 20, teks nilai 14 vs frame 16. Tidak menghitung nilai sendiri.
+- AppBarSub WiQtw: tinggi 64/title 18 sesuai; AppIconButton berkotak putih dengan glyph 20 vs ikon transparan 24 pada frame.
+- AppBarRoot C1rcX: tinggi/title/status sesuai; akun AppIconButton putih 48/glyph 20 vs lingkaran primary 32/ikon putih 24. Atom tetap.
+- FooterBar uqTPF: surface/padding 16/gap 12/shadow sesuai token. Sticky ditangani template; SafeArea bawah tersedia. Summary dan tombol berupa slot.
+- PRD 5.2 tidak merinci semua parameter; API disusun dari frame dan komposisi atoms, tercatat di katalog untuk tinjauan.
+- AppBarRoot menerima SyncIndicator lewat slot; tidak ada impor antarmolecules/provider/navigasi.
+- Tidak mengubah atoms/registry/lint/dependensi. Tema tambahan: AppMoleculeTokens dan AppMoleculeStyles, token lama tetap.
+- Frame warning/error banner dan menyimpan/gagal sync belum terverifikasi. iOS/perangkat/aksesibilitas belum diuji. APK tetap ditunda.
+
+### Jumlah baris widget Molecules
+| M1 | Baris | M2 | Baris | M3 | Baris |
+| --- | ---: | --- | ---: | --- | ---: |
+| SectionHeader | 37 | LabeledField | 35 | ChipBar | 29 |
+| InfoRow | 28 | BannerMessage | 41 | PeriodTabs | 29 |
+| StatTile | 35 | NoticeAi | 17 | NominalChips | 31 |
+| DateGroupHeader | 41 | CalloutAi | 36 | StepperField | 61 |
+| ProgressRow | 38 | EmptyState | 48 | AppBarSub | 54 |
+| MenuRow | 45 | SyncIndicator | 46 | AppBarRoot | 48 |
+| ToggleRow | 49 | — | — | FooterBar | 28 |
+| LockedRow | 49 | — | — | — | — |
+- Self-review akhir: nilai kanan InfoRow/DateGroupHeader/ProgressRow diperbaiki agar rata kanan; golden terkait diperbarui.
+- Checkpoint M3 final: check_all SEMUA HIJAU; kedua analyzer bersih, check_arch OK, 81 tes lulus, repo_map 144 berkas. Format 41 berkas Widgetbook juga bersih. Tidak melanjutkan lapisan berikutnya.

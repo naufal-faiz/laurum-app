@@ -3,9 +3,9 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 31/60 dibuat
+## Registry widget: 38/60 dibuat
 
-Belum dibuat: AppBarRoot, AppBarSub, AppBottomSheet, AuthScaffold, BottomNavBar, ChipBar, ConfirmModal, CustomerRow, ExpenseRow, FooterBar, FormScaffold, NominalChips, NotaCard, Numpad, OrderCard, PeriodTabs, PiutangCard, ProposalCard, ReceiptPreview, ReceiptToggleList, ReportSummary, RootScaffold, SavingsRow, ServiceRow, SheetScaffold, StepperField, SubScaffold, TopServices, WeeklyBarChart
+Belum dibuat: AppBottomSheet, AuthScaffold, BottomNavBar, ConfirmModal, CustomerRow, ExpenseRow, FormScaffold, NotaCard, Numpad, OrderCard, PiutangCard, ProposalCard, ReceiptPreview, ReceiptToggleList, ReportSummary, RootScaffold, SavingsRow, ServiceRow, SheetScaffold, SubScaffold, TopServices, WeeklyBarChart
 
 ## Dependensi
 
@@ -30,6 +30,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_control_tokens.dart (16): AppControlTokens
 - app_dimensions.dart (6): AppDimensions
 - app_input_styles.dart (61): AppInputStyles
+- app_molecule_styles.dart (32): AppMoleculeStyles
 - app_molecule_tokens.dart (15): AppMoleculeTokens
 - app_radius.dart (14): AppRadius
 - app_shadows.dart (15): AppShadows
@@ -61,24 +62,33 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_text_field.dart (88): AppTextField, _AppTextFieldState
 
 ### lib/shared/widgets/molecules/
+- app_bar_root.dart (48): AppBarRoot
+- app_bar_sub.dart (54): AppBarSub
 - banner_message.dart (41): BannerMessageVariant, BannerMessage
 - callout_ai.dart (36): CalloutAi
+- chip_bar.dart (29): ChipBar
 - date_group_header.dart (41): DateGroupHeader
 - empty_state.dart (48): EmptyState
+- footer_bar.dart (28): FooterBar
 - info_row.dart (28): InfoRow
 - labeled_field.dart (35): LabeledField
 - locked_row.dart (49): LockedRow
 - menu_row.dart (45): MenuRow
+- nominal_chips.dart (31): NominalChips
 - notice_ai.dart (17): NoticeAi
-- progress_row.dart (35): ProgressRow
+- period_tabs.dart (29): PeriodTabs
+- progress_row.dart (38): ProgressRow
 - section_header.dart (37): SectionHeader
 - stat_tile.dart (35): StatTile
+- stepper_field.dart (61): StepperField
 - sync_indicator.dart (46): SyncState, SyncIndicator
 - toggle_row.dart (49): ToggleRow
 
 ### test/
 - app_avatar_test.dart (28):
 - app_badge_test.dart (29):
+- app_bar_root_test.dart (32):
+- app_bar_sub_test.dart (26):
 - app_button_test.dart (44):
 - app_card_test.dart (51):
 - app_chip_test.dart (41):
@@ -97,18 +107,23 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - atom_gallery_test.dart (75):
 - banner_message_test.dart (23):
 - callout_ai_test.dart (20):
+- chip_bar_test.dart (30):
 - date_group_header_test.dart (24):
 - empty_state_test.dart (28):
+- footer_bar_test.dart (30):
 - formatters_test.dart (40):
 - info_row_test.dart (25):
 - labeled_field_test.dart (29):
 - locked_row_test.dart (25):
 - menu_row_test.dart (25):
 - molecule_gallery.dart (35):
+- nominal_chips_test.dart (25):
 - notice_ai_test.dart (20):
+- period_tabs_test.dart (29):
 - progress_row_test.dart (23):
 - section_header_test.dart (26):
 - stat_tile_test.dart (24):
+- stepper_field_test.dart (33):
 - sync_indicator_test.dart (23):
 - toggle_row_test.dart (25):
 - widget_test.dart (22):
@@ -138,22 +153,30 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_text_use_case.dart (21):
 
 ### widgetbook/
-- main.dart (64):
+- main.dart (68):
 
 ### widgetbook/molecules/
+- app_bar_root_use_case.dart (25):
+- app_bar_sub_use_case.dart (26):
 - banner_message_use_case.dart (19):
 - callout_ai_use_case.dart (20):
+- chip_bar_use_case.dart (23):
 - date_group_header_use_case.dart (20):
 - empty_state_use_case.dart (26):
+- footer_bar_use_case.dart (35):
 - info_row_use_case.dart (20):
 - labeled_field_use_case.dart (40):
-- locked_row_use_case.dart (19):
+- locked_row_use_case.dart (25):
 - m1.dart (21):
 - m2.dart (17):
+- m3.dart (19):
 - menu_row_use_case.dart (26):
+- nominal_chips_use_case.dart (25):
 - notice_ai_use_case.dart (18):
+- period_tabs_use_case.dart (24):
 - progress_row_use_case.dart (19):
 - section_header_use_case.dart (24):
 - stat_tile_use_case.dart (25):
+- stepper_field_use_case.dart (39):
 - sync_indicator_use_case.dart (18):
-- toggle_row_use_case.dart (25):
+- toggle_row_use_case.dart (27):

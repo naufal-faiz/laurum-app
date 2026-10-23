@@ -1,35 +1,37 @@
 # STATE Laurum
-Diperbarui 2026-10-23 | dev1
+Diperbarui: 2026-10-23 | Cabang dev1
 
 ## Posisi
-Fase 1: 17 atoms + 14 molecules M1/M2 selesai (31/60 registry).
-Pengguna mengizinkan seluruh M1, M2, M3 dalam satu sesi dengan tiga checkpoint.
+Fase 1: 17 atoms + seluruh 21 molecules tersedia (38/60 registry).
+Tiga kelompok yang diizinkan pengguna selesai diimplementasikan; menunggu tinjauan setelah checkpoint M3.
 
 ## Selesai
-- Fondasi Fase 0 dan semua 17 atoms, commit dasar 715a000.
+- Fondasi Fase 0 dan semua atoms, dasar 715a000.
 - M1: SectionHeader, InfoRow, StatTile, DateGroupHeader, ProgressRow, MenuRow, ToggleRow, LockedRow.
-- Delapan use-case, tes perilaku, golden dan katalog; referensi Pencil tersedia.
-- check_all SEMUA HIJAU: format, flutter analyze, dart analyze, check_arch, 67 tes, repo_map 121 berkas.
+- M2: LabeledField, BannerMessage, NoticeAi, CalloutAi, EmptyState, SyncIndicator.
+- M3: ChipBar, PeriodTabs, NominalChips, StepperField, AppBarSub, AppBarRoot, FooterBar.
+- M1 commit 5de7290: check_all hijau, 55 tes.
+- M2 commit 5f981aa: check_all hijau, 67 tes.
+- 21 use-case, 21 tes perilaku dan 21 golden, katalog serta screenshot Pencil tersedia.
+- Semua widget 17–61 baris; tidak mengubah atom/registry/lint/dependensi.
 
 ## Sedang dikerjakan
-- Checkpoint M1: 5de7290. M2 hijau; commit feat: molecules M2.
-- Selesai M2: LabeledField, BannerMessage, NoticeAi, CalloutAi, EmptyState, SyncIndicator.
-- Berikutnya M3: ChipBar, PeriodTabs, NominalChips, StepperField, AppBarSub, AppBarRoot, FooterBar.
-- Rencana docs/plans/004-molecules.md; selisih visual docs/progress/fase-1.md.
+- M3 check_all SEMUA HIJAU: format, flutter analyze, dart analyze, check_arch, 81 tes; repo_map 144 berkas.
+- Checkpoint feat: molecules M3 (hash lihat git log -1). BERHENTI menunggu tinjauan pengguna.
+- Selisih dan jumlah baris: docs/progress/fase-1.md. API: docs/design/component_catalog.md.
 
 ## Keputusan
-- Tidak mengubah atoms/registry/lint/dependensi; tema tambahan hanya token dasar yang diizinkan.
-- AppBarRoot menerima slot syncIndicator dari pemanggil, bukan impor molecule lain.
-- NoticeAi wajib memakai kalimat persis dari K1Xa3y/FnvUf.
-- Semua data/callback dari konstruktor; tidak ada provider atau navigasi.
-- Native riverpod_lint berjalan lewat dart analyze; flutter analyze tetap dijalankan.
-- Perintah check_all memperbarui REPO_MAP; progress hanya docs/progress.
+- AppChip tetap tanpa parameter icon sesuai jawaban pengguna; PeriodTabs tanpa ikon, dicatat sebagai selisih.
+- AppBarRoot menerima SyncIndicator sebagai slot agar tidak mengimpor molecule lain.
+- NoticeAi memakai kalimat persis dari K1Xa3y/FnvUf.
+- Theme tambahan hanya AppMoleculeTokens/Styles; token lama tidak berubah.
+- Native riverpod_lint lewat dart analyze; flutter analyze juga dijalankan.
+- Nilai uang int rupiah; molecule stateless, semua data/callback dari konstruktor.
 
-## Batas
-- APK tetap ditunda; NDK 28.2.13676358 belum selesai diunduh.
-- Android SDK/JDK/lisensi tersedia, belum uji runtime perangkat. iOS belum diuji.
-- package-lock.json untracked milik pengguna di luar tugas; jangan sertakan commit.
-- Jangan push/merge. Setelah M3 berhenti menunggu tinjauan.
-
-- Keputusan pengguna: AppChip tetap tanpa icon; catat selisih PeriodTabs.
-
+## Ketidakpastian dan batas
+- Frame khusus warning/error banner dan menyimpan/gagal sync belum terverifikasi.
+- Selisih ukuran/padding/glyph/icon app bar dijelaskan di fase-1.md; perlu tinjauan visual pengguna.
+- APK tetap ditunda; NDK belum selesai. Android SDK/JDK/lisensi tersedia.
+- iOS, perangkat fisik, keyboard/IME dan pembaca layar perangkat belum diuji.
+- package-lock.json untracked di luar tugas, tidak disertakan commit.
+- Jangan melanjutkan organisms, push, atau merge tanpa instruksi pengguna.
