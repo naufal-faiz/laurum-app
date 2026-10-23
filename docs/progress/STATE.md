@@ -31,7 +31,10 @@ Tiga kelompok yang diizinkan pengguna selesai diimplementasikan; menunggu tinjau
 ## Ketidakpastian dan batas
 - Frame khusus warning/error banner dan menyimpan/gagal sync belum terverifikasi.
 - Selisih ukuran/padding/glyph/icon app bar dijelaskan di fase-1.md; perlu tinjauan visual pengguna.
-- APK tetap ditunda; NDK belum selesai. Android SDK/JDK/lisensi tersedia.
-- iOS, perangkat fisik, keyboard/IME dan pembaca layar perangkat belum diuji.
+- Verifikasi Android: NDK 28.2.13676358 dan Platform 36 terpasang; APK tersedia dan manifest valid.
+- Runtime Android belum diuji: HP nirkabel terputus sebelum instalasi. Tidak ada build aktif; iOS/IME/aksesibilitas belum diuji.
 - package-lock.json untracked di luar tugas, tidak disertakan commit.
 - Jangan melanjutkan organisms, push, atau merge tanpa instruksi pengguna.
+
+- Uji Android ditutup pada verifikasi build; check_all tetap hijau (81 tes). Detail: docs/progress/android-validation.md. Opsi Kotlin incremental=false hanya sementara.
+
