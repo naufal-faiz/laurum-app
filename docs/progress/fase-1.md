@@ -184,3 +184,40 @@ Lingkup: AppTextField, AppSearchField, AppSkeleton, AppNumpadKey.
 | LockedRow | 49 | — | — | — | — |
 - Self-review akhir: nilai kanan InfoRow/DateGroupHeader/ProgressRow diperbaiki agar rata kanan; golden terkait diperbarui.
 - Checkpoint M3 final: check_all SEMUA HIJAU; kedua analyzer bersih, check_arch OK, 81 tes lulus, repo_map 144 berkas. Format 41 berkas Widgetbook juga bersih. Tidak melanjutkan lapisan berikutnya.
+
+## Prompt 10 — Domain inti, 23 Oktober 2026
+- Baseline dari commit 58d24d7 sempat merah karena format tool/pen_frame.dart; dirapikan dan disimpan sebagai 1c96d9d, lalu check_all hijau (81 tes).
+- Enum, 12 model immutable Equatable dan fungsi murni berada di lib/core/domain/. Antarmuka repository di core/domain/repositories/ baru dikerjakan prompt 11.
+- Kolom metadata: id/ownerId/createdAt, updatedAt nullable sampai server mengisi, RecordSyncState pending/synced. SavingsEntry tidak memiliki soft delete.
+- Pengguna menyetujui Proposal minimal (status/sourceText/customerId/orderId) dan OrderEvent (orderId/occurredAt/kind/note/fromStatus/toStatus). Ini kontrak domain sementara, bukan skema backend AI.
+- lineTotal memakai BigInt untuk perkalian dan pembulatan half-up, hasil int rupiah dibatasi rentang integer eksak lintas platform. Diskon negatif/melebihi subtotal ditolak.
+- paidAmount memakai amount, bukan received; payStatus 0 tetap belumBayar sesuai PRD, termasuk total nol. Piutang dihitung per order, tidak negatif, batal/deleted dikecualikan.
+- estimateReady menerima WIB wall time (DateTime lokal), menolak UTC, memakai durasi terlama dan jam 17 pada hari kalender. Konversi UTC/WIB tetap tanggung jawab batas data.
+- nextStatus/Order.withStatus hanya maju satu langkah atau batal; status selesai/dibatalkan tidak dapat diubah lewat API tersebut.
+- applySavings mengembalikan Payment tabungan + SavingsEntry pakai; caller wajib menyimpan keduanya atomik. ID/waktu disediakan caller. Saldo, sisa tagihan, ID duplikat dan order batal divalidasi.
+- cancelOrder mengembalikan order baru, koreksi negatif per metode pembayaran, koreksi positif tabungan terpakai dan OrderEvent. Ledger asli tidak dimutasi/dihapus; net tabungan harus cocok dengan ledger pembayaran.
+- ReportRange inklusif awal/eksklusif akhir. Pendapatan berdasarkan enteredAt; pengeluaran spentAt; kas paidAt + setoran createdAt. Koreksi kas negatif tetap masuk arus periode walaupun order dibatalkan.
+- Baseline historis disetujui pengguna: ReportBaseline memuat rentang dan ReportTotals historis. Input harus delta yang belum tercakup baseline. Rentang berbeda ditolak. Jika mengubah order yang sudah diringkas baseline, baseline wajib dibangun ulang agar tidak menggandakan angka.
+- Piutang/tabungan adalah posisi sekarang dari seluruh ledger delta, tidak dibatasi periode. Rekonsiliasi kasFromOrders/tabunganUsed/piutangBaru memakai cohort order periode dan pembayaran terkini; kelebihan bayar hanya masuk cashIn, alokasi ke nota dibatasi total.
+- topServices memakai snapshot item dan mengalokasikan diskon proporsional dengan largest remainder (tie ID item), sehingga jumlah pendapatan layanan persis total nota. Urutan pendapatan menurun; tie serviceId/unit. Nama memakai snapshot paling baru. Item snapshot tidak lengkap ditolak.
+- Semua koleksi hasil ledger/ranking read-only. Tanpa Flutter, Riverpod, jam sistem, random, persistence, atau paket tambahan di domain.
+- Formatters tidak diubah. Temuan: nomorNota masih mengunci kode A; belum menghalangi domain, perlu parameter kode perangkat saat alur nomor nota dikerjakan. Tidak mengubah atoms/molecules, registry, lint, token, atau PRD.
+- Teks frame Laporan - Ringkasan dan Transaksi - Detail Order dibaca via pen_frame. Tidak ada widget/layar baru, sehingga perbandingan visual tidak berlaku; angka fixture produksi baru dikerjakan prompt 11.
+- Ketidakpastian: skema Proposal/OrderEvent final masih menunggu fase backend/AI; kontrak baseline mengharuskan caller menjaga tidak overlap. Tidak ada pengujian Android/iOS baru pada prompt ini.
+
+### Berkas domain prompt 10 (baris setelah dart format)
+| Model | Baris | Model | Baris |
+| --- | ---: | --- | ---: |
+| BusinessProfile | 33 | Customer | 25 |
+| ServiceItem | 38 | Order | 79 |
+| OrderItem | 41 | Payment | 37 |
+| SavingsEntry | 26 | ExpenseCategory | 19 |
+| Expense | 36 | Proposal | 24 |
+| ReceiptSettings | 38 | OrderEvent | 37 |
+
+- Logika: money 34, order_rules 26, savings_rules 59, payment_corrections 42, cancellation 69, report 73, revenue_allocation 29, top_services 56 baris.
+- Pendukung: domain_enums 16, domain_record 18, report_range 16, report_baseline 13, report_totals 30, service_revenue 15 baris.
+- Keputusan implementasi untuk ditinjau: PRD belum menentukan pembagian diskon per layanan; dipilih proporsional dengan largest remainder agar rekonsiliasi tetap tepat.
+- Yang perlu ditinjau: kontrak baseline/delta; kontrak sementara Proposal/OrderEvent; distribusi diskon untuk ranking layanan.
+- Prompt berikutnya: docs/prompts/11-data-dummy.md. Tidak dikerjakan pada sesi ini.
+- Penutup prompt 10: check_all SEMUA HIJAU (format, flutter analyze, dart analyze, check_arch, 112 tes; repo_map 183 berkas). Ada 31 tes baru; semua 26 berkas domain 13–79 baris. INDEX SELESAI 2026-10-23; berhenti sebelum prompt 11.

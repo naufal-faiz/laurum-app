@@ -11,7 +11,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 1 | (fase-0.md) | Inisiasi | SELESAI kecuali lint Riverpod dan Android SDK | Pasang Android SDK sebelum No 21 |
 | 2 | (fase-1.md) | Atoms A, B, C | SELESAI | |
 | 3 | (fase-1-molecules.md) | Molecules (21) | SELESAI | Tinjau Widgetbook |
-| 4 | 10-domain-core.md | Enum, model, logika murni + tes | BELUM | |
+| 4 | 10-domain-core.md | Enum, model, logika murni + tes | SELESAI (2026-10-23) | Tinjau kontrak domain dan baseline laporan |
 | 5 | 11-data-dummy.md | Fixture, repository in-memory, provider | BELUM | |
 | 6 | 12-organisms-1.md | Organisms 1 (9) | BELUM | |
 | 7 | 13-organisms-2.md | Organisms 2 (8) + ReceiptFormatter | BELUM | |

@@ -2,40 +2,36 @@
 Diperbarui: 2026-10-23 | Cabang dev1
 
 ## Posisi
-Fase 1: 17 atoms + seluruh 21 molecules tersedia (38/60 registry).
-Tiga kelompok yang diizinkan pengguna selesai diimplementasikan; menunggu tinjauan setelah checkpoint M3.
+Prompt 10-domain-core.md SELESAI; INDEX diperbarui, berhenti menunggu tinjauan.
+UI tetap 17 atoms + 21 molecules (38/60 registry); tidak membuat widget/layar baru.
 
 ## Selesai
-- Fondasi Fase 0 dan semua atoms, dasar 715a000.
-- M1: SectionHeader, InfoRow, StatTile, DateGroupHeader, ProgressRow, MenuRow, ToggleRow, LockedRow.
-- M2: LabeledField, BannerMessage, NoticeAi, CalloutAi, EmptyState, SyncIndicator.
-- M3: ChipBar, PeriodTabs, NominalChips, StepperField, AppBarSub, AppBarRoot, FooterBar.
-- M1 commit 5de7290: check_all hijau, 55 tes.
-- M2 commit 5f981aa: check_all hijau, 67 tes.
-- 21 use-case, 21 tes perilaku dan 21 golden, katalog serta screenshot Pencil tersedia.
-- Semua widget 17–61 baris; tidak mengubah atom/registry/lint/dependensi.
-
-## Sedang dikerjakan
-- M3 check_all SEMUA HIJAU: format, flutter analyze, dart analyze, check_arch, 81 tes; repo_map 144 berkas.
-- Checkpoint feat: molecules M3 (hash lihat git log -1). BERHENTI menunggu tinjauan pengguna.
-- Selisih dan jumlah baris: docs/progress/fase-1.md. API: docs/design/component_catalog.md.
+- Molecules: M1 5de7290, M2 5f981aa, M3 c628f9e.
+- Baseline prompt 10: format tool/pen_frame.dart diperbaiki; commit 1c96d9d, check_all 81 tes hijau.
+- Tujuh enum bisnis, RecordSyncState, 12 model immutable Equatable di lib/core/domain/.
+- lineTotal/orderTotal/paidAmount/payStatus/outstanding, estimateReady/nextStatus.
+- savingsBalance/applySavings/cancelOrder dengan ledger koreksi, tanpa mutasi input.
+- buildReport baseline/delta, ReportRange/ReportTotals, topServices dan alokasi diskon integer.
+- Tes unit: angka kecil buatan, tepi pembulatan/DP/kelebihan bayar/status final/pembatalan/tabungan/laporan.
 
 ## Keputusan
-- AppChip tetap tanpa parameter icon sesuai jawaban pengguna; PeriodTabs tanpa ikon, dicatat sebagai selisih.
-- AppBarRoot menerima SyncIndicator sebagai slot agar tidak mengimpor molecule lain.
-- NoticeAi memakai kalimat persis dari K1Xa3y/FnvUf.
-- Theme tambahan hanya AppMoleculeTokens/Styles; token lama tidak berubah.
-- Native riverpod_lint lewat dart analyze; flutter analyze juga dijalankan.
-- Nilai uang int rupiah; molecule stateless, semua data/callback dari konstruktor.
+- Enum, model, logika lintas fitur: lib/core/domain/. Repository nanti core/domain/repositories/.
+- Proposal/OrderEvent memakai kontrak minimal sementara yang disetujui pengguna; skema backend AI tetap ditunda.
+- Baseline historis aditif disetujui pengguna; delta tidak boleh overlap. Perubahan order dalam baseline memerlukan baseline baru.
+- Rentang laporan [start,end) WIB lokal. Piutang/tabungan adalah posisi saat ini; cashIn arus periode.
+- Rekonsiliasi memakai cohort order periode dan pembayaran terkini, dibatasi nilai tagihan untuk kelebihan bayar.
+- Diskon per layanan dialokasikan proporsional largest remainder; ranking berdasarkan pendapatan bersih.
+- Semua ID/waktu dari caller; simpan hasil applySavings/cancelOrder secara atomik di repository berikutnya.
+- Tidak menambah paket atau mengubah UI/token/registry/lint/PRD/Formatters.
+- Temuan Formatters.nomorNota masih mengunci A; perlu dibahas saat penomoran multi-perangkat.
+- AppChip tetap tanpa icon sesuai keputusan sebelumnya.
 
-## Ketidakpastian dan batas
-- Frame khusus warning/error banner dan menyimpan/gagal sync belum terverifikasi.
-- Selisih ukuran/padding/glyph/icon app bar dijelaskan di fase-1.md; perlu tinjauan visual pengguna.
-- Verifikasi Android: NDK 28.2.13676358 dan Platform 36 terpasang; APK tersedia dan manifest valid.
-- Runtime Android belum diuji: HP nirkabel terputus sebelum instalasi. Tidak ada build aktif; iOS/IME/aksesibilitas belum diuji.
-- package-lock.json untracked di luar tugas, tidak disertakan commit.
-- Jangan melanjutkan organisms, push, atau merge tanpa instruksi pengguna.
+## Antrean
+- Checkpoint prompt 10: check_all SEMUA HIJAU; 112 tes, kedua analyzer bersih, check_arch OK, repo_map 183 berkas. Commit terakhir: lihat git log -1.
+- Prompt berikutnya: docs/prompts/11-data-dummy.md (fixture/repository/provider).
+- Detail keputusan, jumlah baris dan ketidakpastian: docs/progress/fase-1.md, bagian Prompt 10.
 
-- Uji Android ditutup pada verifikasi build; check_all tetap hijau (81 tes). Detail: docs/progress/android-validation.md. Opsi Kotlin incremental=false hanya sementara.
-
-- Baseline prompt 10: format tool/pen_frame.dart dari sesi sebelumnya dirapikan; check_all hijau, 81 tes.
+## Batas
+- APK tersedia dan manifest valid; runtime Android belum diuji. Detail android-validation.md.
+- iOS/keyboard/IME/aksesibilitas perangkat belum diuji; tidak memulai build Android dalam prompt 10.
+- Jangan push/merge atau mengerjakan prompt 11 otomatis.

@@ -16,6 +16,34 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/
 - app.dart (14): LaurumApp
 
+### lib/core/domain/
+- business_profile.dart (33): BusinessProfile
+- cancellation.dart (69):
+- customer.dart (25): Customer
+- domain_enums.dart (16): OrderStatus, PayStatus, ServiceKind, PayMethod, SavingsKind, ProposalStatus, OrderSource, RecordSyncState
+- domain_record.dart (18): DomainRecord
+- expense.dart (36): Expense
+- expense_category.dart (19): ExpenseCategory
+- money.dart (34):
+- order.dart (79): Order
+- order_event.dart (37): OrderEvent
+- order_item.dart (41): OrderItem
+- order_rules.dart (26):
+- payment.dart (37): Payment
+- payment_corrections.dart (42):
+- proposal.dart (24): Proposal
+- receipt_settings.dart (38): ReceiptSettings
+- report.dart (73):
+- report_baseline.dart (13): ReportBaseline
+- report_range.dart (16): ReportRange
+- report_totals.dart (30): ReportTotals
+- revenue_allocation.dart (29):
+- savings_entry.dart (26): SavingsEntry
+- savings_rules.dart (59):
+- service_item.dart (38): ServiceItem
+- service_revenue.dart (15): ServiceRevenue
+- top_services.dart (56):
+
 ### lib/core/formatters/
 - formatters.dart (37): Formatters
 
@@ -109,6 +137,19 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - callout_ai_test.dart (20):
 - chip_bar_test.dart (30):
 - date_group_header_test.dart (24):
+- domain_baseline_test.dart (51):
+- domain_cancel_test.dart (74):
+- domain_flow_test.dart (53):
+- domain_models_1_test.dart (38):
+- domain_models_2_test.dart (42):
+- domain_models_3_test.dart (28):
+- domain_money_test.dart (48):
+- domain_order_models_test.dart (30):
+- domain_report_test.dart (77):
+- domain_samples.dart (89):
+- domain_savings_test.dart (87):
+- domain_schedule_test.dart (35):
+- domain_top_services_test.dart (34):
 - empty_state_test.dart (28):
 - footer_bar_test.dart (30):
 - formatters_test.dart (40):
@@ -131,7 +172,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### tool/
 - check_all.dart (37): Step
 - check_arch.dart (121): Rule, Registry
-- pen_frame.dart (27):
+- pen_frame.dart (42):
 - repo_map.dart (100):
 
 ### widgetbook/atoms/
