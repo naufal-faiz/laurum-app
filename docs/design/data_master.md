@@ -68,3 +68,38 @@ Tidak ada konsep jatuh tempo. Usia ditampilkan netral ("4 hari lalu").
 - Omzet harian: Sen 340k, Sel 385k, Rab 290k, Kam 410k, Jum 375k; Sab dan Min kosong (belum terjadi, batang putus-putus). Rata-rata Rp360.000/hari, puncak Kamis.
 - Layanan terlaris (berdasar pendapatan): Cuci setrika 98 kg Rp882.000 (49%), Cuci kiloan 70 kg Rp490.000 (27%), Bed cover 14 pcs Rp350.000 (19%), Lainnya Rp78.000 (4%)
 - Rekonsiliasi: Pendapatan = kas dari nota + tabungan terpakai + piutang baru
+
+## Order pengisi
+Order pengisi untuk melengkapi antrean aktif 12 order (Jemput 3, Proses 5, Siap 4). Semua pengisi berstatus Lunas sehingga tidak menambah piutang (piutang tetap 5 nota Rp400.500). Nomor nota berikutnya A-0143.
+- Menunggu jemput (3):
+  - A-0140 | Mbak Sari | Bed cover 1 pcs Rp25.000 (DP Rp10.000, sisa Rp15.000)
+  - A-0131 | Budi Santoso | Cuci kiloan 3 kg Rp21.000 | Lunas
+  - A-0132 | Pak Joko | Cuci setrika 4 kg Rp36.000 | Lunas
+- Diproses (5):
+  - A-0142 | Pak Dedi | Cuci kiloan 4,5 kg Rp31.500 (belum bayar, sisa Rp31.500)
+  - A-0133 | Bu Linda Salon | Cuci kering lipat 5 kg Rp30.000 | Lunas
+  - A-0134 | Pak Hendra | Selimut tebal 1 pcs Rp20.000 | Lunas
+  - A-0135 | Rian Katering | Cuci setrika 5 kg Rp45.000 | Lunas
+  - A-0137 | Agus Pratama | Cuci kiloan 4 kg Rp28.000 | Lunas
+- Siap diambil (4):
+  - A-0141 | Bu Rina | Cuci setrika 3,5 kg Rp31.500 | Lunas
+  - A-0127 | Pak Joko | Bed cover 2 pcs Rp50.000 | Lunas
+  - A-0129 | Danang Kos Putri | Cuci kering lipat 6 kg Rp36.000 | Lunas
+  - A-0130 | Siti Rohmah | Cuci setrika 3 kg Rp27.000 | Lunas
+
+## Baseline laporan tambahan
+- Hari ini (Jumat, 16 Okt 2026):
+  - Pendapatan: Rp375.000 (12 transaksi)
+  - Pengeluaran: Rp145.000 (Bahan cuci Rp110.000 + Kemasan Rp35.000)
+  - Estimasi laba bersih: Rp230.000
+  - Kas masuk: Rp343.500
+  - Tabungan pelanggan: Rp430.000 (posisi saat ini)
+  - Piutang aktif: Rp400.500 (posisi saat ini)
+- Bulan ini (Okt 2026):
+  - Pendapatan: Rp4.250.000 (135 transaksi)
+  - Pengeluaran: Rp1.850.000 (18 transaksi)
+  - Estimasi laba bersih: Rp2.400.000
+  - Kas masuk: Rp4.050.000
+  - Tabungan pelanggan: Rp430.000 (posisi saat ini)
+  - Piutang aktif: Rp400.500 (posisi saat ini)
+

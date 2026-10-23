@@ -1,0 +1,67 @@
+import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/service_item.dart';
+import 'package:laurum/features/business/data/business_fixtures.dart';
+
+final serviceFixtures = <ServiceItem>[
+  ServiceItem(
+    id: 'srv-001',
+    ownerId: dummyOwnerId,
+    createdAt: DateTime(2026),
+    name: 'Cuci kering lipat',
+    kind: ServiceKind.kiloan,
+    price: 6000,
+    durationDays: 1,
+    sortOrder: 1,
+  ),
+  ServiceItem(
+    id: 'srv-002',
+    ownerId: dummyOwnerId,
+    createdAt: DateTime(2026),
+    name: 'Cuci kiloan',
+    kind: ServiceKind.kiloan,
+    price: 7000,
+    durationDays: 2,
+    sortOrder: 2,
+  ),
+  ServiceItem(
+    id: 'srv-003',
+    ownerId: dummyOwnerId,
+    createdAt: DateTime(2026),
+    name: 'Cuci setrika',
+    kind: ServiceKind.kiloan,
+    price: 9000,
+    durationDays: 2,
+    sortOrder: 3,
+  ),
+  ServiceItem(
+    id: 'srv-004',
+    ownerId: dummyOwnerId,
+    createdAt: DateTime(2026),
+    name: 'Bed cover',
+    kind: ServiceKind.satuan,
+    price: 25000,
+    durationDays: 3,
+    sortOrder: 4,
+  ),
+  ServiceItem(
+    id: 'srv-005',
+    ownerId: dummyOwnerId,
+    createdAt: DateTime(2026),
+    name: 'Selimut tebal',
+    kind: ServiceKind.satuan,
+    price: 20000,
+    durationDays: 3,
+    sortOrder: 5,
+  ),
+  ServiceItem(
+    id: 'srv-006',
+    ownerId: dummyOwnerId,
+    createdAt: DateTime(2026),
+    name: 'Jas & gaun',
+    kind: ServiceKind.satuan,
+    price: 35000,
+    durationDays: 4,
+    isActive: false,
+    sortOrder: 6,
+  ),
+];
