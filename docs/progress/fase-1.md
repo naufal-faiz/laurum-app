@@ -468,3 +468,10 @@ Prompt 12 SELESAI; berikutnya docs/prompts/13-organisms-2.md setelah tinjauan pe
 - Yang perlu ditinjau: (1) kepadatan ReportSummary vs frame, (2) varian normal ConfirmModal
   tanpa frame acuan, (3) alamat struk dua baris dan close sheet berlatar putih.
 - Prompt berikutnya: docs/prompts/14-templates.md. Berhenti menunggu tinjauan pengguna.
+
+### Perbaikan tinjauan pengguna (24 Okt 2026)
+- ExpenseRow: nominal tidak lagi memakai Flexible (yang berbagi sisa lebar 50/50 dengan
+  kolom teks); sekarang menempel ke tepi kanan kartu.
+- LockedRow: status kunci tidak lagi memakai Flexible; menempel ke tepi kanan sehingga
+  sejajar dengan tepi switch ToggleRow di ReceiptToggleList. Label utama mendapat sisa lebar.
+- Golden expense_row, locked_row, dan receipt_toggle_list diperbarui; tes perilaku tetap lulus.

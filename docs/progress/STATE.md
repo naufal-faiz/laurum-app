@@ -16,6 +16,7 @@ REPO_MAP 310 berkas, 55/60 widget. Berhenti menunggu tinjauan; jangan mulai prom
 - Setiap widget punya use-case semua varian, tes kontrak/callback, golden 390 px, dan uji
   320 px + skala teks 2x. API dan selisih tercatat di component_catalog.md.
 - Commit checkpoint 1 dan 2 tercatat di git log; checkpoint 3 = commit penutup prompt 13.
+- Perbaikan tinjauan: nominal ExpenseRow rata kanan; status LockedRow sejajar switch.
 
 ## Sedang dikerjakan
 - Tidak ada. Prompt 13 ditutup setelah check_all hijau.

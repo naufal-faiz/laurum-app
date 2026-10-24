@@ -175,7 +175,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - footer_bar.dart (28): FooterBar
 - info_row.dart (28): InfoRow
 - labeled_field.dart (35): LabeledField
-- locked_row.dart (49): LockedRow
+- locked_row.dart (47): LockedRow
 - menu_row.dart (45): MenuRow
 - nominal_chips.dart (31): NominalChips
 - notice_ai.dart (17): NoticeAi
@@ -192,7 +192,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - bottom_nav_bar.dart (73): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
 - customer_row.dart (98): CustomerRow
-- expense_row.dart (59): ExpenseRow
+- expense_row.dart (57): ExpenseRow
 - nota_card.dart (75): NotaCard
 - numpad.dart (62): NumpadVariant, Numpad
 - order_card.dart (100): OrderCard

@@ -152,6 +152,8 @@ LabeledField tidak mengubah dekorasi child: letakkan error pada wrapper ATAU App
 - Varian: utama dan opsi tambahan pada API.
 - Galeri: widgetbook/molecules/locked_row_use_case.dart; tes: test/locked_row_test.dart.
 - Acuan Pencil: aSIwH; selisih dicatat di docs/progress/fase-1.md.
+- Status kunci menempel ke tepi kanan baris (tanpa flex), sehingga sejajar dengan tepi
+  switch pada ToggleRow; label utama memakai sisa lebar.
 
 
 Atom Fase 1 mengikuti registry; field stateful untuk lifecycle controller. Tanpa provider,
@@ -451,6 +453,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Referensi vHZ7O: nominal kanan dan merah, catatan membungkus. Kategori tanpa pill;
   row berupa kartu sendiri dibanding wadah kelompok tanggal bersama; tidak menambah tombol foto.
   Teks vendor/catatan mengikuti DATA MASTER, bukan teks tambahan yang hanya ada di .pen.
+- Nominal bukan flex: menempel ke tepi kanan kartu, bukan berbagi sisa lebar dengan kolom teks.
 
 ## OrderCard
 - Berkas: lib/shared/widgets/organisms/order_card.dart (100 baris).

@@ -44,13 +44,11 @@ class ExpenseRow extends StatelessWidget {
             ),
           ),
           const SizedBox(width: AppMoleculeTokens.gap),
-          Flexible(
-            child: AppText(
-              Formatters.rupiah(-amount),
-              variant: AppTextVariant.section,
-              textAlign: TextAlign.end,
-              color: AppColors.error,
-            ),
+          AppText(
+            Formatters.rupiah(-amount),
+            variant: AppTextVariant.section,
+            textAlign: TextAlign.end,
+            color: AppColors.error,
           ),
         ],
       ),

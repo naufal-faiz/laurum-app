@@ -40,9 +40,7 @@ class LockedRow extends StatelessWidget {
         const SizedBox(width: AppMoleculeTokens.gap),
         const AppIcon(AppIcons.lock, size: AppDimensions.iconSmall, color: AppColors.ink3),
         const SizedBox(width: AppMoleculeTokens.smallGap),
-        Flexible(
-          child: AppText(lockLabel, variant: AppTextVariant.label, color: AppColors.ink3),
-        ),
+        AppText(lockLabel, variant: AppTextVariant.label, color: AppColors.ink3),
       ],
     ),
   );
