@@ -4,7 +4,6 @@ const placeholderRoutes = <String, String>{
   '/pelanggan/impor': 'Impor kontak HP',
   '/pelanggan/:id/tabungan': 'Riwayat tabungan',
   '/pelanggan/:id/setor': 'Setor tabungan',
-  '/pelanggan/:id': 'Detail pelanggan',
   '/laporan/piutang': 'Daftar piutang',
   '/lainnya/layanan/baru': 'Tambah layanan',
   '/lainnya/layanan/:id': 'Edit layanan',

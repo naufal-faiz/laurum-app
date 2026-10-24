@@ -2,50 +2,42 @@
 Diperbarui: 2026-10-24 | Cabang dev1
 
 ## Posisi
-Prompt 50 SEDANG: Daftar Pelanggan diimplementasikan; Detail/Edit belum dikerjakan.
-Sesi dibatasi satu layar sesuai AGENTS.md. Tunggu tinjauan sebelum bagian berikutnya.
-Validasi akhir: check_all SEMUA HIJAU; 276 tes; kedua analyzer bersih; check_arch OK;
-format 362 berkas (0 berubah); REPO_MAP 429 berkas.
+Prompt 50: Daftar, Detail Pelanggan, dan sheet Edit profil sudah diimplementasikan.
+Validasi akhir BELUM HIJAU: analyzer directives_ordering pada import. Dihentikan karena usage 5%.
+Baseline sesi c9b78c1: check_all hijau, 276 tes. Sembilan tes baru sudah lulus terarah.
 
 ## Selesai
-- Fase 1: 60/60 widget, domain inti, fixture, Widgetbook.
 - Prompt 20-40: Antrean, transaksi, pembayaran/nota, printer palsu, Detail/Edit Order,
-  dan Riwayat Nota. Baseline sesi: check_all hijau, 269 tes.
-- /pelanggan: pencarian nama/nomor normalisasi, tiga filter dengan jumlah dinamis,
-  CustomerRow, tambah cepat, loading/kosong/tanpa hasil/error/retry.
-- Sheet tambah memakai navigator utama dari tab; banner disesuaikan konteks daftar.
-- Tujuh tes baru: data/filter, pembatalan reaktif, pencarian/rute, tambah pelanggan,
-  loading/kosong, error/retry, dan layar 320 px pada teks 2x.
+  Riwayat Nota. Fase 1: 60/60 widget.
+- Daftar Pelanggan: pencarian/filter, jumlah reaktif, tambah cepat, seluruh state.
+- Detail: statistik DATA MASTER, tiga mutasi dengan saldo berjalan, tiga nota terakhir,
+  WhatsApp palsu, rute Setor/Riwayat mutasi placeholder prompt 51.
+- Edit: nama/nomor/alamat/catatan, normalisasi dan duplikat aktif, konfirmasi nonaktif.
+  Nonaktif memakai isActive=false, tidak menghapus nota/piutang/tabungan.
 
 ## Sedang dikerjakan
-- Tidak ada. Daftar Pelanggan selesai; tunggu tinjauan sebelum Detail/Edit.
-
-## Antrean
-1. Tinjau /pelanggan di HP/emulator: cari nama/nomor, filter, tambah dengan keyboard.
-2. Lanjut docs/prompts/50-pelanggan-a.md bagian Detail Pelanggan, lalu Edit pada
-   sesi berikutnya. /pelanggan/:id masih placeholder; prompt 50 belum selesai.
-3. Setelah prompt 50: docs/prompts/51-pelanggan-b.md (tabungan dan impor kontak).
-4. Tinjauan order prompt 40, APK/NDK, iOS, TalkBack/VoiceOver, printer nyata ditunda.
+- WIP: tinjau hasil dart fix --apply --code=directives_ordering yang diinterupsi; urutkan import Dart (package sebelum relatif, ordinal) pada customer_detail_page.dart dan customer_detail_page_test.dart. Jalankan dart format lalu check_all sampai hijau.
 
 ## Keputusan dan batas
-- Daftar pelanggan menghitung jumlah chip dari seluruh pelanggan aktif, tanpa query.
-- Piutang/saldo memakai repository terbaru. Riwayat dummy = baseline pelanggan +
-  snapshot order kini - fixture awal; order batal/dihapus dikecualikan.
-- Tanpa baseline, jumlah order/total dihitung dari order kini; tidak membuat nota fiktif.
-- Tambah berhasil mereset query/filter; tidak mengubah draf transaksi dari tab Pelanggan.
-- Impor kontak placeholder prompt 51; telepon masih ExternalLauncher palsu.
-- Selisih .pen: urutan repository, jumlah Semua/Punya tabungan mengikuti prompt,
-  DP tanpa nomor nota, CTA tambah tetap di footer. Spec: 12-daftar-pelanggan.md.
-- Order: status maju berurutan; edit mempertahankan ID item dan ditolak bila total
-  kurang dari pembayaran. Pembatalan menyimpan koreksi order sebelum penyesuaian
-  tabungan; rollback lintas repository belum tersedia.
-- GoRouter push dalam shell tidak memperbarui routeInformationProvider; tes memakai
-  isi layar/canPop. AppBottomSheet di navigator tab memotong tinggi sheet; pemanggilan
-  Daftar kini lewat navigator utama tanpa mengubah widget bersama.
-- Atom/token/registry/lint/PRD tidak diubah. Tanpa dependensi baru.
+- customerSummariesProvider mencakup pelanggan nonaktif; daftar memfilter isActive.
+- Riwayat = baseline + snapshot order kini - fixture awal; nota batal dikecualikan.
+- Mutasi: saldo dihitung dari seluruh ledger kronologis sebelum mengambil tiga terbaru.
+- Edit mengambil pelanggan terkini saat simpan, menjaga id/ownerId/createdAt;
+  updatedAt dari jam usaha dan sync pending. Nonaktif mengabaikan draf belum disimpan.
+- Rute /pelanggan/impor harus sebelum /pelanggan/:id. Sheet memakai navigator utama.
+- Spec 13-detail-pelanggan.md dan 14-edit-pelanggan.md mencatat selisih .pen dan teks modal.
+- Statistik vertikal; tanpa rata-rata bulanan/claim potong otomatis yang tidak didukung.
+- Order: status berurutan, total edit tidak boleh di bawah pembayaran; pembatalan
+  order lalu koreksi tabungan belum memiliki rollback lintas repository.
+- Tidak mengubah widget bersama/registry/token/lint/PRD, tanpa dependensi baru.
 
-## Pemeriksaan dan batas
-- Frame daftar dan state dibaca lewat pen_frame; tidak ada PNG referensi di screens/png.
-- Perangkat Android/iOS, TalkBack/VoiceOver, keyboard/telepon nyata belum diuji.
-- Tool AI Memory tidak tersedia; konteks tersimpan di repo.
-- Tidak push/merge. Tunggu tinjauan layar Daftar sebelum melanjutkan.
+## Handoff untuk agen penerus
+1. Baca AGENTS.md, SKILLS.md, STATE.md; verifikasi git status dan git log -5.
+2. Tinjau Detail/Edit di HP: simpan profil, nonaktif, keyboard; data keuangan harus tetap ada.
+3. Setelah perapian import: check_all, ubah INDEX prompt 50 menjadi SELESAI, commit. Baru lanjut prompt 51-pelanggan-b.md jika diminta.
+   Fokus satu layar/kelompok; Setor Tabungan, Riwayat Tabungan, Impor Kontak masih placeholder.
+4. Pengguna meminta berhenti bila sisa usage mendekati 10%; cek get_usage_limits berkala.
+   Cek terakhir sebelum penutupan: sisa 5% jendela 5 jam, 53% mingguan.
+5. Android/iOS perangkat, keyboard, TalkBack/VoiceOver, telepon/printer nyata belum diuji.
+Tool AI Memory tidak tersedia; handoff disimpan di repo. Tidak push/merge.
+

@@ -435,6 +435,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   memiliki latar lingkaran. Initials disiapkan pemanggil, bukan ditebak widget.
 
 ## SavingsRow
+- Pemakaian layar: Detail Pelanggan (spec 13); saldo dihitung dari ledger penuh sebelum mengambil tiga mutasi terbaru.
 - Berkas: lib/shared/widgets/organisms/savings_row.dart.
 - API wajib: label, timeLabel (hasil Formatters), kind SavingsKind, amount int, balance int.
   Opsi: methodLabel, reference, note. Tidak ada aksi edit ledger.

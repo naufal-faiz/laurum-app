@@ -24,7 +24,7 @@ Data dan provider:
 Interaksi:
 - Cari nama tanpa membedakan kapital; nomor dinormalisasi (spasi/tanda, +62/62/8).
 - Filter digabung pencarian; jumlah chip selalu dari seluruh pelanggan aktif.
-- Ketuk baris -> /pelanggan/:id (placeholder sampai bagian berikutnya prompt 50).
+- Ketuk baris -> /pelanggan/:id (Detail Pelanggan, spec 13).
 - Impor kontak -> /pelanggan/impor (placeholder prompt 51).
 - Pelanggan baru -> AddCustomerSheet di navigator utama; simpan memperbarui daftar,
   mereset filter dan pencarian. Banner form menjelaskan konteks daftar, bukan nota.

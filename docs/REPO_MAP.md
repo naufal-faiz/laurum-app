@@ -340,6 +340,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - checkout_controller_test.dart (83):
 - chip_bar_test.dart (30):
 - confirm_modal_test.dart (74):
+- customer_detail_data_test.dart (61):
 - customer_directory_data_test.dart (39):
 - customer_directory_states_test.dart (64):
 - customer_directory_test.dart (67):

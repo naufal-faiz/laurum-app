@@ -43,11 +43,11 @@ List<CustomerDirectoryRow> filterCustomers(
   }).toList();
 }
 
-final customerDirectoryProvider = FutureProvider<List<CustomerDirectoryRow>>((ref) async {
+final customerSummariesProvider = FutureProvider<List<CustomerDirectoryRow>>((ref) async {
   final customers = ref.watch(customerRepositoryProvider);
   final orders = ref.watch(orderRepositoryProvider);
   final savings = ref.watch(savingsRepositoryProvider);
-  final people = await customers.getCustomers();
+  final people = await customers.getCustomers(includeInactive: true);
   final notes = await orders.getOrders();
   final payments = await orders.getAllPayments();
   final entries = await savings.getAllEntries();
@@ -75,4 +75,9 @@ final customerDirectoryProvider = FutureProvider<List<CustomerDirectoryRow>>((re
     );
   }
   return rows;
+});
+
+final customerDirectoryProvider = FutureProvider<List<CustomerDirectoryRow>>((ref) async {
+  final rows = await ref.watch(customerSummariesProvider.future);
+  return rows.where((row) => row.customer.isActive).toList();
 });

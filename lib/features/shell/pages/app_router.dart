@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:laurum/features/customers/pages/customer_detail_page.dart';
 import 'package:laurum/features/customers/pages/customer_directory_page.dart';
 import 'package:laurum/features/orders/pages/antrean_page.dart';
 import 'package:laurum/features/orders/pages/nota_history_page.dart';
@@ -45,6 +46,10 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
         path: route.key,
         builder: (context, state) => PlaceholderPage(title: route.value),
       ),
+    GoRoute(
+      path: '/pelanggan/:id',
+      builder: (context, state) => CustomerDetailPage(customerId: state.pathParameters['id']!),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) => RootShellPage(navigationShell: shell),
       branches: [

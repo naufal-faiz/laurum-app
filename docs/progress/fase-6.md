@@ -17,3 +17,16 @@
 - Atom/registry/token/lint/PRD tidak berubah; tidak ada dependensi baru.
 - Detail pelanggan dan Impor kontak masih placeholder; telepon memakai launcher palsu.
 - Hasil check_all akhir dicatat di STATE.md; tinjau Daftar sebelum melanjutkan prompt 50.
+
+## Prompt 50: Detail Pelanggan dan sheet Edit profil
+- /pelanggan/:id mengganti placeholder; statistik, tiga mutasi, tiga nota terbaru.
+- customerSummariesProvider memuat aktif/nonaktif; daftar memfilter aktif sehingga
+  detail/histori tetap tersedia setelah nonaktif. Saldo dihitung sebelum membatasi mutasi.
+- Edit memakai Notifier dan konfirmasi nonaktif, mempertahankan identitas/metadata awal,
+  menolak nomor duplikat aktif, serta tidak menghapus nota/piutang/tabungan.
+- Rute statis impor didahulukan dari parameter id. Setor/riwayat mutasi masih placeholder.
+- Selisih: statistik vertikal, tanpa rata-rata bulanan yang tidak tersedia di data master,
+  tanpa klaim tabungan otomatis, NotaCard tanpa CTA Struk/Lihat semua; inisial helper.
+- Spec 13/14 mencatat detail dan teks baru ConfirmModal. Tidak ada widget bersama baru.
+- Sembilan tes baru: tiga data/edit/nonaktif, tiga alur UI, tiga state/layar sempit.
+- Verifikasi akhir dan batas usage dicatat di STATE.md; berikutnya prompt 51 setelah tinjauan.

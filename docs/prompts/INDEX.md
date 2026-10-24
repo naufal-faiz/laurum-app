@@ -21,7 +21,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 11 | 31-printer.md | Printer dan Struk, PrintService palsu | SELESAI (2026-10-24) | Tinjau koneksi palsu, pratinjau, dan simpan pengaturan |
 | 12 | 32-transaksi-b.md | Pembayaran, Nota Tersimpan | SELESAI (2026-10-24) | **Coba alur nota lengkap**; tinjau atomicity tabungan |
 | 13 | 40-order.md | Detail Order, Edit Order, Riwayat Nota | SELESAI (2026-10-24) | Tinjau alur batal/edit dan sheet Catat pembayaran |
-| 14 | 50-pelanggan-a.md | Daftar, Detail, Edit Pelanggan | SEDANG (2026-10-24) | Daftar selesai; tinjau sebelum Detail/Edit pada sesi berikutnya |
+| 14 | 50-pelanggan-a.md | Daftar, Detail, Edit Pelanggan | SEDANG (2026-10-24) | Daftar selesai; Detail/Edit WIP, 9 tes baru lulus terarah, check_all terhalang import; lihat STATE.md |
 | 15 | 51-pelanggan-b.md | Setor Tabungan, Riwayat Tabungan, Impor Kontak | BELUM | |
 | 16 | 60-laporan.md | Laporan Ringkasan, Daftar Piutang | BELUM | Cocokkan angka dengan data_master.md |
 | 17 | 70-lainnya-a.md | Pengaturan dan Akun, Layanan, Info Usaha | BELUM | |
@@ -31,3 +31,4 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 21 | 100-penyelesaian.md | Audit, aksesibilitas, alur akhir, APK | BELUM | **Butuh Android SDK. Coba di HP** |
 
 Setelah No 21 selesai, antrean berikutnya adalah backend (PRD B bagian 14). Prompt-nya disusun terpisah setelah keputusan terbuka PRD B dijawab.
+
