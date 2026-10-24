@@ -106,10 +106,19 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - savings_fixtures.dart (86):
 
 ### lib/features/customers/pages/
+- customer_detail_data.dart (48): CustomerMovement, CustomerDetailData, customerDetailProvider
+- customer_detail_page.dart (53): CustomerDetailPage
 - customer_directory_controller.dart (20): CustomerDirectoryFilter, CustomerDirectorySearch, customerDirectoryFilterProvider, customerDirectorySearchProvider
-- customer_directory_data.dart (78): CustomerDirectoryRow, customerDirectoryProvider
+- customer_directory_data.dart (83): CustomerDirectoryRow, customerSummariesProvider, customerDirectoryProvider
 - customer_directory_list_page.dart (86): CustomerDirectoryListPage
 - customer_directory_page.dart (65): CustomerDirectoryPage
+- customer_edit_controller.dart (90): CustomerEditController, customerEditProvider
+- customer_edit_form_page.dart (65): CustomerEditFormPage
+- customer_edit_sheet.dart (68): CustomerEditSheet
+- customer_edit_state.dart (36): CustomerEditState
+- customer_orders_page.dart (36): CustomerOrdersPage
+- customer_profile_page.dart (75): CustomerProfilePage
+- customer_savings_page.dart (61): CustomerSavingsPage
 
 ### lib/features/expenses/data/
 - expense_category_fixtures.dart (35):
@@ -195,9 +204,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_fixtures.dart (67):
 
 ### lib/features/shell/pages/
-- app_router.dart (68):
+- app_router.dart (73):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (26):
+- placeholder_routes.dart (25):
 - root_shell_page.dart (49): RootShellPage
 - shell_state.dart (23): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, whatsappConnectionProvider
 
@@ -341,6 +350,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - chip_bar_test.dart (30):
 - confirm_modal_test.dart (74):
 - customer_detail_data_test.dart (61):
+- customer_detail_page_test.dart (86):
+- customer_detail_states_test.dart (60):
 - customer_directory_data_test.dart (39):
 - customer_directory_states_test.dart (64):
 - customer_directory_test.dart (67):

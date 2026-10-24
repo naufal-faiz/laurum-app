@@ -29,4 +29,6 @@
   tanpa klaim tabungan otomatis, NotaCard tanpa CTA Struk/Lihat semua; inisial helper.
 - Spec 13/14 mencatat detail dan teks baru ConfirmModal. Tidak ada widget bersama baru.
 - Sembilan tes baru: tiga data/edit/nonaktif, tiga alur UI, tiga state/layar sempit.
-- Verifikasi akhir dan batas usage dicatat di STATE.md; berikutnya prompt 51 setelah tinjauan.
+- Penutup: directive import dirapikan (dart fix directives_ordering) pada
+  customer_detail_page.dart dan customer_detail_page_test.dart; check_all SEMUA HIJAU,
+  285 tes, REPO_MAP 441 berkas. Berikutnya prompt 51 setelah tinjauan.

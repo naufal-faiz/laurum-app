@@ -1,12 +1,12 @@
-import 'antrean_test_host.dart';
-
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/features/customers/pages/customer_edit_sheet.dart';
 import 'package:laurum/shared/widgets/organisms/confirm_modal.dart';
 import 'package:laurum/shared/widgets/organisms/nota_card.dart';
 import 'package:laurum/shared/widgets/organisms/savings_row.dart';
+
+import 'antrean_test_host.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
