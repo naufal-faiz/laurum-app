@@ -452,3 +452,19 @@ Prompt 12 SELESAI; berikutnya docs/prompts/13-organisms-2.md setelah tinjauan pe
 - Selisih: label toggle membungkus dua baris pada 390 px (frame satu baris 48 px);
   chips memakai +Rp (NominalChips lama), bukan chip berat pada frame Input Berat.
 - Checkpoint 2: check_all SEMUA HIJAU, 184 tes, REPO_MAP 295 berkas (50/60 widget).
+
+### Checkpoint 3 / penutup: AppBottomSheet, ConfirmModal, ReportSummary, TopServices, WeeklyBarChart
+- AppBottomSheet.show dan ConfirmModal.show berupa static method; ConfirmModal mengembalikan
+  bool? dan punya varian tombol biasa/destruktif. Isi modal dapat digulir agar teks 2x aman.
+- ReportSummary memakai ReportTotals; TopServices memakai ServiceRevenue dan menghitung
+  persentase dari total pendapatan; WeeklyBarChart tanpa paket chart, hari belum terjadi
+  memakai empat garis putus-putus. Numpad/Toggle/Preview tetap dari checkpoint sebelumnya.
+- Galeri semua varian, golden 390 px, uji 320 px + skala teks 2x untuk tiap widget.
+- Selisih visual: modal selalu ikon info pada frame (ikon dapat diganti), close sheet
+  berlatar putih vs chipIdle; ringkasan metrik menjadi dua baris dan kartu kewajiban
+  digabung karena batas 110 baris; batang grafik radius semua sudut; tinggi grafik
+  mengikuti skala teks. Tidak ada perubahan atom/molekul/token/registry/lint.
+- Penutup: check_all SEMUA HIJAU, 200 tes, REPO_MAP 310 berkas (55/60 widget).
+- Yang perlu ditinjau: (1) kepadatan ReportSummary vs frame, (2) varian normal ConfirmModal
+  tanpa frame acuan, (3) alamat struk dua baris dan close sheet berlatar putih.
+- Prompt berikutnya: docs/prompts/14-templates.md. Berhenti menunggu tinjauan pengguna.

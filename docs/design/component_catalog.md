@@ -549,3 +549,59 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Galeri: numpad_use_case.dart; tes key 7, chip nominal, varian desimal mengganti 000.
 - Referensi C/Numpad Desimal dan 3-Column Numpad Grid: AppNumpadKey 56/12, gap 8,
   surfaceLow; chips memakai NominalChips +Rp dari atom lama.
+
+## AppBottomSheet
+- Berkas: lib/shared/widgets/organisms/app_bottom_sheet.dart.
+- API: `AppBottomSheet.show<T>(context, title, child, subtitle)` mengembalikan Future<T?>;
+  widget langsung menerima title/subtitle/child.
+- Varian: dengan/tanpa subtitle, isi bebas dari halaman; tutup lewat ikon close.
+- Contoh: AppBottomSheet.show<void>(context: context, title: 'Pembayaran',
+  subtitle: 'Nota A-0143 · Pak Dedi', child: PaymentSheet(...)).
+- Galeri: app_bottom_sheet_use_case.dart; tes buka/tutup lewat show.
+- Referensi C/Sheet: radius 28, drag handle 40x4 borderStrong, padding 12/16 dan 4/16,
+  judul section 16/22, subjudul caption. AppIconButton close berlatar putih sedangkan
+  frame chipIdle; atom tidak diubah.
+
+## ConfirmModal
+- Berkas: lib/shared/widgets/organisms/confirm_modal.dart.
+- API: `ConfirmModal.show(context, title, message, confirmLabel, cancelLabel, destructive,
+  icon)` -> Future<bool?>; true untuk konfirmasi, false untuk kembali.
+- Varian: tombol utama biasa (action) dan destruktif (destructiveFilled).
+- Contoh: ConfirmModal.show(context: context, title: 'Hapus pengeluaran ini?',
+  message: summary, confirmLabel: 'Hapus', destructive: true, icon: AppIcons.alert).
+- Galeri: confirm_modal_use_case.dart; tes hasil true/false, golden dan teks 2x.
+- Referensi C/Modal: 326 px, radius 16, padding 24, gap 12, ikon 48 primaryTint.
+  Isi dapat digulir agar teks 2x tidak overflow. Frame selalu memakai ikon info;
+  ikon dapat diganti pemanggil.
+
+## ReportSummary
+- Berkas: lib/shared/widgets/organisms/report_summary.dart.
+- API wajib: totals ReportTotals, expenseSummary, unpaidCount int; opsi onOutstandingTap.
+- Varian: laba positif/nol, piutang aktif, interaktif/noninteraktif.
+- Contoh: ReportSummary(totals: totals, expenseSummary: 'Deterjen & operasional',
+  unpaidCount: 5, onOutstandingTap: openPiutang).
+- Galeri: report_summary_use_case.dart; tes angka mingguan dan callback piutang.
+- Referensi Laporan - Ringkasan: laba figure, chipIdle sub-grid, kartu kewajiban, piutang
+  error + chevron. Batas 110 baris membuat metrik menjadi dua baris teks dan kewajiban
+  digabung dalam satu kartu; ikon lingkaran piutang tidak dipakai. Selisih dicatat.
+
+## TopServices
+- Berkas: lib/shared/widgets/organisms/top_services.dart.
+- API wajib: services List<ServiceRevenue>; opsi totalRevenue (default jumlah layanan)
+  dan title. Persentase dibulatkan dari revenue/total; unit kosong menjadi "Lainnya".
+- Varian: empat peringkat, pendapatan nol, kuantitas kg/pcs/tanpa kuantitas.
+- Contoh: TopServices(services: weekTopServicesFixtures).
+- Galeri: top_services_use_case.dart; tes nama, kuantitas, nominal, persentase.
+- Referensi Layanan Terlaris: pil peringkat 20, progress 8, persen primary untuk rank 1.
+  Tanpa paket chart; kuantitas Lainnya disembunyikan sesuai catatan prompt 11.
+
+## WeeklyBarChart
+- Berkas: lib/shared/widgets/organisms/weekly_bar_chart.dart.
+- API wajib: labels dan amounts (List<int?>; null = belum terjadi); opsi title,
+  averageLabel, peakLabel. Tinggi grafik 128 dan bertambah saat skala teks naik.
+- Varian: hari terjadi, hari belum terjadi (batang putus-putus), puncak.
+- Contoh: WeeklyBarChart(labels: days, amounts: values, averageLabel: average,
+  peakLabel: 'Puncak: Kamis').
+- Galeri: weekly_bar_chart_use_case.dart; tes label, nilai ringkas, garis putus-putus.
+- Referensi Aktivitas omzet harian: label 340k, batang primary, garis putus borderStrong.
+  Batang memakai radius AppRadius.input (8 semua sudut), frame hanya sudut atas.

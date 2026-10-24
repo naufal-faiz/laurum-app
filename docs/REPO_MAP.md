@@ -3,9 +3,9 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 50/60 dibuat
+## Registry widget: 55/60 dibuat
 
-Belum dibuat: AppBottomSheet, AuthScaffold, ConfirmModal, FormScaffold, ReportSummary, RootScaffold, SheetScaffold, SubScaffold, TopServices, WeeklyBarChart
+Belum dibuat: AuthScaffold, FormScaffold, RootScaffold, SheetScaffold, SubScaffold
 
 ## Dependensi
 
@@ -188,7 +188,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - toggle_row.dart (49): ToggleRow
 
 ### lib/shared/widgets/organisms/
+- app_bottom_sheet.dart (86): AppBottomSheet
 - bottom_nav_bar.dart (73): BottomNavBar
+- confirm_modal.dart (89): ConfirmModal
 - customer_row.dart (98): CustomerRow
 - expense_row.dart (59): ExpenseRow
 - nota_card.dart (75): NotaCard
@@ -198,14 +200,18 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - proposal_card.dart (63): ProposalCard
 - receipt_preview.dart (35): ReceiptPreview
 - receipt_toggle_list.dart (65): ReceiptToggleList
+- report_summary.dart (109): ReportSummary
 - savings_row.dart (74): SavingsRow
 - service_row.dart (84): ServiceRow
+- top_services.dart (106): TopServices
+- weekly_bar_chart.dart (110): WeeklyBarChart
 
 ### test/
 - app_avatar_test.dart (28):
 - app_badge_test.dart (29):
 - app_bar_root_test.dart (32):
 - app_bar_sub_test.dart (26):
+- app_bottom_sheet_test.dart (45):
 - app_button_test.dart (44):
 - app_card_test.dart (51):
 - app_chip_test.dart (41):
@@ -226,6 +232,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - bottom_nav_bar_test.dart (36):
 - callout_ai_test.dart (20):
 - chip_bar_test.dart (30):
+- confirm_modal_test.dart (74):
 - customer_row_test.dart (39):
 - date_group_header_test.dart (24):
 - domain_baseline_test.dart (51):
@@ -279,6 +286,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_preview_test.dart (28):
 - receipt_template_lines.dart (28):
 - receipt_toggle_list_test.dart (37):
+- report_summary_test.dart (36):
 - savings_row_test.dart (33):
 - section_header_test.dart (26):
 - service_row_test.dart (41):
@@ -286,6 +294,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - stepper_field_test.dart (33):
 - sync_indicator_test.dart (23):
 - toggle_row_test.dart (25):
+- top_services_test.dart (30):
+- weekly_bar_chart_test.dart (30):
 - widget_test.dart (22):
 
 ### tool/
@@ -342,18 +352,23 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - toggle_row_use_case.dart (27):
 
 ### widgetbook/organisms/
+- app_bottom_sheet_use_case.dart (35):
 - bottom_nav_bar_use_case.dart (17):
+- confirm_modal_use_case.dart (35):
 - customer_row_use_case.dart (44):
 - expense_row_use_case.dart (27):
 - fixture_labels.dart (10):
 - nota_card_use_case.dart (51):
 - numpad_use_case.dart (23):
 - o1.dart (23):
-- o2.dart (11):
+- o2.dart (21):
 - order_card_use_case.dart (55):
 - piutang_card_use_case.dart (37):
 - proposal_card_use_case.dart (30):
 - receipt_preview_use_case.dart (106):
 - receipt_toggle_list_use_case.dart (36):
+- report_summary_use_case.dart (18):
 - savings_row_use_case.dart (43):
 - service_row_use_case.dart (34):
+- top_services_use_case.dart (13):
+- weekly_bar_chart_use_case.dart (17):
