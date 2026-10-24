@@ -23,14 +23,17 @@ class SheetScaffold extends StatelessWidget {
         child: SingleChildScrollView(padding: padding, child: child),
       ),
       if (footer != null)
-        Padding(
-          padding: const EdgeInsets.fromLTRB(
-            AppSpacing.screenPadding,
-            0,
-            AppSpacing.screenPadding,
-            AppSpacing.screenPadding,
+        SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.screenPadding,
+              0,
+              AppSpacing.screenPadding,
+              AppSpacing.screenPadding,
+            ),
+            child: footer,
           ),
-          child: footer,
         ),
     ],
   );

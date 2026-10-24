@@ -148,11 +148,29 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_fixtures.dart (67):
 
 ### lib/features/shell/pages/
-- app_router.dart (33):
+- app_router.dart (40):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (33):
+- placeholder_routes.dart (31):
 - root_shell_page.dart (49): RootShellPage
 - shell_state.dart (23): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, whatsappConnectionProvider
+
+### lib/features/transactions/pages/
+- add_customer_form.dart (102): AddCustomerState, AddCustomerForm, addCustomerFormProvider
+- add_customer_form_page.dart (74): AddCustomerFormPage
+- add_customer_sheet.dart (50): AddCustomerSheet
+- contact_picker_sheet.dart (58): ContactPickerSheet, contactsProvider
+- customer_picker_sheet.dart (97): CustomerPickerSheet
+- discount_sheet.dart (85): DiscountInputState, DiscountInput, DiscountSheet, discountInputProvider
+- service_picker_page.dart (101): ServicePickerPage
+- transaction_actions.dart (22):
+- transaction_customer_page.dart (49): TransactionCustomerPage
+- transaction_details_page.dart (66): TransactionDetailsPage
+- transaction_draft.dart (110): DraftLine, TransactionDraftState, TransactionDraft, transactionDraftProvider
+- transaction_line_sheet.dart (76): TransactionLineSheet
+- transaction_page.dart (66): TransactionPage
+- transaction_providers.dart (32): ServiceSearch, CustomerSearch, serviceCatalogProvider, customerCatalogProvider, customerBalanceProvider, serviceSearchProvider, customerSearchProvider
+- weight_edit.dart (58): WeightEditState, WeightEdit, weightEditProvider
+- weight_input_sheet.dart (86): WeightInputSheet
 
 ### lib/
 - main.dart (17):
@@ -223,10 +241,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_scaffold.dart (20): AuthScaffold
 - form_scaffold.dart (41): FormScaffold
 - root_scaffold.dart (72): RootScaffold
-- sheet_scaffold.dart (37): SheetScaffold
+- sheet_scaffold.dart (40): SheetScaffold
 - sub_scaffold.dart (35): SubScaffold
 
 ### test/
+- add_customer_test.dart (64):
 - antrean_controller_test.dart (46):
 - antrean_golden_test.dart (52):
 - antrean_page_test.dart (57):
@@ -245,7 +264,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_icon_button_test.dart (32):
 - app_icon_test.dart (29):
 - app_numpad_key_test.dart (43):
-- app_router_test.dart (34):
+- app_router_test.dart (49):
 - app_search_field_test.dart (66):
 - app_skeleton_test.dart (32):
 - app_status_text_test.dart (26):
@@ -318,6 +337,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - root_scaffold_test.dart (39):
 - savings_row_test.dart (33):
 - section_header_test.dart (26):
+- service_picker_test.dart (54):
 - service_row_test.dart (41):
 - sheet_scaffold_test.dart (37):
 - stat_tile_test.dart (24):
@@ -327,6 +347,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - template_gallery.dart (54):
 - toggle_row_test.dart (25):
 - top_services_test.dart (30):
+- transaction_draft_test.dart (43):
+- transaction_golden_test.dart (70):
+- transaction_page_test.dart (97):
 - weekly_bar_chart_test.dart (30):
 - widget_test.dart (22):
 

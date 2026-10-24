@@ -698,3 +698,26 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   tanpa nav bawah; aturan nav daftar turunan diterapkan saat layarnya dibangun.
 - Entry point: main.dart dan main_dummy.dart memakai createAppRouter dan
   dummyRepositoryOverrides yang sama.
+
+### Fase 3: transaksi baru
+- Rute nyata: /transaksi/baru (TransactionPage) dan /transaksi/baru/layanan
+  (ServicePickerPage); /transaksi/baru/bayar tetap placeholder prompt 32.
+- TransactionPage: FormScaffold, TransactionCustomerPage, SectionHeader Layanan,
+  MenuRow per DraftLine, TransactionDetailsPage, FooterBar total + Bayar.
+- Subhalaman di features/transactions/pages: TransactionCustomerPage,
+  TransactionDetailsPage, AddCustomerFormPage (dipakai inline, pola AntreanStatusPage).
+- Sheet: CustomerPickerSheet, AddCustomerSheet, ContactPickerSheet,
+  TransactionLineSheet, WeightInputSheet, DiscountSheet.
+- Provider: transactionDraftProvider (global, bertahan antar layar), serviceSearchProvider,
+  customerSearchProvider, customerCatalogProvider, customerBalanceProvider,
+  serviceCatalogProvider, weightEditProvider, discountInputProvider, addCustomerFormProvider.
+- Draf: DraftLine menghitung total via lineTotal; qty kg 0,5 kg step, pcs 1; total =
+  subtotal - diskon; clear saat keluar; guard ConfirmModal bila berisi.
+- Pelanggan: pencarian AppSearchField, normalisasi nomor 62/8 ke 0, duplikat menampilkan
+  nama pemilik + Pakai pelanggan ini, kontak palsu lewat ContactPickerSheet.
+- Estimasi memakai estimateReady dan teks 'Mengikuti layanan terlama'.
+- Selisih: pencarian pelanggan di sheet, baris layanan MenuRow, detail estimasi InfoRow,
+  Pilih Layanan berupa halaman (frame sheet S25), chip berat AppChip, sheet pelanggan
+  dibatasi 500 px, tombol footer sheet full-width (perubahan SheetScaffold).
+- Tes: transaction_draft, transaction_page, service_picker, add_customer, app_router,
+  3 golden; 245 tes total, REPO_MAP 363 berkas.

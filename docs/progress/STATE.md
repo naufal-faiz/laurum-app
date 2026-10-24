@@ -2,44 +2,50 @@
 Diperbarui: 2026-10-24 | Cabang dev1
 
 ## Posisi
-Fase 1 selesai (60/60 widget, commit 2d8dd6f). Prompt 20-antrean.md SELESAI.
-check_all: SEMUA HIJAU; 232 tes; kedua analyzer bersih; check_arch OK.
-REPO_MAP 342 berkas. Berhenti menunggu tinjauan sebelum prompt 30-transaksi-a.md.
+Fase 1 dan prompt 20 selesai. Prompt 30-transaksi-a.md SELESAI.
+check_all: SEMUA HIJAU; 245 tes; kedua analyzer bersih; check_arch OK.
+REPO_MAP 363 berkas. Berhenti menunggu tinjauan sebelum prompt 31-printer.md.
 
 ## Selesai
-- Fase 1: atoms/molecules/organisms/templates, domain inti, data dummy, Widgetbook 60 widget.
-- Prompt 20: GoRouter StatefulShellRoute lima tab; placeholder seluruh rute PRD A 8.
-- Antrean - Beranda: chip 12/3/5/4/3, filter persisten, usulan Perlu dicek, OrderCard
-  dengan aksi status, FAB Transaksi baru, banner WhatsApp palsu.
-- Loading skeleton, error/retry, kosong, filter kosong; aksi menulis OrderEvent dan
-  menghitung ulang chip; guard klik ganda dan status usang.
-- 18 tes terarah (17 antrean/router + entry point), 7 golden, uji 320 px dan teks 2x.
-- AntreanPage 100 baris; katalog layar/router/provider diperbarui; docs fase-2 ditutup.
+- Fase 1: 60/60 widget, domain inti, data dummy, Widgetbook.
+- Prompt 20: router lima tab, Antrean - Beranda, state kosong/loading/error/WhatsApp.
+- Prompt 30: /transaksi/baru (Buat Transaksi) dan /transaksi/baru/layanan nyata;
+  /transaksi/baru/bayar tetap placeholder sampai prompt 32.
+- Draf nota global (transactionDraftProvider) bertahan antar layar; total memakai lineTotal,
+  diskon dibatasi 0..subtotal, dibersihkan saat keluar.
+- Pelanggan: pencarian di sheet, tambah cepat dengan validasi nama/nomor, normalisasi
+  62/8 ke 0, duplikat menampilkan nama + 'Pakai pelanggan ini', kontak HP palsu.
+- Layanan aktif saja, Sering dipakai, Kiloan/Satuan, pencarian.
+- Input Berat/Jumlah: Numpad desimal/standar, chip +0,5/+1/+5 kg, StepperField.
+- Estimasi estimateReady + 'Mengikuti layanan terlama'; catatan dan diskon tersimpan.
+- 13 tes baru dan 3 golden (transaction_page, service_picker, add_customer_sheet).
 
 ## Sedang dikerjakan
 - Tidak ada. Tunggu tinjauan pengguna sebelum prompt berikutnya.
 
 ## Antrean
-1. Tinjau Antrean - Beranda di HP/emulator bila tersedia (FAB, chip gulir, banner).
-2. Berikutnya: docs/prompts/30-transaksi-a.md (Pilih Layanan, Buat Transaksi,
-   Input Berat, Tambah Pelanggan Cepat).
-3. APK/NDK, iOS, TalkBack/VoiceOver, dan SafeArea perangkat masih ditunda.
+1. Tinjau alur Buat Transaksi di HP/emulator (keyboard, sheet, FAB tidak berlaku di sini).
+2. Berikutnya: docs/prompts/31-printer.md (Printer dan Struk, PrintService palsu).
+3. APK/NDK, iOS, TalkBack/VoiceOver, SafeArea perangkat masih ditunda.
 
 ## Keputusan dan batas
-- FAB hanya di cabang Antrean; banner WhatsApp di atas daftar dengan tombol Hubungkan
-  terpisah karena BannerMessage belum punya slot aksi.
-- Semua usulan diberi Periksa karena Proposal minimal belum memuat certainty.
-  Persetujuan/pembatalan order AI menunggu prompt 80.
-- FakeWhatsappConnection terpisah dari SyncService; jam dummy 16 Okt 2026 12.00.
-- Placeholder daftar turunan (mis. /lainnya/layanan, /laporan/piutang) memakai SubScaffold
-  tanpa nav; aturan nav daftar diterapkan saat layar nyata dibangun.
-- Antrean memakai indexedStack sehingga filter dan posisi gulir bertahan antar tab.
-- main.dart dan main_dummy.dart memakai router serta dummyRepositoryOverrides yang sama.
-- Formatters.nomorNota masih kunci A; transaksi Order/Savings atomik ditunda ke alur kasir.
+- Rute transaksi berada di luar shell sehingga nav bawah tidak tampil; Bayar menuju
+  placeholder Pembayaran sampai prompt 32.
+- Pelanggan dipilih lewat CustomerPickerSheet berisi AppSearchField; hasil kosong
+  menawarkan AddCustomerSheet. Nomor disimpan ternormalisasi 0... dan dicek unik.
+- AddCustomerSheet dibatasi 500 px agar form dapat digulir; footer SheetScaffold kini
+  full-width (perubahan template).
+- Estimasi memakai estimateReady dari businessClockProvider (16 Okt 2026 12.00).
+- DraftLine: kg default 1 kg/langkah 0,5 kg, pcs default 1/langkah 1 pcs; qtyMilli.
+- Keluar dengan draf berisi memunculkan ConfirmModal; draf kosong langsung keluar.
+- Subhalaman TransactionCustomerPage/TransactionDetailsPage/AddCustomerFormPage dipakai
+  inline mengikuti pola AntreanStatusPage; bukan rute.
+- Formatters.nomorNota masih kunci A; penyimpanan order belum dibuat (prompt 32).
 - Atom/token/registry/lint/PRD tidak diubah. Tanpa dependensi baru.
 - Selisih visual lama dipertahankan: Ionicons, mono w400, nav 61 px, DP amber, field 48.
 
 ## Pemeriksaan dan batas
-- Android/iOS perangkat, TalkBack/VoiceOver, SafeArea nyata belum diuji; APK ditunda.
-- Screenshot Pencil frame zb8jN, akEX1, zqBHI, MrWTS, P1axJ sudah dibaca.
-- Tidak push/merge. Jangan mulai prompt 30 tanpa instruksi pengguna.
+- Android/iOS perangkat, TalkBack/VoiceOver, keyboard/safe area nyata belum diuji.
+- Screenshot Pencil frame Buat Transaksi/Pilih Layanan/Input Berat/Tambah Pelanggan
+  sudah dibaca; golden Flutter dipakai untuk perbandingan.
+- Tidak push/merge. Jangan mulai prompt 31 tanpa instruksi pengguna.

@@ -31,4 +31,19 @@ void main() {
     expect(find.text('Halaman tidak ditemukan'), findsWidgets);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('transaction routes replace placeholders and hide bottom nav', (tester) async {
+    final host = await pumpAntrean(tester);
+    host.router.go('/transaksi/baru');
+    await tester.pumpAndSettle();
+    expect(find.text('Buat transaksi'), findsWidgets);
+    expect(find.byType(BottomNavBar), findsNothing);
+    host.router.go('/transaksi/baru/layanan');
+    await tester.pumpAndSettle();
+    expect(find.text('Pilih layanan'), findsWidgets);
+    expect(find.byType(BottomNavBar), findsNothing);
+    host.router.go('/transaksi/baru/bayar');
+    await tester.pumpAndSettle();
+    expect(find.text('Pembayaran'), findsWidgets);
+  });
 }
