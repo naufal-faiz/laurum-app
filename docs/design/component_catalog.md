@@ -423,6 +423,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   tidak ada titik/ikon jam dekoratif, tidak memakai opacity 0.75 yang belum ada di token.
 
 ## CustomerRow
+- Pemakaian layar: /pelanggan (spec 12-daftar-pelanggan.md), statistik dan filter reaktif.
 - Berkas: lib/shared/widgets/organisms/customer_row.dart.
 - API wajib: name, phone. Opsi: initials, orderCount/historyTotal/savings/outstanding/paid = 0,
   onTap, onContact. Semua nominal int rupiah. Data saldo/statistik dihitung pemanggil.

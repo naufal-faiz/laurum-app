@@ -10,15 +10,16 @@ import 'package:laurum/shared/widgets/organisms/app_bottom_sheet.dart';
 import 'package:laurum/shared/widgets/templates/sheet_scaffold.dart';
 
 class AddCustomerSheet extends ConsumerWidget {
-  const AddCustomerSheet({super.key});
+  const AddCustomerSheet({super.key, this.forOrder = true});
+  final bool forOrder;
 
-  static Future<Customer?> show(BuildContext context, WidgetRef ref) {
+  static Future<Customer?> show(BuildContext context, WidgetRef ref, {bool forOrder = true}) {
     ref.read(addCustomerFormProvider.notifier).reset();
     return AppBottomSheet.show<Customer>(
       context: context,
       title: 'Tambah pelanggan cepat',
       subtitle: 'Tersimpan ke kontak usaha. Nota tetap utuh.',
-      child: const AddCustomerSheet(),
+      child: AddCustomerSheet(forOrder: forOrder),
     );
   }
 
@@ -44,7 +45,7 @@ class AddCustomerSheet extends ConsumerWidget {
           ),
         ],
       ),
-      child: const AddCustomerFormPage(),
+      child: AddCustomerFormPage(forOrder: forOrder),
     ),
   );
 }

@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:laurum/features/customers/pages/customer_directory_page.dart';
 import 'package:laurum/features/orders/pages/antrean_page.dart';
 import 'package:laurum/features/orders/pages/nota_history_page.dart';
 import 'package:laurum/features/orders/pages/order_detail_page.dart';
@@ -54,6 +55,7 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
                 path: route.key,
                 builder: (context, state) => switch (route.key) {
                   '/antrean' => const AntreanPage(),
+                  '/pelanggan' => const CustomerDirectoryPage(),
                   '/transaksi' => const NotaHistoryPage(),
                   _ => PlaceholderPage(title: route.value, isTab: true),
                 },

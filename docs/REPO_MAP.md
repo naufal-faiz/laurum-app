@@ -105,6 +105,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - in_memory_savings_repository.dart (48): InMemorySavingsRepository, inMemorySavingsRepositoryProvider
 - savings_fixtures.dart (86):
 
+### lib/features/customers/pages/
+- customer_directory_controller.dart (20): CustomerDirectoryFilter, CustomerDirectorySearch, customerDirectoryFilterProvider, customerDirectorySearchProvider
+- customer_directory_data.dart (78): CustomerDirectoryRow, customerDirectoryProvider
+- customer_directory_list_page.dart (86): CustomerDirectoryListPage
+- customer_directory_page.dart (65): CustomerDirectoryPage
+
 ### lib/features/expenses/data/
 - expense_category_fixtures.dart (35):
 - expense_fixtures.dart (10):
@@ -189,7 +195,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_fixtures.dart (67):
 
 ### lib/features/shell/pages/
-- app_router.dart (66):
+- app_router.dart (68):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (26):
 - root_shell_page.dart (49): RootShellPage
@@ -197,8 +203,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/transactions/pages/
 - add_customer_form.dart (102): AddCustomerState, AddCustomerForm, addCustomerFormProvider
-- add_customer_form_page.dart (74): AddCustomerFormPage
-- add_customer_sheet.dart (50): AddCustomerSheet
+- add_customer_form_page.dart (77): AddCustomerFormPage
+- add_customer_sheet.dart (51): AddCustomerSheet
 - cash_input_sheet.dart (76): CashInput, CashInputSheet, cashInputProvider
 - checkout_item.dart (21):
 - checkout_save.dart (109):
@@ -334,6 +340,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - checkout_controller_test.dart (83):
 - chip_bar_test.dart (30):
 - confirm_modal_test.dart (74):
+- customer_directory_data_test.dart (39):
+- customer_directory_states_test.dart (64):
+- customer_directory_test.dart (67):
 - customer_row_test.dart (39):
 - date_group_header_test.dart (24):
 - domain_baseline_test.dart (51):

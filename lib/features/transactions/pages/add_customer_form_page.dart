@@ -8,7 +8,8 @@ import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
 
 class AddCustomerFormPage extends ConsumerWidget {
-  const AddCustomerFormPage({super.key});
+  const AddCustomerFormPage({super.key, this.forOrder = true});
+  final bool forOrder;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,8 +19,10 @@ class AddCustomerFormPage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: AppSpacing.screenPadding,
       children: [
-        const BannerMessage(
-          message: 'Pelanggan yang disimpan langsung dipilih untuk nota ini.',
+        BannerMessage(
+          message: forOrder
+              ? 'Pelanggan yang disimpan langsung dipilih untuk nota ini.'
+              : 'Pelanggan yang disimpan akan muncul di daftar pelanggan.',
         ),
         LabeledField(
           label: 'Nama pelanggan',

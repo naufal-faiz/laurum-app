@@ -1,5 +1,6 @@
 # 05 - Tambah Pelanggan Cepat
 Rute: sheet dari CustomerPickerSheet   Fase: 3
+Juga dipakai dari /pelanggan lewat navigator utama agar tidak terpotong area tab.
 Frame .pen: "Pelanggan - Tambah Pelanggan Cepat" (sheet S21) + State Validasi nama,
 Validasi nomor WhatsApp, Nomor pelanggan sudah ada.
 Template: AppBottomSheet + SheetScaffold
@@ -23,6 +24,8 @@ Interaksi:
   dan tautan 'Pakai pelanggan ini' memilih pelanggan tersebut.
 - 'Ambil dari kontak HP' membuka ContactPickerSheet; memilih kontak mengisi nama/nomor.
 - Simpan berhasil membuat Customer baru, memilihnya untuk draf, lalu menutup sheet.
+- Dari Daftar Pelanggan: forOrder=false mengganti banner menjadi 'Pelanggan yang
+  disimpan akan muncul di daftar pelanggan.'; tidak mengubah draf transaksi.
 
 State: kosong, error nama, error nomor, duplikat, daftar kontak/loading/kosong.
 Format: Formatters.telepon untuk tampilan nomor; nomor disimpan dalam bentuk 0...
