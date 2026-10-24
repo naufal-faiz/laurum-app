@@ -357,3 +357,17 @@ dan perbaikan audit (termasuk tes); widget/layar baru: tidak ada.
   check_arch OK; 146 tes lulus; REPO_MAP diperbarui 248 berkas.
 - Diff whitespace bersih. Tidak ada widget/layar baru; 67 berkas Dart prompt 11,
   maksimum 91 baris. Commit akhir dicatat lewat git log; berikutnya 12-organisms-1.md.
+
+## Prompt 12 — Organisms bagian 1 (24 Okt 2026)
+### O1a: BottomNavBar, ServiceRow, CustomerRow
+- Baseline check_all 146 tes hijau; git bersih pada c17cd40.
+- Referensi Pencil aktif laurum-ready.pen: MurpB, yI3rK, gv4k0, adwTE.
+  Screenshot langsung dibanding golden Flutter bottom_nav_bar/service_row/customer_row.
+- Semua varian dirender tanpa overflow di 390px. Nominal fixture dari DATA MASTER.
+- Selisih: nav dinamis sekitar 61px sebelum SafeArea vs desain 96px; glyph Ionicons;
+  ServiceRow jenis tanpa pill dan tanpa ikon jam/titik; nonaktif tanpa opacity 0.75.
+  CustomerRow kontak tanpa lingkaran dan status tanpa pill (PRD); DP amber, bukan hijau.
+- Atom/token dipertahankan. Tidak membuat widget di luar registry; tanpa provider/navigasi.
+- Belum diuji TalkBack/VoiceOver, SafeArea perangkat nyata, Android/iOS.
+
+Checkpoint O1a: check_all SEMUA HIJAU, 152 tes, kedua analyzer bersih, check_arch OK.

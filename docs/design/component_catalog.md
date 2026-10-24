@@ -400,3 +400,33 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   error/errorInk, primary, chipIdle/ink3. State tersebut perlu tinjauan pengguna.
 - Contoh galeri adalah label teknis, bukan data bisnis. Keyboard/IME dan pembaca layar
   Android/iOS belum diuji pada perangkat; tes widget dijalankan di Windows.
+
+## BottomNavBar
+- Berkas: lib/shared/widgets/organisms/bottom_nav_bar.dart.
+- API: activeIndex 0..4 wajib, onSelected(int) opsional. Tanpa navigasi/state internal.
+- Varian: lima tab aktif dan disabled. Ikon terisi untuk aktif; primary + label semibold.
+- Contoh: BottomNavBar(activeIndex: tab, onSelected: selectTab).
+- Galeri: widgetbook/organisms/bottom_nav_bar_use_case.dart; tes: bottom_nav_bar_test.dart.
+- Referensi MurpB: lima kolom, padding vertikal 8, gap 4, ikon 24.
+  Tinggi dinamis 60 + divider/SafeArea, dibanding frame 96; tidak menebak inset perangkat.
+
+## ServiceRow
+- Berkas: lib/shared/widgets/organisms/service_row.dart.
+- API wajib: name, kind (ServiceKind), price int rupiah, durationDays int.
+  Opsi: isActive/showSwitch true, onTap, onActiveChanged(bool).
+- Varian: kiloan/satuan, aktif/nonaktif, tanpa switch. Nonaktif tetap dapat diedit/diaktifkan.
+- Contoh: ServiceRow(name: name, kind: kind, price: price, durationDays: days, onTap: edit).
+- Galeri semua enam layanan master dan tanpa switch; tes callback toggle tidak membuka baris.
+- Referensi yI3rK/G7SU6: padding/radius 16 cocok; jenis berupa teks tanpa pill,
+  tidak ada titik/ikon jam dekoratif, tidak memakai opacity 0.75 yang belum ada di token.
+
+## CustomerRow
+- Berkas: lib/shared/widgets/organisms/customer_row.dart.
+- API wajib: name, phone. Opsi: initials, orderCount/historyTotal/savings/outstanding/paid = 0,
+  onTap, onContact. Semua nominal int rupiah. Data saldo/statistik dihitung pemanggil.
+- Varian: netral, piutang belum bayar/DP, tabungan, fallback avatar, kontak disabled.
+- Contoh: CustomerRow(name: name, phone: phone, savings: balance, onTap: open).
+- Galeri: customer_row_use_case.dart; tes memeriksa saldo dan callback kontak terpisah.
+- Referensi gv4k0/adwTE: avatar 40, kartu 16 dan strip riwayat cocok.
+  Status bayar teks tanpa pil mengikuti PRD, warna DP amber; AppIconButton tidak
+  memiliki latar lingkaran. Initials disiapkan pemanggil, bukan ditebak widget.
