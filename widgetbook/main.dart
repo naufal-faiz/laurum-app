@@ -25,6 +25,7 @@ import 'molecules/m2.dart';
 import 'molecules/m3.dart';
 import 'organisms/o1.dart';
 import 'organisms/o2.dart';
+import 'templates/templates.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ Future<void> main() async {
     ProviderScope(
       child: Widgetbook.material(
         directories: [
+          WidgetbookFolder(name: 'Templates', children: templateComponents),
           WidgetbookFolder(name: 'Organisms', children: [...o1Components, ...o2Components]),
           WidgetbookFolder(
             name: 'Molecules',

@@ -3,9 +3,9 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 55/60 dibuat
+## Registry widget: 60/60 dibuat
 
-Belum dibuat: AuthScaffold, FormScaffold, RootScaffold, SheetScaffold, SubScaffold
+Semua widget sudah dibuat.
 
 ## Dependensi
 
@@ -206,6 +206,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - top_services.dart (106): TopServices
 - weekly_bar_chart.dart (110): WeeklyBarChart
 
+### lib/shared/widgets/templates/
+- auth_scaffold.dart (20): AuthScaffold
+- form_scaffold.dart (41): FormScaffold
+- root_scaffold.dart (72): RootScaffold
+- sheet_scaffold.dart (37): SheetScaffold
+- sub_scaffold.dart (35): SubScaffold
+
 ### test/
 - app_avatar_test.dart (28):
 - app_badge_test.dart (29):
@@ -228,6 +235,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_text_field_test.dart (70):
 - app_text_test.dart (39):
 - atom_gallery_test.dart (75):
+- auth_scaffold_test.dart (22):
 - banner_message_test.dart (23):
 - bottom_nav_bar_test.dart (36):
 - callout_ai_test.dart (20):
@@ -262,6 +270,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - empty_state_test.dart (28):
 - expense_row_test.dart (34):
 - footer_bar_test.dart (30):
+- form_scaffold_test.dart (33):
 - formatters_test.dart (40):
 - info_row_test.dart (25):
 - labeled_field_test.dart (29):
@@ -287,12 +296,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_template_lines.dart (28):
 - receipt_toggle_list_test.dart (37):
 - report_summary_test.dart (36):
+- root_scaffold_test.dart (39):
 - savings_row_test.dart (33):
 - section_header_test.dart (26):
 - service_row_test.dart (41):
+- sheet_scaffold_test.dart (37):
 - stat_tile_test.dart (24):
 - stepper_field_test.dart (33):
+- sub_scaffold_test.dart (32):
 - sync_indicator_test.dart (23):
+- template_gallery.dart (54):
 - toggle_row_test.dart (25):
 - top_services_test.dart (30):
 - weekly_bar_chart_test.dart (30):
@@ -323,7 +336,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_text_use_case.dart (21):
 
 ### widgetbook/
-- main.dart (74):
+- main.dart (76):
 
 ### widgetbook/molecules/
 - app_bar_root_use_case.dart (25):
@@ -372,3 +385,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_row_use_case.dart (34):
 - top_services_use_case.dart (13):
 - weekly_bar_chart_use_case.dart (17):
+
+### widgetbook/templates/
+- auth_scaffold_use_case.dart (45):
+- form_scaffold_use_case.dart (40):
+- root_scaffold_use_case.dart (48):
+- sheet_scaffold_use_case.dart (59):
+- sub_scaffold_use_case.dart (40):
+- templates.dart (15):

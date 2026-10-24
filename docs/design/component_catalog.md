@@ -608,3 +608,58 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Galeri: weekly_bar_chart_use_case.dart; tes label, nilai ringkas, garis putus-putus.
 - Referensi Aktivitas omzet harian: label 340k, batang primary, garis putus borderStrong.
   Batang memakai radius AppRadius.input (8 semua sudut), frame hanya sudut atas.
+
+## RootScaffold
+- Berkas: lib/shared/widgets/templates/root_scaffold.dart.
+- API wajib: title, accountLabel, activeIndex 0..4, body. Opsi: syncState (default
+  tersimpan), fabLabel + onFab (harus berpasangan), onAccount, onTabSelected.
+- Varian: dengan/tanpa FAB, empat status sinkron, tab aktif mana pun.
+- Contoh: RootScaffold(title: 'Antrean', accountLabel: 'Akun', activeIndex: 0,
+  fabLabel: 'Transaksi baru', onFab: buat, onTabSelected: pilihTab, body: content).
+- Galeri: widgetbook/templates/root_scaffold_use_case.dart; tes judul, status sinkron,
+  callback tab dan FAB, golden serta 320 px + teks 2x.
+- Referensi Antrean/C1rcX/MurpB: AppBarRoot + SyncIndicator + BottomNavBar + FAB pil
+  primary 48. FAB memakai FloatingActionButton.extended elevasi 0 dengan radius chip;
+  nav tetap memakai BottomNavBar yang ada (61 px + SafeArea, frame 96).
+
+## SubScaffold
+- Berkas: lib/shared/widgets/templates/sub_scaffold.dart.
+- API wajib: title, backLabel, body. Opsi: onBack, trailing.
+- Varian: dengan/tanpa aksi kanan; tanpa nav bawah.
+- Contoh: SubScaffold(title: 'Detail order', backLabel: 'Kembali', onBack: back,
+  trailing: AppText('Ubah'), body: content).
+- Galeri: sub_scaffold_use_case.dart; tes judul, trailing, callback kembali, golden.
+- Referensi WiQtw/Detail Order: AppBarSub 64 + SafeArea; body memakai SafeArea bawah.
+  Tombol kembali memakai AppIconButton berkotak putih (atom) vs ikon transparan frame.
+
+## FormScaffold
+- Berkas: lib/shared/widgets/templates/form_scaffold.dart.
+- API wajib: title, backLabel, body, footer. Opsi: summary, onBack, trailing, padding
+  (default 16). Body dapat digulir; footer memakai FooterBar sticky.
+- Varian: dengan/tanpa ringkasan; trailing opsional.
+- Contoh: FormScaffold(title: 'Catat pengeluaran', backLabel: 'Kembali', body: fields,
+  summary: total, footer: AppButton('Simpan pengeluaran', onPressed: save)).
+- Galeri: form_scaffold_use_case.dart; tes body, ringkasan, footer, golden.
+- Referensi Catat Pengeluaran/uqTPF: app bar sub + body gulir + footer sticky bertabayang.
+  Frame memakai padding 8/16 pada stack; template memakai 16 agar konsisten.
+
+## SheetScaffold
+- Berkas: lib/shared/widgets/templates/sheet_scaffold.dart.
+- API wajib: child. Opsi: footer, padding (default 16). Body dapat digulir; footer tetap
+  di bawah. Template ini adalah isi sheet, bukan surface: pakai sebagai child AppBottomSheet.
+- Varian: dengan/tanpa footer.
+- Contoh: AppBottomSheet(title: 'Input berat', child: SheetScaffold(child: form,
+  footer: AppButton('Simpan berat', onPressed: save))).
+- Galeri: sheet_scaffold_use_case.dart (dibungkus AppBottomSheet + Scaffold); tes body,
+  footer, golden.
+- Referensi C/Sheet Transaksi - Pembayaran/Input Berat: header/handle dari AppBottomSheet,
+  padding 16, footer di luar area gulir. Tanpa scrim sendiri.
+
+## AuthScaffold
+- Berkas: lib/shared/widgets/templates/auth_scaffold.dart.
+- API wajib: child. Tanpa app bar, nav, atau provider.
+- Varian: satu (konten auth bebas).
+- Contoh: AuthScaffold(child: Column(children: [brand, fields, AppButton('Masuk')])).
+- Galeri: auth_scaffold_use_case.dart; tes tanpa AppBar, golden, 320 px + teks 2x.
+- Referensi Auth - Masuk: latar bg, konten selebar layar dikurangi 32, mulai 96 px dari
+  atas layar (SafeArea bawah tetap aktif), dapat digulir saat keyboard muncul.

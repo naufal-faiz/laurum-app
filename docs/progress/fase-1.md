@@ -475,3 +475,73 @@ Prompt 12 SELESAI; berikutnya docs/prompts/13-organisms-2.md setelah tinjauan pe
 - LockedRow: status kunci tidak lagi memakai Flexible; menempel ke tepi kanan sehingga
   sejajar dengan tepi switch ToggleRow di ReceiptToggleList. Label utama mendapat sisa lebar.
 - Golden expense_row, locked_row, dan receipt_toggle_list diperbarui; tes perilaku tetap lulus.
+
+## Penutup Fase 1 — 60/60 widget (24 Okt 2026)
+
+### Ringkasan
+- Registry lengkap: 17 atoms, 21 molecules, 17 organisms, 5 templates. REPO_MAP menyatakan
+  `Registry widget: 60/60 dibuat`; tidak ada widget registry yang kurang.
+- Domain inti (model, aturan order/tabungan/pembatalan/laporan), repository in-memory,
+  provider, dan fixture DATA MASTER selesai pada prompt 10-11 dan mendukung galeri.
+- 215 tes lulus; 59 berkas golden; Widgetbook memuat folder Templates, Organisms,
+  Molecules, dan Atoms. Seluruh widget maksimal 110 baris (hampir semua <=100).
+- Templates: RootScaffold 72, SubScaffold 35, FormScaffold 41, SheetScaffold 37,
+  AuthScaffold 20 baris. Root memakai AppBarRoot + SyncIndicator + BottomNavBar + FAB pil;
+  Sub/Form memakai AppBarSub; Form memakai FooterBar sticky; SheetScaffold adalah isi
+  AppBottomSheet (body gulir + footer); Auth tanpa app bar.
+- RootScaffold/Sub/Form/Sheet/Auth hanya slot dan komposisi; tanpa provider/navigasi.
+  BottomNav hanya ada di RootScaffold, tidak di Sub/Form/Sheet/Auth.
+
+### Daftar selisih terhadap .pen (kumulatif)
+- Ikon memakai Ionicons (AppIcons), bukan Lucide/Material pada frame.
+- Mono memakai w400 (token) sedangkan beberapa label frame w600; CTA/secondary w700
+  mengikuti PRD meski frame w600.
+- BottomNavBar dinamis ~61 px + SafeArea, frame 96 px; tidak menebak inset perangkat.
+- AppBarSub/AppBarRoot memakai AppIconButton berkotak putih; frame memakai ikon
+  transparan atau lingkaran primary.
+- ServiceRow tanpa pill jenis dan tanpa ikon jam/titik; CustomerRow tanpa lingkaran
+  kontak dan status tanpa pil; DP amber mengikuti PRD, bukan hijau frame.
+- SavingsRow memisahkan nominal/saldo; ExpenseRow berupa kartu per baris dan nominal
+  rata kanan (diperbaiki setelah tinjauan); OrderCard/NotaCard mono w400 tanpa titik status.
+- ProposalCard belum punya certainty/uncertainPart; CalloutAi tidak berupa kotak tinted.
+  PiutangCard memakai usia netral tanpa jatuh tempo.
+- ReceiptPreview: alamat DATA MASTER membungkus dua baris (frame satu baris tanpa kota),
+  tepi bergerigi 8 px via clipper, padding 16.
+- ReportSummary dipadatkan: metrik dua baris, kartu kewajiban digabung, piutang tanpa
+  lingkaran ikon. WeeklyBarChart memakai radius 8 semua sudut dan tinggi mengikuti skala teks.
+- ConfirmModal varian biasa memakai tombol action (frame hanya destruktif); close
+  AppBottomSheet berlatar putih, bukan chipIdle.
+- FormScaffold memakai padding body 16 (frame 8/16); AuthScaffold mulai 96 px dari atas
+  layar dengan SafeArea bawah; FAB memakai FloatingActionButton.extended elevasi 0.
+- Field 48 vs frame 44; placeholder search satu baris; multiline rata atas; toggle password
+  belum ada; label ToggleRow/LockedRow dapat membungkus dua baris; NominalChips memakai +Rp.
+
+### Temuan pada lapisan bawah
+- `Formatters.nomorNota` masih mengunci kode A; parameter kode perangkat diperlukan saat
+  alur nomor nota dikerjakan.
+- `Formatters.tanggalStruk` ditambahkan pada prompt 13 untuk format `16 Okt 2026`.
+- Transaksi Order + Savings harus atomik di alur kasir; repository dummy sudah menyediakan
+  fungsi domain berpasangan, database nyata belum.
+- Kontrak Proposal minimal belum memuat certainty/uncertainPart; menunggu integrasi AI.
+- Baseline laporan tidak boleh tumpang tindih; caller bertanggung jawab membangun ulang
+  baseline bila mengubah order yang sudah diringkas. Top services hanya Minggu ini.
+- A-0143/A-0144 adalah skenario berikutnya, bukan bagian snapshot awal.
+- Android/iOS perangkat, TalkBack/VoiceOver, SafeArea nyata, APK, dan iOS belum diuji.
+
+### Proposal widget yang menunggu
+- Tidak ada. Folder docs/design/proposals/ kosong; seluruh kebutuhan prompt 10-14 tercakup
+  registry. Kebutuhan widget baru pada layar berikutnya harus melalui proposal.
+
+### Cara membuka Widgetbook
+```
+flutter run -d chrome -t widgetbook/main.dart
+# atau di perangkat/emulator:
+flutter run -t widgetbook/main.dart
+```
+- Folder Templates berisi lima template; Organisms berisi 17 organisms; Molecules 21;
+  Atoms 17. Setiap komponen memiliki use-case semua varian.
+- Alternatif tanpa menjalankan app: lihat PNG di `test/goldens/` (59 berkas).
+- Untuk memeriksa ulang seluruh pemeriksaan: `dart run tool/check_all.dart`.
+
+Penutup Fase 1: 60/60 widget, check_all SEMUA HIJAU, 215 tes, REPO_MAP 327 berkas.
+Berhenti untuk tinjauan seluruh Widgetbook sebelum prompt 20-antrean.md.
