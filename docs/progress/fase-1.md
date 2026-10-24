@@ -426,3 +426,19 @@ Format 226 berkas (0 changed), flutter analyze dan dart analyze tanpa isu,
 check_arch OK, 170 tes lulus, REPO_MAP 278 berkas (47/60 widget).
 Satu kegagalan directives_ordering pada impor galeri diperbaiki sebelum hasil akhir.
 Prompt 12 SELESAI; berikutnya docs/prompts/13-organisms-2.md setelah tinjauan pengguna.
+
+## Prompt 13 — Organisms 2 (24 Okt 2026)
+
+### Checkpoint 1: ReceiptFormatter dan ReceiptPreview
+- `receiptLines` murni di core/domain (receipt_formatter.dart + receipt_layout.dart):
+  32 kolom, item/berat, baris kondisional, status LUNAS/LUNAS (TABUNGAN)/DP/BELUM BAYAR.
+- Formatters.tanggalStruk ditambahkan (d MMM yyyy) karena format tanggal struk belum ada.
+- Tes golden-text A-0143 persis 26 baris receipt_template.md; varian tabungan, DP,
+  belum bayar, dan flag pengaturan disembunyikan. Semua baris <= 32 kolom.
+- ReceiptPreview hanya merender List<String>; mono 11/16, hitam, putih, padding 16,
+  tepi bergerigi 8 px lewat ReceiptEdgeClipper di core/theme (bukan path .pen).
+- Galeri dua varian (penuh dan tanpa alamat/pelanggan/tabungan/catatan); golden 390x1200,
+  uji lebar 320 + skala teks 2x tanpa exception.
+- Selisih: alamat DATA MASTER (memuat Bandung) membungkus dua baris seimbang, frame satu
+  baris tanpa kota; tangkapan Pencil baru tidak dibuat pada checkpoint ini.
+- Checkpoint 1: check_all SEMUA HIJAU, 177 tes, REPO_MAP 289 berkas (48/60 widget).

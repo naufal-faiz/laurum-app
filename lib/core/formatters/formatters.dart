@@ -25,6 +25,9 @@ abstract final class Formatters {
       ? DateFormat('HH:mm', 'id_ID').format(waktu)
       : '${DateFormat('HH.mm', 'id_ID').format(waktu)} WIB';
 
+  // Thermal receipt date: no weekday, year shown.
+  static String tanggalStruk(DateTime tanggal) => DateFormat('d MMM yyyy', 'id_ID').format(tanggal);
+
   static String telepon(String telepon) {
     var digits = telepon.replaceAll(RegExp(r'[\s()-]'), '');
     if (digits.startsWith('+62')) digits = '0${digits.substring(3)}';

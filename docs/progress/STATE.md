@@ -2,43 +2,40 @@
 Diperbarui: 2026-10-24 | Cabang dev1
 
 ## Posisi
-Prompt 12-organisms-1.md SELESAI: sembilan organisms, tiga checkpoint.
-check_all: SEMUA HIJAU; 170 tes; kedua analyzer bersih; check_arch OK.
-REPO_MAP 278 berkas, 47/60 widget. Semua sembilan widget <=100 baris.
-Berhenti menunggu tinjauan; jangan otomatis memulai prompt berikutnya.
+Prompt 13-organisms-2.md SEDANG: checkpoint 1 selesai (ReceiptFormatter + ReceiptPreview).
+check_all: SEMUA HIJAU; 177 tes; kedua analyzer bersih; check_arch OK.
+REPO_MAP 289 berkas, 48/60 widget. Berhenti di checkpoint; lanjut ReceiptToggleList/Numpad.
 
 ## Selesai
-- Domain core prompt 10: 80ed571; audit repository prompt 11: c17cd40.
-- O1a: BottomNavBar, ServiceRow, CustomerRow; 152 tes; commit 0e090ca.
-- O1b: SavingsRow, ExpenseRow, OrderCard; 161 tes; commit 5baa282.
-- O1c: NotaCard, ProposalCard, PiutangCard; 170 tes; commit terakhir lihat git log -1.
-- Setiap widget memiliki use-case semua varian, tes kontrak dan golden.
-- O1b/O1c juga diuji 320px dengan skala teks 2x tanpa overflow.
-- API dan contoh: docs/design/component_catalog.md.
-- Selisih visual, jumlah baris dan bukti: docs/progress/fase-1.md.
-- Tidak mengubah atoms/molecules/token/registry/lint/PRD/dependensi.
-
-## Keputusan dan batas
-- Data pelengkap sudah diizinkan dan terdokumentasi DATA MASTER pada prompt 11.
-- Baseline laporan Hari/Minggu/Bulan; top services hanya Minggu.
-- Formatters.nomorNota masih mengunci A; transaksi Order/Savings lintas repository
-  perlu koordinasi atomik pada alur kasir mendatang, bukan tugas widget ini.
-- Organisms hanya primitif/enum core dan callback; tidak membaca provider/navigasi.
-- needsReview/cancelRequested OrderCard hanya rail; aksi progres tetap sesuai status.
-- ProposalCard onApprove bermakna pemeriksaan bila needsReview, persetujuan bila tidak.
-- Proposal minimal belum memiliki certainty/uncertainPart; galeri ragu adalah state teknis
-  menggunakan teks sumber fixture. Penentuan bagian ragu menunggu integrasi AI.
-- PiutangCard menghitung sisa total-paid; usia netral dipasok pemanggil, tanpa jatuh tempo.
-- Atom/token lama dipertahankan; perbedaan pill/callout/mono/tinggi nav dicatat.
-- Screenshot Pencil sempat berhasil dibaca untuk seluruh referensi; percobaan ulang O1c
-  gagal karena transport VS Code putus. Golden baru ditinjau terhadap referensi sebelumnya.
-- Android/iOS perangkat, SafeArea nyata, TalkBack/VoiceOver belum diuji pada prompt ini.
-- Tidak push/merge.
+- Fondasi, atoms 17, molecules 21, organisms 9 (prompt 12) sesuai catatan fase-1.md.
+- Domain prompt 10 (80ed571), audit data dummy prompt 11 (c17cd40), organisms O1a-O1c.
+- Prompt 13 checkpoint 1: receipt_formatter.dart + receipt_layout.dart (32 kolom murni),
+  Formatters.tanggalStruk, ReceiptPreview + ReceiptEdgeClipper (tepi bergerigi 8 px).
+- Checkpoint 1: 7 tes baru (4 formatter/varian, 1 settings, 3 preview+galeri), golden baru.
 
 ## Sedang dikerjakan
-Tidak ada. Prompt 12 ditutup dengan semua pemeriksaan hijau.
+- Checkpoint 2: ReceiptToggleList dan Numpad, lalu AppBottomSheet/ConfirmModal.
 
 ## Antrean
-- Tinjau galeri sembilan organisms dan selisih visual di fase-1.md.
-- Berikutnya: docs/prompts/13-organisms-2.md (8 organisms + ReceiptFormatter).
-- Jalankan hanya setelah pengguna meminta lanjut.
+1. Selesaikan ReportSummary, TopServices, WeeklyBarChart; check_all, STATE, commit akhir.
+2. Tinjau delapan organisms dan selisih visual di docs/progress/fase-1.md.
+3. Berikutnya: docs/prompts/14-templates.md (5 templates, penutup Fase 1).
+
+## Keputusan dan batas
+- Struk 32 kolom memakai Formatters; tanggal struk baru `d MMM yyyy` (16 Okt 2026).
+- Status: LUNAS, LUNAS (TABUNGAN), DP Rp..., BELUM BAYAR; SISA BAYAR selalu tampil.
+- Baris tabungan/metode/catatan mengikuti flag ReceiptSettings dan receipt_template.md.
+- Alamat lengkap DATA MASTER membungkus dua baris seimbang; frame memakai satu baris
+  tanpa kota. Tepi struk memakai clipper 8 px, bukan path .pen.
+- Grafik mingguan tanpa paket chart; hari belum terjadi memakai batang putus-putus.
+- Organisms hanya primitif/enum/domain model dan callback; tanpa provider/navigasi.
+- Data pelengkap DATA MASTER disetujui prompt 11; baseline laporan tetap Hari/Minggu/Bulan.
+- Formatters.nomorNota masih kunci A; transaksi Order/Savings atomik ditunda ke alur kasir.
+- Selisih visual lama dipertahankan: Ionicons, mono w400, nav 61 px, DP amber.
+- Atom/token/registry/lint/PRD tidak diubah. Tanpa dependensi baru.
+
+## Pemeriksaan dan batas
+- Android/iOS perangkat, TalkBack/VoiceOver, SafeArea nyata belum diuji; APK ditunda.
+- Screenshot Pencil O1c gagal karena transport VS Code; referensi sebelumnya dipakai.
+- package-lock.json untracked tidak terkait; tidak diubah atau di-commit.
+- Tidak push/merge. Prompt berikutnya dijalankan hanya setelah pengguna meminta.

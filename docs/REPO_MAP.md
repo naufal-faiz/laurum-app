@@ -3,9 +3,9 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 47/60 dibuat
+## Registry widget: 48/60 dibuat
 
-Belum dibuat: AppBottomSheet, AuthScaffold, ConfirmModal, FormScaffold, Numpad, ReceiptPreview, ReceiptToggleList, ReportSummary, RootScaffold, SheetScaffold, SubScaffold, TopServices, WeeklyBarChart
+Belum dibuat: AppBottomSheet, AuthScaffold, ConfirmModal, FormScaffold, Numpad, ReceiptToggleList, ReportSummary, RootScaffold, SheetScaffold, SubScaffold, TopServices, WeeklyBarChart
 
 ## Dependensi
 
@@ -33,6 +33,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment.dart (37): Payment
 - payment_corrections.dart (42):
 - proposal.dart (24): Proposal
+- receipt_formatter.dart (82):
+- receipt_layout.dart (77): ReceiptLayout
 - receipt_settings.dart (38): ReceiptSettings
 - report.dart (73):
 - report_baseline.dart (13): ReportBaseline
@@ -58,7 +60,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - top_services.dart (56):
 
 ### lib/core/formatters/
-- formatters.dart (37): Formatters
+- formatters.dart (40): Formatters
 
 ### lib/core/icons/
 - app_icons.dart (49): AppIcons
@@ -89,6 +91,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_spacing.dart (9): AppSpacing
 - app_text_styles.dart (85): AppTextStyles
 - app_theme.dart (44): AppTheme
+- receipt_edge_clipper.dart (27): ReceiptEdgeClipper
 
 ### lib/features/business/data/
 - business_fixtures.dart (21):
@@ -192,6 +195,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_card.dart (100): OrderCard
 - piutang_card.dart (80): PiutangCard
 - proposal_card.dart (63): ProposalCard
+- receipt_preview.dart (35): ReceiptPreview
 - savings_row.dart (74): SavingsRow
 - service_row.dart (84): ServiceRow
 
@@ -266,6 +270,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - platform_services_test.dart (78):
 - progress_row_test.dart (23):
 - proposal_card_test.dart (41):
+- receipt_fixtures.dart (86):
+- receipt_formatter_settings_test.dart (31):
+- receipt_formatter_test.dart (70):
+- receipt_preview_test.dart (28):
+- receipt_template_lines.dart (28):
 - savings_row_test.dart (33):
 - section_header_test.dart (26):
 - service_row_test.dart (41):
@@ -300,7 +309,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_text_use_case.dart (21):
 
 ### widgetbook/
-- main.dart (73):
+- main.dart (74):
 
 ### widgetbook/molecules/
 - app_bar_root_use_case.dart (25):
@@ -335,8 +344,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - fixture_labels.dart (10):
 - nota_card_use_case.dart (51):
 - o1.dart (23):
+- o2.dart (7):
 - order_card_use_case.dart (55):
 - piutang_card_use_case.dart (37):
 - proposal_card_use_case.dart (30):
+- receipt_preview_use_case.dart (106):
 - savings_row_use_case.dart (43):
 - service_row_use_case.dart (34):

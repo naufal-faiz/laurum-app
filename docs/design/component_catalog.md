@@ -506,3 +506,24 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   golden dan lebar 320 dengan teks 2x.
 - Referensi C4RpY: usia ink3, dua tombol dan sisa cocok. DP amber sesuai PRD,
   bukan hijau di desain; header wrap, nomor nota mono w400.
+
+## ReceiptFormatter
+- Berkas: lib/core/domain/receipt_formatter.dart + receipt_layout.dart.
+- API: receiptLines(business, order, items, payments, customerName, settings,
+  savingsBalance) -> List<String> 32 kolom. Murni; tanpa Flutter/Riverpod/jam sistem.
+- Baris kondisional mengikuti receipt_template.md: tabungan, metode bayar, sisa tabungan,
+  catatan. Status LUNAS/LUNAS (TABUNGAN)/DP/BELUM BAYAR. Formatters.tanggalStruk baru
+  (16 Okt 2026) dipakai untuk tanggal struk.
+- Contoh: receiptLines(business: profile, order: order, items: items, payments: payments,
+  customerName: name, settings: settings, savingsBalance: balance).
+- Tes: receipt_formatter_test.dart (A-0143 persis template), settings test, layout helpers.
+
+## ReceiptPreview
+- Berkas: lib/shared/widgets/organisms/receipt_preview.dart; clipper di core/theme.
+- API: lines List<String> hasil ReceiptFormatter; widget hanya merender, tanpa format.
+- Varian: struk penuh dan struk dengan alamat/pelanggan/tabungan/catatan disembunyikan.
+- Contoh: ReceiptPreview(lines: receiptLines(...)).
+- Galeri: receipt_preview_use_case.dart; tes 26 baris, golden, lebar 320 dan teks 2x.
+- Referensi C/Struk A-0143: mono 11/16, hitam, latar putih, tepi bergerigi 8 px,
+  padding 16/16. Alamat DATA MASTER (memuat Bandung) membungkus dua baris seimbang,
+  sedangkan frame memakai satu baris tanpa kota; perbedaan dicatat.
