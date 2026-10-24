@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:laurum/features/orders/pages/antrean_page.dart';
+import 'package:laurum/features/printer/pages/printer_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_routes.dart';
 import 'package:laurum/features/shell/pages/root_shell_page.dart';
@@ -15,6 +16,7 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
       path: '/transaksi/baru/layanan',
       builder: (context, state) => const ServicePickerPage(),
     ),
+    GoRoute(path: '/lainnya/printer', builder: (context, state) => const PrinterPage()),
     for (final route in placeholderRoutes.entries)
       GoRoute(
         path: route.key,

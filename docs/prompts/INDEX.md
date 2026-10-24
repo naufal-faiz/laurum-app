@@ -18,7 +18,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 8 | 14-templates.md | Templates (5), penutup Fase 1 | SELESAI (2026-10-24) | **Tinjau seluruh Widgetbook (60 widget)** |
 | 9 | 20-antrean.md | Kerangka navigasi + Antrean - Beranda | SELESAI (2026-10-24) | Coba di HP/emulator; tinjau FAB dan chip gulir |
 | 10 | 30-transaksi-a.md | Pilih Layanan, Buat Transaksi, Input Berat, Tambah Pelanggan Cepat | SELESAI (2026-10-24) | Tinjau alur transaksi dan sheet keyboard |
-| 11 | 31-printer.md | Printer dan Struk, PrintService palsu | BELUM | |
+| 11 | 31-printer.md | Printer dan Struk, PrintService palsu | SELESAI (2026-10-24) | Tinjau koneksi palsu, pratinjau, dan simpan pengaturan |
 | 12 | 32-transaksi-b.md | Pembayaran, Nota Tersimpan | BELUM | **Coba alur nota lengkap** |
 | 13 | 40-order.md | Detail Order, Edit Order, Riwayat Nota | BELUM | |
 | 14 | 50-pelanggan-a.md | Daftar, Detail, Edit Pelanggan | BELUM | |

@@ -16,7 +16,6 @@ const placeholderRoutes = <String, String>{
   '/lainnya/info-usaha': 'Info usaha',
   '/lainnya/pengeluaran/baru': 'Catat pengeluaran',
   '/lainnya/pengeluaran': 'Daftar pengeluaran',
-  '/lainnya/printer': 'Printer dan struk',
   '/lainnya/ai/riwayat': 'Riwayat usulan AI',
   '/lainnya/ai/hubungkan': 'Hubungkan WhatsApp',
   '/lainnya/ai': 'Pengaturan AI dan WhatsApp',

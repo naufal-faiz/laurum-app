@@ -45,5 +45,9 @@ void main() {
     host.router.go('/transaksi/baru/bayar');
     await tester.pumpAndSettle();
     expect(find.text('Pembayaran'), findsWidgets);
+    host.router.go('/lainnya/printer');
+    await tester.pumpAndSettle();
+    expect(find.text('Printer dan struk'), findsWidgets);
+    expect(find.byType(BottomNavBar), findsNothing);
   });
 }

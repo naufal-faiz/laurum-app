@@ -721,3 +721,18 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   dibatasi 500 px, tombol footer sheet full-width (perubahan SheetScaffold).
 - Tes: transaction_draft, transaction_page, service_picker, add_customer, app_router,
   3 golden; 245 tes total, REPO_MAP 363 berkas.
+
+### Fase 4: printer dan struk
+- Rute /lainnya/printer (PrinterPage) menggantikan placeholder.
+- PrinterPage: FormScaffold; PrinterConnectionPage, PrinterSettingsPage,
+  PrinterPreviewPage; footer Simpan pengaturan + Cetak uji.
+- PrinterSettingsProvider (AsyncNotifier): ReceiptSettings + BusinessProfile; edit
+  langsung, save ke BusinessRepository. PrinterConnectionProvider (Notifier): status,
+  devices, connected, notice.
+- PrintService: PrintStatus, PrinterDevice, ReceiptData(lines/paperMm/fontSize),
+  discover/connect/printReceipt/enableBluetooth/disconnect. Fake bisa gagal/bluetooth off.
+- Sheet: PrinterDeviceSheet dan BluetoothSheet.
+- Pratinjau memakai ReceiptFormatter 32 kolom + A-0143; ReceiptPreview width 320/384.
+- Selisih: tanpa tab Printer/Tampilan struk, tanpa perataan header, huruf Normal/Besar
+  (11/13), cetak/koneksi palsu. iOS belum diuji; risiko Bluetooth Classic vs BLE.
+- Tes: printer_service (4), printer_page (4) + golden printer_page; 253 tes, 375 berkas.

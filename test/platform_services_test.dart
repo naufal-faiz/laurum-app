@@ -10,12 +10,17 @@ import 'package:laurum/features/customers/data/contact_fixtures.dart';
 
 void main() {
   group('Fake Platform Services', () {
-    test('FakePrintService records printed text', () async {
+    test('FakePrintService discovers, connects and records receipts', () async {
       final service = FakePrintService();
-      expect(service.isConnected, true);
-      final ok = await service.printReceipt('Struk Laurum');
+      final devices = await service.discover();
+      expect(devices, hasLength(2));
+      expect(await service.connect(devices.first), isTrue);
+      expect(service.connectedPrinter?.name, 'Thermal 58mm');
+      final ok = await service.printReceipt(
+        const ReceiptData(lines: ['Struk Laurum'], paperMm: 58, fontSize: 11),
+      );
       expect(ok, true);
-      expect(service.printedReceipts, ['Struk Laurum']);
+      expect(service.printedReceipts.single.text, 'Struk Laurum');
     });
 
     test('FakeExternalLauncher records WhatsApp and URL calls', () async {

@@ -72,7 +72,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - export_service.dart (19): ExportService, FakeExportService
 - external_launcher.dart (25): ExternalLauncher, FakeExternalLauncher
 - photo_picker.dart (16): PhotoPicker, FakePhotoPicker
-- print_service.dart (18): PrintService, FakePrintService
+- print_service.dart (96): PrintStatus, PrinterDevice, ReceiptData, PrintService, FakePrintService
 - repository_providers.dart (41): businessRepositoryProvider, customerRepositoryProvider, serviceRepositoryProvider, orderRepositoryProvider, savingsRepositoryProvider, expenseRepositoryProvider, proposalRepositoryProvider, reportRepositoryProvider
 - service_providers.dart (38): printServiceProvider, externalLauncherProvider, contactSourceProvider, photoPickerProvider, exportServiceProvider, authServiceProvider, syncServiceProvider
 - sync_service.dart (42): SyncServiceStatus, SyncService, FakeSyncService
@@ -132,6 +132,20 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_page.dart (100): AntreanPage
 - antrean_status_page.dart (69): AntreanStatusPage
 
+### lib/features/printer/data/
+- receipt_demo.dart (74):
+
+### lib/features/printer/pages/
+- bluetooth_sheet.dart (44): BluetoothSheet
+- printer_connection.dart (87): PrinterConnectionController, printerConnectionProvider
+- printer_connection_page.dart (79): PrinterConnectionPage
+- printer_device_sheet.dart (49): PrinterDeviceSheet
+- printer_page.dart (84): PrinterPage
+- printer_preview_page.dart (42): PrinterPreviewPage
+- printer_settings.dart (85): PrinterSettingsState, PrinterSettingsController, printerSettingsProvider
+- printer_settings_page.dart (84): PrinterSettingsPage
+- printer_state.dart (73): PrinterConnectionState
+
 ### lib/features/proposals/data/
 - in_memory_proposal_repository.dart (63): InMemoryProposalRepository, inMemoryProposalRepositoryProvider
 - proposal_fixtures.dart (31):
@@ -148,9 +162,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_fixtures.dart (67):
 
 ### lib/features/shell/pages/
-- app_router.dart (40):
+- app_router.dart (42):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (31):
+- placeholder_routes.dart (30):
 - root_shell_page.dart (49): RootShellPage
 - shell_state.dart (23): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, whatsappConnectionProvider
 
@@ -229,7 +243,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_card.dart (100): OrderCard
 - piutang_card.dart (80): PiutangCard
 - proposal_card.dart (63): ProposalCard
-- receipt_preview.dart (35): ReceiptPreview
+- receipt_preview.dart (36): ReceiptPreview
 - receipt_toggle_list.dart (65): ReceiptToggleList
 - report_summary.dart (109): ReportSummary
 - savings_row.dart (74): SavingsRow
@@ -264,7 +278,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_icon_button_test.dart (32):
 - app_icon_test.dart (29):
 - app_numpad_key_test.dart (43):
-- app_router_test.dart (49):
+- app_router_test.dart (53):
 - app_search_field_test.dart (66):
 - app_skeleton_test.dart (32):
 - app_status_text_test.dart (26):
@@ -324,7 +338,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - organism_gallery.dart (54):
 - period_tabs_test.dart (29):
 - piutang_card_test.dart (43):
-- platform_services_test.dart (78):
+- platform_services_test.dart (83):
+- printer_page_test.dart (100):
+- printer_service_test.dart (42):
 - progress_row_test.dart (23):
 - proposal_card_test.dart (41):
 - receipt_fixtures.dart (86):

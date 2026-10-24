@@ -5,14 +5,15 @@ import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
 /// Renders lines from [receiptLines]; it does not format the receipt itself.
 class ReceiptPreview extends StatelessWidget {
-  const ReceiptPreview({required this.lines, super.key});
+  const ReceiptPreview({required this.lines, super.key, this.width = 320});
 
   final List<String> lines;
+  final double width;
 
   @override
   Widget build(BuildContext context) => Center(
     child: SizedBox(
-      width: 320,
+      width: width,
       child: ClipPath(
         clipper: const ReceiptEdgeClipper(),
         child: ColoredBox(
