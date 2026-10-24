@@ -383,4 +383,46 @@ Checkpoint O1a: check_all SEMUA HIJAU, 152 tes, kedua analyzer bersih, check_arc
   Caller dapat memberi timeLabel event; kartu tidak memilih event atau menjalankan bisnis.
 - Sembilan tes kelompok (kontrak, golden, sempit 320px dengan skala teks 2x) lulus.
 - Tidak mengubah atoms/molecules/token/registry. Tidak ada model/provider di organisms.
-`nCheckpoint O1b: check_all SEMUA HIJAU, 161 tes, REPO_MAP 269 berkas.
+
+Checkpoint O1b: check_all SEMUA HIJAU, 161 tes, REPO_MAP 269 berkas.
+
+
+### O1c: NotaCard, ProposalCard, PiutangCard
+- Sembilan tes baru lulus: kontrak render/callback, golden 390px, lebar 320px dan teks 2x.
+- Golden ketiganya diperiksa visual: tidak ada overflow; seluruh varian tampil.
+- Referensi Sx8tY/i1jkP/C4RpY sudah dilihat lewat screenshot Pencil sebelum interupsi.
+  Percobaan verifikasi ulang 24 Okt gagal: transport visual_studio_code tidak terhubung.
+  Perbandingan memakai screenshot yang sudah dilihat, bukan klaim capture baru.
+- NotaCard: susunan ringkas sesuai referensi; mono w400, teks mengikuti DATA MASTER,
+  header membungkus pada ruang sempit dan tinggi dinamis.
+- ProposalCard: rail amber dan tombol Tolak/Periksa cocok; tanpa titik pemisah dan kotak
+  tinted callout karena API CalloutAi dipertahankan. Isi fixture berbeda dari Bu Rina pada frame.
+  Model minimal belum memuat certainty/uncertainPart; galeri menampilkan state teknis ragu,
+  mengulang teks sumber di callout. Integrasi AI dan potongan ragu belum ditentukan.
+- PiutangCard: usia ink3 dan sisa total-minus-paid, lima piutang Rp400.500; DP amber
+  mengikuti PRD dibanding hijau di frame. Nomor nota mono w400 dan header wrap.
+- Tidak mengubah atoms/molecules, registry, token, lint, PRD atau dependensi.
+- Android/iOS perangkat, TalkBack/VoiceOver dan SafeArea nyata belum diuji pada prompt ini.
+
+
+### Jumlah baris widget prompt 12 (sesudah dart format)
+| Widget | Baris |
+| --- | --- |
+| BottomNavBar | 73 |
+| ServiceRow | 84 |
+| CustomerRow | 98 |
+| SavingsRow | 74 |
+| ExpenseRow | 59 |
+| OrderCard | 100 |
+| NotaCard | 75 |
+| ProposalCard | 63 |
+| PiutangCard | 80 |
+
+Yang perlu ditinjau: perbedaan visual yang mengikuti atom/token lama; pola callback
+Periksa/Setujui; penanda rail OrderCard tidak menjalankan keputusan usulan batal.
+
+Checkpoint O1c/penutup: dart run tool/check_all.dart -> check_all: SEMUA HIJAU.
+Format 226 berkas (0 changed), flutter analyze dan dart analyze tanpa isu,
+check_arch OK, 170 tes lulus, REPO_MAP 278 berkas (47/60 widget).
+Satu kegagalan directives_ordering pada impor galeri diperbaiki sebelum hasil akhir.
+Prompt 12 SELESAI; berikutnya docs/prompts/13-organisms-2.md setelah tinjauan pengguna.

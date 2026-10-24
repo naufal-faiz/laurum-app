@@ -467,3 +467,42 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   Mono w400 vs w600 di .pen; tidak ada titik status; header wrap saat sempit.
   needsReview/cancelRequested hanya penanda rail; onAction tetap aksi progres status.
   Keputusan usulan batal menggunakan ProposalCard/callback pemanggil, tidak diproses kartu ini.
+
+
+## NotaCard
+- Berkas: lib/shared/widgets/organisms/nota_card.dart.
+- API wajib: orderNo, customerName, summary, total int, status OrderStatus, payStatus PayStatus.
+  Opsi: timeLabel kosong (hasil Formatters), paid int 0, onTap.
+- Varian: lima status order, tiga status bayar, callback aktif/nonaktif; tanpa aksi progres.
+- Contoh: NotaCard(orderNo: number, customerName: name, summary: items, total: total,
+  status: status, payStatus: payment, paid: paid, onTap: open).
+- Galeri: nota_card_use_case.dart; tes DP/callback, golden, lebar 320 dengan teks 2x.
+- Referensi Sx8tY: struktur ringkas cocok; mono w400 mengikuti token, nama/angka dari
+  DATA MASTER. Header membungkus bila ruang sempit, tinggi mengikuti isi.
+
+## ProposalCard
+- Berkas: lib/shared/widgets/organisms/proposal_card.dart.
+- API wajib: customerName, summary. Opsi: timeLabel/reviewText kosong,
+  needsReview false, onApprove/onReject. onApprove membuka pemeriksaan saat needsReview.
+- Varian: ragu (rail amber, Periksa), yakin (Setujui), disabled; selalu ada Tolak.
+- Contoh: ProposalCard(customerName: name, summary: source, needsReview: true,
+  reviewText: uncertainPart, onApprove: review, onReject: reject).
+- Galeri: proposal_card_use_case.dart; tes pergantian tombol/rail/callback, golden dan teks 2x.
+- Referensi i1jkP: rail, hierarki dan pasangan tombol sesuai token. CalloutAi yang ada
+  tidak menyediakan kotak tinted; tidak diubah. Tidak ada titik pemisah judul/waktu.
+- Kontrak Proposal minimal belum memiliki certainty/uncertainPart. Galeri mendemonstrasikan
+  state visual memakai teks fixture yang sama; tidak menambah hasil interpretasi AI palsu.
+  Pemanggil kelak memasok bagian ragu. Label sumber WhatsApp mengikuti cakupan PRD.
+
+## PiutangCard
+- Berkas: lib/shared/widgets/organisms/piutang_card.dart.
+- API wajib: customerName, orderNo, summary, total int, paid int, ageLabel netral.
+  Opsi: dateLabel kosong (hasil Formatters), onPay, onRemind.
+  total > 0 dan 0 <= paid < total; sisa dihitung total - paid.
+- Varian: belum bayar/DP, tombol aktif/disabled; tidak ada jatuh tempo.
+- Contoh: PiutangCard(customerName: name, orderNo: number, summary: items, total: total,
+  paid: paid, ageLabel: age, onPay: pay, onRemind: remind).
+- Galeri lima piutang master (total Rp400.500); tes saldo/warna usia/callback,
+  golden dan lebar 320 dengan teks 2x.
+- Referensi C4RpY: usia ink3, dua tombol dan sisa cocok. DP amber sesuai PRD,
+  bukan hijau di desain; header wrap, nomor nota mono w400.

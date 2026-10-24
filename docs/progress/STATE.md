@@ -2,46 +2,43 @@
 Diperbarui: 2026-10-24 | Cabang dev1
 
 ## Posisi
-Prompt 12-organisms-1.md SEDANG: O1a dan O1b selesai (enam widget).
-Checkpoint check_all SEMUA HIJAU: 161 tes, REPO_MAP 269 berkas, 44/60 widget.
-Langkah berikutnya O1c: NotaCard, ProposalCard, PiutangCard.
+Prompt 12-organisms-1.md SELESAI: sembilan organisms, tiga checkpoint.
+check_all: SEMUA HIJAU; 170 tes; kedua analyzer bersih; check_arch OK.
+REPO_MAP 278 berkas, 47/60 widget. Semua sembilan widget <=100 baris.
+Berhenti menunggu tinjauan; jangan otomatis memulai prompt berikutnya.
 
 ## Selesai
-- Domain core prompt 10: 80ed571.
-- Checkpoint pekerjaan agen lama: c985c36; baseline 132 tes hijau tetapi kontrak mutasi cacat.
-- Delapan antarmuka domain dan InMemory Notifier, provider publik reaktif di kedua entry point.
-- OrderStore immutable; save atomik untuk order/item/payment/event, retry ledger idempoten.
-- Laporan merekonsiliasi baseline dengan perubahan snapshot awal/kini lewat buildReport.
-- Fixture konsisten: antrean 12 (3/5/4), piutang 400500 (5 nota), saldo Pak Dedi 50000.
-- Tabungan terbaru dahulu, 48 pelanggan, 18 pengeluaran 1850000, 6 layanan (1 nonaktif).
-- Nomor nota berikutnya A-0143; tujuh layanan platform Fake mencatat panggilan.
-- 14 regresi tambahan mencakup reaktivitas, mutasi laporan, isolasi, integritas dan rollback.
-- Check_all akhir SEMUA HIJAU: 146 tes; Flutter analyze, Dart analyze, check_arch bersih.
-- REPO_MAP: 248 berkas. 67 berkas Dart prompt 11 semuanya <=100 baris, maksimum 91.
-- Commit akhir: lihat git log -1; rincian audit/jumlah baris di docs/progress/fase-1.md.
+- Domain core prompt 10: 80ed571; audit repository prompt 11: c17cd40.
+- O1a: BottomNavBar, ServiceRow, CustomerRow; 152 tes; commit 0e090ca.
+- O1b: SavingsRow, ExpenseRow, OrderCard; 161 tes; commit 5baa282.
+- O1c: NotaCard, ProposalCard, PiutangCard; 170 tes; commit terakhir lihat git log -1.
+- Setiap widget memiliki use-case semua varian, tes kontrak dan golden.
+- O1b/O1c juga diuji 320px dengan skala teks 2x tanpa overflow.
+- API dan contoh: docs/design/component_catalog.md.
+- Selisih visual, jumlah baris dan bukti: docs/progress/fase-1.md.
+- Tidak mengubah atoms/molecules/token/registry/lint/PRD/dependensi.
 
-## Keputusan
-- Pengguna mengizinkan data pelengkap; semua rincian ditulis di DATA MASTER (23 Okt 2026).
-- A-0139 masih menunggu pembatalan, mengganti pengisi A-0131 agar antrean tetap 12.
-- A-0115 memiliki order/item/payment pasangannya; A-0143/A-0144 belum dibuat pada snapshot awal.
-- Provider Riverpod di core/services; core/domain/repositories berisi antarmuka murni.
-- Provider publik memberi notifikasi eksplisit; Pages kelak tidak bergantung InMemory.
-- Baseline Hari/Minggu/Bulan saja. Top services hanya Minggu; lainnya ditolak eksplisit.
-- Lainnya tidak punya satuan/kuantitas (internal kosong/0); sembunyikan kuantitas di UI nanti.
-- Riwayat pelanggan tetap ringkasan historis. Formatters.nomorNota masih mengunci A.
-- Cancellation nota berbayar wajib menyertakan koreksi payment dalam save yang sama.
-- Transaksi lintas Order/Savings pada alur kasir berikutnya harus menyimpan pasangan hasil
-  domain bersama; transaksi database nyata belum termasuk implementasi dummy.
-
-## Batas
-- Tidak mengubah widgets/token/registry/lint/PRD atau menambah paket.
-- Tidak ada perubahan visual atau klaim perbandingan screenshot .pen baru.
-- Fake platform tidak menjalankan hardware/jaringan. Android runtime/iOS belum diuji di sesi ini.
-- Codebase-memory Transport closed; fallback REPO_MAP dan pembacaan terarah.
+## Keputusan dan batas
+- Data pelengkap sudah diizinkan dan terdokumentasi DATA MASTER pada prompt 11.
+- Baseline laporan Hari/Minggu/Bulan; top services hanya Minggu.
+- Formatters.nomorNota masih mengunci A; transaksi Order/Savings lintas repository
+  perlu koordinasi atomik pada alur kasir mendatang, bukan tugas widget ini.
+- Organisms hanya primitif/enum core dan callback; tidak membaca provider/navigasi.
+- needsReview/cancelRequested OrderCard hanya rail; aksi progres tetap sesuai status.
+- ProposalCard onApprove bermakna pemeriksaan bila needsReview, persetujuan bila tidak.
+- Proposal minimal belum memiliki certainty/uncertainPart; galeri ragu adalah state teknis
+  menggunakan teks sumber fixture. Penentuan bagian ragu menunggu integrasi AI.
+- PiutangCard menghitung sisa total-paid; usia netral dipasok pemanggil, tanpa jatuh tempo.
+- Atom/token lama dipertahankan; perbedaan pill/callout/mono/tinggi nav dicatat.
+- Screenshot Pencil sempat berhasil dibaca untuk seluruh referensi; percobaan ulang O1c
+  gagal karena transport VS Code putus. Golden baru ditinjau terhadap referensi sebelumnya.
+- Android/iOS perangkat, SafeArea nyata, TalkBack/VoiceOver belum diuji pada prompt ini.
 - Tidak push/merge.
 
-## Antrean
-- Tinjau pelengkap DATA MASTER, baseline laporan dan kontrak repository.
-- Aktif: docs/prompts/12-organisms-1.md; lanjut dua kelompok tersisa di sesi ini.
-- Setelah prompt 12 selesai: docs/prompts/13-organisms-2.md, tunggu tinjauan.
+## Sedang dikerjakan
+Tidak ada. Prompt 12 ditutup dengan semua pemeriksaan hijau.
 
+## Antrean
+- Tinjau galeri sembilan organisms dan selisih visual di fase-1.md.
+- Berikutnya: docs/prompts/13-organisms-2.md (8 organisms + ReceiptFormatter).
+- Jalankan hanya setelah pengguna meminta lanjut.

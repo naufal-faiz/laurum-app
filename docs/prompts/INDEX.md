@@ -13,7 +13,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 3 | (fase-1-molecules.md) | Molecules (21) | SELESAI | Tinjau Widgetbook |
 | 4 | 10-domain-core.md | Enum, model, logika murni + tes | SELESAI (2026-10-23) | Tinjau kontrak domain dan baseline laporan |
 | 5 | 11-data-dummy.md | Fixture, repository in-memory, provider | SELESAI (2026-10-23) | Audit 146 tes hijau; tinjau pelengkap DATA MASTER dan batas baseline |
-| 6 | 12-organisms-1.md | Organisms 1 (9) | SEDANG (2026-10-24) | O1a selesai; lanjut O1b |
+| 6 | 12-organisms-1.md | Organisms 1 (9) | SELESAI (2026-10-24) | 9 widget, 170 tes hijau; tinjau selisih visual di fase-1.md |
 | 7 | 13-organisms-2.md | Organisms 2 (8) + ReceiptFormatter | BELUM | |
 | 8 | 14-templates.md | Templates (5), penutup Fase 1 | BELUM | **Tinjau seluruh Widgetbook (60 widget)** |
 | 9 | 20-antrean.md | Kerangka navigasi + Antrean - Beranda | BELUM | Coba di HP/emulator |
