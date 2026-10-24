@@ -131,6 +131,33 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_data.dart (68): AntreanData, antreanDataProvider
 - antrean_page.dart (100): AntreanPage
 - antrean_status_page.dart (69): AntreanStatusPage
+- nota_history_controller.dart (20): NotaFilter, NotaSearch, notaFilterProvider, notaSearchProvider
+- nota_history_data.dart (69): NotaHistoryData, notaHistoryProvider
+- nota_history_list_page.dart (97): NotaHistoryListPage
+- nota_history_page.dart (62): NotaHistoryPage
+- order_cancel.dart (23):
+- order_customer_page.dart (56): OrderCustomerPage
+- order_detail_body_page.dart (33): OrderDetailBodyPage
+- order_detail_content_page.dart (69): OrderDetailContentPage
+- order_detail_controller.dart (83): OrderActionState, OrderActions, orderActionsProvider
+- order_detail_data.dart (98): ActivityEntry, OrderDetailData, orderDetailProvider
+- order_detail_footer_page.dart (41): OrderDetailFooterPage
+- order_detail_page.dart (68): OrderDetailPage
+- order_edit_body_page.dart (55): OrderEditBodyPage
+- order_edit_controller.dart (101): OrderEditState, OrderEdit, orderEditProvider
+- order_edit_customer_page.dart (43): OrderEditCustomerPage
+- order_edit_item.dart (25):
+- order_edit_order.dart (21):
+- order_edit_page.dart (78): OrderEditPage
+- order_items_page.dart (76): OrderItemsPage
+- order_menu_sheet.dart (60): OrderMenuAction, OrderMenuSheet
+- order_payment_controller.dart (81): OrderPaymentState, OrderPaymentAction, orderPaymentProvider
+- order_payment_page.dart (44): OrderPaymentPage
+- order_status_sheet.dart (59): OrderStatusSheet
+- order_summary_page.dart (54): OrderSummaryPage
+- order_timeline_page.dart (55): OrderTimelinePage
+- payment_draft.dart (33): PaymentDraftState, PaymentDraft, paymentDraftProvider
+- payment_record_sheet.dart (78): PaymentRecordSheet
 
 ### lib/features/printer/data/
 - receipt_demo.dart (74):
@@ -162,9 +189,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_fixtures.dart (67):
 
 ### lib/features/shell/pages/
-- app_router.dart (49):
+- app_router.dart (66):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (28):
+- placeholder_routes.dart (26):
 - root_shell_page.dart (49): RootShellPage
 - shell_state.dart (23): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, whatsappConnectionProvider
 
@@ -345,9 +372,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - molecule_gallery.dart (35):
 - nominal_chips_test.dart (25):
 - nota_card_test.dart (37):
+- nota_history_test.dart (67):
 - notice_ai_test.dart (20):
 - numpad_test.dart (47):
+- order_actions_test.dart (72):
 - order_card_test.dart (40):
+- order_detail_test.dart (89):
+- order_edit_test.dart (80):
 - order_number_generator_test.dart (34):
 - organism_gallery.dart (54):
 - payment_page_test.dart (59):

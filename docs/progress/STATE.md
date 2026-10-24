@@ -2,46 +2,49 @@
 Diperbarui: 2026-10-24 | Cabang dev1
 
 ## Posisi
-Prompt 20, 30, 31, dan 32 selesai. Fase 1-4 tertutup untuk alur yang dibangun.
-check_all: SEMUA HIJAU; 258 tes; kedua analyzer bersih; check_arch OK.
-REPO_MAP 391 berkas. Berhenti menunggu tinjauan sebelum prompt 40-order.md.
+Prompt 40 selesai: Detail Order, Edit Order, dan Riwayat Nota menjadi layar nyata.
+check_all: SEMUA HIJAU; 269 tes; kedua analyzer bersih; check_arch OK; REPO_MAP 422 berkas.
+Berhenti menunggu tinjauan sebelum prompt 50-pelanggan-a.md.
 
 ## Selesai
 - Fase 1: 60/60 widget, domain inti, data dummy, Widgetbook.
-- Antrean - Beranda, Printer dan Struk, dan alur transaksi bagian 1.
-- Prompt 32: Pembayaran (Lunas/DP/Belum bayar, tabungan, Tunai/QRIS/Transfer, uang
-  diterima + kembalian) dan Nota Tersimpan (struk, cetak, WhatsApp, lihat order).
-- Checkout membuat order A-0143, item, payment, event, dan SavingsEntry; draf dibersihkan;
-  Antrean/Laporan/saldo tabungan berubah.
-- Skenario A-0143 diuji end-to-end dan struk dari data tersimpan identik receipt_template.md.
-- 5 tes baru (checkout, pembayaran, nota, 2 golden); 258 tes, 72 berkas golden.
+- Fase 2-4: Antrean - Beranda, alur transaksi (pilih layanan, berat, pelanggan,
+  pembayaran, nota tersimpan), Printer dan Struk dengan PrintService palsu.
+- Prompt 40: /order/:id (status berurutan, ubah status, catat pembayaran, jejak
+  aktivitas, cetak struk, batal via cancelOrder) dan /order/:id/edit (draf dari order,
+  pelanggan terkunci, banner WhatsApp, simpan item/estimasi/event).
+- Tab /transaksi: pencarian, lima filter, grup tanggal, NotaCard, CTA Transaksi baru.
+- 11 tes baru; total 269. Placeholder Detail order/Edit order/Riwayat nota dihapus.
 
 ## Sedang dikerjakan
 - Tidak ada. Tunggu tinjauan pengguna sebelum prompt berikutnya.
 
 ## Antrean
-1. Tinjau alur nota lengkap di HP/emulator: pelanggan baru, dua layanan, berat,
-   tabungan + tunai, nota tersimpan, Antrean/Laporan/saldo berubah.
-2. Berikutnya: docs/prompts/40-order.md (Detail Order, Edit Order, Riwayat Nota).
+1. Tinjau di HP/emulator: buka nota dari Antrean dan Riwayat, ubah status, catat
+   pembayaran, edit berat, batalkan A-0142, lalu periksa Antrean/Laporan/tabungan.
+2. Berikutnya: docs/prompts/50-pelanggan-a.md (Daftar, Detail, Edit Pelanggan).
 3. APK/NDK, iOS, TalkBack/VoiceOver, printer dan keyboard nyata masih ditunda.
 
 ## Keputusan dan batas
-- Jam bisnis dummy 16 Okt 2026 10.45 agar A-0143 sama dengan DATA MASTER dan struk.
-- Order baru: status diproses, sumber kasir, nomor dari OrderNumberGenerator (A-0143),
-  estimasi estimateReady, diskon dari draf, total memakai lineTotal.
-- saveOrder atomik untuk order/item/payment/event. SavingsEntry ditulis setelahnya karena
-  antarmuka repository terpisah; saldo divalidasi lebih dulu, rollback belum tersedia.
-- Pembayaran: tabungan memakai applySavings; Lunas membayar sisa, DP memakai uang diterima,
-  Belum bayar tanpa pembayaran; QRIS/Transfer tepat sisa; kembalian hanya tunai.
-- Nota: cetak manual via PrintService; gagal menampilkan banner + Coba lagi/Pengaturan
-  printer; WhatsApp memakai ExternalLauncher palsu; Lihat order masih placeholder.
-- Kedua tombol footer pembayaran menyimpan tanpa cetak otomatis (selisih dari .pen).
-- Draf global dibersihkan setelah simpan; filter Antrean tetap seperti sebelumnya.
-- Formatters.nomorNota masih kunci A; nomor memakai OrderNumberGenerator(A).
+- Detail order memakai FormScaffold (footer dua tombol sejajar: Cetak struk + CTA).
+- Menu: MenuRow untuk Edit order/Ubah status; Batalkan order memakai AppButton
+  destructiveOutline karena MenuRow belum punya warna destruktif.
+- Status hanya maju berurutan lewat nextStatus; akhir status tidak bisa diedit/diubah.
+- Catat pembayaran (Tunai/QRIS/Transfer) memvalidasi sisa piutang terbaru dari
+  repository, menyimpan Payment + OrderEvent; tabungan tetap lewat alur pembayaran.
+- Batal: cancelOrder menulis koreksi pembayaran + event pada saveOrder, lalu
+  SavingsEntry penyesuaian ditambahkan setelahnya (rollback belum tersedia).
+- Edit: estimasi = enteredAt + durasi terlama; item lama mempertahankan ID; simpan
+  ditolak bila total < pembayaran tercatat; event "edited".
+- Riwayat: Semua/Hari ini/Belum lunas/Selesai/Dibatalkan; pencarian nomor atau nama.
+  CTA memakai push; kartu membuka Detail order.
+- GoRouter push dari dalam shell tidak memperbarui URI di routeInformationProvider
+  (halaman tetap terbuka); tes memakai isi layar dan canPop.
+- Selisih .pen: tanpa "Oleh Pemilik", baris layanan edit tetap MenuRow + sheet,
+  ringkasan A-0140 tanpa "Sisa Rp15.000" di NotaCard.
 - Atom/token/registry/lint/PRD tidak diubah. Tanpa dependensi baru.
-- Selisih visual lama: Ionicons, mono w400, nav 61 px, DP amber, field 48.
 
 ## Pemeriksaan dan batas
 - Android/iOS perangkat, TalkBack/VoiceOver, keyboard/printer nyata belum diuji.
-- Screenshot Pencil frame Pembayaran/Nota dan state terkait sudah dibaca.
-- Tidak push/merge. Jangan mulai prompt 40 tanpa instruksi pengguna.
+- Screenshot .pen Detail Order, Edit Order, Riwayat Nota, dan state batal dibaca.
+- Tidak push/merge. Jangan mulai prompt 50 tanpa instruksi pengguna.

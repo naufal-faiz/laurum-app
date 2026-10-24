@@ -20,7 +20,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 10 | 30-transaksi-a.md | Pilih Layanan, Buat Transaksi, Input Berat, Tambah Pelanggan Cepat | SELESAI (2026-10-24) | Tinjau alur transaksi dan sheet keyboard |
 | 11 | 31-printer.md | Printer dan Struk, PrintService palsu | SELESAI (2026-10-24) | Tinjau koneksi palsu, pratinjau, dan simpan pengaturan |
 | 12 | 32-transaksi-b.md | Pembayaran, Nota Tersimpan | SELESAI (2026-10-24) | **Coba alur nota lengkap**; tinjau atomicity tabungan |
-| 13 | 40-order.md | Detail Order, Edit Order, Riwayat Nota | BELUM | |
+| 13 | 40-order.md | Detail Order, Edit Order, Riwayat Nota | SELESAI (2026-10-24) | Tinjau alur batal/edit dan sheet Catat pembayaran |
 | 14 | 50-pelanggan-a.md | Daftar, Detail, Edit Pelanggan | BELUM | |
 | 15 | 51-pelanggan-b.md | Setor Tabungan, Riwayat Tabungan, Impor Kontak | BELUM | |
 | 16 | 60-laporan.md | Laporan Ringkasan, Daftar Piutang | BELUM | Cocokkan angka dengan data_master.md |

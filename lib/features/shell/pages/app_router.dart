@@ -1,5 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:laurum/features/orders/pages/antrean_page.dart';
+import 'package:laurum/features/orders/pages/nota_history_page.dart';
+import 'package:laurum/features/orders/pages/order_detail_page.dart';
+import 'package:laurum/features/orders/pages/order_edit_page.dart';
 import 'package:laurum/features/printer/pages/printer_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_routes.dart';
@@ -23,6 +26,18 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
       path: '/transaksi/nota/:id',
       builder: (context, state) => ReceiptPage(orderId: state.pathParameters['id']!),
     ),
+    GoRoute(
+      path: '/order/:id/edit',
+      builder: (context, state) => OrderEditPage(orderId: state.pathParameters['id']!),
+    ),
+    GoRoute(
+      path: '/order/:id/edit/layanan',
+      builder: (context, state) => const ServicePickerPage(),
+    ),
+    GoRoute(
+      path: '/order/:id',
+      builder: (context, state) => OrderDetailPage(orderId: state.pathParameters['id']!),
+    ),
     GoRoute(path: '/lainnya/printer', builder: (context, state) => const PrinterPage()),
     for (final route in placeholderRoutes.entries)
       GoRoute(
@@ -37,9 +52,11 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
             routes: [
               GoRoute(
                 path: route.key,
-                builder: (context, state) => route.key == '/antrean'
-                    ? const AntreanPage()
-                    : PlaceholderPage(title: route.value, isTab: true),
+                builder: (context, state) => switch (route.key) {
+                  '/antrean' => const AntreanPage(),
+                  '/transaksi' => const NotaHistoryPage(),
+                  _ => PlaceholderPage(title: route.value, isTab: true),
+                },
               ),
             ],
           ),
