@@ -2,22 +2,23 @@
 Diperbarui: 2026-10-24 | Cabang dev1
 
 ## Posisi
-Prompt 13-organisms-2.md SEDANG: checkpoint 1 selesai (ReceiptFormatter + ReceiptPreview).
-check_all: SEMUA HIJAU; 177 tes; kedua analyzer bersih; check_arch OK.
-REPO_MAP 289 berkas, 48/60 widget. Berhenti di checkpoint; lanjut ReceiptToggleList/Numpad.
+Prompt 13-organisms-2.md SEDANG: checkpoint 2 selesai (ReceiptToggleList + Numpad).
+check_all: SEMUA HIJAU; 184 tes; kedua analyzer bersih; check_arch OK.
+REPO_MAP 295 berkas, 50/60 widget. Lanjut AppBottomSheet/ConfirmModal lalu tiga organism akhir.
 
 ## Selesai
 - Fondasi, atoms 17, molecules 21, organisms 9 (prompt 12) sesuai catatan fase-1.md.
 - Domain prompt 10 (80ed571), audit data dummy prompt 11 (c17cd40), organisms O1a-O1c.
 - Prompt 13 checkpoint 1: receipt_formatter.dart + receipt_layout.dart (32 kolom murni),
   Formatters.tanggalStruk, ReceiptPreview + ReceiptEdgeClipper (tepi bergerigi 8 px).
-- Checkpoint 1: 7 tes baru (4 formatter/varian, 1 settings, 3 preview+galeri), golden baru.
+- Checkpoint 2: ReceiptToggleList (4 switch + 2 baris terkunci) dan Numpad standar/desimal.
 
 ## Sedang dikerjakan
-- Checkpoint 2: ReceiptToggleList dan Numpad, lalu AppBottomSheet/ConfirmModal.
+- Checkpoint 3: AppBottomSheet, ConfirmModal, ReportSummary, TopServices, WeeklyBarChart.
 
 ## Antrean
-1. Selesaikan ReportSummary, TopServices, WeeklyBarChart; check_all, STATE, commit akhir.
+1. AppBottomSheet, ConfirmModal, ReportSummary, TopServices, WeeklyBarChart; check_all,
+   STATE, commit akhir.
 2. Tinjau delapan organisms dan selisih visual di docs/progress/fase-1.md.
 3. Berikutnya: docs/prompts/14-templates.md (5 templates, penutup Fase 1).
 

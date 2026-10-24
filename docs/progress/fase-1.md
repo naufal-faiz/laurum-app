@@ -442,3 +442,13 @@ Prompt 12 SELESAI; berikutnya docs/prompts/13-organisms-2.md setelah tinjauan pe
 - Selisih: alamat DATA MASTER (memuat Bandung) membungkus dua baris seimbang, frame satu
   baris tanpa kota; tangkapan Pencil baru tidak dibuat pada checkpoint ini.
 - Checkpoint 1: check_all SEMUA HIJAU, 177 tes, REPO_MAP 289 berkas (48/60 widget).
+
+### Checkpoint 2: ReceiptToggleList dan Numpad
+- ReceiptToggleList memakai ToggleRow/LockedRow lama: empat switch (alamat, pelanggan,
+  tabungan, catatan) dan dua baris terkunci (nomor/tanggal, rincian item).
+- Numpad standar (000) dan desimal (koma) memakai AppNumpadKey; baris NominalChips
+  opsional, tanpa Reset (C) dan tanpa logika uang.
+- Galeri toggle semua aktif/sebagian mati; galeri numpad dua varian; golden dan uji 320 + teks 2x.
+- Selisih: label toggle membungkus dua baris pada 390 px (frame satu baris 48 px);
+  chips memakai +Rp (NominalChips lama), bukan chip berat pada frame Input Berat.
+- Checkpoint 2: check_all SEMUA HIJAU, 184 tes, REPO_MAP 295 berkas (50/60 widget).

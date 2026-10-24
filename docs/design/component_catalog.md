@@ -527,3 +527,25 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Referensi C/Struk A-0143: mono 11/16, hitam, latar putih, tepi bergerigi 8 px,
   padding 16/16. Alamat DATA MASTER (memuat Bandung) membungkus dua baris seimbang,
   sedangkan frame memakai satu baris tanpa kota; perbedaan dicatat.
+
+## ReceiptToggleList
+- Berkas: lib/shared/widgets/organisms/receipt_toggle_list.dart.
+- API wajib: showAddress, showCustomer, showSavings, showNote (bool) dan callback
+  onAddressChanged/onCustomerChanged/onSavingsChanged/onNoteChanged opsional.
+- Varian: semua aktif, sebagian nonaktif, dan dua baris terkunci.
+- Contoh: ReceiptToggleList(showAddress: true, showCustomer: true, showSavings: true,
+  showNote: true, onAddressChanged: setAddress).
+- Galeri: receipt_toggle_list_use_case.dart; tes empat AppSwitch, dua label terkunci,
+  dan callback baris pertama.
+- Referensi frame Printer dan Struk: ToggleRow/LockedRow yang ada dipakai ulang tanpa
+  perubahan. Label membungkus dua baris pada 390 px karena ikon + switch; frame 48 px.
+
+## Numpad
+- Berkas: lib/shared/widgets/organisms/numpad.dart.
+- API wajib: onKey(AppNumpadKeyValue). Opsi: variant standar/desimal, amounts int rupiah,
+  selectedAmount, onNominalSelected. Tanpa logika uang dan tanpa tombol Reset (C).
+- Varian: 000/0/hapus, koma/0/hapus, dengan atau tanpa baris NominalChips.
+- Contoh: Numpad(onKey: appendDigit, variant: NumpadVariant.decimal).
+- Galeri: numpad_use_case.dart; tes key 7, chip nominal, varian desimal mengganti 000.
+- Referensi C/Numpad Desimal dan 3-Column Numpad Grid: AppNumpadKey 56/12, gap 8,
+  surfaceLow; chips memakai NominalChips +Rp dari atom lama.
