@@ -371,3 +371,16 @@ dan perbaikan audit (termasuk tes); widget/layar baru: tidak ada.
 - Belum diuji TalkBack/VoiceOver, SafeArea perangkat nyata, Android/iOS.
 
 Checkpoint O1a: check_all SEMUA HIJAU, 152 tes, kedua analyzer bersih, check_arch OK.
+
+### O1b: SavingsRow, ExpenseRow, OrderCard
+- Screenshot Pencil i9q8b/vHZ7O/JrA3v/V6p3J dibanding golden Flutter masing-masing.
+- SavingsRow: nominal/saldo dipisah baris, wallet mengganti titik, judul tanpa pill,
+  detail InfoRow tanpa blok tinted; waktu ringkas disiapkan gallery lewat Formatters.
+- ExpenseRow: nominal negatif merah di kanan; kartu per row bukan satu kartu per tanggal;
+  tanpa pill kategori/ikon foto. Isi catatan/vendor dari DATA MASTER, bukan tambahan .pen.
+- OrderCard: badge status dan rail sesuai token; mono w400 mengganti w600, tanpa titik status,
+  waktu/gallery dari enteredAt (A-0142 10.15) vs event proses 10.30 pada frame.
+  Caller dapat memberi timeLabel event; kartu tidak memilih event atau menjalankan bisnis.
+- Sembilan tes kelompok (kontrak, golden, sempit 320px dengan skala teks 2x) lulus.
+- Tidak mengubah atoms/molecules/token/registry. Tidak ada model/provider di organisms.
+`nCheckpoint O1b: check_all SEMUA HIJAU, 161 tes, REPO_MAP 269 berkas.

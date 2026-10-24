@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 import 'package:widgetbook/widgetbook.dart';
 
@@ -24,7 +25,9 @@ import 'molecules/m2.dart';
 import 'molecules/m3.dart';
 import 'organisms/o1.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('id_ID');
   runApp(
     ProviderScope(
       child: Widgetbook.material(

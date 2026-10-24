@@ -430,3 +430,40 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Referensi gv4k0/adwTE: avatar 40, kartu 16 dan strip riwayat cocok.
   Status bayar teks tanpa pil mengikuti PRD, warna DP amber; AppIconButton tidak
   memiliki latar lingkaran. Initials disiapkan pemanggil, bukan ditebak widget.
+
+## SavingsRow
+- Berkas: lib/shared/widgets/organisms/savings_row.dart.
+- API wajib: label, timeLabel (hasil Formatters), kind SavingsKind, amount int, balance int.
+  Opsi: methodLabel, reference, note. Tidak ada aksi edit ledger.
+- Varian: setor (+), pakai (-), penyesuaian bertanda; rincian opsional.
+- Contoh: SavingsRow(label: label, timeLabel: time, kind: kind, amount: amount, balance: balance).
+- Galeri: savings_row_use_case.dart; tes render nominal, golden, lebar 320 dan skala teks 2x.
+- Referensi i9q8b/gpqMH/Wt1NN: susunan dibuat vertikal agar teks besar membungkus;
+  judul tanpa pill, ikon wallet mengganti titik, InfoRow tanpa latar tinted di frame.
+
+## ExpenseRow
+- Berkas: lib/shared/widgets/organisms/expense_row.dart.
+- API wajib: category, note, amount int positif, timeLabel hasil Formatters.
+  Opsi: vendor kosong, onTap. Nominal dirender negatif berwarna error.
+- Varian: vendor ada/kosong, interaktif/noninteraktif. Contoh:
+  ExpenseRow(category: category, note: note, amount: amount, timeLabel: time, onTap: edit).
+- Galeri: expense_row_use_case.dart; tes nominal/callback, golden dan teks 2x.
+- Referensi vHZ7O: nominal kanan dan merah, catatan membungkus. Kategori tanpa pill;
+  row berupa kartu sendiri dibanding wadah kelompok tanggal bersama; tidak menambah tombol foto.
+  Teks vendor/catatan mengikuti DATA MASTER, bukan teks tambahan yang hanya ada di .pen.
+
+## OrderCard
+- Berkas: lib/shared/widgets/organisms/order_card.dart (100 baris).
+- API wajib: orderNo, customerName, summary, total int, status OrderStatus, payStatus PayStatus.
+  Opsi: timeLabel/detail kosong, paid int 0, compact/needsReview/cancelRequested false,
+  onTap/onAction. Data yang sudah diformat dibuat lewat Formatters oleh pemanggil.
+- Varian: semua lima status dan tiga status bayar; rail normal/amber/merah; aksi/ringkas.
+  Rail merah diprioritaskan atas amber. Status final tidak menampilkan aksi progres.
+- Contoh: OrderCard(orderNo: number, customerName: name, summary: items, total: total,
+  status: status, payStatus: payment, onAction: advance).
+- Galeri: order_card_use_case.dart; tes callback tidak memicu onTap induk, prioritas rail,
+  golden dan teks 2x. Mapping badge/status bayar dilakukan di organism.
+- Referensi JrA3v/V6p3J: kartu, badge, CTA outline, nominal mengikuti token.
+  Mono w400 vs w600 di .pen; tidak ada titik status; header wrap saat sempit.
+  needsReview/cancelRequested hanya penanda rail; onAction tetap aksi progres status.
+  Keputusan usulan batal menggunakan ProposalCard/callback pemanggil, tidak diproses kartu ini.

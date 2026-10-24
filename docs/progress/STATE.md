@@ -2,9 +2,9 @@
 Diperbarui: 2026-10-24 | Cabang dev1
 
 ## Posisi
-Prompt 12-organisms-1.md SEDANG: O1a selesai (BottomNavBar, ServiceRow, CustomerRow).
-Checkpoint check_all SEMUA HIJAU: 152 tes, REPO_MAP 258 berkas, 41/60 widget.
-Langkah berikutnya O1b: SavingsRow, ExpenseRow, OrderCard; lalu O1c sesuai prompt 12.
+Prompt 12-organisms-1.md SEDANG: O1a dan O1b selesai (enam widget).
+Checkpoint check_all SEMUA HIJAU: 161 tes, REPO_MAP 269 berkas, 44/60 widget.
+Langkah berikutnya O1c: NotaCard, ProposalCard, PiutangCard.
 
 ## Selesai
 - Domain core prompt 10: 80ed571.
@@ -44,3 +44,4 @@ Langkah berikutnya O1b: SavingsRow, ExpenseRow, OrderCard; lalu O1c sesuai promp
 - Tinjau pelengkap DATA MASTER, baseline laporan dan kontrak repository.
 - Aktif: docs/prompts/12-organisms-1.md; lanjut dua kelompok tersisa di sesi ini.
 - Setelah prompt 12 selesai: docs/prompts/13-organisms-2.md, tunggu tinjauan.
+

@@ -3,9 +3,9 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 41/60 dibuat
+## Registry widget: 44/60 dibuat
 
-Belum dibuat: AppBottomSheet, AuthScaffold, ConfirmModal, ExpenseRow, FormScaffold, NotaCard, Numpad, OrderCard, PiutangCard, ProposalCard, ReceiptPreview, ReceiptToggleList, ReportSummary, RootScaffold, SavingsRow, SheetScaffold, SubScaffold, TopServices, WeeklyBarChart
+Belum dibuat: AppBottomSheet, AuthScaffold, ConfirmModal, FormScaffold, NotaCard, Numpad, PiutangCard, ProposalCard, ReceiptPreview, ReceiptToggleList, ReportSummary, RootScaffold, SheetScaffold, SubScaffold, TopServices, WeeklyBarChart
 
 ## Dependensi
 
@@ -187,6 +187,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/organisms/
 - bottom_nav_bar.dart (73): BottomNavBar
 - customer_row.dart (98): CustomerRow
+- expense_row.dart (59): ExpenseRow
+- order_card.dart (100): OrderCard
+- savings_row.dart (74): SavingsRow
 - service_row.dart (84): ServiceRow
 
 ### test/
@@ -241,6 +244,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - dummy_repository_regression_test.dart (52):
 - dummy_savings_integration_test.dart (49):
 - empty_state_test.dart (28):
+- expense_row_test.dart (34):
 - footer_bar_test.dart (30):
 - formatters_test.dart (40):
 - info_row_test.dart (25):
@@ -250,10 +254,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - molecule_gallery.dart (35):
 - nominal_chips_test.dart (25):
 - notice_ai_test.dart (20):
+- order_card_test.dart (40):
 - order_number_generator_test.dart (34):
+- organism_gallery.dart (54):
 - period_tabs_test.dart (29):
 - platform_services_test.dart (78):
 - progress_row_test.dart (23):
+- savings_row_test.dart (33):
 - section_header_test.dart (26):
 - service_row_test.dart (41):
 - stat_tile_test.dart (24):
@@ -287,7 +294,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_text_use_case.dart (21):
 
 ### widgetbook/
-- main.dart (70):
+- main.dart (73):
 
 ### widgetbook/molecules/
 - app_bar_root_use_case.dart (25):
@@ -318,5 +325,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### widgetbook/organisms/
 - bottom_nav_bar_use_case.dart (17):
 - customer_row_use_case.dart (44):
-- o1.dart (11):
+- expense_row_use_case.dart (27):
+- fixture_labels.dart (10):
+- o1.dart (17):
+- order_card_use_case.dart (55):
+- savings_row_use_case.dart (43):
 - service_row_use_case.dart (34):
