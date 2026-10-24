@@ -1,59 +1,55 @@
 # STATE Laurum
-Diperbarui: 2026-10-24 | Cabang dev1
+Diperbarui: 2026-10-25 | Cabang dev1
 
 ## Posisi
-Prompt 51 SELESAI. check_all SEMUA HIJAU: 292 tes, REPO_MAP 457 berkas, generator
-baru untuk setor/riwayat/impor terpasang.
-Baseline sebelumnya: bb4196d hijau 285 tes; tujuh tes prompt 51 lulus.
+Prompt 51 selesai di 1e94f8f. Prompt 60 SEDANG: Laporan Ringkasan diimplementasikan;
+Daftar Piutang belum dikerjakan. Sesi dibatasi satu layar, menunggu tinjauan.
+Verifikasi final: check_all SEMUA HIJAU; 299 tes; kedua analyzer bersih; check_arch OK;
+format 401 berkas (0 berubah); REPO_MAP 468 berkas. Tujuh tes laporan baru lulus.
 
 ## Selesai
-- Prompt 20-40: Antrean, transaksi, pembayaran/nota, printer palsu, Detail/Edit Order,
-  Riwayat Nota. Fase 1: 60/60 widget.
-- Daftar Pelanggan: pencarian/filter, jumlah reaktif, tambah cepat, seluruh state.
-- Detail: statistik DATA MASTER, tiga mutasi dengan saldo berjalan, tiga nota terakhir,
-  WhatsApp palsu.
-- Edit: nama/nomor/alamat/catatan, normalisasi dan duplikat aktif, konfirmasi nonaktif.
-  Nonaktif memakai isActive=false, tidak menghapus nota/piutang/tabungan.
-- Setor Tabungan: Numpad + NominalChips aditif, metode ChipBar, catatan, saldo
-  sekarang/akhir; menulis SavingsEntry(setor) dengan jam usaha dan ownerId sesi.
-- Riwayat Tabungan: header saldo + CTA setor, ChipBar Semua/Setoran/Terpakai, SavingsRow
-  lengkap (metode, referensi nota, catatan), saldo berjalan, tanpa BottomNavBar.
-- Impor Kontak: ContactSource palsu, pencarian, pilih semua, kontak terdaftar dilewati,
-  ringkasan jumlah, state izin ditolak dengan "Buka pengaturan" (app-settings:).
+- Fase 1: 60/60 widget. Prompt 20-51: Antrean, transaksi, pembayaran/nota, printer
+  palsu, Detail/Edit Order, Riwayat Nota, Daftar/Detail/Edit Pelanggan,
+  Setor/Riwayat Tabungan, Impor Kontak palsu. Rincian fase sebelumnya di fase-5/6.md.
+- /laporan: PeriodTabs, ReportSummary, WeeklyBarChart, TopServices, kartu piutang,
+  satu tombol Ekspor ke Excel, loading/error/retry/kosong.
+- Periode awal Minggu ini; totals sesuai DATA MASTER. Checkout/pembayaran memperbarui
+  ringkasan dan grafik. Ekspor CSV memakai FakeExportService, tidak membuat file nyata.
+
+## Sedang dikerjakan
+- Tidak ada. Laporan Ringkasan selesai; tunggu tinjauan sebelum Daftar Piutang.
 
 ## Antrean
-- Berkas prompt berikutnya: docs/prompts/60-laporan.md (Laporan Ringkasan, Daftar
-  Piutang). Cocokkan angka dengan docs/design/data_master.md.
-- Setelah itu 70-lainnya-a.md.
+1. Tinjau /laporan: ganti periode, angka minggu, grafik/layanan, ekspor palsu.
+2. Lanjut docs/prompts/60-laporan.md bagian Daftar Piutang: /laporan/piutang masih
+   placeholder; perlu BottomNavBar Laporan aktif, filter, catat bayar, ingatkan.
+3. Setelah prompt 60 selesai: docs/prompts/70-lainnya-a.md.
 
 ## Keputusan dan batas
-- customerSummariesProvider mencakup pelanggan nonaktif; daftar memfilter isActive.
-- Riwayat = baseline + snapshot order kini - fixture awal; nota batal dikecualikan.
-- Mutasi: saldo dihitung dari seluruh ledger kronologis sebelum memilih baris;
-  savingsMovements dipakai Detail (3 terbaru) dan Riwayat (semua).
-- Edit mengambil pelanggan terkini saat simpan, menjaga id/ownerId/createdAt;
-  updatedAt dari jam usaha dan sync pending. Nonaktif mengabaikan draf belum disimpan.
-- Rute /pelanggan/impor, /:id/setor, /:id/tabungan harus sebelum /pelanggan/:id.
-- Setor: nominal awal kosong (Rp0), chip menambah bukan mengganti, maks 9 digit;
-  nominal 0 ditolak "Nominal harus lebih dari Rp0."; id sav-new-<micros>.
-- Impor memakai normalizePhone sebagai kunci; kontak yang cocok dengan pelanggan
-  aktif/nonaktif dilewati. contactImportProvider mematikan retry Riverpod agar izin
-  ditolak menjadi state akhir. READ_CONTACTS berisiko (PRD B bagian 10); mitigasi
-  pemilih kontak sistem untuk satu pelanggan, layar tetap karena ContactSource di core.
-- Fixture kontak DATA MASTER seluruhnya sudah terdaftar (cust-010..013), sehingga dummy
-  menampilkan 0 kontak baru; alur simpan diuji lewat override ContactSource. Menambah
-  kontak baru perlu keputusan pemilik produk.
-- main_dummy.dart memakai dummyOverrides({contactSource}); dummyRepositoryOverrides
-  tetap untuk pemanggil lama.
-- Statistik vertikal; tanpa rata-rata bulanan/klaim potong otomatis yang tidak didukung.
-- Tidak mengubah widget bersama/registry/token/lint/PRD, tanpa dependensi baru.
+- ReportRepository hanya punya top services Minggu ini. Hari/Bulan menampilkan
+  keterangan belum tersedia; tidak meminjam angka minggu (DATA MASTER bagian akhir).
+- Grafik minggu = fixture harian + snapshot order kini - order fixture awal;
+  hari mendatang null. Hari ini satu batang; grafik Bulan belum tersedia.
+- Ringkasan uang int rupiah; rata-rata harian pembagian integer. Urutan layanan pendapatan.
+- ExportService menerima CSV UTF-8 BOM, pemisah titik koma, angka rupiah mentah;
+  bukan XLSX nyata. Ganti periode disabled saat ekspor; kegagalan dapat dicoba lagi.
+- Tanpa arus periode tampil EmptyState; posisi tabungan/piutang tetap terlihat jika ada.
+- Selisih .pen: tanpa Atur, puncak di bawah grafik, label Operasional usaha;
+  rincian ada di spec 18-laporan-ringkasan.md. Tidak mengubah widget bersama/registry/
+  tema/lint/PRD/dependensi. Test layar 320 px dan teks 2x lulus.
+- Customer summaries termasuk nonaktif; daftar hanya aktif. Nonaktif tidak menghapus
+  nota/piutang/tabungan. Riwayat dummy baseline + selisih snapshot, bukan nota fiktif.
+- Setor chip aditif, maksimal 9 digit. Mutasi dihitung sebelum memfilter baris.
+- Impor normalizePhone, kontak aktif/nonaktif dilewati. Semua fixture kontak sudah
+  terdaftar: dummy 0 baru; tes memakai override ContactSource. Izin masih palsu.
+- Pembatalan order lalu penyesuaian tabungan belum memiliki rollback lintas repository.
 
 ## Handoff untuk agen penerus
-1. Baca AGENTS.md, SKILLS.md, STATE.md; verifikasi git status dan git log -5.
-2. Tinjau di HP: setoran (numpad, chip, metode), riwayat (chip filter, saldo berjalan),
-   impor kontak (izin ditolak, pilih semua, nomor duplikat).
-3. Lanjut prompt 60-laporan.md bila diminta; satu layar/kelompok widget per sesi,
-   berhenti menunggu tinjauan. Tool AI Memory tidak tersedia; handoff disimpan di repo.
-4. Pengguna meminta berhenti bila sisa usage mendekati 10%; cek get_usage_limits berkala.
-5. Android/iOS perangkat, keyboard, TalkBack/VoiceOver, telepon/printer nyata belum diuji.
+1. Baca AGENTS.md, SKILLS.md, STATE.md; verifikasi git status/log sebelum melanjutkan.
+2. Lanjut bagian Daftar Piutang dari prompt 60 setelah pengguna meninjau Ringkasan.
+3. Pengguna meminta berhenti bila sisa usage mendekati 10%; cek usage berkala dan
+   simpan STATE + commit sebelum berhenti. Tool AI Memory tidak tersedia.
+4. Launcher sandbox kadang gagal karena drive G: terkunci. Read/exec di luar sandbox
+   yang disetujui berhasil membaca repo E: dan menjalankan SDK. Bukan lokasi proyek G:.
+5. Android/iOS perangkat, keyboard, TalkBack/VoiceOver, ekspor/telepon/printer nyata belum diuji.
 Tidak push/merge.

@@ -9,6 +9,7 @@ import 'package:laurum/features/orders/pages/nota_history_page.dart';
 import 'package:laurum/features/orders/pages/order_detail_page.dart';
 import 'package:laurum/features/orders/pages/order_edit_page.dart';
 import 'package:laurum/features/printer/pages/printer_page.dart';
+import 'package:laurum/features/reports/pages/report_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_routes.dart';
 import 'package:laurum/features/shell/pages/root_shell_page.dart';
@@ -78,6 +79,7 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
                   '/antrean' => const AntreanPage(),
                   '/pelanggan' => const CustomerDirectoryPage(),
                   '/transaksi' => const NotaHistoryPage(),
+                  '/laporan' => const ReportPage(),
                   _ => PlaceholderPage(title: route.value, isTab: true),
                 },
               ),

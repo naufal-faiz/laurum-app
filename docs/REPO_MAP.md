@@ -208,16 +208,25 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/reports/data/
 - in_memory_report_repository.dart (76): InMemoryReportRepository, inMemoryReportRepositoryProvider
 - report_adjustments.dart (16):
+- report_daily.dart (25):
+- report_daily_fixtures.dart (2):
 - report_fixtures.dart (83):
 - report_snapshot.dart (21):
 - report_top_services.dart (35):
+
+### lib/features/reports/pages/
+- report_body_page.dart (63): ReportBodyPage
+- report_export.dart (62): ReportExportState, ReportExport, reportExportProvider
+- report_page.dart (90): ReportPage
+- report_period.dart (22): ReportPeriod, reportPeriodProvider
+- report_view.dart (66): ReportView, reportViewProvider
 
 ### lib/features/services/data/
 - in_memory_service_repository.dart (63): InMemoryServiceRepository, inMemoryServiceRepositoryProvider
 - service_fixtures.dart (67):
 
 ### lib/features/shell/pages/
-- app_router.dart (89):
+- app_router.dart (91):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (22):
 - root_shell_page.dart (49): RootShellPage
@@ -433,7 +442,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_preview_test.dart (28):
 - receipt_template_lines.dart (28):
 - receipt_toggle_list_test.dart (37):
+- report_export_test.dart (48): RetryExportService
+- report_page_test.dart (69):
+- report_states_test.dart (61):
 - report_summary_test.dart (36):
+- report_view_test.dart (68):
 - root_scaffold_test.dart (39):
 - savings_row_test.dart (33):
 - section_header_test.dart (26):

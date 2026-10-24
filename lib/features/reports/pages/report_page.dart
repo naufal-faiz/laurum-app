@@ -1,0 +1,90 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/reports/pages/report_body_page.dart';
+import 'package:laurum/features/reports/pages/report_export.dart';
+import 'package:laurum/features/reports/pages/report_period.dart';
+import 'package:laurum/features/reports/pages/report_view.dart';
+import 'package:laurum/shared/widgets/atoms/app_button.dart';
+import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
+import 'package:laurum/shared/widgets/molecules/banner_message.dart';
+import 'package:laurum/shared/widgets/molecules/empty_state.dart';
+import 'package:laurum/shared/widgets/molecules/footer_bar.dart';
+import 'package:laurum/shared/widgets/molecules/period_tabs.dart';
+import 'package:laurum/shared/widgets/molecules/section_header.dart';
+
+class ReportPage extends ConsumerWidget {
+  const ReportPage({super.key});
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final snapshot = ref.watch(reportViewProvider);
+    final data = snapshot.asData?.value;
+    final exporting = ref.watch(reportExportProvider);
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(AppSpacing.screenPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: AppSpacing.cardGap,
+            children: [
+              const SectionHeader(title: 'Laporan'),
+              PeriodTabs(
+                labels: reportPeriodLabels,
+                selectedIndex: ref.watch(reportPeriodProvider),
+                onSelected: exporting.busy
+                    ? null
+                    : (index) {
+                        ref.read(reportExportProvider.notifier).reset();
+                        ref.read(reportPeriodProvider.notifier).select(index);
+                      },
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: snapshot.when(
+            skipLoadingOnReload: false,
+            skipLoadingOnRefresh: false,
+            loading: () => ListView(
+              padding: const EdgeInsets.all(AppSpacing.screenPadding),
+              children: [for (var i = 0; i < 4; i++) const AppSkeleton()],
+            ),
+            error: (_, _) => Center(
+              child: EmptyState(
+                title: 'Gagal memuat laporan',
+                icon: AppIcons.alert,
+                description: 'Data periode ini belum dapat dimuat.',
+                actionLabel: 'Coba lagi',
+                onAction: () => ref.invalidate(reportViewProvider),
+              ),
+            ),
+            data: (value) => ReportBodyPage(data: value),
+          ),
+        ),
+        FooterBar(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: AppSpacing.cardGap,
+            children: [
+              if (exporting.message != null)
+                BannerMessage(
+                  message: exporting.message!,
+                  variant: exporting.failed
+                      ? BannerMessageVariant.error
+                      : BannerMessageVariant.info,
+                ),
+              AppButton(
+                exporting.busy ? 'Menyiapkan ekspor...' : 'Ekspor ke Excel',
+                onPressed: data == null || data.isEmpty || exporting.busy
+                    ? null
+                    : () => ref.read(reportExportProvider.notifier).export(data),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

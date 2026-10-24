@@ -580,6 +580,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   ikon dapat diganti pemanggil.
 
 ## ReportSummary
+- Pemakaian layar: tab Laporan (spec 18); totals dan jumlah piutang mengikuti repository, aksi membuka Daftar Piutang.
 - Berkas: lib/shared/widgets/organisms/report_summary.dart.
 - API wajib: totals ReportTotals, expenseSummary, unpaidCount int; opsi onOutstandingTap.
 - Varian: laba positif/nol, piutang aktif, interaktif/noninteraktif.
