@@ -20,7 +20,7 @@ import 'package:laurum/features/shell/pages/app_router.dart';
 import 'package:laurum/features/shell/pages/shell_state.dart';
 
 final dummyRepositoryOverrides = [
-  businessClockProvider.overrideWithValue(() => DateTime(2026, 10, 16, 12)),
+  businessClockProvider.overrideWithValue(() => DateTime(2026, 10, 16, 10, 45)),
   contactSourceProvider.overrideWith((ref) => FakeContactSource(contacts: contactFixtures)),
   authServiceProvider.overrideWith((ref) => FakeAuthService(userId: dummyOwnerId)),
   businessRepositoryProvider.overrideWith(

@@ -162,9 +162,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_fixtures.dart (67):
 
 ### lib/features/shell/pages/
-- app_router.dart (42):
+- app_router.dart (49):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (30):
+- placeholder_routes.dart (28):
 - root_shell_page.dart (49): RootShellPage
 - shell_state.dart (23): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, whatsappConnectionProvider
 
@@ -172,9 +172,22 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - add_customer_form.dart (102): AddCustomerState, AddCustomerForm, addCustomerFormProvider
 - add_customer_form_page.dart (74): AddCustomerFormPage
 - add_customer_sheet.dart (50): AddCustomerSheet
+- cash_input_sheet.dart (76): CashInput, CashInputSheet, cashInputProvider
+- checkout_item.dart (21):
+- checkout_save.dart (109):
+- checkout_state.dart (89): PaymentMode, CheckoutState, Checkout, checkoutControllerProvider
 - contact_picker_sheet.dart (58): ContactPickerSheet, contactsProvider
 - customer_picker_sheet.dart (97): CustomerPickerSheet
 - discount_sheet.dart (85): DiscountInputState, DiscountInput, DiscountSheet, discountInputProvider
+- payment_method_page.dart (78): PaymentMethodPage
+- payment_page.dart (63): PaymentPage
+- payment_quote.dart (34): PaymentQuote
+- payment_savings_page.dart (65): PaymentSavingsPage
+- payment_summary_page.dart (86): PaymentSummaryPage
+- receipt_page.dart (90): ReceiptPage
+- receipt_print_controller.dart (47): ReceiptPrintState, ReceiptPrint, receiptPrintProvider
+- receipt_status_page.dart (95): ReceiptStatusPage
+- receipt_view.dart (55): ReceiptView, receiptViewProvider
 - service_picker_page.dart (101): ServicePickerPage
 - transaction_actions.dart (22):
 - transaction_customer_page.dart (49): TransactionCustomerPage
@@ -291,6 +304,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - banner_message_test.dart (23):
 - bottom_nav_bar_test.dart (36):
 - callout_ai_test.dart (20):
+- checkout_controller_test.dart (83):
 - chip_bar_test.dart (30):
 - confirm_modal_test.dart (74):
 - customer_row_test.dart (39):
@@ -336,6 +350,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_card_test.dart (40):
 - order_number_generator_test.dart (34):
 - organism_gallery.dart (54):
+- payment_page_test.dart (59):
 - period_tabs_test.dart (29):
 - piutang_card_test.dart (43):
 - platform_services_test.dart (83):
@@ -346,6 +361,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_fixtures.dart (86):
 - receipt_formatter_settings_test.dart (31):
 - receipt_formatter_test.dart (70):
+- receipt_page_test.dart (67):
 - receipt_preview_test.dart (28):
 - receipt_template_lines.dart (28):
 - receipt_toggle_list_test.dart (37):
@@ -364,7 +380,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - toggle_row_test.dart (25):
 - top_services_test.dart (30):
 - transaction_draft_test.dart (43):
-- transaction_golden_test.dart (70):
+- transaction_golden_test.dart (118):
 - transaction_page_test.dart (97):
 - weekly_bar_chart_test.dart (30):
 - widget_test.dart (22):

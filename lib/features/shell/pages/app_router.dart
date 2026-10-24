@@ -4,6 +4,8 @@ import 'package:laurum/features/printer/pages/printer_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_routes.dart';
 import 'package:laurum/features/shell/pages/root_shell_page.dart';
+import 'package:laurum/features/transactions/pages/payment_page.dart';
+import 'package:laurum/features/transactions/pages/receipt_page.dart';
 import 'package:laurum/features/transactions/pages/service_picker_page.dart';
 import 'package:laurum/features/transactions/pages/transaction_page.dart';
 
@@ -15,6 +17,11 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
     GoRoute(
       path: '/transaksi/baru/layanan',
       builder: (context, state) => const ServicePickerPage(),
+    ),
+    GoRoute(path: '/transaksi/baru/bayar', builder: (context, state) => const PaymentPage()),
+    GoRoute(
+      path: '/transaksi/nota/:id',
+      builder: (context, state) => ReceiptPage(orderId: state.pathParameters['id']!),
     ),
     GoRoute(path: '/lainnya/printer', builder: (context, state) => const PrinterPage()),
     for (final route in placeholderRoutes.entries)

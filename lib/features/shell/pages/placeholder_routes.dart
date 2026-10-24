@@ -1,8 +1,6 @@
 const placeholderRoutes = <String, String>{
   '/masuk': 'Masuk',
   '/antrean/usulan/:id': 'Detail usulan AI',
-  '/transaksi/baru/bayar': 'Pembayaran',
-  '/transaksi/nota/:id': 'Nota tersimpan',
   '/order/:id/edit': 'Edit order',
   '/order/:id': 'Detail order',
   '/pelanggan/impor': 'Impor kontak HP',

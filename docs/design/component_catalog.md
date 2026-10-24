@@ -736,3 +736,19 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Selisih: tanpa tab Printer/Tampilan struk, tanpa perataan header, huruf Normal/Besar
   (11/13), cetak/koneksi palsu. iOS belum diuji; risiko Bluetooth Classic vs BLE.
 - Tes: printer_service (4), printer_page (4) + golden printer_page; 253 tes, 375 berkas.
+
+### Fase 3 lanjutan: pembayaran dan nota
+- Rute /transaksi/baru/bayar (PaymentPage) dan /transaksi/nota/:id (ReceiptPage).
+- PaymentPage: PaymentSummaryPage (total + status chip), PaymentSavingsPage (switch
+  tabungan), PaymentMethodPage (metode + uang diterima), CashInputSheet.
+- Checkout: checkoutControllerProvider (metode/mode/received/useSavings), quotePayment,
+  saveCheckout membuat Order/OrderItem/Payment/OrderEvent + SavingsEntry; nomor A-0143.
+- ReceiptPage: ReceiptStatusPage, ReceiptPreview data tersimpan, receiptPrintProvider
+  (PrintService + ExternalLauncher), banner gagal cetak + Coba lagi/Pengaturan printer.
+- Tombol: Cetak struk, Kirim lewat WhatsApp, Transaksi baru, Lihat order.
+- Catatan atomicity: saveOrder atomik untuk order/item/payment/event; SavingsEntry ditulis
+  setelahnya karena repository terpisah. Validasi saldo sebelum simpan; rollback belum ada.
+- Selisih: pembayaran berupa halaman (frame sheet), tanpa simpan kelebihan ke tabungan;
+  kedua tombol footer tidak mencetak otomatis; struk dicetak manual di Nota.
+- Tes: checkout_controller, payment_page, receipt_page + golden payment_page dan
+  receipt_page; 258 tes, 391 berkas.
