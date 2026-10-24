@@ -14,7 +14,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ## Berkas (jumlah baris): nama deklarasi
 
 ### lib/
-- app.dart (14): LaurumApp
+- app.dart (16): LaurumApp
 
 ### lib/core/domain/
 - business_profile.dart (33): BusinessProfile
@@ -126,6 +126,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_store_write.dart (86):
 - payment_fixtures.dart (31):
 
+### lib/features/orders/pages/
+- antrean_controller.dart (76): AntreanFilter, AntreanActionState, AntreanActions, antreanFilterProvider, antreanActionsProvider
+- antrean_data.dart (68): AntreanData, antreanDataProvider
+- antrean_page.dart (100): AntreanPage
+- antrean_status_page.dart (69): AntreanStatusPage
+
 ### lib/features/proposals/data/
 - in_memory_proposal_repository.dart (63): InMemoryProposalRepository, inMemoryProposalRepositoryProvider
 - proposal_fixtures.dart (31):
@@ -141,9 +147,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - in_memory_service_repository.dart (63): InMemoryServiceRepository, inMemoryServiceRepositoryProvider
 - service_fixtures.dart (67):
 
+### lib/features/shell/pages/
+- app_router.dart (33):
+- placeholder_page.dart (31): PlaceholderPage
+- placeholder_routes.dart (33):
+- root_shell_page.dart (49): RootShellPage
+- shell_state.dart (23): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, whatsappConnectionProvider
+
 ### lib/
-- main.dart (16):
-- main_dummy.dart (82):
+- main.dart (17):
+- main_dummy.dart (85):
 
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
@@ -214,6 +227,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sub_scaffold.dart (35): SubScaffold
 
 ### test/
+- antrean_controller_test.dart (46):
+- antrean_golden_test.dart (52):
+- antrean_page_test.dart (57):
+- antrean_states_test.dart (82):
+- antrean_test_host.dart (45):
 - app_avatar_test.dart (28):
 - app_badge_test.dart (29):
 - app_bar_root_test.dart (32):
@@ -227,6 +245,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_icon_button_test.dart (32):
 - app_icon_test.dart (29):
 - app_numpad_key_test.dart (43):
+- app_router_test.dart (34):
 - app_search_field_test.dart (66):
 - app_skeleton_test.dart (32):
 - app_status_text_test.dart (26):

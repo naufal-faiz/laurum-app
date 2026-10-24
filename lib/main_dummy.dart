@@ -16,8 +16,11 @@ import 'package:laurum/features/orders/data/in_memory_order_repository.dart';
 import 'package:laurum/features/proposals/data/in_memory_proposal_repository.dart';
 import 'package:laurum/features/reports/data/in_memory_report_repository.dart';
 import 'package:laurum/features/services/data/in_memory_service_repository.dart';
+import 'package:laurum/features/shell/pages/app_router.dart';
+import 'package:laurum/features/shell/pages/shell_state.dart';
 
 final dummyRepositoryOverrides = [
+  businessClockProvider.overrideWithValue(() => DateTime(2026, 10, 16, 12)),
   contactSourceProvider.overrideWith((ref) => FakeContactSource(contacts: contactFixtures)),
   authServiceProvider.overrideWith((ref) => FakeAuthService(userId: dummyOwnerId)),
   businessRepositoryProvider.overrideWith(
@@ -76,7 +79,7 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       overrides: dummyRepositoryOverrides,
-      child: const LaurumApp(),
+      child: LaurumApp(router: createAppRouter()),
     ),
   );
 }

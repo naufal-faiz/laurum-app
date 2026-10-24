@@ -663,3 +663,38 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Galeri: auth_scaffold_use_case.dart; tes tanpa AppBar, golden, 320 px + teks 2x.
 - Referensi Auth - Masuk: latar bg, konten selebar layar dikurangi 32, mulai 96 px dari
   atas layar (SafeArea bawah tetap aktif), dapat digulir saat keyboard muncul.
+
+## Layar dan navigasi Fase 2
+
+### AntreanPage
+- Berkas: lib/features/orders/pages/antrean_page.dart (100 baris),
+  antrean_controller.dart, antrean_data.dart, antrean_status_page.dart.
+- Rute: /antrean di dalam StatefulShellRoute cabang Antrean.
+- Data: antreanDataProvider menggabungkan order/items/payment/customer/proposal dari
+  repository publik; tanpa membaca fixture di page.
+- Komposisi: RootScaffold (app bar root, sync, nav, FAB), SectionHeader, ChipBar,
+  ProposalCard di Perlu dicek, OrderCard di Sedang berjalan.
+- State: loading tiga AppSkeleton; error dengan Coba lagi; kosong; filter kosong;
+  banner WhatsApp + tombol Hubungkan saat koneksi palsu terputus.
+- Aksi: OrderCard memajukan satu status + OrderEvent; guard klik ganda dan status usang;
+  Tolak mengubah usulan tanpa membatalkan order; Periksa membuka placeholder.
+- Tes: antrean_page_test, antrean_controller_test, antrean_states_test,
+  antrean_golden_test, app_router_test; 7 golden termasuk 320 px dan teks 2x.
+- Selisih: tiga usulan master tampil, tanggal memakai tahun, banner dan tombol Hubungkan
+  terpisah karena BannerMessage tanpa slot aksi, FAB menutupi kartu sampai digulir.
+
+### Root shell dan router
+- Berkas: lib/features/shell/pages/{app_router,root_shell_page,placeholder_page,
+  placeholder_routes,shell_state}.dart.
+- app_router: GoRouter dengan StatefulShellRoute.indexedStack lima cabang; rute PRD A 8
+  yang belum dibuat memakai PlaceholderPage.
+- Rute placeholder: /masuk, /antrean/usulan/:id, /transaksi/*, /order/:id[/edit],
+  /pelanggan/*, /laporan/piutang, /lainnya/*.
+- RootShellPage: nama usaha dari businessProfileProvider, SyncService, akun ke tab
+  Lainnya, FAB hanya di tab Antrean, banner WhatsApp di atas daftar.
+- shell_state: businessClockProvider (dummy 16 Okt 2026 12.00), businessProfileProvider,
+  shellSyncProvider, whatsappConnectionProvider palsu.
+- Catatan: placeholder daftar turunan (mis. /lainnya/layanan) masih memakai SubScaffold
+  tanpa nav bawah; aturan nav daftar turunan diterapkan saat layarnya dibangun.
+- Entry point: main.dart dan main_dummy.dart memakai createAppRouter dan
+  dummyRepositoryOverrides yang sama.

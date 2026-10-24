@@ -16,7 +16,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 6 | 12-organisms-1.md | Organisms 1 (9) | SELESAI (2026-10-24) | 9 widget, 170 tes hijau; tinjau selisih visual di fase-1.md |
 | 7 | 13-organisms-2.md | Organisms 2 (8) + ReceiptFormatter | SELESAI (2026-10-24) | 8 widget, 200 tes hijau; tinjau ReportSummary dan modal |
 | 8 | 14-templates.md | Templates (5), penutup Fase 1 | SELESAI (2026-10-24) | **Tinjau seluruh Widgetbook (60 widget)** |
-| 9 | 20-antrean.md | Kerangka navigasi + Antrean - Beranda | BELUM | Coba di HP/emulator |
+| 9 | 20-antrean.md | Kerangka navigasi + Antrean - Beranda | SELESAI (2026-10-24) | Coba di HP/emulator; tinjau FAB dan chip gulir |
 | 10 | 30-transaksi-a.md | Pilih Layanan, Buat Transaksi, Input Berat, Tambah Pelanggan Cepat | BELUM | |
 | 11 | 31-printer.md | Printer dan Struk, PrintService palsu | BELUM | |
 | 12 | 32-transaksi-b.md | Pembayaran, Nota Tersimpan | BELUM | **Coba alur nota lengkap** |
