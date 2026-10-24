@@ -68,7 +68,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/core/services/
 - auth_service.dart (42): AuthService, FakeAuthService
-- contact_source.dart (23): ContactItem, ContactSource, FakeContactSource
+- contact_source.dart (31): ContactItem, ContactSource, ContactPermissionDenied, FakeContactSource
 - export_service.dart (19): ExportService, FakeExportService
 - external_launcher.dart (25): ExternalLauncher, FakeExternalLauncher
 - photo_picker.dart (16): PhotoPicker, FakePhotoPicker
@@ -106,7 +106,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - savings_fixtures.dart (86):
 
 ### lib/features/customers/pages/
-- customer_detail_data.dart (48): CustomerMovement, CustomerDetailData, customerDetailProvider
+- customer_deposit_controller.dart (79): CustomerDepositController, customerDepositProvider
+- customer_deposit_form_page.dart (88): CustomerDepositFormPage
+- customer_deposit_page.dart (71): CustomerDepositPage
+- customer_deposit_state.dart (39): CustomerDepositState
+- customer_detail_data.dart (51): CustomerMovement, CustomerDetailData, customerDetailProvider
 - customer_detail_page.dart (53): CustomerDetailPage
 - customer_directory_controller.dart (20): CustomerDirectoryFilter, CustomerDirectorySearch, customerDirectoryFilterProvider, customerDirectorySearchProvider
 - customer_directory_data.dart (83): CustomerDirectoryRow, customerSummariesProvider, customerDirectoryProvider
@@ -116,9 +120,18 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_edit_form_page.dart (65): CustomerEditFormPage
 - customer_edit_sheet.dart (68): CustomerEditSheet
 - customer_edit_state.dart (36): CustomerEditState
+- customer_import_controller.dart (66): CustomerImportState, CustomerImportSelection, customerImportSelectionProvider
+- customer_import_data.dart (53): ContactImportRow, ContactImportData, contactImportProvider
+- customer_import_list_page.dart (94): CustomerImportListPage
+- customer_import_page.dart (67): CustomerImportPage
 - customer_orders_page.dart (36): CustomerOrdersPage
 - customer_profile_page.dart (75): CustomerProfilePage
-- customer_savings_page.dart (61): CustomerSavingsPage
+- customer_savings_controller.dart (14): CustomerSavingsFilter, customerSavingsFilterProvider
+- customer_savings_data.dart (59): CustomerSavingsData, customerSavingsProvider
+- customer_savings_header_page.dart (66): CustomerSavingsHeaderPage
+- customer_savings_history_page.dart (63): CustomerSavingsHistoryPage
+- customer_savings_list_page.dart (58): CustomerSavingsListPage
+- customer_savings_page.dart (54): CustomerSavingsPage
 
 ### lib/features/expenses/data/
 - expense_category_fixtures.dart (35):
@@ -204,9 +217,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_fixtures.dart (67):
 
 ### lib/features/shell/pages/
-- app_router.dart (73):
+- app_router.dart (89):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (25):
+- placeholder_routes.dart (22):
 - root_shell_page.dart (49): RootShellPage
 - shell_state.dart (23): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, whatsappConnectionProvider
 
@@ -243,7 +256,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/
 - main.dart (17):
-- main_dummy.dart (85):
+- main_dummy.dart (90):
 
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
@@ -349,13 +362,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - checkout_controller_test.dart (83):
 - chip_bar_test.dart (30):
 - confirm_modal_test.dart (74):
+- customer_deposit_page_test.dart (50):
 - customer_detail_data_test.dart (61):
 - customer_detail_page_test.dart (86):
 - customer_detail_states_test.dart (60):
 - customer_directory_data_test.dart (39):
 - customer_directory_states_test.dart (64):
 - customer_directory_test.dart (67):
+- customer_import_page_test.dart (68):
 - customer_row_test.dart (39):
+- customer_savings_page_test.dart (48):
 - date_group_header_test.dart (24):
 - domain_baseline_test.dart (51):
 - domain_cancel_test.dart (74):

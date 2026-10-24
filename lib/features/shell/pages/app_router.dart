@@ -1,6 +1,9 @@
 import 'package:go_router/go_router.dart';
+import 'package:laurum/features/customers/pages/customer_deposit_page.dart';
 import 'package:laurum/features/customers/pages/customer_detail_page.dart';
 import 'package:laurum/features/customers/pages/customer_directory_page.dart';
+import 'package:laurum/features/customers/pages/customer_import_page.dart';
+import 'package:laurum/features/customers/pages/customer_savings_history_page.dart';
 import 'package:laurum/features/orders/pages/antrean_page.dart';
 import 'package:laurum/features/orders/pages/nota_history_page.dart';
 import 'package:laurum/features/orders/pages/order_detail_page.dart';
@@ -46,6 +49,19 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
         path: route.key,
         builder: (context, state) => PlaceholderPage(title: route.value),
       ),
+    GoRoute(
+      path: '/pelanggan/impor',
+      builder: (context, state) => const CustomerImportPage(),
+    ),
+    GoRoute(
+      path: '/pelanggan/:id/setor',
+      builder: (context, state) => CustomerDepositPage(customerId: state.pathParameters['id']!),
+    ),
+    GoRoute(
+      path: '/pelanggan/:id/tabungan',
+      builder: (context, state) =>
+          CustomerSavingsHistoryPage(customerId: state.pathParameters['id']!),
+    ),
     GoRoute(
       path: '/pelanggan/:id',
       builder: (context, state) => CustomerDetailPage(customerId: state.pathParameters['id']!),

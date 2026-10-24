@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/app.dart';
 import 'package:laurum/core/services/auth_service.dart';
@@ -19,9 +20,11 @@ import 'package:laurum/features/services/data/in_memory_service_repository.dart'
 import 'package:laurum/features/shell/pages/app_router.dart';
 import 'package:laurum/features/shell/pages/shell_state.dart';
 
-final dummyRepositoryOverrides = [
+List<Override> dummyOverrides({ContactSource? contactSource}) => [
   businessClockProvider.overrideWithValue(() => DateTime(2026, 10, 16, 10, 45)),
-  contactSourceProvider.overrideWith((ref) => FakeContactSource(contacts: contactFixtures)),
+  contactSourceProvider.overrideWith(
+    (ref) => contactSource ?? FakeContactSource(contacts: contactFixtures),
+  ),
   authServiceProvider.overrideWith((ref) => FakeAuthService(userId: dummyOwnerId)),
   businessRepositoryProvider.overrideWith(
     (ref) {
@@ -72,6 +75,8 @@ final dummyRepositoryOverrides = [
     },
   ),
 ];
+
+final dummyRepositoryOverrides = dummyOverrides();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

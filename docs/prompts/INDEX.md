@@ -22,7 +22,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 12 | 32-transaksi-b.md | Pembayaran, Nota Tersimpan | SELESAI (2026-10-24) | **Coba alur nota lengkap**; tinjau atomicity tabungan |
 | 13 | 40-order.md | Detail Order, Edit Order, Riwayat Nota | SELESAI (2026-10-24) | Tinjau alur batal/edit dan sheet Catat pembayaran |
 | 14 | 50-pelanggan-a.md | Daftar, Detail, Edit Pelanggan | SELESAI (2026-10-24) | check_all hijau, 285 tes; tinjau Detail/Edit dan keyboard di HP |
-| 15 | 51-pelanggan-b.md | Setor Tabungan, Riwayat Tabungan, Impor Kontak | BELUM | |
+| 15 | 51-pelanggan-b.md | Setor Tabungan, Riwayat Tabungan, Impor Kontak | SELESAI (2026-10-24) | check_all hijau, 292 tes; tinjau setoran, riwayat, dan impor kontak di HP |
 | 16 | 60-laporan.md | Laporan Ringkasan, Daftar Piutang | BELUM | Cocokkan angka dengan data_master.md |
 | 17 | 70-lainnya-a.md | Pengaturan dan Akun, Layanan, Info Usaha | BELUM | |
 | 18 | 71-lainnya-b.md | Daftar dan Catat Pengeluaran | BELUM | |

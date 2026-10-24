@@ -19,7 +19,7 @@ class CustomerDetailData {
       .toList();
 }
 
-List<CustomerMovement> customerMovements(List<SavingsEntry> entries) {
+List<CustomerMovement> savingsMovements(List<SavingsEntry> entries) {
   final chronological = entries.toList()
     ..sort((a, b) {
       final byTime = a.createdAt.compareTo(b.createdAt);
@@ -31,8 +31,11 @@ List<CustomerMovement> customerMovements(List<SavingsEntry> entries) {
     balance += entry.kind == SavingsKind.pakai ? -entry.amount : entry.amount;
     rows.add((entry: entry, balance: balance));
   }
-  return rows.reversed.take(3).toList();
+  return rows.reversed.toList();
 }
+
+List<CustomerMovement> customerMovements(List<SavingsEntry> entries) =>
+    savingsMovements(entries).take(3).toList();
 
 final customerDetailProvider = FutureProvider.family<CustomerDetailData?, String>((ref, id) async {
   final summaries = ref.watch(customerSummariesProvider.future);
