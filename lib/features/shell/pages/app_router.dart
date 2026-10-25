@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+
 import 'package:laurum/features/customers/pages/customer_deposit_page.dart';
 import 'package:laurum/features/customers/pages/customer_detail_page.dart';
 import 'package:laurum/features/customers/pages/customer_directory_page.dart';
@@ -9,6 +10,7 @@ import 'package:laurum/features/orders/pages/nota_history_page.dart';
 import 'package:laurum/features/orders/pages/order_detail_page.dart';
 import 'package:laurum/features/orders/pages/order_edit_page.dart';
 import 'package:laurum/features/printer/pages/printer_page.dart';
+import 'package:laurum/features/reports/pages/outstanding_page.dart';
 import 'package:laurum/features/reports/pages/report_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_routes.dart';
@@ -62,6 +64,10 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
       path: '/pelanggan/:id/tabungan',
       builder: (context, state) =>
           CustomerSavingsHistoryPage(customerId: state.pathParameters['id']!),
+    ),
+    GoRoute(
+      path: '/laporan/piutang',
+      builder: (context, state) => const OutstandingPage(),
     ),
     GoRoute(
       path: '/pelanggan/:id',
