@@ -6,11 +6,11 @@ import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/printer/data/receipt_demo.dart';
 import 'package:laurum/features/printer/pages/bluetooth_sheet.dart';
-import 'package:laurum/features/printer/pages/printer_connection.dart';
-import 'package:laurum/features/printer/pages/printer_connection_page.dart';
-import 'package:laurum/features/printer/pages/printer_preview_page.dart';
-import 'package:laurum/features/printer/pages/printer_settings.dart';
-import 'package:laurum/features/printer/pages/printer_settings_page.dart';
+import 'package:laurum/features/printer/state/printer_connection.dart';
+import 'package:laurum/features/printer/state/printer_settings.dart';
+import 'package:laurum/features/printer/widgets/printer_connection_section.dart';
+import 'package:laurum/features/printer/widgets/printer_preview_section.dart';
+import 'package:laurum/features/printer/widgets/printer_settings_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -58,9 +58,9 @@ class PrinterPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: AppSpacing.screenPadding,
           children: [
-            PrinterConnectionPage(),
-            PrinterSettingsPage(),
-            PrinterPreviewPage(),
+            PrinterConnectionSection(),
+            PrinterSettingsSection(),
+            PrinterPreviewSection(),
           ],
         ),
       ),

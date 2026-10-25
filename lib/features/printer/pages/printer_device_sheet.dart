@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/icons/app_icons.dart';
-import 'package:laurum/features/printer/pages/printer_connection.dart';
+import 'package:laurum/features/printer/state/printer_connection.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/organisms/app_bottom_sheet.dart';

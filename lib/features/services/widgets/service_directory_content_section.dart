@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/service_item.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/services/pages/service_directory_data.dart';
-import 'package:laurum/features/services/pages/service_directory_list_page.dart';
+import 'package:laurum/features/services/state/service_directory_data.dart';
+import 'package:laurum/features/services/widgets/service_directory_list_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_search_field.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
-class ServiceDirectoryContentPage extends StatelessWidget {
-  const ServiceDirectoryContentPage({
+class ServiceDirectoryContentSection extends StatelessWidget {
+  const ServiceDirectoryContentSection({
     required this.services,
     required this.query,
     required this.onQuery,
@@ -56,7 +56,7 @@ class ServiceDirectoryContentPage extends StatelessWidget {
                     description: 'Coba kata kunci lain.',
                   ),
                 )
-              : ServiceDirectoryListPage(
+              : ServiceDirectoryListSection(
                   services: items,
                   onTap: onTap,
                   onToggle: onToggle,

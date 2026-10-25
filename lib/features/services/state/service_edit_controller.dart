@@ -3,10 +3,10 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/service_item.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/services/pages/service_copy.dart';
-import 'package:laurum/features/services/pages/service_directory_data.dart';
-import 'package:laurum/features/services/pages/service_edit_state.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/services/state/service_copy.dart';
+import 'package:laurum/features/services/state/service_directory_data.dart';
+import 'package:laurum/features/services/state/service_edit_state.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 
 final serviceEditProvider =
     AsyncNotifierProvider.family<ServiceEditController, ServiceEditState, String>(

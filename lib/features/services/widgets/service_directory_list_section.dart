@@ -4,8 +4,8 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_gap.dart';
 import 'package:laurum/shared/widgets/organisms/service_row.dart';
 
-class ServiceDirectoryListPage extends StatelessWidget {
-  const ServiceDirectoryListPage({
+class ServiceDirectoryListSection extends StatelessWidget {
+  const ServiceDirectoryListSection({
     required this.services,
     required this.onTap,
     required this.onToggle,

@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/services/pages/service_edit_controller.dart';
-import 'package:laurum/features/services/pages/service_edit_state.dart';
+import 'package:laurum/features/services/state/service_edit_controller.dart';
+import 'package:laurum/features/services/state/service_edit_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
@@ -13,8 +13,8 @@ import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
 import 'package:laurum/shared/widgets/molecules/toggle_row.dart';
 
-class ServiceEditFieldsPage extends ConsumerWidget {
-  const ServiceEditFieldsPage({
+class ServiceEditFieldsSection extends ConsumerWidget {
+  const ServiceEditFieldsSection({
     required this.serviceId,
     required this.state,
     super.key,

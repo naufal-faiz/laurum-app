@@ -8,8 +8,8 @@ import 'package:laurum/shared/widgets/molecules/locked_row.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
-class SettingsAccountPage extends StatelessWidget {
-  const SettingsAccountPage({required this.onLogout, super.key});
+class SettingsAccountSection extends StatelessWidget {
+  const SettingsAccountSection({required this.onLogout, super.key});
 
   final VoidCallback onLogout;
 

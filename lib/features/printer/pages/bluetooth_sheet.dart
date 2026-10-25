@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/printer/pages/printer_connection.dart';
+import 'package:laurum/features/printer/state/printer_connection.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/organisms/app_bottom_sheet.dart';

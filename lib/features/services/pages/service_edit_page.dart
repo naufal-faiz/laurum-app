@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/services/pages/service_edit_controller.dart';
-import 'package:laurum/features/services/pages/service_edit_fields_page.dart';
+import 'package:laurum/features/services/state/service_edit_controller.dart';
+import 'package:laurum/features/services/widgets/service_edit_fields_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -56,7 +56,7 @@ class ServiceEditPage extends ConsumerWidget {
           title: 'Layanan tidak ditemukan',
           icon: AppIcons.service,
         ),
-        data: (value) => ServiceEditFieldsPage(state: value, serviceId: serviceId),
+        data: (value) => ServiceEditFieldsSection(state: value, serviceId: serviceId),
       ),
     );
   }

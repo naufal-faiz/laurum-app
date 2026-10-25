@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/printer/pages/printer_settings.dart';
+import 'package:laurum/features/printer/state/printer_settings.dart';
 import 'package:laurum/shared/widgets/atoms/app_chip.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
@@ -9,8 +9,8 @@ import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/organisms/receipt_toggle_list.dart';
 
-class PrinterSettingsPage extends ConsumerWidget {
-  const PrinterSettingsPage({super.key});
+class PrinterSettingsSection extends ConsumerWidget {
+  const PrinterSettingsSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

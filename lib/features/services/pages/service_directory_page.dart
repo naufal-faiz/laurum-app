@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/services/pages/service_copy.dart';
-import 'package:laurum/features/services/pages/service_directory_content_page.dart';
-import 'package:laurum/features/services/pages/service_directory_providers.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/services/state/service_copy.dart';
+import 'package:laurum/features/services/state/service_directory_providers.dart';
+import 'package:laurum/features/services/widgets/service_directory_content_section.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -41,7 +41,7 @@ class ServiceDirectoryPage extends ConsumerWidget {
                   onAction: () => ref.invalidate(serviceDirectoryProvider),
                 ),
               ),
-              data: (services) => ServiceDirectoryContentPage(
+              data: (services) => ServiceDirectoryContentSection(
                 services: services,
                 query: query,
                 onQuery: ref.read(serviceDirectorySearchProvider.notifier).set,

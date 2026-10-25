@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/settings/pages/settings_menu_page.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/settings/widgets/settings_menu_section.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/organisms/confirm_modal.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -13,7 +13,7 @@ class SettingsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(businessProfileProvider).value;
-    return SettingsMenuPage(
+    return SettingsMenuSection(
       address: profile?.address ?? '',
       connected: ref.watch(whatsappConnectionProvider),
       onLogout: () => _logout(context, ref),

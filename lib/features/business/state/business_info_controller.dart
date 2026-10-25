@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/business_profile.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/business/pages/business_info_state.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/business/state/business_info_state.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 
 final businessInfoProvider = AsyncNotifierProvider<BusinessInfoController, BusinessInfoState>(
   BusinessInfoController.new,

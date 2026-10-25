@@ -18,7 +18,7 @@ import 'package:laurum/features/proposals/data/in_memory_proposal_repository.dar
 import 'package:laurum/features/reports/data/in_memory_report_repository.dart';
 import 'package:laurum/features/services/data/in_memory_service_repository.dart';
 import 'package:laurum/features/shell/pages/app_router.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 
 List<Override> dummyOverrides({ContactSource? contactSource}) => [
   businessClockProvider.overrideWithValue(() => DateTime(2026, 10, 16, 10, 45)),

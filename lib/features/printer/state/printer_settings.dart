@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/business_profile.dart';
 import 'package:laurum/core/domain/receipt_settings.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/printer/pages/printer_state.dart';
+import 'package:laurum/features/printer/state/printer_state.dart';
 
 class PrinterSettingsState {
   const PrinterSettingsState({

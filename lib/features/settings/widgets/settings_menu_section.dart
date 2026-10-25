@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/settings/pages/settings_account_page.dart';
+import 'package:laurum/features/settings/widgets/settings_account_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_divider.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/notice_ai.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
-class SettingsMenuPage extends StatelessWidget {
-  const SettingsMenuPage({
+class SettingsMenuSection extends StatelessWidget {
+  const SettingsMenuSection({
     required this.address,
     required this.connected,
     required this.onLogout,
@@ -85,7 +85,7 @@ class SettingsMenuPage extends StatelessWidget {
             ],
           ),
         ),
-        SettingsAccountPage(onLogout: onLogout),
+        SettingsAccountSection(onLogout: onLogout),
       ],
     ),
   );

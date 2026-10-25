@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/printer/pages/printer_state.dart';
+import 'package:laurum/features/printer/state/printer_state.dart';
 
 final printerConnectionProvider =
     NotifierProvider<PrinterConnectionController, PrinterConnectionState>(

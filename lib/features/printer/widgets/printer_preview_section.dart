@@ -3,13 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/printer/data/receipt_demo.dart';
-import 'package:laurum/features/printer/pages/printer_settings.dart';
+import 'package:laurum/features/printer/state/printer_settings.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/organisms/receipt_preview.dart';
 
-class PrinterPreviewPage extends ConsumerWidget {
-  const PrinterPreviewPage({super.key});
+class PrinterPreviewSection extends ConsumerWidget {
+  const PrinterPreviewSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
