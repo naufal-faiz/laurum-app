@@ -10,6 +10,7 @@ import 'package:laurum/features/transactions/state/weight_edit.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_chip.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
+import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/organisms/app_bottom_sheet.dart';
 import 'package:laurum/shared/widgets/organisms/numpad.dart';
 import 'package:laurum/shared/widgets/templates/sheet_scaffold.dart';
@@ -37,13 +38,10 @@ class WeightInputSheet extends ConsumerWidget {
     if (line == null) return const SizedBox.shrink();
     final kilo = line.service.kind == ServiceKind.kiloan;
     final milli = edit.milli;
-    final quantity = kilo
-        ? Formatters.berat(milli < 500 ? 500 : milli)
-        : Formatters.jumlah(milli < 1000 ? 1 : milli ~/ 1000);
-    final total = lineTotal(
-      qtyMilli: milli < line.step ? line.step : milli,
-      unitPrice: line.service.price,
-    );
+    final quantity = kilo ? Formatters.berat(milli) : Formatters.jumlah(milli ~/ 1000);
+    final minimum = kilo ? Formatters.berat(line.step) : Formatters.jumlah(line.step ~/ 1000);
+    final valid = milli >= line.step;
+    final total = lineTotal(qtyMilli: milli, unitPrice: line.service.price);
     final body = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: AppMoleculeTokens.gap,
@@ -53,6 +51,11 @@ class WeightInputSheet extends ConsumerWidget {
           '$quantity x ${Formatters.rupiah(line.service.price)} = ${Formatters.rupiah(total)}',
           color: AppColors.ink2,
         ),
+        if (!valid)
+          BannerMessage(
+            message: 'Minimal $minimum',
+            variant: BannerMessageVariant.error,
+          ),
         if (kilo)
           Wrap(
             spacing: AppMoleculeTokens.gap,
@@ -73,12 +76,14 @@ class WeightInputSheet extends ConsumerWidget {
     return SheetScaffold(
       footer: AppButton(
         kilo ? 'Simpan berat' : 'Simpan jumlah',
-        onPressed: () {
-          final current = ref.read(weightEditProvider).milli;
-          final qty = current < line.step ? line.step : current;
-          ref.read(transactionDraftProvider.notifier).setQuantity(line.service.id, qty);
-          Navigator.of(context).pop();
-        },
+        onPressed: valid
+            ? () {
+                final current = ref.read(weightEditProvider).milli;
+                if (current < line.step) return;
+                ref.read(transactionDraftProvider.notifier).setQuantity(line.service.id, current);
+                Navigator.of(context).pop();
+              }
+            : null,
       ),
       child: body,
     );

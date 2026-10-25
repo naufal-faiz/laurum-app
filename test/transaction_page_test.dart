@@ -86,6 +86,28 @@ void main() {
     expect(host.container.read(antreanFilterProvider), 0);
   });
 
+  testWidgets('stepper minus nonaktif pada nilai minimum', (tester) async {
+    await pumpAntrean(tester, location: '/transaksi/baru');
+    await tester.tap(find.widgetWithText(AppButton, 'Pilih layanan'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Cuci setrika').first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('1 kg · Rp9.000'));
+    await tester.pumpAndSettle();
+    final minus = find.descendant(of: find.byType(StepperField), matching: find.text('−'));
+    TextButton minusButton() => tester.widget<TextButton>(
+      find.ancestor(of: minus, matching: find.byType(TextButton)),
+    );
+    expect(minusButton().onPressed, isNotNull);
+    await tester.tap(minus);
+    await tester.pumpAndSettle();
+    expect(find.text('0,5 kg · Rp4.500'), findsOneWidget);
+    expect(minusButton().onPressed, isNull);
+    await tester.tap(find.descendant(of: find.byType(StepperField), matching: find.text('+')));
+    await tester.pumpAndSettle();
+    expect(minusButton().onPressed, isNotNull);
+  });
+
   testWidgets('empty draft opens without confirmation and Bayar is disabled', (tester) async {
     final host = await pumpAntrean(tester, location: '/transaksi/baru');
     expect(tester.widget<TextButton>(find.widgetWithText(TextButton, 'Bayar')).onPressed, isNull);

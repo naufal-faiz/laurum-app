@@ -45,6 +45,7 @@ class DiscountSheet extends ConsumerWidget {
             hint: '0',
             value: input.text,
             keyboardType: TextInputType.number,
+            selectAllOnFocus: input.text.isNotEmpty,
             onChanged: ref.read(discountInputProvider.notifier).set,
           ),
         ),
@@ -55,7 +56,8 @@ class DiscountSheet extends ConsumerWidget {
         'Simpan diskon',
         onPressed: () {
           final subtotal = ref.read(transactionDraftProvider).subtotal;
-          final value = int.tryParse(ref.read(discountInputProvider).text.trim());
+          final text = ref.read(discountInputProvider).text.trim();
+          final value = text.isEmpty ? 0 : int.tryParse(text);
           if (value == null || value < 0 || value > subtotal) {
             ref
                 .read(discountInputProvider.notifier)
