@@ -5,6 +5,8 @@ Diperbarui: 2026-10-25 | Cabang dev1rev
 R0 SELESAI. check_all SEMUA HIJAU: 317 tes, REPO_MAP 496 berkas.
 38 kelas *Page non-rute sudah menjadi Section, logika non-UI di features/*/state/.
 Prompt berikutnya: R1-input-keyboard.md.
+Audit ulang 25 Okt 2026: check_all hijau (317 tes), ekspektasi tes lama tetap;
+rincian migrasi dan bukti: docs/progress/r0-verification.md.
 
 ## Selesai
 - Fase 1-8: 60 widget registry, alur antrean, transaksi, pembayaran/nota, printer,
