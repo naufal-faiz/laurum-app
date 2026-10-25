@@ -13,10 +13,12 @@ void configureKeyboardTest(WidgetTester tester, {Size size = const Size(390, 844
   addTearDown(tester.view.resetViewPadding);
 }
 
+/// Fokuskan [field], munculkan keyboard 300 dp, lalu pastikan field (dan
+/// [save] bila ada) tetap terlihat, dapat diketuk, dan berada di atas keyboard.
 Future<void> expectKeyboardVisible(
   WidgetTester tester, {
   required Finder field,
-  required Finder save,
+  Finder? save,
 }) async {
   await tester.ensureVisible(field);
   await tester.showKeyboard(field);
@@ -30,18 +32,21 @@ Future<void> expectKeyboardVisible(
   );
   expect(editable.focusNode.hasFocus, isTrue);
   final keyboardTop = tester.view.physicalSize.height / tester.view.devicePixelRatio - 300;
-  for (final target in [field, save]) {
+  for (final target in [field, ?save]) {
     final rect = tester.getRect(target);
     expect(rect.top, greaterThanOrEqualTo(0));
     expect(rect.bottom, lessThanOrEqualTo(keyboardTop));
     expect(target.hitTestable(), findsOneWidget);
   }
   final fieldRect = tester.getRect(field);
-  final viewport = tester.getRect(
-    find.ancestor(of: field, matching: find.byType(SingleChildScrollView)).first,
-  );
-  expect(fieldRect.top, greaterThanOrEqualTo(viewport.top));
-  expect(fieldRect.bottom, lessThanOrEqualTo(viewport.bottom));
-  expect(fieldRect.bottom, lessThanOrEqualTo(tester.getRect(save).top));
+  final scrolls = find.ancestor(of: field, matching: find.byType(Scrollable));
+  if (scrolls.evaluate().isNotEmpty) {
+    final viewport = tester.getRect(scrolls.first);
+    expect(fieldRect.top, greaterThanOrEqualTo(viewport.top));
+    expect(fieldRect.bottom, lessThanOrEqualTo(viewport.bottom));
+  }
+  if (save != null) {
+    expect(fieldRect.bottom, lessThanOrEqualTo(tester.getRect(save).top));
+  }
   expect(tester.takeException(), isNull);
 }
