@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/reports/pages/report_view.dart';
+import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -11,8 +11,8 @@ import 'package:laurum/shared/widgets/organisms/report_summary.dart';
 import 'package:laurum/shared/widgets/organisms/top_services.dart';
 import 'package:laurum/shared/widgets/organisms/weekly_bar_chart.dart';
 
-class ReportBodyPage extends StatelessWidget {
-  const ReportBodyPage({required this.data, super.key});
+class ReportBodySection extends StatelessWidget {
+  const ReportBodySection({required this.data, super.key});
   final ReportView data;
   @override
   Widget build(BuildContext context) {

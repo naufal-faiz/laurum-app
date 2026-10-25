@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/reports/pages/outstanding_data.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/reports/state/outstanding_data.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -16,8 +16,8 @@ String _ageLabel(DateTime createdAt, DateTime now) {
   return diff == 0 ? 'hari ini' : '$diff hari lalu';
 }
 
-class OutstandingListPage extends ConsumerWidget {
-  const OutstandingListPage({required this.data, super.key});
+class OutstandingListSection extends ConsumerWidget {
+  const OutstandingListSection({required this.data, super.key});
   final OutstandingListData data;
 
   @override

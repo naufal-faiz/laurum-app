@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/reports/pages/report_body_page.dart';
-import 'package:laurum/features/reports/pages/report_export.dart';
-import 'package:laurum/features/reports/pages/report_period.dart';
-import 'package:laurum/features/reports/pages/report_view.dart';
+import 'package:laurum/features/reports/state/report_export.dart';
+import 'package:laurum/features/reports/state/report_period.dart';
+import 'package:laurum/features/reports/state/report_view.dart';
+import 'package:laurum/features/reports/widgets/report_body_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
@@ -60,7 +60,7 @@ class ReportPage extends ConsumerWidget {
                 onAction: () => ref.invalidate(reportViewProvider),
               ),
             ),
-            data: (value) => ReportBodyPage(data: value),
+            data: (value) => ReportBodySection(data: value),
           ),
         ),
         FooterBar(

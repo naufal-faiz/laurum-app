@@ -2,13 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
-import 'package:laurum/features/orders/pages/order_payment_controller.dart';
-import 'package:laurum/features/reports/pages/report_period.dart';
-import 'package:laurum/features/reports/pages/report_view.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
+import 'package:laurum/features/orders/state/order_payment_controller.dart';
+import 'package:laurum/features/reports/state/report_period.dart';
+import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/services/data/service_fixtures.dart';
-import 'package:laurum/features/transactions/pages/checkout_state.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/checkout_state.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/main_dummy.dart';
 
 void main() {

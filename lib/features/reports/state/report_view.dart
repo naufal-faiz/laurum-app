@@ -6,8 +6,8 @@ import 'package:laurum/core/domain/report_totals.dart';
 import 'package:laurum/core/domain/service_revenue.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/reports/data/report_daily.dart';
-import 'package:laurum/features/reports/pages/report_period.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/reports/state/report_period.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 
 class ReportView {
   const ReportView({

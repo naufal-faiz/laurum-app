@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/services/export_service.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/reports/pages/report_export.dart';
-import 'package:laurum/features/reports/pages/report_view.dart';
+import 'package:laurum/features/reports/state/report_export.dart';
+import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/main_dummy.dart';
 
 class RetryExportService extends FakeExportService {

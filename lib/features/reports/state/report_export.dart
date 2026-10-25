@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/reports/pages/report_period.dart';
-import 'package:laurum/features/reports/pages/report_view.dart';
+import 'package:laurum/features/reports/state/report_period.dart';
+import 'package:laurum/features/reports/state/report_view.dart';
 
 String reportCsv(ReportView data) {
   final t = data.totals;

@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/reports/pages/outstanding_data.dart';
-import 'package:laurum/features/reports/pages/outstanding_list_page.dart';
+import 'package:laurum/features/reports/state/outstanding_data.dart';
+import 'package:laurum/features/reports/widgets/outstanding_list_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/organisms/bottom_nav_bar.dart';
@@ -44,7 +44,7 @@ class OutstandingPage extends ConsumerWidget {
               )
             : ListView(
                 padding: const EdgeInsets.all(AppSpacing.screenPadding),
-                children: [OutstandingListPage(data: data)],
+                children: [OutstandingListSection(data: data)],
               ),
       ),
       bottomNavigationBar: const BottomNavBar(activeIndex: 3),
