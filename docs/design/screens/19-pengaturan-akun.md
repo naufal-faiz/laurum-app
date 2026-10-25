@@ -1,7 +1,7 @@
 # 19 - Pengaturan dan Akun
 Rute: /lainnya (tab kelima)   Prompt: 70
 Frame .pen: "Lainnya - Pengaturan & Akun"; State "Keluar dari akun".
-Template: RootScaffold dari RootShellPage; isi memakai SettingsMenuPage.
+Template: RootScaffold dari RootShellPage; isi memakai SettingsMenuSection.
 
 Komposisi:
 - SectionHeader 'OPERASIONAL'; AppCard berisi MenuRow:

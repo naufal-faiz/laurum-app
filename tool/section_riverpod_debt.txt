@@ -1,0 +1,27 @@
+# Section yang masih ConsumerWidget / memakai Riverpod / go_router (utang R0, hanya boleh menyusut)
+lib/features/customers/widgets/customer_deposit_form_section.dart
+lib/features/customers/widgets/customer_directory_list_section.dart
+lib/features/customers/widgets/customer_edit_form_section.dart
+lib/features/customers/widgets/customer_import_list_section.dart
+lib/features/customers/widgets/customer_orders_section.dart
+lib/features/customers/widgets/customer_profile_section.dart
+lib/features/customers/widgets/customer_savings_header_section.dart
+lib/features/customers/widgets/customer_savings_list_section.dart
+lib/features/customers/widgets/customer_savings_section.dart
+lib/features/orders/widgets/order_detail_content_section.dart
+lib/features/orders/widgets/order_edit_body_section.dart
+lib/features/orders/widgets/order_edit_customer_section.dart
+lib/features/printer/widgets/printer_connection_section.dart
+lib/features/printer/widgets/printer_preview_section.dart
+lib/features/printer/widgets/printer_settings_section.dart
+lib/features/reports/widgets/outstanding_list_section.dart
+lib/features/reports/widgets/report_body_section.dart
+lib/features/services/widgets/service_edit_fields_section.dart
+lib/features/settings/widgets/settings_menu_section.dart
+lib/features/transactions/widgets/add_customer_form_section.dart
+lib/features/transactions/widgets/payment_method_section.dart
+lib/features/transactions/widgets/payment_savings_section.dart
+lib/features/transactions/widgets/payment_summary_section.dart
+lib/features/transactions/widgets/receipt_status_section.dart
+lib/features/transactions/widgets/transaction_customer_section.dart
+lib/features/transactions/widgets/transaction_details_section.dart

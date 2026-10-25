@@ -27,7 +27,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 15 | 51-pelanggan-b.md | Setor Tabungan, Riwayat Tabungan, Impor Kontak | SELESAI (2026-10-24) | check_all hijau, 292 tes; tinjau setoran, riwayat, dan impor kontak di HP |
 | 16 | 60-laporan.md | Laporan Ringkasan, Daftar Piutang | SELESAI (2026-10-25) | check_all hijau, 301 tes; tinjau ringkasan periode dan daftar piutang di HP |
 | 17 | 70-lainnya-a.md | Pengaturan dan Akun, Layanan, Info Usaha | SELESAI (2026-10-25) | check_all hijau, 310 tes; tinjau Pengaturan, Layanan, dan Info Usaha di HP |
-| R0 | R0-struktur-section.md | Revisi: kategori Section, struktur fitur, check_arch (tanpa perubahan perilaku) | BELUM | Tinjau daftar utang Riverpod dan hasil pemindahan |
+| R0 | R0-struktur-section.md | Revisi: kategori Section, struktur fitur, check_arch (tanpa perubahan perilaku) | SELESAI (2026-10-25) | 38 Page->Section, 50 berkas state, 317 tes hijau; tinjau daftar utang di tool/section_riverpod_debt.txt - 26 berkas |
 | R1 | R1-input-keyboard.md | Revisi 1,2,3,10: keyboard, angka awal, berat | BELUM | **Coba semua sheet berinput di HP** |
 | R2 | R2-navigasi-beranda.md | Revisi 9,11: tombol Transaksi di tengah nav, Beranda antrean aktif | BELUM | Tinjau nav di HP dan teks besar |
 | R3 | R3-transaksi.md | Revisi 4,5: FAB Pilih Layanan, tombol tambah pelanggan | BELUM | |

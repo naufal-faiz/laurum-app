@@ -11,7 +11,7 @@ Komposisi (urut dari atas, HANYA nama widget registry + argumen penting):
   lockLabel 'Terkunci')
 - SectionHeader 'Layanan' subtitle '1 layanan di nota' + AppButton 'Pilih layanan' /
   'Tambah layanan lain' (actionOutline) + MenuRow per DraftLine
-- TransactionDetailsPage: InfoRow 'Estimasi selesai', caption 'Mengikuti layanan
+- TransactionDetailsSection: InfoRow 'Estimasi selesai', caption 'Mengikuti layanan
   terlama', MenuRow 'Atur diskon', LabeledField 'Catatan nota' (AppTextField)
 - FooterBar ringkasan 'Total tagihan (1 item)' + AppButton 'Simpan perubahan'
 

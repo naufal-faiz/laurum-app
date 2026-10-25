@@ -671,7 +671,8 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ### AntreanPage
 - Berkas: lib/features/orders/pages/antrean_page.dart (100 baris),
-  antrean_controller.dart, antrean_data.dart, antrean_status_page.dart.
+  state/antrean_controller.dart, state/antrean_data.dart,
+  widgets/antrean_status_section.dart.
 - Rute: /antrean di dalam StatefulShellRoute cabang Antrean.
 - Data: antreanDataProvider menggabungkan order/items/payment/customer/proposal dari
   repository publik; tanpa membaca fixture di page.
@@ -688,7 +689,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ### Root shell dan router
 - Berkas: lib/features/shell/pages/{app_router,root_shell_page,placeholder_page,
-  placeholder_routes,shell_state}.dart.
+  placeholder_routes}.dart dan lib/features/shell/state/shell_state.dart.
 - app_router: GoRouter dengan StatefulShellRoute.indexedStack lima cabang; rute PRD A 8
   yang belum dibuat memakai PlaceholderPage.
 - Rute placeholder: /masuk, /antrean/usulan/:id, /transaksi/*, /order/:id[/edit],
@@ -705,10 +706,10 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 ### Fase 3: transaksi baru
 - Rute nyata: /transaksi/baru (TransactionPage) dan /transaksi/baru/layanan
   (ServicePickerPage); /transaksi/baru/bayar tetap placeholder prompt 32.
-- TransactionPage: FormScaffold, TransactionCustomerPage, SectionHeader Layanan,
-  MenuRow per DraftLine, TransactionDetailsPage, FooterBar total + Bayar.
-- Subhalaman di features/transactions/pages: TransactionCustomerPage,
-  TransactionDetailsPage, AddCustomerFormPage (dipakai inline, pola AntreanStatusPage).
+- TransactionPage: FormScaffold, TransactionCustomerSection, SectionHeader Layanan,
+  MenuRow per DraftLine, TransactionDetailsSection, FooterBar total + Bayar.
+- Potongan layar di features/transactions/widgets: TransactionCustomerSection,
+  TransactionDetailsSection, AddCustomerFormSection (dipakai inline, pola AntreanStatusSection).
 - Sheet: CustomerPickerSheet, AddCustomerSheet, ContactPickerSheet,
   TransactionLineSheet, WeightInputSheet, DiscountSheet.
 - Provider: transactionDraftProvider (global, bertahan antar layar), serviceSearchProvider,
@@ -727,8 +728,8 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ### Fase 4: printer dan struk
 - Rute /lainnya/printer (PrinterPage) menggantikan placeholder.
-- PrinterPage: FormScaffold; PrinterConnectionPage, PrinterSettingsPage,
-  PrinterPreviewPage; footer Simpan pengaturan + Cetak uji.
+- PrinterPage: FormScaffold; PrinterConnectionSection, PrinterSettingsSection,
+  PrinterPreviewSection; footer Simpan pengaturan + Cetak uji.
 - PrinterSettingsProvider (AsyncNotifier): ReceiptSettings + BusinessProfile; edit
   langsung, save ke BusinessRepository. PrinterConnectionProvider (Notifier): status,
   devices, connected, notice.
@@ -742,11 +743,11 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ### Fase 3 lanjutan: pembayaran dan nota
 - Rute /transaksi/baru/bayar (PaymentPage) dan /transaksi/nota/:id (ReceiptPage).
-- PaymentPage: PaymentSummaryPage (total + status chip), PaymentSavingsPage (switch
-  tabungan), PaymentMethodPage (metode + uang diterima), CashInputSheet.
+- PaymentPage: PaymentSummarySection (total + status chip), PaymentSavingsSection (switch
+  tabungan), PaymentMethodSection (metode + uang diterima), CashInputSheet.
 - Checkout: checkoutControllerProvider (metode/mode/received/useSavings), quotePayment,
   saveCheckout membuat Order/OrderItem/Payment/OrderEvent + SavingsEntry; nomor A-0143.
-- ReceiptPage: ReceiptStatusPage, ReceiptPreview data tersimpan, receiptPrintProvider
+- ReceiptPage: ReceiptStatusSection, ReceiptPreview data tersimpan, receiptPrintProvider
   (PrintService + ExternalLauncher), banner gagal cetak + Coba lagi/Pengaturan printer.
 - Tombol: Cetak struk, Kirim lewat WhatsApp, Transaksi baru, Lihat order.
 - Catatan atomicity: saveOrder atomik untuk order/item/payment/event; SavingsEntry ditulis

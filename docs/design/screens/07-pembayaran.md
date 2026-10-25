@@ -3,11 +3,11 @@ Rute: /transaksi/baru/bayar   Fase: 3   Frame .pen: "Transaksi - Pembayaran"
 Template: FormScaffold (AppBarSub + body gulir + FooterBar sticky)
 
 Komposisi:
-- PaymentSummaryPage: AppCard nama pelanggan, jumlah layanan, Total tagihan,
+- PaymentSummarySection: AppCard nama pelanggan, jumlah layanan, Total tagihan,
   AppChip status Lunas/DP/Belum bayar; BannerMessage error bila simpan gagal.
-- PaymentSavingsPage: saldo tabungan, AppSwitch 'Pakai tabungan' (hanya bila saldo > 0),
+- PaymentSavingsSection: saldo tabungan, AppSwitch 'Pakai tabungan' (hanya bila saldo > 0),
   Tabungan dipakai, Sisa bayar, Sisa tabungan.
-- PaymentMethodPage: AppChip Tunai/QRIS/Transfer; MenuRow 'Uang diterima' membuka
+- PaymentMethodSection: AppChip Tunai/QRIS/Transfer; MenuRow 'Uang diterima' membuka
   CashInputSheet; Kembali Rp... untuk tunai; Sisa bayar.
 - Footer: AppButton 'Simpan dan cetak' + 'Simpan saja'.
 

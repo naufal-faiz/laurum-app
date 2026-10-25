@@ -1,74 +1,60 @@
 # STATE Laurum
-Diperbarui: 2026-10-25 | Cabang dev1
+Diperbarui: 2026-10-25 | Cabang dev1rev
 
 ## Posisi
-Prompt 70 SELESAI. check_all SEMUA HIJAU: 310 tes, REPO_MAP 493 berkas.
-Pengaturan dan Akun, Daftar/Tambah/Edit Layanan, dan Info Usaha terimplementasi.
+R0 SELESAI. check_all SEMUA HIJAU: 317 tes, REPO_MAP 496 berkas.
+38 kelas *Page non-rute sudah menjadi Section, logika non-UI di features/*/state/.
+Prompt berikutnya: R1-input-keyboard.md.
 
 ## Selesai
-- Fase 1: 60/60 widget. Prompt 20-51: Antrean, transaksi, pembayaran/nota, printer
-  palsu, Detail/Edit Order, Riwayat Nota, Daftar/Detail/Edit Pelanggan,
-  Setor/Riwayat Tabungan, Impor Kontak palsu. Rincian fase sebelumnya di fase-5/6.md.
-- Prompt 60 Ringkasan: PeriodTabs, ReportSummary, WeeklyBarChart, TopServices,
-  kartu piutang, ekspor CSV palsu, loading/error/retry/kosong. Angka Minggu ini
-  sesuai DATA MASTER. Checkout/pembayaran reaktif terhadap periode.
-- Prompt 60 Daftar Piutang: /laporan/piutang dengan BottomNavBar Laporan aktif,
-  header total piutang, ChipBar Semua/Belum bayar/DP, lima PiutangCard urut tertua,
-  catatan immutable. Catat bayar dan Ingatkan masih placeholder.
-- Prompt 70 Pengaturan dan Akun: /lainnya memakai SettingsPage, kelompok
-  OPERASIONAL/PENGATURAN/AKUN, NoticeAi, versi, LockedRow akun, dan Keluar lewat
-  ConfirmModal. Sinkronisasi dan isi Akun menunggu prompt 90.
-- Prompt 70 Daftar Layanan: enam fixture DATA MASTER, header total/aktif,
-  pencarian, ServiceRow, switch aktif langsung tersimpan, tombol tambah, serta
-  loading/error/kosong. Perubahan langsung terlihat di katalog Pilih Layanan.
-- Prompt 70 Tambah/Edit Layanan: satu form, Kiloan/Satuan, nama, harga, ChipBar
-  estimasi 1-5 hari, ToggleRow aktif, validasi, busy, dan catatan harga khusus Edit.
-- Prompt 70 Info Usaha: nama, alamat, telepon, catatan kaki struk; simpan
-  memperbarui AppBarRoot dan struk. Spec layar 19-22 dan rincian di fase-8.md.
+- Fase 1-8: 60 widget registry, alur antrean, transaksi, pembayaran/nota, printer,
+  detail/edit order, pelanggan, tabungan, impor kontak, laporan/piutang,
+  pengaturan/akun, layanan, info usaha. Prompt 70 berakhir 310 tes hijau;
+  rincian di docs/progress/fase-0..8.md.
+- R0 Struktur Section (25 Okt 2026): check_arch menegakkan *Page hanya untuk rute,
+  *Section hanya di features/*/widgets/*_section.dart (StatelessWidget, tanpa
+  Riverpod/go_router/widgets fitur lain), pages/ hanya *_page/_sheet/_flow/_routes
+  + app_router.dart, state/ tanpa kelas Widget dan tanpa material/go_router,
+  showModalBottomSheet hanya di AppBottomSheet. Ditambah test/tool/check_arch_test.dart
+  (7 tes).
+- R0 migrasi: 38 Page non-rute menjadi Section (orders 12, transactions 7, customers 9,
+  reports 2, services 3, settings 2, printer 3); 50 berkas di state/; notifier yang
+  menempel di sheet (diskon, uang tunai) dipisah ke state/; order_cancel dan
+  leaveTransaction menjadi *_flow.dart. Tes lama tidak diubah ekspektasinya:
+  310 + 7 = 317 hijau.
+- R0 dokumen: PRD A 5.1 (paragraf Section) dan 7 (struktur fitur) diperbarui;
+  spec 06, 07, 08, 10, 19 dan component_catalog memakai nama Section baru.
 
 ## Antrean
-- Revisi hasil uji HP (25 Okt 2026): kerjakan seri R dulu, dari docs/prompts/R0-struktur-section.md
-  sampai R7; daftar di docs/revisi/REVISI-01.md. Prompt 71 ditunda sampai R7 SELESAI.
-- Setelah seri R: docs/prompts/71-lainnya-b.md (Daftar dan Catat Pengeluaran).
-- Setelah itu 80-ai.md (layar AI dummy) dan 90-auth-sinkron.md (Masuk Google,
-  Sinkronisasi, Akun).
-- Catat bayar dan Ingatkan di Daftar Piutang masih perlu sheet Numpad dan
-  ExternalLauncher WhatsApp; implementasi terpisah bila diminta.
+- R1-input-keyboard.md: perbaiki AppBottomSheet, selectAllOnFocus, diskon, berat,
+  audit keyboard semua sheet. Lalu R2, R3, R4, R5, R6, R7 berurutan.
+- Setelah R7: prompt 71-lainnya-b.md, 80-ai.md, 90-auth-sinkron.md, 100-penyelesaian.md.
+- Catat bayar dan Ingatkan di Daftar Piutang masih placeholder.
 
 ## Keputusan dan batas
-- Prompt 70: direktori layanan memakai pencarian tanpa kontrol Urutkan; urutan
-  tetap sortOrder. Switch aktif menyimpan segera lewat ServiceRepository.
-- ID layanan baru memakai microsecond waktu nyata agar tidak bertabrakan dengan
-  jam usaha dummy. ServiceItem belum punya copyWith; helper copyService diletakkan
-  di features/services/pages, bukan domain.
-- Info Usaha hanya menyunting receiptFooter. receiptNote ('Pakaian bersih, wangi &
-  rapi') tetap di Printer karena keduanya field terpisah.
-- Keluar memanggil AuthService.signOut lalu menuju /masuk (placeholder prompt 90).
-  Rute Lainnya dipisah ke lainnya_routes.dart agar app_router.dart tetap 99 baris.
-- ReportRepository hanya punya top services Minggu ini. Hari/Bulan menampilkan
-  keterangan belum tersedia; tidak meminjam angka minggu (DATA MASTER bagian akhir).
-- Grafik minggu = fixture harian + snapshot order kini - order fixture awal;
-  hari mendatang null. Ringkasan uang int rupiah; rata-rata harian pembagian integer.
-- ExportService menerima CSV UTF-8 BOM, pemisah titik koma, angka rupiah mentah;
-  bukan XLSX nyata. Ganti periode disabled saat ekspor; kegagalan dapat dicoba lagi.
-- OutstandingListData menghitung total piutang, jumlah nota, jumlah pelanggan,
-  dan chip filter dari ledger aktual. PiutangCard tanpa jatuh tempo.
-- Customer summaries termasuk nonaktif; daftar hanya aktif. Nonaktif tidak menghapus
-  nota/piutang/tabungan. Riwayat dummy baseline + selisih snapshot, bukan nota fiktif.
-- Setor chip aditif, maksimal 9 digit. Mutasi dihitung sebelum memfilter baris.
-- Impor normalizePhone, kontak aktif/nonaktif dilewati. Semua fixture kontak sudah
-  terdaftar: dummy 0 baru; tes memakai override ContactSource. Izin masih palsu.
-- Pembatalan order lalu penyesuaian tabungan belum memiliki rollback lintas repository.
-- Tidak mengubah widget bersama/registry/tema/lint/PRD/dependensi. Test layar 320 px
-  dan teks 2x lulus.
+- Section debt: 26 berkas (22 ConsumerWidget) di tool/section_riverpod_debt.txt;
+  hanya boleh menyusut, dimigrasikan saat berkas disentuh R1-R7.
+- OrderEditBodySection menerima slot `details` (Widget) dari OrderEditPage karena
+  Section dilarang mengimpor widgets/ fitur lain: TransactionDetailsSection dipakai
+  fitur transactions dan orders (draf transaksi dipakai bersama).
+- PRD A 5.2 (RootScaffold + FAB) dan 8 (5 tab, /transaksi) masih deskripsi lama;
+  diperbarui di R2 sesuai izin pengguna 25 Okt 2026.
+- R5 (keputusan pengguna 25 Okt 2026): ringkasan rentang hanya nota + pembayaran;
+  pengeluaran ditunda ke prompt 71.
+- Keputusan prompt 70 tetap: direktori layanan tanpa kontrol Urutkan; switch aktif
+  simpan langsung; Info Usaha hanya receiptFooter; Keluar lewat AuthService.signOut
+  (placeholder prompt 90); top services hanya Minggu ini; CSV UTF-8 BOM titik koma;
+  total piutang dari ledger; nonaktif tidak menghapus nota/piutang/tabungan.
+- Pembatalan order lalu penyesuaian tabungan belum punya rollback lintas repository.
+- Tidak mengubah widget bersama/registry/tema/lint/PRD lain/dependensi. Tes layar
+  320 px dan teks 2x lulus.
 
 ## Handoff untuk agen penerus
-1. Baca AGENTS.md, SKILLS.md, STATE.md; verifikasi git status/log sebelum melanjutkan.
-2. Lanjut prompt 71-lainnya-b.md bila diminta; satu layar/kelompok widget per sesi,
-   berhenti menunggu tinjauan.
-3. Pengguna meminta berhenti bila sisa usage mendekati 10%; cek usage berkala dan
-   simpan STATE + commit sebelum berhenti.
-4. Launcher sandbox kadang gagal karena drive G: terkunci. Read/exec di luar sandbox
-   yang disetujui berhasil membaca repo E: dan menjalankan SDK. Bukan lokasi proyek G:.
-5. Android/iOS perangkat, keyboard, TalkBack/VoiceOver, ekspor/telepon/printer nyata belum diuji.
+1. Baca AGENTS.md, SKILLS.md, STATE.md; verifikasi git status/log sebelum lanjut.
+2. Lanjut R1-input-keyboard.md; satu layar/kelompok widget per sesi, berhenti menunggu
+   tinjauan.
+3. Pengguna meminta berhenti bila sisa usage mendekati 10%; simpan STATE + commit.
+4. Launcher sandbox kadang gagal karena drive G: terkunci; repo ada di E:. 
+5. Android/iOS perangkat, keyboard, TalkBack/VoiceOver, ekspor/telepon/printer nyata
+   belum diuji.
 Tidak push/merge.

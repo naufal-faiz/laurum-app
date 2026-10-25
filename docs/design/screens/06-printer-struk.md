@@ -4,12 +4,12 @@ Template: FormScaffold (AppBarSub + body gulir + FooterBar sticky)
 
 Komposisi:
 - AppBarSub(title: 'Printer dan struk', backLabel: 'Kembali').
-- PrinterConnectionPage: BannerMessage warning 'Printer belum terhubung.' + AppButton
+- PrinterConnectionSection: BannerMessage warning 'Printer belum terhubung.' + AppButton
   'Cari printer'; atau AppCard berisi nama printer + 'Terhubung dan siap mencetak' + Ganti.
-- PrinterSettingsPage: AppChip '58 mm'/'80 mm', AppChip 'Normal'/'Besar',
+- PrinterSettingsSection: AppChip '58 mm'/'80 mm', AppChip 'Normal'/'Besar',
   ReceiptToggleList (alamat, pelanggan, tabungan, catatan; dua baris terkunci),
   LabeledField + AppTextField 'Teks penutup struk' dan 'Catatan khusus nota'.
-- PrinterPreviewPage: ReceiptPreview (lebar 320 untuk 58 mm, 384 untuk 80 mm) memakai
+- PrinterPreviewSection: ReceiptPreview (lebar 320 untuk 58 mm, 384 untuk 80 mm) memakai
   receiptLines dari ReceiptFormatter; teks 'belum diuji' ke printer asli.
 - Footer: AppButton('Simpan pengaturan') + AppButton('Cetak uji').
 

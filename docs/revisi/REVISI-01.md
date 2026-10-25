@@ -17,7 +17,7 @@ Sumber: uji dummy app di Android (Naufal) + audit statis cabang dev1 (prompt 70)
 | 12 | Tombol Pelanggan baru pindah ke atas, di sebelah Impor kontak | Berada di FooterBar | R7 | BELUM |
 | 14 | Ekspor Excel di atas | Berada di FooterBar Laporan | R5 | BELUM |
 | 15 | Tombol logout cacat | MenuRow biasa berikon panah kembali di kartu yang sama dengan baris terkunci | R7 | BELUM |
-| S1-S3 | Sub-widget (rekomendasi di bawah) | ~39 kelas *Page non-rute menyiasati Aturan 1; logika non-UI bercampur di pages/ | R0 | BELUM |
+| S1-S3 | Sub-widget (rekomendasi di bawah) | ~39 kelas *Page non-rute menyiasati Aturan 1; logika non-UI bercampur di pages/ | R0 | SELESAI (2026-10-25) |
 
 Temuan tambahan yang masuk prompt: Daftar Piutang memakai BottomNavBar tanpa onSelected (nav tidak berfungsi) -> R2.
 

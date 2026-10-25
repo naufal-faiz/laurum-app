@@ -3,7 +3,7 @@ Rute: /transaksi/nota/:id   Fase: 3   Frame .pen: "Transaksi - Nota Tersimpan"
 Template: SubScaffold (AppBarSub, tanpa nav)
 
 Komposisi:
-- ReceiptStatusPage: AppCard Nomor nota, AppStatusText Lunas/DP/Belum bayar,
+- ReceiptStatusSection: AppCard Nomor nota, AppStatusText Lunas/DP/Belum bayar,
   'Pembayaran tersimpan.', status printer (nama + Terhubung / belum terhubung).
 - BannerMessage error 'Struk gagal dicetak. Pastikan printer menyala dan Bluetooth aktif.'
   + AppButton 'Coba lagi' dan 'Pengaturan printer'.

@@ -54,6 +54,8 @@ File bisa dibaca (format JSON, 8.939 node, 36 objek tingkat atas).
 
 Aturan tambahan: satu widget publik per file; tanpa kelas widget privat (`_Foo`); tanpa method pembangun widget (`Widget _buildX()`); semua data lewat konstruktor, aksi lewat callback.
 
+**Section (potongan layar fitur).** Setiap fitur boleh memiliki `*Section` di `features/<fitur>/widgets/*_section.dart`: potongan layar milik satu fitur, tanpa state sendiri, data lewat konstruktor dan aksi lewat callback, tanpa impor Riverpod/go_router maupun `widgets/` fitur lain. Akhiran `*Page` hanya untuk kelas yang menjadi builder rute di `app_router.dart` atau `*_routes.dart`; akhiran `*Sheet` hanya untuk modal. Section bukan entri registry; bila dipakai dua fitur atau lebih, ia naik ke registry lewat proposal. Logika non-UI (controller, draf, view-data, pemetaan) tinggal di `features/<fitur>/state/`.
+
 ### 5.2 Registry (60 widget; padanan nama komponen di desain)
 
 **Atoms (17):** `AppText`, `AppIcon`, `AppSvg`, `AppButton` (varian: cta, secondary, action, actionOutline, destructiveOutline, destructiveFilled), `AppIconButton`, `AppChip`, `AppBadge` (diproses, siap, menungguJemput, selesai, dibatalkan), `AppStatusText` (lunas, belumBayar, dp), `AppAvatar`, `AppCard` (opsi rail kiri amber/merah), `AppDivider`, `AppGap`, `AppSwitch`, `AppTextField`\*, `AppSearchField`\*, `AppSkeleton`, `AppNumpadKey`.
@@ -80,9 +82,9 @@ Semua token hidup di `lib/core/theme/` (satu-satunya tempat boleh memakai `Color
 
 ## 7. State management dan data
 
-**Struktur per fitur:** `domain/` (model dan antarmuka repository), `data/` (repository in-memory + fixture), `providers/` (Notifier/AsyncNotifier), `pages/`.
+**Struktur per fitur:** `pages/` (hanya `*_page`, `*_sheet`, `*_flow`, `*_routes`), `widgets/` (`*_section`), `state/` (Notifier/AsyncNotifier, draf, view-data, pemetaan), `data/` (repository in-memory dan fixture). Model dan antarmuka repository tinggal di `core/domain/`.
 
-- Pages adalah satu-satunya lapisan yang membaca provider (`ConsumerWidget`).
+- Pages dan Sheets adalah satu-satunya lapisan fitur yang membaca provider (`ConsumerWidget`); Section menerima data lewat konstruktor (Section lama yang masih membaca provider dicatat di `tool/section_riverpod_debt.txt` dan dimigrasikan bertahap).
 - State sementara layar (filter terpilih, tab periode, isi numpad, draf form) memakai `Notifier.autoDispose` per layar. Tidak ada `setState`.
 - Repository dipasang lewat provider dan di-override di `main_dummy.dart` (data dummy). Saat backend siap, `main.dart` meng-override dengan repository Drift. **Pages dan widget tidak berubah.**
 - Logika murni (hitung total, estimasi selesai, status bayar, saldo tabungan, rumus laporan) ada di `core/domain/` sebagai fungsi tanpa Flutter dan memiliki unit test. Logika yang sama dipakai backend (PRD B).
