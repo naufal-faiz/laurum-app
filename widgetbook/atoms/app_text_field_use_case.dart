@@ -12,7 +12,7 @@ final appTextFieldUseCase = WidgetbookUseCase(
       spacing: AppSpacing.cardGap,
       children: [
         AppTextField(label: 'Empty', hint: 'Placeholder'),
-        AppTextField(label: 'Filled', value: 'Sample text'),
+        AppTextField(label: 'Filled', value: 'Sample text', selectAllOnFocus: true),
         AppTextField(label: 'Error', value: 'Invalid', errorText: 'Error message'),
         AppTextField(label: 'Disabled', value: 'Disabled', enabled: false),
         AppTextField(label: 'Read only', value: 'Read only', readOnly: true),

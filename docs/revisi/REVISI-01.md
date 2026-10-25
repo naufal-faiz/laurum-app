@@ -4,7 +4,7 @@ Sumber: uji dummy app di Android (Naufal) + audit statis cabang dev1 (prompt 70)
 ## Daftar revisi
 | No | Permintaan | Akar masalah di kode | Prompt | Status |
 | --- | --- | --- | --- | --- |
-| 1, 10 | Input tertutup keyboard (diskon, dan semua input) | AppBottomSheet.show tanpa padding viewInsets; berlaku untuk semua sheet berinput | R1 | BELUM |
+| 1, 10 | Input tertutup keyboard (diskon, dan semua input) | AppBottomSheet.show tanpa padding viewInsets; berlaku untuk semua sheet berinput | R1 | SEDANG: fondasi widget, audit layar belum |
 | 2 | Angka 0 di diskon harus tergantikan | DiscountInput.start menulis "0" ke field; tidak ada select-all dan pembersih nol di depan | R1 | BELUM |
 | 3 | Berat default 1 kg, tidak bisa 0, edit tanpa hapus angka | WeightEdit menambah digit ke nilai awal; layar menampilkan 0,5 saat nilai 0 (klamp diam-diam) | R1 | BELUM |
 | 4 | FAB tambah di Pilih Layanan | SubScaffold belum mendukung FAB | R3 | BELUM |

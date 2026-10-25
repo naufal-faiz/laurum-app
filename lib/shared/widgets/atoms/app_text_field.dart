@@ -18,6 +18,7 @@ class AppTextField extends StatefulWidget {
     this.enabled = true,
     this.readOnly = false,
     this.obscureText = false,
+    this.selectAllOnFocus = false,
     this.minLines = 1,
     this.maxLines = 1,
     this.textInputAction,
@@ -29,7 +30,7 @@ class AppTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final List<TextInputFormatter>? inputFormatters;
-  final bool enabled, readOnly, obscureText;
+  final bool enabled, readOnly, obscureText, selectAllOnFocus;
   final int minLines, maxLines;
 
   @override
@@ -38,10 +39,18 @@ class AppTextField extends StatefulWidget {
 
 class _AppTextFieldState extends State<AppTextField> {
   late final TextEditingController _controller;
+  final _focusNode = FocusNode();
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(text: widget.value);
+    _focusNode.addListener(() {
+      if (!_focusNode.hasFocus || !widget.selectAllOnFocus) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted || !_focusNode.hasFocus) return;
+        _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
+      });
+    });
   }
 
   @override
@@ -57,6 +66,7 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   void dispose() {
+    _focusNode.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -66,6 +76,7 @@ class _AppTextFieldState extends State<AppTextField> {
     label: widget.label,
     child: TextField(
       controller: _controller,
+      focusNode: _focusNode,
       enabled: widget.enabled,
       readOnly: widget.readOnly,
       obscureText: widget.obscureText,

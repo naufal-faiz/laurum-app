@@ -1,5 +1,6 @@
 import 'package:widgetbook/widgetbook.dart';
 
+import 'app_bottom_sheet_keyboard_use_case.dart';
 import 'app_bottom_sheet_use_case.dart';
 import 'confirm_modal_use_case.dart';
 import 'numpad_use_case.dart';
@@ -13,7 +14,10 @@ final o2Components = <WidgetbookComponent>[
   WidgetbookComponent(name: 'ReceiptPreview', useCases: [receiptPreviewUseCase]),
   WidgetbookComponent(name: 'ReceiptToggleList', useCases: [receiptToggleListUseCase]),
   WidgetbookComponent(name: 'Numpad', useCases: [numpadUseCase]),
-  WidgetbookComponent(name: 'AppBottomSheet', useCases: [appBottomSheetUseCase]),
+  WidgetbookComponent(
+    name: 'AppBottomSheet',
+    useCases: [appBottomSheetUseCase, appBottomSheetKeyboardUseCase],
+  ),
   WidgetbookComponent(name: 'ConfirmModal', useCases: [confirmModalUseCase]),
   WidgetbookComponent(name: 'ReportSummary', useCases: [reportSummaryUseCase]),
   WidgetbookComponent(name: 'TopServices', useCases: [topServicesUseCase]),

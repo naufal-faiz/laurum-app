@@ -342,14 +342,16 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   Tes memeriksa callback, sedangkan state layar nanti ditangani Riverpod pada Pages.
 
 ## AppTextField
-- Berkas: lib/shared/widgets/atoms/app_text_field.dart (88 baris).
+- Berkas: lib/shared/widgets/atoms/app_text_field.dart (99 baris).
 - Parameter: label wajib (aksesibilitas, bukan label visual); value = ''; hint/errorText;
   onChanged/onSubmitted; keyboardType/textInputAction/inputFormatters; enabled = true;
-  readOnly/obscureText = false; minLines/maxLines = 1; key.
+  readOnly/obscureText/selectAllOnFocus = false; minLines/maxLines = 1; key.
 - Contoh: AppTextField(label: label, value: value, errorText: error, onChanged: onChange).
 - Varian galeri: kosong, terisi, error, disabled, readOnly, password, multiline.
 - Controller dimiliki widget dan dibuang di dispose. Perubahan value eksternal mengganti teks
   dan memindah caret ke akhir; echo nilai yang sama tidak mengubah selection/composing.
+- FocusNode dimiliki widget dan dibuang di dispose. selectAllOnFocus memilih seluruh teks
+  saat mendapat fokus (termasuk fokus ulang), agar ketikan mengganti nilai awal.
 - Validasi/format bisnis milik pemanggil. Label visual disusun LabeledField pada tahap molecules.
 - obscureText dikontrol pemanggil; tombol toggle mata pada j6ZtZV belum disediakan.
 - Tes: entry/filter, submit, value eksternal, error, disposal dan opsi varian.
@@ -563,6 +565,9 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Contoh: AppBottomSheet.show<void>(context: context, title: 'Pembayaran',
   subtitle: 'Nota A-0143 · Pak Dedi', child: PaymentSheet(...)).
 - Galeri: app_bottom_sheet_use_case.dart; tes buka/tutup lewat show.
+- R1: show memakai useSafeArea, batas tinggi 90% layar dan padding viewInsets keyboard.
+  Slot child fleksibel agar SheetScaffold menggulir body dan menjaga footer tetap terlihat.
+  Galeri tambahan app_bottom_sheet_keyboard_use_case.dart membuka modal dengan input.
 - Referensi C/Sheet: radius 28, drag handle 40x4 borderStrong, padding 12/16 dan 4/16,
   judul section 16/22, subjudul caption. AppIconButton close berlatar putih sedangkan
   frame chipIdle; atom tidak diubah.
@@ -643,6 +648,9 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Contoh: FormScaffold(title: 'Catat pengeluaran', backLabel: 'Kembali', body: fields,
   summary: total, footer: AppButton('Simpan pengeluaran', onPressed: save)).
 - Galeri: form_scaffold_use_case.dart; tes body, ringkasan, footer, golden.
+- R1: footer diberi padding viewInsets agar berada di atas keyboard; body tetap dapat digulir.
+  Varian galeri Input dan keyboard; tes keyboard bersama sheet pada 390x844 dan 320x640,
+  keyboard 300 dp, dengan safe area. Golden tanpa keyboard dipertahankan.
 - Referensi Catat Pengeluaran/uqTPF: app bar sub + body gulir + footer sticky bertabayang.
   Frame memakai padding 8/16 pada stack; template memakai 16 agar konsisten.
 

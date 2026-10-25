@@ -26,12 +26,19 @@ class AppBottomSheet extends StatelessWidget {
   }) => showModalBottomSheet<T>(
     context: context,
     isScrollControlled: true,
+    useSafeArea: true,
     backgroundColor: AppColors.surface,
     barrierColor: AppColors.scrim,
     shape: const RoundedRectangleBorder(borderRadius: AppRadius.sheet),
-    builder: (context) => SafeArea(
-      top: false,
-      child: AppBottomSheet(title: title, subtitle: subtitle, child: child),
+    builder: (context) => ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * .9),
+      child: Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+        child: SafeArea(
+          top: false,
+          child: AppBottomSheet(title: title, subtitle: subtitle, child: child),
+        ),
+      ),
     ),
   );
 
@@ -80,7 +87,7 @@ class AppBottomSheet extends StatelessWidget {
           ],
         ),
       ),
-      child,
+      Flexible(child: child),
     ],
   );
 }

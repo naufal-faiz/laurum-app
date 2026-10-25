@@ -16,6 +16,7 @@ final appBottomSheetUseCase = WidgetbookUseCase(
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.screenPadding),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: AppSpacing.cardGap,
           children: [

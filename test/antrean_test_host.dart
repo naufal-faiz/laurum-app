@@ -31,11 +31,16 @@ Future<({ProviderContainer container, GoRouter router})> pumpAntrean(
   await tester.pumpWidget(
     UncontrolledProviderScope(
       container: scope,
-      child: MediaQuery(
-        data: MediaQueryData(textScaler: TextScaler.linear(textScale)),
-        child: RepaintBoundary(
-          key: const ValueKey('antrean-golden'),
-          child: LaurumApp(router: router),
+      child: MediaQuery.fromView(
+        view: tester.view,
+        child: Builder(
+          builder: (context) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(textScale)),
+            child: RepaintBoundary(
+              key: const ValueKey('antrean-golden'),
+              child: LaurumApp(router: router),
+            ),
+          ),
         ),
       ),
     ),

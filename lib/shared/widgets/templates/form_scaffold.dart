@@ -36,6 +36,9 @@ class FormScaffold extends StatelessWidget {
       ),
     ),
     body: SingleChildScrollView(padding: padding, child: body),
-    bottomNavigationBar: FooterBar(summary: summary, child: footer),
+    bottomNavigationBar: Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+      child: FooterBar(summary: summary, child: footer),
+    ),
   );
 }

@@ -3,6 +3,7 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
+import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 import 'package:widgetbook/widgetbook.dart';
 
@@ -35,6 +36,16 @@ final formScaffoldUseCases = [
       onBack: () {},
       body: _body,
       footer: AppButton('Simpan pengeluaran', onPressed: () {}),
+    ),
+  ),
+  WidgetbookUseCase(
+    name: 'Input dan keyboard',
+    builder: (context) => FormScaffold(
+      title: 'Input dan keyboard',
+      backLabel: 'Kembali',
+      onBack: () {},
+      body: const AppTextField(label: 'Catatan', hint: 'Catatan'),
+      footer: AppButton('Simpan', onPressed: () {}),
     ),
   ),
 ];
