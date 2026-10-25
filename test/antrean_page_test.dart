@@ -16,7 +16,7 @@ void main() {
     final host = await pumpAntrean(tester);
     expect(find.text('Berkah Laundry'), findsOneWidget);
     expect(find.text('Semua 12'), findsOneWidget);
-    expect(find.text('Jumat, 16 Okt 2026 · 12 order'), findsOneWidget);
+    expect(find.text('12 order aktif'), findsOneWidget);
     expect(tester.widget<ChipBar>(find.byType(ChipBar)).labels.last, 'Perlu dicek 3');
     await tester.tap(find.text('Proses 5'));
     await tester.pumpAndSettle();
@@ -33,7 +33,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(host.container.read(antreanFilterProvider), 2);
     expect(tester.widget<ChipBar>(find.byType(ChipBar)).selectedIndex, 2);
-    await tester.tap(find.text('Transaksi baru'));
+    await tester.tap(find.descendant(of: nav, matching: find.text('Transaksi')));
     await tester.pumpAndSettle();
     expect(host.router.canPop(), isTrue);
     expect(find.text('Buat transaksi'), findsWidgets);

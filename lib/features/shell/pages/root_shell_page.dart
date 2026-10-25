@@ -21,10 +21,9 @@ class RootShellPage extends ConsumerWidget {
       syncState: sync.hasError
           ? SyncState.gagal
           : SyncState.values.byName(sync.value?.name ?? 'menyimpan'),
-      onAccount: () => navigationShell.goBranch(4),
+      onAccount: () => navigationShell.goBranch(3),
       onTabSelected: navigationShell.goBranch,
-      fabLabel: navigationShell.currentIndex == 0 ? 'Transaksi baru' : null,
-      onFab: navigationShell.currentIndex == 0 ? () => context.push('/transaksi/baru') : null,
+      onCreate: () => context.push('/transaksi/baru'),
       body: SafeArea(
         top: false,
         child: Column(

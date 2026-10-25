@@ -28,7 +28,7 @@ void main() {
     expect(find.byType(AppSkeleton), findsWidgets);
     pending.complete(emptyQueue);
     await tester.pumpAndSettle();
-    expect(find.text('Belum ada order hari ini'), findsOneWidget);
+    expect(find.text('Belum ada order aktif'), findsOneWidget);
     await tester.tap(find.text('Transaksi baru').first);
     await tester.pumpAndSettle();
     expect(find.text('Buat transaksi'), findsWidgets);
@@ -46,7 +46,7 @@ void main() {
     expect(find.text('Tidak ada order di status ini'), findsOneWidget);
     await tester.tap(find.text('Semua 0'));
     await tester.pumpAndSettle();
-    expect(find.text('Belum ada order hari ini'), findsOneWidget);
+    expect(find.text('Belum ada order aktif'), findsOneWidget);
   });
   testWidgets('failed load retries through repository state', (tester) async {
     var calls = 0;
@@ -65,7 +65,7 @@ void main() {
     await tester.tap(find.text('Coba lagi'));
     await tester.pumpAndSettle();
     expect(calls, 2);
-    expect(find.text('Belum ada order hari ini'), findsOneWidget);
+    expect(find.text('Belum ada order aktif'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
   testWidgets('320px with text 2x does not overflow', (tester) async {

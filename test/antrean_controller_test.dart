@@ -5,6 +5,8 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/antrean_controller.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
+import 'package:laurum/features/orders/state/order_detail_controller.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/main_dummy.dart';
 
 void main() {
@@ -42,5 +44,24 @@ void main() {
     final data = await container.read(antreanDataProvider.future);
     expect(data.chips.last, 'Perlu dicek 2');
     expect(data.orders.singleWhere((o) => o.id == 'ord-0139').status, OrderStatus.menungguJemput);
+  });
+  test('active queue includes older orders and excludes completed and cancelled', () async {
+    final repository = container.read(orderRepositoryProvider);
+    final all = await repository.getOrders();
+    final completed = all.firstWhere((o) => o.status == OrderStatus.selesai);
+    final active = all.firstWhere((o) => o.status == OrderStatus.diproses);
+    final detail = (await container.read(orderDetailProvider(active.id).future))!;
+    expect(await container.read(orderActionsProvider.notifier).cancel(detail), isTrue);
+    final data = await container.read(antreanDataProvider.future);
+    expect(data.orders.map((o) => o.id), isNot(contains(completed.id)));
+    expect(data.orders.map((o) => o.id), isNot(contains(active.id)));
+    expect(data.orders.any((o) => o.enteredAt.day < 16), isTrue);
+    expect(
+      data.orders.every(
+        (o) =>
+            [OrderStatus.menungguJemput, OrderStatus.diproses, OrderStatus.siap].contains(o.status),
+      ),
+      isTrue,
+    );
   });
 }

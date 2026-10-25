@@ -9,7 +9,7 @@ import '../widgetbook/templates/root_scaffold_use_case.dart';
 import 'template_gallery.dart';
 
 void main() {
-  testWidgets('RootScaffold composes app bar, nav, and optional FAB', (tester) async {
+  testWidgets('RootScaffold composes four tabs and create action without FAB', (tester) async {
     int? selectedTab;
     var fabTaps = 0;
     await tester.pumpWidget(
@@ -20,8 +20,7 @@ void main() {
           accountLabel: 'Akun',
           activeIndex: 0,
           syncState: SyncState.offline,
-          fabLabel: 'Transaksi baru',
-          onFab: () => fabTaps++,
+          onCreate: () => fabTaps++,
           onTabSelected: (index) => selectedTab = index,
           body: const AppText('Isi layar'),
         ),
@@ -31,8 +30,9 @@ void main() {
     expect(find.text('Offline'), findsOneWidget);
     expect(find.text('Isi layar'), findsOneWidget);
     await tester.tap(find.text('Laporan'));
-    expect(selectedTab, 3);
-    await tester.tap(find.text('Transaksi baru'));
+    expect(selectedTab, 2);
+    expect(find.byType(FloatingActionButton), findsNothing);
+    await tester.tap(find.text('Transaksi'));
     expect(fabTaps, 1);
   });
   registerTemplateGallery('root_scaffold', rootScaffoldUseCases.first.builder);

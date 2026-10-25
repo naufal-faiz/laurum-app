@@ -47,7 +47,7 @@ class AntreanStatusSection extends StatelessWidget {
           ? 'Gagal memuat data'
           : filtered
           ? 'Tidak ada order di status ini'
-          : 'Belum ada order hari ini',
+          : 'Belum ada order aktif',
       icon: error ? AppIcons.alert : AppIcons.queue,
       description: error
           ? 'Periksa koneksi dan coba lagi.'

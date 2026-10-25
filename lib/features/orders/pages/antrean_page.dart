@@ -6,7 +6,6 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/state/antrean_controller.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/orders/widgets/antrean_status_section.dart';
-import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
@@ -35,9 +34,8 @@ class AntreanPage extends ConsumerWidget {
       padding: const EdgeInsets.all(AppSpacing.screenPadding),
       children: [
         SectionHeader(
-          title: 'Antrean hari ini',
-          subtitle:
-              '${Formatters.tanggal(ref.watch(businessClockProvider)())} · ${data.orders.length} order',
+          title: 'Antrean aktif',
+          subtitle: '${data.orders.length} order aktif',
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.cardGap),

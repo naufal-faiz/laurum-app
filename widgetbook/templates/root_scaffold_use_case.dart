@@ -14,27 +14,26 @@ const _body = Padding(
     children: [
       AppText('Ringkasan hari ini', variant: AppTextVariant.section),
       AppCard(child: AppText('Konten layar ditempatkan pada slot body.')),
-      AppCard(child: AppText('BottomNavBar dan FAB berasal dari template.')),
+      AppCard(child: AppText('BottomNavBar dan aksi Transaksi berasal dari template.')),
     ],
   ),
 );
 
 final rootScaffoldUseCases = [
   WidgetbookUseCase(
-    name: 'Dengan FAB',
+    name: 'Navigasi dan Transaksi',
     builder: (context) => RootScaffold(
       title: 'Antrean',
       accountLabel: 'Akun',
       activeIndex: 0,
-      fabLabel: 'Transaksi baru',
-      onFab: () {},
+      onCreate: () {},
       onAccount: () {},
       onTabSelected: (_) {},
       body: _body,
     ),
   ),
   WidgetbookUseCase(
-    name: 'Tanpa FAB, offline',
+    name: 'Offline',
     builder: (context) => RootScaffold(
       title: 'Antrean',
       accountLabel: 'Akun',

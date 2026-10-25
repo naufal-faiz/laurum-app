@@ -9,7 +9,8 @@ final bottomNavBarUseCase = WidgetbookUseCase(
     child: Column(
       spacing: AppSpacing.cardGap,
       children: [
-        for (var i = 0; i < 5; i++) BottomNavBar(activeIndex: i, onSelected: (_) {}),
+        for (var i = 0; i < 4; i++)
+          BottomNavBar(activeIndex: i, onSelected: (_) {}, onCreate: () {}),
         const BottomNavBar(activeIndex: 0),
       ],
     ),

@@ -10,9 +10,10 @@ void main() {
     await tester.pumpAndSettle();
     final scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
     final theme = Theme.of(tester.element(find.byType(Scaffold)));
-    expect(find.text('Antrean hari ini'), findsOneWidget);
+    expect(find.text('Antrean aktif'), findsOneWidget);
     expect(scaffold.appBar, isNotNull);
-    expect(scaffold.floatingActionButton, isNotNull);
+    expect(scaffold.floatingActionButton, isNull);
+    expect(find.text('Transaksi'), findsOneWidget);
     expect(theme.scaffoldBackgroundColor, AppColors.bg);
     expect(theme.colorScheme.primary, AppColors.primary);
     expect(theme.textTheme.bodyMedium?.fontFamily, AppTextStyles.fontFamily);

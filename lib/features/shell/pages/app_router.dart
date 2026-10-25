@@ -25,6 +25,7 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
   initialLocation: initialLocation,
   errorBuilder: (context, state) => const PlaceholderPage(title: 'Halaman tidak ditemukan'),
   routes: [
+    GoRoute(path: '/transaksi', builder: (context, state) => const NotaHistoryPage()),
     GoRoute(path: '/transaksi/baru', builder: (context, state) => const TransactionPage()),
     GoRoute(
       path: '/transaksi/baru/layanan',
@@ -85,7 +86,7 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
                 builder: (context, state) => switch (route.key) {
                   '/antrean' => const AntreanPage(),
                   '/pelanggan' => const CustomerDirectoryPage(),
-                  '/transaksi' => const NotaHistoryPage(),
+
                   '/laporan' => const ReportPage(),
                   '/lainnya' => const SettingsPage(),
                   _ => PlaceholderPage(title: route.value, isTab: true),

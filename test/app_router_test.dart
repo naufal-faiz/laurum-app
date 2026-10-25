@@ -7,7 +7,7 @@ import 'antrean_test_host.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
-  testWidgets('all PRD routes resolve, static paths win and five branches navigate', (
+  testWidgets('all PRD routes resolve, static paths win and four branches navigate', (
     tester,
   ) async {
     final host = await pumpAntrean(tester);
