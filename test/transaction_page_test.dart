@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:laurum/features/orders/pages/antrean_controller.dart';
+import 'package:laurum/features/orders/state/antrean_controller.dart';
 import 'package:laurum/features/transactions/pages/customer_picker_sheet.dart';
 import 'package:laurum/features/transactions/pages/discount_sheet.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_numpad_key.dart';
 import 'package:laurum/shared/widgets/molecules/stepper_field.dart';

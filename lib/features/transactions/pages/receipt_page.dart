@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/transactions/pages/receipt_print_controller.dart';
-import 'package:laurum/features/transactions/pages/receipt_status_page.dart';
-import 'package:laurum/features/transactions/pages/receipt_view.dart';
+import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
+import 'package:laurum/features/transactions/state/receipt_view.dart';
+import 'package:laurum/features/transactions/widgets/receipt_status_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -40,7 +40,7 @@ class ReceiptPage extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    ReceiptStatusPage(view: receipt),
+                    ReceiptStatusSection(view: receipt),
                     const SizedBox(height: AppSpacing.screenPadding),
                     ReceiptPreview(
                       lines: receipt.lines,

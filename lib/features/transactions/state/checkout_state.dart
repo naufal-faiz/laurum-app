@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
-import 'package:laurum/features/transactions/pages/checkout_save.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/checkout_save.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 
 enum PaymentMode { lunas, dp, belumBayar }
 

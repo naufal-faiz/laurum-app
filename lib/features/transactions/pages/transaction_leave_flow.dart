@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/shared/widgets/organisms/confirm_modal.dart';
 
 Future<void> leaveTransaction(BuildContext context, WidgetRef ref) async {

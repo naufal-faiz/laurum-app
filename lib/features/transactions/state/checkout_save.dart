@@ -8,10 +8,10 @@ import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/core/domain/savings_entry.dart';
 import 'package:laurum/core/domain/savings_rules.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
-import 'package:laurum/features/transactions/pages/checkout_item.dart';
-import 'package:laurum/features/transactions/pages/checkout_state.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/transactions/state/checkout_item.dart';
+import 'package:laurum/features/transactions/state/checkout_state.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 
 Future<String> saveCheckout(
   Ref ref,

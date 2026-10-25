@@ -4,14 +4,14 @@ import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/transactions/pages/customer_picker_sheet.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
-import 'package:laurum/features/transactions/pages/transaction_providers.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/transaction_providers.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
-class TransactionCustomerPage extends ConsumerWidget {
-  const TransactionCustomerPage({super.key});
+class TransactionCustomerSection extends ConsumerWidget {
+  const TransactionCustomerSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/transactions/pages/add_customer_form.dart';
+import 'package:laurum/features/transactions/state/add_customer_form.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
 
-class AddCustomerFormPage extends ConsumerWidget {
-  const AddCustomerFormPage({super.key, this.forOrder = true});
+class AddCustomerFormSection extends ConsumerWidget {
+  const AddCustomerFormSection({super.key, this.forOrder = true});
   final bool forOrder;
 
   @override

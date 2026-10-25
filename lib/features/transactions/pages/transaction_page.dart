@@ -4,11 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/transactions/pages/transaction_actions.dart';
-import 'package:laurum/features/transactions/pages/transaction_customer_page.dart';
-import 'package:laurum/features/transactions/pages/transaction_details_page.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/pages/transaction_leave_flow.dart';
 import 'package:laurum/features/transactions/pages/transaction_line_sheet.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
+import 'package:laurum/features/transactions/widgets/transaction_customer_section.dart';
+import 'package:laurum/features/transactions/widgets/transaction_details_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
@@ -40,7 +40,7 @@ class TransactionPage extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: AppSpacing.cardGap,
         children: [
-          const TransactionCustomerPage(),
+          const TransactionCustomerSection(),
           SectionHeader(
             title: 'Layanan',
             subtitle: '${draft.itemCount} layanan di nota',
@@ -58,7 +58,7 @@ class TransactionPage extends ConsumerWidget {
               icon: AppIcons.service,
               onTap: () => TransactionLineSheet.show(context, ref, line.service.id),
             ),
-          const TransactionDetailsPage(),
+          const TransactionDetailsSection(),
         ],
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/customer.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 
 class AddCustomerState {
   const AddCustomerState({

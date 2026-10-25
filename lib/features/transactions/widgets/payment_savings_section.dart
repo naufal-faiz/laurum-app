@@ -3,16 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/transactions/pages/checkout_state.dart';
-import 'package:laurum/features/transactions/pages/payment_quote.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
-import 'package:laurum/features/transactions/pages/transaction_providers.dart';
+import 'package:laurum/features/transactions/state/checkout_state.dart';
+import 'package:laurum/features/transactions/state/payment_quote.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/transaction_providers.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_switch.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
-class PaymentSavingsPage extends ConsumerWidget {
-  const PaymentSavingsPage({super.key});
+class PaymentSavingsSection extends ConsumerWidget {
+  const PaymentSavingsSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

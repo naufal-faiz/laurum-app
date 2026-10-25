@@ -1,6 +1,6 @@
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/order_item.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 
 OrderItem checkoutItem(
   String orderId,

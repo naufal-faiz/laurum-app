@@ -3,27 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/discount_input.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
 import 'package:laurum/shared/widgets/organisms/app_bottom_sheet.dart';
 import 'package:laurum/shared/widgets/templates/sheet_scaffold.dart';
-
-typedef DiscountInputState = ({String text, String? error});
-
-class DiscountInput extends Notifier<DiscountInputState> {
-  @override
-  DiscountInputState build() => (text: '', error: null);
-  void start(int current) => state = (text: '$current', error: null);
-  void set(String value) => state = (text: value, error: null);
-  void error(String message) => state = (text: state.text, error: message);
-}
-
-final discountInputProvider = NotifierProvider<DiscountInput, DiscountInputState>(
-  DiscountInput.new,
-);
 
 class DiscountSheet extends ConsumerWidget {
   const DiscountSheet({super.key});

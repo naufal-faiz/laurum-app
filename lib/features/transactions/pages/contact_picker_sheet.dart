@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/contact_source.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/transactions/pages/add_customer_form.dart';
+import 'package:laurum/features/transactions/state/add_customer_form.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/organisms/app_bottom_sheet.dart';

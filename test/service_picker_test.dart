@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/features/transactions/pages/service_picker_page.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 
 import 'antrean_test_host.dart';

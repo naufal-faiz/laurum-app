@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/transactions/pages/receipt_view.dart';
+import 'package:laurum/features/transactions/state/receipt_view.dart';
 
 typedef ReceiptPrintState = ({bool printing, String? error, String? notice});
 

@@ -5,9 +5,9 @@ import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/features/transactions/pages/discount_sheet.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
@@ -15,8 +15,8 @@ import 'package:laurum/shared/widgets/molecules/info_row.dart';
 import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 
-class TransactionDetailsPage extends ConsumerWidget {
-  const TransactionDetailsPage({super.key});
+class TransactionDetailsSection extends ConsumerWidget {
+  const TransactionDetailsSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

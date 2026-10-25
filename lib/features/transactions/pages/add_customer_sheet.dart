@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/customer.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/transactions/pages/add_customer_form.dart';
-import 'package:laurum/features/transactions/pages/add_customer_form_page.dart';
 import 'package:laurum/features/transactions/pages/contact_picker_sheet.dart';
+import 'package:laurum/features/transactions/state/add_customer_form.dart';
+import 'package:laurum/features/transactions/widgets/add_customer_form_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/organisms/app_bottom_sheet.dart';
 import 'package:laurum/shared/widgets/templates/sheet_scaffold.dart';
@@ -45,7 +45,7 @@ class AddCustomerSheet extends ConsumerWidget {
           ),
         ],
       ),
-      child: AddCustomerFormPage(forOrder: forOrder),
+      child: AddCustomerFormSection(forOrder: forOrder),
     ),
   );
 }

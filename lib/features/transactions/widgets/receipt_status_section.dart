@@ -7,16 +7,16 @@ import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/transactions/pages/receipt_print_controller.dart';
-import 'package:laurum/features/transactions/pages/receipt_view.dart';
+import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
+import 'package:laurum/features/transactions/state/receipt_view.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_status_text.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 
-class ReceiptStatusPage extends ConsumerWidget {
-  const ReceiptStatusPage({required this.view, super.key});
+class ReceiptStatusSection extends ConsumerWidget {
+  const ReceiptStatusSection({required this.view, super.key});
   final ReceiptView view;
 
   @override

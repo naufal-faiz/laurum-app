@@ -5,8 +5,8 @@ import 'package:laurum/core/services/external_launcher.dart';
 import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/services/data/service_fixtures.dart';
-import 'package:laurum/features/transactions/pages/checkout_state.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/checkout_state.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/main_dummy.dart';
 
 import 'antrean_test_host.dart';

@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/transactions/pages/checkout_state.dart';
-import 'package:laurum/features/transactions/pages/payment_method_page.dart';
-import 'package:laurum/features/transactions/pages/payment_savings_page.dart';
-import 'package:laurum/features/transactions/pages/payment_summary_page.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/checkout_state.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
+import 'package:laurum/features/transactions/widgets/payment_method_section.dart';
+import 'package:laurum/features/transactions/widgets/payment_savings_section.dart';
+import 'package:laurum/features/transactions/widgets/payment_summary_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
@@ -42,7 +42,7 @@ class PaymentPage extends ConsumerWidget {
           ? const Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               spacing: AppSpacing.screenPadding,
-              children: [PaymentSummaryPage(), PaymentSavingsPage(), PaymentMethodPage()],
+              children: [PaymentSummarySection(), PaymentSavingsSection(), PaymentMethodSection()],
             )
           : Center(
               child: EmptyState(

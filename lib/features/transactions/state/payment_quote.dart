@@ -1,5 +1,5 @@
 import 'package:laurum/core/domain/domain_enums.dart';
-import 'package:laurum/features/transactions/pages/checkout_state.dart';
+import 'package:laurum/features/transactions/state/checkout_state.dart';
 
 typedef PaymentQuote = ({
   int savingsUsed,
