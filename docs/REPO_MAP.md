@@ -82,7 +82,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_button_styles.dart (53): AppButtonVariant, AppButtonStyles
 - app_colors.dart (33): AppColors
 - app_control_tokens.dart (16): AppControlTokens
-- app_dimensions.dart (6): AppDimensions
+- app_dimensions.dart (8): AppDimensions
 - app_input_styles.dart (61): AppInputStyles
 - app_molecule_styles.dart (32): AppMoleculeStyles
 - app_molecule_tokens.dart (15): AppMoleculeTokens
@@ -166,8 +166,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_fixtures.dart (31):
 
 ### lib/features/orders/pages/
-- antrean_page.dart (103): AntreanPage
-- nota_history_page.dart (62): NotaHistoryPage
+- antrean_page.dart (101): AntreanPage
+- nota_history_page.dart (67): NotaHistoryPage
 - order_cancel_flow.dart (23):
 - order_detail_page.dart (68): OrderDetailPage
 - order_edit_page.dart (84): OrderEditPage
@@ -234,7 +234,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_top_services.dart (35):
 
 ### lib/features/reports/pages/
-- outstanding_page.dart (53): OutstandingPage
+- outstanding_page.dart (59): OutstandingPage
 - report_page.dart (90): ReportPage
 
 ### lib/features/reports/state/
@@ -276,11 +276,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - settings_menu_section.dart (92): SettingsMenuSection
 
 ### lib/features/shell/pages/
-- app_router.dart (99):
+- app_router.dart (100):
 - lainnya_routes.dart (16):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (17):
-- root_shell_page.dart (49): RootShellPage
+- root_shell_page.dart (48): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (23): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, whatsappConnectionProvider
@@ -370,7 +370,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/organisms/
 - app_bottom_sheet.dart (93): AppBottomSheet
-- bottom_nav_bar.dart (73): BottomNavBar
+- bottom_nav_bar.dart (103): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
 - customer_row.dart (98): CustomerRow
 - expense_row.dart (57): ExpenseRow
@@ -390,13 +390,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/templates/
 - auth_scaffold.dart (20): AuthScaffold
 - form_scaffold.dart (44): FormScaffold
-- root_scaffold.dart (72): RootScaffold
+- root_scaffold.dart (49): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
 - sub_scaffold.dart (35): SubScaffold
 
 ### test/
 - add_customer_test.dart (64):
-- antrean_controller_test.dart (46):
+- antrean_controller_test.dart (67):
 - antrean_golden_test.dart (52):
 - antrean_page_test.dart (57):
 - antrean_states_test.dart (82):
@@ -427,7 +427,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - atom_gallery_test.dart (75):
 - auth_scaffold_test.dart (22):
 - banner_message_test.dart (23):
-- bottom_nav_bar_test.dart (36):
+- bottom_nav_bar_test.dart (85):
 - business_info_page_test.dart (50):
 - callout_ai_test.dart (20):
 - checkout_controller_test.dart (83):
@@ -503,6 +503,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - printer_service_test.dart (42):
 - progress_row_test.dart (23):
 - proposal_card_test.dart (41):
+- r2_navigation_test.dart (56):
 - receipt_fixtures.dart (86):
 - receipt_formatter_settings_test.dart (31):
 - receipt_formatter_test.dart (70):
@@ -541,7 +542,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - weekly_bar_chart_test.dart (30):
 - weight_edit_test.dart (184):
 - weight_input_display_test.dart (38):
-- widget_test.dart (22):
+- widget_test.dart (23):
 
 ### tool/
 - check_all.dart (37): Step
@@ -599,7 +600,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### widgetbook/organisms/
 - app_bottom_sheet_keyboard_use_case.dart (23):
 - app_bottom_sheet_use_case.dart (36):
-- bottom_nav_bar_use_case.dart (17):
+- bottom_nav_bar_use_case.dart (18):
 - confirm_modal_use_case.dart (35):
 - customer_row_use_case.dart (44):
 - expense_row_use_case.dart (27):
@@ -622,7 +623,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### widgetbook/templates/
 - auth_scaffold_use_case.dart (45):
 - form_scaffold_use_case.dart (51):
-- root_scaffold_use_case.dart (48):
+- root_scaffold_use_case.dart (47):
 - sheet_scaffold_use_case.dart (59):
 - sub_scaffold_use_case.dart (40):
 - templates.dart (15):

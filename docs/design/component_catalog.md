@@ -407,13 +407,14 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ## BottomNavBar
 - Berkas: lib/shared/widgets/organisms/bottom_nav_bar.dart.
-- API: activeIndex 0..4 wajib, onSelected(int) opsional. Tanpa navigasi/state internal.
-- Varian: lima tab aktif dan disabled. Ikon terisi untuk aktif; primary + label semibold.
-- Contoh: BottomNavBar(activeIndex: tab, onSelected: selectTab).
-- Galeri: widgetbook/organisms/bottom_nav_bar_use_case.dart; tes: bottom_nav_bar_test.dart.
-- Referensi MurpB: lima kolom, padding vertikal 8, gap 4, ikon 24.
-  Tinggi dinamis 60 + divider/SafeArea, dibanding frame 96; tidak menebak inset perangkat.
-
+- API: activeIndex 0..3 (Antrean/Pelanggan/Laporan/Lainnya), onSelected(int),
+  onCreate opsional, createLabel default Transaksi. Tanpa state/navigasi internal.
+- Lima slot; tengah aksi, bukan tab. Semantics Transaksi baru, selalu tidak aktif.
+- Tombol primary 56 dp terangkat 56/3 dp, cincin surface 4 dp, ikon AppIcons.add.
+  Dua token baru di AppDimensions; tanpa warna baru atau gradien.
+- Contoh: BottomNavBar(activeIndex: tab, onSelected: pilih, onCreate: buat).
+- Galeri empat tab aktif dan disabled; tes callback, semantics, area terangkat,
+  320 px/teks 2x dan golden. Acuan R2 nav-referensi.png menggantikan nav lama .pen.
 ## ServiceRow
 - Berkas: lib/shared/widgets/organisms/service_row.dart.
 - API wajib: name, kind (ServiceKind), price int rupiah, durationDays int.
@@ -619,17 +620,13 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ## RootScaffold
 - Berkas: lib/shared/widgets/templates/root_scaffold.dart.
-- API wajib: title, accountLabel, activeIndex 0..4, body. Opsi: syncState (default
-  tersimpan), fabLabel + onFab (harus berpasangan), onAccount, onTabSelected.
-- Varian: dengan/tanpa FAB, empat status sinkron, tab aktif mana pun.
-- Contoh: RootScaffold(title: 'Antrean', accountLabel: 'Akun', activeIndex: 0,
-  fabLabel: 'Transaksi baru', onFab: buat, onTabSelected: pilihTab, body: content).
-- Galeri: widgetbook/templates/root_scaffold_use_case.dart; tes judul, status sinkron,
-  callback tab dan FAB, golden serta 320 px + teks 2x.
-- Referensi Antrean/C1rcX/MurpB: AppBarRoot + SyncIndicator + BottomNavBar + FAB pil
-  primary 48. FAB memakai FloatingActionButton.extended elevasi 0 dengan radius chip;
-  nav tetap memakai BottomNavBar yang ada (61 px + SafeArea, frame 96).
-
+- API wajib: title, accountLabel, activeIndex 0..3, body. Opsi: syncState,
+  onAccount, onTabSelected, onCreate. Tanpa fabLabel/onFab atau FAB.
+- AppBarRoot + SyncIndicator, body, BottomNavBar dengan aksi tengah.
+- Contoh: RootScaffold(title: nama, accountLabel: akun, activeIndex: tab,
+  onTabSelected: pilih, onCreate: buat, body: content).
+- Widgetbook: navigasi dan Transaksi, offline. Tes tanpa FAB, callback,
+  golden dan 320 px/teks 2x. R2 menggantikan FAB pil lama di frame .pen.
 ## SubScaffold
 - Berkas: lib/shared/widgets/templates/sub_scaffold.dart.
 - API wajib: title, backLabel, body. Opsi: onBack, trailing.
@@ -684,7 +681,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Rute: /antrean di dalam StatefulShellRoute cabang Antrean.
 - Data: antreanDataProvider menggabungkan order/items/payment/customer/proposal dari
   repository publik; tanpa membaca fixture di page.
-- Komposisi: RootScaffold (app bar root, sync, nav, FAB), SectionHeader, ChipBar,
+- Komposisi: RootScaffold (app bar root, sync, nav, aksi Transaksi tengah), SectionHeader, ChipBar,
   ProposalCard di Perlu dicek, OrderCard di Sedang berjalan.
 - State: loading tiga AppSkeleton; error dengan Coba lagi; kosong; filter kosong;
   banner WhatsApp + tombol Hubungkan saat koneksi palsu terputus.
@@ -693,7 +690,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Tes: antrean_page_test, antrean_controller_test, antrean_states_test,
   antrean_golden_test, app_router_test; 7 golden termasuk 320 px dan teks 2x.
 - Selisih: tiga usulan master tampil, tanggal memakai tahun, banner dan tombol Hubungkan
-  terpisah karena BannerMessage tanpa slot aksi, FAB menutupi kartu sampai digulir.
+  terpisah karena BannerMessage tanpa slot aksi, tombol tengah berada di nav.
 
 ### Root shell dan router
 - Berkas: lib/features/shell/pages/{app_router,root_shell_page,placeholder_page,
@@ -703,7 +700,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Rute placeholder: /masuk, /antrean/usulan/:id, /transaksi/*, /order/:id[/edit],
   /pelanggan/*, /laporan/piutang, /lainnya/*.
 - RootShellPage: nama usaha dari businessProfileProvider, SyncService, akun ke tab
-  Lainnya, FAB hanya di tab Antrean, banner WhatsApp di atas daftar.
+  Lainnya, aksi Transaksi tersedia di semua tab, banner WhatsApp di atas daftar.
 - shell_state: businessClockProvider (dummy 16 Okt 2026 12.00), businessProfileProvider,
   shellSyncProvider, whatsappConnectionProvider palsu.
 - Catatan: placeholder daftar turunan (mis. /lainnya/layanan) masih memakai SubScaffold
