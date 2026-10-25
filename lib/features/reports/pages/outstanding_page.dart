@@ -18,7 +18,7 @@ class OutstandingPage extends ConsumerWidget {
     final outstanding = ref.watch(outstandingListProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Piutang'),
+        title: const Text('Daftar piutang'),
         backgroundColor: AppColors.bg,
       ),
       body: outstanding.when(

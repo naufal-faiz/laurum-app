@@ -215,6 +215,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_top_services.dart (35):
 
 ### lib/features/reports/pages/
+- outstanding_controller.dart (95): PaymentRecordState, PaymentRecordController, paymentRecordProvider
+- outstanding_data.dart (68): OutstandingRow, OutstandingListData, OutstandingFilter, outstandingListProvider, outstandingFilterProvider
+- outstanding_list_page.dart (77): OutstandingListPage
+- outstanding_page.dart (53): OutstandingPage
 - report_body_page.dart (63): ReportBodyPage
 - report_export.dart (62): ReportExportState, ReportExport, reportExportProvider
 - report_page.dart (90): ReportPage
@@ -226,9 +230,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_fixtures.dart (67):
 
 ### lib/features/shell/pages/
-- app_router.dart (91):
+- app_router.dart (97):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (22):
+- placeholder_routes.dart (21):
 - root_shell_page.dart (49): RootShellPage
 - shell_state.dart (23): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, whatsappConnectionProvider
 
@@ -427,6 +431,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_edit_test.dart (80):
 - order_number_generator_test.dart (34):
 - organism_gallery.dart (54):
+- outstanding_page_test.dart (38):
 - payment_page_test.dart (59):
 - period_tabs_test.dart (29):
 - piutang_card_test.dart (43):
