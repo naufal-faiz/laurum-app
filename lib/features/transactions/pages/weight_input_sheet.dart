@@ -46,7 +46,7 @@ class WeightInputSheet extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: AppMoleculeTokens.gap,
       children: [
-        AppText(quantity, variant: AppTextVariant.figure),
+        AppText(kilo ? Formatters.beratInput(edit.text) : quantity, variant: AppTextVariant.figure),
         AppText(
           '$quantity x ${Formatters.rupiah(line.service.price)} = ${Formatters.rupiah(total)}',
           color: AppColors.ink2,

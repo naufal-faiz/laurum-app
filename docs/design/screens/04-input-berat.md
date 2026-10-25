@@ -26,11 +26,14 @@ Interaksi:
 - Layar menampilkan nilai apa adanya (0 kg saat kosong); di bawah minimum muncul
   pesan 'Minimal 0,5 kg' / 'Minimal 1 pcs' dan tombol simpan nonaktif. Tidak ada
   pembulatan diam-diam; simpan memakai nilai terkini dan menutup sheet.
+- Angka utama mempertahankan koma dan nol desimal selama mengetik ('0,' / '0,50');
+  ringkasan harga dan penyimpanan tetap memakai nilai gram numerik.
 - Tutup sheet tanpa simpan tidak mengubah draf.
 
 State: kg desimal, pcs standar (koma diabaikan), nilai kosong/'0,', chip menambah,
 di bawah minimum (error + simpan nonaktif).
-Format: Formatters.berat/jumlah/rupiah; qtyMilli = gram/1000 untuk kg dan pcs*1000.
+Format: Formatters.beratInput untuk draf, berat/jumlah/rupiah untuk ringkasan;
+qtyMilli = gram untuk kg dan pcs*1000 untuk satuan.
 
 Selisih terhadap .pen: chip memakai AppChip (bukan NominalChips +Rp); tinggi sheet
 mengikuti isi (numpad + footer), tanpa handle kustom karena AppBottomSheet standar.

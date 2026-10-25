@@ -31,6 +31,11 @@ Status: SELESAI (25 Oktober 2026), menunggu tinjauan pengguna.
   nilai terkini dari provider (bukan nilai build lama) agar ketukan cepat tidak
   menyimpan angka basi.
 - StepperField minus di TransactionLineSheet nonaktif saat qty di minimum.
+- Audit prasyarat R2 menemukan angka utama masih diformat dari gram, sehingga
+  '0,' dan '0,50' kehilangan koma/nol desimal saat mengetik. Sudah dikoreksi:
+  Formatters.beratInput mempertahankan teks draf; ringkasan dan simpan tetap gram.
+  weight_input_display_test membuktikan kegagalan sebelum perbaikan dan memastikan
+  '0,50' tersimpan sebagai 500 gram setelah perbaikan.
 
 ## Nominal
 
@@ -73,18 +78,20 @@ memakai helper 300 dp; perilakunya ditutup tes state dan tes alur lama.
 Perintah: dart run tool/check_all.dart, 25 Oktober 2026.
 
 ```text
-== format      Formatted 437 files (0 changed)
+== format      Formatted 438 files (0 changed)
 == analyze     No issues found!
 == Riverpod lint No issues found!
 == check_arch  check_arch: OK
-== test        +354: All tests passed!
-== repo_map    REPO_MAP diperbarui: 505 berkas
+== test        +355: All tests passed!
+== repo_map    REPO_MAP diperbarui: 506 berkas
 check_all: SEMUA HIJAU
 ```
 
 Tambahan tes: discount_input_test (4), weight_edit_test (8), nominal_input_test (3),
 keyboard_audit_test (14), satu tes stepper di transaction_page_test. Tes lama tidak
 diubah ekspektasinya kecuali satu alur berat yang tetap 3 kg (perilaku baru identik).
+Audit prasyarat R2 menambahkan satu tes weight_input_display_test; seluruh 354 tes
+sebelumnya tetap lulus. R2 belum dimulai karena sesi ini menutup koreksi layar R1.
 
 Pemanggil showModalBottomSheet sudah hanya AppBottomSheet (audit R0).
 Uji perangkat Android/iOS belum dilakukan. Utang Section menyusut 26 -> 25 berkas.

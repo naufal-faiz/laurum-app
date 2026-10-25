@@ -17,6 +17,9 @@ abstract final class Formatters {
 
   static String jumlah(int jumlah) => '$jumlah pcs';
 
+  // Draft numpad text retains its decimal separator and trailing zeroes while editing.
+  static String beratInput(String text) => '${text.isEmpty ? '0' : text} kg';
+
   // Dates are supplied as business-local wall time (WIB), not converted using the device zone.
   static String tanggal(DateTime tanggal, {bool ringkas = false}) =>
       DateFormat(ringkas ? 'd MMM' : 'EEEE, d MMM yyyy', 'id_ID').format(tanggal);

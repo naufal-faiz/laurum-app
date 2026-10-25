@@ -60,7 +60,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - top_services.dart (56):
 
 ### lib/core/formatters/
-- formatters.dart (40): Formatters
+- formatters.dart (43): Formatters
 
 ### lib/core/icons/
 - app_icons.dart (49): AppIcons
@@ -540,6 +540,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_page_test.dart (119):
 - weekly_bar_chart_test.dart (30):
 - weight_edit_test.dart (184):
+- weight_input_display_test.dart (38):
 - widget_test.dart (22):
 
 ### tool/

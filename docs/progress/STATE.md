@@ -2,7 +2,7 @@
 Diperbarui: 2026-10-25 | Cabang dev1rev
 
 ## Posisi
-R0 dan R1 SELESAI. check_all hijau: 354 tes, REPO_MAP 505 berkas.
+R0 dan R1 SELESAI. check_all hijau: 355 tes, REPO_MAP 506 berkas.
 Prompt berikutnya: R2-navigasi-beranda.md. Rincian R1: docs/progress/r1-input-keyboard.md.
 
 ## Selesai
@@ -18,6 +18,8 @@ Prompt berikutnya: R2-navigasi-beranda.md. Rincian R1: docs/progress/r1-input-ke
   mengosongkan, tanpa nol depan, tanpa klamp; tampil nilai apa adanya, pesan
   'Minimal 0,5 kg'/'Minimal 1 pcs', simpan nonaktif; chip menambah; minus stepper
   nonaktif di minimum. Simpan membaca nilai terkini (bukan build lama).
+- Audit sebelum R2: angka utama kini mempertahankan '0,' dan '0,50' dari teks
+  draf via Formatters.beratInput; ringkasan/simpan tetap gram. Tes regresi lulus.
 - R1 nominal: Uang tunai dan Setor tabungan tanpa nol depan; harga layanan membuang
   nol depan dan kosong saat '0', selectAllOnFocus saat harga awal bukan nol.
 - R1 audit keyboard: 14 layar/sheet lulus helper 300 dp (keyboard_audit_test),
@@ -47,7 +49,8 @@ Prompt berikutnya: R2-navigasi-beranda.md. Rincian R1: docs/progress/r1-input-ke
 
 ## Handoff untuk agen penerus
 1. Baca AGENTS.md, SKILLS.md, STATE.md; verifikasi git status/log.
-2. Lanjut R2; satu kelompok widget/layar per sesi, berhenti menunggu tinjauan.
+2. Lanjut R2 (belum dimulai; sesi audit menutup koreksi Input Berat R1).
+   Satu kelompok widget/layar per sesi, berhenti menunggu tinjauan.
 3. Pengguna meminta berhenti bila sisa usage mendekati 10%; simpan STATE + commit.
 4. Launcher sandbox gagal karena G: BitLocker; repo E:, eksekusi tereskalasi berhasil.
 5. Android/iOS perangkat, keyboard nyata, TalkBack/VoiceOver, ekspor/telepon/printer

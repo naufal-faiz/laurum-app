@@ -28,7 +28,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 16 | 60-laporan.md | Laporan Ringkasan, Daftar Piutang | SELESAI (2026-10-25) | check_all hijau, 301 tes; tinjau ringkasan periode dan daftar piutang di HP |
 | 17 | 70-lainnya-a.md | Pengaturan dan Akun, Layanan, Info Usaha | SELESAI (2026-10-25) | check_all hijau, 310 tes; tinjau Pengaturan, Layanan, dan Info Usaha di HP |
 | R0 | R0-struktur-section.md | Revisi: kategori Section, struktur fitur, check_arch (tanpa perubahan perilaku) | SELESAI (2026-10-25) | 38 Page->Section, 50 berkas state, 317 tes hijau; tinjau daftar utang di tool/section_riverpod_debt.txt - 26 berkas |
-| R1 | R1-input-keyboard.md | Revisi 1,2,3,10: keyboard, angka awal, berat | SELESAI (2026-10-25) | Fondasi keyboard, diskon, berat/jumlah, nominal, audit 14 layar + numpad T/A; 354 tes hijau. Catatan: docs/progress/r1-input-keyboard.md |
+| R1 | R1-input-keyboard.md | Revisi 1,2,3,10: keyboard, angka awal, berat | SELESAI (2026-10-25) | Fondasi keyboard, diskon, berat/jumlah, nominal, audit 14 layar + numpad T/A; koreksi teks desimal, 355 tes hijau. Catatan: docs/progress/r1-input-keyboard.md |
 | R2 | R2-navigasi-beranda.md | Revisi 9,11: tombol Transaksi di tengah nav, Beranda antrean aktif | BELUM | Tinjau nav di HP dan teks besar |
 | R3 | R3-transaksi.md | Revisi 4,5: FAB Pilih Layanan, tombol tambah pelanggan | BELUM | |
 | R4 | R4-status-order.md | Revisi 6: pengaturan Pakai status order | BELUM | **Coba Selesaikan -> cetak di HP** |
