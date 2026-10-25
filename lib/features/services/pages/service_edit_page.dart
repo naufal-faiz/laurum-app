@@ -56,7 +56,17 @@ class ServiceEditPage extends ConsumerWidget {
           title: 'Layanan tidak ditemukan',
           icon: AppIcons.service,
         ),
-        data: (value) => ServiceEditFieldsSection(state: value, serviceId: serviceId),
+        data: (value) {
+          final actions = ref.read(serviceEditProvider(serviceId).notifier);
+          return ServiceEditFieldsSection(
+            state: value,
+            onName: actions.setName,
+            onKind: actions.setKind,
+            onPrice: actions.setPrice,
+            onDuration: actions.setDuration,
+            onActive: (value) => actions.setActive(value: value),
+          );
+        },
       ),
     );
   }

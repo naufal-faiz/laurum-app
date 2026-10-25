@@ -40,7 +40,11 @@ class ServiceEditController extends AsyncNotifier<ServiceEditState> {
   void setName(String value) => _edit((s) => s.copyWith(name: value, clearErrors: true));
   void setKind(int index) =>
       _edit((s) => s.copyWith(kind: index == 0 ? ServiceKind.kiloan : ServiceKind.satuan));
-  void setPrice(String value) => _edit((s) => s.copyWith(priceText: value, clearErrors: true));
+  void setPrice(String value) {
+    final digits = value.replaceFirst(RegExp('^0+'), '');
+    _edit((s) => s.copyWith(priceText: digits, clearErrors: true));
+  }
+
   void setDuration(int days) => _edit((s) => s.copyWith(durationDays: days));
   void setActive({required bool value}) => _edit((s) => s.copyWith(isActive: value));
 

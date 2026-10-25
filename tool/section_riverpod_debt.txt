@@ -16,7 +16,6 @@ lib/features/printer/widgets/printer_preview_section.dart
 lib/features/printer/widgets/printer_settings_section.dart
 lib/features/reports/widgets/outstanding_list_section.dart
 lib/features/reports/widgets/report_body_section.dart
-lib/features/services/widgets/service_edit_fields_section.dart
 lib/features/settings/widgets/settings_menu_section.dart
 lib/features/transactions/widgets/add_customer_form_section.dart
 lib/features/transactions/widgets/payment_method_section.dart
