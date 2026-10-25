@@ -11,17 +11,25 @@ Komposisi:
 - Footer AppButton('Simpan berat' / 'Simpan jumlah').
 
 Data dan provider:
-- weightEditProvider menyimpan serviceId + teks input; weightInputSheet membaca
-  TransactionDraftProvider untuk harga/satuan.
+- weightEditProvider menyimpan serviceId, teks input, milli, dan penanda fresh;
+  weightInputSheet membaca TransactionDraftProvider untuk harga/satuan.
 - transactionDraftProvider.setQuantity(serviceId, qtyMilli) setelah simpan.
 
 Interaksi:
-- Ketuk kotak nilai StepperField membuka sheet; chip menambah 0,5/1/5 kg.
-- Numpad mengetik angka/koma; hapus digit mengurangi satu karakter.
-- Simpan memakai nilai terkini (minimal 0,5 kg atau 1 pcs) dan menutup sheet.
+- Ketuk kotak nilai StepperField membuka sheet; StepperField minus nonaktif saat
+  qty sudah di minimum (0,5 kg atau 1 pcs).
+- Setelah sheet dibuka, nilai awal baris (1 kg / 1 pcs) bertanda fresh: ketukan
+  angka pertama MENGGANTI nilai, koma pertama menjadi '0,', Backspace pada nilai
+  fresh mengosongkan field. Angka nol di depan tidak ditampilkan (0,5 bukan 00,5).
+- Chip +0,5/+1/+5 kg menambah ke nilai yang sedang diketik, mematikan fresh, dan
+  tidak membulatkan ke minimum.
+- Layar menampilkan nilai apa adanya (0 kg saat kosong); di bawah minimum muncul
+  pesan 'Minimal 0,5 kg' / 'Minimal 1 pcs' dan tombol simpan nonaktif. Tidak ada
+  pembulatan diam-diam; simpan memakai nilai terkini dan menutup sheet.
 - Tutup sheet tanpa simpan tidak mengubah draf.
 
-State: kg desimal, pcs standar, nilai kosong/koma, chip menambah.
+State: kg desimal, pcs standar (koma diabaikan), nilai kosong/'0,', chip menambah,
+di bawah minimum (error + simpan nonaktif).
 Format: Formatters.berat/jumlah/rupiah; qtyMilli = gram/1000 untuk kg dan pcs*1000.
 
 Selisih terhadap .pen: chip memakai AppChip (bukan NominalChips +Rp); tinggi sheet

@@ -23,8 +23,13 @@ Interaksi:
 - Pilih pelanggan lewat pencarian di CustomerPickerSheet; hasil kosong menawarkan
   Tambah CustomerSheet. Pelanggan terpilih langsung dipakai draf.
 - Pilih layanan menambah DraftLine (kg 1 kg, pcs 1 pcs) lalu kembali.
-- Stepper +/- memakai langkah 0,5 kg atau 1 pcs; nilai dapat diketuk untuk Input Berat.
-- Diskon dibatasi 0..subtotal; total = subtotal - diskon; catatan tersimpan di draf.
+- Stepper +/- memakai langkah 0,5 kg atau 1 pcs; minus nonaktif saat nilai sudah
+  minimum. Nilai dapat diketuk untuk Input Berat (lihat spec 04).
+- Diskon dibatasi 0..subtotal; field kosong berarti 0 (hint '0'), hanya digit tanpa
+  nol di depan, dan nilai awal bukan nol diseleksi semua saat fokus. Total =
+  subtotal - diskon; catatan tersimpan di draf.
+- Field catatan nota dan tombol Bayar tetap terlihat saat keyboard muncul
+  (FooterBar memakai padding viewInsets; field dapat digulir).
 - Bayar menuju /transaksi/baru/bayar (placeholder sampai prompt 32); nonaktif tanpa item.
 - Kembali dengan draf berisi memunculkan ConfirmModal 'Keluar tanpa menyimpan?'.
 

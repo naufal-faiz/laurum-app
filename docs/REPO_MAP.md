@@ -254,19 +254,19 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/services/pages/
 - service_directory_page.dart (71): ServiceDirectoryPage
-- service_edit_page.dart (63): ServiceEditPage
+- service_edit_page.dart (73): ServiceEditPage
 
 ### lib/features/services/state/
 - service_copy.dart (25):
 - service_directory_data.dart (15):
 - service_directory_providers.dart (17): ServiceDirectorySearch, serviceDirectoryProvider, serviceDirectorySearchProvider
-- service_edit_controller.dart (100): ServiceEditController, serviceEditProvider
+- service_edit_controller.dart (104): ServiceEditController, serviceEditProvider
 - service_edit_state.dart (55): ServiceEditState
 
 ### lib/features/services/widgets/
 - service_directory_content_section.dart (68): ServiceDirectoryContentSection
 - service_directory_list_section.dart (37): ServiceDirectoryListSection
-- service_edit_fields_section.dart (96): ServiceEditFieldsSection
+- service_edit_fields_section.dart (100): ServiceEditFieldsSection
 
 ### lib/features/settings/pages/
 - settings_page.dart (35): SettingsPage
@@ -290,28 +290,28 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - cash_input_sheet.dart (57): CashInputSheet
 - contact_picker_sheet.dart (58): ContactPickerSheet, contactsProvider
 - customer_picker_sheet.dart (97): CustomerPickerSheet
-- discount_sheet.dart (72): DiscountSheet
+- discount_sheet.dart (74): DiscountSheet
 - payment_page.dart (63): PaymentPage
 - receipt_page.dart (90): ReceiptPage
 - service_picker_page.dart (101): ServicePickerPage
 - transaction_leave_flow.dart (22):
 - transaction_line_sheet.dart (76): TransactionLineSheet
 - transaction_page.dart (66): TransactionPage
-- weight_input_sheet.dart (86): WeightInputSheet
+- weight_input_sheet.dart (91): WeightInputSheet
 
 ### lib/features/transactions/state/
 - add_customer_form.dart (102): AddCustomerState, AddCustomerForm, addCustomerFormProvider
-- cash_input.dart (21): CashInput, cashInputProvider
+- cash_input.dart (23): CashInput, cashInputProvider
 - checkout_item.dart (21):
 - checkout_save.dart (109):
 - checkout_state.dart (89): PaymentMode, CheckoutState, Checkout, checkoutControllerProvider
-- discount_input.dart (15): DiscountInputState, DiscountInput, discountInputProvider
+- discount_input.dart (19): DiscountInputState, DiscountInput, discountInputProvider
 - payment_quote.dart (34): PaymentQuote
 - receipt_print_controller.dart (47): ReceiptPrintState, ReceiptPrint, receiptPrintProvider
 - receipt_view.dart (55): ReceiptView, receiptViewProvider
 - transaction_draft.dart (110): DraftLine, TransactionDraftState, TransactionDraft, transactionDraftProvider
 - transaction_providers.dart (32): ServiceSearch, CustomerSearch, serviceCatalogProvider, customerCatalogProvider, customerBalanceProvider, serviceSearchProvider, customerSearchProvider
-- weight_edit.dart (58): WeightEditState, WeightEdit, weightEditProvider
+- weight_edit.dart (79): WeightEditState, WeightEdit, weightEditProvider
 
 ### lib/features/transactions/widgets/
 - add_customer_form_section.dart (77): AddCustomerFormSection
@@ -444,6 +444,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_row_test.dart (39):
 - customer_savings_section_test.dart (48):
 - date_group_header_test.dart (24):
+- discount_input_test.dart (118):
 - domain_baseline_test.dart (51):
 - domain_cancel_test.dart (74):
 - domain_flow_test.dart (53):
@@ -475,12 +476,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - formatters_test.dart (40):
 - info_row_test.dart (25):
 - input_templates_keyboard_test.dart (72):
-- keyboard_test_helper.dart (47):
+- keyboard_audit_test.dart (145):
+- keyboard_test_helper.dart (52):
 - labeled_field_test.dart (29):
 - locked_row_test.dart (25):
 - menu_row_test.dart (25):
 - molecule_gallery.dart (35):
 - nominal_chips_test.dart (25):
+- nominal_input_test.dart (77):
 - nota_card_test.dart (37):
 - nota_history_test.dart (67):
 - notice_ai_test.dart (20):
@@ -534,8 +537,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - top_services_test.dart (30):
 - transaction_draft_test.dart (43):
 - transaction_golden_test.dart (118):
-- transaction_page_test.dart (97):
+- transaction_page_test.dart (119):
 - weekly_bar_chart_test.dart (30):
+- weight_edit_test.dart (184):
 - widget_test.dart (22):
 
 ### tool/

@@ -4,9 +4,9 @@ Sumber: uji dummy app di Android (Naufal) + audit statis cabang dev1 (prompt 70)
 ## Daftar revisi
 | No | Permintaan | Akar masalah di kode | Prompt | Status |
 | --- | --- | --- | --- | --- |
-| 1, 10 | Input tertutup keyboard (diskon, dan semua input) | AppBottomSheet.show tanpa padding viewInsets; berlaku untuk semua sheet berinput | R1 | SEDANG: fondasi widget, audit layar belum |
-| 2 | Angka 0 di diskon harus tergantikan | DiscountInput.start menulis "0" ke field; tidak ada select-all dan pembersih nol di depan | R1 | BELUM |
-| 3 | Berat default 1 kg, tidak bisa 0, edit tanpa hapus angka | WeightEdit menambah digit ke nilai awal; layar menampilkan 0,5 saat nilai 0 (klamp diam-diam) | R1 | BELUM |
+| 1, 10 | Input tertutup keyboard (diskon, dan semua input) | AppBottomSheet.show tanpa padding viewInsets; berlaku untuk semua sheet berinput | R1 | SELESAI (2026-10-25): fondasi + audit 14 layar; numpad T/A |
+| 2 | Angka 0 di diskon harus tergantikan | DiscountInput.start menulis "0" ke field; tidak ada select-all dan pembersih nol di depan | R1 | SELESAI (2026-10-25) |
+| 3 | Berat default 1 kg, tidak bisa 0, edit tanpa hapus angka | WeightEdit menambah digit ke nilai awal; layar menampilkan 0,5 saat nilai 0 (klamp diam-diam) | R1 | SELESAI (2026-10-25) |
 | 4 | FAB tambah di Pilih Layanan | SubScaffold belum mendukung FAB | R3 | BELUM |
 | 5 | Tombol tambah pelanggan di samping Pilih pelanggan | TransactionCustomerSection hanya satu tombol | R3 | BELUM |
 | 6 | Pengaturan pakai status order atau tidak | Status order selalu dipakai; belum ada pengaturan | R4 | BELUM |
