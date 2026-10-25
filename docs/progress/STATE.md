@@ -27,8 +27,9 @@ Pengaturan dan Akun, Daftar/Tambah/Edit Layanan, dan Info Usaha terimplementasi.
   memperbarui AppBarRoot dan struk. Spec layar 19-22 dan rincian di fase-8.md.
 
 ## Antrean
-- Berkas prompt berikutnya: docs/prompts/71-lainnya-b.md (Daftar dan Catat
-  Pengeluaran).
+- Revisi hasil uji HP (25 Okt 2026): kerjakan seri R dulu, dari docs/prompts/R0-struktur-section.md
+  sampai R7; daftar di docs/revisi/REVISI-01.md. Prompt 71 ditunda sampai R7 SELESAI.
+- Setelah seri R: docs/prompts/71-lainnya-b.md (Daftar dan Catat Pengeluaran).
 - Setelah itu 80-ai.md (layar AI dummy) dan 90-auth-sinkron.md (Masuk Google,
   Sinkronisasi, Akun).
 - Catat bayar dan Ingatkan di Daftar Piutang masih perlu sheet Numpad dan

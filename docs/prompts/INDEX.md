@@ -1,5 +1,7 @@
 # Antrean prompt (urut)
 
+Seri R (revisi hasil uji HP, 25 Okt 2026) dikerjakan lebih dulu, berurutan R0 sampai R7; daftar revisi lengkap di docs/revisi/REVISI-01.md. Setelah R7, lanjut No 18.
+
 Cara memakai: tempel prompt LANJUT di bawah ke agen setiap kali. Agen mengambil baris pertama berstatus BELUM atau SEDANG, mengerjakannya, mengubah statusnya sendiri, lalu berhenti. Jika ada koreksi, jelaskan ke agen, lalu jalankan LANJUT lagi.
 
 ```
@@ -25,6 +27,14 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 15 | 51-pelanggan-b.md | Setor Tabungan, Riwayat Tabungan, Impor Kontak | SELESAI (2026-10-24) | check_all hijau, 292 tes; tinjau setoran, riwayat, dan impor kontak di HP |
 | 16 | 60-laporan.md | Laporan Ringkasan, Daftar Piutang | SELESAI (2026-10-25) | check_all hijau, 301 tes; tinjau ringkasan periode dan daftar piutang di HP |
 | 17 | 70-lainnya-a.md | Pengaturan dan Akun, Layanan, Info Usaha | SELESAI (2026-10-25) | check_all hijau, 310 tes; tinjau Pengaturan, Layanan, dan Info Usaha di HP |
+| R0 | R0-struktur-section.md | Revisi: kategori Section, struktur fitur, check_arch (tanpa perubahan perilaku) | BELUM | Tinjau daftar utang Riverpod dan hasil pemindahan |
+| R1 | R1-input-keyboard.md | Revisi 1,2,3,10: keyboard, angka awal, berat | BELUM | **Coba semua sheet berinput di HP** |
+| R2 | R2-navigasi-beranda.md | Revisi 9,11: tombol Transaksi di tengah nav, Beranda antrean aktif | BELUM | Tinjau nav di HP dan teks besar |
+| R3 | R3-transaksi.md | Revisi 4,5: FAB Pilih Layanan, tombol tambah pelanggan | BELUM | |
+| R4 | R4-status-order.md | Revisi 6: pengaturan Pakai status order | BELUM | **Coba Selesaikan -> cetak di HP** |
+| R5 | R5-laporan-rentang.md | Revisi 8,13,14: rentang tanggal, Ekspor di atas | BELUM | Tinjau pemilih tanggal dan angka |
+| R6 | R6-laporan-nota.md | Revisi 7,8,13: daftar nota di Laporan, hapus Riwayat Nota | BELUM | Tinjau rekonsiliasi angka dan daftar nota |
+| R7 | R7-pelanggan-akun.md | Revisi 12,15: tombol Pelanggan baru di atas, tombol Keluar | BELUM | Tinjau di HP |
 | 18 | 71-lainnya-b.md | Daftar dan Catat Pengeluaran | BELUM | |
 | 19 | 80-ai.md | Layar AI (dummy) | BELUM | |
 | 20 | 90-auth-sinkron.md | Masuk Google (dummy), Sinkronisasi, Akun | BELUM | |

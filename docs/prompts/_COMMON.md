@@ -20,19 +20,21 @@ Setiap berkas prompt di folder ini diawali "Ikuti _COMMON.md". Isinya berlaku un
 ## C. Standar setiap layar
 1. Spec: jika docs/design/screens/NN-nama.md belum ada, buat dari _TEMPLATE.md memakai teks frame .pen dan HANYA nama widget registry.
 2. Data: pakai model, fixture, dan repository dari core/domain dan data in-memory. Tambah hanya yang diperlukan.
-3. Page (ConsumerWidget) maksimal 100 baris, dibangun dari templates, organisms, molecules. Jika panjang, pindahkan logika ke controller Notifier dan pemetaan data ke fungsi biasa (bukan widget) di folder pages.
+3. Page (ConsumerWidget) maksimal 100 baris, dibangun dari templates, organisms, molecules, dan Section sefitur. Jika panjang, pindahkan logika ke controller Notifier dan pemetaan data ke fungsi biasa di features/<f>/state/, dan potongan tampilan ke Section di features/<f>/widgets/ (AGENTS.md aturan 14-15). Dilarang menamai potongan layar dengan akhiran Page.
 4. State sementara layar (filter, tab, isi numpad, draf) di Notifier; tanpa setState.
 5. State pendukung: ambil varian dari frame State yang relevan (kosong, loading, error, modal, validasi) dan implementasikan.
 6. Daftarkan rute di go_router. Dependensi platform (cetak, kontak, kamera, pembuka tautan, ekspor) lewat antarmuka di core dengan implementasi palsu; tanpa dependensi baru.
 7. Tes page: override repository/provider, periksa teks kunci dan angka PERSIS dari data_master.md, plus satu interaksi yang mengubah state.
 8. Alur dummy harus nyata: aksi mengubah state dan layar lain ikut berubah.
 9. Bandingkan dengan .pen, catat selisih. Perbarui spec layar dan component_catalog.md bila berubah.
+10. Input: ikuti AGENTS.md aturan 16. Setiap layar atau sheet berinput punya tes keyboard (viewInsets 300 dp).
 
 ## D. Titik simpan dan handoff
 Pada prompt yang membagi pekerjaan menjadi kelompok, setelah tiap kelompok: check_all hijau, perbarui STATE.md, commit. Bila usage menipis, ikuti prosedur handoff di SKILLS.md (commit "wip:", status SEDANG di INDEX.md).
 
 ## E. Larangan
-- Widget baru di luar registry: tulis proposal di docs/design/proposals/, lanjutkan yang lain.
+- Widget baru di luar registry: potongan layar satu fitur = Section (tanpa proposal); selain itu tulis proposal di docs/design/proposals/, lanjutkan yang lain.
+- Prompt revisi (R0-R7) memuat bagian IZIN TERTULIS; hanya perubahan yang tercantum di sana yang boleh menyentuh atoms/molecules/organisms/templates, tema, registry, dependensi, atau PRD.
 - Atoms, molecules, dan organisms yang sudah ada tidak diubah diam-diam. Kekurangan dicatat sebagai temuan dan diminta izinnya.
 - Tanpa subagen, tanpa dependensi baru, tanpa mengubah registry, lint, PRD, atau token.
 

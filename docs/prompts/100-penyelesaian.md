@@ -11,3 +11,6 @@ TUGAS
 7. Coba `flutter build apk --debug`. Jika Android SDK belum tersedia, catat sebagai BLOKIR di STATE.md dan laporkan; jangan menandai selesai tanpa APK berjalan.
 
 Laporkan: hasil audit, daftar selisih terakhir, keputusan yang menunggu, dan saran urutan backend (PRD B bagian 14).
+
+
+Tambahan (25 Okt 2026): audit akhir mencakup tes keyboard seluruh layar berinput (AGENTS 16e) dan pemeriksaan bahwa tool/section_riverpod_debt.txt tidak bertambah.
