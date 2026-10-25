@@ -97,6 +97,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - business_fixtures.dart (21):
 - in_memory_business_repository.dart (36): BusinessState, InMemoryBusinessRepository, inMemoryBusinessRepositoryProvider
 
+### lib/features/business/pages/
+- business_info_controller.dart (71): BusinessInfoController, businessInfoProvider
+- business_info_page.dart (96): BusinessInfoPage
+- business_info_state.dart (40): BusinessInfoState
+
 ### lib/features/customers/data/
 - contact_fixtures.dart (8):
 - customer_fixtures.dart (57):
@@ -229,10 +234,28 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - in_memory_service_repository.dart (63): InMemoryServiceRepository, inMemoryServiceRepositoryProvider
 - service_fixtures.dart (67):
 
+### lib/features/services/pages/
+- service_copy.dart (25):
+- service_directory_content_page.dart (68): ServiceDirectoryContentPage
+- service_directory_data.dart (15):
+- service_directory_list_page.dart (37): ServiceDirectoryListPage
+- service_directory_page.dart (71): ServiceDirectoryPage
+- service_directory_providers.dart (17): ServiceDirectorySearch, serviceDirectoryProvider, serviceDirectorySearchProvider
+- service_edit_controller.dart (100): ServiceEditController, serviceEditProvider
+- service_edit_fields_page.dart (96): ServiceEditFieldsPage
+- service_edit_page.dart (63): ServiceEditPage
+- service_edit_state.dart (55): ServiceEditState
+
+### lib/features/settings/pages/
+- settings_account_page.dart (43): SettingsAccountPage
+- settings_menu_page.dart (92): SettingsMenuPage
+- settings_page.dart (35): SettingsPage
+
 ### lib/features/shell/pages/
-- app_router.dart (97):
+- app_router.dart (99):
+- lainnya_routes.dart (16):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (21):
+- placeholder_routes.dart (17):
 - root_shell_page.dart (49): RootShellPage
 - shell_state.dart (23): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, whatsappConnectionProvider
 
@@ -359,7 +382,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_icon_button_test.dart (32):
 - app_icon_test.dart (29):
 - app_numpad_key_test.dart (43):
-- app_router_test.dart (53):
+- app_router_test.dart (64):
 - app_search_field_test.dart (66):
 - app_skeleton_test.dart (32):
 - app_status_text_test.dart (26):
@@ -371,6 +394,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_scaffold_test.dart (22):
 - banner_message_test.dart (23):
 - bottom_nav_bar_test.dart (36):
+- business_info_page_test.dart (50):
 - callout_ai_test.dart (20):
 - checkout_controller_test.dart (83):
 - chip_bar_test.dart (30):
@@ -455,8 +479,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - root_scaffold_test.dart (39):
 - savings_row_test.dart (33):
 - section_header_test.dart (26):
+- service_directory_page_test.dart (110):
 - service_picker_test.dart (54):
 - service_row_test.dart (41):
+- settings_page_test.dart (68):
 - sheet_scaffold_test.dart (37):
 - stat_tile_test.dart (24):
 - stepper_field_test.dart (33):

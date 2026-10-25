@@ -9,9 +9,10 @@ import 'package:laurum/features/orders/pages/antrean_page.dart';
 import 'package:laurum/features/orders/pages/nota_history_page.dart';
 import 'package:laurum/features/orders/pages/order_detail_page.dart';
 import 'package:laurum/features/orders/pages/order_edit_page.dart';
-import 'package:laurum/features/printer/pages/printer_page.dart';
 import 'package:laurum/features/reports/pages/outstanding_page.dart';
 import 'package:laurum/features/reports/pages/report_page.dart';
+import 'package:laurum/features/settings/pages/settings_page.dart';
+import 'package:laurum/features/shell/pages/lainnya_routes.dart';
 import 'package:laurum/features/shell/pages/placeholder_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_routes.dart';
 import 'package:laurum/features/shell/pages/root_shell_page.dart';
@@ -46,7 +47,7 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
       path: '/order/:id',
       builder: (context, state) => OrderDetailPage(orderId: state.pathParameters['id']!),
     ),
-    GoRoute(path: '/lainnya/printer', builder: (context, state) => const PrinterPage()),
+    ...lainnyaRoutes,
     for (final route in placeholderRoutes.entries)
       GoRoute(
         path: route.key,
@@ -86,6 +87,7 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
                   '/pelanggan' => const CustomerDirectoryPage(),
                   '/transaksi' => const NotaHistoryPage(),
                   '/laporan' => const ReportPage(),
+                  '/lainnya' => const SettingsPage(),
                   _ => PlaceholderPage(title: route.value, isTab: true),
                 },
               ),

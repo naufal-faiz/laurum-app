@@ -24,7 +24,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 14 | 50-pelanggan-a.md | Daftar, Detail, Edit Pelanggan | SELESAI (2026-10-24) | check_all hijau, 285 tes; tinjau Detail/Edit dan keyboard di HP |
 | 15 | 51-pelanggan-b.md | Setor Tabungan, Riwayat Tabungan, Impor Kontak | SELESAI (2026-10-24) | check_all hijau, 292 tes; tinjau setoran, riwayat, dan impor kontak di HP |
 | 16 | 60-laporan.md | Laporan Ringkasan, Daftar Piutang | SELESAI (2026-10-25) | check_all hijau, 301 tes; tinjau ringkasan periode dan daftar piutang di HP |
-| 17 | 70-lainnya-a.md | Pengaturan dan Akun, Layanan, Info Usaha | BELUM | |
+| 17 | 70-lainnya-a.md | Pengaturan dan Akun, Layanan, Info Usaha | SELESAI (2026-10-25) | check_all hijau, 310 tes; tinjau Pengaturan, Layanan, dan Info Usaha di HP |
 | 18 | 71-lainnya-b.md | Daftar dan Catat Pengeluaran | BELUM | |
 | 19 | 80-ai.md | Layar AI (dummy) | BELUM | |
 | 20 | 90-auth-sinkron.md | Masuk Google (dummy), Sinkronisasi, Akun | BELUM | |

@@ -26,6 +26,17 @@ void main() {
         tabRoutes.keys.toList().indexOf(path),
       );
     }
+    for (final entry in {
+      '/lainnya/layanan': 'Daftar layanan',
+      '/lainnya/layanan/baru': 'Tambah layanan',
+      '/lainnya/layanan/srv-001': 'Edit layanan',
+      '/lainnya/info-usaha': 'Info usaha',
+    }.entries) {
+      host.router.go(entry.key);
+      await tester.pumpAndSettle();
+      expect(find.text(entry.value), findsWidgets, reason: entry.key);
+      expect(find.text('Halaman tidak ditemukan'), findsNothing, reason: entry.key);
+    }
     host.router.go('/tidak-ada');
     await tester.pumpAndSettle();
     expect(find.text('Halaman tidak ditemukan'), findsWidgets);
