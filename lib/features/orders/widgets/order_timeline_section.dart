@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
-class OrderTimelinePage extends StatelessWidget {
-  const OrderTimelinePage({required this.data, super.key});
+class OrderTimelineSection extends StatelessWidget {
+  const OrderTimelineSection({required this.data, super.key});
   final OrderDetailData data;
 
   @override

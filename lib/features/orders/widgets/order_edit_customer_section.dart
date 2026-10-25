@@ -3,13 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/transactions/pages/transaction_providers.dart';
+import 'package:laurum/features/transactions/state/transaction_providers.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/molecules/locked_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
-class OrderEditCustomerPage extends ConsumerWidget {
-  const OrderEditCustomerPage({required this.customerId, super.key});
+class OrderEditCustomerSection extends ConsumerWidget {
+  const OrderEditCustomerSection({required this.customerId, super.key});
   final String customerId;
 
   @override

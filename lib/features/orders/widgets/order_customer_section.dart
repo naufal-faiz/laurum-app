@@ -3,14 +3,14 @@ import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_avatar.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
-class OrderCustomerPage extends StatelessWidget {
-  const OrderCustomerPage({required this.data, required this.onWhatsApp, super.key});
+class OrderCustomerSection extends StatelessWidget {
+  const OrderCustomerSection({required this.data, required this.onWhatsApp, super.key});
   final OrderDetailData data;
   final VoidCallback? onWhatsApp;
 

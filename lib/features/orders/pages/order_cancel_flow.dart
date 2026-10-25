@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/icons/app_icons.dart';
-import 'package:laurum/features/orders/pages/order_detail_controller.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/orders/state/order_detail_controller.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/organisms/confirm_modal.dart';
 
 Future<bool> confirmCancelOrder(

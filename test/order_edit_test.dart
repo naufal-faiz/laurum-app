@@ -4,8 +4,8 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/main_dummy.dart';
 import 'package:laurum/shared/widgets/molecules/stepper_field.dart';
 

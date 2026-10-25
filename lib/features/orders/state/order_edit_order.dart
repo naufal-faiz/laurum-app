@@ -1,6 +1,6 @@
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_rules.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 
 Order orderEditOrder(Order original, TransactionDraftState draft, DateTime now) => Order(
   id: original.id,

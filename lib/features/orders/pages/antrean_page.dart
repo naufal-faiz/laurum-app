@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/pages/antrean_controller.dart';
-import 'package:laurum/features/orders/pages/antrean_data.dart';
-import 'package:laurum/features/orders/pages/antrean_status_page.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/orders/state/antrean_controller.dart';
+import 'package:laurum/features/orders/state/antrean_data.dart';
+import 'package:laurum/features/orders/widgets/antrean_status_section.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
@@ -23,7 +23,7 @@ class AntreanPage extends ConsumerWidget {
     final controller = ref.read(antreanActionsProvider.notifier);
     final data = snapshot.value;
     if (data == null) {
-      return AntreanStatusPage(
+      return AntreanStatusSection(
         loading: snapshot.isLoading,
         error: snapshot.hasError,
         onRetry: () => ref.invalidate(antreanDataProvider),
@@ -72,7 +72,10 @@ class AntreanPage extends ConsumerWidget {
         ],
         if (orders.isNotEmpty) const SectionHeader(title: 'Sedang berjalan'),
         if (orders.isEmpty && (!showProposals || data.proposals.isEmpty))
-          AntreanStatusPage(filtered: filter != 0, onCreate: () => context.push('/transaksi/baru')),
+          AntreanStatusSection(
+            filtered: filter != 0,
+            onCreate: () => context.push('/transaksi/baru'),
+          ),
         for (final order in orders)
           Padding(
             padding: const EdgeInsets.only(bottom: AppSpacing.cardGap),

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_divider.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/info_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
-class OrderItemsPage extends StatelessWidget {
-  const OrderItemsPage({required this.data, super.key});
+class OrderItemsSection extends StatelessWidget {
+  const OrderItemsSection({required this.data, super.key});
   final OrderDetailData data;
 
   @override

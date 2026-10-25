@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 
-class OrderDetailFooterPage extends StatelessWidget {
-  const OrderDetailFooterPage({
+class OrderDetailFooterSection extends StatelessWidget {
+  const OrderDetailFooterSection({
     required this.data,
     required this.busy,
     required this.onPrint,

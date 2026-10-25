@@ -4,13 +4,13 @@ import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/orders/pages/antrean_data.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
-import 'package:laurum/features/orders/pages/order_edit_item.dart';
-import 'package:laurum/features/orders/pages/order_edit_order.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
-import 'package:laurum/features/transactions/pages/receipt_view.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/orders/state/antrean_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
+import 'package:laurum/features/orders/state/order_edit_item.dart';
+import 'package:laurum/features/orders/state/order_edit_order.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/transactions/state/receipt_view.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 
 class OrderEditState {
   const OrderEditState({required this.order, this.saving = false, this.error});

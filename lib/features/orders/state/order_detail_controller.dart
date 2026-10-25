@@ -4,10 +4,10 @@ import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_rules.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/orders/pages/antrean_data.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
-import 'package:laurum/features/transactions/pages/receipt_view.dart';
+import 'package:laurum/features/orders/state/antrean_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/transactions/state/receipt_view.dart';
 
 typedef OrderActionState = ({Set<String> pending, String? error});
 final orderActionsProvider = NotifierProvider<OrderActions, OrderActionState>(

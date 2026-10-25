@@ -3,15 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
-import 'package:laurum/features/orders/pages/order_cancel.dart';
-import 'package:laurum/features/orders/pages/order_detail_content_page.dart';
-import 'package:laurum/features/orders/pages/order_detail_controller.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
-import 'package:laurum/features/orders/pages/order_detail_footer_page.dart';
+import 'package:laurum/features/orders/pages/order_cancel_flow.dart';
 import 'package:laurum/features/orders/pages/order_menu_sheet.dart';
 import 'package:laurum/features/orders/pages/order_status_sheet.dart';
-import 'package:laurum/features/transactions/pages/receipt_print_controller.dart';
-import 'package:laurum/features/transactions/pages/receipt_view.dart';
+import 'package:laurum/features/orders/state/order_detail_controller.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
+import 'package:laurum/features/orders/widgets/order_detail_content_section.dart';
+import 'package:laurum/features/orders/widgets/order_detail_footer_section.dart';
+import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
+import 'package:laurum/features/transactions/state/receipt_view.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 
@@ -35,13 +35,13 @@ class OrderDetailPage extends ConsumerWidget {
       ),
       footer: data == null
           ? const SizedBox.shrink()
-          : OrderDetailFooterPage(
+          : OrderDetailFooterSection(
               data: data,
               busy: busy,
               onPrint: () => _print(ref, data),
               onAdvance: () => ref.read(orderActionsProvider.notifier).advance(data.order),
             ),
-      body: OrderDetailContentPage(orderId: orderId),
+      body: OrderDetailContentSection(orderId: orderId),
     );
   }
 

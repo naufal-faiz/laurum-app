@@ -3,17 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/pages/order_detail_body_page.dart';
-import 'package:laurum/features/orders/pages/order_detail_controller.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
 import 'package:laurum/features/orders/pages/payment_record_sheet.dart';
-import 'package:laurum/features/transactions/pages/receipt_print_controller.dart';
+import 'package:laurum/features/orders/state/order_detail_controller.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
+import 'package:laurum/features/orders/widgets/order_detail_body_section.dart';
+import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 
-class OrderDetailContentPage extends ConsumerWidget {
-  const OrderDetailContentPage({required this.orderId, super.key});
+class OrderDetailContentSection extends ConsumerWidget {
+  const OrderDetailContentSection({required this.orderId, super.key});
   final String orderId;
 
   @override
@@ -50,7 +50,7 @@ class OrderDetailContentPage extends ConsumerWidget {
                     variant: BannerMessageVariant.error,
                   ),
                 if (printing.notice != null) BannerMessage(message: printing.notice!),
-                OrderDetailBodyPage(
+                OrderDetailBodySection(
                   data: data,
                   onWhatsApp: () => ref
                       .read(externalLauncherProvider)

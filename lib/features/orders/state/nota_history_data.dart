@@ -6,7 +6,7 @@ import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 
 class NotaHistoryData {
   const NotaHistoryData({

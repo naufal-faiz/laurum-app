@@ -6,8 +6,8 @@ import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 
-class AntreanStatusPage extends StatelessWidget {
-  const AntreanStatusPage({
+class AntreanStatusSection extends StatelessWidget {
+  const AntreanStatusSection({
     super.key,
     this.loading = false,
     this.error = false,

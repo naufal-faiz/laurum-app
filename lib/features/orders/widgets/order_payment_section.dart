@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_status_text.dart';
 import 'package:laurum/shared/widgets/molecules/info_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
-class OrderPaymentPage extends StatelessWidget {
-  const OrderPaymentPage({required this.data, required this.onRecord, super.key});
+class OrderPaymentSection extends StatelessWidget {
+  const OrderPaymentSection({required this.data, required this.onRecord, super.key});
   final OrderDetailData data;
   final VoidCallback? onRecord;
 

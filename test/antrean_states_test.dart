@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:laurum/features/orders/pages/antrean_controller.dart';
-import 'package:laurum/features/orders/pages/antrean_data.dart';
+import 'package:laurum/features/orders/state/antrean_controller.dart';
+import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/main_dummy.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 

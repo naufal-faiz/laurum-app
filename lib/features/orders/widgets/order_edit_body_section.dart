@@ -6,19 +6,25 @@ import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/pages/order_edit_customer_page.dart';
-import 'package:laurum/features/transactions/pages/transaction_details_page.dart';
-import 'package:laurum/features/transactions/pages/transaction_draft.dart';
+import 'package:laurum/features/orders/widgets/order_edit_customer_section.dart';
 import 'package:laurum/features/transactions/pages/transaction_line_sheet.dart';
+import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
-class OrderEditBodyPage extends ConsumerWidget {
-  const OrderEditBodyPage({required this.orderId, required this.order, super.key, this.error});
+class OrderEditBodySection extends ConsumerWidget {
+  const OrderEditBodySection({
+    required this.orderId,
+    required this.order,
+    required this.details,
+    super.key,
+    this.error,
+  });
   final String orderId;
   final Order order;
+  final Widget details;
   final String? error;
 
   @override
@@ -33,7 +39,7 @@ class OrderEditBodyPage extends ConsumerWidget {
           const BannerMessage(
             message: 'Order dari WhatsApp: isi berat setelah cucian ditimbang.',
           ),
-        OrderEditCustomerPage(customerId: order.customerId),
+        OrderEditCustomerSection(customerId: order.customerId),
         SectionHeader(title: 'Layanan', subtitle: '${draft.itemCount} layanan di nota'),
         AppButton(
           draft.lines.isEmpty ? 'Pilih layanan' : 'Tambah layanan lain',
@@ -48,7 +54,7 @@ class OrderEditBodyPage extends ConsumerWidget {
             icon: AppIcons.service,
             onTap: () => TransactionLineSheet.show(context, ref, line.service.id),
           ),
-        const TransactionDetailsPage(),
+        details,
       ],
     );
   }

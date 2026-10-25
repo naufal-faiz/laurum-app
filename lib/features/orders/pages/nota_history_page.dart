@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/pages/nota_history_controller.dart';
-import 'package:laurum/features/orders/pages/nota_history_data.dart';
-import 'package:laurum/features/orders/pages/nota_history_list_page.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/orders/state/nota_history_controller.dart';
+import 'package:laurum/features/orders/state/nota_history_data.dart';
+import 'package:laurum/features/orders/widgets/nota_history_list_section.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -43,7 +43,7 @@ class NotaHistoryPage extends ConsumerWidget {
                             ),
                         ],
                       ))
-              : NotaHistoryListPage(
+              : NotaHistoryListSection(
                   data: data,
                   filter: ref.watch(notaFilterProvider),
                   search: ref.watch(notaSearchProvider),

@@ -3,15 +3,15 @@ import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/pages/nota_history_data.dart';
+import 'package:laurum/features/orders/state/nota_history_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_search_field.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/date_group_header.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/organisms/nota_card.dart';
 
-class NotaHistoryListPage extends StatelessWidget {
-  const NotaHistoryListPage({
+class NotaHistoryListSection extends StatelessWidget {
+  const NotaHistoryListSection({
     required this.data,
     required this.filter,
     required this.search,
