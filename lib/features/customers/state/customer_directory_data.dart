@@ -7,7 +7,7 @@ import 'package:laurum/core/domain/savings_rules.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/customers/data/customer_history_fixtures.dart';
 import 'package:laurum/features/orders/data/order_fixtures.dart';
-import 'package:laurum/features/transactions/pages/add_customer_form.dart';
+import 'package:laurum/features/transactions/state/add_customer_form.dart';
 
 class CustomerDirectoryRow {
   const CustomerDirectoryRow(

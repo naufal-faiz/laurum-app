@@ -3,15 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_savings_controller.dart';
-import 'package:laurum/features/customers/pages/customer_savings_data.dart';
+import 'package:laurum/features/customers/state/customer_savings_controller.dart';
+import 'package:laurum/features/customers/state/customer_savings_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/organisms/savings_row.dart';
 
-class CustomerSavingsListPage extends ConsumerWidget {
-  const CustomerSavingsListPage({required this.data, super.key});
+class CustomerSavingsListSection extends ConsumerWidget {
+  const CustomerSavingsListSection({required this.data, super.key});
   final CustomerSavingsData data;
 
   @override

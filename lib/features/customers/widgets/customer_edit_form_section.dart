@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_edit_controller.dart';
+import 'package:laurum/features/customers/state/customer_edit_controller.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
 
-class CustomerEditFormPage extends ConsumerWidget {
-  const CustomerEditFormPage({super.key});
+class CustomerEditFormSection extends ConsumerWidget {
+  const CustomerEditFormSection({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(customerEditProvider);

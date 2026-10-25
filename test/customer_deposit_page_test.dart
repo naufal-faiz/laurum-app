@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/customers/pages/customer_deposit_controller.dart';
+import 'package:laurum/features/customers/state/customer_deposit_controller.dart';
 
 import 'antrean_test_host.dart';
 

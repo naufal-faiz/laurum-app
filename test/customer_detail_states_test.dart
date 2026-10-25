@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:laurum/features/customers/pages/customer_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_detail_data.dart';
 import 'package:laurum/main_dummy.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 

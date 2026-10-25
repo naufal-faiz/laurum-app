@@ -4,9 +4,9 @@ import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_directory_data.dart';
 import 'package:laurum/features/customers/pages/customer_edit_sheet.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_directory_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_avatar.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
@@ -15,8 +15,8 @@ import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/info_row.dart';
 import 'package:laurum/shared/widgets/molecules/stat_tile.dart';
 
-class CustomerProfilePage extends ConsumerWidget {
-  const CustomerProfilePage({required this.summary, super.key});
+class CustomerProfileSection extends ConsumerWidget {
+  const CustomerProfileSection({required this.summary, super.key});
   final CustomerDirectoryRow summary;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

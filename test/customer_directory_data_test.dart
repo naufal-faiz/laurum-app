@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:laurum/features/customers/pages/customer_directory_data.dart';
-import 'package:laurum/features/orders/pages/order_detail_controller.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_directory_data.dart';
+import 'package:laurum/features/orders/state/order_detail_controller.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/main_dummy.dart';
 
 void main() {

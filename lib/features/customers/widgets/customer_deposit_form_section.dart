@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_deposit_controller.dart';
-import 'package:laurum/features/customers/pages/customer_deposit_state.dart';
-import 'package:laurum/features/customers/pages/customer_detail_data.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_deposit_controller.dart';
+import 'package:laurum/features/customers/state/customer_deposit_state.dart';
+import 'package:laurum/features/customers/state/customer_detail_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_avatar.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
@@ -17,8 +17,8 @@ import 'package:laurum/shared/widgets/molecules/nominal_chips.dart';
 import 'package:laurum/shared/widgets/molecules/stat_tile.dart';
 import 'package:laurum/shared/widgets/organisms/numpad.dart';
 
-class CustomerDepositFormPage extends ConsumerWidget {
-  const CustomerDepositFormPage({required this.data, super.key});
+class CustomerDepositFormSection extends ConsumerWidget {
+  const CustomerDepositFormSection({required this.data, super.key});
   final CustomerDetailData data;
 
   @override

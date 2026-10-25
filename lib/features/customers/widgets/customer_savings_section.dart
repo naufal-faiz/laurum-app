@@ -3,16 +3,16 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_detail_data.dart';
-import 'package:laurum/features/customers/pages/customer_savings_data.dart';
+import 'package:laurum/features/customers/state/customer_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_savings_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/molecules/stat_tile.dart';
 import 'package:laurum/shared/widgets/organisms/savings_row.dart';
 
-class CustomerSavingsPage extends StatelessWidget {
-  const CustomerSavingsPage({required this.data, super.key});
+class CustomerSavingsSection extends StatelessWidget {
+  const CustomerSavingsSection({required this.data, super.key});
   final CustomerDetailData data;
   @override
   Widget build(BuildContext context) {

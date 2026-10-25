@@ -1,5 +1,5 @@
 import 'package:laurum/core/domain/customer.dart';
-import 'package:laurum/features/transactions/pages/add_customer_form.dart';
+import 'package:laurum/features/transactions/state/add_customer_form.dart';
 
 class CustomerEditState {
   const CustomerEditState({

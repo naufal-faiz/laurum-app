@@ -3,8 +3,8 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/savings_entry.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/customers/pages/customer_deposit_state.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
+import 'package:laurum/features/customers/state/customer_deposit_state.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_numpad_key.dart';
 
 final customerDepositProvider =

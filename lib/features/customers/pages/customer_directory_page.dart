@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_directory_controller.dart';
-import 'package:laurum/features/customers/pages/customer_directory_data.dart';
-import 'package:laurum/features/customers/pages/customer_directory_list_page.dart';
+import 'package:laurum/features/customers/state/customer_directory_controller.dart';
+import 'package:laurum/features/customers/state/customer_directory_data.dart';
+import 'package:laurum/features/customers/widgets/customer_directory_list_section.dart';
 import 'package:laurum/features/transactions/pages/add_customer_sheet.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
@@ -22,7 +22,7 @@ class CustomerDirectoryPage extends ConsumerWidget {
       children: [
         Expanded(
           child: rows != null
-              ? CustomerDirectoryListPage(rows: rows)
+              ? CustomerDirectoryListSection(rows: rows)
               : snapshot.hasError
               ? Center(
                   child: EmptyState(

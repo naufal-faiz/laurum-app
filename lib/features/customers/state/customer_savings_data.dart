@@ -3,8 +3,8 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/savings_entry.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/customers/pages/customer_detail_data.dart';
-import 'package:laurum/features/customers/pages/customer_directory_data.dart';
+import 'package:laurum/features/customers/state/customer_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_directory_data.dart';
 
 class CustomerSavingsData {
   const CustomerSavingsData(this.summary, this.movements, this.orders);

@@ -5,9 +5,9 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/contact_source.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_import_controller.dart';
-import 'package:laurum/features/customers/pages/customer_import_data.dart';
-import 'package:laurum/features/customers/pages/customer_import_list_page.dart';
+import 'package:laurum/features/customers/state/customer_import_controller.dart';
+import 'package:laurum/features/customers/state/customer_import_data.dart';
+import 'package:laurum/features/customers/widgets/customer_import_list_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -60,7 +60,7 @@ class CustomerImportPage extends ConsumerWidget {
                 actionLabel: 'Coba lagi',
                 onAction: () => ref.invalidate(contactImportProvider),
               ),
-        data: (value) => CustomerImportListPage(data: value),
+        data: (value) => CustomerImportListSection(data: value),
       ),
     );
   }

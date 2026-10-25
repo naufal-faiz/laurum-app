@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_import_controller.dart';
-import 'package:laurum/features/customers/pages/customer_import_data.dart';
+import 'package:laurum/features/customers/state/customer_import_controller.dart';
+import 'package:laurum/features/customers/state/customer_import_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_search_field.dart';
@@ -12,8 +12,8 @@ import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/toggle_row.dart';
 
-class CustomerImportListPage extends ConsumerWidget {
-  const CustomerImportListPage({required this.data, super.key});
+class CustomerImportListSection extends ConsumerWidget {
+  const CustomerImportListSection({required this.data, super.key});
   final ContactImportData data;
 
   @override

@@ -3,13 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_detail_data.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/organisms/nota_card.dart';
 
-class CustomerOrdersPage extends StatelessWidget {
-  const CustomerOrdersPage({required this.data, super.key});
+class CustomerOrdersSection extends StatelessWidget {
+  const CustomerOrdersSection({required this.data, super.key});
   final CustomerDetailData data;
   @override
   Widget build(BuildContext context) => Column(

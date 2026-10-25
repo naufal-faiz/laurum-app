@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/services/contact_source.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/transactions/pages/add_customer_form.dart';
+import 'package:laurum/features/transactions/state/add_customer_form.dart';
 
 class ContactImportRow {
   const ContactImportRow(this.contact, {required this.exists});

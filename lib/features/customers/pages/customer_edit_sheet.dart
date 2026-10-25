@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/customer.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_edit_controller.dart';
-import 'package:laurum/features/customers/pages/customer_edit_form_page.dart';
+import 'package:laurum/features/customers/state/customer_edit_controller.dart';
+import 'package:laurum/features/customers/widgets/customer_edit_form_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/organisms/app_bottom_sheet.dart';
 import 'package:laurum/shared/widgets/organisms/confirm_modal.dart';
@@ -47,7 +47,7 @@ class CustomerEditSheet extends ConsumerWidget {
             ),
           ],
         ),
-        child: const CustomerEditFormPage(),
+        child: const CustomerEditFormSection(),
       ),
     );
   }

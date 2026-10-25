@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/customers/pages/customer_detail_data.dart';
-import 'package:laurum/features/customers/pages/customer_directory_data.dart';
-import 'package:laurum/features/customers/pages/customer_edit_controller.dart';
+import 'package:laurum/features/customers/state/customer_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_directory_data.dart';
+import 'package:laurum/features/customers/state/customer_edit_controller.dart';
 import 'package:laurum/main_dummy.dart';
 
 void main() {

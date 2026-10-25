@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_savings_data.dart';
-import 'package:laurum/features/customers/pages/customer_savings_header_page.dart';
-import 'package:laurum/features/customers/pages/customer_savings_list_page.dart';
+import 'package:laurum/features/customers/state/customer_savings_data.dart';
+import 'package:laurum/features/customers/widgets/customer_savings_header_section.dart';
+import 'package:laurum/features/customers/widgets/customer_savings_list_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/templates/sub_scaffold.dart';
@@ -41,7 +41,7 @@ class CustomerSavingsHistoryPage extends ConsumerWidget {
             : ListView(
                 padding: const EdgeInsets.all(AppSpacing.screenPadding),
                 children: [
-                  CustomerSavingsHeaderPage(data: data),
+                  CustomerSavingsHeaderSection(data: data),
                   const SizedBox(height: AppSpacing.screenPadding),
                   if (data.movements.isEmpty)
                     EmptyState(
@@ -54,7 +54,7 @@ class CustomerSavingsHistoryPage extends ConsumerWidget {
                           : null,
                     )
                   else
-                    CustomerSavingsListPage(data: data),
+                    CustomerSavingsListSection(data: data),
                 ],
               ),
       ),

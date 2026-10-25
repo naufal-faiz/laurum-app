@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_deposit_controller.dart';
-import 'package:laurum/features/customers/pages/customer_deposit_form_page.dart';
-import 'package:laurum/features/customers/pages/customer_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_deposit_controller.dart';
+import 'package:laurum/features/customers/state/customer_detail_data.dart';
+import 'package:laurum/features/customers/widgets/customer_deposit_form_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
@@ -64,7 +64,7 @@ class CustomerDepositPage extends ConsumerWidget {
         ),
         data: (value) => value == null
             ? const EmptyState(title: 'Pelanggan tidak ditemukan', icon: AppIcons.person)
-            : CustomerDepositFormPage(data: value),
+            : CustomerDepositFormSection(data: value),
       ),
     );
   }

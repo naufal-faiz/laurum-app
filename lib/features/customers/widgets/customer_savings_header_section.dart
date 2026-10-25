@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_savings_data.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_savings_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_avatar.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
@@ -14,8 +14,8 @@ import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/molecules/stat_tile.dart';
 
-class CustomerSavingsHeaderPage extends ConsumerWidget {
-  const CustomerSavingsHeaderPage({required this.data, super.key});
+class CustomerSavingsHeaderSection extends ConsumerWidget {
+  const CustomerSavingsHeaderSection({required this.data, super.key});
   final CustomerSavingsData data;
 
   @override

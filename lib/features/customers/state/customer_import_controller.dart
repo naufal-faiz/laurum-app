@@ -2,9 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/customer.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
-import 'package:laurum/features/customers/pages/customer_import_data.dart';
-import 'package:laurum/features/shell/pages/shell_state.dart';
-import 'package:laurum/features/transactions/pages/add_customer_form.dart';
+import 'package:laurum/features/customers/state/customer_import_data.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/transactions/state/add_customer_form.dart';
 
 class CustomerImportState {
   const CustomerImportState({this.query = '', this.selected = const <String>{}});

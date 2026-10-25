@@ -4,17 +4,17 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_directory_controller.dart';
-import 'package:laurum/features/customers/pages/customer_directory_data.dart';
-import 'package:laurum/features/orders/pages/order_detail_data.dart';
+import 'package:laurum/features/customers/state/customer_directory_controller.dart';
+import 'package:laurum/features/customers/state/customer_directory_data.dart';
+import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_search_field.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/organisms/customer_row.dart';
 
-class CustomerDirectoryListPage extends ConsumerWidget {
-  const CustomerDirectoryListPage({required this.rows, super.key});
+class CustomerDirectoryListSection extends ConsumerWidget {
+  const CustomerDirectoryListSection({required this.rows, super.key});
   final List<CustomerDirectoryRow> rows;
 
   @override
