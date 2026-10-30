@@ -49,8 +49,10 @@ Jangan mulai R3 sebelum PRD diputuskan.
 - Perangkat baru: repo C:/Users/Naufal/Downloads/laurum-app (clone GitHub).
 - Detached HEAD dipulihkan menjadi dev1rev, upstream origin/dev1rev.
   Fetch dan git push --dry-run berhasil; belum melakukan push aktual.
-- Flutter/Dart belum ditemukan di PATH maupun lokasi SDK umum; check_all belum
-  dijalankan ulang di perangkat ini. Siapkan SDK sebelum melanjutkan kode R3.
+- Pengguna 30 Okt 2026: JANGAN memasang SDK di laptop ini (keterbatasan sumber daya).
+  Coding dan penulisan tes dapat diteruskan tanpa SDK setelah PRD R2 diputuskan.
+  Format/analyze/check_all ditunda sampai pengguna mengonfirmasi perangkat baru;
+  perubahan kode berikutnya harus ditandai BELUM TERVALIDASI, bukan hijau.
 - Android/iOS, keyboard nyata, TalkBack/VoiceOver dan printer nyata belum diuji.
 
 ## Untuk agen penerus
