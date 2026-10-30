@@ -22,5 +22,4 @@ lib/features/transactions/widgets/payment_method_section.dart
 lib/features/transactions/widgets/payment_savings_section.dart
 lib/features/transactions/widgets/payment_summary_section.dart
 lib/features/transactions/widgets/receipt_status_section.dart
-lib/features/transactions/widgets/transaction_customer_section.dart
 lib/features/transactions/widgets/transaction_details_section.dart

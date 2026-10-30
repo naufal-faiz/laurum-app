@@ -4,9 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/transactions/pages/add_customer_sheet.dart';
+import 'package:laurum/features/transactions/pages/customer_picker_sheet.dart';
 import 'package:laurum/features/transactions/pages/transaction_leave_flow.dart';
 import 'package:laurum/features/transactions/pages/transaction_line_sheet.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
+import 'package:laurum/features/transactions/state/transaction_providers.dart';
 import 'package:laurum/features/transactions/widgets/transaction_customer_section.dart';
 import 'package:laurum/features/transactions/widgets/transaction_details_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
@@ -21,6 +24,10 @@ class TransactionPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final draft = ref.watch(transactionDraftProvider);
+    final customer = ref.watch(customerCatalogProvider).value
+        ?.where((c) => c.id == draft.customerId).firstOrNull;
+    final balance = draft.customerId == null
+        ? 0 : ref.watch(customerBalanceProvider(draft.customerId!)).value ?? 0;
     return FormScaffold(
       title: 'Buat transaksi',
       backLabel: 'Kembali',
@@ -40,7 +47,17 @@ class TransactionPage extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: AppSpacing.cardGap,
         children: [
-          const TransactionCustomerSection(),
+          TransactionCustomerSection(
+            customer: customer,
+            balance: balance,
+            onChoose: () => CustomerPickerSheet.show(context, ref),
+            onCreate: () async {
+              final created = await AddCustomerSheet.show(context, ref, forOrder: true);
+              if (created == null || !context.mounted) return;
+              ref.invalidate(customerCatalogProvider);
+              ref.read(transactionDraftProvider.notifier).selectCustomer(created.id);
+            },
+          ),
           SectionHeader(
             title: 'Layanan',
             subtitle: '${draft.itemCount} layanan di nota',

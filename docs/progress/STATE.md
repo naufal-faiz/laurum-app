@@ -4,7 +4,8 @@ Diperbarui: 2026-10-30 | Cabang dev1rev
 ## Posisi
 R0/R1/R2 SELESAI. Bukti otomatis perangkat lama: 366 tes, REPO_MAP 507.
 PRD R2 disinkronkan dengan izin eksplisit pengguna 30 Oktober 2026; pemeriksaan
-manual R2 di ponsel Android dikonfirmasi pengguna. Berikutnya: R3-transaksi.md.
+manual R2 di ponsel Android dikonfirmasi pengguna.
+R3 SEDANG: kode/tes disiapkan tanpa SDK, BELUM TERVALIDASI. Rincian: r3-transaksi.md.
 
 ## Selesai
 - Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
@@ -26,17 +27,18 @@ manual R2 di ponsel Android dikonfirmasi pengguna. Berikutnya: R3-transaksi.md.
   antrean_normal sudah ditinjau. Spec 01, katalog, Widgetbook diperbarui.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Sinkronisasi PRD R2 selesai: RootScaffold tanpa FAB, empat tab dan aksi tengah,
-   /transaksi tetap rute langsung sementara sampai R6. Izin pengguna 30 Okt 2026.
-2. Pemeriksaan dokumentasi: git diff --check; kode Dart tidak berubah pada tugas ini.
-   Tidak menjalankan ulang check_all karena laptop ini tidak memiliki SDK.
-3. Lanjut R3-transaksi.md: FAB Layanan baru dan tombol Baru di bagian pelanggan.
-   Coding/penulisan tes boleh tanpa SDK; tandai BELUM TERVALIDASI hingga perangkat baru.
-4. Jangan memasang SDK, push, atau merge tanpa permintaan pengguna.
+- R3: FAB SubScaffold/Pilih Layanan, daftar layanan menjadi ServicePickerListSection;
+  tombol Baru langsung tambah/pilih pelanggan. CustomerSection kini Stateless.
+- Enam berkas tes baru (sembilan skenario) belum dijalankan. Spec 02/03/05/21,
+  katalog dan Widgetbook diperbarui; golden lama belum diubah.
+- Di perangkat dengan SDK: dart format, tes R3 dan regresi, tinjau golden, check_all.
+  REPO_MAP juga perlu diregenerasi. Panduan: docs/progress/r3-transaksi.md.
+- Jangan tandai R3 selesai atau mulai R4 sebelum validasi. Tidak memasang SDK,
+  push, atau merge pada laptop ini. Commit wip menyimpan draf yang belum tervalidasi.
 
 ## Antrean dan keputusan
 - R3-R7 berurutan, lalu 71,80,90,100. Catat bayar/Ingatkan piutang placeholder.
-- Utang Section tetap 25, hanya menyusut; migrasikan saat disentuh.
+- Utang Section 24: TransactionCustomerSection dimigrasikan pada R3; hanya menyusut.
 - OrderEditBodySection slot details lintas fitur tetap keputusan R0.
 - R5 hanya nota + pembayaran; pengeluaran ke 71. Prompt 70: tanpa Urutkan,
   switch langsung, receiptFooter, signOut placeholder90, top services Minggu ini,

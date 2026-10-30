@@ -629,8 +629,9 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   golden dan 320 px/teks 2x. R2 menggantikan FAB pil lama di frame .pen.
 ## SubScaffold
 - Berkas: lib/shared/widgets/templates/sub_scaffold.dart.
-- API wajib: title, backLabel, body. Opsi: onBack, trailing.
-- Varian: dengan/tanpa aksi kanan; tanpa nav bawah.
+- API wajib: title, backLabel, body. Opsi: onBack, trailing, fabLabel/onFab (berpasangan).
+- Varian: dengan/tanpa aksi kanan atau FAB; tanpa nav bawah. FAB primary berikon add,
+  disembunyikan saat viewInsets.bottom > 0. Pemanggil menyisakan ruang bawah daftar.
 - Contoh: SubScaffold(title: 'Detail order', backLabel: 'Kembali', onBack: back,
   trailing: AppText('Ubah'), body: content).
 - Galeri: sub_scaffold_use_case.dart; tes judul, trailing, callback kembali, golden.
@@ -761,3 +762,16 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   kedua tombol footer tidak mencetak otomatis; struk dicetak manual di Nota.
 - Tes: checkout_controller, payment_page, receipt_page + golden payment_page dan
   receipt_page; 258 tes, 391 berkas.
+
+## R3 - Draf transaksi (30 Oktober 2026, BELUM TERVALIDASI)
+- SubScaffold: fabLabel/onFab memakai FloatingActionButton.extended mengikuti pola
+  FAB lama RootScaffold. Widgetbook menambahkan varian FAB dan keyboard.
+- ServicePickerListSection: services (List<ServiceItem>), query, onSearch,
+  onSelect. Stateless tanpa provider; Page memuat katalog dan menangani navigasi.
+- TransactionCustomerSection: customer (Customer?), balance (int rupiah), onChoose,
+  onCreate. Tanpa pelanggan: pilih melebar + Baru; terpilih: MenuRow lama.
+  Provider dan aksi sheet hanya di TransactionPage. Utang Section 25 -> 24.
+- Tes ditulis di sub_scaffold_fab_test, service_picker_list_section_test,
+  transaction_customer_section_test dan r3_*_test. Belum dijalankan tanpa SDK.
+- Golden transaction_page, service_picker, dan kemungkinan add_customer_sheet
+  perlu dirender/ditinjau pada perangkat dengan SDK sebelum diperbarui.

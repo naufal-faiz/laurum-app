@@ -1,5 +1,5 @@
 # 05 - Tambah Pelanggan Cepat
-Rute: sheet dari CustomerPickerSheet   Fase: 3
+Rute: sheet dari CustomerPickerSheet atau tombol Baru di Buat Transaksi   Fase: 3
 Juga dipakai dari /pelanggan lewat navigator utama agar tidak terpotong area tab.
 Frame .pen: "Pelanggan - Tambah Pelanggan Cepat" (sheet S21) + State Validasi nama,
 Validasi nomor WhatsApp, Nomor pelanggan sudah ada.
@@ -33,3 +33,7 @@ Format: Formatters.telepon untuk tampilan nomor; nomor disimpan dalam bentuk 0..
 Selisih terhadap .pen: tinggi sheet dibatasi 500 px agar dapat digulir; tidak ada field
 +62 terpisah (normalisasi otomatis); tombol Simpan memakai label 'Simpan pelanggan'
 (frame S21: 'Simpan dan pakai'); ContactPickerSheet adalah sheet tambahan.
+
+R3 (30 Oktober 2026): Baru di sebelah Pilih pelanggan membuka sheet dengan forOrder=true.
+Page memilih customerId dari hasil sheet; tutup tanpa simpan mempertahankan draf.
+Tes alur langsung dan keyboard 300 dp ditulis, BELUM TERVALIDASI tanpa SDK.

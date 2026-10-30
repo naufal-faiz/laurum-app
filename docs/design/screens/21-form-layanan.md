@@ -32,3 +32,7 @@ Selisih terhadap .pen:
 - Tanpa 'Paket' dan dropdown satuan, sesuai prompt.
 - Catatan harga diletakkan di atas form Edit agar langsung terbaca.
 - Footer memakai dua AppButton bertumpuk, bukan baris sejajar.
+
+R3: form baru juga dibuka dari FAB Pilih Layanan via push. Simpan/kembali
+mengembalikan pengguna ke pemilih; katalog dimuat ulang. Tes alur disiapkan,
+belum dijalankan tanpa SDK (30 Oktober 2026).

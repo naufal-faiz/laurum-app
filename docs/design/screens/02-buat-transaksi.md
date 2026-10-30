@@ -4,8 +4,9 @@ Template: FormScaffold (AppBarSub + body gulir + FooterBar sticky)
 
 Komposisi:
 - AppBarSub(title: 'Buat transaksi', backLabel: 'Kembali') dengan guard ConfirmModal.
-- SectionHeader('Pelanggan'), lalu AppButton('Pilih pelanggan') atau MenuRow pelanggan
-  terpilih (nama, telepon, saldo tabungan). Mengetuk membuka CustomerPickerSheet.
+- SectionHeader('Pelanggan'), lalu satu baris AppButton('Pilih pelanggan') melebar
+  dan AppButton('Baru', ikon add, actionOutline). Saat terpilih, hanya MenuRow
+  pelanggan (nama, telepon, saldo) yang membuka CustomerPickerSheet.
 - SectionHeader('Layanan', subtitle: '<n> layanan di nota'), AppButton('Pilih layanan' /
   'Tambah layanan lain') menuju /transaksi/baru/layanan.
 - MenuRow per layanan terpilih: nama, '<berat/jumlah> · <total>'; mengetuk membuka
@@ -22,6 +23,8 @@ Data dan provider:
 Interaksi:
 - Pilih pelanggan lewat pencarian di CustomerPickerSheet; hasil kosong menawarkan
   Tambah CustomerSheet. Pelanggan terpilih langsung dipakai draf.
+- Baru membuka AddCustomerSheet(forOrder: true); hasil simpan dipilih di draf.
+  Menutup sheet tanpa simpan tidak mengubah draf. Tombol Baru hilang saat terpilih.
 - Pilih layanan menambah DraftLine (kg 1 kg, pcs 1 pcs) lalu kembali.
 - Stepper +/- memakai langkah 0,5 kg atau 1 pcs; minus nonaktif saat nilai sudah
   minimum. Nilai dapat diketuk untuk Input Berat (lihat spec 04).
@@ -41,3 +44,6 @@ Format: Formatters.rupiah/berat/jumlah/tanggal/jam/telepon; estimateReady memaka
 Selisih terhadap .pen: pencarian pelanggan berada di sheet, bukan inline; detail estimasi
 memakai InfoRow dua kolom (frame label di atas nilai); baris layanan memakai MenuRow,
 bukan kartu dengan StepperField langsung; tidak ada ikon kasir pada app bar (AppBarSub).
+
+R3 (30 Oktober 2026): kode dan tes disiapkan tanpa SDK; BELUM TERVALIDASI.
+TransactionCustomerSection menerima customer/balance dan onChoose/onCreate dari Page.

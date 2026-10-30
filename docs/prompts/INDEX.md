@@ -30,7 +30,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | R0 | R0-struktur-section.md | Revisi: kategori Section, struktur fitur, check_arch (tanpa perubahan perilaku) | SELESAI (2026-10-25) | 38 Page->Section, 50 berkas state, 317 tes hijau; tinjau daftar utang di tool/section_riverpod_debt.txt - 26 berkas |
 | R1 | R1-input-keyboard.md | Revisi 1,2,3,10: keyboard, angka awal, berat | SELESAI (2026-10-25) | Fondasi keyboard, diskon, berat/jumlah, nominal, audit 14 layar + numpad T/A; koreksi teks desimal, 355 tes hijau. Catatan: docs/progress/r1-input-keyboard.md |
 | R2 | R2-navigasi-beranda.md | Revisi 9,11: tombol Transaksi di tengah nav, Beranda antrean aktif | SELESAI (2026-10-30) | 366 tes hijau di perangkat lama; PRD disinkronkan dengan izin pengguna, pemeriksaan manual Android dikonfirmasi |
-| R3 | R3-transaksi.md | Revisi 4,5: FAB Pilih Layanan, tombol tambah pelanggan | BELUM | |
+| R3 | R3-transaksi.md | Revisi 4,5: FAB Pilih Layanan, tombol tambah pelanggan | SEDANG (2026-10-30) | Kode dan tes disiapkan tanpa SDK; BELUM TERVALIDASI, lihat docs/progress/r3-transaksi.md |
 | R4 | R4-status-order.md | Revisi 6: pengaturan Pakai status order | BELUM | **Coba Selesaikan -> cetak di HP** |
 | R5 | R5-laporan-rentang.md | Revisi 8,13,14: rentang tanggal, Ekspor di atas | BELUM | Tinjau pemilih tanggal dan angka |
 | R6 | R6-laporan-nota.md | Revisi 7,8,13: daftar nota di Laporan, hapus Riwayat Nota | BELUM | Tinjau rekonsiliasi angka dan daftar nota |
