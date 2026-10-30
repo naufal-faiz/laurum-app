@@ -12,7 +12,7 @@ Sumber: uji dummy app di Android (Naufal) + audit statis cabang dev1 (prompt 70)
 | 6 | Pengaturan pakai status order atau tidak | Status order selalu dipakai; belum ada pengaturan | R4 | BELUM |
 | 7 | Hapus Riwayat Nota | Nota dilihat lewat Laporan | R6 | BELUM |
 | 8, 13 | Laporan: tanggal kustom + daftar order pada tanggal terpilih (dari halaman transaksi) | PeriodTabs hanya 3 periode; daftar nota ada di Riwayat Nota | R5 (ringkasan), R6 (daftar nota) | BELUM |
-| 9 | Nav: tombol Transaksi di tengah, FAB Beranda dihapus (ikon lama) | FAB ada di RootScaffold; Transaksi masih tab Riwayat Nota | R2 | SELESAI kode (2026-10-25); PRD menunggu izin |
+| 9 | Nav: tombol Transaksi di tengah, FAB Beranda dihapus (ikon lama) | FAB ada di RootScaffold; Transaksi masih tab Riwayat Nota | R2 | SELESAI (2026-10-30); PRD disinkronkan, pemeriksaan manual Android dikonfirmasi |
 | 11 | Beranda hanya antrean aktif | Judul "Antrean hari ini" menyesatkan; data sudah aktif-saja | R2 | SELESAI (2026-10-25) |
 | 12 | Tombol Pelanggan baru pindah ke atas, di sebelah Impor kontak | Berada di FooterBar | R7 | BELUM |
 | 14 | Ekspor Excel di atas | Berada di FooterBar Laporan | R5 | BELUM |

@@ -66,7 +66,7 @@ Aturan tambahan: satu widget publik per file; tanpa kelas widget privat (`_Foo`)
 
 **Organisms (17):** `BottomNavBar`, `OrderCard`, `NotaCard`, `ProposalCard`, `CustomerRow`, `PiutangCard`, `ServiceRow`, `SavingsRow`, `ExpenseRow`, `ReportSummary`, `WeeklyBarChart`, `TopServices`, `ReceiptPreview` (C/Struk), `ReceiptToggleList`, `Numpad` (C/Numpad, varian desimal), `ConfirmModal` (C/Modal), `AppBottomSheet` (C/Sheet).
 
-**Templates (5):** `RootScaffold` (app bar root + nav bawah + FAB), `SubScaffold` (app bar sub, tanpa nav), `FormScaffold` (sub + footer sticky), `SheetScaffold`, `AuthScaffold`.
+**Templates (5):** `RootScaffold` (app bar root + nav bawah empat tab dan aksi Transaksi tengah, tanpa FAB), `SubScaffold` (app bar sub, tanpa nav), `FormScaffold` (sub + footer sticky), `SheetScaffold`, `AuthScaffold`.
 
 **Aturan penambahan widget:** jika kebutuhan belum tercakup, agen berhenti dan menulis usulan di `docs/design/proposals/NNN-nama.md` (alasan, layar yang butuh, sketsa API). Widget baru baru boleh dibuat setelah kamu menyetujui dan registry diperbarui.
 
@@ -95,7 +95,7 @@ Semua token hidup di `lib/core/theme/` (satu-satunya tempat boleh memakai `Color
 
 ## 8. Navigasi
 
-`go_router` dengan `StatefulShellRoute` untuk 5 tab. Sheet dan modal dibuka lewat `AppBottomSheet.show` dan `ConfirmModal.show`.
+`go_router` dengan `StatefulShellRoute` untuk empat tab: `/antrean`, `/pelanggan`, `/laporan`, `/lainnya`. Slot tengah Transaksi adalah aksi push `/transaksi/baru`, tidak menjadi tab dan tidak pernah berstatus aktif. `/transaksi` sementara tetap menjadi rute langsung Riwayat Nota sampai pemindahan R6. Sheet dan modal dibuka lewat `AppBottomSheet.show` dan `ConfirmModal.show`.
 
 | Rute | Layar |
 | --- | --- |

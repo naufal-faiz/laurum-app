@@ -39,7 +39,8 @@ Loading: tiga AppCard berisi AppSkeleton. Error: EmptyState dengan Coba lagi.
 Kosong: Belum ada order aktif; tombol Transaksi baru tetap. Filter kosong: Tidak ada order di status ini.
 WhatsApp terputus: banner warning; order kasir tetap dapat digunakan.
 Nama/nominal/teks pesan mengikuti DATA MASTER, bukan usulan Bu Rina tambahan di .pen.
-Belum diuji di Android/iOS perangkat; tidak ada integrasi WhatsApp/jaringan nyata.
+Pengguna mengonfirmasi pemeriksaan manual R2 di ponsel Android pada 30 Oktober 2026.
+Belum diuji di iOS; tidak ada integrasi WhatsApp/jaringan nyata.
 
 ## Selisih terhadap .pen
 Token/komponen Fase 1 dipertahankan: mono w400, nav dinamis, DP amber, glyph Ionicons.

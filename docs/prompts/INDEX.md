@@ -29,7 +29,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 17 | 70-lainnya-a.md | Pengaturan dan Akun, Layanan, Info Usaha | SELESAI (2026-10-25) | check_all hijau, 310 tes; tinjau Pengaturan, Layanan, dan Info Usaha di HP |
 | R0 | R0-struktur-section.md | Revisi: kategori Section, struktur fitur, check_arch (tanpa perubahan perilaku) | SELESAI (2026-10-25) | 38 Page->Section, 50 berkas state, 317 tes hijau; tinjau daftar utang di tool/section_riverpod_debt.txt - 26 berkas |
 | R1 | R1-input-keyboard.md | Revisi 1,2,3,10: keyboard, angka awal, berat | SELESAI (2026-10-25) | Fondasi keyboard, diskon, berat/jumlah, nominal, audit 14 layar + numpad T/A; koreksi teks desimal, 355 tes hijau. Catatan: docs/progress/r1-input-keyboard.md |
-| R2 | R2-navigasi-beranda.md | Revisi 9,11: tombol Transaksi di tengah nav, Beranda antrean aktif | SELESAI kode (2026-10-25) | 366 tes hijau; sinkronisasi PRD menunggu izin eksplisit (r2-prd-proposal.md) |
+| R2 | R2-navigasi-beranda.md | Revisi 9,11: tombol Transaksi di tengah nav, Beranda antrean aktif | SELESAI (2026-10-30) | 366 tes hijau di perangkat lama; PRD disinkronkan dengan izin pengguna, pemeriksaan manual Android dikonfirmasi |
 | R3 | R3-transaksi.md | Revisi 4,5: FAB Pilih Layanan, tombol tambah pelanggan | BELUM | |
 | R4 | R4-status-order.md | Revisi 6: pengaturan Pakai status order | BELUM | **Coba Selesaikan -> cetak di HP** |
 | R5 | R5-laporan-rentang.md | Revisi 8,13,14: rentang tanggal, Ekspor di atas | BELUM | Tinjau pemilih tanggal dan angka |

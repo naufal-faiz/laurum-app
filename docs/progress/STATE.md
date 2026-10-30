@@ -2,9 +2,9 @@
 Diperbarui: 2026-10-30 | Cabang dev1rev
 
 ## Posisi
-R0/R1 SELESAI. R2 implementasi SELESAI; bukti perangkat lama: 366 tes, REPO_MAP 507.
-Sisa R2: sinkronisasi PRD menunggu izin eksplisit pengguna (r2-prd-proposal.md).
-Jangan mulai R3 sebelum PRD diputuskan.
+R0/R1/R2 SELESAI. Bukti otomatis perangkat lama: 366 tes, REPO_MAP 507.
+PRD R2 disinkronkan dengan izin eksplisit pengguna 30 Oktober 2026; pemeriksaan
+manual R2 di ponsel Android dikonfirmasi pengguna. Berikutnya: R3-transaksi.md.
 
 ## Selesai
 - Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
@@ -26,15 +26,13 @@ Jangan mulai R3 sebelum PRD diputuskan.
   antrean_normal sudah ditinjau. Spec 01, katalog, Widgetbook diperbarui.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Validasi perangkat lama SELESAI: check_all hijau (366 tes, 507 berkas).
-   Tiga tes lama disesuaikan dengan perilaku R2: teks kosong 'Belum ada order aktif'
-   (antrean_states_test) dan RootScaffold tanpa FAB, aksi Transaksi tengah (widget_test).
-2. PRD BELUM diubah: auto-review menolak karena izin eksplisit tidak ditemukan
-   pada prompt R2. Usulan konkret: docs/progress/r2-prd-proposal.md.
-   Minta izin pengguna untuk tiga perubahan PRD itu; jangan bypass penolakan.
-3. Setelah izin, sinkronkan PRD A deskripsi RootScaffold dan bagian 8; tandai
-   R2 selesai di INDEX/REVISI, perbarui STATE dan commit. Jangan push/merge.
-4. Berikutnya R3-transaksi.md; tinjau navigasi di Android dan teks besar.
+1. Sinkronisasi PRD R2 selesai: RootScaffold tanpa FAB, empat tab dan aksi tengah,
+   /transaksi tetap rute langsung sementara sampai R6. Izin pengguna 30 Okt 2026.
+2. Pemeriksaan dokumentasi: git diff --check; kode Dart tidak berubah pada tugas ini.
+   Tidak menjalankan ulang check_all karena laptop ini tidak memiliki SDK.
+3. Lanjut R3-transaksi.md: FAB Layanan baru dan tombol Baru di bagian pelanggan.
+   Coding/penulisan tes boleh tanpa SDK; tandai BELUM TERVALIDASI hingga perangkat baru.
+4. Jangan memasang SDK, push, atau merge tanpa permintaan pengguna.
 
 ## Antrean dan keputusan
 - R3-R7 berurutan, lalu 71,80,90,100. Catat bayar/Ingatkan piutang placeholder.
@@ -50,10 +48,11 @@ Jangan mulai R3 sebelum PRD diputuskan.
 - Detached HEAD dipulihkan menjadi dev1rev, upstream origin/dev1rev.
   Fetch dan git push --dry-run berhasil; belum melakukan push aktual.
 - Pengguna 30 Okt 2026: JANGAN memasang SDK di laptop ini (keterbatasan sumber daya).
-  Coding dan penulisan tes dapat diteruskan tanpa SDK setelah PRD R2 diputuskan.
+  Coding dan penulisan tes dapat diteruskan tanpa SDK; prasyarat PRD R2 selesai.
   Format/analyze/check_all ditunda sampai pengguna mengonfirmasi perangkat baru;
   perubahan kode berikutnya harus ditandai BELUM TERVALIDASI, bukan hijau.
-- Android/iOS, keyboard nyata, TalkBack/VoiceOver dan printer nyata belum diuji.
+- R2 diperiksa manual di Android oleh pengguna; iOS, cakupan keyboard nyata,
+  TalkBack/VoiceOver dan printer nyata belum diverifikasi pada sesi ini.
 
 ## Untuk agen penerus
 Baca AGENTS.md, SKILLS.md, STATE.md; verifikasi git status dan git log -5.
