@@ -1,8 +1,8 @@
 # STATE Laurum
-Diperbarui: 2026-10-25 | Cabang dev1rev
+Diperbarui: 2026-10-30 | Cabang dev1rev
 
 ## Posisi
-R0/R1 SELESAI. R2 implementasi SELESAI; check_all hijau (366 tes, REPO_MAP 507).
+R0/R1 SELESAI. R2 implementasi SELESAI; bukti perangkat lama: 366 tes, REPO_MAP 507.
 Sisa R2: sinkronisasi PRD menunggu izin eksplisit pengguna (r2-prd-proposal.md).
 Jangan mulai R3 sebelum PRD diputuskan.
 
@@ -26,7 +26,7 @@ Jangan mulai R3 sebelum PRD diputuskan.
   antrean_normal sudah ditinjau. Spec 01, katalog, Widgetbook diperbarui.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Validasi akhir SELESAI: dart run tool/check_all.dart hijau (366 tes, 507 berkas).
+1. Validasi perangkat lama SELESAI: check_all hijau (366 tes, 507 berkas).
    Tiga tes lama disesuaikan dengan perilaku R2: teks kosong 'Belum ada order aktif'
    (antrean_states_test) dan RootScaffold tanpa FAB, aksi Transaksi tengah (widget_test).
 2. PRD BELUM diubah: auto-review menolak karena izin eksplisit tidak ditemukan
@@ -46,7 +46,11 @@ Jangan mulai R3 sebelum PRD diputuskan.
 - Pembatalan order/tabungan belum rollback lintas repository.
 - R2 hanya dua token ukuran baru; registry/lint/dependensi tetap.
 - Formatters beratInput mempertahankan teks draf; perhitungan tetap int gram.
-- Launcher sandbox gagal karena G: BitLocker; repo E:, eskalasi berhasil.
+- Perangkat baru: repo C:/Users/Naufal/Downloads/laurum-app (clone GitHub).
+- Detached HEAD dipulihkan menjadi dev1rev, upstream origin/dev1rev.
+  Fetch dan git push --dry-run berhasil; belum melakukan push aktual.
+- Flutter/Dart belum ditemukan di PATH maupun lokasi SDK umum; check_all belum
+  dijalankan ulang di perangkat ini. Siapkan SDK sebelum melanjutkan kode R3.
 - Android/iOS, keyboard nyata, TalkBack/VoiceOver dan printer nyata belum diuji.
 
 ## Untuk agen penerus
