@@ -36,8 +36,11 @@ class Order extends DomainRecord {
   final String? proposalId;
   final String note;
   final DateTime? deletedAt;
-  Order withStatus(OrderStatus value) {
-    if (nextStatus(status, cancel: value == OrderStatus.dibatalkan) != value) {
+  Order withStatus(OrderStatus value, {bool useOrderStatus = true}) {
+    final next = nextStatus(
+      status, cancel: value == OrderStatus.dibatalkan, useOrderStatus: useOrderStatus,
+    );
+    if (next != value) {
       throw StateError('Invalid status transition');
     }
     return Order(

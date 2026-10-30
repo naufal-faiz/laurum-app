@@ -40,8 +40,9 @@ class BusinessInfoController extends AsyncNotifier<BusinessInfoState> {
       return false;
     }
     state = AsyncData(current.copyWith(busy: true, clearNotice: true));
-    final profile = current.profile;
+
     try {
+      final profile = await ref.read(businessRepositoryProvider).getProfile();
       await ref
           .read(businessRepositoryProvider)
           .saveProfile(
@@ -56,6 +57,7 @@ class BusinessInfoController extends AsyncNotifier<BusinessInfoState> {
               phone: current.phone.trim(),
               receiptFooter: current.receiptFooter.trim(),
               receiptNote: profile.receiptNote,
+              useOrderStatus: profile.useOrderStatus,
               deletedAt: profile.deletedAt,
             ),
           );

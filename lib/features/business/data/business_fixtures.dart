@@ -12,6 +12,7 @@ final businessProfileFixture = BusinessProfile(
   phone: '0812-3456-7890',
   receiptFooter: 'Terima kasih atas kepercayaan Anda',
   receiptNote: 'Pakaian bersih, wangi & rapi',
+  useOrderStatus: true,
 );
 
 final receiptSettingsFixture = ReceiptSettings(

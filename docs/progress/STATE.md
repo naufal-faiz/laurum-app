@@ -5,7 +5,8 @@ Diperbarui: 2026-10-30 | Cabang dev1rev
 R0/R1/R2 SELESAI. Bukti otomatis perangkat lama: 366 tes, REPO_MAP 507.
 PRD R2 disinkronkan dengan izin eksplisit pengguna 30 Oktober 2026; pemeriksaan
 manual R2 di ponsel Android dikonfirmasi pengguna.
-R3 SEDANG: kode/tes disiapkan tanpa SDK, BELUM TERVALIDASI. Rincian: r3-transaksi.md.
+R3 SEDANG: kode/tes tanpa SDK, BELUM TERVALIDASI. Rincian: r3-transaksi.md.
+R4 DRAF PARSIAL: fondasi model/policy/preservasi profil; belum ada toggle atau alur cetak.
 
 ## Selesai
 - Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
@@ -27,14 +28,17 @@ R3 SEDANG: kode/tes disiapkan tanpa SDK, BELUM TERVALIDASI. Rincian: r3-transaks
   antrean_normal sudah ditinjau. Spec 01, katalog, Widgetbook diperbarui.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-- R3: FAB SubScaffold/Pilih Layanan, daftar layanan menjadi ServicePickerListSection;
-  tombol Baru langsung tambah/pilih pelanggan. CustomerSection kini Stateless.
-- Enam berkas tes baru (sembilan skenario) belum dijalankan. Spec 02/03/05/21,
-  katalog dan Widgetbook diperbarui; golden lama belum diubah.
-- Di perangkat dengan SDK: dart format, tes R3 dan regresi, tinjau golden, check_all.
-  REPO_MAP juga perlu diregenerasi. Panduan: docs/progress/r3-transaksi.md.
-- Jangan tandai R3 selesai atau mulai R4 sebelum validasi. Tidak memasang SDK,
-  push, atau merge pada laptop ini. Commit wip menyimpan draf yang belum tervalidasi.
+- R3 draf: FAB layanan, tombol Baru, migrasi CustomerSection; enam tes baru belum
+  dijalankan, golden/REPO_MAP perlu ditinjau saat SDK tersedia. Lihat r3-transaksi.md.
+- Permintaan pengguna melanjutkan bagian yang memungkinkan tanpa SDK: R4 fondasi
+  profil useOrderStatus default true, aturan awal/label/transisi dan 12 tes kontrak.
+- R4 belum aktif di UI. Guard repository order masih mode lama. Lihat catatan
+  docs/progress/r4-status-order.md sebelum meneruskan policy ke repository/settings.
+- Berikutnya: guard repository yang konsisten, toggle, checkout/AI, Antrean/Detail,
+  alur selesai/cetak dan koreksi ledger sesuai R4; spec dan kolom sinkron PRD B.
+- R3/R4 tetap BELUM TERVALIDASI. Di perangkat SDK: format/analyze/tes, golden,
+  check_all dan regenerasi REPO_MAP. Jangan menandai selesai atau mulai R5 dulu.
+- Tidak memasang SDK atau melakukan push/merge. Semua draf disimpan lewat commit wip.
 
 ## Antrean dan keputusan
 - R3-R7 berurutan, lalu 71,80,90,100. Catat bayar/Ingatkan piutang placeholder.

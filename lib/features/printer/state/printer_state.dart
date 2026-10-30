@@ -70,4 +70,5 @@ BusinessProfile copyProfile(
   phone: current.phone,
   receiptFooter: receiptFooter ?? current.receiptFooter,
   receiptNote: receiptNote ?? current.receiptNote,
+  useOrderStatus: current.useOrderStatus,
 );

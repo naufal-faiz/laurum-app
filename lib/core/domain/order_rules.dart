@@ -12,15 +12,32 @@ DateTime estimateReady(DateTime enteredAt, Iterable<ServiceItem> services) {
   return DateTime(enteredAt.year, enteredAt.month, enteredAt.day + days, 17);
 }
 
-OrderStatus nextStatus(OrderStatus status, {bool cancel = false}) {
+OrderStatus nextStatus(
+  OrderStatus status, {
+  bool cancel = false,
+  bool useOrderStatus = true,
+}) {
   if (status == OrderStatus.selesai || status == OrderStatus.dibatalkan) {
     throw StateError('Final order status cannot change');
   }
   if (cancel) return OrderStatus.dibatalkan;
   return switch (status) {
     OrderStatus.menungguJemput => OrderStatus.diproses,
-    OrderStatus.diproses => OrderStatus.siap,
+    OrderStatus.diproses => useOrderStatus ? OrderStatus.siap : OrderStatus.selesai,
     OrderStatus.siap => OrderStatus.selesai,
     _ => throw StateError('Final order status cannot change'),
   };
 }
+
+OrderStatus initialOrderStatus(OrderSource source, {bool useOrderStatus = true}) =>
+    useOrderStatus && source == OrderSource.whatsappAi
+        ? OrderStatus.menungguJemput
+        : OrderStatus.diproses;
+
+String orderStatusLabel(OrderStatus status, {bool useOrderStatus = true}) => switch (status) {
+  OrderStatus.menungguJemput => 'Menunggu jemput',
+  OrderStatus.diproses => useOrderStatus ? 'Diproses' : 'Sedang dikerjakan',
+  OrderStatus.siap => 'Siap',
+  OrderStatus.selesai => 'Selesai',
+  OrderStatus.dibatalkan => 'Dibatalkan',
+};
