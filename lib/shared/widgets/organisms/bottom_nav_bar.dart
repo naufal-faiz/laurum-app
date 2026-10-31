@@ -35,8 +35,13 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Stack(
     children: [
-      const Positioned.fill(child: ColoredBox(color: AppColors.surface)),
-      const Positioned(top: 0, left: 0, right: 0, child: AppDivider()),
+      const Positioned.fill(
+        top: AppDimensions.navCreateSize / 2,
+        child: ColoredBox(
+          color: AppColors.surface,
+          child: Align(alignment: Alignment.topCenter, child: AppDivider()),
+        ),
+      ),
       SafeArea(
         top: false,
         child: Row(
@@ -44,20 +49,20 @@ class BottomNavBar extends StatelessWidget {
           children: [
             for (var slot = 0; slot < _tabs.length; slot++)
               Expanded(
-                child: Semantics(
-                  label: slot == 2 ? 'Transaksi baru' : _tabs[slot].$1,
-                  button: true,
-                  selected: selected(slot),
-                  excludeSemantics: true,
-                  onTap: action(slot),
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: slot == 2 ? 0 : AppDimensions.navCreateSize / 2 + AppMoleculeTokens.gap,
+                    bottom: AppMoleculeTokens.gap,
+                  ),
+                  child: Semantics(
+                    label: slot == 2 ? 'Transaksi baru' : _tabs[slot].$1,
+                    button: true,
+                    selected: selected(slot),
+                    excludeSemantics: true,
                     onTap: action(slot),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        top: slot == 2 ? 0 : AppDimensions.navCreateLift + AppMoleculeTokens.gap,
-                        bottom: AppMoleculeTokens.gap,
-                      ),
+                    child: GestureDetector(
+                      behavior: slot == 2 ? HitTestBehavior.deferToChild : HitTestBehavior.opaque,
+                      onTap: action(slot),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         spacing: AppMoleculeTokens.smallGap,

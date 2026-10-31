@@ -35,3 +35,16 @@ Tombol tengah BottomNavBar hanya GestureDetector tanpa umpan tekan, dan rute
 ## Tinjauan di HP
 - Rasakan ripple tombol tengah dan transisi masuk/keluar alur transaksi.
 - Transisi rute lain (detail order, pelanggan, laporan) sengaja belum diubah.
+
+## Koreksi lanjutan pengguna 31 Okt
+- Pengguna menegaskan tombol Transaksi tetap mengambang; revisi meratakan latar
+  hingga puncak tombol di atas dibatalkan. Garis bar melewati tengah lingkaran.
+- RootScaffold extendBody, padding bawah halaman dikurangi separuh tombol (28 dp).
+  Padding tab di luar area interaksi; sudut luar lingkaran meneruskan sentuhan.
+- Tes regresi membuktikan batas halaman di tengah lingkaran, empat titik samping
+  menerima tap halaman, scroll dari samping berjalan, puncak tombol tetap aktif.
+- Golden Antrean ditinjau visual: konten terlihat di samping tonjolan tombol.
+  Tinjauan perangkat Android/iOS untuk koreksi ini belum dilakukan.
+- Bukti `dart run tool/check_all.dart`: format 486 files (0 changed),
+  flutter analyze dan dart analyze tanpa masalah, check_arch OK,
+  +450: All tests passed!, REPO_MAP 554 berkas, check_all: SEMUA HIJAU.

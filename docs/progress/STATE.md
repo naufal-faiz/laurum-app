@@ -2,9 +2,9 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-R0-R7 SELESAI otomatis. check_all terakhir hijau: 449 tes, REPO_MAP 553 berkas.
+R0-R7 SELESAI otomatis. check_all terakhir hijau: 450 tes, REPO_MAP 554 berkas.
 Pelanggan: aksi di atas; Akun: tombol Keluar destruktif terpisah dari kartu.
-Transaksi: nav tanpa celah, tombol tengah ber-ripple, alur memakai transisi fade + lift.
+Transaksi: tombol mengambang, sisi atas bar milik halaman; ripple + fade/lift tetap.
 AppIconButton transparan; aksi Pelanggan sama tinggi.
 
 ## Selesai
@@ -41,12 +41,12 @@ AppIconButton transparan; aksi Pelanggan sama tinggi.
   tanpa latar putih di app bar/sheet. 449 hijau, golden disinkronkan.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. SEMUA HIJAU: dua analyzer bersih, check_arch OK, 449 tes. Golden nav, root,
+1. SEMUA HIJAU: dua analyzer bersih, check_arch OK, 450 tes. Golden nav, root,
    antrean, r4_settings, dan r5_report diperbarui (selisih hanya tepi lingkaran).
    Rincian dan bukti di animasi-transaksi.md.
-2. Dahulukan koreksi nav pengguna 31 Okt: tombol Transaksi tetap mengambang naik;
-   area di kiri/kanan separuh atasnya milik halaman, konten dan sentuhan lewat.
-   Pemahaman sedang ditinjau pengguna; kode UI belum diubah. Setelah itu prompt 71.
+2. Koreksi nav disetujui dan diimplementasikan: tombol menonjol 28 dp;
+   halaman di sampingnya menerima tap/scroll. Golden ditinjau, 450 tes lulus;
+   check_all SEMUA HIJAU. Berikutnya tinjauan perangkat, lalu prompt 71.
 3. Tinjauan Android/iOS/pembaca layar dan ekspor/printer nyata belum dilakukan.
 4. Persetujuan AI baru prompt 80; wajib gunakan initialOrderStatus dari profil.
 
@@ -64,8 +64,8 @@ AppIconButton transparan; aksi Pelanggan sama tinggi.
   kartu AKUN sebagai tombol destruktif, modal ikon logout. MenuRow Keluar dihapus.
 - Animasi Transaksi hanya di tombol tengah dan tiga rute alur; rute lain tetap
   transisi bawaan. Ripple memakai warna bawaan tema (tanpa token warna baru).
-- Revisi 31 Okt membatalkan tampilan nav terangkat R2: tombol menempel garis atas,
-  tanpa cincin/celah; AppIconButton tidak lagi berlatar putih.
+- Koreksi terakhir 31 Okt menggantikan revisi nav rata: tombol menonjol separuh,
+  bar mulai tengah lingkaran; AppIconButton tetap tanpa latar putih.
 - Utang Section 21; ReportBodySection sekarang aksi piutang callback tanpa router.
 - R4 selesai tidak wajib lunas; toggle Lainnya/PENGATURAN default aktif.
 - Izin 31 Okt: statusLabel opsional OrderCard, label mengikuti dua mode; proposal 001.

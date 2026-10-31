@@ -632,6 +632,8 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - API wajib: title, accountLabel, activeIndex 0..3, body. Opsi: syncState,
   onAccount, onTabSelected, onCreate. Tanpa fabLabel/onFab atau FAB.
 - AppBarRoot + SyncIndicator, body, BottomNavBar dengan aksi tengah.
+- Revisi 31 Okt: separuh atas tombol Transaksi menonjol; extendBody dan padding
+  halaman menyisakan hanya bar bawah, area samping tonjolan menerima scroll/tap.
 - Contoh: RootScaffold(title: nama, accountLabel: akun, activeIndex: tab,
   onTabSelected: pilih, onCreate: buat, body: content).
 - Widgetbook: navigasi dan Transaksi, offline. Tes tanpa FAB, callback,

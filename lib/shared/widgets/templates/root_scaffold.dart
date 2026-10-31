@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_root.dart';
 import 'package:laurum/shared/widgets/molecules/sync_indicator.dart';
@@ -39,7 +40,23 @@ class RootScaffold extends StatelessWidget {
         onAccount: onAccount,
       ),
     ),
-    body: body,
+    extendBody: true,
+    body: Builder(
+      builder: (context) {
+        final media = MediaQuery.of(context);
+        return MediaQuery(
+          data: media.copyWith(
+            padding: media.padding.copyWith(
+              bottom: (media.padding.bottom - AppDimensions.navCreateSize / 2).clamp(
+                0,
+                double.infinity,
+              ),
+            ),
+          ),
+          child: body,
+        );
+      },
+    ),
     bottomNavigationBar: BottomNavBar(
       activeIndex: activeIndex,
       onSelected: onTabSelected,

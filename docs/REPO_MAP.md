@@ -385,7 +385,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/organisms/
 - app_bottom_sheet.dart (93): AppBottomSheet
-- bottom_nav_bar.dart (100): BottomNavBar
+- bottom_nav_bar.dart (105): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
 - customer_row.dart (98): CustomerRow
 - expense_row.dart (57): ExpenseRow
@@ -405,7 +405,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/templates/
 - auth_scaffold.dart (20): AuthScaffold
 - form_scaffold.dart (44): FormScaffold
-- root_scaffold.dart (49): RootScaffold
+- root_scaffold.dart (66): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
 - sub_scaffold.dart (62): SubScaffold
 
@@ -548,6 +548,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r5_report_body_section_test.dart (58):
 - r5_report_visual_test.dart (70):
 - r5_report_widgets_test.dart (100): HeldReportExport
+- raised_navigation_test.dart (52):
 - receipt_fixtures.dart (86):
 - receipt_formatter_settings_test.dart (31):
 - receipt_formatter_test.dart (70):
