@@ -5,11 +5,13 @@ import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/state/antrean_controller.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
+import 'package:laurum/features/orders/state/antrean_filter_view.dart';
+import 'package:laurum/features/orders/widgets/antrean_orders_section.dart';
 import 'package:laurum/features/orders/widgets/antrean_status_section.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
-import 'package:laurum/shared/widgets/organisms/order_card.dart';
 import 'package:laurum/shared/widgets/organisms/proposal_card.dart';
 
 class AntreanPage extends ConsumerWidget {
@@ -17,7 +19,9 @@ class AntreanPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final snapshot = ref.watch(antreanDataProvider);
-    final filter = ref.watch(antreanFilterProvider);
+    final useStatus = ref.watch(businessProfileProvider).value?.useOrderStatus ?? true;
+    final filters = AntreanFilterView(ref.watch(antreanFilterProvider), useOrderStatus: useStatus);
+    final filter = filters.selectedValue;
     final actions = ref.watch(antreanActionsProvider);
     final controller = ref.read(antreanActionsProvider.notifier);
     final data = snapshot.value;
@@ -40,9 +44,10 @@ class AntreanPage extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.cardGap),
           child: ChipBar(
-            labels: data.chips,
-            selectedIndex: filter,
-            onSelected: ref.read(antreanFilterProvider.notifier).select,
+            labels: [for (final value in filters.values) data.chips[value]],
+            selectedIndex: filters.selectedIndex,
+            onSelected: (index) =>
+                ref.read(antreanFilterProvider.notifier).select(filters.values[index]),
           ),
         ),
         if (actions.error != null)
@@ -72,28 +77,17 @@ class AntreanPage extends ConsumerWidget {
         if (orders.isEmpty && (!showProposals || data.proposals.isEmpty))
           AntreanStatusSection(
             filtered: filter != 0,
+            reviewOnly: filter == 4,
             onCreate: () => context.push('/transaksi/baru'),
           ),
-        for (final order in orders)
-          Padding(
-            padding: const EdgeInsets.only(bottom: AppSpacing.cardGap),
-            child: OrderCard(
-              key: ValueKey(order.id),
-              orderNo: order.orderNo,
-              customerName: data.customer(order.customerId),
-              summary: data.summary(order),
-              total: order.total,
-              status: order.status,
-              payStatus: data.paymentStatus(order),
-              paid: data.paid(order),
-              timeLabel: Formatters.jam(order.enteredAt),
-              detail: data.detail(order),
-              onTap: () => context.push('/order/${order.id}'),
-              onAction: actions.pending.contains(order.id)
-                  ? null
-                  : () => controller.advance(order.id, order.status),
-            ),
-          ),
+        AntreanOrdersSection(
+          data: data,
+          orders: orders,
+          pending: actions.pending,
+          useOrderStatus: useStatus,
+          onOpen: (order) => context.push('/order/${order.id}'),
+          onAdvance: (order) => controller.advance(order.id, order.status),
+        ),
         const SizedBox(height: AppSpacing.appBarHeight),
       ],
     );

@@ -36,5 +36,54 @@ void main() {
     expect(calls, 1);
     expect(opens, 0);
   });
+  testWidgets('showAction false hides progress while keeping card openable', (tester) async {
+    var opens = 0;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: Scaffold(
+          body: OrderCard(
+            orderNo: 'A-0142',
+            customerName: 'Pak Dedi',
+            summary: 'Cuci kiloan',
+            total: 31500,
+            status: OrderStatus.diproses,
+            payStatus: PayStatus.belumBayar,
+            showAction: false,
+            onTap: () => opens++,
+          ),
+        ),
+      ),
+    );
+    expect(find.text('Tandai siap'), findsNothing);
+    expect(find.text('Diproses'), findsOneWidget);
+    await tester.tap(find.text('A-0142'));
+    expect(opens, 1);
+  });
+  testWidgets('statusLabel changes badge text while preserving payment and card action', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: const Scaffold(
+          body: OrderCard(
+            orderNo: 'A-0142',
+            customerName: 'Pak Dedi',
+            summary: 'Cuci kiloan',
+            total: 31500,
+            status: OrderStatus.diproses,
+            payStatus: PayStatus.belumBayar,
+            statusLabel: 'Sedang dikerjakan',
+            showAction: false,
+          ),
+        ),
+      ),
+    );
+    expect(find.text('Sedang dikerjakan'), findsOneWidget);
+    expect(find.text('Diproses'), findsNothing);
+    expect(find.text('Belum bayar'), findsOneWidget);
+    expect(find.text('Rp31.500'), findsOneWidget);
+  });
   registerOrganismGallery('order_card', orderCardUseCase.builder, height: 1500);
 }

@@ -29,6 +29,14 @@ class AntreanActions extends Notifier<AntreanActionState> {
     if (state.pending.contains(id)) return;
     state = (pending: {...state.pending, id}, error: null);
     try {
+      final profile = await ref.read(businessRepositoryProvider).getProfile();
+      if (!profile.useOrderStatus) {
+        state = (
+          pending: state.pending,
+          error: 'Pakai status order nonaktif. Selesaikan dari Detail order.',
+        );
+        return;
+      }
       final repository = ref.read(orderRepositoryProvider);
       final order = await repository.getOrderById(id);
       if (order == null || order.status != expected) {

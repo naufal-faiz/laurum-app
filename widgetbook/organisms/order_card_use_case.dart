@@ -38,6 +38,18 @@ final orderCardUseCase = WidgetbookUseCase(
               onTap: () {},
               onAction: () {},
             ),
+        for (final order in orderFixtures.where((o) => o.id == 'ord-0142'))
+          OrderCard(
+            orderNo: order.orderNo,
+            customerName: customerFixtures.singleWhere((c) => c.id == order.customerId).name,
+            summary: fixtureOrderSummary(order.id),
+            total: order.total,
+            status: order.status,
+            payStatus: PayStatus.belumBayar,
+            showAction: false,
+            statusLabel: 'Sedang dikerjakan',
+            onTap: () {},
+          ),
         OrderCard(
           orderNo: orderFixtures.first.orderNo,
           customerName: customerFixtures

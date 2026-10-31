@@ -461,16 +461,21 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Nominal bukan flex: menempel ke tepi kanan kartu, bukan berbagi sisa lebar dengan kolom teks.
 
 ## OrderCard
-- Berkas: lib/shared/widgets/organisms/order_card.dart (100 baris).
+- Berkas: lib/shared/widgets/organisms/order_card.dart (99 baris).
 - API wajib: orderNo, customerName, summary, total int, status OrderStatus, payStatus PayStatus.
   Opsi: timeLabel/detail kosong, paid int 0, compact/needsReview/cancelRequested false,
   onTap/onAction. Data yang sudah diformat dibuat lewat Formatters oleh pemanggil.
+- R4: showAction default true mengendalikan tampilnya tombol secara terpisah dari
+  callback null (disabled). statusLabel opsional default null memakai label enum;
+  Antrean meneruskan label core policy 'Sedang dikerjakan' saat mode sederhana.
+  Izin statusLabel: pengguna 31 Oktober 2026, proposals/001-order-card-label-r4.md.
 - Varian: semua lima status dan tiga status bayar; rail normal/amber/merah; aksi/ringkas.
   Rail merah diprioritaskan atas amber. Status final tidak menampilkan aksi progres.
 - Contoh: OrderCard(orderNo: number, customerName: name, summary: items, total: total,
   status: status, payStatus: payment, onAction: advance).
 - Galeri: order_card_use_case.dart; tes callback tidak memicu onTap induk, prioritas rail,
   golden dan teks 2x. Mapping badge/status bayar dilakukan di organism.
+  Varian tambahan mode sederhana tanpa CTA tetap bisa dibuka; nominal/badge bayar tetap.
 - Referensi JrA3v/V6p3J: kartu, badge, CTA outline, nominal mengikuti token.
   Mono w400 vs w600 di .pen; tidak ada titik status; header wrap saat sempit.
   needsReview/cancelRequested hanya penanda rail; onAction tetap aksi progres status.
@@ -676,9 +681,10 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 ## Layar dan navigasi Fase 2
 
 ### AntreanPage
-- Berkas: lib/features/orders/pages/antrean_page.dart (100 baris),
+- Berkas: lib/features/orders/pages/antrean_page.dart (95 baris),
   state/antrean_controller.dart, state/antrean_data.dart,
-  widgets/antrean_status_section.dart.
+  widgets/antrean_status_section.dart, widgets/antrean_orders_section.dart,
+  state/antrean_filter_view.dart.
 - Rute: /antrean di dalam StatefulShellRoute cabang Antrean.
 - Data: antreanDataProvider menggabungkan order/items/payment/customer/proposal dari
   repository publik; tanpa membaca fixture di page.
@@ -688,6 +694,10 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   banner WhatsApp + tombol Hubungkan saat koneksi palsu terputus.
 - Aksi: OrderCard memajukan satu status + OrderEvent; guard klik ganda dan status usang;
   Tolak mengubah usulan tanpa membatalkan order; Periksa membuka placeholder.
+- R4: AntreanOrdersSection Stateless (data/domain dan callback, tanpa provider/router).
+  Mode sederhana menyembunyikan CTA dan chip status, memetakan Perlu dicek ke ID 4;
+  filter lama tampil sebagai Semua. Guard callback memeriksa profil repository terkini.
+  Empty Perlu dicek memakai pesan khusus; order aktif tidak berubah ketika mode diganti.
 - Tes: antrean_page_test, antrean_controller_test, antrean_states_test,
   antrean_golden_test, app_router_test; 7 golden termasuk 320 px dan teks 2x.
 - Selisih: tiga usulan master tampil, tanggal memakai tahun, banner dan tombol Hubungkan

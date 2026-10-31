@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/order_rules.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_molecule_tokens.dart';
@@ -27,23 +28,26 @@ class OrderCard extends StatelessWidget {
     this.cancelRequested = false,
     this.onTap,
     this.onAction,
+    this.showAction = true,
+    this.statusLabel,
   }) : assert(total >= 0 && paid >= 0);
   final String orderNo, customerName, summary, timeLabel, detail;
+  final String? statusLabel;
   final int total, paid;
   final OrderStatus status;
   final PayStatus payStatus;
-  final bool compact, needsReview, cancelRequested;
+  final bool compact, needsReview, cancelRequested, showAction;
   final VoidCallback? onTap, onAction;
   @override
   Widget build(BuildContext context) {
-    const labels = ['Menunggu jemput', 'Diproses', 'Siap', 'Selesai', 'Dibatalkan'];
-    final label = labels[status.index];
-    final action = switch (status) {
-      OrderStatus.menungguJemput => 'Tandai dijemput',
-      OrderStatus.diproses => 'Tandai siap',
-      OrderStatus.siap => 'Serahkan',
-      _ => null,
-    };
+    final label = statusLabel ?? orderStatusLabel(status);
+    final rail = cancelRequested
+        ? 2
+        : needsReview
+        ? 1
+        : 0;
+    const actions = ['Tandai dijemput', 'Tandai siap', 'Serahkan', null, null];
+    final action = actions[status.index];
     final payment = switch (payStatus) {
       PayStatus.belumBayar => 'Belum bayar',
       PayStatus.dp => 'DP ${Formatters.rupiah(paid)}',
@@ -52,12 +56,7 @@ class OrderCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: AppCard(
-        rail:
-            AppCardRail.values[cancelRequested
-                ? 2
-                : needsReview
-                ? 1
-                : 0],
+        rail: AppCardRail.values[rail],
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: AppMoleculeTokens.gap,
@@ -90,7 +89,7 @@ class OrderCard extends StatelessWidget {
                   AppText(detail, variant: AppTextVariant.caption, color: AppColors.ink3),
               ],
             ),
-            if (!compact && action != null)
+            if (showAction && !compact && action != null)
               AppButton(action, variant: AppButtonVariant.actionOutline, onPressed: onAction),
           ],
         ),

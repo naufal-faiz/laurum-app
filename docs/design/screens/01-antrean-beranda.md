@@ -34,6 +34,25 @@ Jam bisnis dummy tetap 16 Oktober 2026 melalui override di entry point.
 - Riwayat Nota /transaksi sementara tetap rute langsung SubScaffold sampai R6,
   bukan cabang tab; berkas dan tes riwayat dipertahankan.
 
+## R4: mode status order
+- businessProfileProvider.useOrderStatus true mempertahankan seluruh chip dan CTA.
+- Saat false, hanya chip Semua dan Perlu dicek; ID filter internal tetap 0 dan 4.
+  Pilihan status lama 1..3 ditampilkan sebagai Semua tanpa menulis ulang pilihan
+  atau order; bila mode aktif kembali, filter status lama kembali berlaku.
+- AntreanOrdersSection Stateless menerima data/callback dari Page. OrderCard memakai
+  showAction false; kartu tetap membuka Detail. Badge diproses menjadi 'Sedang
+  dikerjakan' melalui statusLabel opsional (izin pengguna 31 Oktober 2026, proposal 001).
+- Controller membaca profil terkini dan menolak callback maju status yang usang
+  saat mode nonaktif; tidak menyimpan status atau event.
+- Perlu dicek tetap menampilkan/menolak usulan. Saat kosong: 'Belum ada usulan yang
+  perlu dicek'. Persetujuan AI masih placeholder, menunggu prompt 80.
+- Penyelesaian dari Detail sesudah cetak mengeluarkan order dari Antrean; sisa
+  pembayaran tetap piutang. Mengganti mode tidak mengubah data order lama.
+- Golden r4_antrean_sederhana.png menampilkan kartu setelah daftar digulir;
+  tujuh golden mode aktif tetap. Tes alur pada 390 px dan 320 px dengan teks 2x.
+- Toggle global belum ditampilkan sampai integrasi checkout/AI lengkap.
+- R4 Android/iOS perangkat dan pembaca layar belum diuji.
+
 ## State dan batas
 Loading: tiga AppCard berisi AppSkeleton. Error: EmptyState dengan Coba lagi.
 Kosong: Belum ada order aktif; tombol Transaksi baru tetap. Filter kosong: Tidak ada order di status ini.
@@ -48,3 +67,4 @@ R2/nav-referensi.png menggantikan nav dan FAB lama di .pen. Header tidak memakai
 Tes 320 px/teks 2x dan area tombol terangkat lulus. Banner dan tombol Hubungkan terpisah karena API
 BannerMessage tidak memiliki slot aksi. Detail/persetujuan AI menunggu prompt 80;
 tidak membuat tombol Biarkan/Batalkan order atau data interpretasi yang belum ada di kontrak.
+R4 menyembunyikan chip dan CTA dalam mode sederhana; varian ini belum ada di .pen.
