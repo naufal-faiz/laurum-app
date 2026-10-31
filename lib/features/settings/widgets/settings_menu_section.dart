@@ -20,6 +20,10 @@ class SettingsMenuSection extends StatelessWidget {
     required this.onNavigate,
     required this.onLogout,
     this.error,
+    this.email = '',
+    this.onDelete,
+    this.accountBusy = false,
+    this.deleteHint,
     super.key,
   });
   final String address;
@@ -28,6 +32,10 @@ class SettingsMenuSection extends StatelessWidget {
   final ValueChanged<bool>? onOrderStatusChanged;
   final ValueChanged<String> onNavigate;
   final VoidCallback onLogout;
+  final String email;
+  final VoidCallback? onDelete;
+  final bool accountBusy;
+  final String? deleteHint;
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
@@ -66,7 +74,13 @@ class SettingsMenuSection extends StatelessWidget {
             ],
           ),
         ),
-        SettingsAccountSection(onLogout: onLogout),
+        SettingsAccountSection(
+          onLogout: onLogout,
+          email: email,
+          onDelete: onDelete,
+          busy: accountBusy,
+          deleteHint: deleteHint,
+        ),
       ],
     ),
   );

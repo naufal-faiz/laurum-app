@@ -8,17 +8,19 @@ class LaurumApp extends StatelessWidget {
   final GoRouter router;
 
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
-    title: 'Laurum',
-    debugShowCheckedModeBanner: false,
-    theme: AppTheme.light,
-    locale: const Locale('id', 'ID'),
-    supportedLocales: const [Locale('id', 'ID')],
-    localizationsDelegates: const [
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-    ],
-    routerConfig: router,
-  );
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      title: 'Laurum',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light,
+      locale: const Locale('id', 'ID'),
+      supportedLocales: const [Locale('id', 'ID')],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      routerConfig: router,
+    );
+  }
 }

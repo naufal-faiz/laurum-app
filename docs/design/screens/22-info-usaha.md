@@ -24,3 +24,11 @@ Selisih terhadap .pen:
   rapi') tetap di layar Printer dan struk karena keduanya field terpisah.
 - Helper catatan kaki menjelaskan pembagian field tersebut.
 - Tanpa foto/logo usaha (tidak ada di registry maupun PRD).
+
+Prompt 90 - onboarding:
+- Akun baru diarahkan paksa ke rute ini dengan query onboarding=1; draf awal
+  nama/alamat/telepon/footer kosong. Nama wajib sebelum setup dianggap selesai.
+- Simpan sukses menuntaskan metadata setup AuthService, mencoba sinkron lalu
+  router ke Antrean. Kembali membuka konfirmasi keluar dengan peringatan pending.
+- Field awal nonkosong memakai selectAllOnFocus; keyboard 300 dp diuji juga
+  dalam mode onboarding. Tidak ada Google atau penyimpanan kredensial nyata.

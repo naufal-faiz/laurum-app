@@ -5,6 +5,7 @@ import 'package:laurum/core/domain/repositories/proposal_repository.dart';
 import 'package:laurum/features/proposals/data/proposal_fixtures.dart';
 
 class InMemoryProposalRepository extends Notifier<List<Proposal>> implements ProposalRepository {
+  void clearLocalData() => state = const [];
   @override
   List<Proposal> build() => List.unmodifiable(proposalFixtures);
 

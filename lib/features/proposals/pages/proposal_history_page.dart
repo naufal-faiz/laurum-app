@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/features/proposals/state/proposal_history.dart';
 import 'package:laurum/features/proposals/widgets/proposal_history_section.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
+import 'package:laurum/shared/widgets/molecules/sync_indicator.dart';
 import 'package:laurum/shared/widgets/templates/root_scaffold.dart';
 
 class ProposalHistoryPage extends ConsumerWidget {
@@ -18,6 +20,7 @@ class ProposalHistoryPage extends ConsumerWidget {
       title: 'Riwayat usulan AI',
       accountLabel: 'Usaha dan akun',
       activeIndex: 3,
+      syncState: SyncState.values.byName(ref.watch(shellSyncStatusProvider).name),
       onAccount: () => context.go('/lainnya'),
       onTabSelected: (i) => context.go(['/antrean', '/pelanggan', '/laporan', '/lainnya'][i]),
       onCreate: () => context.push('/transaksi/baru'),

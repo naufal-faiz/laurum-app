@@ -4,6 +4,8 @@ import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/domain/report_totals.dart';
 import 'package:laurum/core/domain/repositories/report_repository.dart';
 import 'package:laurum/core/domain/service_revenue.dart';
+import 'package:laurum/core/domain/top_services.dart';
+import 'package:laurum/core/services/dummy_history.dart';
 import 'package:laurum/features/customers/data/in_memory_savings_repository.dart';
 import 'package:laurum/features/customers/data/savings_fixtures.dart';
 import 'package:laurum/features/expenses/data/expense_fixtures.dart';
@@ -26,18 +28,26 @@ class InMemoryReportRepository extends Notifier<ReportTotals> implements ReportR
     events: [],
   );
 
-  ReportTotals _report(ReportRange range) => adjustReport(
-    _baseline(range).totals,
-    reportSnapshot(range, _initialOrders, expenseFixtures, savingsFixtures),
-    reportSnapshot(
-      range,
-      ref.read(inMemoryOrderRepositoryProvider),
-      ref.read(inMemoryExpenseRepositoryProvider),
-      ref.read(inMemorySavingsRepositoryProvider),
-    ),
-  );
+  ReportTotals _report(ReportRange range) => !ref.read(dummyHistoryProvider)
+      ? reportSnapshot(
+          range,
+          ref.read(inMemoryOrderRepositoryProvider),
+          ref.read(inMemoryExpenseRepositoryProvider),
+          ref.read(inMemorySavingsRepositoryProvider),
+        )
+      : adjustReport(
+          _baseline(range).totals,
+          reportSnapshot(range, _initialOrders, expenseFixtures, savingsFixtures),
+          reportSnapshot(
+            range,
+            ref.read(inMemoryOrderRepositoryProvider),
+            ref.read(inMemoryExpenseRepositoryProvider),
+            ref.read(inMemorySavingsRepositoryProvider),
+          ),
+        );
 
   ReportBaseline _baseline(ReportRange range) {
+    if (!ref.read(dummyHistoryProvider)) return ReportBaseline(range: range);
     if (range == todayRange) return todayBaseline;
     if (range == weekRange) return weekBaseline;
     if (range == monthRange) return monthBaseline;
@@ -46,6 +56,7 @@ class InMemoryReportRepository extends Notifier<ReportTotals> implements ReportR
 
   @override
   ReportTotals build() {
+    ref.watch(dummyHistoryProvider);
     ref.watch(inMemoryOrderRepositoryProvider);
     ref.watch(inMemoryExpenseRepositoryProvider);
     ref.watch(inMemorySavingsRepositoryProvider);
@@ -64,6 +75,10 @@ class InMemoryReportRepository extends Notifier<ReportTotals> implements ReportR
 
   @override
   Future<List<ServiceRevenue>> getTopServices(ReportRange range) async {
+    if (!ref.read(dummyHistoryProvider)) {
+      final store = ref.read(inMemoryOrderRepositoryProvider);
+      return topServices(store.orders, store.items, range: range);
+    }
     if (range != weekRange) {
       throw UnsupportedError('Dummy top-service baseline exists only for this week');
     }

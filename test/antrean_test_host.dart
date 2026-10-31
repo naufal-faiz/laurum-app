@@ -22,7 +22,7 @@ Future<({ProviderContainer container, GoRouter router})> pumpAntrean(
     await (FontLoader(font.key)..addFont(rootBundle.load(font.value))).load();
   }
   final scope = container ?? ProviderContainer(overrides: dummyRepositoryOverrides);
-  final router = createAppRouter(initialLocation: location);
+  final router = createAppRouter(container: scope, initialLocation: location);
   addTearDown(() async {
     await tester.pumpWidget(const SizedBox.shrink());
     router.dispose();

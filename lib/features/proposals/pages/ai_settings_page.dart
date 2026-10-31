@@ -13,6 +13,7 @@ import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/notice_ai.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
+import 'package:laurum/shared/widgets/molecules/sync_indicator.dart';
 import 'package:laurum/shared/widgets/organisms/confirm_modal.dart';
 import 'package:laurum/shared/widgets/templates/root_scaffold.dart';
 
@@ -29,6 +30,7 @@ class AiSettingsPage extends ConsumerWidget {
       title: 'Pengaturan AI & WhatsApp',
       accountLabel: 'Usaha dan akun',
       activeIndex: 3,
+      syncState: SyncState.values.byName(ref.watch(shellSyncStatusProvider).name),
       onAccount: () => context.go('/lainnya'),
       onTabSelected: (i) => context.go(['/antrean', '/pelanggan', '/laporan', '/lainnya'][i]),
       onCreate: () => context.push('/transaksi/baru'),

@@ -5,6 +5,7 @@ import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/domain/report_totals.dart';
 import 'package:laurum/core/domain/service_revenue.dart';
 import 'package:laurum/core/formatters/formatters.dart';
+import 'package:laurum/core/services/dummy_history.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/reports/data/report_daily.dart';
 import 'package:laurum/features/reports/state/report_custom_data.dart';
@@ -81,7 +82,11 @@ final reportViewProvider = FutureProvider<ReportView>((ref) async {
               outstanding([o], payments) > 0,
         )
         .length,
-    daily: period == 0 ? [totals.revenue] : reportDailyRevenue(range, orders, now),
+    daily: period == 0
+        ? [totals.revenue]
+        : ref.watch(dummyHistoryProvider)
+        ? reportDailyRevenue(range, orders, now)
+        : actualDailyRevenue(range, orders),
     services: services,
   );
 });

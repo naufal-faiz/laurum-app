@@ -37,7 +37,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | R7 | R7-pelanggan-akun.md | Revisi 12,15: tombol Pelanggan baru di atas, tombol Keluar | SELESAI (2026-10-31) | Aksi pelanggan di atas responsif, Keluar destructiveOutline + ikon logout, ConfirmModal destruktif; 447 tes hijau. Tinjau di HP |
 | 18 | 71-lainnya-b.md | Daftar dan Catat Pengeluaran | SELESAI (2026-10-31) | 473 tes hijau; simpan/hapus/kategori/foto palsu dan Laporan reaktif; tinjau perangkat |
 | 19 | 80-ai.md | Layar AI (dummy) | SELESAI (2026-10-31) | 510 tes hijau; detail/approve/tolak/batal, pelanggan baru, riwayat dan status R4; fixture tersinkron atas izin pengguna |
-| 20 | 90-auth-sinkron.md | Masuk Google (dummy), Sinkronisasi, Akun | BELUM | |
+| 20 | 90-auth-sinkron.md | Masuk Google (dummy), Sinkronisasi, Akun | SELESAI (2026-10-31) | 535 tes hijau; guard/onboarding, pending/sync/retry/offline, logout dan hapus dua langkah dengan cleanup dummy |
 | 21 | 100-penyelesaian.md | Audit, aksesibilitas, alur akhir, APK | BELUM | **Butuh Android SDK. Coba di HP** |
 
 Setelah No 21 selesai, antrean berikutnya adalah backend (PRD B bagian 14). Prompt-nya disusun terpisah setelah keputusan terbuka PRD B dijawab.

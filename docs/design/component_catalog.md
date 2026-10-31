@@ -866,3 +866,14 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Model Proposal menyimpan hasil baca dan mempertahankannya setelah perubahan status.
   Persetujuan memakai initialOrderStatus; order kg baru tanpa berat memiliki jalur Edit.
 - Spec 25/26 dan progress/80-ai.md mencatat sinkronisasi fixture dan batas dummy.
+
+## Prompt 90 - autentikasi/sinkronisasi/akun
+- SignInSection: busy/restoring/error/onGoogle; AuthScaffold, tanpa input password.
+- SyncStatusSection: SyncView/busy/failed/conflictExample/onSync; status dan retry
+  dari service palsu, contoh konflik sebagai informasi.
+- SettingsAccountSection kini menerima email/busy/onDelete/deleteHint; Keluar tetap
+  destructiveOutline di luar kartu. Callback disediakan SettingsPage, bukan provider.
+- Info Usaha menangani onboarding akun baru, guard sampai nama tersimpan; field
+  awal nonkosong memakai selectAllOnFocus. Spec 19/22/29/30.
+- RootScaffold di Antrean/Pelanggan/Laporan/Lainnya, AI/riwayat dan pengeluaran
+  mengikuti satu service SyncIndicator. Tidak ada perubahan API widget bersama.

@@ -8,10 +8,11 @@ import 'package:laurum/main_dummy.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('id_ID');
+  final container = ProviderContainer(overrides: dummyRepositoryOverrides);
   runApp(
-    ProviderScope(
-      overrides: dummyRepositoryOverrides,
-      child: LaurumApp(router: createAppRouter()),
+    UncontrolledProviderScope(
+      container: container,
+      child: LaurumApp(router: createAppRouter(container: container)),
     ),
   );
 }

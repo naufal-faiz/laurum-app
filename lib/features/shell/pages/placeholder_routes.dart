@@ -1,7 +1,4 @@
-const placeholderRoutes = <String, String>{
-  '/masuk': 'Masuk',
-  '/lainnya/sinkronisasi': 'Sinkronisasi',
-};
+const placeholderRoutes = <String, String>{};
 const tabRoutes = <String, String>{
   '/antrean': 'Antrean',
   '/pelanggan': 'Pelanggan',

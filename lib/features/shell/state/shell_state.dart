@@ -12,6 +12,10 @@ final shellSyncProvider = StreamProvider<SyncServiceStatus>((ref) async* {
   yield service.currentStatus;
   yield* service.statusStream;
 });
+final shellSyncStatusProvider = Provider<SyncServiceStatus>((ref) {
+  final async = ref.watch(shellSyncProvider);
+  return async.hasError ? SyncServiceStatus.gagal : async.value ?? SyncServiceStatus.menyimpan;
+});
 final whatsappConnectionProvider = NotifierProvider<FakeWhatsappConnection, bool>(
   FakeWhatsappConnection.new,
 );

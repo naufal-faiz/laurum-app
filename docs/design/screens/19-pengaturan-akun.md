@@ -11,8 +11,8 @@ Komposisi:
   ToggleRow 'Pakai status order', dan MenuRow Sinkronisasi.
 - Toggle default aktif. Deskripsi: "Matikan bila usaha tidak melacak tahap cucian.
   Order baru langsung 'Sedang dikerjakan'." Tidak ada tombol Simpan terpisah.
-- SectionHeader 'AKUN'; AppCard berisi LockedRow 'Email Google & hapus akun'
-  (Segera). Di bawah kartu: AppButton destructiveOutline 'Keluar' dengan ikon logout.
+- SectionHeader 'AKUN'; AppCard berisi email Google dan AppButton Hapus akun.
+  Di bawah kartu: AppButton destructiveOutline 'Keluar' dengan ikon logout.
   AppText 'Laurum v1.0.0'. Tidak ada MenuRow Keluar di dalam kartu (R7).
 
 Data dan provider:
@@ -23,7 +23,9 @@ Data dan provider:
 - SettingsMenuSection dan SettingsOperationalSection Stateless, navigasi lewat
   callback dari SettingsPage. Tidak membaca provider/router di Section.
 - whatsappConnectionProvider untuk status Terhubung/Terputus pada Otomatisasi AI.
-- authServiceProvider.signOut saat Keluar dikonfirmasi.
+- authSessionProvider menangani masuk/keluar/hapus melalui AuthService palsu.
+- Keluar memperingatkan jumlah pending dan menjaga data HP. Hapus memerlukan
+  dua ConfirmModal, dinonaktifkan saat offline, dan membersihkan data lokal jika sukses.
 
 Interaksi:
 - Layanan dan tarif -> /lainnya/layanan; Pengeluaran -> /lainnya/pengeluaran;
@@ -47,8 +49,8 @@ dan printer nyata belum diuji.
 
 Selisih terhadap .pen:
 - Baris Sinkronisasi dan kelompok AKUN ditambahkan sesuai PRD A bagian 11;
-  isinya placeholder sampai prompt 90. Subtitle memakai teks ringkas, bukan
-  kalimat panjang .pen. Baris Riwayat usulan AI belum ada (prompt 80).
+  kini berfungsi pada prompt 90. Subtitle memakai teks ringkas, bukan
+  kalimat panjang .pen. Riwayat usulan AI berada di Pengaturan AI (prompt 80).
 - Judul AppBarRoot memakai nama usaha dari Info Usaha, sesuai keputusan global.
 - Pengeluaran belum menampilkan total bulan ini (prompt 71).
 - Toggle R4 ditambahkan sesuai revisi; tidak ada pada frame .pen lama.

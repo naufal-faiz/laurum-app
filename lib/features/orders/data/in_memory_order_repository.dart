@@ -13,6 +13,7 @@ import 'package:laurum/features/orders/data/order_store_write.dart';
 import 'package:laurum/features/orders/data/payment_fixtures.dart';
 
 class InMemoryOrderRepository extends Notifier<OrderStore> implements OrderRepository {
+  void clearLocalData() => state = OrderStore(orders: [], items: [], payments: [], events: []);
   @override
   OrderStore build() => OrderStore(
     orders: orderFixtures,

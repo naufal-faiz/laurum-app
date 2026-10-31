@@ -2,9 +2,9 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-Fase 1-8 sampai prompt 80 dan R0-R7 selesai otomatis.
-check_all: SEMUA HIJAU, 510 tes, kedua analyzer bersih, check_arch OK,
-REPO_MAP 605 berkas. Bukti prompt 80 di docs/progress/80-ai.md.
+Fase 1-8 sampai prompt 90 dan R0-R7 selesai otomatis.
+check_all SEMUA HIJAU: 535 tes, kedua analyzer bersih, check_arch OK,
+REPO_MAP 629 berkas. Bukti di docs/progress/90-auth-sinkron.md.
 
 ## Selesai
 - R0: Section/state; utang Riverpod Section 21 (tidak bertambah).
@@ -25,11 +25,14 @@ REPO_MAP 605 berkas. Bukti prompt 80 di docs/progress/80-ai.md.
   persetujuan/tolak/batal terkonfirmasi, riwayat/filter; spec 25..28.
   Status awal kedua mode dari initialOrderStatus. Order kg tanpa berat memiliki
   jalan langsung ke Edit. Retry tidak membuat pelanggan/order ganda.
+- Prompt 90: Google palsu/guard/onboarding, sync pending/retry/indikator/offline,
+  email, peringatan logout, dua konfirmasi hapus dan cleanup data/draf/histori lokal.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Tinjau kelompok AI dan keyboard di Android (juga nav/pengeluaran).
+1. Prompt 90 selesai; siap tinjauan auth/sinkron/akun dummy.
+2. Tinjau kelompok auth/sinkron/akun dan keyboard di Android (juga AI/nav/pengeluaran).
    iOS, pembaca layar, printer/ekspor, foto dan WhatsApp nyata belum diuji.
-2. Berikutnya docs/prompts/90-auth-sinkron.md, kemudian 100-penyelesaian.md.
+3. Berikutnya docs/prompts/100-penyelesaian.md.
    Jangan memulai prompt berikutnya tanpa sesi/tinjauan kelompok ini.
 
 ## Keputusan dan batas
@@ -44,7 +47,10 @@ REPO_MAP 605 berkas. Bukti prompt 80 di docs/progress/80-ai.md.
   Risiko jalur QR PRD B 12 di spec 28; jalur rilis publik belum dipilih.
 - Pembatalan order/tabungan belum rollback lintas repository. Persetujuan baru
   mengompensasi kegagalan simpan order dengan soft-delete pelanggan baru.
-- Catat bayar/Ingatkan piutang dan signOut masih placeholder.
+- Catat bayar/Ingatkan piutang masih placeholder; signOut sekarang berfungsi dummy.
+- Auth/Sync hanya simulasi in-memory; tidak ada Google/secure storage/server nyata.
+  Keluar menjaga data HP; hapus dua konfirmasi membersihkan repo/draf/baseline demo.
+  Counter pending per mutasi repository, belum outbox/baris/backend sungguhan.
 - OrderEditBodySection slot lintas fitur tetap keputusan R0; OrderCard statusLabel
   opsional proposal 001 mengikuti R4. Custom omzet = nota non-batal, CSV BOM titik koma.
 - Tidak mengubah registry/tema/token/lint/PRD/dependensi pada prompt 71/80.

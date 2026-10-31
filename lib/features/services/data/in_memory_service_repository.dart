@@ -4,6 +4,7 @@ import 'package:laurum/core/domain/service_item.dart';
 import 'package:laurum/features/services/data/service_fixtures.dart';
 
 class InMemoryServiceRepository extends Notifier<List<ServiceItem>> implements ServiceRepository {
+  void clearLocalData() => state = const [];
   @override
   List<ServiceItem> build() => List.unmodifiable(serviceFixtures);
 

@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/auth/pages/account_flow.dart';
+import 'package:laurum/features/auth/state/auth_session.dart';
 import 'package:laurum/features/business/state/business_info_controller.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
@@ -19,10 +21,13 @@ class BusinessInfoPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final async = ref.watch(businessInfoProvider);
     final state = async.value;
+    final setup = ref.watch(authSessionProvider).needsSetup;
     return FormScaffold(
       title: 'Info usaha',
       backLabel: 'Kembali',
-      onBack: () => context.canPop() ? context.pop() : context.go('/lainnya'),
+      onBack: setup
+          ? () => confirmSignOut(context, ref)
+          : () => context.canPop() ? context.pop() : context.go('/lainnya'),
       footer: state == null
           ? const SizedBox.shrink()
           : AppButton(
@@ -51,6 +56,7 @@ class BusinessInfoPage extends ConsumerWidget {
                 label: 'Nama usaha',
                 value: value.name,
                 enabled: !value.busy,
+                selectAllOnFocus: true,
                 onChanged: ref.read(businessInfoProvider.notifier).setName,
               ),
             ),
@@ -60,6 +66,7 @@ class BusinessInfoPage extends ConsumerWidget {
                 label: 'Alamat',
                 value: value.address,
                 enabled: !value.busy,
+                selectAllOnFocus: true,
                 minLines: 2,
                 maxLines: 2,
                 onChanged: ref.read(businessInfoProvider.notifier).setAddress,
@@ -72,6 +79,7 @@ class BusinessInfoPage extends ConsumerWidget {
                 label: 'Nomor telepon',
                 value: value.phone,
                 enabled: !value.busy,
+                selectAllOnFocus: true,
                 keyboardType: TextInputType.phone,
                 onChanged: ref.read(businessInfoProvider.notifier).setPhone,
               ),
@@ -83,6 +91,7 @@ class BusinessInfoPage extends ConsumerWidget {
                 label: 'Catatan kaki struk',
                 value: value.receiptFooter,
                 enabled: !value.busy,
+                selectAllOnFocus: true,
                 minLines: 2,
                 maxLines: 2,
                 onChanged: ref.read(businessInfoProvider.notifier).setFooter,

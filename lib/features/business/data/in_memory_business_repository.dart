@@ -7,6 +7,19 @@ import 'package:laurum/features/business/data/business_fixtures.dart';
 typedef BusinessState = ({BusinessProfile profile, ReceiptSettings settings});
 
 class InMemoryBusinessRepository extends Notifier<BusinessState> implements BusinessRepository {
+  void clearLocalData() => state = (
+    profile: BusinessProfile(
+      id: state.profile.id,
+      ownerId: state.profile.ownerId,
+      createdAt: state.profile.createdAt,
+      name: '',
+    ),
+    settings: ReceiptSettings(
+      id: state.settings.id,
+      ownerId: state.settings.ownerId,
+      createdAt: state.settings.createdAt,
+    ),
+  );
   @override
   BusinessState build() => (
     profile: businessProfileFixture,

@@ -186,3 +186,13 @@ Tiga status awal menunggu; pesan dummy, bukan hasil integrasi WhatsApp.
   Permintaan top services Hari/Bulan atau laporan rentang lain ditolak eksplisit, tidak memakai angka minggu.
 - Footer/note usaha mengikuti template struk: “Terima kasih atas kepercayaan Anda” /
   “Pakaian bersih, wangi & rapi”; tidak ada klausul batas pengambilan 30 hari.
+
+## Auth dan sinkronisasi dummy (prompt 90)
+- Akun contoh Bu Ratna: ratna@example.com (domain contoh, bukan alamat akun nyata).
+- Sesi dummy awal terautentikasi sebagai owner-001 agar demo langsung membuka Antrean.
+- Sinkron awal tersimpan, 0 perubahan tertunda; terakhir 16 Okt 2026 10.43 WIB.
+- Ilustrasi konflik: dua rekaman memakai nomor Pak Dedi 0813-7788-1122;
+  gabungkan pelanggan atau ganti nomor sebelum sinkron. Ini contoh informasi,
+  bukan dua pelanggan tambahan dalam fixture. Tidak mengubah jumlah pelanggan/nota.
+- Hapus akun melalui dua konfirmasi mengosongkan repository dan ringkasan historis
+  lokal, sedangkan keluar biasa menjaga data di HP. Tidak ada Google/Supabase nyata.

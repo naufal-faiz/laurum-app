@@ -29,7 +29,7 @@ class ProposalHistorySection extends StatelessWidget {
     children: [
       ChipBar(labels: history.chips, selectedIndex: filter, onSelected: onFilter),
       const SizedBox(height: AppSpacing.cardGap),
-      BannerMessage(message: history.historicalSummary),
+      if (history.includeBaseline) BannerMessage(message: history.historicalSummary),
       if (history.visible(filter).isEmpty)
         const EmptyState(
           title: 'Belum ada rincian usulan',

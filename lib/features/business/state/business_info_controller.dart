@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/business_profile.dart';
 import 'package:laurum/core/services/repository_providers.dart';
+import 'package:laurum/core/services/service_providers.dart';
+import 'package:laurum/features/auth/state/auth_session.dart';
 import 'package:laurum/features/business/state/business_info_state.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 
@@ -12,12 +14,13 @@ class BusinessInfoController extends AsyncNotifier<BusinessInfoState> {
   @override
   Future<BusinessInfoState> build() async {
     final profile = await ref.read(businessRepositoryProvider).getProfile();
+    final setup = ref.read(authServiceProvider).needsBusinessSetup;
     return BusinessInfoState(
       profile: profile,
-      name: profile.name,
-      address: profile.address,
-      phone: profile.phone,
-      receiptFooter: profile.receiptFooter,
+      name: setup ? '' : profile.name,
+      address: setup ? '' : profile.address,
+      phone: setup ? '' : profile.phone,
+      receiptFooter: setup ? '' : profile.receiptFooter,
     );
   }
 
@@ -61,6 +64,9 @@ class BusinessInfoController extends AsyncNotifier<BusinessInfoState> {
               deletedAt: profile.deletedAt,
             ),
           );
+      if (ref.read(authServiceProvider).needsBusinessSetup) {
+        await ref.read(authSessionProvider.notifier).completeSetup();
+      }
       state = AsyncData(current.copyWith(busy: false, notice: 'Info usaha disimpan.'));
       return true;
     } catch (_) {

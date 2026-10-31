@@ -5,6 +5,11 @@ import 'package:laurum/core/domain/repositories/expense_repository.dart';
 import 'package:laurum/features/expenses/data/expense_fixtures.dart';
 
 class InMemoryExpenseRepository extends Notifier<List<Expense>> implements ExpenseRepository {
+  void clearLocalData() {
+    _categories = [];
+    state = const [];
+  }
+
   List<ExpenseCategory> _categories = List.of(expenseCategoryFixtures);
   @override
   List<Expense> build() => List.unmodifiable(expenseFixtures);

@@ -1,5 +1,8 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:laurum/features/auth/pages/auth_routes.dart';
+import 'package:laurum/features/auth/state/auth_router_refresh.dart';
+import 'package:laurum/features/auth/state/auth_session.dart';
 import 'package:laurum/features/customers/pages/customer_deposit_page.dart';
 import 'package:laurum/features/customers/pages/customer_detail_page.dart';
 import 'package:laurum/features/customers/pages/customer_directory_page.dart';
@@ -20,11 +23,17 @@ import 'package:laurum/features/transactions/pages/receipt_page.dart';
 import 'package:laurum/features/transactions/pages/service_picker_page.dart';
 import 'package:laurum/features/transactions/pages/transaction_routes.dart';
 
-GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
+GoRouter createAppRouter({
+  required ProviderContainer container,
+  String initialLocation = '/antrean',
+}) => GoRouter(
   initialLocation: initialLocation,
+  redirect: (context, state) => authRedirect(container.read(authSessionProvider), state),
+  refreshListenable: container.read(authRouterRefreshProvider),
   errorBuilder: (context, state) => const PlaceholderPage(title: 'Halaman tidak ditemukan'),
   routes: [
     ...transactionRoutes,
+    ...authRoutes,
     ...aiRoutes,
     GoRoute(
       path: '/transaksi/nota/:id',

@@ -21,7 +21,8 @@ void main() {
     expect(find.text('Otomatisasi AI'), findsOneWidget);
     expect(find.text('Info usaha & alamat'), findsOneWidget);
     expect(find.text('Sinkronisasi'), findsOneWidget);
-    expect(find.text('Email Google & hapus akun'), findsOneWidget);
+    expect(find.text('Email Google'), findsOneWidget);
+    expect(find.text('ratna@example.com'), findsOneWidget);
     expect(find.text('Keluar'), findsOneWidget);
     expect(find.text('Laurum v1.0.0'), findsOneWidget);
     expect(find.text(NoticeAi.message), findsOneWidget);
@@ -38,7 +39,7 @@ void main() {
     expect(modal.destructive, isTrue);
     expect(modal.icon, AppIcons.logout);
     expect(
-      find.text('Data tetap tersimpan online. Anda bisa masuk lagi kapan saja.'),
+      find.text('Data di HP tetap tersimpan. Anda bisa masuk lagi kapan saja.'),
       findsOneWidget,
     );
     await tester.tap(find.text('Kembali'));

@@ -6,6 +6,7 @@ import 'package:laurum/core/domain/savings_rules.dart';
 import 'package:laurum/features/customers/data/savings_fixtures.dart';
 
 class InMemorySavingsRepository extends Notifier<List<SavingsEntry>> implements SavingsRepository {
+  void clearLocalData() => state = const [];
   @override
   List<SavingsEntry> build() => List.unmodifiable(savingsFixtures);
 

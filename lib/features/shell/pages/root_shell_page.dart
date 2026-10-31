@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:laurum/core/services/sync_service.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
@@ -28,6 +29,10 @@ class RootShellPage extends ConsumerWidget {
         top: false,
         child: Column(
           children: [
+            if (sync.value == SyncServiceStatus.offline)
+              const BannerMessage(
+                message: 'Mode offline. Data tersimpan di HP dan disinkronkan otomatis.',
+              ),
             if (navigationShell.currentIndex == 0 && !ref.watch(whatsappConnectionProvider)) ...[
               const BannerMessage(
                 message: 'WhatsApp terputus. AI berhenti membaca pesan.',
