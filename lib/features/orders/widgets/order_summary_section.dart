@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laurum/core/domain/order_rules.dart' as policy;
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
@@ -9,8 +10,9 @@ import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/info_row.dart';
 
 class OrderSummarySection extends StatelessWidget {
-  const OrderSummarySection({required this.data, super.key});
+  const OrderSummarySection({required this.data, this.useOrderStatus = true, super.key});
   final OrderDetailData data;
+  final bool useOrderStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class OrderSummarySection extends StatelessWidget {
                 ),
               ),
               AppBadge(
-                orderStatusLabel(order.status),
+                policy.orderStatusLabel(order.status, useOrderStatus: useOrderStatus),
                 variant: AppBadgeVariant.values.byName(order.status.name),
               ),
             ],

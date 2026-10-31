@@ -12,9 +12,11 @@ class OrderDetailBodySection extends StatelessWidget {
     required this.data,
     required this.onWhatsApp,
     required this.onRecord,
+    this.useOrderStatus = true,
     super.key,
   });
   final OrderDetailData data;
+  final bool useOrderStatus;
   final VoidCallback? onWhatsApp;
   final VoidCallback? onRecord;
 
@@ -23,7 +25,7 @@ class OrderDetailBodySection extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.stretch,
     spacing: AppSpacing.screenPadding,
     children: [
-      OrderSummarySection(data: data),
+      OrderSummarySection(data: data, useOrderStatus: useOrderStatus),
       OrderCustomerSection(data: data, onWhatsApp: onWhatsApp),
       OrderItemsSection(data: data),
       OrderPaymentSection(data: data, onRecord: onRecord),

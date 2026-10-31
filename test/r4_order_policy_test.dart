@@ -12,7 +12,7 @@ void main() {
 
   test('disabled status tracking permits processing to complete directly', () {
     expect(nextStatus(OrderStatus.diproses, useOrderStatus: false), OrderStatus.selesai);
-    expect(nextStatus(OrderStatus.menungguJemput, useOrderStatus: false), OrderStatus.diproses);
+    expect(nextStatus(OrderStatus.menungguJemput, useOrderStatus: false), OrderStatus.selesai);
     expect(nextStatus(OrderStatus.siap, useOrderStatus: false), OrderStatus.selesai);
   });
 
@@ -64,6 +64,9 @@ void main() {
       throwsStateError,
     );
     final waiting = orderFixtures.firstWhere((o) => o.status == OrderStatus.menungguJemput);
-    expect(() => waiting.withStatus(OrderStatus.selesai, useOrderStatus: false), throwsStateError);
+    expect(
+      waiting.withStatus(OrderStatus.selesai, useOrderStatus: false).status,
+      OrderStatus.selesai,
+    );
   });
 }

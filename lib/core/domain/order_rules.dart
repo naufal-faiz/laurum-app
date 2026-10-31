@@ -22,7 +22,7 @@ OrderStatus nextStatus(
   }
   if (cancel) return OrderStatus.dibatalkan;
   return switch (status) {
-    OrderStatus.menungguJemput => OrderStatus.diproses,
+    OrderStatus.menungguJemput => useOrderStatus ? OrderStatus.diproses : OrderStatus.selesai,
     OrderStatus.diproses => useOrderStatus ? OrderStatus.siap : OrderStatus.selesai,
     OrderStatus.siap => OrderStatus.selesai,
     _ => throw StateError('Final order status cannot change'),

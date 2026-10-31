@@ -168,8 +168,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/orders/pages/
 - antrean_page.dart (101): AntreanPage
 - nota_history_page.dart (67): NotaHistoryPage
-- order_cancel_flow.dart (23):
-- order_detail_page.dart (68): OrderDetailPage
+- order_cancel_flow.dart (24):
+- order_completion_flow.dart (36):
+- order_detail_menu_flow.dart (22):
+- order_detail_page.dart (100): OrderDetailPage
 - order_edit_page.dart (84): OrderEditPage
 - order_menu_sheet.dart (60): OrderMenuAction, OrderMenuSheet
 - order_status_sheet.dart (59): OrderStatusSheet
@@ -180,6 +182,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_data.dart (68): AntreanData, antreanDataProvider
 - nota_history_controller.dart (20): NotaFilter, NotaSearch, notaFilterProvider, notaSearchProvider
 - nota_history_data.dart (69): NotaHistoryData, notaHistoryProvider
+- order_completion_controller.dart (57): OrderCompletionState, OrderCompletion, orderCompletionProvider
+- order_completion_save.dart (47):
 - order_detail_controller.dart (83): OrderActionState, OrderActions, orderActionsProvider
 - order_detail_data.dart (98): ActivityEntry, OrderDetailData, orderDetailProvider
 - order_edit_controller.dart (101): OrderEditState, OrderEdit, orderEditProvider
@@ -192,14 +196,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_status_section.dart (69): AntreanStatusSection
 - nota_history_list_section.dart (97): NotaHistoryListSection
 - order_customer_section.dart (56): OrderCustomerSection
-- order_detail_body_section.dart (33): OrderDetailBodySection
-- order_detail_content_section.dart (69): OrderDetailContentSection
-- order_detail_footer_section.dart (41): OrderDetailFooterSection
+- order_detail_body_section.dart (35): OrderDetailBodySection
+- order_detail_content_section.dart (63): OrderDetailContentSection
+- order_detail_footer_section.dart (83): OrderDetailFooterSection
 - order_edit_body_section.dart (61): OrderEditBodySection
 - order_edit_customer_section.dart (43): OrderEditCustomerSection
 - order_items_section.dart (76): OrderItemsSection
 - order_payment_section.dart (44): OrderPaymentSection
-- order_summary_section.dart (54): OrderSummarySection
+- order_summary_section.dart (56): OrderSummarySection
 - order_timeline_section.dart (55): OrderTimelineSection
 
 ### lib/features/printer/data/
@@ -307,7 +311,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - checkout_state.dart (89): PaymentMode, CheckoutState, Checkout, checkoutControllerProvider
 - discount_input.dart (19): DiscountInputState, DiscountInput, discountInputProvider
 - payment_quote.dart (34): PaymentQuote
-- receipt_print_controller.dart (47): ReceiptPrintState, ReceiptPrint, receiptPrintProvider
+- receipt_print_controller.dart (59): ReceiptPrintState, ReceiptPrint, receiptPrintProvider
 - receipt_view.dart (55): ReceiptView, receiptViewProvider
 - transaction_draft.dart (110): DraftLine, TransactionDraftState, TransactionDraft, transactionDraftProvider
 - transaction_providers.dart (32): ServiceSearch, CustomerSearch, serviceCatalogProvider, customerCatalogProvider, customerBalanceProvider, serviceSearchProvider, customerSearchProvider
@@ -509,7 +513,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r3_service_creation_test.dart (50):
 - r3_service_picker_keyboard_test.dart (36):
 - r4_business_profile_test.dart (57):
-- r4_order_policy_test.dart (69):
+- r4_completion_guards_test.dart (72):
+- r4_completion_test_host.dart (38): CompletionPrinter
+- r4_detail_completion_test.dart (84):
+- r4_detail_print_failure_test.dart (57):
+- r4_order_completion_test.dart (81):
+- r4_order_policy_test.dart (72):
 - r4_order_repository_policy_test.dart (87):
 - r4_order_store_guards_test.dart (66):
 - r4_profile_persistence_test.dart (50):

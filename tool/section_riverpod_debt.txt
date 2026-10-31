@@ -8,7 +8,6 @@ lib/features/customers/widgets/customer_profile_section.dart
 lib/features/customers/widgets/customer_savings_header_section.dart
 lib/features/customers/widgets/customer_savings_list_section.dart
 lib/features/customers/widgets/customer_savings_section.dart
-lib/features/orders/widgets/order_detail_content_section.dart
 lib/features/orders/widgets/order_edit_body_section.dart
 lib/features/orders/widgets/order_edit_customer_section.dart
 lib/features/printer/widgets/printer_connection_section.dart

@@ -8,16 +8,17 @@ import 'package:laurum/shared/widgets/organisms/confirm_modal.dart';
 Future<bool> confirmCancelOrder(
   BuildContext context,
   WidgetRef ref,
-  OrderDetailData data,
-) async {
+  OrderDetailData data, {
+  bool simplified = false,
+}) async {
   final confirmed = await ConfirmModal.show(
     context: context,
-    title: 'Batalkan order ${data.order.orderNo}?',
+    title: simplified ? 'Hapus nota ini?' : 'Batalkan order ${data.order.orderNo}?',
     message: 'Order tidak dihitung di laporan. Riwayatnya tetap tersimpan.',
-    confirmLabel: 'Ya, batalkan order',
+    confirmLabel: simplified ? 'Ya, hapus nota' : 'Ya, batalkan order',
     destructive: true,
     icon: AppIcons.alert,
   );
-  if (confirmed != true) return false;
+  if (confirmed != true || !context.mounted) return false;
   return ref.read(orderActionsProvider.notifier).cancel(data);
 }

@@ -13,22 +13,34 @@ class ReceiptPrint extends Notifier<ReceiptPrintState> {
   @override
   ReceiptPrintState build() => (printing: false, error: null, notice: null);
 
-  Future<void> printReceipt(ReceiptView view) async {
+  void clearResult() {
+    if (!state.printing) state = (printing: false, error: null, notice: null);
+  }
+
+  Future<bool> printReceipt(ReceiptView view) async {
+    if (state.printing) return false;
     state = (printing: true, error: null, notice: null);
-    final ok = await ref
-        .read(printServiceProvider)
-        .printReceipt(
-          ReceiptData(
-            lines: view.lines,
-            paperMm: view.settings.paperMm,
-            fontSize: view.settings.fontSize,
-          ),
-        );
+    var ok = false;
+    try {
+      ok = await ref
+          .read(printServiceProvider)
+          .printReceipt(
+            ReceiptData(
+              lines: view.lines,
+              paperMm: view.settings.paperMm,
+              fontSize: view.settings.fontSize,
+            ),
+          );
+    } on Object {
+      // Printer plugins may throw platform errors instead of returning false.
+      ok = false;
+    }
     state = (
       printing: false,
       error: ok ? null : 'Struk gagal dicetak. Pastikan printer menyala dan Bluetooth aktif.',
       notice: ok ? 'Struk terkirim ke printer.' : null,
     );
+    return ok;
   }
 
   Future<void> sendWhatsApp(ReceiptView view) async {

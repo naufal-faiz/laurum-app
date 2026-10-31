@@ -2,8 +2,8 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-R0-R3 SELESAI otomatis. check_all hijau: 396 tes, REPO_MAP 519 berkas.
-Fondasi dan repository R4 tervalidasi; R4 MASIH PARSIAL (toggle/layar/cetak belum).
+R0-R3 SELESAI otomatis. check_all terakhir hijau: 408 tes, REPO_MAP 528 berkas.
+Fondasi, repository dan Detail R4 terhubung; R4 MASIH PARSIAL (toggle/Antrean/checkout/AI).
 Perangkat sudah kembali memiliki SDK; izin menunda validasi tanpa SDK sudah berakhir.
 
 ## Selesai
@@ -21,20 +21,26 @@ Perangkat sudah kembali memiliki SDK; izin menunda validasi tanpa SDK sudah bera
   Usaha dan printer, status awal/label/transisi. Dua belas tes kontrak lulus.
   withOrderStatus memakai argumen bernama enabled; fixture memakai default true.
 - R4 repository: policy diteruskan pada dua jalur simpan; snapshot tetap divalidasi,
-  final/ledger/item terjaga. Sembilan tes baru; check_all terakhir 396 tes hijau.
+  final/ledger/item terjaga. Sembilan tes baru; baseline 396 tes hijau.
+- R4 Detail: Edit/Hapus/Selesaikan, cetak sukses lalu status/event, konfirmasi tanpa
+  cetak sesudah gagal/batal. Guard ketukan ganda, order/mode berubah selama cetak.
+  ContentSection Stateless; golden mode sederhana ditinjau. 12 tes baru, 408 hijau.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Guard repository R4 selesai pada saveOrder/updateOrderStatus dan writeOrderStore;
-   sembilan tes baru lulus, default mode aktif tetap menolak penyelesaian langsung.
-2. Lanjut toggle/settings, checkout/AI, Antrean/Detail dan alur selesai/cetak
-   sesuai R4. Jangan aktifkan toggle sebelum semua perilaku tersambung.
-3. Spec 01/09/19 dan kolom sinkron PRD B masih perlu disesuaikan saat integrasi.
+1. Detail selesai otomatis: check_all SEMUA HIJAU, format 460 berkas 0 perubahan,
+   analyze/dart analyze/check_arch lulus, 408 tes. Log TEMP/laurum-r4-detail-all.log.
+2. Berikutnya satu kelompok Antrean mode sederhana: sembunyikan aksi/status chips,
+   pertahankan Semua/Perlu dicek. Lalu checkout/AI dan terakhir toggle/settings.
+   Jangan aktifkan toggle sebelum semua perilaku tersambung.
+3. Spec 09 sudah diperbarui; spec 01/19 dan kolom sinkron PRD B masih tersisa.
    Catatan: docs/progress/r4-status-order.md. Jangan mulai R5 sebelum R4 selesai.
 4. Setiap kelompok: check_all hijau, STATE, commit. Tidak push/merge tanpa izin.
 
 ## Keputusan dan batas
 - R5 ringkasan hanya nota + pembayaran; pengeluaran ke 71. R4 selesai tidak wajib lunas.
-- Utang Section 24, hanya menyusut; migrasikan saat disentuh.
+- Utang Section 23, hanya menyusut; migrasikan saat disentuh.
+- Izin 31 Okt: order lama Menunggu jemput boleh langsung selesai setelah cetak
+  sukses dalam mode sederhana; toggle sendiri tidak mengubah order lama.
 - OrderEditBodySection slot details lintas fitur tetap keputusan R0.
 - Prompt 70: tanpa Urutkan, switch langsung, receiptFooter, signOut placeholder90,
   top services Minggu ini, CSV BOM titik koma, piutang ledger, nonaktif tidak hapus data.

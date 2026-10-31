@@ -24,6 +24,24 @@ Payment kosong, OrderEvent diproses 10.30; pelanggan cust-001.
 Provider: orderDetailProvider(:id) (order, item, payment, event, pelanggan),
 orderActionsProvider (pending/error), receiptPrintProvider (cetak dari data tersimpan).
 
+## R4: mode sederhana (useOrderStatus false)
+- Menu titik tiga disembunyikan. Footer aktif hanya Edit, Hapus, Selesaikan.
+- Badge diproses menjadi 'Sedang dikerjakan'; status lama tidak diubah saat toggle.
+- Edit memakai rute yang sama; Hapus memakai ConfirmModal 'Hapus nota ini?' dan
+  alur pembatalan/koreksi ledger, bukan menghapus riwayat.
+- Selesaikan membuka konfirmasi cetak memakai ReceiptView/PrintService yang ada.
+  Sukses cetak baru menyimpan status selesai + OrderEvent dan keluar dari Antrean.
+- Gagal/exception/batal cetak: tetap aktif, BannerMessage dan aksi 'Selesaikan
+  tanpa cetak'. Aksi itu wajib ConfirmModal terpisah; batal tidak mengubah order.
+- Order lama Menunggu jemput atau Siap boleh langsung selesai (izin 31 Okt 2026).
+- Order final hanya Cetak struk. Lunas tidak wajib; sisa piutang tetap tercatat.
+- Ketukan ganda diblokir; order dan pengaturan diperiksa ulang sesudah mencetak.
+- ContentSection Stateless, data/callback dari Page. Provider tambahan:
+  businessProfileProvider dan orderCompletionProvider(:id).
+- Golden r4_order_detail.png: 390 x 844. Android/iOS dan printer nyata belum diuji.
+- Selisih .pen R4: footer dua baris Edit/Hapus lalu Selesaikan, dengan satu baris
+  tambahan untuk tanpa cetak setelah gagal/batal, mengikuti spec R4.
+
 Interaksi:
 - CTA memajukan satu status (nextStatus) + OrderEvent; Antrean ikut berubah.
 - Menu titik tiga: Edit order -> /order/:id/edit; Ubah status -> AppBottomSheet satu
