@@ -7,7 +7,15 @@ import 'package:laurum/features/reports/state/report_view.dart';
 String reportCsv(ReportView data) {
   final t = data.totals;
   final rows = <List<Object>>[
-    ['Laporan', reportPeriodLabels[data.period]],
+    [
+      'Laporan',
+      data.period == 3
+          ? Formatters.rentangTanggal(
+              data.range.start,
+              data.range.end.subtract(const Duration(days: 1)),
+            )
+          : reportPeriodLabels[data.period],
+    ],
     ['Mulai', Formatters.tanggal(data.range.start, ringkas: true)],
     ['Sampai', Formatters.tanggal(data.range.end.subtract(const Duration(days: 1)), ringkas: true)],
     ['Pendapatan', t.revenue],
@@ -51,7 +59,11 @@ class ReportExport extends Notifier<ReportExportState> {
     final service = ref.read(exportServiceProvider);
     state = (busy: true, failed: false, message: null);
     try {
-      await service.exportReport(fileName: 'laporan-${data.period}.csv', content: reportCsv(data));
+      final fileName = data.period == 3
+          ? 'laporan-${Formatters.tanggalBerkas(data.range.start)}-'
+                '${Formatters.tanggalBerkas(data.range.end.subtract(const Duration(days: 1)))}.csv'
+          : 'laporan-${data.period}.csv';
+      await service.exportReport(fileName: fileName, content: reportCsv(data));
       state = (busy: false, failed: false, message: 'Laporan siap diekspor.');
     } catch (_) {
       state = (busy: false, failed: true, message: 'Ekspor gagal. Coba lagi.');

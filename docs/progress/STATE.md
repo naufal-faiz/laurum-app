@@ -2,8 +2,8 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-R0-R4 SELESAI otomatis. check_all terakhir hijau: 428 tes, REPO_MAP 543 berkas.
-Toggle tersedia: Lainnya -> PENGATURAN -> Pakai status order (default aktif).
+R0-R5 SELESAI otomatis. check_all terakhir hijau: 443 tes, REPO_MAP 552 berkas.
+Laporan: tab Pilih tanggal/rentang, kalender Indonesia, Ekspor Excel di header.
 
 ## Selesai
 - Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
@@ -16,39 +16,36 @@ Toggle tersedia: Lainnya -> PENGATURAN -> Pakai status order (default aktif).
   Sembilan skenario baru lulus; dua golden ditinjau, registry/tema/dependensi tetap.
 - Validasi ulang 31 Okt: format draf dirapikan, empat lint diperbaiki tanpa ignore,
   seluruh 387 tes lulus. Rincian docs/progress/r3-transaksi.md.
-- Fondasi R4: useOrderStatus default true, salinan profil/preservasi mode di Info
-  Usaha dan printer, status awal/label/transisi. Dua belas tes kontrak lulus.
-  withOrderStatus memakai argumen bernama enabled; fixture memakai default true.
-- R4 repository: policy diteruskan pada dua jalur simpan; snapshot tetap divalidasi,
-  final/ledger/item terjaga. Sembilan tes baru; baseline 396 tes hijau.
-- R4 Detail: Edit/Hapus/Selesaikan, cetak sukses lalu status/event, konfirmasi tanpa
-  cetak sesudah gagal/batal. Guard ketukan ganda, order/mode berubah selama cetak.
-  ContentSection Stateless; golden mode sederhana ditinjau. 12 tes baru, 408 hijau.
-- R4 Antrean: dua chip pada mode sederhana, CTA tersembunyi, label mengikuti mode;
-  guard callback/profil, filter lama, alur cetak ke Antrean dan 320 px/teks 2x diuji.
-  OrderCard 99, Page 95, OrdersSection 50 baris. 11 tes baru; 419 hijau.
-- R4 akhir: toggle di Lainnya/PENGATURAN simpan langsung, retry/busy; checkout pakai
-  profil terkini. Tes alur sukses/gagal/fallback/Hapus bertabungan/piutang lulus.
-  AI masih placeholder 80 (tidak ada caller approve); spec 19/PRD B diperbarui; 428 hijau.
+- R4: useOrderStatus default true, toggle Lainnya/PENGATURAN, checkout/profil/repository
+  mengikuti policy. Antrean sederhana dua chip, Detail Edit/Hapus/Selesaikan;
+  cetak sukses/fallback/Hapus bertabungan/piutang tervalidasi. 428 tes hijau.
+  AI masih placeholder 80; spec 01/09/19/PRD B sinkron. Rincian r4-status-order.md.
+- R5: state range inklusif -> akhir domain eksklusif, kalender 1 Jan 2026..clock,
+  label/batal/ekspor aktif; komposisi repository aktual tanpa baseline custom.
+  Grafik <=7 hari dan top services aktual; empty tidak meminjam posisi global.
+  Golden laporan/kalender ditinjau, 320 px/teks 2x/7 hari lulus. 15 tes baru; 443 hijau.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. R4 SEMUA HIJAU: format 475 (0 perubahan), dua analyzer bersih, check_arch OK,
-   428 tes. Log TEMP/laurum-r4-complete-all.log; bukti di r4-status-order.md.
-2. Prompt berikutnya R5-laporan-rentang.md. Tidak dimulai pada sesi penutupan R4.
-3. Tinjauan Android/iOS/pembaca layar dan printer nyata belum dilakukan.
-4. Persetujuan AI baru dibuat prompt 80; wajib gunakan initialOrderStatus dari profil.
+1. R5 SEMUA HIJAU: format 484 (0 perubahan), dua analyzer bersih, check_arch OK,
+   443 tes. Log TEMP/laurum-r5-all.log; bukti r5-laporan-rentang.md.
+2. R6-laporan-nota.md berikutnya: daftar nota/CSV; bedakan snapshot aktual custom
+   dari preset baseline historis. Jangan menciptakan nota untuk menutup baseline.
+3. Tinjauan Android/iOS/pembaca layar dan ekspor/printer nyata belum dilakukan.
+4. Persetujuan AI baru prompt 80; wajib gunakan initialOrderStatus dari profil.
 
 ## Keputusan dan batas
-- R5 ringkasan hanya nota + pembayaran; pengeluaran ke 71. R4 selesai tidak wajib lunas.
-- Utang Section 22; SettingsMenuSection sekarang navigasi callback tanpa router.
+- Keputusan pengguna 31 Okt: R5 menyertakan pengeluaran yang sudah tersimpan;
+  menggantikan batas lama hanya nota/pembayaran. CRUD pengeluaran tetap prompt 71.
+- Utang Section 21; ReportBodySection sekarang aksi piutang callback tanpa router.
+- R4 selesai tidak wajib lunas; toggle Lainnya/PENGATURAN default aktif.
 - Izin 31 Okt: statusLabel opsional OrderCard, label mengikuti dua mode; proposal 001.
 - Izin 31 Okt: order lama Menunggu jemput boleh langsung selesai setelah cetak
   sukses dalam mode sederhana; toggle sendiri tidak mengubah order lama.
 - OrderEditBodySection slot details lintas fitur tetap keputusan R0.
 - Prompt 70: tanpa Urutkan, switch langsung, receiptFooter, signOut placeholder90,
-  top services Minggu ini, CSV BOM titik koma, piutang ledger, nonaktif tidak hapus data.
+  top services preset Minggu ini, CSV BOM titik koma, piutang ledger, nonaktif tidak hapus data.
 - Pembatalan order/tabungan belum rollback lintas repository.
-- Sesudah R4: R5-R7 lalu 71,80,90,100. Catat bayar/Ingatkan piutang masih placeholder.
+- Sesudah R5: R6-R7 lalu 71,80,90,100. Catat bayar/Ingatkan piutang masih placeholder.
 - Repo C:/Users/Naufal/Downloads/laurum-app. Branch dev1rev melacak origin/dev1rev.
 - SDK: E:/App Data/flutter/flutter; cache/lock di luar workspace perlu akses eskalasi.
 - Graph lokal kini laurum-app (root C:/Users/Naufal/Downloads/laurum-app);

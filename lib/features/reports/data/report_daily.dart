@@ -23,3 +23,20 @@ List<int?>? reportDailyRevenue(ReportRange range, List<Order> orders, DateTime n
         revenue(orderFixtures, day);
   });
 }
+
+List<int?>? actualDailyRevenue(ReportRange range, List<Order> orders) {
+  final days = range.end.difference(range.start).inDays;
+  if (days > 7) return null;
+  return List.generate(days, (index) {
+    final start = range.start.add(Duration(days: index));
+    final day = ReportRange(start, start.add(const Duration(days: 1)));
+    return orders
+        .where(
+          (o) =>
+              o.deletedAt == null &&
+              o.status != OrderStatus.dibatalkan &&
+              day.contains(o.enteredAt),
+        )
+        .fold<int>(0, (sum, o) => sum + o.total);
+  });
+}

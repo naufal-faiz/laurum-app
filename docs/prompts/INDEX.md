@@ -32,7 +32,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | R2 | R2-navigasi-beranda.md | Revisi 9,11: tombol Transaksi di tengah nav, Beranda antrean aktif | SELESAI (2026-10-30) | 366 tes hijau di perangkat lama; PRD disinkronkan dengan izin pengguna, pemeriksaan manual Android dikonfirmasi |
 | R3 | R3-transaksi.md | Revisi 4,5: FAB Pilih Layanan, tombol tambah pelanggan | SELESAI (2026-10-31) | check_all 387 tes hijau; dua golden R3 ditinjau/diperbarui, lihat docs/progress/r3-transaksi.md |
 | R4 | R4-status-order.md | Revisi 6: pengaturan Pakai status order | SELESAI (2026-10-31) | Toggle/checkout/Antrean/Detail/cetak tervalidasi, check_all 428 tes hijau; AI masih placeholder 80, policy awal kedua source diuji |
-| R5 | R5-laporan-rentang.md | Revisi 8,13,14: rentang tanggal, Ekspor di atas | BELUM | Tinjau pemilih tanggal dan angka |
+| R5 | R5-laporan-rentang.md | Revisi 8,13,14: rentang tanggal, Ekspor di atas | SELESAI (2026-10-31) | Kalender id_ID, custom aktual termasuk pengeluaran tersimpan (izin pengguna), Ekspor di header; 443 tes hijau, dua golden ditinjau |
 | R6 | R6-laporan-nota.md | Revisi 7,8,13: daftar nota di Laporan, hapus Riwayat Nota | BELUM | Tinjau rekonsiliasi angka dan daftar nota |
 | R7 | R7-pelanggan-akun.md | Revisi 12,15: tombol Pelanggan baru di atas, tombol Keluar | BELUM | Tinjau di HP |
 | 18 | 71-lainnya-b.md | Daftar dan Catat Pengeluaran | BELUM | |

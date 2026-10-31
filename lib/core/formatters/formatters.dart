@@ -31,6 +31,17 @@ abstract final class Formatters {
   // Thermal receipt date: no weekday, year shown.
   static String tanggalStruk(DateTime tanggal) => DateFormat('d MMM yyyy', 'id_ID').format(tanggal);
 
+  static String rentangTanggal(DateTime start, DateTime end) {
+    if (start.year != end.year) return '${tanggalStruk(start)}-${tanggalStruk(end)}';
+    if (start.month != end.month) {
+      return '${tanggal(start, ringkas: true)}-${tanggal(end, ringkas: true)}';
+    }
+    if (start.day == end.day) return tanggal(start, ringkas: true);
+    return '${start.day}-${tanggal(end, ringkas: true)}';
+  }
+
+  static String tanggalBerkas(DateTime value) => DateFormat('yyyyMMdd').format(value);
+
   static String telepon(String telepon) {
     var digits = telepon.replaceAll(RegExp(r'[\s()-]'), '');
     if (digits.startsWith('+62')) digits = '0${digits.substring(3)}';

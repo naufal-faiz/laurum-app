@@ -32,6 +32,15 @@ abstract final class AppTheme {
       labelMedium: AppTextStyles.label,
     ).apply(bodyColor: AppColors.ink, displayColor: AppColors.ink),
     dividerColor: AppColors.border,
+    datePickerTheme: const DatePickerThemeData(
+      backgroundColor: AppColors.surface,
+      headerBackgroundColor: AppColors.primary,
+      headerForegroundColor: AppColors.onPrimary,
+      rangePickerBackgroundColor: AppColors.surface,
+      rangePickerHeaderBackgroundColor: AppColors.primary,
+      rangePickerHeaderForegroundColor: AppColors.onPrimary,
+      rangeSelectionBackgroundColor: AppColors.primaryTint,
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.appBarBg,
       foregroundColor: AppColors.ink,

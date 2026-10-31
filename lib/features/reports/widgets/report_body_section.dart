@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
@@ -12,8 +11,9 @@ import 'package:laurum/shared/widgets/organisms/top_services.dart';
 import 'package:laurum/shared/widgets/organisms/weekly_bar_chart.dart';
 
 class ReportBodySection extends StatelessWidget {
-  const ReportBodySection({required this.data, super.key});
+  const ReportBodySection({required this.data, required this.onOutstanding, super.key});
   final ReportView data;
+  final VoidCallback onOutstanding;
   @override
   Widget build(BuildContext context) {
     final daily = data.daily;
@@ -22,7 +22,7 @@ class ReportBodySection extends StatelessWidget {
     final peak = amounts.fold(0, (max, value) => value > max ? value : max);
     const dayNames = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
     return ListView(
-      key: ValueKey(data.period),
+      key: ValueKey((data.period, data.range)),
       padding: const EdgeInsets.all(AppSpacing.screenPadding),
       children: [
         if (data.isEmpty)
@@ -31,12 +31,14 @@ class ReportBodySection extends StatelessWidget {
             description: 'Laporan terisi setelah ada nota pada periode yang dipilih.',
             icon: AppIcons.reports,
           ),
-        if (!data.isEmpty || data.totals.activeOutstanding > 0 || data.totals.savingsBalance > 0)
+        if (!data.isEmpty ||
+            (data.period != 3 &&
+                (data.totals.activeOutstanding > 0 || data.totals.savingsBalance > 0)))
           ReportSummary(
             totals: data.totals,
             expenseSummary: 'Operasional usaha',
             unpaidCount: data.unpaidCount,
-            onOutstandingTap: () => context.push('/laporan/piutang'),
+            onOutstandingTap: onOutstanding,
           ),
         if (!data.isEmpty) ...[
           const SizedBox(height: AppSpacing.screenPadding),
@@ -48,7 +50,11 @@ class ReportBodySection extends StatelessWidget {
             ),
             if (data.period == 1 && peak > 0) AppText('Puncak: ${dayNames[daily.indexOf(peak)]}'),
           ] else
-            const BannerMessage(message: 'Rincian omzet harian belum tersedia untuk periode ini.'),
+            BannerMessage(
+              message: data.period == 3
+                  ? 'Grafik harian ditampilkan untuk rentang hingga 7 hari.'
+                  : 'Rincian omzet harian belum tersedia untuk periode ini.',
+            ),
           const SizedBox(height: AppSpacing.screenPadding),
           if (data.services != null)
             TopServices(services: data.services!, totalRevenue: data.totals.revenue)

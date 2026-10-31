@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -7,7 +8,6 @@ import 'package:laurum/core/domain/report_totals.dart';
 import 'package:laurum/features/reports/data/report_fixtures.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/main_dummy.dart';
-import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 
 import 'antrean_test_host.dart';
@@ -35,7 +35,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Belum ada data periode ini'), findsOneWidget);
     expect(
-      tester.widget<AppButton>(find.widgetWithText(AppButton, 'Ekspor ke Excel')).onPressed,
+      tester.widget<TextButton>(find.widgetWithText(TextButton, 'Ekspor Excel')).onPressed,
       isNull,
     );
   });

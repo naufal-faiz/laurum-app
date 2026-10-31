@@ -40,6 +40,8 @@ dependencies:
   intl: ^0.20.3
   ionicons: ^0.2.3
   flutter_svg: ^2.3.0
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:

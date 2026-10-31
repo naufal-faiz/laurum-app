@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/reports/pages/report_range_flow.dart';
+import 'package:laurum/features/reports/state/report_custom_range.dart';
 import 'package:laurum/features/reports/state/report_export.dart';
 import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/reports/widgets/report_body_section.dart';
-import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
-import 'package:laurum/shared/widgets/molecules/footer_bar.dart';
 import 'package:laurum/shared/widgets/molecules/period_tabs.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
@@ -21,6 +23,7 @@ class ReportPage extends ConsumerWidget {
     final snapshot = ref.watch(reportViewProvider);
     final data = snapshot.asData?.value;
     final exporting = ref.watch(reportExportProvider);
+    final custom = ref.watch(reportCustomRangeProvider);
     return Column(
       children: [
         Padding(
@@ -29,16 +32,32 @@ class ReportPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             spacing: AppSpacing.cardGap,
             children: [
-              const SectionHeader(title: 'Laporan'),
-              PeriodTabs(
-                labels: reportPeriodLabels,
-                selectedIndex: ref.watch(reportPeriodProvider),
-                onSelected: exporting.busy
+              SectionHeader(
+                title: 'Laporan',
+                actionLabel: 'Ekspor Excel',
+                onAction: data == null || data.isEmpty || exporting.busy
                     ? null
-                    : (index) {
-                        ref.read(reportExportProvider.notifier).reset();
-                        ref.read(reportPeriodProvider.notifier).select(index);
-                      },
+                    : () => ref.read(reportExportProvider.notifier).export(data),
+              ),
+              if (exporting.message != null)
+                BannerMessage(
+                  message: exporting.message!,
+                  variant: exporting.failed
+                      ? BannerMessageVariant.error
+                      : BannerMessageVariant.info,
+                ),
+              PeriodTabs(
+                labels: [
+                  ...reportPeriodLabels.take(3),
+                  custom == null
+                      ? 'Pilih tanggal'
+                      : Formatters.rentangTanggal(
+                          custom.start,
+                          custom.end.subtract(const Duration(days: 1)),
+                        ),
+                ],
+                selectedIndex: ref.watch(reportPeriodProvider),
+                onSelected: exporting.busy ? null : (index) => _select(context, ref, index),
               ),
             ],
           ),
@@ -60,31 +79,22 @@ class ReportPage extends ConsumerWidget {
                 onAction: () => ref.invalidate(reportViewProvider),
               ),
             ),
-            data: (value) => ReportBodySection(data: value),
-          ),
-        ),
-        FooterBar(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: AppSpacing.cardGap,
-            children: [
-              if (exporting.message != null)
-                BannerMessage(
-                  message: exporting.message!,
-                  variant: exporting.failed
-                      ? BannerMessageVariant.error
-                      : BannerMessageVariant.info,
-                ),
-              AppButton(
-                exporting.busy ? 'Menyiapkan ekspor...' : 'Ekspor ke Excel',
-                onPressed: data == null || data.isEmpty || exporting.busy
-                    ? null
-                    : () => ref.read(reportExportProvider.notifier).export(data),
-              ),
-            ],
+            data: (value) => ReportBodySection(
+              data: value,
+              onOutstanding: () => context.push('/laporan/piutang'),
+            ),
           ),
         ),
       ],
     );
+  }
+
+  Future<void> _select(BuildContext context, WidgetRef ref, int index) async {
+    if (index == 3) {
+      await pickReportRange(context, ref);
+    } else {
+      ref.read(reportExportProvider.notifier).reset();
+      ref.read(reportPeriodProvider.notifier).select(index);
+    }
   }
 }

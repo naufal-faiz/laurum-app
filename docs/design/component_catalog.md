@@ -804,3 +804,22 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   320 px/teks 2x; golden r4_settings.png ditinjau.
 - Selisih .pen: toggle baru di kelompok PENGATURAN sesuai revisi R4. Tanpa perubahan
   registry/tema/token/dependensi; utang Section 23 -> 22. Printer nyata/iOS belum diuji.
+
+## R5 - Laporan rentang kustom
+- ReportPage 100 baris: SectionHeader Laporan + aksi Ekspor Excel, BannerMessage
+  hasil ekspor tepat di bawah, empat PeriodTabs dan ReportBodySection. Tanpa footer.
+- ReportBodySection 69 baris: data ReportView dan onOutstanding, tanpa provider/router;
+  key daftar memuat range. Grafik <=7 hari, top services aktual, empty custom tanpa
+  posisi global. Utang Section 22 -> 21. Tidak mengubah organism/registry.
+- reportCustomRangeProvider: tanggal inklusif dibatasi 1 Jan 2026..businessClock,
+  model akhir eksklusif. reportPeriodProvider 0..3; tanpa range index 3 gagal eksplisit.
+- report_range_flow 32 baris: showDateRangePicker calendarOnly, lokal id_ID; Terapkan
+  menyimpan/aktifkan custom, tutup tidak mengubah periode. Warna DatePickerThemeData
+  token lama; flutter_localizations paket SDK menjadi dependensi langsung.
+- customReportData 55 baris: repository publik + buildReport baseline nol; expense
+  tersimpan ikut sesuai keputusan pengguna 31 Okt. Baseline preset tetap.
+- CSV custom memakai label/tanggal aktif dan nama bertanggal; daftar nota menunggu R6.
+- Tes r5_range/custom_report/picker/report_widgets/report_body_section/report_visual;
+  golden r5_report_custom/r5_date_picker ditinjau, 320 px/teks 2x hingga tujuh hari lulus.
+- Selisih .pen: Ekspor di header dan rentang/pemilih Indonesia sesuai R5; native
+  kalender baru menggantikan Atur. Perangkat Android/iOS dan ekspor nyata belum diuji.

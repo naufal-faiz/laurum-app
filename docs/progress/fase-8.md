@@ -23,3 +23,18 @@
   sehingga dua layanan baru tidak bertabrakan.
 - receiptFooter dan receiptNote adalah field terpisah; Info Usaha hanya
   menyunting footer, note tetap di Printer dan struk.
+
+## R5 - Keputusan komposisi laporan (31 Oktober 2026)
+- Custom dihitung di state/report_custom_data.dart melalui repository publik dan
+  buildReport baseline nol; kontrak ReportRepository tidak diperluas. Ini menjaga
+  tiga baseline preset dan menghindari meminjam omzet/top services historis.
+- Pengguna mengonfirmasi pengeluaran tersimpan ikut custom (menggantikan batas
+  lama STATE). Posisi piutang/tabungan tetap aktual usaha sesuai domain; flows
+  mengikuti tanggalnya. Empty custom menyembunyikan ringkasan posisi global.
+- Fixture memiliki nota/pengeluaran sebelum minggu 12-18 Okt, berbeda dengan
+  asumsi singkat REVISI-01. Data aktual itu tetap dihitung bila masuk rentang;
+  tidak menambah/mengubah DATA MASTER atau membatasi tanggal secara semu.
+- Grafik maksimal tujuh hari memakai organism lama; lebih panjang diberi pesan.
+  Top services aktual mendukung rentang, memakai alokasi diskon domain yang ada.
+- Daftar nota CSV menunggu view R6. SDK flutter_localizations saja ditambahkan;
+  tema hanya DatePickerThemeData/token yang sudah diizinkan R5.

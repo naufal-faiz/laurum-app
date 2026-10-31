@@ -9,12 +9,12 @@ Semua widget sudah dibuat.
 
 ## Dependensi
 
-flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_test, flutter_lints, widgetbook, riverpod_lint
+flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, flutter_test, flutter_lints, widgetbook, riverpod_lint
 
 ## Berkas (jumlah baris): nama deklarasi
 
 ### lib/
-- app.dart (16): LaurumApp
+- app.dart (24): LaurumApp
 
 ### lib/core/domain/
 - business_profile.dart (50): BusinessProfile
@@ -60,7 +60,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - top_services.dart (56):
 
 ### lib/core/formatters/
-- formatters.dart (43): Formatters
+- formatters.dart (54): Formatters
 
 ### lib/core/icons/
 - app_icons.dart (49): AppIcons
@@ -90,7 +90,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_shadows.dart (15): AppShadows
 - app_spacing.dart (9): AppSpacing
 - app_text_styles.dart (85): AppTextStyles
-- app_theme.dart (44): AppTheme
+- app_theme.dart (53): AppTheme
 - receipt_edge_clipper.dart (27): ReceiptEdgeClipper
 
 ### lib/features/business/data/
@@ -233,7 +233,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/reports/data/
 - in_memory_report_repository.dart (76): InMemoryReportRepository, inMemoryReportRepositoryProvider
 - report_adjustments.dart (16):
-- report_daily.dart (25):
+- report_daily.dart (42):
 - report_daily_fixtures.dart (2):
 - report_fixtures.dart (83):
 - report_snapshot.dart (21):
@@ -241,18 +241,21 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/reports/pages/
 - outstanding_page.dart (59): OutstandingPage
-- report_page.dart (90): ReportPage
+- report_page.dart (100): ReportPage
+- report_range_flow.dart (32):
 
 ### lib/features/reports/state/
 - outstanding_controller.dart (95): PaymentRecordState, PaymentRecordController, paymentRecordProvider
 - outstanding_data.dart (68): OutstandingRow, OutstandingListData, OutstandingFilter, outstandingListProvider, outstandingFilterProvider
-- report_export.dart (62): ReportExportState, ReportExport, reportExportProvider
-- report_period.dart (22): ReportPeriod, reportPeriodProvider
-- report_view.dart (66): ReportView, reportViewProvider
+- report_custom_data.dart (55): CustomReportData
+- report_custom_range.dart (24): ReportCustomRange, reportCustomRangeProvider
+- report_export.dart (74): ReportExportState, ReportExport, reportExportProvider
+- report_period.dart (30): ReportPeriod, reportPeriodProvider
+- report_view.dart (87): ReportView, reportViewProvider
 
 ### lib/features/reports/widgets/
 - outstanding_list_section.dart (77): OutstandingListSection
-- report_body_section.dart (63): ReportBodySection
+- report_body_section.dart (69): ReportBodySection
 
 ### lib/features/services/data/
 - in_memory_service_repository.dart (63): InMemoryServiceRepository, inMemoryServiceRepositoryProvider
@@ -539,6 +542,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r4_settings_operational_section_test.dart (43):
 - r4_settings_page_test.dart (86):
 - r4_settings_test_support.dart (23): BusinessSaveControl, ControlledBusiness
+- r5_custom_report_test.dart (65):
+- r5_picker_test.dart (66):
+- r5_range_test.dart (39):
+- r5_report_body_section_test.dart (58):
+- r5_report_visual_test.dart (70):
+- r5_report_widgets_test.dart (100): HeldReportExport
 - receipt_fixtures.dart (86):
 - receipt_formatter_settings_test.dart (31):
 - receipt_formatter_test.dart (70):
