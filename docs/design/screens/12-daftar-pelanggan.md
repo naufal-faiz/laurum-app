@@ -8,7 +8,8 @@ Komposisi:
 - SectionHeader('Pelanggan', jumlah pelanggan) tanpa aksi.
 - CustomerDirectoryActionsSection: AppButton 'Impor kontak' (actionOutline) dan
   'Pelanggan baru' (cta, ikon add) satu baris; tumpuk vertikal pada layar sempit
-  atau teks 1,3x ke atas.
+  atau teks 1,3x ke atas. Keduanya memakai tinggi tetap ctaHeight (56 dp) agar
+  ukuran visualnya sama persis.
 - AppSearchField('Nama pelanggan', hint 'Cari nama atau nomor WhatsApp...').
 - ChipBar: Semua (48), Ada piutang (5), Punya tabungan (5); jumlah dinamis.
 - CustomerRow: nama/telepon, avatar, piutang/DP, saldo, jumlah order/total historis.

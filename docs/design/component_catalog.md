@@ -278,9 +278,10 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Selisih: CTA/secondary memakai token cta 16/22 w700; desain w600. Aksi memakai bodyStrong 14/20 w600.
 
 ## AppIconButton
-- Berkas: lib/shared/widgets/atoms/app_icon_button.dart (40 baris).
+- Berkas: lib/shared/widgets/atoms/app_icon_button.dart (39 baris).
 - Parameter: icon dan label wajib; onPressed opsional; color = primary; key.
-- label menjadi tooltip/nama aksesibel. Ukuran sentuh 48, ikon 20, radius action 8.
+- label menjadi tooltip/nama aksesibel. Ukuran sentuh 48, ikon 20, radius action 8,
+  tanpa latar (transparan) agar tidak tampak kotak putih di app bar.
 - Contoh: AppIconButton(AppIcons.person, label: label, onPressed: onTap).
 - Widgetbook: enabled/disabled. Tes tooltip, AppIcon, ukuran, callback dan disabled.
 - Referensi jo0oP; glyph Ionicons menggantikan Lucide sesuai PRD.
@@ -410,14 +411,14 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - API: activeIndex 0..3 (Antrean/Pelanggan/Laporan/Lainnya), onSelected(int),
   onCreate opsional, createLabel default Transaksi. Tanpa state/navigasi internal.
 - Lima slot; tengah aksi, bukan tab. Semantics Transaksi baru, selalu tidak aktif.
-- Tombol primary 56 dp terangkat 56/3 dp, cincin surface 4 dp (foreground
-  ShapeDecoration), ikon AppIcons.add. Dua token baru di AppDimensions; tanpa
-  warna baru atau gradien.
+- Tombol primary 56 dp menempel garis atas, tanpa cincin surface; permukaan putih
+  nav mengisi seluruh tinggi sampai garis, jadi tidak ada celah di kiri/kanan.
+  Ikon AppIcons.add. Dua token baru di AppDimensions; tanpa warna baru atau gradien.
 - Ketuk tombol tengah memberi umpan Material ink (InkWell di dalam Material
   berbentuk lingkaran); tanpa state internal tambahan dan tanpa warna baru.
 - Contoh: BottomNavBar(activeIndex: tab, onSelected: pilih, onCreate: buat).
-- Galeri empat tab aktif dan disabled; tes callback, semantics, area terangkat,
-  320 px/teks 2x dan golden. Acuan R2 nav-referensi.png menggantikan nav lama .pen.
+- Galeri empat tab aktif dan disabled; tes callback, semantics, garis atas dan
+  tombol menempel, 320 px/teks 2x dan golden. Acuan R2 nav-referensi.png.
 ## ServiceRow
 - Berkas: lib/shared/widgets/organisms/service_row.dart.
 - API wajib: name, kind (ServiceKind), price int rupiah, durationDays int.
@@ -578,8 +579,8 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   Slot child fleksibel agar SheetScaffold menggulir body dan menjaga footer tetap terlihat.
   Galeri tambahan app_bottom_sheet_keyboard_use_case.dart membuka modal dengan input.
 - Referensi C/Sheet: radius 28, drag handle 40x4 borderStrong, padding 12/16 dan 4/16,
-  judul section 16/22, subjudul caption. AppIconButton close berlatar putih sedangkan
-  frame chipIdle; atom tidak diubah.
+  judul section 16/22, subjudul caption. AppIconButton close transparan (tanpa latar
+  putih) sejak revisi 31 Okt.
 
 ## ConfirmModal
 - Berkas: lib/shared/widgets/organisms/confirm_modal.dart.
@@ -644,7 +645,8 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   trailing: AppText('Ubah'), body: content).
 - Galeri: sub_scaffold_use_case.dart; tes judul, trailing, callback kembali, golden.
 - Referensi WiQtw/Detail Order: AppBarSub 64 + SafeArea; body memakai SafeArea bawah.
-  Tombol kembali memakai AppIconButton berkotak putih (atom) vs ikon transparan frame.
+  Tombol kembali memakai AppIconButton transparan (tanpa kotak putih) sejak revisi
+  31 Okt, mengikuti tombol profil di AppBarRoot.
 
 ## FormScaffold
 - Berkas: lib/shared/widgets/templates/form_scaffold.dart.

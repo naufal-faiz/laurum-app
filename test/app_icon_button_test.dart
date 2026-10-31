@@ -17,6 +17,7 @@ void main() {
       ),
     );
     expect(tester.getSize(find.byType(IconButton)), const Size(48, 48));
+    expect(tester.widget<IconButton>(find.byType(IconButton)).style?.backgroundColor, isNull);
     expect(find.byTooltip('Open'), findsOneWidget);
     expect(find.byType(AppIcon), findsOneWidget);
     await tester.tap(find.byType(IconButton));

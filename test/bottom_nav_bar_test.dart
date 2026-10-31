@@ -95,7 +95,7 @@ void main() {
       ),
     );
     final circle = tester.getRect(
-      find.descendant(of: find.byType(BottomNavBar), matching: find.byType(Container)),
+      find.descendant(of: find.byType(BottomNavBar), matching: find.byType(InkWell)),
     );
     await tester.tapAt(Offset(circle.center.dx, circle.top + 4));
     expect(creates, 1);

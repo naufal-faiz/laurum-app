@@ -10,7 +10,8 @@ Template: RootScaffold pada RootShellPage, empat cabang StatefulShellRoute.
 - SectionHeader Sedang berjalan dan OrderCard untuk order aktif, terbaru dahulu.
 - Tanpa FAB. BottomNavBar lima slot: Antrean, Pelanggan, Transaksi, Laporan, Lainnya.
   Empat tab berindeks 0..3; Transaksi adalah aksi push /transaksi/baru dan tidak aktif.
-  Tombol primary 56 dp, terangkat sepertiga, cincin surface 4 dp, ikon AppIcons.add;
+  Tombol primary 56 dp menempel garis atas nav (tanpa cincin dan tanpa celah),
+  ikon AppIcons.add; permukaan putih mengisi penuh sampai garis.
   label Transaksi, semantics 'Transaksi baru'. Akun menuju Lainnya (3).
   Ketuk memberi ripple Material; /transaksi/baru masuk dengan fade + lift singkat
   (280 ms, easeOutCubic; balik 200 ms) dari transaction_routes.dart.
@@ -65,7 +66,8 @@ Belum diuji di iOS; tidak ada integrasi WhatsApp/jaringan nyata.
 ## Selisih terhadap .pen
 Token/komponen Fase 1 dipertahankan: mono w400, nav dinamis, DP amber, glyph Ionicons.
 R2/nav-referensi.png menggantikan nav dan FAB lama di .pen. Header tidak memakai tanggal.
-Tes 320 px/teks 2x dan area tombol terangkat lulus. Banner dan tombol Hubungkan terpisah karena API
+Tes 320 px/teks 2x dan tombol tengah menempel garis atas lulus. Banner dan tombol
+Hubungkan terpisah karena API
 BannerMessage tidak memiliki slot aksi. Detail/persetujuan AI menunggu prompt 80;
 tidak membuat tombol Biarkan/Batalkan order atau data interpretasi yang belum ada di kontrak.
 R4 menyembunyikan chip dan CTA dalam mode sederhana; varian ini belum ada di .pen.

@@ -28,7 +28,6 @@ class AppIconButton extends StatelessWidget {
       minimumSize: const Size.square(AppSpacing.touchTarget),
       maximumSize: const Size.square(AppSpacing.touchTarget),
       padding: EdgeInsets.zero,
-      backgroundColor: AppColors.surface,
       shape: const RoundedRectangleBorder(borderRadius: AppRadius.action),
     ),
     icon: AppIcon(

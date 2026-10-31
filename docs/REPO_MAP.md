@@ -135,7 +135,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/customers/widgets/
 - customer_deposit_form_section.dart (88): CustomerDepositFormSection
-- customer_directory_actions_section.dart (40): CustomerDirectoryActionsSection
+- customer_directory_actions_section.dart (47): CustomerDirectoryActionsSection
 - customer_directory_list_section.dart (91): CustomerDirectoryListSection
 - customer_edit_form_section.dart (65): CustomerEditFormSection
 - customer_import_list_section.dart (94): CustomerImportListSection
@@ -350,7 +350,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_divider.dart (16): AppDivider
 - app_gap.dart (19): AppGap
 - app_icon.dart (27): AppIcon
-- app_icon_button.dart (40): AppIconButton
+- app_icon_button.dart (39): AppIconButton
 - app_numpad_key.dart (54): AppNumpadKeyValue, AppNumpadKey
 - app_search_field.dart (88): AppSearchField, _AppSearchFieldState
 - app_skeleton.dart (25): AppSkeleton
@@ -385,7 +385,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/organisms/
 - app_bottom_sheet.dart (93): AppBottomSheet
-- bottom_nav_bar.dart (109): BottomNavBar
+- bottom_nav_bar.dart (100): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
 - customer_row.dart (98): CustomerRow
 - expense_row.dart (57): ExpenseRow
@@ -427,7 +427,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_chip_test.dart (41):
 - app_divider_test.dart (41):
 - app_gap_test.dart (33):
-- app_icon_button_test.dart (32):
+- app_icon_button_test.dart (33):
 - app_icon_test.dart (29):
 - app_numpad_key_test.dart (43):
 - app_router_test.dart (64):
@@ -454,7 +454,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_detail_states_test.dart (60):
 - customer_directory_data_test.dart (39):
 - customer_directory_states_test.dart (64):
-- customer_directory_test.dart (96):
+- customer_directory_test.dart (100):
 - customer_import_page_test.dart (68):
 - customer_row_test.dart (39):
 - customer_savings_section_test.dart (48):

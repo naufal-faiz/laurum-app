@@ -4,7 +4,8 @@ Diperbarui: 2026-10-31 | Cabang dev1rev
 ## Posisi
 R0-R7 SELESAI otomatis. check_all terakhir hijau: 449 tes, REPO_MAP 553 berkas.
 Pelanggan: aksi di atas; Akun: tombol Keluar destruktif terpisah dari kartu.
-Transaksi: tombol tengah ber-ripple, rute alur memakai transisi fade + lift.
+Transaksi: nav tanpa celah, tombol tengah ber-ripple, alur memakai transisi fade + lift.
+AppIconButton transparan; aksi Pelanggan sama tinggi.
 
 ## Selesai
 - Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
@@ -35,6 +36,9 @@ Transaksi: tombol tengah ber-ripple, rute alur memakai transisi fade + lift.
   /transaksi/baru, /layanan, /bayar memakai fade + lift 280 ms easeOutCubic
   (balik 200 ms) dari transaction_routes.dart. 449 hijau.
   Rincian animasi-transaksi.md.
+- Revisi tampilan 31 Okt: nav tanpa celah (permukaan penuh, tombol menempel garis
+  atas, cincin dihapus); dua tombol Pelanggan sama tinggi 56 dp; AppIconButton
+  tanpa latar putih di app bar/sheet. 449 hijau, golden disinkronkan.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
 1. SEMUA HIJAU: dua analyzer bersih, check_arch OK, 449 tes. Golden nav, root,
@@ -54,6 +58,8 @@ Transaksi: tombol tengah ber-ripple, rute alur memakai transisi fade + lift.
   kartu AKUN sebagai tombol destruktif, modal ikon logout. MenuRow Keluar dihapus.
 - Animasi Transaksi hanya di tombol tengah dan tiga rute alur; rute lain tetap
   transisi bawaan. Ripple memakai warna bawaan tema (tanpa token warna baru).
+- Revisi 31 Okt membatalkan tampilan nav terangkat R2: tombol menempel garis atas,
+  tanpa cincin/celah; AppIconButton tidak lagi berlatar putih.
 - Utang Section 21; ReportBodySection sekarang aksi piutang callback tanpa router.
 - R4 selesai tidak wajib lunas; toggle Lainnya/PENGATURAN default aktif.
 - Izin 31 Okt: statusLabel opsional OrderCard, label mengikuti dua mode; proposal 001.

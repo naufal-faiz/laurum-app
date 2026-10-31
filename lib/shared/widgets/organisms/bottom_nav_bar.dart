@@ -3,7 +3,6 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_molecule_tokens.dart';
-import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_divider.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
@@ -20,7 +19,6 @@ class BottomNavBar extends StatelessWidget {
   final ValueChanged<int>? onSelected;
   final VoidCallback? onCreate;
   final String createLabel;
-  static const _ring = BorderSide(color: AppColors.surface, width: AppSpacing.railWidth);
   static const _tabs = [
     ('Antrean', AppIcons.queue, AppIcons.queueActive),
     ('Pelanggan', AppIcons.customers, AppIcons.customersActive),
@@ -37,11 +35,8 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Stack(
     children: [
-      const Positioned.fill(
-        top: AppDimensions.navCreateLift,
-        child: ColoredBox(color: AppColors.surface),
-      ),
-      const Positioned(top: AppDimensions.navCreateLift, left: 0, right: 0, child: AppDivider()),
+      const Positioned.fill(child: ColoredBox(color: AppColors.surface)),
+      const Positioned(top: 0, left: 0, right: 0, child: AppDivider()),
       SafeArea(
         top: false,
         child: Row(
@@ -68,12 +63,8 @@ class BottomNavBar extends StatelessWidget {
                         spacing: AppMoleculeTokens.smallGap,
                         children: [
                           if (slot == 2)
-                            Container(
-                              width: AppDimensions.navCreateSize,
-                              height: AppDimensions.navCreateSize,
-                              foregroundDecoration: const ShapeDecoration(
-                                shape: CircleBorder(side: _ring),
-                              ),
+                            SizedBox.square(
+                              dimension: AppDimensions.navCreateSize,
                               child: Material(
                                 color: AppColors.primary,
                                 shape: const CircleBorder(),

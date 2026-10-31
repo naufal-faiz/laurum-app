@@ -55,6 +55,10 @@ void main() {
       tester.widget<AppButton>(find.widgetWithText(AppButton, 'Pelanggan baru')).icon,
       AppIcons.add,
     );
+    expect(
+      tester.getSize(find.widgetWithText(AppButton, 'Impor kontak')),
+      tester.getSize(find.widgetWithText(AppButton, 'Pelanggan baru')),
+    );
   });
 
   testWidgets('directory actions fit 320 px with 2x text', (tester) async {
