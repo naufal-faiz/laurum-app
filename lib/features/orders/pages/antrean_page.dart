@@ -62,7 +62,9 @@ class AntreanPage extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: AppSpacing.cardGap),
               child: ProposalCard(
-                customerName: data.customer(proposal.customerId),
+                customerName: proposal.customerId == null
+                    ? proposal.customerName
+                    : data.customer(proposal.customerId),
                 summary: proposal.sourceText,
                 timeLabel: Formatters.jam(proposal.createdAt),
                 needsReview: true,

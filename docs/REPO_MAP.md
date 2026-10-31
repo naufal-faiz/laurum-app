@@ -32,7 +32,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_rules.dart (43):
 - payment.dart (37): Payment
 - payment_corrections.dart (42):
-- proposal.dart (24): Proposal
+- proposal.dart (70): Proposal
 - receipt_formatter.dart (82):
 - receipt_layout.dart (77): ReceiptLayout
 - receipt_settings.dart (38): ReceiptSettings
@@ -185,11 +185,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_fixtures.dart (31):
 
 ### lib/features/orders/pages/
-- antrean_page.dart (95): AntreanPage
+- antrean_page.dart (97): AntreanPage
 - order_cancel_flow.dart (24):
 - order_completion_flow.dart (36):
 - order_detail_menu_flow.dart (22):
-- order_detail_page.dart (100): OrderDetailPage
+- order_detail_page.dart (101): OrderDetailPage
 - order_edit_page.dart (84): OrderEditPage
 - order_menu_sheet.dart (60): OrderMenuAction, OrderMenuSheet
 - order_status_sheet.dart (59): OrderStatusSheet
@@ -214,7 +214,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_status_section.dart (74): AntreanStatusSection
 - order_customer_section.dart (56): OrderCustomerSection
 - order_detail_body_section.dart (35): OrderDetailBodySection
-- order_detail_content_section.dart (63): OrderDetailContentSection
+- order_detail_content_section.dart (70): OrderDetailContentSection
 - order_detail_footer_section.dart (83): OrderDetailFooterSection
 - order_edit_body_section.dart (61): OrderEditBodySection
 - order_edit_customer_section.dart (43): OrderEditCustomerSection
@@ -242,21 +242,32 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - printer_settings_section.dart (84): PrinterSettingsSection
 
 ### lib/features/proposals/data/
-- in_memory_proposal_repository.dart (63): InMemoryProposalRepository, inMemoryProposalRepositoryProvider
-- proposal_fixtures.dart (31):
+- in_memory_proposal_repository.dart (52): InMemoryProposalRepository, inMemoryProposalRepositoryProvider
+- proposal_fixtures.dart (47):
 
 ### lib/features/proposals/pages/
-- ai_routes.dart (8):
-- ai_settings_page.dart (77): AiSettingsPage
+- ai_routes.dart (15):
+- ai_settings_page.dart (83): AiSettingsPage
+- proposal_detail_page.dart (99): ProposalDetailPage
+- proposal_history_page.dart (44): ProposalHistoryPage
+- proposal_review_flow.dart (68):
 - whatsapp_link_page.dart (30): WhatsappLinkPage
 
 ### lib/features/proposals/state/
 - ai_settings.dart (25): AiPreferences, AiSettings, aiSettingsProvider
+- proposal_accept.dart (65):
+- proposal_actions.dart (70): ProposalActions, proposalActionsProvider
+- proposal_history.dart (43): ProposalHistory, ProposalHistoryFilter, proposalHistoryProvider, proposalHistoryFilterProvider
+- proposal_order.dart (65):
+- proposal_review.dart (92): ProposalReview, ProposalDraft, ProposalDraftController, proposalReviewProvider, proposalDraftProvider
 - whatsapp_link.dart (38): WhatsappLinkStatus, WhatsappLink, whatsappLinkProvider
 
 ### lib/features/proposals/widgets/
 - ai_connection_section.dart (59): AiConnectionSection
 - ai_preferences_section.dart (64): AiPreferencesSection
+- proposal_fields_section.dart (95): ProposalFieldsSection
+- proposal_history_section.dart (49): ProposalHistorySection
+- proposal_message_section.dart (44): ProposalMessageSection
 - whatsapp_link_section.dart (75): WhatsappLinkSection
 
 ### lib/features/reports/data/
@@ -324,7 +335,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_router.dart (94):
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (13):
+- placeholder_routes.dart (11):
 - root_shell_page.dart (48): RootShellPage
 
 ### lib/features/shell/state/
@@ -560,7 +571,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - printer_page_test.dart (100):
 - printer_service_test.dart (42):
 - progress_row_test.dart (23):
+- proposal_actions_test.dart (72):
 - proposal_card_test.dart (41):
+- proposal_golden_test.dart (35):
+- proposal_history_page_test.dart (61):
+- proposal_keyboard_test.dart (32):
+- proposal_pages_test.dart (72):
+- proposal_retry_test.dart (46): FailOnceProposalRepository
+- proposal_sections_test.dart (92):
 - r2_navigation_test.dart (56):
 - r3_customer_creation_test.dart (55):
 - r3_service_creation_test.dart (50):
@@ -705,7 +723,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - o2.dart (25):
 - order_card_use_case.dart (67):
 - piutang_card_use_case.dart (37):
-- proposal_card_use_case.dart (30):
+- proposal_card_use_case.dart (33):
 - receipt_preview_use_case.dart (106):
 - receipt_toggle_list_use_case.dart (36):
 - report_summary_use_case.dart (18):

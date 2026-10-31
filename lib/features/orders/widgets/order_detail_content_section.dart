@@ -3,6 +3,7 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/features/orders/widgets/order_detail_body_section.dart';
+import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -18,12 +19,14 @@ class OrderDetailContentSection extends StatelessWidget {
     this.useOrderStatus = true,
     this.error,
     this.notice,
+    this.onFillWeight,
     super.key,
   });
   final OrderDetailData? data;
   final bool loading, failed, useOrderStatus;
   final String? error, notice;
   final VoidCallback onRetry, onWhatsApp, onRecord;
+  final VoidCallback? onFillWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +52,10 @@ class OrderDetailContentSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: AppSpacing.screenPadding,
       children: [
+        if (!data!.isFinal && data!.items.any((i) => i.unit == 'kg' && i.qtyMilli == 0)) ...[
+          const BannerMessage(message: 'Berat belum diisi. Lengkapi sebelum memproses order.'),
+          AppButton('Isi berat lewat Edit order', onPressed: onFillWeight),
+        ],
         if (error != null) BannerMessage(message: error!, variant: BannerMessageVariant.error),
         if (notice != null) BannerMessage(message: notice!),
         OrderDetailBodySection(

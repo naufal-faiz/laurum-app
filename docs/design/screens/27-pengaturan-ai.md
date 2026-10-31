@@ -15,6 +15,6 @@ Uji koneksi membuka status koneksi lokal di /lainnya/ai/hubungkan.
 Toggle menyimpan preferensi lokal dummy, belum mengendalikan worker AI nyata.
 Retensi adalah keterangan rancangan, belum menjalankan penghapusan pesan sungguhan.
 Selisih .pen: empat tab/nav revisi terbaru; status relatif pembaruan tidak dikarang;
-angka ringkasan riwayat menunggu keputusan fixture, tautan riwayat tetap ada.
+angka ringkasan riwayat kini mengikuti fixture yang disetujui pengguna pada 31 Okt.
 Verifikasi: toggle, batal/putus/sambung, golden terhubung/terputus, 320 px/teks 2x.
 Perangkat Android/iOS dan TalkBack/VoiceOver belum diuji untuk layar ini.

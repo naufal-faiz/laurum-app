@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/proposals/state/ai_settings.dart';
+import 'package:laurum/features/proposals/state/proposal_history.dart';
 import 'package:laurum/features/proposals/widgets/ai_connection_section.dart';
 import 'package:laurum/features/proposals/widgets/ai_preferences_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
@@ -22,6 +24,7 @@ class AiSettingsPage extends ConsumerWidget {
     final actions = ref.read(aiSettingsProvider.notifier);
     final profile = ref.watch(businessProfileProvider).value;
     final connected = ref.watch(whatsappConnectionProvider);
+    final history = ref.watch(proposalHistoryProvider).value;
     return RootScaffold(
       title: 'Pengaturan AI & WhatsApp',
       accountLabel: 'Usaha dan akun',
@@ -66,6 +69,9 @@ class AiSettingsPage extends ConsumerWidget {
             const SectionHeader(title: 'Riwayat'),
             MenuRow(
               label: 'Riwayat usulan AI',
+              subtitle: history == null
+                  ? null
+                  : '${history.count(ProposalStatus.disetujui)} disetujui · ${history.count(ProposalStatus.ditolak)} ditolak · ${history.count(ProposalStatus.ditutupOtomatis)} ditutup otomatis',
               icon: AppIcons.time,
               onTap: () => context.push('/lainnya/ai/riwayat'),
             ),

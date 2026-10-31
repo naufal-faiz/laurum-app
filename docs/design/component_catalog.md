@@ -854,3 +854,15 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Routes /lainnya/ai dan /lainnya/ai/hubungkan menggantikan placeholder.
 - Spec 27/28: preferensi lokal, putus terkonfirmasi, QR palsu, risiko PRD B 12.
 - Tes Section, state/expiry/reload, alur konfirmasi, 320 px/2x, empat golden.
+
+## AI dummy - detail dan riwayat prompt 80
+- ProposalMessageSection: ProposalReview/onWhatsApp; pesan, identitas, badge baru.
+- ProposalFieldsSection: review/draft/enabled dan callback nama/telepon/alamat/
+  layanan; validasi pelanggan baru, layanan aktif, CalloutAi alamat dan NoticeAi di Page.
+- ProposalHistorySection: history/filter dan callback filter/open; ringkasan
+  historis dibedakan dari tiga usulan aktual sesuai DATA MASTER.
+- ProposalDetailPage memakai FormScaffold; ProposalHistoryPage RootScaffold.
+  Flow konfirmasi alamat/tolak/batal dipisah dari widget, state tanpa Flutter material.
+- Model Proposal menyimpan hasil baca dan mempertahankannya setelah perubahan status.
+  Persetujuan memakai initialOrderStatus; order kg baru tanpa berat memiliki jalur Edit.
+- Spec 25/26 dan progress/80-ai.md mencatat sinkronisasi fixture dan batas dummy.

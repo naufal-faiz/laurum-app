@@ -42,7 +42,7 @@ final customerFixtures = <Customer>[
   _c('cust-007', 'Pak Hendra', '0821-5566-7788'),
   _c('cust-008', 'Rian Katering', '0896-1234-5678'),
   _c('cust-009', 'Pak Rudi', ''),
-  _c('cust-010', 'Agus Pratama', '0856-4400-1234'),
+  _c('cust-010', 'Pelanggan 10', '0812-0000-0010'),
   _c('cust-011', 'Danang Kos Putri', '0857-2201-3344'),
   _c('cust-012', 'Mbak Maya Laundry', '0878-9900-1122'),
   _c('cust-013', 'Siti Rohmah', '0821-4455-6677'),

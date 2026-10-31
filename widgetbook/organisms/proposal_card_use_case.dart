@@ -15,12 +15,15 @@ final proposalCardUseCase = WidgetbookUseCase(
       children: [
         for (final proposal in proposalFixtures)
           ProposalCard(
-            customerName: customerFixtures.singleWhere((c) => c.id == proposal.customerId).name,
+            customerName: proposal.customerId == null
+                ? proposal.customerName
+                : customerFixtures.singleWhere((c) => c.id == proposal.customerId).name,
             summary: proposal.sourceText,
             timeLabel: Formatters.jam(proposal.createdAt),
-            // Review certainty is a presentation state, not part of the minimal domain.
-            needsReview: proposal == proposalFixtures.first,
-            reviewText: proposal == proposalFixtures.first ? proposal.sourceText : '',
+            needsReview: proposal.uncertainAddress || proposal.cancelRequested,
+            reviewText: proposal.uncertainAddress || proposal.cancelRequested
+                ? proposal.sourceText
+                : '',
             onApprove: proposal == proposalFixtures.last ? null : () {},
             onReject: proposal == proposalFixtures.last ? null : () {},
           ),

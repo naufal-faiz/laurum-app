@@ -13,14 +13,14 @@ import 'antrean_test_host.dart';
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
 
-  testWidgets('fixture contacts are already registered and skipped', (tester) async {
+  testWidgets('registered contacts are skipped and Agus remains available', (tester) async {
     await pumpAntrean(tester, location: '/pelanggan/impor');
     expect(
-      find.text('4 nomor sudah terdaftar di sistem dan akan otomatis dilewati'),
+      find.text('3 nomor sudah terdaftar di sistem dan akan otomatis dilewati'),
       findsOneWidget,
     );
-    expect(find.text('0 kontak baru dipilih (4 dilewati)'), findsOneWidget);
-    expect(find.text('Pilih semua (0 kontak)'), findsOneWidget);
+    expect(find.text('0 kontak baru dipilih (3 dilewati)'), findsOneWidget);
+    expect(find.text('Pilih semua (1 kontak)'), findsOneWidget);
     expect(find.text('Simpan 0 pelanggan'), findsOneWidget);
     await tester.enterText(find.byType(TextField), 'agus');
     await tester.pumpAndSettle();
@@ -42,13 +42,13 @@ void main() {
     await pumpAntrean(tester, location: '/pelanggan', container: container);
     await tester.tap(find.text('Impor kontak'));
     await tester.pumpAndSettle();
-    expect(find.text('Pilih semua (1 kontak)'), findsOneWidget);
-    await tester.tap(find.text('Pilih semua (1 kontak)'));
+    expect(find.text('Pilih semua (2 kontak)'), findsOneWidget);
+    await tester.tap(find.text('Pilih semua (2 kontak)'));
     await tester.pumpAndSettle();
-    expect(find.text('Simpan 1 pelanggan'), findsOneWidget);
-    await tester.tap(find.text('Simpan 1 pelanggan'));
+    expect(find.text('Simpan 2 pelanggan'), findsOneWidget);
+    await tester.tap(find.text('Simpan 2 pelanggan'));
     await tester.pumpAndSettle();
-    expect(find.text('Semua (49)'), findsOneWidget);
+    expect(find.text('Semua (50)'), findsOneWidget);
   });
 
   testWidgets('denied permission offers system settings', (tester) async {

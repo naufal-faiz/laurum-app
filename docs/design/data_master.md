@@ -1,4 +1,4 @@
-# DATA MASTER
+﻿# DATA MASTER
 
 Satu-satunya sumber data contoh (fixture) untuk mode dummy. Semua angka dan nama di semua layar wajib cocok dengan dokumen ini. Hari ini (dummy) = **Jumat, 16 Okt 2026**.
 
@@ -80,7 +80,7 @@ Order pengisi untuk melengkapi antrean aktif 12 order (Jemput 3, Proses 5, Siap 
   - A-0133 | Bu Linda Salon | Cuci kering lipat 5 kg Rp30.000 | Lunas
   - A-0134 | Pak Hendra | Selimut tebal 1 pcs Rp20.000 | Lunas
   - A-0135 | Rian Katering | Cuci setrika 5 kg Rp45.000 | Lunas
-  - A-0137 | Agus Pratama | Cuci kiloan 4 kg Rp28.000 | Lunas
+  - A-0137 | Pelanggan 10 | Cuci kiloan 4 kg Rp28.000 | Lunas
 - Siap diambil (4):
   - A-0141 | Bu Rina | Cuci setrika 3,5 kg Rp31.500 | Lunas
   - A-0127 | Pak Joko | Bed cover 2 pcs Rp50.000 | Lunas
@@ -111,11 +111,12 @@ bukan nota awal. Riwayat pelanggan tetap berupa baseline (16/14/6/8/22 order), b
 dibuat menjadi puluhan nota fiktif. Ringkasan riwayat tidak dimasukkan ke kolom catatan pelanggan.
 
 ### Pelanggan dan kontak
-- 13 nama yang sudah disebut di atas termasuk empat kontak impor tersedia dalam daftar dummy.
+- 13 rekaman awal termasuk Pelanggan 10, Danang, Mbak Maya, dan Siti. Agus adalah kontak baru, belum menjadi pelanggan (sinkronisasi prompt 80 disetujui pengguna 31 Okt).
 - Pelanggan ke-14 sampai ke-48 bernama “Pelanggan 14” sampai “Pelanggan 48”,
   telepon 0812-0000-0014 sampai 0812-0000-0048; alamat/catatan kosong.
 - Telepon Pak Rudi tetap kosong karena belum ditentukan.
-- ID teknis cust-001..013 mengikuti urutan sembilan pelanggan lalu empat kontak impor;
+- ID teknis cust-001..009 mengikuti sembilan pelanggan, cust-010 Pelanggan 10,
+  cust-011..013 Danang/Mbak Maya/Siti; Agus belum memiliki ID pelanggan awal;
   cust-014..048 mengikuti nomor pelanggan. Owner dummy owner-001, tanggal metadata awal 1 Jan 2026.
 - Kode layanan srv-001..006 dan kategori cat-001..005 mengikuti urutan tabel/daftar di atas.
 
@@ -165,15 +166,13 @@ menghasilkan 18 transaksi Rp1.850.000 dan minggu berjalan Rp850.000.
 | 01 10.00 | Kemasan | 80000 | Plastik Jaya | label kertas & tag gun |
 Vendor entri listrik/air: PLN & PDAM. Vendor dua entri utama lain yang tidak disebut tetap kosong.
 
-### Usulan AI
-Semua status awal menunggu; pesan adalah dummy pelengkap, bukan hasil integrasi WhatsApp.
-- Pak Rudi, 16 Okt 08.45, terkait A-0139:
-  “Pak, tolong batalkan pesanan cucian bed cover saya ya (A-0139)”
-- Budi Santoso, 16 Okt 09.30, tanpa nota terkait:
-  “Bu Ratna, cucian saya tolong dipisah ya bajunya yang putih.”
-- Siti Rohmah, 16 Okt 10.00, tanpa nota terkait:
-  “Halo Berkah Laundry, mau tanya jemputan pakaian jam berapa ya?”
-
+### Usulan AI (sinkronisasi prompt 80 disetujui 31 Okt 2026)
+Tiga status awal menunggu; pesan dummy, bukan hasil integrasi WhatsApp.
+- prop-001 Pak Rudi, 16 Okt 08.45: "Pak, tolong batalkan pesanan cucian bed cover saya ya (A-0139)". Terkait ord-0139, permintaan batal; layanan Bed cover.
+- prop-002 Bu Rina, 16 Okt 09.12: "Kak, besok pagi bisa diambil laundrynya? Cuci setrika aja, sekitar 3 kiloan. Alamat Jl. Melati 4 depan warung Bu Sri ya". Pelanggan cust-002, 0812-8899-1234; layanan Cuci setrika, alamat Jl. Melati 4, depan Warung Bu Sri; alamat perlu dipastikan. Berat belum ditetapkan oleh AI.
+- prop-003 Agus Pratama, 16 Okt 10.45 (baru saja): "Halo, saya Agus. Saya ingin mencuci 1 bed cover. Bisa dibantu?". 0856-4400-1234, belum terdaftar; alamat kosong opsional, Bed cover 1 pcs.
+- Rekaman cust-010 lama menjadi Pelanggan 10, telepon 0812-0000-0010; A-0137 tetap mengacu cust-010. Ini menyelesaikan benturan Agus lama dengan varian pelanggan baru; jumlah awal tetap 48. Agus hanya dibuat saat usulan disetujui.
+- Ringkasan historis usulan: 142 disetujui, 8 ditolak, 3 ditutup otomatis, ditambah 3 usulan menunggu di atas. Ringkasan historis tidak dibuat menjadi ratusan rekaman pesan fiktif; perubahan dari tiga usulan aktual menambah penghitung status terkait.
 ### Penjelasan baseline dan struk
 - Rekonsiliasi Hari ini: kas dari nota Rp328.500 + tabungan terpakai Rp0 + piutang baru Rp46.500.
 - Minggu ini: Rp1.574.500 + Rp25.000 + Rp200.500 = Rp1.800.000.

@@ -41,18 +41,7 @@ class InMemoryProposalRepository extends Notifier<List<Proposal>> implements Pro
   }) async {
     state = List.unmodifiable([
       for (final p in state)
-        if (p.id == id)
-          Proposal(
-            id: p.id,
-            ownerId: p.ownerId,
-            createdAt: p.createdAt,
-            status: status,
-            sourceText: p.sourceText,
-            customerId: p.customerId,
-            orderId: orderId ?? p.orderId,
-          )
-        else
-          p,
+        if (p.id == id) p.withStatus(status, orderId: orderId) else p,
     ]);
   }
 }
