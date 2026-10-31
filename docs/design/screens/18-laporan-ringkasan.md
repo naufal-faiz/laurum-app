@@ -8,13 +8,22 @@ Komposisi:
   tepat di bawah header; PeriodTabs Hari ini / Minggu ini / Bulan ini / Pilih tanggal.
 - ReportSummary dengan kartu piutang yang membuka /laporan/piutang.
 - WeeklyBarChart, AppText puncak hari, TopServices (peringkat pendapatan).
+- ReportOrdersSection di bawah ringkasan untuk semua periode: judul 'Nota (n)',
+  AppSearchField nomor/nama, ChipBar Semua/Belum lunas/Selesai/Dibatalkan,
+  DateGroupHeader per tanggal, OrderCard ringkas per nota; ketuk membuka /order/:id.
 - Pemilih rentang bawaan showDateRangePicker dalam mode kalender saja, lokal id_ID,
   warna DatePickerThemeData dari token yang ada. Tidak menambahkan input keyboard.
 - AppSkeleton; EmptyState kosong/error dengan Coba lagi.
 
 Data/provider:
 - reportPeriodProvider (awal Minggu ini, indeks 0..3), reportCustomRangeProvider,
-  reportViewProvider, reportExportProvider.
+  reportViewProvider, reportExportProvider, reportOrdersProvider,
+  reportOrdersFilterProvider (0..3), reportOrdersSearchProvider.
+- Daftar nota memakai orderRepository (item, payment, pelanggan) difilter range aktif.
+  Untuk preset, ringkasan tetap baseline DATA MASTER dan daftar hanya memuat nota
+  yang benar-benar tersimpan; baseline historis tidak dibuat menjadi nota fiktif.
+  Untuk rentang kustom, omzet ringkasan sama dengan jumlah nota non-batal yang tampil.
+- Mode status order nonaktif memakai label kebijakan 'Sedang dikerjakan' pada nota.
 - Periode dihitung dari businessClockProvider; minggu Senin sampai Minggu.
 - ReportRepository menyediakan totals/top services; OrderRepository menghitung jumlah
   nota belum lunas (order dibatalkan/dihapus dikecualikan).
@@ -53,7 +62,9 @@ Interaksi/state:
   permintaan dan path palsu. Tidak membuat XLSX/file nyata atau membuka Excel.
 - Ekspor disabled saat loading/kosong/busy; error dapat dicoba lagi.
 - CSV custom memakai label/rentang aktif dan nama laporan-YYYYMMDD-YYYYMMDD.csv;
-  daftar nota ditambahkan pada R6, belum ada view daftar nota R6 pada tahap ini.
+  CSV semua periode memuat daftar nota (nomor, tanggal, pelanggan, total, status bayar).
+- Seluruh /transaksi, NotaHistoryPage, dan spesifikasi Riwayat Nota dihapus (R6).
+- Pencarian nota di Laporan wajib lulus tes keyboard (viewInsets 300 dp).
 - Periode tanpa arus transaksi/pengeluaran/kas menampilkan EmptyState. Jika posisi
   piutang/tabungan tetap ada, ringkasannya tetap terlihat agar tidak tersembunyi.
 - Khusus custom kosong: hanya EmptyState, tidak menampilkan ringkasan posisi global.

@@ -2,8 +2,8 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-R0-R5 SELESAI otomatis. check_all terakhir hijau: 443 tes, REPO_MAP 552 berkas.
-Laporan: tab Pilih tanggal/rentang, kalender Indonesia, Ekspor Excel di header.
+R0-R6 SELESAI otomatis. check_all terakhir hijau: 445 tes, REPO_MAP 551 berkas.
+Riwayat Nota dihapus; daftar nota kini di Laporan, CSV ikut memuat nota.
 
 ## Selesai
 - Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
@@ -24,18 +24,23 @@ Laporan: tab Pilih tanggal/rentang, kalender Indonesia, Ekspor Excel di header.
   label/batal/ekspor aktif; komposisi repository aktual tanpa baseline custom.
   Grafik <=7 hari dan top services aktual; empty tidak meminjam posisi global.
   Golden laporan/kalender ditinjau, 320 px/teks 2x/7 hari lulus. 15 tes baru; 443 hijau.
+- R6: ReportOrdersSection (pencarian, 4 chip, grup tanggal, buka Detail) di semua
+  periode; CSV nota; /transaksi, NotaHistoryPage, spec 11 dihapus. 445 hijau.
+  Rincian docs/progress/r6-laporan-nota.md.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. R5 SEMUA HIJAU: format 484 (0 perubahan), dua analyzer bersih, check_arch OK,
-   443 tes. Log TEMP/laurum-r5-all.log; bukti r5-laporan-rentang.md.
-2. R6-laporan-nota.md berikutnya: daftar nota/CSV; bedakan snapshot aktual custom
-   dari preset baseline historis. Jangan menciptakan nota untuk menutup baseline.
+1. R6 SEMUA HIJAU: format 483, dua analyzer bersih, check_arch OK, 445 tes.
+   551 berkas REPO_MAP. Rincian dan bukti di r6-laporan-nota.md.
+2. R7-pelanggan-akun.md berikutnya: tombol Pelanggan baru di atas, perbaikan Keluar.
 3. Tinjauan Android/iOS/pembaca layar dan ekspor/printer nyata belum dilakukan.
 4. Persetujuan AI baru prompt 80; wajib gunakan initialOrderStatus dari profil.
 
 ## Keputusan dan batas
 - Keputusan pengguna 31 Okt: R5 menyertakan pengeluaran yang sudah tersimpan;
   menggantikan batas lama hanya nota/pembayaran. CRUD pengeluaran tetap prompt 71.
+- R6: daftar nota hanya nota tersimpan dalam range; preset baseline historis tidak
+  dijadikan nota. Custom: omzet ringkasan = jumlah daftar non-batal. OrderCard
+  ringkas dipakai agar label status mengikuti mode R4; CSV memuat daftar nota.
 - Utang Section 21; ReportBodySection sekarang aksi piutang callback tanpa router.
 - R4 selesai tidak wajib lunas; toggle Lainnya/PENGATURAN default aktif.
 - Izin 31 Okt: statusLabel opsional OrderCard, label mengikuti dua mode; proposal 001.
@@ -45,7 +50,7 @@ Laporan: tab Pilih tanggal/rentang, kalender Indonesia, Ekspor Excel di header.
 - Prompt 70: tanpa Urutkan, switch langsung, receiptFooter, signOut placeholder90,
   top services preset Minggu ini, CSV BOM titik koma, piutang ledger, nonaktif tidak hapus data.
 - Pembatalan order/tabungan belum rollback lintas repository.
-- Sesudah R5: R6-R7 lalu 71,80,90,100. Catat bayar/Ingatkan piutang masih placeholder.
+- Sesudah R6: R7 lalu 71,80,90,100. Catat bayar/Ingatkan piutang masih placeholder.
 - Repo C:/Users/Naufal/Downloads/laurum-app. Branch dev1rev melacak origin/dev1rev.
 - SDK: E:/App Data/flutter/flutter; cache/lock di luar workspace perlu akses eskalasi.
 - Graph lokal kini laurum-app (root C:/Users/Naufal/Downloads/laurum-app);

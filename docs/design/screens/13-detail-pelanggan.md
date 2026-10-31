@@ -15,7 +15,7 @@ Komposisi:
 
 Data/provider:
 - customerDetailProvider(id) memakai customerSummariesProvider (termasuk nonaktif),
-  notaHistoryProvider dan SavingsRepository. Daftar tetap memfilter pelanggan aktif.
+  reportOrdersProvider dan SavingsRepository. Daftar tetap memfilter pelanggan aktif.
 - Pak Dedi: 0813-7788-1122; total Rp580.000; 16 order; piutang Rp31.500; saldo Rp50.000.
 - Saldo mutasi dihitung dari ledger kronologis penuh sebelum mengambil 3 terbaru:
   10 Okt +Rp50.000/saldo Rp50.000; 2 Okt -Rp25.000/saldo Rp0;

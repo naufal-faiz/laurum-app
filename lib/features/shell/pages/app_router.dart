@@ -6,7 +6,6 @@ import 'package:laurum/features/customers/pages/customer_directory_page.dart';
 import 'package:laurum/features/customers/pages/customer_import_page.dart';
 import 'package:laurum/features/customers/pages/customer_savings_history_page.dart';
 import 'package:laurum/features/orders/pages/antrean_page.dart';
-import 'package:laurum/features/orders/pages/nota_history_page.dart';
 import 'package:laurum/features/orders/pages/order_detail_page.dart';
 import 'package:laurum/features/orders/pages/order_edit_page.dart';
 import 'package:laurum/features/reports/pages/outstanding_page.dart';
@@ -25,7 +24,6 @@ GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
   initialLocation: initialLocation,
   errorBuilder: (context, state) => const PlaceholderPage(title: 'Halaman tidak ditemukan'),
   routes: [
-    GoRoute(path: '/transaksi', builder: (context, state) => const NotaHistoryPage()),
     GoRoute(path: '/transaksi/baru', builder: (context, state) => const TransactionPage()),
     GoRoute(
       path: '/transaksi/baru/layanan',

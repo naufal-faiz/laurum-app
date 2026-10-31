@@ -5,11 +5,12 @@ import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/core/domain/payment.dart';
+import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 
-class NotaHistoryData {
-  const NotaHistoryData({
+class ReportOrdersData {
+  const ReportOrdersData({
     required this.orders,
     required this.customers,
     required this.items,
@@ -26,32 +27,30 @@ class NotaHistoryData {
   String summary(Order order) => (items[order.id] ?? []).map(orderItemSummary).join(' • ');
 }
 
-List<Order> filterNota(
-  NotaHistoryData data, {
+List<Order> filterReportOrders(
+  ReportOrdersData data, {
   required int filter,
   required String search,
-  required DateTime today,
+  required ReportRange range,
 }) {
   final query = search.trim().toLowerCase();
-  bool todayOnly(DateTime value) =>
-      value.year == today.year && value.month == today.month && value.day == today.day;
   return data.orders.where((order) {
+    if (order.deletedAt != null || !range.contains(order.enteredAt)) return false;
     final matchesText =
         query.isEmpty ||
         order.orderNo.toLowerCase().contains(query) ||
         data.customer(order.customerId).toLowerCase().contains(query);
     final matchesFilter = switch (filter) {
-      1 => todayOnly(order.enteredAt),
-      2 => data.paymentStatus(order) != PayStatus.lunas && order.status != OrderStatus.dibatalkan,
-      3 => order.status == OrderStatus.selesai,
-      4 => order.status == OrderStatus.dibatalkan,
+      1 => data.paymentStatus(order) != PayStatus.lunas && order.status != OrderStatus.dibatalkan,
+      2 => order.status == OrderStatus.selesai,
+      3 => order.status == OrderStatus.dibatalkan,
       _ => true,
     };
     return matchesText && matchesFilter;
   }).toList();
 }
 
-final notaHistoryProvider = FutureProvider<NotaHistoryData>((ref) async {
+final reportOrdersProvider = FutureProvider<ReportOrdersData>((ref) async {
   final repository = ref.watch(orderRepositoryProvider);
   final customers = await ref.watch(customerRepositoryProvider).getCustomers(includeInactive: true);
   final orders = (await repository.getOrders()).toList()
@@ -60,7 +59,7 @@ final notaHistoryProvider = FutureProvider<NotaHistoryData>((ref) async {
   for (final order in orders) {
     items[order.id] = await repository.getItemsByOrderId(order.id);
   }
-  return NotaHistoryData(
+  return ReportOrdersData(
     orders: orders,
     customers: {for (final customer in customers) customer.id: customer},
     items: items,

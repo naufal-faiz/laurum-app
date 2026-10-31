@@ -31,8 +31,7 @@ Jam bisnis dummy tetap 16 Oktober 2026 melalui override di entry point.
 - Hanya menungguJemput/diproses/siap, termasuk order hari sebelumnya. Selesai dan
   dibatalkan tidak muncul. Chip serta usulan Perlu dicek dipertahankan.
 - Daftar Piutang: Laporan aktif (2), empat tab berfungsi, aksi push transaksi sama.
-- Riwayat Nota /transaksi sementara tetap rute langsung SubScaffold sampai R6,
-  bukan cabang tab; berkas dan tes riwayat dipertahankan.
+- Riwayat Nota dilihat lewat Laporan (R6); rute /transaksi dihapus, bukan cabang tab.
 
 ## R4: mode status order
 - businessProfileProvider.useOrderStatus true mempertahankan seluruh chip dan CTA.

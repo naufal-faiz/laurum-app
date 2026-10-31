@@ -7,9 +7,12 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/reports/pages/report_range_flow.dart';
 import 'package:laurum/features/reports/state/report_custom_range.dart';
 import 'package:laurum/features/reports/state/report_export.dart';
+import 'package:laurum/features/reports/state/report_orders_controller.dart';
+import 'package:laurum/features/reports/state/report_orders_data.dart';
 import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/reports/widgets/report_body_section.dart';
+import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -22,8 +25,10 @@ class ReportPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final snapshot = ref.watch(reportViewProvider);
     final data = snapshot.asData?.value;
+    final orders = ref.watch(reportOrdersProvider).asData?.value;
     final exporting = ref.watch(reportExportProvider);
     final custom = ref.watch(reportCustomRangeProvider);
+    final useStatus = ref.watch(businessProfileProvider).value?.useOrderStatus ?? true;
     return Column(
       children: [
         Padding(
@@ -37,7 +42,7 @@ class ReportPage extends ConsumerWidget {
                 actionLabel: 'Ekspor Excel',
                 onAction: data == null || data.isEmpty || exporting.busy
                     ? null
-                    : () => ref.read(reportExportProvider.notifier).export(data),
+                    : () => ref.read(reportExportProvider.notifier).export(data, orders: orders),
               ),
               if (exporting.message != null)
                 BannerMessage(
@@ -57,7 +62,9 @@ class ReportPage extends ConsumerWidget {
                         ),
                 ],
                 selectedIndex: ref.watch(reportPeriodProvider),
-                onSelected: exporting.busy ? null : (index) => _select(context, ref, index),
+                onSelected: exporting.busy
+                    ? null
+                    : (index) => selectReportPeriod(context, ref, index),
               ),
             ],
           ),
@@ -82,19 +89,17 @@ class ReportPage extends ConsumerWidget {
             data: (value) => ReportBodySection(
               data: value,
               onOutstanding: () => context.push('/laporan/piutang'),
+              orders: orders,
+              orderFilter: ref.watch(reportOrdersFilterProvider),
+              orderSearch: ref.watch(reportOrdersSearchProvider),
+              useOrderStatus: useStatus,
+              onOrderSearch: ref.read(reportOrdersSearchProvider.notifier).set,
+              onOrderFilter: ref.read(reportOrdersFilterProvider.notifier).select,
+              onOpenOrder: (order) => context.push('/order/${order.id}'),
             ),
           ),
         ),
       ],
     );
-  }
-
-  Future<void> _select(BuildContext context, WidgetRef ref, int index) async {
-    if (index == 3) {
-      await pickReportRange(context, ref);
-    } else {
-      ref.read(reportExportProvider.notifier).reset();
-      ref.read(reportPeriodProvider.notifier).select(index);
-    }
   }
 }

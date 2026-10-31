@@ -4,14 +4,14 @@ import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/savings_entry.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
-import 'package:laurum/features/orders/state/nota_history_data.dart';
+import 'package:laurum/features/reports/state/report_orders_data.dart';
 
 typedef CustomerMovement = ({SavingsEntry entry, int balance});
 
 class CustomerDetailData {
   const CustomerDetailData(this.summary, this.history, this.movements);
   final CustomerDirectoryRow summary;
-  final NotaHistoryData history;
+  final ReportOrdersData history;
   final List<CustomerMovement> movements;
   List<Order> get orders => history.orders
       .where((o) => o.customerId == summary.customer.id && o.deletedAt == null)
@@ -39,7 +39,7 @@ List<CustomerMovement> customerMovements(List<SavingsEntry> entries) =>
 
 final customerDetailProvider = FutureProvider.family<CustomerDetailData?, String>((ref, id) async {
   final summaries = ref.watch(customerSummariesProvider.future);
-  final history = ref.watch(notaHistoryProvider.future);
+  final history = ref.watch(reportOrdersProvider.future);
   final savings = ref.watch(savingsRepositoryProvider);
   final summary = (await summaries).where((row) => row.customer.id == id).firstOrNull;
   if (summary == null) return null;

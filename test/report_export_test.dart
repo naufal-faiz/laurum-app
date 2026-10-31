@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/services/export_service.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/reports/state/report_export.dart';
+import 'package:laurum/features/reports/state/report_orders_data.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/main_dummy.dart';
 
@@ -44,5 +45,16 @@ void main() {
     expect(content, contains('"Sab";""'));
     expect(content, contains('"Cuci setrika";882000'));
     expect(content, contains('"Tabungan pelanggan";430000'));
+  });
+
+  test('csv includes the active note list', () async {
+    final scope = ProviderContainer(overrides: dummyRepositoryOverrides);
+    addTearDown(scope.dispose);
+    final data = await scope.read(reportViewProvider.future);
+    final orders = await scope.read(reportOrdersProvider.future);
+    final content = reportCsv(data, orders: orders);
+    expect(content, contains('"Nomor nota";"Tanggal";"Pelanggan";"Total";"Status bayar"'));
+    expect(content, contains('"A-0142";"16 Okt";"Pak Dedi Budiarto";31500;"Belum bayar"'));
+    expect(content, contains('"A-0141";"16 Okt";"Bu Rina";31500;"Lunas"'));
   });
 }

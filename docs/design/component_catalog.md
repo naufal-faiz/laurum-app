@@ -818,7 +818,8 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   token lama; flutter_localizations paket SDK menjadi dependensi langsung.
 - customReportData 55 baris: repository publik + buildReport baseline nol; expense
   tersimpan ikut sesuai keputusan pengguna 31 Okt. Baseline preset tetap.
-- CSV custom memakai label/tanggal aktif dan nama bertanggal; daftar nota menunggu R6.
+- CSV custom memakai label/tanggal aktif dan nama bertanggal; daftar nota (nomor,
+  tanggal, pelanggan, total, status bayar) ikut diekspor di semua periode (R6).
 - Tes r5_range/custom_report/picker/report_widgets/report_body_section/report_visual;
   golden r5_report_custom/r5_date_picker ditinjau, 320 px/teks 2x hingga tujuh hari lulus.
 - Selisih .pen: Ekspor di header dan rentang/pemilih Indonesia sesuai R5; native

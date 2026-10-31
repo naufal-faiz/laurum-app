@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
@@ -73,9 +74,13 @@ void main() {
     await expectKeyboardVisible(tester, field: find.byType(AppSearchField).first);
   });
 
-  testWidgets('Pencarian Riwayat Nota: pencarian di atas keyboard', (tester) async {
+  testWidgets('Pencarian Nota Laporan: pencarian di atas keyboard', (tester) async {
     configureKeyboardTest(tester);
-    await pumpAntrean(tester, location: '/transaksi');
+    await pumpAntrean(tester, location: '/laporan');
+    final vertical = find.byWidgetPredicate(
+      (w) => w is Scrollable && w.axisDirection == AxisDirection.down,
+    );
+    await tester.scrollUntilVisible(find.byType(AppSearchField), 400, scrollable: vertical);
     await expectKeyboardVisible(tester, field: find.byType(AppSearchField).first);
   });
 

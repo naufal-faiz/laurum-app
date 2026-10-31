@@ -95,13 +95,13 @@ Semua token hidup di `lib/core/theme/` (satu-satunya tempat boleh memakai `Color
 
 ## 8. Navigasi
 
-`go_router` dengan `StatefulShellRoute` untuk empat tab: `/antrean`, `/pelanggan`, `/laporan`, `/lainnya`. Slot tengah Transaksi adalah aksi push `/transaksi/baru`, tidak menjadi tab dan tidak pernah berstatus aktif. `/transaksi` sementara tetap menjadi rute langsung Riwayat Nota sampai pemindahan R6. Sheet dan modal dibuka lewat `AppBottomSheet.show` dan `ConfirmModal.show`.
+`go_router` dengan `StatefulShellRoute` untuk empat tab: `/antrean`, `/pelanggan`, `/laporan`, `/lainnya`. Slot tengah Transaksi adalah aksi push `/transaksi/baru`, tidak menjadi tab dan tidak pernah berstatus aktif. Riwayat Nota dilihat lewat Laporan; rute `/transaksi` dihapus. Sheet dan modal dibuka lewat `AppBottomSheet.show` dan `ConfirmModal.show`.
 
 | Rute | Layar |
 | --- | --- |
 | `/masuk` | Auth - Masuk |
 | `/antrean`, `/antrean/usulan/:id` | Beranda, Detail Usulan AI (dua varian) |
-| `/transaksi`, `/transaksi/baru`, `/transaksi/baru/layanan`, `/transaksi/baru/bayar`, `/transaksi/nota/:id` | Riwayat Nota, Buat, Pilih Layanan, Pembayaran, Nota Tersimpan |
+| `/transaksi/baru`, `/transaksi/baru/layanan`, `/transaksi/baru/bayar`, `/transaksi/nota/:id` | Buat, Pilih Layanan, Pembayaran, Nota Tersimpan |
 | `/order/:id`, `/order/:id/edit` | Detail Order, Edit Order |
 | `/pelanggan`, `/pelanggan/:id`, `/pelanggan/:id/tabungan`, `/pelanggan/:id/setor`, `/pelanggan/impor` | Daftar, Detail, Riwayat Tabungan, Setor, Impor |
 | `/laporan`, `/laporan/piutang` | Ringkasan, Daftar Piutang |
@@ -118,7 +118,7 @@ Nama layar mengikuti frame di `.pen`. Kolom Fase merujuk bagian 10.
 | 2 | Antrean - Beranda (termasuk state kosong, filter kosong, loading, WhatsApp terputus) |
 | 3 | Transaksi - Pilih Layanan; Buat Transaksi; Input Berat (sheet); Pelanggan - Tambah Pelanggan Cepat (sheet); Transaksi - Pembayaran; Nota Tersimpan |
 | 4 | Lainnya - Printer dan Struk (dengan `FakePrintService`) |
-| 5 | Transaksi - Detail Order; Edit Order; Riwayat Nota |
+| 5 | Transaksi - Detail Order; Edit Order (Riwayat Nota dilihat lewat Laporan) |
 | 6 | Pelanggan - Daftar; Detail dan Tabungan; Setor Tabungan; Riwayat Tabungan; Edit Pelanggan (sheet); Impor Kontak HP |
 | 7 | Laporan - Ringkasan; Daftar Piutang |
 | 8 | Lainnya - Pengaturan dan Akun; Daftar Layanan; Tambah Layanan; Edit Layanan; Info Usaha; Daftar Pengeluaran; Catat Pengeluaran |

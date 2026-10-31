@@ -1,71 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/order.dart';
+import 'package:laurum/core/domain/order_rules.dart';
+import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/orders/state/nota_history_data.dart';
+import 'package:laurum/features/reports/state/report_orders_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_search_field.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/date_group_header.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
-import 'package:laurum/shared/widgets/organisms/nota_card.dart';
+import 'package:laurum/shared/widgets/molecules/section_header.dart';
+import 'package:laurum/shared/widgets/organisms/order_card.dart';
 
-class NotaHistoryListSection extends StatelessWidget {
-  const NotaHistoryListSection({
+class ReportOrdersSection extends StatelessWidget {
+  const ReportOrdersSection({
     required this.data,
+    required this.range,
     required this.filter,
     required this.search,
-    required this.today,
+    required this.useOrderStatus,
     required this.onSearch,
     required this.onFilter,
     required this.onOpen,
     super.key,
   });
-  final NotaHistoryData data;
+  final ReportOrdersData data;
+  final ReportRange range;
   final int filter;
   final String search;
-  final DateTime today;
+  final bool useOrderStatus;
   final ValueChanged<String> onSearch;
   final ValueChanged<int> onFilter;
   final ValueChanged<Order> onOpen;
 
   @override
   Widget build(BuildContext context) {
-    final orders = filterNota(data, filter: filter, search: search, today: today);
+    final orders = filterReportOrders(data, filter: filter, search: search, range: range);
+    final inRange = filterReportOrders(data, filter: 0, search: '', range: range);
     final rows = <Widget>[];
     DateTime? lastDay;
     for (final order in orders) {
       final day = DateTime(order.enteredAt.year, order.enteredAt.month, order.enteredAt.day);
       if (day != lastDay) {
-        final sameDay = day.year == today.year && day.month == today.month && day.day == today.day;
-        rows.add(
-          DateGroupHeader(
-            label: sameDay ? 'Hari ini - ${Formatters.tanggal(day)}' : Formatters.tanggal(day),
-          ),
-        );
+        rows.add(DateGroupHeader(label: Formatters.tanggal(day)));
         lastDay = day;
       }
       rows.add(
         Padding(
           padding: const EdgeInsets.only(bottom: AppSpacing.cardGap),
-          child: NotaCard(
+          child: OrderCard(
             orderNo: order.orderNo,
             customerName: data.customer(order.customerId),
             summary: data.summary(order),
             total: order.total,
             status: order.status,
+            statusLabel: orderStatusLabel(order.status, useOrderStatus: useOrderStatus),
             payStatus: data.paymentStatus(order),
             paid: data.paid(order),
             timeLabel: Formatters.jam(order.enteredAt),
+            compact: true,
+            showAction: false,
             onTap: () => onOpen(order),
           ),
         ),
       );
     }
-    return ListView(
-      padding: const EdgeInsets.all(AppSpacing.screenPadding),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (data.orders.isNotEmpty) ...[
+        SectionHeader(title: 'Nota (${orders.length})'),
+        const SizedBox(height: AppSpacing.cardGap),
+        if (inRange.isNotEmpty) ...[
           AppSearchField(
             label: 'Nama pelanggan',
             clearLabel: 'Hapus pencarian',
@@ -75,7 +81,7 @@ class NotaHistoryListSection extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.cardGap),
           ChipBar(
-            labels: const ['Semua', 'Hari ini', 'Belum lunas', 'Selesai', 'Dibatalkan'],
+            labels: const ['Semua', 'Belum lunas', 'Selesai', 'Dibatalkan'],
             selectedIndex: filter,
             onSelected: onFilter,
           ),
@@ -83,10 +89,10 @@ class NotaHistoryListSection extends StatelessWidget {
         ],
         if (orders.isEmpty)
           EmptyState(
-            title: data.orders.isEmpty ? 'Belum ada nota' : 'Nota tidak ditemukan',
+            title: inRange.isEmpty ? 'Belum ada nota periode ini' : 'Nota tidak ditemukan',
             icon: AppIcons.receipt,
-            description: data.orders.isEmpty
-                ? 'Nota yang Anda buat akan tampil di sini.'
+            description: inRange.isEmpty
+                ? 'Nota pada periode ini akan tampil di sini.'
                 : 'Coba kata kunci atau filter lain.',
           )
         else

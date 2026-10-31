@@ -33,7 +33,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | R3 | R3-transaksi.md | Revisi 4,5: FAB Pilih Layanan, tombol tambah pelanggan | SELESAI (2026-10-31) | check_all 387 tes hijau; dua golden R3 ditinjau/diperbarui, lihat docs/progress/r3-transaksi.md |
 | R4 | R4-status-order.md | Revisi 6: pengaturan Pakai status order | SELESAI (2026-10-31) | Toggle/checkout/Antrean/Detail/cetak tervalidasi, check_all 428 tes hijau; AI masih placeholder 80, policy awal kedua source diuji |
 | R5 | R5-laporan-rentang.md | Revisi 8,13,14: rentang tanggal, Ekspor di atas | SELESAI (2026-10-31) | Kalender id_ID, custom aktual termasuk pengeluaran tersimpan (izin pengguna), Ekspor di header; 443 tes hijau, dua golden ditinjau |
-| R6 | R6-laporan-nota.md | Revisi 7,8,13: daftar nota di Laporan, hapus Riwayat Nota | BELUM | Tinjau rekonsiliasi angka dan daftar nota |
+| R6 | R6-laporan-nota.md | Revisi 7,8,13: daftar nota di Laporan, hapus Riwayat Nota | SELESAI (2026-10-31) | Daftar nota per range/pencarian/filter, CSV nota, /transaksi dihapus; 445 tes hijau. Tinjau rekonsiliasi preset baseline vs daftar aktual |
 | R7 | R7-pelanggan-akun.md | Revisi 12,15: tombol Pelanggan baru di atas, tombol Keluar | BELUM | Tinjau di HP |
 | 18 | 71-lainnya-b.md | Daftar dan Catat Pengeluaran | BELUM | |
 | 19 | 80-ai.md | Layar AI (dummy) | BELUM | |

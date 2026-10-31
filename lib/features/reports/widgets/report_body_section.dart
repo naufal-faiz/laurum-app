@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/reports/state/report_orders_data.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
+import 'package:laurum/features/reports/widgets/report_orders_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -11,9 +14,27 @@ import 'package:laurum/shared/widgets/organisms/top_services.dart';
 import 'package:laurum/shared/widgets/organisms/weekly_bar_chart.dart';
 
 class ReportBodySection extends StatelessWidget {
-  const ReportBodySection({required this.data, required this.onOutstanding, super.key});
+  const ReportBodySection({
+    required this.data,
+    required this.onOutstanding,
+    super.key,
+    this.orders,
+    this.orderFilter = 0,
+    this.orderSearch = '',
+    this.useOrderStatus = true,
+    this.onOrderSearch,
+    this.onOrderFilter,
+    this.onOpenOrder,
+  });
   final ReportView data;
   final VoidCallback onOutstanding;
+  final ReportOrdersData? orders;
+  final int orderFilter;
+  final String orderSearch;
+  final bool useOrderStatus;
+  final ValueChanged<String>? onOrderSearch;
+  final ValueChanged<int>? onOrderFilter;
+  final ValueChanged<Order>? onOpenOrder;
   @override
   Widget build(BuildContext context) {
     final daily = data.daily;
@@ -62,6 +83,19 @@ class ReportBodySection extends StatelessWidget {
             const BannerMessage(
               message: 'Rincian layanan terlaris belum tersedia untuk periode ini.',
             ),
+        ],
+        if (orders != null) ...[
+          const SizedBox(height: AppSpacing.screenPadding),
+          ReportOrdersSection(
+            data: orders!,
+            range: data.range,
+            filter: orderFilter,
+            search: orderSearch,
+            useOrderStatus: useOrderStatus,
+            onSearch: onOrderSearch ?? (_) {},
+            onFilter: onOrderFilter ?? (_) {},
+            onOpen: onOpenOrder ?? (_) {},
+          ),
         ],
       ],
     );

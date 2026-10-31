@@ -5,6 +5,15 @@ import 'package:laurum/features/reports/state/report_export.dart';
 import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 
+Future<void> selectReportPeriod(BuildContext context, WidgetRef ref, int index) async {
+  if (index == 3) {
+    await pickReportRange(context, ref);
+  } else {
+    ref.read(reportExportProvider.notifier).reset();
+    ref.read(reportPeriodProvider.notifier).select(index);
+  }
+}
+
 Future<void> pickReportRange(BuildContext context, WidgetRef ref) async {
   final now = ref.read(businessClockProvider)();
   final today = DateTime(now.year, now.month, now.day);

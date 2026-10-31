@@ -167,7 +167,6 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/orders/pages/
 - antrean_page.dart (95): AntreanPage
-- nota_history_page.dart (67): NotaHistoryPage
 - order_cancel_flow.dart (24):
 - order_completion_flow.dart (36):
 - order_detail_menu_flow.dart (22):
@@ -181,8 +180,6 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_controller.dart (84): AntreanFilter, AntreanActionState, AntreanActions, antreanFilterProvider, antreanActionsProvider
 - antrean_data.dart (68): AntreanData, antreanDataProvider
 - antrean_filter_view.dart (9): AntreanFilterView
-- nota_history_controller.dart (20): NotaFilter, NotaSearch, notaFilterProvider, notaSearchProvider
-- nota_history_data.dart (69): NotaHistoryData, notaHistoryProvider
 - order_completion_controller.dart (57): OrderCompletionState, OrderCompletion, orderCompletionProvider
 - order_completion_save.dart (47):
 - order_detail_controller.dart (85): OrderActionState, OrderActions, orderActionsProvider
@@ -196,7 +193,6 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/orders/widgets/
 - antrean_orders_section.dart (50): AntreanOrdersSection
 - antrean_status_section.dart (74): AntreanStatusSection
-- nota_history_list_section.dart (97): NotaHistoryListSection
 - order_customer_section.dart (56): OrderCustomerSection
 - order_detail_body_section.dart (35): OrderDetailBodySection
 - order_detail_content_section.dart (63): OrderDetailContentSection
@@ -241,21 +237,24 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/reports/pages/
 - outstanding_page.dart (59): OutstandingPage
-- report_page.dart (100): ReportPage
-- report_range_flow.dart (32):
+- report_page.dart (105): ReportPage
+- report_range_flow.dart (41):
 
 ### lib/features/reports/state/
 - outstanding_controller.dart (95): PaymentRecordState, PaymentRecordController, paymentRecordProvider
 - outstanding_data.dart (68): OutstandingRow, OutstandingListData, OutstandingFilter, outstandingListProvider, outstandingFilterProvider
 - report_custom_data.dart (55): CustomReportData
 - report_custom_range.dart (24): ReportCustomRange, reportCustomRangeProvider
-- report_export.dart (74): ReportExportState, ReportExport, reportExportProvider
+- report_export.dart (97): ReportExportState, ReportExport, reportExportProvider
+- report_orders_controller.dart (24): ReportOrdersFilter, ReportOrdersSearch, reportOrdersFilterProvider, reportOrdersSearchProvider
+- report_orders_data.dart (68): ReportOrdersData, reportOrdersProvider
 - report_period.dart (30): ReportPeriod, reportPeriodProvider
 - report_view.dart (87): ReportView, reportViewProvider
 
 ### lib/features/reports/widgets/
 - outstanding_list_section.dart (77): OutstandingListSection
-- report_body_section.dart (69): ReportBodySection
+- report_body_section.dart (103): ReportBodySection
+- report_orders_section.dart (103): ReportOrdersSection
 
 ### lib/features/services/data/
 - in_memory_service_repository.dart (63): InMemoryServiceRepository, inMemoryServiceRepositoryProvider
@@ -289,7 +288,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - settings_operational_section.dart (59): SettingsOperationalSection
 
 ### lib/features/shell/pages/
-- app_router.dart (100):
+- app_router.dart (98):
 - lainnya_routes.dart (16):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (17):
@@ -490,7 +489,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - formatters_test.dart (40):
 - info_row_test.dart (25):
 - input_templates_keyboard_test.dart (72):
-- keyboard_audit_test.dart (145):
+- keyboard_audit_test.dart (150):
 - keyboard_test_helper.dart (52):
 - labeled_field_test.dart (29):
 - locked_row_test.dart (25):
@@ -499,7 +498,6 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - nominal_chips_test.dart (25):
 - nominal_input_test.dart (77):
 - nota_card_test.dart (37):
-- nota_history_test.dart (67):
 - notice_ai_test.dart (20):
 - numpad_test.dart (47):
 - order_actions_test.dart (72):
@@ -555,7 +553,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_preview_test.dart (28):
 - receipt_template_lines.dart (28):
 - receipt_toggle_list_test.dart (37):
-- report_export_test.dart (48): RetryExportService
+- report_export_test.dart (60): RetryExportService
+- report_orders_test.dart (108):
 - report_page_test.dart (69):
 - report_states_test.dart (61):
 - report_summary_test.dart (36):

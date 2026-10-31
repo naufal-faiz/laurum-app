@@ -10,8 +10,8 @@ Sumber: uji dummy app di Android (Naufal) + audit statis cabang dev1 (prompt 70)
 | 4 | FAB tambah di Pilih Layanan | SubScaffold belum mendukung FAB | R3 | SELESAI otomatis (2026-10-31); 387 tes total hijau, menunggu tinjauan perangkat |
 | 5 | Tombol tambah pelanggan di samping Pilih pelanggan | TransactionCustomerSection hanya satu tombol | R3 | SELESAI otomatis (2026-10-31); 387 tes total hijau, menunggu tinjauan perangkat |
 | 6 | Pengaturan pakai status order atau tidak | Status order selalu dipakai; belum ada pengaturan | R4 | SEDANG: fondasi + repository hijau (396 tes total); UI/cetak belum |
-| 7 | Hapus Riwayat Nota | Nota dilihat lewat Laporan | R6 | BELUM |
-| 8, 13 | Laporan: tanggal kustom + daftar order pada tanggal terpilih (dari halaman transaksi) | PeriodTabs hanya 3 periode; daftar nota ada di Riwayat Nota | R5 (ringkasan), R6 (daftar nota) | R5 SELESAI (31 Okt 2026); R6 BELUM |
+| 7 | Hapus Riwayat Nota | Nota dilihat lewat Laporan | R6 | SELESAI (2026-10-31): daftar nota pindah ke Laporan, rute /transaksi dan halaman dihapus |
+| 8, 13 | Laporan: tanggal kustom + daftar order pada tanggal terpilih (dari halaman transaksi) | PeriodTabs hanya 3 periode; daftar nota ada di Riwayat Nota | R5 (ringkasan), R6 (daftar nota) | R5 SELESAI (31 Okt 2026); R6 SELESAI (31 Okt 2026) |
 | 9 | Nav: tombol Transaksi di tengah, FAB Beranda dihapus (ikon lama) | FAB ada di RootScaffold; Transaksi masih tab Riwayat Nota | R2 | SELESAI (2026-10-30); PRD disinkronkan, pemeriksaan manual Android dikonfirmasi |
 | 11 | Beranda hanya antrean aktif | Judul "Antrean hari ini" menyesatkan; data sudah aktif-saja | R2 | SELESAI (2026-10-25) |
 | 12 | Tombol Pelanggan baru pindah ke atas, di sebelah Impor kontak | Berada di FooterBar | R7 | BELUM |
