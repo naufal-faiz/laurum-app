@@ -2,8 +2,8 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-R0-R3 SELESAI otomatis. check_all hijau: 387 tes, REPO_MAP 517 berkas.
-Fondasi R4 tervalidasi; R4 MASIH PARSIAL (belum ada toggle/integrasi cetak).
+R0-R3 SELESAI otomatis. check_all hijau: 396 tes, REPO_MAP 519 berkas.
+Fondasi dan repository R4 tervalidasi; R4 MASIH PARSIAL (toggle/layar/cetak belum).
 Perangkat sudah kembali memiliki SDK; izin menunda validasi tanpa SDK sudah berakhir.
 
 ## Selesai
@@ -20,11 +20,13 @@ Perangkat sudah kembali memiliki SDK; izin menunda validasi tanpa SDK sudah bera
 - Fondasi R4: useOrderStatus default true, salinan profil/preservasi mode di Info
   Usaha dan printer, status awal/label/transisi. Dua belas tes kontrak lulus.
   withOrderStatus memakai argumen bernama enabled; fixture memakai default true.
+- R4 repository: policy diteruskan pada dua jalur simpan; snapshot tetap divalidasi,
+  final/ledger/item terjaga. Sembilan tes baru; check_all terakhir 396 tes hijau.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Lanjut guard repository order R4 secara konsisten pada saveOrder/updateOrderStatus
-   dan writeOrderStore, default mode aktif tetap menolak diproses->selesai langsung.
-2. Setelah itu toggle/settings, checkout/AI, Antrean/Detail dan alur selesai/cetak
+1. Guard repository R4 selesai pada saveOrder/updateOrderStatus dan writeOrderStore;
+   sembilan tes baru lulus, default mode aktif tetap menolak penyelesaian langsung.
+2. Lanjut toggle/settings, checkout/AI, Antrean/Detail dan alur selesai/cetak
    sesuai R4. Jangan aktifkan toggle sebelum semua perilaku tersambung.
 3. Spec 01/09/19 dan kolom sinkron PRD B masih perlu disesuaikan saat integrasi.
    Catatan: docs/progress/r4-status-order.md. Jangan mulai R5 sebelum R4 selesai.

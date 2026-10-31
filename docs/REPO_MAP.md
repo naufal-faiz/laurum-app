@@ -45,7 +45,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - business_repository.dart (10): BusinessRepository
 - customer_repository.dart (8): CustomerRepository
 - expense_repository.dart (10): ExpenseRepository
-- order_repository.dart (33): OrderRepository
+- order_repository.dart (35): OrderRepository
 - proposal_repository.dart (13): ProposalRepository
 - report_repository.dart (10): ReportRepository
 - savings_repository.dart (9): SavingsRepository
@@ -152,7 +152,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - week_expense_fixtures.dart (48):
 
 ### lib/features/orders/data/
-- in_memory_order_repository.dart (91): InMemoryOrderRepository, inMemoryOrderRepositoryProvider
+- in_memory_order_repository.dart (99): InMemoryOrderRepository, inMemoryOrderRepositoryProvider
 - order_event_fixtures.dart (26):
 - order_fixture_factory.dart (26):
 - order_fixtures.dart (8):
@@ -162,7 +162,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_queue_process_fixtures.dart (81):
 - order_queue_ready_fixtures.dart (42):
 - order_store.dart (20): OrderStore
-- order_store_write.dart (86):
+- order_store_write.dart (89):
 - payment_fixtures.dart (31):
 
 ### lib/features/orders/pages/
@@ -510,6 +510,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r3_service_picker_keyboard_test.dart (36):
 - r4_business_profile_test.dart (57):
 - r4_order_policy_test.dart (69):
+- r4_order_repository_policy_test.dart (87):
+- r4_order_store_guards_test.dart (66):
 - r4_profile_persistence_test.dart (50):
 - receipt_fixtures.dart (86):
 - receipt_formatter_settings_test.dart (31):

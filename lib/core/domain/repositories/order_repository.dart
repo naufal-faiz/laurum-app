@@ -20,12 +20,14 @@ abstract class OrderRepository {
     List<OrderItem>? items,
     List<Payment>? payments,
     List<OrderEvent>? events,
+    bool useOrderStatus = true,
   });
 
   Future<void> updateOrderStatus(
     String orderId,
     OrderStatus status, {
     OrderEvent? event,
+    bool useOrderStatus = true,
   });
 
   Future<void> addPayment(Payment payment);

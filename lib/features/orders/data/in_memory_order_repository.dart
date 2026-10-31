@@ -50,6 +50,7 @@ class InMemoryOrderRepository extends Notifier<OrderStore> implements OrderRepos
     List<OrderItem>? items,
     List<Payment>? payments,
     List<OrderEvent>? events,
+    bool useOrderStatus = true,
   }) async {
     state = writeOrderStore(
       state,
@@ -57,6 +58,7 @@ class InMemoryOrderRepository extends Notifier<OrderStore> implements OrderRepos
       items: items,
       payments: payments ?? [],
       events: events ?? [],
+      useOrderStatus: useOrderStatus,
     );
   }
 
@@ -65,10 +67,16 @@ class InMemoryOrderRepository extends Notifier<OrderStore> implements OrderRepos
     String orderId,
     OrderStatus status, {
     OrderEvent? event,
+    bool useOrderStatus = true,
   }) async {
     final order = state.orders.where((o) => o.id == orderId).firstOrNull;
     if (order == null) throw StateError('Order not found');
-    state = writeOrderStore(state, order.withStatus(status), events: [?event]);
+    state = writeOrderStore(
+      state,
+      order.withStatus(status, useOrderStatus: useOrderStatus),
+      events: [?event],
+      useOrderStatus: useOrderStatus,
+    );
   }
 
   @override

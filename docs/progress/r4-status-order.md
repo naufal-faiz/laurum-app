@@ -1,59 +1,52 @@
-# R4 - Fondasi pengaturan status order
-Tanggal validasi: 31 Oktober 2026. Status: FONDASI TERVALIDASI, R4 MASIH PARSIAL.
-R3 selesai otomatis. Fondasi R4 lulus; UI/toggle dan alur cetak belum terhubung.
+# R4 - Mode status order (parsial)
+Diperbarui: 31 Oktober 2026. Fondasi dan repository TERVALIDASI.
+R4 belum selesai: toggle, integrasi layar dan alur cetak belum terhubung.
 
-## Perubahan pada kelompok ini
-- BusinessProfile.useOrderStatus bool default true, termasuk props Equatable.
-  Fixture tetap true agar DATA MASTER dan perilaku lama tidak berubah.
-- withOrderStatus mengembalikan profil baru, mempertahankan seluruh data serta
-  metadata; updatedAt bisa diberikan eksplisit. Repository bisnis in-memory sudah
-  menyimpan objek profil utuh, sehingga tidak memerlukan penyimpanan field terpisah.
-- Simpan Info Usaha membaca profil terkini sebelum menyalin metadata/mode; pilihan
-  mode yang berubah setelah formulir dibuka tidak kembali ke nilai snapshot lama.
-- copyProfile pengaturan printer ikut mempertahankan useOrderStatus.
-- nextStatus menerima useOrderStatus opsional default true. Hanya jika false,
-  diproses dapat langsung selesai. Pembatalan dan proteksi status final tetap.
-- Order.withStatus meneruskan flag eksplisit ke validasi domain.
-- initialOrderStatus: kasir diproses; WhatsApp AI menungguJemput saat mode aktif,
-  diproses saat nonaktif. orderStatusLabel memakai Sedang dikerjakan untuk diproses
-  pada mode nonaktif; label lain mengikuti label lama.
+## Fondasi
+- BusinessProfile.useOrderStatus default true, termasuk equality. Fixture memakai
+  default true. withOrderStatus(enabled: ...) menyalin data dan metadata.
+- Info Usaha membaca profil terkini saat menyimpan; copyProfile printer ikut
+  mempertahankan mode. Dua belas tes fondasi/preservasi profil lulus.
+- nextStatus dan Order.withStatus menerima useOrderStatus, default true. Hanya mode
+  false yang mengizinkan diproses langsung selesai; pembatalan/final tetap terjaga.
+- initialOrderStatus dan orderStatusLabel tersedia untuk integrasi checkout/AI/UI.
 
-## Tes fondasi yang sudah lulus
-- r4_order_policy_test: enam skenario default/transisi, pembatalan/final, status
-  awal, label, serta perubahan status objek Order dan preservasi nominal/identitas.
-- r4_business_profile_test: tiga skenario default, equality/salinan/metadata, serta
-  salinan teks struk yang mempertahankan mode.
-- r4_profile_persistence_test: tiga skenario repository tidak mengubah order/struk,
-  simpan Info Usaha dengan snapshot lama, dan simpan pengaturan printer.
-- Pemeriksaan yang bisa dilakukan sekarang: diff/whitespace, impor lokal,
-  encoding UTF-8, batas baris, dan peninjauan statis. Bukan analyzer/compiler Dart.
+## Repository (kelompok 31 Oktober)
+- OrderRepository.saveOrder dan updateOrderStatus menerima useOrderStatus opsional,
+  default true. InMemoryOrderRepository meneruskannya hingga writeOrderStore.
+- Snapshot yang dibentuk dengan mode false tetap ditolak jika disimpan melalui
+  repository dalam mode aktif. Kedua jalur harus memakai policy yang sama.
+- Sembilan tes baru lulus: default/normal chain, penyelesaian langsung order belum
+  lunas dengan event dan ledger tetap, status final tidak bisa dibuka kembali,
+  pembatalan final, item tidak valid gagal atomik, dan larangan pembatalan berbayar
+  tanpa koreksi ledger. Tes baru gagal sebelum kontrak API ditambahkan, lalu lulus.
+- Berkas sumber repository tetap <= 100 baris. Tidak ada dependensi/registry/tema baru.
 
-## Belum dihubungkan (penting)
-- Toggle Pengaturan BELUM dibuat; semua caller aplikasi masih memakai default true.
-- OrderRepository.updateOrderStatus dan writeOrderStore masih menggunakan guard
-  mode aktif. Menambahkan flag ke Order.withStatus SAJA belum mengizinkan transisi
-  langsung melalui repository; guard ini sengaja tidak dilonggarkan pada kelompok ini.
-- Berikutnya teruskan policy melalui jalur penyimpanan repository secara konsisten,
-  dengan tes yang memastikan transisi diproses->selesai tetap ditolak saat mode aktif.
-- Buat provider pengaturan dan toggle, lalu hubungkan status awal checkout/AI,
-  label/kartu/chip Antrean, serta menu dan footer Detail Order sesuai prompt R4.
-- Alur Selesaikan harus menunggu cetak berhasil sebelum mencatat status/event;
-  gagal/batal tidak mengubah status, opsi Selesaikan tanpa cetak memakai konfirmasi.
-  Sisa tagihan tidak menghalangi selesai. Hapus memakai alur batal dan koreksi ledger.
-- Kolom sinkron use_order_status bool default true pada businesses di PRD B masih
-  perlu dicatat ketika integrasi R4 dilanjutkan (izin tertulis di prompt R4).
-- Spec 01/09/19, tes layar dua mode, golden dan REPO_MAP belum diperbarui untuk R4.
+## Bukti validasi terakhir
+Perintah: dart run tool/check_all.dart, 31 Oktober 2026.
+```text
+Formatted 451 files (0 changed)
+flutter analyze: No issues found!
+dart analyze: No issues found!
+check_arch: OK
++396: All tests passed!
+REPO_MAP diperbarui: 519 berkas
+check_all: SEMUA HIJAU
+```
+Sebelumnya validasi draf awal juga lulus 387 tes setelah lint dan dua golden R3
+(dirender dan ditinjau) diperbaiki. R3 selesai otomatis; Android/iOS manual R3/R4
+belum dilakukan pada sesi ini.
 
-## Di perangkat berikutnya
-Jalankan dart format dan analyzer, tiga tes R4, tes domain_schedule_test,
-domain_models_1_test, business_info_page_test, printer_page_test dan tes R3;
-kemudian check_all. Jangan klaim perubahan R3/R4 hijau berdasarkan 366 tes R2 lama.
-Tidak memasang SDK pada laptop sementara, dan tidak push/merge tanpa permintaan.
-
-Pemeriksaan teks: git diff --check bersih; impor lokal/UTF-8/batas 100 baris lolos.
-
-## Validasi SDK (31 Oktober 2026)
-Dua belas tes fondasi lulus bersama regresi/R3: check_all SEMUA HIJAU, 387 tes,
-REPO_MAP 517 berkas. withOrderStatus kini memakai argumen bernama enabled;
-fixture memakai default true. Tidak ada lint yang ditekan. Guard repository
-masih perlu dihubungkan sebelum mode nonaktif dapat ditampilkan di UI.
+## Langkah berikutnya
+1. Provider/toggle pengaturan: baca profil terkini dan simpan langsung; migrasikan
+   SettingsMenuSection yang disentuh menjadi Stateless dengan callback.
+2. Teruskan profile.useOrderStatus ke caller repository saat operasi dilakukan;
+   caller aplikasi saat ini masih default true. Jangan aktifkan toggle sebelum
+   checkout/AI, kartu/chip Antrean, serta menu/footer Detail tersambung.
+3. Selesaikan: cetak via ReceiptView/PrintService yang ada. Baru setelah cetak
+   berhasil simpan status/event. Gagal/batal tetap aktif; konfirmasi tanpa cetak
+   boleh menyelesaikan. Lunas tidak wajib. Hapus memakai alur batal/koreksi ledger.
+4. Catat kolom businesses.use_order_status bool default true di PRD B sesuai izin
+   tertulis R4; perbarui spec 01/09/19 dan tes layar dua mode.
+5. Tiap kelompok: format/analyzer/check_all, tinjau golden bila berubah, STATE,
+   commit. R5 menunggu R4 selesai. Tidak push/merge tanpa izin pengguna.

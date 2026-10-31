@@ -773,5 +773,5 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   Provider dan aksi sheet hanya di TransactionPage. Utang Section 25 -> 24.
 - Tes ditulis di sub_scaffold_fab_test, service_picker_list_section_test,
   transaction_customer_section_test dan r3_*_test. Lulus check_all 31 Oktober 2026 (387 tes total).
-- Golden transaction_page, service_picker, dan kemungkinan add_customer_sheet
-  perlu dirender/ditinjau pada perangkat dengan SDK sebelum diperbarui.
+- Golden service_picker dan add_customer_sheet ditinjau dan diperbarui;
+  transaction_page (pelanggan terpilih) tetap sama.

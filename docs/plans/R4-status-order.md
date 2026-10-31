@@ -9,3 +9,6 @@
 8. Lanjutan: repository order, settings/toggle, checkout/AI, Antrean, Detail, cetak.
 9. Setelah integrasi: satu kolom sinkron PRD B sesuai izin R4, spec dan tes layar.
 10. Di perangkat SDK: format/analyze, tes R3/R4, golden dan check_all.
+
+31 Oktober 2026: fondasi dan guard repository selesai otomatis; 396 tes hijau.
+Berikutnya provider/toggle dan integrasi layar/cetak. R4 tetap parsial.

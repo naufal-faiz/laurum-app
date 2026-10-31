@@ -9,7 +9,7 @@ Sumber: uji dummy app di Android (Naufal) + audit statis cabang dev1 (prompt 70)
 | 3 | Berat default 1 kg, tidak bisa 0, edit tanpa hapus angka | WeightEdit menambah digit ke nilai awal; layar menampilkan 0,5 saat nilai 0 (klamp diam-diam) | R1 | SELESAI (2026-10-25) |
 | 4 | FAB tambah di Pilih Layanan | SubScaffold belum mendukung FAB | R3 | SELESAI otomatis (2026-10-31); 387 tes total hijau, menunggu tinjauan perangkat |
 | 5 | Tombol tambah pelanggan di samping Pilih pelanggan | TransactionCustomerSection hanya satu tombol | R3 | SELESAI otomatis (2026-10-31); 387 tes total hijau, menunggu tinjauan perangkat |
-| 6 | Pengaturan pakai status order atau tidak | Status order selalu dipakai; belum ada pengaturan | R4 | SEDANG: fondasi model/policy, UI dan cetak belum; belum tervalidasi |
+| 6 | Pengaturan pakai status order atau tidak | Status order selalu dipakai; belum ada pengaturan | R4 | SEDANG: fondasi + repository hijau (396 tes total); UI/cetak belum |
 | 7 | Hapus Riwayat Nota | Nota dilihat lewat Laporan | R6 | BELUM |
 | 8, 13 | Laporan: tanggal kustom + daftar order pada tanggal terpilih (dari halaman transaksi) | PeriodTabs hanya 3 periode; daftar nota ada di Riwayat Nota | R5 (ringkasan), R6 (daftar nota) | BELUM |
 | 9 | Nav: tombol Transaksi di tengah, FAB Beranda dihapus (ikon lama) | FAB ada di RootScaffold; Transaksi masih tab Riwayat Nota | R2 | SELESAI (2026-10-30); PRD disinkronkan, pemeriksaan manual Android dikonfirmasi |

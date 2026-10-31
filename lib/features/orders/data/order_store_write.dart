@@ -22,13 +22,16 @@ OrderStore writeOrderStore(
   List<OrderItem>? items,
   List<Payment> payments = const [],
   List<OrderEvent> events = const [],
+  bool useOrderStatus = true,
 }) {
   final old = state.orders.where((o) => o.id == order.id).firstOrNull;
   if (old != null && old != order) {
     if (old.status == OrderStatus.selesai || old.status == OrderStatus.dibatalkan) {
       throw StateError('Order status is final');
     }
-    if (old.status != order.status) old.withStatus(order.status);
+    if (old.status != order.status) {
+      old.withStatus(order.status, useOrderStatus: useOrderStatus);
+    }
     if (old.ownerId != order.ownerId || old.customerId != order.customerId) {
       throw StateError('Order identity cannot change');
     }
