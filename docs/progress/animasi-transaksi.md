@@ -48,3 +48,15 @@ Tombol tengah BottomNavBar hanya GestureDetector tanpa umpan tekan, dan rute
 - Bukti `dart run tool/check_all.dart`: format 486 files (0 changed),
   flutter analyze dan dart analyze tanpa masalah, check_arch OK,
   +450: All tests passed!, REPO_MAP 554 berkas, check_all: SEMUA HIJAU.
+
+## Revisi cincin, ruang scroll, dan aksi pelanggan
+- Permintaan pengguna: cincin putih 4 dp di dalam batas lingkaran 56 dp,
+  memakai surface/smallGap yang tersedia; area luar lingkaran tetap milik halaman.
+- Padding akhir scroll Pelanggan, Laporan, Lainnya ditambah 28 dp (separuh tombol),
+  sehingga elemen terakhir tidak tertutup. Antrean sudah punya spacer akhir 64 dp.
+- Aksi pelanggan tetap sama tinggi, diperkecil 56 -> 48 dp; Pelanggan baru memakai
+  action agar proporsi teks/radius mengikuti tombol aksi ringkas yang ada.
+- Tes tombol 320 px/teks 2x dan callback lulus; tes akhir scroll tiga tab lulus.
+- check_all akhir: format 488 files (0 changed), flutter analyze/dart analyze
+  bersih, check_arch OK, +454: All tests passed!, REPO_MAP 556 berkas,
+  check_all: SEMUA HIJAU. Tinjauan perangkat untuk revisi ini belum dilakukan.

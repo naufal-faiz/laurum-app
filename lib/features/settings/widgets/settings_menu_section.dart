@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/settings/widgets/settings_account_section.dart';
 import 'package:laurum/features/settings/widgets/settings_operational_section.dart';
@@ -30,7 +31,8 @@ class SettingsMenuSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
-    padding: const EdgeInsets.all(AppSpacing.screenPadding),
+    padding: const EdgeInsets.all(AppSpacing.screenPadding)
+        .add(const EdgeInsets.only(bottom: AppDimensions.navCreateSize / 2)),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: AppSpacing.cardGap,

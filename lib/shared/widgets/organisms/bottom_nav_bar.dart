@@ -72,7 +72,12 @@ class BottomNavBar extends StatelessWidget {
                               dimension: AppDimensions.navCreateSize,
                               child: Material(
                                 color: AppColors.primary,
-                                shape: const CircleBorder(),
+                                shape: const CircleBorder(
+                                  side: BorderSide(
+                                    color: AppColors.surface,
+                                    width: AppMoleculeTokens.smallGap,
+                                  ),
+                                ),
                                 clipBehavior: Clip.antiAlias,
                                 child: InkWell(
                                   onTap: action(slot),

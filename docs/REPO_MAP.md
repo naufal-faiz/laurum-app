@@ -135,8 +135,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/customers/widgets/
 - customer_deposit_form_section.dart (88): CustomerDepositFormSection
-- customer_directory_actions_section.dart (47): CustomerDirectoryActionsSection
-- customer_directory_list_section.dart (91): CustomerDirectoryListSection
+- customer_directory_actions_section.dart (51): CustomerDirectoryActionsSection
+- customer_directory_list_section.dart (93): CustomerDirectoryListSection
 - customer_edit_form_section.dart (65): CustomerEditFormSection
 - customer_import_list_section.dart (94): CustomerImportListSection
 - customer_orders_section.dart (36): CustomerOrdersSection
@@ -254,7 +254,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/reports/widgets/
 - outstanding_list_section.dart (77): OutstandingListSection
-- report_body_section.dart (103): ReportBodySection
+- report_body_section.dart (105): ReportBodySection
 - report_orders_section.dart (103): ReportOrdersSection
 
 ### lib/features/services/data/
@@ -285,7 +285,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/settings/widgets/
 - settings_account_section.dart (42): SettingsAccountSection
-- settings_menu_section.dart (71): SettingsMenuSection
+- settings_menu_section.dart (73): SettingsMenuSection
 - settings_operational_section.dart (59): SettingsOperationalSection
 
 ### lib/features/shell/pages/
@@ -385,7 +385,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/organisms/
 - app_bottom_sheet.dart (93): AppBottomSheet
-- bottom_nav_bar.dart (105): BottomNavBar
+- bottom_nav_bar.dart (110): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
 - customer_row.dart (98): CustomerRow
 - expense_row.dart (57): ExpenseRow
@@ -452,6 +452,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_detail_data_test.dart (61):
 - customer_detail_page_test.dart (86):
 - customer_detail_states_test.dart (60):
+- customer_directory_actions_section_test.dart (41):
 - customer_directory_data_test.dart (39):
 - customer_directory_states_test.dart (64):
 - customer_directory_test.dart (100):
@@ -563,6 +564,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_summary_test.dart (36):
 - report_view_test.dart (68):
 - root_scaffold_test.dart (39):
+- root_scroll_clearance_test.dart (44):
 - savings_row_test.dart (33):
 - section_header_test.dart (26):
 - service_directory_page_test.dart (110):

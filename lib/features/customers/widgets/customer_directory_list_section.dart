@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
 import 'package:laurum/features/customers/widgets/customer_directory_actions_section.dart';
@@ -35,7 +36,8 @@ class CustomerDirectoryListSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final visible = filterCustomers(rows, filter: filter, search: search);
     return ListView(
-      padding: const EdgeInsets.all(AppSpacing.screenPadding),
+      padding: const EdgeInsets.all(AppSpacing.screenPadding)
+          .add(const EdgeInsets.only(bottom: AppDimensions.navCreateSize / 2)),
       children: [
         SectionHeader(title: 'Pelanggan', subtitle: '${rows.length} pelanggan'),
         const SizedBox(height: AppSpacing.cardGap),

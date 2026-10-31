@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/reports/state/report_orders_data.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
@@ -44,7 +45,8 @@ class ReportBodySection extends StatelessWidget {
     const dayNames = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
     return ListView(
       key: ValueKey((data.period, data.range)),
-      padding: const EdgeInsets.all(AppSpacing.screenPadding),
+      padding: const EdgeInsets.all(AppSpacing.screenPadding)
+          .add(const EdgeInsets.only(bottom: AppDimensions.navCreateSize / 2)),
       children: [
         if (data.isEmpty)
           const EmptyState(

@@ -7,8 +7,8 @@ Template: RootScaffold dari RootShellPage; tanpa FooterBar (R7).
 Komposisi:
 - SectionHeader('Pelanggan', jumlah pelanggan) tanpa aksi.
 - CustomerDirectoryActionsSection: AppButton 'Impor kontak' (actionOutline) dan
-  'Pelanggan baru' (cta, ikon add) satu baris; tumpuk vertikal pada layar sempit
-  atau teks 1,3x ke atas. Keduanya memakai tinggi tetap ctaHeight (56 dp) agar
+  'Pelanggan baru' (action, ikon add) satu baris; tumpuk vertikal pada layar sempit
+  atau teks 1,3x ke atas. Keduanya memakai tinggi tetap touchTarget (48 dp) agar
   ukuran visualnya sama persis.
 - AppSearchField('Nama pelanggan', hint 'Cari nama atau nomor WhatsApp...').
 - ChipBar: Semua (48), Ada piutang (5), Punya tabungan (5); jumlah dinamis.
@@ -29,7 +29,7 @@ Interaksi:
 - Filter digabung pencarian; jumlah chip selalu dari seluruh pelanggan aktif.
 - Ketuk baris -> /pelanggan/:id (Detail Pelanggan, spec 13).
 - Impor kontak (tombol atas) -> /pelanggan/impor.
-- Pelanggan baru (tombol atas, cta ikon add) -> AddCustomerSheet di navigator utama;
+- Pelanggan baru (tombol atas, action ikon add) -> AddCustomerSheet di navigator utama;
   simpan memperbarui daftar, mereset filter dan pencarian. Banner form menjelaskan
   konteks daftar, bukan nota. Tidak ada FooterBar di layar ini (R7).
 - Ikon telepon -> ExternalLauncher palsu dengan tel:; disabled bila nomor kosong.

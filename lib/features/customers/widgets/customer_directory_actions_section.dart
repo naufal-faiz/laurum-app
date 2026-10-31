@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
-import 'package:laurum/core/theme/app_control_tokens.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 
@@ -16,7 +15,7 @@ class CustomerDirectoryActionsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final importButton = SizedBox(
-      height: AppControlTokens.ctaHeight,
+      height: AppSpacing.touchTarget,
       child: AppButton(
         'Impor kontak',
         variant: AppButtonVariant.actionOutline,
@@ -24,8 +23,13 @@ class CustomerDirectoryActionsSection extends StatelessWidget {
       ),
     );
     final addButton = SizedBox(
-      height: AppControlTokens.ctaHeight,
-      child: AppButton('Pelanggan baru', icon: AppIcons.add, onPressed: onAdd),
+      height: AppSpacing.touchTarget,
+      child: AppButton(
+        'Pelanggan baru',
+        variant: AppButtonVariant.action,
+        icon: AppIcons.add,
+        onPressed: onAdd,
+      ),
     );
     final scaled = MediaQuery.textScalerOf(context).scale(1) >= 1.3;
     return LayoutBuilder(

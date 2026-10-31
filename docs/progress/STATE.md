@@ -2,10 +2,10 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-R0-R7 SELESAI otomatis. check_all terakhir hijau: 450 tes, REPO_MAP 554 berkas.
+R0-R7 SELESAI otomatis. check_all terakhir hijau: 454 tes, REPO_MAP 556 berkas.
 Pelanggan: aksi di atas; Akun: tombol Keluar destruktif terpisah dari kartu.
 Transaksi: tombol mengambang, sisi atas bar milik halaman; ripple + fade/lift tetap.
-AppIconButton transparan; aksi Pelanggan sama tinggi.
+AppIconButton transparan; aksi Pelanggan ringkas 48 dp, nav bercincin putih 4 dp.
 
 ## Selesai
 - Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
@@ -41,16 +41,19 @@ AppIconButton transparan; aksi Pelanggan sama tinggi.
   tanpa latar putih di app bar/sheet. 449 hijau, golden disinkronkan.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. SEMUA HIJAU: dua analyzer bersih, check_arch OK, 450 tes. Golden nav, root,
+1. SEMUA HIJAU: dua analyzer bersih, check_arch OK, 454 tes. Golden nav, root,
    antrean, r4_settings, dan r5_report diperbarui (selisih hanya tepi lingkaran).
    Rincian dan bukti di animasi-transaksi.md.
 2. Koreksi nav disetujui dan diimplementasikan: tombol menonjol 28 dp;
-   halaman di sampingnya menerima tap/scroll. Golden ditinjau, 450 tes lulus;
+   halaman di sampingnya menerima tap/scroll. Cincin putih 4 dp; padding akhir
+   scroll Pelanggan/Laporan/Lainnya +28 dp; aksi pelanggan 48 dp. 454 tes lulus;
    check_all SEMUA HIJAU. Berikutnya tinjauan perangkat, lalu prompt 71.
 3. Tinjauan Android/iOS/pembaca layar dan ekspor/printer nyata belum dilakukan.
 4. Persetujuan AI baru prompt 80; wajib gunakan initialOrderStatus dari profil.
 
 ## Keputusan dan batas
+- Pengguna 31 Okt: perintah terminal rutin langsung dijalankan; tanyakan hanya
+  hal penting. Batas persetujuan sistem tetap berlaku.
 - Koreksi pengguna 31 Okt: nav tanpa celah BUKAN meratakan tombol ke atas bar.
   Tombol tetap menonjol; jangan sisakan bidang kosong/penghalang di sampingnya.
 - Checkout semula detached e09a81d digabung fast-forward 15 commit ke dev1rev;
