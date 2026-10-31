@@ -10,16 +10,18 @@ void main() {
   testWidgets('SubScaffold FAB hides for keyboard and returns after dismissal', (tester) async {
     configureKeyboardTest(tester);
     var creates = 0;
-    await tester.pumpWidget(MaterialApp(
-      theme: AppTheme.light,
-      home: SubScaffold(
-        title: 'Pilih layanan',
-        backLabel: 'Kembali',
-        fabLabel: 'Layanan baru',
-        onFab: () => creates++,
-        body: const AppTextField(label: 'Cari layanan'),
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: SubScaffold(
+          title: 'Pilih layanan',
+          backLabel: 'Kembali',
+          fabLabel: 'Layanan baru',
+          onFab: () => creates++,
+          body: const AppTextField(label: 'Cari layanan'),
+        ),
       ),
-    ));
+    );
     expect(find.byType(FloatingActionButton), findsOneWidget);
     await tester.tap(find.text('Layanan baru'));
     expect(creates, 1);

@@ -36,4 +36,4 @@ Selisih terhadap .pen: tinggi sheet dibatasi 500 px agar dapat digulir; tidak ad
 
 R3 (30 Oktober 2026): Baru di sebelah Pilih pelanggan membuka sheet dengan forOrder=true.
 Page memilih customerId dari hasil sheet; tutup tanpa simpan mempertahankan draf.
-Tes alur langsung dan keyboard 300 dp ditulis, BELUM TERVALIDASI tanpa SDK.
+Tes alur langsung dan keyboard 300 dp ditulis, tervalidasi otomatis 31 Oktober 2026 (check_all: 387 tes) tanpa SDK.

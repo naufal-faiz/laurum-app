@@ -22,7 +22,7 @@ class BusinessProfile extends DomainRecord {
   final String receiptNote;
   final bool useOrderStatus;
   final DateTime? deletedAt;
-  BusinessProfile withOrderStatus(bool value, {DateTime? updatedAt}) => BusinessProfile(
+  BusinessProfile withOrderStatus({required bool enabled, DateTime? updatedAt}) => BusinessProfile(
     id: id,
     ownerId: ownerId,
     createdAt: createdAt,
@@ -33,7 +33,7 @@ class BusinessProfile extends DomainRecord {
     phone: phone,
     receiptFooter: receiptFooter,
     receiptNote: receiptNote,
-    useOrderStatus: value,
+    useOrderStatus: enabled,
     deletedAt: deletedAt,
   );
   @override

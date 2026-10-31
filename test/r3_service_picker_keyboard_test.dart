@@ -27,8 +27,10 @@ void main() {
     await tester.pumpAndSettle();
     final row = find.ancestor(of: find.text(last.name).last, matching: find.byType(MenuRow));
     expect(row.hitTestable(), findsOneWidget);
-    expect(tester.getRect(row).bottom,
-        lessThanOrEqualTo(tester.getRect(find.byType(FloatingActionButton)).top));
+    expect(
+      tester.getRect(row).bottom,
+      lessThanOrEqualTo(tester.getRect(find.byType(FloatingActionButton)).top),
+    );
     expect(tester.takeException(), isNull);
   });
 }

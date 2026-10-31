@@ -11,19 +11,25 @@ import 'keyboard_test_helper.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
-  testWidgets('Baru saves a customer, selects draft and keeps keyboard actions visible', (tester) async {
+  testWidgets('Baru saves a customer, selects draft and keeps keyboard actions visible', (
+    tester,
+  ) async {
     configureKeyboardTest(tester);
     final host = await pumpAntrean(tester, location: '/transaksi/baru');
     await tester.tap(find.widgetWithText(AppButton, 'Baru'));
     await tester.pumpAndSettle();
     expect(tester.widget<AddCustomerSheet>(find.byType(AddCustomerSheet)).forOrder, isTrue);
-    final fields = find.descendant(of: find.byType(AddCustomerSheet),
-        matching: find.byType(TextField));
+    final fields = find.descendant(
+      of: find.byType(AddCustomerSheet),
+      matching: find.byType(TextField),
+    );
     await tester.enterText(fields.at(0), 'Pelanggan R3');
     await tester.enterText(fields.at(1), '081299998888');
-    await expectKeyboardVisible(tester,
-      field: find.descendant(of: find.byType(AddCustomerSheet),
-          matching: find.byType(AppTextField)).last,
+    await expectKeyboardVisible(
+      tester,
+      field: find
+          .descendant(of: find.byType(AddCustomerSheet), matching: find.byType(AppTextField))
+          .last,
       save: find.widgetWithText(AppButton, 'Simpan pelanggan'),
     );
     await tester.tap(find.widgetWithText(AppButton, 'Simpan pelanggan'));

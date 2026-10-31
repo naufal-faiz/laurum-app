@@ -38,7 +38,9 @@ class Order extends DomainRecord {
   final DateTime? deletedAt;
   Order withStatus(OrderStatus value, {bool useOrderStatus = true}) {
     final next = nextStatus(
-      status, cancel: value == OrderStatus.dibatalkan, useOrderStatus: useOrderStatus,
+      status,
+      cancel: value == OrderStatus.dibatalkan,
+      useOrderStatus: useOrderStatus,
     );
     if (next != value) {
       throw StateError('Invalid status transition');

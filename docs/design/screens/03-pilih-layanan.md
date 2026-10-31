@@ -33,5 +33,5 @@ memakai halaman SubScaffold, MenuRow (bukan kartu kustom), header Kiloan/Satuan 
 grup A-Z), dan tanpa chip kategori.
 
 R3 (30 Oktober 2026): ServicePickerListSection menerima services/query/onSearch/onSelect.
-Kode dan tes dua rute, keyboard serta baris terakhir disiapkan tanpa SDK; BELUM TERVALIDASI.
-Selisih baru dari .pen: FAB mengikuti revisi R3. Android/iOS dan golden R3 belum ditinjau.
+Kode dan tes dua rute, keyboard serta baris terakhir disiapkan tanpa SDK; tervalidasi otomatis 31 Oktober 2026 (check_all: 387 tes).
+Selisih baru dari .pen: FAB mengikuti revisi R3. Golden R3 ditinjau; Android/iOS perangkat belum ditinjau.

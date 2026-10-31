@@ -35,4 +35,4 @@ Selisih terhadap .pen:
 
 R3: form baru juga dibuka dari FAB Pilih Layanan via push. Simpan/kembali
 mengembalikan pengguna ke pemilih; katalog dimuat ulang. Tes alur disiapkan,
-belum dijalankan tanpa SDK (30 Oktober 2026).
+lulus pemeriksaan SDK pada 31 Oktober 2026 (387 tes total).

@@ -45,5 +45,5 @@ Selisih terhadap .pen: pencarian pelanggan berada di sheet, bukan inline; detail
 memakai InfoRow dua kolom (frame label di atas nilai); baris layanan memakai MenuRow,
 bukan kartu dengan StepperField langsung; tidak ada ikon kasir pada app bar (AppBarSub).
 
-R3 (30 Oktober 2026): kode dan tes disiapkan tanpa SDK; BELUM TERVALIDASI.
+R3 (30 Oktober 2026): kode dan tes disiapkan tanpa SDK; tervalidasi otomatis 31 Oktober 2026 (check_all: 387 tes).
 TransactionCustomerSection menerima customer/balance dan onChoose/onCreate dari Page.

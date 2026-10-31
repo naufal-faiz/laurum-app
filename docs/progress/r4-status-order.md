@@ -1,7 +1,6 @@
 # R4 - Fondasi pengaturan status order
-Tanggal: 30 Oktober 2026. Status: DRAF PARSIAL / BELUM TERVALIDASI.
-Pengguna meminta melanjutkan bagian yang bisa dikerjakan tanpa SDK. R3 tetap belum
-tervalidasi; ini persiapan fondasi R4, bukan pernyataan bahwa prasyarat R3 lulus.
+Tanggal validasi: 31 Oktober 2026. Status: FONDASI TERVALIDASI, R4 MASIH PARSIAL.
+R3 selesai otomatis. Fondasi R4 lulus; UI/toggle dan alur cetak belum terhubung.
 
 ## Perubahan pada kelompok ini
 - BusinessProfile.useOrderStatus bool default true, termasuk props Equatable.
@@ -19,7 +18,7 @@ tervalidasi; ini persiapan fondasi R4, bukan pernyataan bahwa prasyarat R3 lulus
   diproses saat nonaktif. orderStatusLabel memakai Sedang dikerjakan untuk diproses
   pada mode nonaktif; label lain mengikuti label lama.
 
-## Tes ditulis, belum dijalankan
+## Tes fondasi yang sudah lulus
 - r4_order_policy_test: enam skenario default/transisi, pembatalan/final, status
   awal, label, serta perubahan status objek Order dan preservasi nominal/identitas.
 - r4_business_profile_test: tiga skenario default, equality/salinan/metadata, serta
@@ -52,3 +51,9 @@ kemudian check_all. Jangan klaim perubahan R3/R4 hijau berdasarkan 366 tes R2 la
 Tidak memasang SDK pada laptop sementara, dan tidak push/merge tanpa permintaan.
 
 Pemeriksaan teks: git diff --check bersih; impor lokal/UTF-8/batas 100 baris lolos.
+
+## Validasi SDK (31 Oktober 2026)
+Dua belas tes fondasi lulus bersama regresi/R3: check_all SEMUA HIJAU, 387 tes,
+REPO_MAP 517 berkas. withOrderStatus kini memakai argumen bernama enabled;
+fixture memakai default true. Tidak ada lint yang ditekan. Guard repository
+masih perlu dihubungkan sebelum mode nonaktif dapat ditampilkan di UI.

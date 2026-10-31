@@ -39,8 +39,12 @@ void main() {
   test('processing label changes only in simplified mode', () {
     expect(orderStatusLabel(OrderStatus.diproses), 'Diproses');
     expect(orderStatusLabel(OrderStatus.diproses, useOrderStatus: false), 'Sedang dikerjakan');
-    for (final status in [OrderStatus.menungguJemput, OrderStatus.siap,
-      OrderStatus.selesai, OrderStatus.dibatalkan]) {
+    for (final status in [
+      OrderStatus.menungguJemput,
+      OrderStatus.siap,
+      OrderStatus.selesai,
+      OrderStatus.dibatalkan,
+    ]) {
       expect(orderStatusLabel(status, useOrderStatus: false), orderStatusLabel(status));
     }
   });
@@ -55,8 +59,10 @@ void main() {
     expect(completed.total, order.total);
     expect(completed.note, order.note);
     expect(order.status, OrderStatus.diproses);
-    expect(() => completed.withStatus(OrderStatus.dibatalkan, useOrderStatus: false),
-        throwsStateError);
+    expect(
+      () => completed.withStatus(OrderStatus.dibatalkan, useOrderStatus: false),
+      throwsStateError,
+    );
     final waiting = orderFixtures.firstWhere((o) => o.status == OrderStatus.menungguJemput);
     expect(() => waiting.withStatus(OrderStatus.selesai, useOrderStatus: false), throwsStateError);
   });

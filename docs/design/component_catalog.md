@@ -763,7 +763,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Tes: checkout_controller, payment_page, receipt_page + golden payment_page dan
   receipt_page; 258 tes, 391 berkas.
 
-## R3 - Draf transaksi (30 Oktober 2026, BELUM TERVALIDASI)
+## R3 - Transaksi (tervalidasi otomatis 31 Oktober 2026)
 - SubScaffold: fabLabel/onFab memakai FloatingActionButton.extended mengikuti pola
   FAB lama RootScaffold. Widgetbook menambahkan varian FAB dan keyboard.
 - ServicePickerListSection: services (List<ServiceItem>), query, onSearch,
@@ -772,6 +772,6 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   onCreate. Tanpa pelanggan: pilih melebar + Baru; terpilih: MenuRow lama.
   Provider dan aksi sheet hanya di TransactionPage. Utang Section 25 -> 24.
 - Tes ditulis di sub_scaffold_fab_test, service_picker_list_section_test,
-  transaction_customer_section_test dan r3_*_test. Belum dijalankan tanpa SDK.
+  transaction_customer_section_test dan r3_*_test. Lulus check_all 31 Oktober 2026 (387 tes total).
 - Golden transaction_page, service_picker, dan kemungkinan add_customer_sheet
   perlu dirender/ditinjau pada perangkat dengan SDK sebelum diperbarui.

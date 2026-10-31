@@ -17,7 +17,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app.dart (16): LaurumApp
 
 ### lib/core/domain/
-- business_profile.dart (33): BusinessProfile
+- business_profile.dart (50): BusinessProfile
 - cancellation.dart (69):
 - customer.dart (25): Customer
 - domain_enums.dart (16): OrderStatus, PayStatus, ServiceKind, PayMethod, SavingsKind, ProposalStatus, OrderSource, RecordSyncState
@@ -25,11 +25,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense.dart (36): Expense
 - expense_category.dart (19): ExpenseCategory
 - money.dart (34):
-- order.dart (79): Order
+- order.dart (84): Order
 - order_event.dart (37): OrderEvent
 - order_item.dart (41): OrderItem
 - order_number_generator.dart (35): OrderNumberGenerator
-- order_rules.dart (26):
+- order_rules.dart (43):
 - payment.dart (37): Payment
 - payment_corrections.dart (42):
 - proposal.dart (24): Proposal
@@ -101,7 +101,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - business_info_page.dart (96): BusinessInfoPage
 
 ### lib/features/business/state/
-- business_info_controller.dart (71): BusinessInfoController, businessInfoProvider
+- business_info_controller.dart (73): BusinessInfoController, businessInfoProvider
 - business_info_state.dart (40): BusinessInfoState
 
 ### lib/features/customers/data/
@@ -213,7 +213,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/printer/state/
 - printer_connection.dart (87): PrinterConnectionController, printerConnectionProvider
 - printer_settings.dart (85): PrinterSettingsState, PrinterSettingsController, printerSettingsProvider
-- printer_state.dart (73): PrinterConnectionState
+- printer_state.dart (74): PrinterConnectionState
 
 ### lib/features/printer/widgets/
 - printer_connection_section.dart (79): PrinterConnectionSection
@@ -293,10 +293,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - discount_sheet.dart (74): DiscountSheet
 - payment_page.dart (63): PaymentPage
 - receipt_page.dart (90): ReceiptPage
-- service_picker_page.dart (101): ServicePickerPage
+- service_picker_page.dart (54): ServicePickerPage
 - transaction_leave_flow.dart (22):
 - transaction_line_sheet.dart (76): TransactionLineSheet
-- transaction_page.dart (66): TransactionPage
+- transaction_page.dart (87): TransactionPage
 - weight_input_sheet.dart (91): WeightInputSheet
 
 ### lib/features/transactions/state/
@@ -319,7 +319,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_savings_section.dart (65): PaymentSavingsSection
 - payment_summary_section.dart (86): PaymentSummarySection
 - receipt_status_section.dart (95): ReceiptStatusSection
-- transaction_customer_section.dart (49): TransactionCustomerSection
+- service_picker_list_section.dart (84): ServicePickerListSection
+- transaction_customer_section.dart (57): TransactionCustomerSection
 - transaction_details_section.dart (66): TransactionDetailsSection
 
 ### lib/
@@ -392,7 +393,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - form_scaffold.dart (44): FormScaffold
 - root_scaffold.dart (49): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
-- sub_scaffold.dart (35): SubScaffold
+- sub_scaffold.dart (62): SubScaffold
 
 ### test/
 - add_customer_test.dart (64):
@@ -504,6 +505,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - progress_row_test.dart (23):
 - proposal_card_test.dart (41):
 - r2_navigation_test.dart (56):
+- r3_customer_creation_test.dart (55):
+- r3_service_creation_test.dart (50):
+- r3_service_picker_keyboard_test.dart (36):
+- r4_business_profile_test.dart (57):
+- r4_order_policy_test.dart (69):
+- r4_profile_persistence_test.dart (50):
 - receipt_fixtures.dart (86):
 - receipt_formatter_settings_test.dart (31):
 - receipt_formatter_test.dart (70):
@@ -520,12 +527,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - savings_row_test.dart (33):
 - section_header_test.dart (26):
 - service_directory_page_test.dart (110):
+- service_picker_list_section_test.dart (38):
 - service_picker_test.dart (54):
 - service_row_test.dart (41):
 - settings_page_test.dart (68):
 - sheet_scaffold_test.dart (37):
 - stat_tile_test.dart (24):
 - stepper_field_test.dart (33):
+- sub_scaffold_fab_test.dart (37):
 - sub_scaffold_test.dart (32):
 - sync_indicator_test.dart (23):
 - template_gallery.dart (54):
@@ -536,6 +545,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### test/
 - top_services_test.dart (30):
+- transaction_customer_section_test.dart (50):
 - transaction_draft_test.dart (43):
 - transaction_golden_test.dart (118):
 - transaction_page_test.dart (119):
@@ -625,5 +635,5 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - form_scaffold_use_case.dart (51):
 - root_scaffold_use_case.dart (47):
 - sheet_scaffold_use_case.dart (59):
-- sub_scaffold_use_case.dart (40):
+- sub_scaffold_use_case.dart (55):
 - templates.dart (15):

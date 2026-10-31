@@ -31,8 +31,8 @@ OrderStatus nextStatus(
 
 OrderStatus initialOrderStatus(OrderSource source, {bool useOrderStatus = true}) =>
     useOrderStatus && source == OrderSource.whatsappAi
-        ? OrderStatus.menungguJemput
-        : OrderStatus.diproses;
+    ? OrderStatus.menungguJemput
+    : OrderStatus.diproses;
 
 String orderStatusLabel(OrderStatus status, {bool useOrderStatus = true}) => switch (status) {
   OrderStatus.menungguJemput => 'Menunggu jemput',

@@ -16,18 +16,18 @@ void main() {
     final before = await business.getProfile();
     final beforeOrders = await orders.getOrders();
     final beforeSettings = await business.getReceiptSettings();
-    await business.saveProfile(before.withOrderStatus(false));
+    await business.saveProfile(before.withOrderStatus(enabled: false));
     expect((await business.getProfile()).useOrderStatus, isFalse);
     expect(await business.getReceiptSettings(), beforeSettings);
     expect(await orders.getOrders(), orderedEquals(beforeOrders));
-    await business.saveProfile((await business.getProfile()).withOrderStatus(true));
+    await business.saveProfile((await business.getProfile()).withOrderStatus(enabled: true));
     expect(await business.getProfile(), before);
   });
 
   test('business info save preserves latest mode changed after opening the form', () async {
     final opened = await container.read(businessInfoProvider.future);
     final business = container.read(businessRepositoryProvider);
-    await business.saveProfile(opened.profile.withOrderStatus(false));
+    await business.saveProfile(opened.profile.withOrderStatus(enabled: false));
     final form = container.read(businessInfoProvider.notifier);
     form.setName('Berkah Laundry R4');
     expect(await form.save(), isTrue);
@@ -38,7 +38,7 @@ void main() {
 
   test('printer settings save does not restore status tracking to true', () async {
     final business = container.read(businessRepositoryProvider);
-    await business.saveProfile((await business.getProfile()).withOrderStatus(false));
+    await business.saveProfile((await business.getProfile()).withOrderStatus(enabled: false));
     await container.read(printerSettingsProvider.future);
     final printer = container.read(printerSettingsProvider.notifier);
     printer.edit(footer: 'Footer R4');
