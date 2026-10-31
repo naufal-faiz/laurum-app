@@ -63,7 +63,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - formatters.dart (54): Formatters
 
 ### lib/core/icons/
-- app_icons.dart (49): AppIcons
+- app_icons.dart (50): AppIcons
 - app_svgs.dart (4): AppSvgs
 
 ### lib/core/services/
@@ -115,7 +115,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/customers/pages/
 - customer_deposit_page.dart (71): CustomerDepositPage
 - customer_detail_page.dart (53): CustomerDetailPage
-- customer_directory_page.dart (65): CustomerDirectoryPage
+- customer_directory_page.dart (69): CustomerDirectoryPage
 - customer_edit_sheet.dart (68): CustomerEditSheet
 - customer_import_page.dart (67): CustomerImportPage
 - customer_savings_history_page.dart (63): CustomerSavingsHistoryPage
@@ -135,7 +135,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/customers/widgets/
 - customer_deposit_form_section.dart (88): CustomerDepositFormSection
-- customer_directory_list_section.dart (86): CustomerDirectoryListSection
+- customer_directory_actions_section.dart (40): CustomerDirectoryActionsSection
+- customer_directory_list_section.dart (91): CustomerDirectoryListSection
 - customer_edit_form_section.dart (65): CustomerEditFormSection
 - customer_import_list_section.dart (94): CustomerImportListSection
 - customer_orders_section.dart (36): CustomerOrdersSection
@@ -277,13 +278,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_edit_fields_section.dart (100): ServiceEditFieldsSection
 
 ### lib/features/settings/pages/
-- settings_page.dart (43): SettingsPage
+- settings_page.dart (44): SettingsPage
 
 ### lib/features/settings/state/
 - order_status_setting.dart (31): OrderStatusSettingState, OrderStatusSetting, orderStatusSettingProvider
 
 ### lib/features/settings/widgets/
-- settings_account_section.dart (43): SettingsAccountSection
+- settings_account_section.dart (42): SettingsAccountSection
 - settings_menu_section.dart (71): SettingsMenuSection
 - settings_operational_section.dart (59): SettingsOperationalSection
 
@@ -452,7 +453,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_detail_states_test.dart (60):
 - customer_directory_data_test.dart (39):
 - customer_directory_states_test.dart (64):
-- customer_directory_test.dart (67):
+- customer_directory_test.dart (96):
 - customer_import_page_test.dart (68):
 - customer_row_test.dart (39):
 - customer_savings_section_test.dart (48):
@@ -566,7 +567,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_picker_list_section_test.dart (38):
 - service_picker_test.dart (54):
 - service_row_test.dart (41):
-- settings_page_test.dart (68):
+- settings_page_test.dart (79):
 - sheet_scaffold_test.dart (37):
 - stat_tile_test.dart (24):
 - stepper_field_test.dart (33):

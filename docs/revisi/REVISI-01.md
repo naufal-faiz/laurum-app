@@ -14,9 +14,9 @@ Sumber: uji dummy app di Android (Naufal) + audit statis cabang dev1 (prompt 70)
 | 8, 13 | Laporan: tanggal kustom + daftar order pada tanggal terpilih (dari halaman transaksi) | PeriodTabs hanya 3 periode; daftar nota ada di Riwayat Nota | R5 (ringkasan), R6 (daftar nota) | R5 SELESAI (31 Okt 2026); R6 SELESAI (31 Okt 2026) |
 | 9 | Nav: tombol Transaksi di tengah, FAB Beranda dihapus (ikon lama) | FAB ada di RootScaffold; Transaksi masih tab Riwayat Nota | R2 | SELESAI (2026-10-30); PRD disinkronkan, pemeriksaan manual Android dikonfirmasi |
 | 11 | Beranda hanya antrean aktif | Judul "Antrean hari ini" menyesatkan; data sudah aktif-saja | R2 | SELESAI (2026-10-25) |
-| 12 | Tombol Pelanggan baru pindah ke atas, di sebelah Impor kontak | Berada di FooterBar | R7 | BELUM |
+| 12 | Tombol Pelanggan baru pindah ke atas, di sebelah Impor kontak | Berada di FooterBar | R7 | SELESAI (2026-10-31): aksi atas sejajar, responsif 320 px/2x |
 | 14 | Ekspor Excel di atas | Berada di FooterBar Laporan | R5 | SELESAI (31 Okt 2026) |
-| 15 | Tombol logout cacat | MenuRow biasa berikon panah kembali di kartu yang sama dengan baris terkunci | R7 | BELUM |
+| 15 | Tombol logout cacat | MenuRow biasa berikon panah kembali di kartu yang sama dengan baris terkunci | R7 | SELESAI (2026-10-31): tombol destructiveOutline di bawah kartu, ikon logout |
 | S1-S3 | Sub-widget (rekomendasi di bawah) | ~39 kelas *Page non-rute menyiasati Aturan 1; logika non-UI bercampur di pages/ | R0 | SELESAI (2026-10-25) |
 
 Temuan tambahan yang masuk prompt: Daftar Piutang memakai BottomNavBar tanpa onSelected (nav tidak berfungsi) -> R2.

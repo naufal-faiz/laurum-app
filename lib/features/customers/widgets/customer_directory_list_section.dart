@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
-import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/state/customer_directory_controller.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
+import 'package:laurum/features/customers/widgets/customer_directory_actions_section.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_search_field.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
@@ -13,24 +10,36 @@ import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/organisms/customer_row.dart';
 
-class CustomerDirectoryListSection extends ConsumerWidget {
-  const CustomerDirectoryListSection({required this.rows, super.key});
+class CustomerDirectoryListSection extends StatelessWidget {
+  const CustomerDirectoryListSection({
+    required this.rows,
+    required this.filter,
+    required this.search,
+    required this.onFilter,
+    required this.onSearch,
+    required this.onImport,
+    required this.onAdd,
+    required this.onOpen,
+    required this.onContact,
+    super.key,
+  });
   final List<CustomerDirectoryRow> rows;
+  final int filter;
+  final String search;
+  final ValueChanged<int> onFilter;
+  final ValueChanged<String> onSearch;
+  final VoidCallback onImport, onAdd;
+  final ValueChanged<String> onOpen, onContact;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final filter = ref.watch(customerDirectoryFilterProvider);
-    final search = ref.watch(customerDirectorySearchProvider);
+  Widget build(BuildContext context) {
     final visible = filterCustomers(rows, filter: filter, search: search);
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.screenPadding),
       children: [
-        SectionHeader(
-          title: 'Pelanggan',
-          subtitle: '${rows.length} pelanggan',
-          actionLabel: 'Impor kontak',
-          onAction: () => context.push('/pelanggan/impor'),
-        ),
+        SectionHeader(title: 'Pelanggan', subtitle: '${rows.length} pelanggan'),
+        const SizedBox(height: AppSpacing.cardGap),
+        CustomerDirectoryActionsSection(onImport: onImport, onAdd: onAdd),
         const SizedBox(height: AppSpacing.cardGap),
         if (rows.isNotEmpty) ...[
           AppSearchField(
@@ -38,7 +47,7 @@ class CustomerDirectoryListSection extends ConsumerWidget {
             clearLabel: 'Hapus pencarian',
             hint: 'Cari nama atau nomor WhatsApp...',
             value: search,
-            onChanged: ref.read(customerDirectorySearchProvider.notifier).set,
+            onChanged: onSearch,
           ),
           const SizedBox(height: AppSpacing.cardGap),
           ChipBar(
@@ -48,7 +57,7 @@ class CustomerDirectoryListSection extends ConsumerWidget {
               'Punya tabungan (${rows.where((r) => r.savings > 0).length})',
             ],
             selectedIndex: filter,
-            onSelected: ref.read(customerDirectoryFilterProvider.notifier).select,
+            onSelected: onFilter,
           ),
           const SizedBox(height: AppSpacing.cardGap),
         ],
@@ -72,12 +81,8 @@ class CustomerDirectoryListSection extends ConsumerWidget {
               savings: row.savings,
               outstanding: row.debt,
               paid: row.paid,
-              onTap: () => context.push('/pelanggan/${row.customer.id}'),
-              onContact: row.customer.phone.isEmpty
-                  ? null
-                  : () => ref
-                        .read(externalLauncherProvider)
-                        .launchUrl('tel:${row.customer.phone.replaceAll(RegExp(r'\D'), '')}'),
+              onTap: () => onOpen(row.customer.id),
+              onContact: row.customer.phone.isEmpty ? null : () => onContact(row.customer.phone),
             ),
           ),
       ],

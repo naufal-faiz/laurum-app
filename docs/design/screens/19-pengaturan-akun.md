@@ -12,7 +12,8 @@ Komposisi:
 - Toggle default aktif. Deskripsi: "Matikan bila usaha tidak melacak tahap cucian.
   Order baru langsung 'Sedang dikerjakan'." Tidak ada tombol Simpan terpisah.
 - SectionHeader 'AKUN'; AppCard berisi LockedRow 'Email Google & hapus akun'
-  (Segera) dan MenuRow Keluar. AppText 'Laurum v1.0.0'.
+  (Segera). Di bawah kartu: AppButton destructiveOutline 'Keluar' dengan ikon logout.
+  AppText 'Laurum v1.0.0'. Tidak ada MenuRow Keluar di dalam kartu (R7).
 
 Data dan provider:
 - businessProfileProvider untuk subtitle alamat dan useOrderStatus.
@@ -29,7 +30,8 @@ Interaksi:
   Printer dan struk -> /lainnya/printer; Otomatisasi AI -> /lainnya/ai;
   Info usaha -> /lainnya/info-usaha; Sinkronisasi -> /lainnya/sinkronisasi.
 - Keluar membuka ConfirmModal 'Keluar dari akun?' dengan pesan
-  'Data tetap tersimpan online. Anda bisa masuk lagi kapan saja.'.
+  'Data tetap tersimpan online. Anda bisa masuk lagi kapan saja.', ikon logout,
+  dan tombol konfirmasi destruktif.
   Konfirmasi memanggil signOut lalu menuju /masuk (placeholder prompt 90).
 - Mengubah toggle memperbarui Antrean/Detail lewat invalidasi profil; data order
   lama tidak diubah. Default true mempertahankan tahap/CTA, false memakai alur R4.

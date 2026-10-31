@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
-import 'package:laurum/shared/widgets/atoms/app_divider.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/locked_row.dart';
-import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
 class SettingsAccountSection extends StatelessWidget {
@@ -19,19 +18,19 @@ class SettingsAccountSection extends StatelessWidget {
     spacing: AppSpacing.cardGap,
     children: [
       const SectionHeader(title: 'AKUN'),
-      AppCard(
-        child: Column(
-          children: [
-            const LockedRow(
-              label: 'Email Google & hapus akun',
-              lockLabel: 'Segera',
-              description: 'Dilengkapi bersama sinkronisasi.',
-              icon: AppIcons.person,
-            ),
-            const AppDivider(),
-            MenuRow(label: 'Keluar', icon: AppIcons.back, onTap: onLogout),
-          ],
+      const AppCard(
+        child: LockedRow(
+          label: 'Email Google & hapus akun',
+          lockLabel: 'Segera',
+          description: 'Dilengkapi bersama sinkronisasi.',
+          icon: AppIcons.person,
         ),
+      ),
+      AppButton(
+        'Keluar',
+        variant: AppButtonVariant.destructiveOutline,
+        icon: AppIcons.logout,
+        onPressed: onLogout,
       ),
       const AppText(
         'Laurum v1.0.0',

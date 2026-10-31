@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/features/transactions/pages/add_customer_sheet.dart';
+import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
+import 'package:laurum/shared/widgets/molecules/footer_bar.dart';
 import 'package:laurum/shared/widgets/organisms/customer_row.dart';
 
 import 'antrean_test_host.dart';
@@ -37,6 +40,32 @@ void main() {
     await tester.tap(find.text('Impor kontak'));
     await tester.pumpAndSettle();
     expect(find.text('Impor kontak HP'), findsWidgets);
+  });
+
+  testWidgets('directory actions sit above the list without a footer', (tester) async {
+    await pumpAntrean(tester, location: '/pelanggan');
+    expect(find.byType(FooterBar), findsNothing);
+    expect(find.widgetWithText(AppButton, 'Impor kontak'), findsOneWidget);
+    expect(find.widgetWithText(AppButton, 'Pelanggan baru'), findsOneWidget);
+    expect(
+      tester.widget<AppButton>(find.widgetWithText(AppButton, 'Impor kontak')).variant,
+      AppButtonVariant.actionOutline,
+    );
+    expect(
+      tester.widget<AppButton>(find.widgetWithText(AppButton, 'Pelanggan baru')).icon,
+      AppIcons.add,
+    );
+  });
+
+  testWidgets('directory actions fit 320 px with 2x text', (tester) async {
+    tester.view.physicalSize = const Size(320, 900);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await pumpAntrean(tester, location: '/pelanggan', textScale: 2);
+    expect(find.text('Impor kontak'), findsOneWidget);
+    expect(find.text('Pelanggan baru'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('quick add updates directory and clears a search hiding the new customer', (

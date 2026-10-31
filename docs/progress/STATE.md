@@ -2,8 +2,8 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-R0-R6 SELESAI otomatis. check_all terakhir hijau: 445 tes, REPO_MAP 551 berkas.
-Riwayat Nota dihapus; daftar nota kini di Laporan, CSV ikut memuat nota.
+R0-R7 SELESAI otomatis. check_all terakhir hijau: 447 tes, REPO_MAP 552 berkas.
+Pelanggan: aksi di atas; Akun: tombol Keluar destruktif terpisah dari kartu.
 
 ## Selesai
 - Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
@@ -27,11 +27,14 @@ Riwayat Nota dihapus; daftar nota kini di Laporan, CSV ikut memuat nota.
 - R6: ReportOrdersSection (pencarian, 4 chip, grup tanggal, buka Detail) di semua
   periode; CSV nota; /transaksi, NotaHistoryPage, spec 11 dihapus. 445 hijau.
   Rincian docs/progress/r6-laporan-nota.md.
+- R7: aksi Pelanggan baru + Impor kontak di atas (responsif 320 px/2x), tanpa
+  FooterBar; Keluar jadi tombol destructiveOutline berikon logout di bawah kartu,
+  ConfirmModal destruktif. 447 hijau. Rincian r7-pelanggan-akun.md.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. R6 SEMUA HIJAU: format 483, dua analyzer bersih, check_arch OK, 445 tes.
-   551 berkas REPO_MAP. Rincian dan bukti di r6-laporan-nota.md.
-2. R7-pelanggan-akun.md berikutnya: tombol Pelanggan baru di atas, perbaikan Keluar.
+1. R7 SEMUA HIJAU: dua analyzer bersih, check_arch OK, 447 tes. Golden app_icon
+   dan r4_settings ditinjau ulang. Rincian dan bukti di r7-pelanggan-akun.md.
+2. 71-lainnya-b.md berikutnya: Daftar dan Catat Pengeluaran.
 3. Tinjauan Android/iOS/pembaca layar dan ekspor/printer nyata belum dilakukan.
 4. Persetujuan AI baru prompt 80; wajib gunakan initialOrderStatus dari profil.
 
@@ -41,6 +44,8 @@ Riwayat Nota dihapus; daftar nota kini di Laporan, CSV ikut memuat nota.
 - R6: daftar nota hanya nota tersimpan dalam range; preset baseline historis tidak
   dijadikan nota. Custom: omzet ringkasan = jumlah daftar non-batal. OrderCard
   ringkas dipakai agar label status mengikuti mode R4; CSV memuat daftar nota.
+- R7: Pelanggan baru/Impor kontak jadi aksi atas (bukan FooterBar); Keluar di luar
+  kartu AKUN sebagai tombol destruktif, modal ikon logout. MenuRow Keluar dihapus.
 - Utang Section 21; ReportBodySection sekarang aksi piutang callback tanpa router.
 - R4 selesai tidak wajib lunas; toggle Lainnya/PENGATURAN default aktif.
 - Izin 31 Okt: statusLabel opsional OrderCard, label mengikuti dua mode; proposal 001.
@@ -50,7 +55,7 @@ Riwayat Nota dihapus; daftar nota kini di Laporan, CSV ikut memuat nota.
 - Prompt 70: tanpa Urutkan, switch langsung, receiptFooter, signOut placeholder90,
   top services preset Minggu ini, CSV BOM titik koma, piutang ledger, nonaktif tidak hapus data.
 - Pembatalan order/tabungan belum rollback lintas repository.
-- Sesudah R6: R7 lalu 71,80,90,100. Catat bayar/Ingatkan piutang masih placeholder.
+- Sesudah R7: 71,80,90,100. Catat bayar/Ingatkan piutang masih placeholder.
 - Repo C:/Users/Naufal/Downloads/laurum-app. Branch dev1rev melacak origin/dev1rev.
 - SDK: E:/App Data/flutter/flutter; cache/lock di luar workspace perlu akses eskalasi.
 - Graph lokal kini laurum-app (root C:/Users/Naufal/Downloads/laurum-app);

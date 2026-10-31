@@ -28,6 +28,7 @@ enum AppIcons {
   printer(Ionicons.printOutline),
   alert(Ionicons.alertCircleOutline),
   lock(Ionicons.lockClosedOutline),
+  logout(Ionicons.logOutOutline),
   time(Ionicons.timeOutline),
   add(Ionicons.add),
   chat(Ionicons.chatbubbleOutline),

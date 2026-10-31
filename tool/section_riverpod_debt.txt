@@ -1,6 +1,5 @@
 # Section yang masih ConsumerWidget / memakai Riverpod / go_router (utang R0, hanya boleh menyusut)
 lib/features/customers/widgets/customer_deposit_form_section.dart
-lib/features/customers/widgets/customer_directory_list_section.dart
 lib/features/customers/widgets/customer_edit_form_section.dart
 lib/features/customers/widgets/customer_import_list_section.dart
 lib/features/customers/widgets/customer_orders_section.dart

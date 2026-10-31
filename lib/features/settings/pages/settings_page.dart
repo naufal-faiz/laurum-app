@@ -34,7 +34,8 @@ class SettingsPage extends ConsumerWidget {
       title: 'Keluar dari akun?',
       message: 'Data tetap tersimpan online. Anda bisa masuk lagi kapan saja.',
       confirmLabel: 'Keluar',
-      icon: AppIcons.lock,
+      icon: AppIcons.logout,
+      destructive: true,
     );
     if (confirmed != true || !context.mounted) return;
     await ref.read(authServiceProvider).signOut();

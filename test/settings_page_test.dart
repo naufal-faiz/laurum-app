@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/service_providers.dart';
+import 'package:laurum/shared/widgets/atoms/app_button.dart';
+import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/notice_ai.dart';
+import 'package:laurum/shared/widgets/organisms/confirm_modal.dart';
 
 import 'antrean_test_host.dart';
 
@@ -21,11 +25,18 @@ void main() {
     expect(find.text('Keluar'), findsOneWidget);
     expect(find.text('Laurum v1.0.0'), findsOneWidget);
     expect(find.text(NoticeAi.message), findsOneWidget);
+    expect(find.widgetWithText(MenuRow, 'Keluar'), findsNothing);
+    final logout = tester.widget<AppButton>(find.widgetWithText(AppButton, 'Keluar'));
+    expect(logout.variant, AppButtonVariant.destructiveOutline);
+    expect(logout.icon, AppIcons.logout);
 
     await tester.ensureVisible(find.text('Keluar'));
     await tester.tap(find.text('Keluar'));
     await tester.pumpAndSettle();
     expect(find.text('Keluar dari akun?'), findsOneWidget);
+    final modal = tester.widget<ConfirmModal>(find.byType(ConfirmModal));
+    expect(modal.destructive, isTrue);
+    expect(modal.icon, AppIcons.logout);
     expect(
       find.text('Data tetap tersimpan online. Anda bisa masuk lagi kapan saja.'),
       findsOneWidget,
