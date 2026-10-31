@@ -15,21 +15,15 @@ import 'package:laurum/features/shell/pages/lainnya_routes.dart';
 import 'package:laurum/features/shell/pages/placeholder_page.dart';
 import 'package:laurum/features/shell/pages/placeholder_routes.dart';
 import 'package:laurum/features/shell/pages/root_shell_page.dart';
-import 'package:laurum/features/transactions/pages/payment_page.dart';
 import 'package:laurum/features/transactions/pages/receipt_page.dart';
 import 'package:laurum/features/transactions/pages/service_picker_page.dart';
-import 'package:laurum/features/transactions/pages/transaction_page.dart';
+import 'package:laurum/features/transactions/pages/transaction_routes.dart';
 
 GoRouter createAppRouter({String initialLocation = '/antrean'}) => GoRouter(
   initialLocation: initialLocation,
   errorBuilder: (context, state) => const PlaceholderPage(title: 'Halaman tidak ditemukan'),
   routes: [
-    GoRoute(path: '/transaksi/baru', builder: (context, state) => const TransactionPage()),
-    GoRoute(
-      path: '/transaksi/baru/layanan',
-      builder: (context, state) => const ServicePickerPage(),
-    ),
-    GoRoute(path: '/transaksi/baru/bayar', builder: (context, state) => const PaymentPage()),
+    ...transactionRoutes,
     GoRoute(
       path: '/transaksi/nota/:id',
       builder: (context, state) => ReceiptPage(orderId: state.pathParameters['id']!),

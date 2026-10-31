@@ -2,8 +2,9 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-R0-R7 SELESAI otomatis. check_all terakhir hijau: 447 tes, REPO_MAP 552 berkas.
+R0-R7 SELESAI otomatis. check_all terakhir hijau: 449 tes, REPO_MAP 553 berkas.
 Pelanggan: aksi di atas; Akun: tombol Keluar destruktif terpisah dari kartu.
+Transaksi: tombol tengah ber-ripple, rute alur memakai transisi fade + lift.
 
 ## Selesai
 - Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
@@ -30,10 +31,15 @@ Pelanggan: aksi di atas; Akun: tombol Keluar destruktif terpisah dari kartu.
 - R7: aksi Pelanggan baru + Impor kontak di atas (responsif 320 px/2x), tanpa
   FooterBar; Keluar jadi tombol destructiveOutline berikon logout di bawah kartu,
   ConfirmModal destruktif. 447 hijau. Rincian r7-pelanggan-akun.md.
+- Animasi Transaksi: tombol tengah BottomNavBar memakai Material ink; rute
+  /transaksi/baru, /layanan, /bayar memakai fade + lift 280 ms easeOutCubic
+  (balik 200 ms) dari transaction_routes.dart. 449 hijau.
+  Rincian animasi-transaksi.md.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. R7 SEMUA HIJAU: dua analyzer bersih, check_arch OK, 447 tes. Golden app_icon
-   dan r4_settings ditinjau ulang. Rincian dan bukti di r7-pelanggan-akun.md.
+1. SEMUA HIJAU: dua analyzer bersih, check_arch OK, 449 tes. Golden nav, root,
+   antrean, r4_settings, dan r5_report diperbarui (selisih hanya tepi lingkaran).
+   Rincian dan bukti di animasi-transaksi.md.
 2. 71-lainnya-b.md berikutnya: Daftar dan Catat Pengeluaran.
 3. Tinjauan Android/iOS/pembaca layar dan ekspor/printer nyata belum dilakukan.
 4. Persetujuan AI baru prompt 80; wajib gunakan initialOrderStatus dari profil.
@@ -46,6 +52,8 @@ Pelanggan: aksi di atas; Akun: tombol Keluar destruktif terpisah dari kartu.
   ringkas dipakai agar label status mengikuti mode R4; CSV memuat daftar nota.
 - R7: Pelanggan baru/Impor kontak jadi aksi atas (bukan FooterBar); Keluar di luar
   kartu AKUN sebagai tombol destruktif, modal ikon logout. MenuRow Keluar dihapus.
+- Animasi Transaksi hanya di tombol tengah dan tiga rute alur; rute lain tetap
+  transisi bawaan. Ripple memakai warna bawaan tema (tanpa token warna baru).
 - Utang Section 21; ReportBodySection sekarang aksi piutang callback tanpa router.
 - R4 selesai tidak wajib lunas; toggle Lainnya/PENGATURAN default aktif.
 - Izin 31 Okt: statusLabel opsional OrderCard, label mengikuti dua mode; proposal 001.

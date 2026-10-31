@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/features/orders/state/antrean_controller.dart';
 import 'package:laurum/features/transactions/pages/customer_picker_sheet.dart';
 import 'package:laurum/features/transactions/pages/discount_sheet.dart';
+import 'package:laurum/features/transactions/pages/transaction_page.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_numpad_key.dart';
@@ -115,5 +116,21 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Keluar tanpa menyimpan?'), findsNothing);
     expect(host.router.routeInformationProvider.value.uri.path, '/antrean');
+  });
+
+  testWidgets('create action fades and lifts the transaction page in', (tester) async {
+    await pumpAntrean(tester);
+    await tester.tap(find.text('Transaksi').first);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 140));
+    final fade = find.ancestor(
+      of: find.byType(TransactionPage),
+      matching: find.byType(FadeTransition),
+    );
+    final opacity = tester.widget<FadeTransition>(fade.first).opacity.value;
+    expect(opacity, greaterThan(0));
+    expect(opacity, lessThan(1));
+    await tester.pumpAndSettle();
+    expect(find.text('Buat transaksi'), findsOneWidget);
   });
 }

@@ -410,8 +410,11 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - API: activeIndex 0..3 (Antrean/Pelanggan/Laporan/Lainnya), onSelected(int),
   onCreate opsional, createLabel default Transaksi. Tanpa state/navigasi internal.
 - Lima slot; tengah aksi, bukan tab. Semantics Transaksi baru, selalu tidak aktif.
-- Tombol primary 56 dp terangkat 56/3 dp, cincin surface 4 dp, ikon AppIcons.add.
-  Dua token baru di AppDimensions; tanpa warna baru atau gradien.
+- Tombol primary 56 dp terangkat 56/3 dp, cincin surface 4 dp (foreground
+  ShapeDecoration), ikon AppIcons.add. Dua token baru di AppDimensions; tanpa
+  warna baru atau gradien.
+- Ketuk tombol tengah memberi umpan Material ink (InkWell di dalam Material
+  berbentuk lingkaran); tanpa state internal tambahan dan tanpa warna baru.
 - Contoh: BottomNavBar(activeIndex: tab, onSelected: pilih, onCreate: buat).
 - Galeri empat tab aktif dan disabled; tes callback, semantics, area terangkat,
   320 px/teks 2x dan golden. Acuan R2 nav-referensi.png menggantikan nav lama .pen.

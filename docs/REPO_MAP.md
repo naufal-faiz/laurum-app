@@ -289,7 +289,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - settings_operational_section.dart (59): SettingsOperationalSection
 
 ### lib/features/shell/pages/
-- app_router.dart (98):
+- app_router.dart (92):
 - lainnya_routes.dart (16):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (17):
@@ -310,6 +310,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_leave_flow.dart (22):
 - transaction_line_sheet.dart (76): TransactionLineSheet
 - transaction_page.dart (87): TransactionPage
+- transaction_routes.dart (37):
 - weight_input_sheet.dart (91): WeightInputSheet
 
 ### lib/features/transactions/state/
@@ -384,7 +385,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/organisms/
 - app_bottom_sheet.dart (93): AppBottomSheet
-- bottom_nav_bar.dart (103): BottomNavBar
+- bottom_nav_bar.dart (109): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
 - customer_row.dart (98): CustomerRow
 - expense_row.dart (57): ExpenseRow
@@ -441,7 +442,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - atom_gallery_test.dart (75):
 - auth_scaffold_test.dart (22):
 - banner_message_test.dart (23):
-- bottom_nav_bar_test.dart (85):
+- bottom_nav_bar_test.dart (104):
 - business_info_page_test.dart (50):
 - callout_ai_test.dart (20):
 - checkout_controller_test.dart (83):
@@ -585,7 +586,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_customer_section_test.dart (50):
 - transaction_draft_test.dart (43):
 - transaction_golden_test.dart (118):
-- transaction_page_test.dart (119):
+- transaction_page_test.dart (136):
 - weekly_bar_chart_test.dart (30):
 - weight_edit_test.dart (184):
 - weight_input_display_test.dart (38):

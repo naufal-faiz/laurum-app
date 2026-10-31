@@ -35,6 +35,9 @@ Interaksi:
   (FooterBar memakai padding viewInsets; field dapat digulir).
 - Bayar menuju /transaksi/baru/bayar (placeholder sampai prompt 32); nonaktif tanpa item.
 - Kembali dengan draf berisi memunculkan ConfirmModal 'Keluar tanpa menyimpan?'.
+- Transisi masuk dari tombol Transaksi: fade + lift 4% selama 280 ms easeOutCubic,
+  balik 200 ms easeInCubic. Ketiga rute alur (/transaksi/baru, /layanan, /bayar)
+  memakai transisi yang sama dari transaction_routes.dart.
 
 State: kosong (tanpa pelanggan/layanan), terisi, modal keluar, sheet pelanggan/layanan/
 berat/diskon. Belum ada penyimpanan order (prompt 32).

@@ -12,6 +12,8 @@ Template: RootScaffold pada RootShellPage, empat cabang StatefulShellRoute.
   Empat tab berindeks 0..3; Transaksi adalah aksi push /transaksi/baru dan tidak aktif.
   Tombol primary 56 dp, terangkat sepertiga, cincin surface 4 dp, ikon AppIcons.add;
   label Transaksi, semantics 'Transaksi baru'. Akun menuju Lainnya (3).
+  Ketuk memberi ripple Material; /transaksi/baru masuk dengan fade + lift singkat
+  (280 ms, easeOutCubic; balik 200 ms) dari transaction_routes.dart.
 - BannerMessage dan AppButton Hubungkan hanya saat koneksi WhatsApp palsu terputus.
 
 ## Data dan provider

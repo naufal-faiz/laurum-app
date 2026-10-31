@@ -43,6 +43,25 @@ void main() {
     );
   });
   registerMoleculeGolden('bottom_nav_bar', bottomNavBarUseCase.builder);
+  testWidgets('create action uses material ink feedback once per tap', (tester) async {
+    var creates = 0;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: Scaffold(
+          bottomNavigationBar: BottomNavBar(activeIndex: 0, onCreate: () => creates++),
+        ),
+      ),
+    );
+    final ink = find.descendant(
+      of: find.byType(BottomNavBar),
+      matching: find.byType(InkWell),
+    );
+    expect(ink, findsOneWidget);
+    await tester.tap(ink);
+    await tester.pump();
+    expect(creates, 1);
+  });
   testWidgets('320px and 2x text keep raised create action visible and accessible', (tester) async {
     tester.view.physicalSize = const Size(320, 640);
     tester.view.devicePixelRatio = 1;

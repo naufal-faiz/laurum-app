@@ -20,7 +20,7 @@ class BottomNavBar extends StatelessWidget {
   final ValueChanged<int>? onSelected;
   final VoidCallback? onCreate;
   final String createLabel;
-  static final _ring = Border.all(color: AppColors.surface, width: AppSpacing.railWidth);
+  static const _ring = BorderSide(color: AppColors.surface, width: AppSpacing.railWidth);
   static const _tabs = [
     ('Antrean', AppIcons.queue, AppIcons.queueActive),
     ('Pelanggan', AppIcons.customers, AppIcons.customersActive),
@@ -65,24 +65,30 @@ class BottomNavBar extends StatelessWidget {
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
+                        spacing: AppMoleculeTokens.smallGap,
                         children: [
                           if (slot == 2)
                             Container(
                               width: AppDimensions.navCreateSize,
                               height: AppDimensions.navCreateSize,
-                              decoration: BoxDecoration(
-                                color: AppColors.primary,
-                                shape: BoxShape.circle,
-                                border: _ring,
+                              foregroundDecoration: const ShapeDecoration(
+                                shape: CircleBorder(side: _ring),
                               ),
-                              child: const AppIcon(AppIcons.add, color: AppColors.onPrimary),
+                              child: Material(
+                                color: AppColors.primary,
+                                shape: const CircleBorder(),
+                                clipBehavior: Clip.antiAlias,
+                                child: InkWell(
+                                  onTap: action(slot),
+                                  child: const AppIcon(AppIcons.add, color: AppColors.onPrimary),
+                                ),
+                              ),
                             )
                           else
                             AppIcon(
                               selected(slot) ? _tabs[slot].$3 : _tabs[slot].$2,
                               color: selected(slot) ? AppColors.primary : AppColors.ink2,
                             ),
-                          const SizedBox(height: AppMoleculeTokens.smallGap),
                           AppText(
                             slot == 2 ? createLabel : _tabs[slot].$1,
                             textAlign: TextAlign.center,
