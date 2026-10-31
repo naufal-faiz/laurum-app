@@ -44,11 +44,17 @@ AppIconButton transparan; aksi Pelanggan sama tinggi.
 1. SEMUA HIJAU: dua analyzer bersih, check_arch OK, 449 tes. Golden nav, root,
    antrean, r4_settings, dan r5_report diperbarui (selisih hanya tepi lingkaran).
    Rincian dan bukti di animasi-transaksi.md.
-2. 71-lainnya-b.md berikutnya: Daftar dan Catat Pengeluaran.
+2. Dahulukan koreksi nav pengguna 31 Okt: tombol Transaksi tetap mengambang naik;
+   area di kiri/kanan separuh atasnya milik halaman, konten dan sentuhan lewat.
+   Pemahaman sedang ditinjau pengguna; kode UI belum diubah. Setelah itu prompt 71.
 3. Tinjauan Android/iOS/pembaca layar dan ekspor/printer nyata belum dilakukan.
 4. Persetujuan AI baru prompt 80; wajib gunakan initialOrderStatus dari profil.
 
 ## Keputusan dan batas
+- Koreksi pengguna 31 Okt: nav tanpa celah BUKAN meratakan tombol ke atas bar.
+  Tombol tetap menonjol; jangan sisakan bidang kosong/penghalang di sampingnya.
+- Checkout semula detached e09a81d digabung fast-forward 15 commit ke dev1rev;
+  tanpa konflik, tanpa push. check_all belum diulang pada sesi klarifikasi ini.
 - Keputusan pengguna 31 Okt: R5 menyertakan pengeluaran yang sudah tersimpan;
   menggantikan batas lama hanya nota/pembayaran. CRUD pengeluaran tetap prompt 71.
 - R6: daftar nota hanya nota tersimpan dalam range; preset baseline historis tidak
