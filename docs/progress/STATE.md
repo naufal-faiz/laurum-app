@@ -2,8 +2,8 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-R0-R3 SELESAI otomatis. check_all terakhir hijau: 419 tes, REPO_MAP 535 berkas.
-Fondasi, repository, Detail dan Antrean R4 terhubung; MASIH PARSIAL (toggle/checkout/AI).
+R0-R4 SELESAI otomatis. check_all terakhir hijau: 428 tes, REPO_MAP 543 berkas.
+Toggle tersedia: Lainnya -> PENGATURAN -> Pakai status order (default aktif).
 
 ## Selesai
 - Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
@@ -27,20 +27,20 @@ Fondasi, repository, Detail dan Antrean R4 terhubung; MASIH PARSIAL (toggle/chec
 - R4 Antrean: dua chip pada mode sederhana, CTA tersembunyi, label mengikuti mode;
   guard callback/profil, filter lama, alur cetak ke Antrean dan 320 px/teks 2x diuji.
   OrderCard 99, Page 95, OrdersSection 50 baris. 11 tes baru; 419 hijau.
+- R4 akhir: toggle di Lainnya/PENGATURAN simpan langsung, retry/busy; checkout pakai
+  profil terkini. Tes alur sukses/gagal/fallback/Hapus bertabungan/piutang lulus.
+  AI masih placeholder 80 (tidak ada caller approve); spec 19/PRD B diperbarui; 428 hijau.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Antrean selesai: check_all SEMUA HIJAU (467 format, 419 tes), analyzer/arsitektur lulus.
-2. Berikutnya checkout: gunakan profile.useOrderStatus untuk order baru/repository;
-   audit persetujuan AI bila sudah ada (rute saat ini placeholder; jangan mulai 80).
-   Terakhir toggle/settings dan tes alur matikan pengaturan -> buat -> selesaikan.
-   Jangan aktifkan toggle sebelum semua perilaku tersambung.
-3. Spec 01/09 sudah diperbarui; spec 19 dan kolom sinkron PRD B masih tersisa.
-   Catatan: docs/progress/r4-status-order.md. Jangan mulai R5 sebelum R4 selesai.
-4. Setiap kelompok: check_all hijau, STATE, commit. Tidak push/merge tanpa izin.
+1. R4 SEMUA HIJAU: format 475 (0 perubahan), dua analyzer bersih, check_arch OK,
+   428 tes. Log TEMP/laurum-r4-complete-all.log; bukti di r4-status-order.md.
+2. Prompt berikutnya R5-laporan-rentang.md. Tidak dimulai pada sesi penutupan R4.
+3. Tinjauan Android/iOS/pembaca layar dan printer nyata belum dilakukan.
+4. Persetujuan AI baru dibuat prompt 80; wajib gunakan initialOrderStatus dari profil.
 
 ## Keputusan dan batas
 - R5 ringkasan hanya nota + pembayaran; pengeluaran ke 71. R4 selesai tidak wajib lunas.
-- Utang Section 23, hanya menyusut; migrasikan saat disentuh.
+- Utang Section 22; SettingsMenuSection sekarang navigasi callback tanpa router.
 - Izin 31 Okt: statusLabel opsional OrderCard, label mengikuti dua mode; proposal 001.
 - Izin 31 Okt: order lama Menunggu jemput boleh langsung selesai setelah cetak
   sukses dalam mode sederhana; toggle sendiri tidak mengubah order lama.

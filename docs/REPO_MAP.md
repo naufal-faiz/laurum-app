@@ -185,7 +185,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - nota_history_data.dart (69): NotaHistoryData, notaHistoryProvider
 - order_completion_controller.dart (57): OrderCompletionState, OrderCompletion, orderCompletionProvider
 - order_completion_save.dart (47):
-- order_detail_controller.dart (83): OrderActionState, OrderActions, orderActionsProvider
+- order_detail_controller.dart (85): OrderActionState, OrderActions, orderActionsProvider
 - order_detail_data.dart (98): ActivityEntry, OrderDetailData, orderDetailProvider
 - order_edit_controller.dart (101): OrderEditState, OrderEdit, orderEditProvider
 - order_edit_item.dart (25):
@@ -275,11 +275,15 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_edit_fields_section.dart (100): ServiceEditFieldsSection
 
 ### lib/features/settings/pages/
-- settings_page.dart (35): SettingsPage
+- settings_page.dart (43): SettingsPage
+
+### lib/features/settings/state/
+- order_status_setting.dart (31): OrderStatusSettingState, OrderStatusSetting, orderStatusSettingProvider
 
 ### lib/features/settings/widgets/
 - settings_account_section.dart (43): SettingsAccountSection
-- settings_menu_section.dart (92): SettingsMenuSection
+- settings_menu_section.dart (71): SettingsMenuSection
+- settings_operational_section.dart (59): SettingsOperationalSection
 
 ### lib/features/shell/pages/
 - app_router.dart (100):
@@ -308,8 +312,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/transactions/state/
 - add_customer_form.dart (102): AddCustomerState, AddCustomerForm, addCustomerFormProvider
 - cash_input.dart (23): CashInput, cashInputProvider
-- checkout_item.dart (21):
-- checkout_save.dart (109):
+- checkout_item.dart (33):
+- checkout_save.dart (100):
 - checkout_state.dart (89): PaymentMode, CheckoutState, Checkout, checkoutControllerProvider
 - discount_input.dart (19): DiscountInputState, DiscountInput, discountInputProvider
 - payment_quote.dart (34): PaymentQuote
@@ -524,11 +528,17 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r4_completion_test_host.dart (38): CompletionPrinter
 - r4_detail_completion_test.dart (84):
 - r4_detail_print_failure_test.dart (57):
+- r4_finish_flow_test.dart (83):
+- r4_finish_test_host.dart (48):
 - r4_order_completion_test.dart (81):
 - r4_order_policy_test.dart (72):
 - r4_order_repository_policy_test.dart (87):
 - r4_order_store_guards_test.dart (66):
 - r4_profile_persistence_test.dart (50):
+- r4_setting_controller_test.dart (61):
+- r4_settings_operational_section_test.dart (43):
+- r4_settings_page_test.dart (86):
+- r4_settings_test_support.dart (23): BusinessSaveControl, ControlledBusiness
 - receipt_fixtures.dart (86):
 - receipt_formatter_settings_test.dart (31):
 - receipt_formatter_test.dart (70):

@@ -56,7 +56,7 @@ Tabel yang sama di SQLite dan Postgres. Kolom umum di semua tabel kecuali dicata
 
 | Tabel | Kolom penting |
 | --- | --- |
-| `businesses` | name, address, phone, receipt\_footer, receipt\_note |
+| `businesses` | name, address, phone, receipt\_footer, receipt\_note, use\_order\_status boolean default true (disinkronkan; R4) |
 | `devices` | code (A, B, ...), name, last\_seen\_at |
 | `customers` | name, phone, address, notes, is\_active. Unik `(owner_id, phone)` untuk baris aktif |
 | `services` | name, kind (`kiloan`/`satuan`), price, duration\_days, is\_active, sort\_order |

@@ -785,3 +785,22 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   transaction_customer_section_test dan r3_*_test. Lulus check_all 31 Oktober 2026 (387 tes total).
 - Golden service_picker dan add_customer_sheet ditinjau dan diperbarui;
   transaction_page (pelanggan terpilih) tetap sama.
+
+## R4 - Pengaturan dan checkout
+- SettingsPage (43 baris) membaca profil dan orderStatusSettingProvider, menangani
+  navigasi dan logout. SettingsMenuSection (71) menerima address/connected/
+  useOrderStatus/error/onOrderStatusChanged/onNavigate/onLogout; tanpa provider/router.
+- SettingsOperationalSection (59): connected dan onNavigate(String) untuk empat
+  baris operasional, NoticeAi tetap. Kedua Section memiliki tes render/interaksi.
+- ToggleRow yang sudah ada: 'Pakai status order', deskripsi sesuai spec 19, default
+  aktif, disabled ketika profil belum tersedia atau saving. Simpan langsung;
+  error BannerMessage dan retry lewat sakelar, tidak mengubah profil saat gagal.
+- Notifier orderStatusSettingProvider membaca profil terbaru, menjaga metadata,
+  memblokir ketukan ganda dan menginvalidasi profil/ReceiptView setelah sukses.
+- Checkout memakai initialOrderStatus/profil terbaru, meneruskan policy repository,
+  event created dari order aktual (helper checkoutCreatedEvent). checkout_save 100 baris.
+- Tes r4_setting_controller, r4_settings_page, r4_settings_operational_section dan
+  r4_finish_flow; mode aktif/nonaktif, storage gagal/retry, ledger, piutang,
+  320 px/teks 2x; golden r4_settings.png ditinjau.
+- Selisih .pen: toggle baru di kelompok PENGATURAN sesuai revisi R4. Tanpa perubahan
+  registry/tema/token/dependensi; utang Section 23 -> 22. Printer nyata/iOS belum diuji.

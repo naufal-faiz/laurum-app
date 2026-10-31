@@ -19,6 +19,8 @@ class OrderActions extends Notifier<OrderActionState> {
   OrderActionState build() => (pending: const {}, error: null);
 
   Future<bool> advance(Order order) => _run(order.id, () async {
+    final profile = await ref.read(businessRepositoryProvider).getProfile();
+    if (!profile.useOrderStatus) throw StateError('Status tracking disabled');
     final repository = ref.read(orderRepositoryProvider);
     final current = await repository.getOrderById(order.id);
     if (current == null || current.status != order.status) {

@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/order.dart';
-import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_number_generator.dart';
 import 'package:laurum/core/domain/order_rules.dart';
 import 'package:laurum/core/domain/payment.dart';
@@ -20,6 +19,7 @@ Future<String> saveCheckout(
 ) async {
   final orderRepository = ref.read(orderRepositoryProvider);
   final savingsRepository = ref.read(savingsRepositoryProvider);
+  final profile = await ref.read(businessRepositoryProvider).getProfile();
   final customerId = draft.customerId!;
   final customer = await ref.read(customerRepositoryProvider).getCustomerById(customerId);
   if (customer == null) throw StateError('Pelanggan tidak ditemukan');
@@ -45,7 +45,7 @@ Future<String> saveCheckout(
     createdAt: now,
     orderNo: orderNo,
     customerId: customerId,
-    status: OrderStatus.diproses,
+    status: initialOrderStatus(OrderSource.kasir, useOrderStatus: profile.useOrderStatus),
     source: OrderSource.kasir,
     discount: draft.discount,
     enteredAt: now,
@@ -88,19 +88,10 @@ Future<String> saveCheckout(
   }
   await orderRepository.saveOrder(
     order,
+    useOrderStatus: profile.useOrderStatus,
     items: items,
     payments: payments,
-    events: [
-      OrderEvent(
-        id: '$orderId-created',
-        ownerId: customer.ownerId,
-        createdAt: now,
-        orderId: orderId,
-        occurredAt: now,
-        kind: 'created',
-        toStatus: OrderStatus.diproses,
-      ),
-    ],
+    events: [checkoutCreatedEvent(order, now)],
   );
   for (final entry in entries) {
     await savingsRepository.addEntry(entry);
