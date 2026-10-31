@@ -53,5 +53,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Hubungkan WhatsApp'), findsWidgets);
     expect(host.router.canPop(), isTrue);
+    expect(find.text('Menunggu pindai'), findsOneWidget);
+    host.router.pop();
+    await tester.pumpAndSettle();
+    expect(find.text(banner), findsOneWidget);
   });
 }

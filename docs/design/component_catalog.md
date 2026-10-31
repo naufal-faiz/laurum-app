@@ -845,3 +845,12 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   ExpenseFormPage memakai FormScaffold; detail/kategori memakai AppBottomSheet.
 - Tes satu per Section, alur layar/nominal/kategori/simpan/hapus/Laporan, keyboard
   300 dp, 320 px/teks 2x dan golden dua layar. Spec 23/24 merinci selisih .pen.
+
+## AI dummy - kelompok pengaturan/koneksi prompt 80
+- AiConnectionSection: connected/phone dan callback connect/disconnect/check.
+- AiPreferencesSection: AiPreferences dan callback tiga toggle, privasi/retensi.
+- WhatsappLinkSection: status waiting/connected/expired dan callback check/reload/done.
+- Ketiganya Stateless tanpa provider/router; Pages membaca Riverpod dan navigasi.
+- Routes /lainnya/ai dan /lainnya/ai/hubungkan menggantikan placeholder.
+- Spec 27/28: preferensi lokal, putus terkonfirmasi, QR palsu, risiko PRD B 12.
+- Tes Section, state/expiry/reload, alur konfirmasi, 320 px/2x, empat golden.

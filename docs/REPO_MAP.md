@@ -245,6 +245,20 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - in_memory_proposal_repository.dart (63): InMemoryProposalRepository, inMemoryProposalRepositoryProvider
 - proposal_fixtures.dart (31):
 
+### lib/features/proposals/pages/
+- ai_routes.dart (8):
+- ai_settings_page.dart (77): AiSettingsPage
+- whatsapp_link_page.dart (30): WhatsappLinkPage
+
+### lib/features/proposals/state/
+- ai_settings.dart (25): AiPreferences, AiSettings, aiSettingsProvider
+- whatsapp_link.dart (38): WhatsappLinkStatus, WhatsappLink, whatsappLinkProvider
+
+### lib/features/proposals/widgets/
+- ai_connection_section.dart (59): AiConnectionSection
+- ai_preferences_section.dart (64): AiPreferencesSection
+- whatsapp_link_section.dart (75): WhatsappLinkSection
+
 ### lib/features/reports/data/
 - in_memory_report_repository.dart (76): InMemoryReportRepository, inMemoryReportRepositoryProvider
 - report_adjustments.dart (16):
@@ -307,10 +321,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - settings_operational_section.dart (59): SettingsOperationalSection
 
 ### lib/features/shell/pages/
-- app_router.dart (92):
+- app_router.dart (94):
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (15):
+- placeholder_routes.dart (13):
 - root_shell_page.dart (48): RootShellPage
 
 ### lib/features/shell/state/
@@ -429,9 +443,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### test/
 - add_customer_test.dart (64):
+- ai_golden_test.dart (52):
+- ai_sections_test.dart (82):
+- ai_settings_pages_test.dart (52):
+- ai_settings_state_test.dart (41):
 - antrean_controller_test.dart (67):
 - antrean_golden_test.dart (52):
-- antrean_page_test.dart (57):
+- antrean_page_test.dart (61):
 - antrean_states_test.dart (82):
 - antrean_test_host.dart (50):
 - antrean_test_host_test.dart (22):

@@ -2,8 +2,6 @@ const placeholderRoutes = <String, String>{
   '/masuk': 'Masuk',
   '/antrean/usulan/:id': 'Detail usulan AI',
   '/lainnya/ai/riwayat': 'Riwayat usulan AI',
-  '/lainnya/ai/hubungkan': 'Hubungkan WhatsApp',
-  '/lainnya/ai': 'Pengaturan AI dan WhatsApp',
   '/lainnya/sinkronisasi': 'Sinkronisasi',
 };
 const tabRoutes = <String, String>{

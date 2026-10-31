@@ -2,9 +2,10 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-Fase 1-8 sampai prompt 71 dan R0-R7 selesai otomatis.
-check_all: SEMUA HIJAU, 473 tes, kedua analyzer bersih, REPO_MAP 575 berkas.
-Baseline sebelum tugas: 454 tes hijau pada commit 1b229a0.
+Fase 1-8 sampai prompt 71 dan R0-R7 selesai otomatis. Prompt 80 SEDANG.
+Kelompok pengaturan AI/koneksi dummy selesai; check_all SEMUA HIJAU:
+485 tes, kedua analyzer bersih, check_arch OK, REPO_MAP 587 berkas.
+Baseline prompt 80: 473 tes hijau pada commit 516eb2c.
 
 ## Selesai
 - R0: struktur Section/state; utang Riverpod Section tinggal 21 (tidak bertambah).
@@ -24,21 +25,27 @@ Baseline sebelum tugas: 454 tes hijau pada commit 1b229a0.
 - Prompt 71: dua rute pengeluaran, daftar bulan aktual, kategori/filter/grup tanggal,
   detail/hapus terkonfirmasi, form nominal/numpad/tanggal/vendor/catatan/foto palsu,
   kategori baru persisten. Spec 23/24, docs/progress/71-pengeluaran.md.
+- Prompt 80 kelompok 1: Pengaturan AI/Hubungkan WhatsApp, tiga toggle lokal,
+  putus koneksi terkonfirmasi, QR palsu menunggu/terhubung/kedaluwarsa/ulang.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Prompt 71 selesai; bukti check_all di docs/progress/71-pengeluaran.md.
+1. Kelompok pengaturan AI/koneksi siap ditinjau; bukti di docs/progress/80-ai.md.
 2. Tinjau pengeluaran/nav/keyboard di Android. iOS, pembaca layar, printer/ekspor
    dan foto nyata belum diuji. Jangan mengklaim verifikasi perangkat sudah selesai.
-3. Prompt berikutnya setelah 71: docs/prompts/80-ai.md, lalu 90 dan 100.
-   AI wajib memakai initialOrderStatus profil. Berhenti setelah satu kelompok.
+3. Selesaikan sisa prompt 80 (detail/persetujuan/riwayat) sesudah jawaban konflik
+   data: DATA MASTER memakai Rudi/Budi/Siti, prompt/.pen memakai Rudi/Rina/Agus baru.
+   Pertanyaan sinkronisasi sudah diajukan; fixture belum diubah. AI wajib memakai
+   initialOrderStatus profil. Berikutnya 90/100; berhenti setelah satu kelompok.
 
 ## Keputusan dan batas
 - Terminal/Git/Flutter/test rutin langsung dijalankan tanpa pertanyaan pengguna;
   tanyakan hanya keputusan penting yang melewati aturan/desain. Batas sistem berlaku.
 - Pengeluaran hanya dummy in-memory; PhotoPicker palsu, belum integrasi kamera.
+- QR WhatsApp hanya placeholder lokal, tidak menautkan atau mengirim pesan.
+  Risiko jalur QR PRD B 12 dicatat di spec 28; belum memilih jalur rilis publik.
 - ExpenseRepository mendapat saveCategory untuk Kategori baru prompt 71; tanpa
   perubahan registry, tema/token, dependensi, lint, PRD, atau fixture.
-- Catat bayar/Ingatkan piutang, AI, signOut masih placeholder prompt selanjutnya.
+- Catat bayar/Ingatkan piutang, detail/riwayat AI, signOut masih placeholder.
 - Pembatalan order/tabungan belum rollback lintas repository.
 - OrderEditBodySection slot details lintas fitur tetap keputusan R0.
 - OrderCard statusLabel opsional (proposal 001) mengikuti dua mode R4.
