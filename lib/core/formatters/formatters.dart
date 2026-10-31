@@ -30,6 +30,7 @@ abstract final class Formatters {
 
   // Thermal receipt date: no weekday, year shown.
   static String tanggalStruk(DateTime tanggal) => DateFormat('d MMM yyyy', 'id_ID').format(tanggal);
+  static String bulan(DateTime tanggal) => DateFormat('MMMM yyyy', 'id_ID').format(tanggal);
 
   static String rentangTanggal(DateTime start, DateTime end) {
     if (start.year != end.year) return '${tanggalStruk(start)}-${tanggalStruk(end)}';

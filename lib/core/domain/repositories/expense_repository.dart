@@ -3,6 +3,7 @@ import 'package:laurum/core/domain/expense_category.dart';
 
 abstract class ExpenseRepository {
   Future<List<ExpenseCategory>> getCategories();
+  Future<void> saveCategory(ExpenseCategory category);
   // Half-open local date interval [from, to). Deleted rows are excluded.
   Future<List<Expense>> getExpenses({DateTime? from, DateTime? to});
   Future<void> saveExpense(Expense expense);

@@ -35,7 +35,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | R5 | R5-laporan-rentang.md | Revisi 8,13,14: rentang tanggal, Ekspor di atas | SELESAI (2026-10-31) | Kalender id_ID, custom aktual termasuk pengeluaran tersimpan (izin pengguna), Ekspor di header; 443 tes hijau, dua golden ditinjau |
 | R6 | R6-laporan-nota.md | Revisi 7,8,13: daftar nota di Laporan, hapus Riwayat Nota | SELESAI (2026-10-31) | Daftar nota per range/pencarian/filter, CSV nota, /transaksi dihapus; 445 tes hijau. Tinjau rekonsiliasi preset baseline vs daftar aktual |
 | R7 | R7-pelanggan-akun.md | Revisi 12,15: tombol Pelanggan baru di atas, tombol Keluar | SELESAI (2026-10-31) | Aksi pelanggan di atas responsif, Keluar destructiveOutline + ikon logout, ConfirmModal destruktif; 447 tes hijau. Tinjau di HP |
-| 18 | 71-lainnya-b.md | Daftar dan Catat Pengeluaran | BELUM | |
+| 18 | 71-lainnya-b.md | Daftar dan Catat Pengeluaran | SELESAI (2026-10-31) | 473 tes hijau; simpan/hapus/kategori/foto palsu dan Laporan reaktif; tinjau perangkat |
 | 19 | 80-ai.md | Layar AI (dummy) | BELUM | |
 | 20 | 90-auth-sinkron.md | Masuk Google (dummy), Sinkronisasi, Akun | BELUM | |
 | 21 | 100-penyelesaian.md | Audit, aksesibilitas, alur akhir, APK | BELUM | **Butuh Android SDK. Coba di HP** |

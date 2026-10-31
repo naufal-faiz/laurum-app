@@ -44,7 +44,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/core/domain/repositories/
 - business_repository.dart (10): BusinessRepository
 - customer_repository.dart (8): CustomerRepository
-- expense_repository.dart (10): ExpenseRepository
+- expense_repository.dart (11): ExpenseRepository
 - order_repository.dart (35): OrderRepository
 - proposal_repository.dart (13): ProposalRepository
 - report_repository.dart (10): ReportRepository
@@ -60,7 +60,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - top_services.dart (56):
 
 ### lib/core/formatters/
-- formatters.dart (54): Formatters
+- formatters.dart (55): Formatters
 
 ### lib/core/icons/
 - app_icons.dart (50): AppIcons
@@ -148,9 +148,27 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/expenses/data/
 - expense_category_fixtures.dart (35):
 - expense_fixtures.dart (10):
-- in_memory_expense_repository.dart (64): InMemoryExpenseRepository, inMemoryExpenseRepositoryProvider
+- in_memory_expense_repository.dart (71): InMemoryExpenseRepository, inMemoryExpenseRepositoryProvider
 - prior_expense_fixtures.dart (72):
 - week_expense_fixtures.dart (48):
+
+### lib/features/expenses/pages/
+- expense_category_sheet.dart (46): ExpenseCategorySheet
+- expense_detail_sheet.dart (71): ExpenseDetailSheet
+- expense_directory_page.dart (72): ExpenseDirectoryPage
+- expense_form_page.dart (82): ExpenseFormPage
+
+### lib/features/expenses/state/
+- expense_category_controller.dart (48): ExpenseCategoryDraft, ExpenseCategoryController, expenseCategoryProvider
+- expense_delete_controller.dart (26): ExpenseDeleteController, expenseDeleteProvider
+- expense_directory.dart (37): ExpenseDirectory, ExpenseFilter, expenseDirectoryProvider, expenseFilterProvider
+- expense_draft.dart (41): ExpenseDraft
+- expense_form_controller.dart (74): ExpenseFormController, expenseFormProvider
+
+### lib/features/expenses/widgets/
+- expense_amount_section.dart (42): ExpenseAmountSection
+- expense_details_section.dart (85): ExpenseDetailsSection
+- expense_list_section.dart (97): ExpenseListSection
 
 ### lib/features/orders/data/
 - in_memory_order_repository.dart (99): InMemoryOrderRepository, inMemoryOrderRepositoryProvider
@@ -290,9 +308,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/shell/pages/
 - app_router.dart (92):
-- lainnya_routes.dart (16):
+- lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
-- placeholder_routes.dart (17):
+- placeholder_routes.dart (15):
 - root_shell_page.dart (48): RootShellPage
 
 ### lib/features/shell/state/
@@ -486,7 +504,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - dummy_repository_regression_test.dart (52):
 - dummy_savings_integration_test.dart (49):
 - empty_state_test.dart (28):
+- expense_controller_test.dart (78):
+- expense_failures_test.dart (76): FailingExpenseRepository
+- expense_form_actions_test.dart (49):
+- expense_golden_test.dart (38):
+- expense_keyboard_test.dart (57):
+- expense_pages_test.dart (66):
 - expense_row_test.dart (34):
+- expense_sections_test.dart (87):
 - footer_bar_test.dart (30):
 - form_scaffold_test.dart (33):
 - formatters_test.dart (40):

@@ -5,11 +5,18 @@ import 'package:laurum/core/domain/repositories/expense_repository.dart';
 import 'package:laurum/features/expenses/data/expense_fixtures.dart';
 
 class InMemoryExpenseRepository extends Notifier<List<Expense>> implements ExpenseRepository {
+  List<ExpenseCategory> _categories = List.of(expenseCategoryFixtures);
   @override
   List<Expense> build() => List.unmodifiable(expenseFixtures);
 
   @override
-  Future<List<ExpenseCategory>> getCategories() async => List.unmodifiable(expenseCategoryFixtures);
+  Future<List<ExpenseCategory>> getCategories() async => List.unmodifiable(_categories);
+
+  @override
+  Future<void> saveCategory(ExpenseCategory category) async {
+    _categories = [..._categories.where((c) => c.id != category.id), category];
+    ref.notifyListeners();
+  }
 
   @override
   Future<List<Expense>> getExpenses({DateTime? from, DateTime? to}) async {

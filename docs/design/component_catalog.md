@@ -833,3 +833,15 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   golden r5_report_custom/r5_date_picker ditinjau, 320 px/teks 2x hingga tujuh hari lulus.
 - Selisih .pen: Ekspor di header dan rentang/pemilih Indonesia sesuai R5; native
   kalender baru menggantikan Atur. Perangkat Android/iOS dan ekspor nyata belum diuji.
+
+## Pengeluaran - prompt 71
+- ExpenseListSection: data ExpenseDirectory, filter kategori, callback onFilter/onOpen.
+  Menyusun ringkasan bulan, ChipBar, grup tanggal dan ExpenseRow; kosong didukung.
+- ExpenseAmountSection: ExpenseDraft dan callback nominal/key; LabeledField dan
+  Numpad standar tanpa Reset, nominal awal kosong dan pesan minimum.
+- ExpenseDetailsSection: draf/kategori dan callback kategori/baru/tanggal/vendor/
+  catatan/foto. Tanpa provider; semua aksi disediakan Page.
+- ExpenseDirectoryPage memakai RootScaffold Lainnya aktif + FooterBar CTA;
+  ExpenseFormPage memakai FormScaffold; detail/kategori memakai AppBottomSheet.
+- Tes satu per Section, alur layar/nominal/kategori/simpan/hapus/Laporan, keyboard
+  300 dp, 320 px/teks 2x dan golden dua layar. Spec 23/24 merinci selisih .pen.

@@ -1,10 +1,14 @@
 import 'package:go_router/go_router.dart';
 import 'package:laurum/features/business/pages/business_info_page.dart';
+import 'package:laurum/features/expenses/pages/expense_directory_page.dart';
+import 'package:laurum/features/expenses/pages/expense_form_page.dart';
 import 'package:laurum/features/printer/pages/printer_page.dart';
 import 'package:laurum/features/services/pages/service_directory_page.dart';
 import 'package:laurum/features/services/pages/service_edit_page.dart';
 
 final lainnyaRoutes = <RouteBase>[
+  GoRoute(path: '/lainnya/pengeluaran/baru', builder: (context, state) => const ExpenseFormPage()),
+  GoRoute(path: '/lainnya/pengeluaran', builder: (context, state) => const ExpenseDirectoryPage()),
   GoRoute(path: '/lainnya/printer', builder: (context, state) => const PrinterPage()),
   GoRoute(path: '/lainnya/layanan/baru', builder: (context, state) => const ServiceEditPage()),
   GoRoute(

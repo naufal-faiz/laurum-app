@@ -2,89 +2,53 @@
 Diperbarui: 2026-10-31 | Cabang dev1rev
 
 ## Posisi
-R0-R7 SELESAI otomatis. check_all terakhir hijau: 454 tes, REPO_MAP 556 berkas.
-Pelanggan: aksi di atas; Akun: tombol Keluar destruktif terpisah dari kartu.
-Transaksi: tombol mengambang, sisi atas bar milik halaman; ripple + fade/lift tetap.
-AppIconButton transparan; aksi Pelanggan ringkas 48 dp, nav bercincin putih 4 dp.
+Fase 1-8 sampai prompt 71 dan R0-R7 selesai otomatis.
+check_all: SEMUA HIJAU, 473 tes, kedua analyzer bersih, REPO_MAP 575 berkas.
+Baseline sebelum tugas: 454 tes hijau pada commit 1b229a0.
 
 ## Selesai
-- Fase 1-8 sampai prompt 70; rincian fase-0..8.md. R0: 38 Section, 50 state.
-- R1: keyboard/insets, diskon, berat fresh/minimum, nominal, audit input;
-  koma/nol desimal tetap di layar. Rincian r1-input-keyboard.md.
-- R2: empat tab, aksi Transaksi tengah, tanpa FAB Beranda, Antrean aktif,
-  navigasi Piutang. PRD disinkronkan dan Android manual dikonfirmasi 30 Okt.
-- R3: FAB Layanan baru di dua rute pemilih; sembunyi saat keyboard; katalog
-  reaktif; Baru langsung tambah/pilih pelanggan. Section pelanggan Stateless.
-  Sembilan skenario baru lulus; dua golden ditinjau, registry/tema/dependensi tetap.
-- Validasi ulang 31 Okt: format draf dirapikan, empat lint diperbaiki tanpa ignore,
-  seluruh 387 tes lulus. Rincian docs/progress/r3-transaksi.md.
-- R4: useOrderStatus default true, toggle Lainnya/PENGATURAN, checkout/profil/repository
-  mengikuti policy. Antrean sederhana dua chip, Detail Edit/Hapus/Selesaikan;
-  cetak sukses/fallback/Hapus bertabungan/piutang tervalidasi. 428 tes hijau.
-  AI masih placeholder 80; spec 01/09/19/PRD B sinkron. Rincian r4-status-order.md.
-- R5: state range inklusif -> akhir domain eksklusif, kalender 1 Jan 2026..clock,
-  label/batal/ekspor aktif; komposisi repository aktual tanpa baseline custom.
-  Grafik <=7 hari dan top services aktual; empty tidak meminjam posisi global.
-  Golden laporan/kalender ditinjau, 320 px/teks 2x/7 hari lulus. 15 tes baru; 443 hijau.
-- R6: ReportOrdersSection (pencarian, 4 chip, grup tanggal, buka Detail) di semua
-  periode; CSV nota; /transaksi, NotaHistoryPage, spec 11 dihapus. 445 hijau.
-  Rincian docs/progress/r6-laporan-nota.md.
-- R7: aksi Pelanggan baru + Impor kontak di atas (responsif 320 px/2x), tanpa
-  FooterBar; Keluar jadi tombol destructiveOutline berikon logout di bawah kartu,
-  ConfirmModal destruktif. 447 hijau. Rincian r7-pelanggan-akun.md.
-- Animasi Transaksi: tombol tengah BottomNavBar memakai Material ink; rute
-  /transaksi/baru, /layanan, /bayar memakai fade + lift 280 ms easeOutCubic
-  (balik 200 ms) dari transaction_routes.dart. 449 hijau.
-  Rincian animasi-transaksi.md.
-- Revisi tampilan 31 Okt: nav tanpa celah (permukaan penuh, tombol menempel garis
-  atas, cincin dihapus); dua tombol Pelanggan sama tinggi 56 dp; AppIconButton
-  tanpa latar putih di app bar/sheet. 449 hijau, golden disinkronkan.
+- R0: struktur Section/state; utang Riverpod Section tinggal 21 (tidak bertambah).
+- R1: input/keyboard, nominal/berat fresh/minimum; r1-input-keyboard.md.
+- R2: empat tab, Transaksi tengah, Antrean aktif; Android dikonfirmasi 30 Okt.
+- R3: katalog/FAB Layanan baru, tambah pelanggan; r3-transaksi.md.
+- R4: useOrderStatus default aktif, mode sederhana/detail/cetak/selesai;
+  r4-status-order.md. Selesai tidak wajib lunas; toggle tidak mengubah order lama.
+- R5: laporan range aktual, kalender, grafik/top services/CSV; pengeluaran tersimpan
+  termasuk custom range (izin pengguna). Baseline historis tidak dijadikan nota.
+- R6: daftar nota/filter/pencarian/CSV di Laporan; Riwayat Nota dihapus.
+- R7: aksi pelanggan di atas, Keluar destruktif terpisah dari kartu Akun.
+- Nav: tombol tengah menonjol 28 dp, cincin putih 4 dp; area sampingnya milik
+  halaman dan menerima tap/scroll. Ripple dan fade/lift tiga rute transaksi tetap.
+- Padding akhir scroll Pelanggan/Laporan/Lainnya +28 dp; aksi pelanggan 48 dp;
+  AppIconButton transparan. Bukti/golden: animasi-transaksi.md.
+- Prompt 71: dua rute pengeluaran, daftar bulan aktual, kategori/filter/grup tanggal,
+  detail/hapus terkonfirmasi, form nominal/numpad/tanggal/vendor/catatan/foto palsu,
+  kategori baru persisten. Spec 23/24, docs/progress/71-pengeluaran.md.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. SEMUA HIJAU: dua analyzer bersih, check_arch OK, 454 tes. Golden nav, root,
-   antrean, r4_settings, dan r5_report diperbarui (selisih hanya tepi lingkaran).
-   Rincian dan bukti di animasi-transaksi.md.
-2. Koreksi nav disetujui dan diimplementasikan: tombol menonjol 28 dp;
-   halaman di sampingnya menerima tap/scroll. Cincin putih 4 dp; padding akhir
-   scroll Pelanggan/Laporan/Lainnya +28 dp; aksi pelanggan 48 dp. 454 tes lulus;
-   check_all SEMUA HIJAU. Berikutnya tinjauan perangkat, lalu prompt 71.
-3. Tinjauan Android/iOS/pembaca layar dan ekspor/printer nyata belum dilakukan.
-4. Persetujuan AI baru prompt 80; wajib gunakan initialOrderStatus dari profil.
+1. Prompt 71 selesai; bukti check_all di docs/progress/71-pengeluaran.md.
+2. Tinjau pengeluaran/nav/keyboard di Android. iOS, pembaca layar, printer/ekspor
+   dan foto nyata belum diuji. Jangan mengklaim verifikasi perangkat sudah selesai.
+3. Prompt berikutnya setelah 71: docs/prompts/80-ai.md, lalu 90 dan 100.
+   AI wajib memakai initialOrderStatus profil. Berhenti setelah satu kelompok.
 
 ## Keputusan dan batas
-- Pengguna 31 Okt: perintah terminal rutin langsung dijalankan; tanyakan hanya
-  hal penting. Batas persetujuan sistem tetap berlaku.
-- Koreksi pengguna 31 Okt: nav tanpa celah BUKAN meratakan tombol ke atas bar.
-  Tombol tetap menonjol; jangan sisakan bidang kosong/penghalang di sampingnya.
-- Checkout semula detached e09a81d digabung fast-forward 15 commit ke dev1rev;
-  tanpa konflik, tanpa push. check_all belum diulang pada sesi klarifikasi ini.
-- Keputusan pengguna 31 Okt: R5 menyertakan pengeluaran yang sudah tersimpan;
-  menggantikan batas lama hanya nota/pembayaran. CRUD pengeluaran tetap prompt 71.
-- R6: daftar nota hanya nota tersimpan dalam range; preset baseline historis tidak
-  dijadikan nota. Custom: omzet ringkasan = jumlah daftar non-batal. OrderCard
-  ringkas dipakai agar label status mengikuti mode R4; CSV memuat daftar nota.
-- R7: Pelanggan baru/Impor kontak jadi aksi atas (bukan FooterBar); Keluar di luar
-  kartu AKUN sebagai tombol destruktif, modal ikon logout. MenuRow Keluar dihapus.
-- Animasi Transaksi hanya di tombol tengah dan tiga rute alur; rute lain tetap
-  transisi bawaan. Ripple memakai warna bawaan tema (tanpa token warna baru).
-- Koreksi terakhir 31 Okt menggantikan revisi nav rata: tombol menonjol separuh,
-  bar mulai tengah lingkaran; AppIconButton tetap tanpa latar putih.
-- Utang Section 21; ReportBodySection sekarang aksi piutang callback tanpa router.
-- R4 selesai tidak wajib lunas; toggle Lainnya/PENGATURAN default aktif.
-- Izin 31 Okt: statusLabel opsional OrderCard, label mengikuti dua mode; proposal 001.
-- Izin 31 Okt: order lama Menunggu jemput boleh langsung selesai setelah cetak
-  sukses dalam mode sederhana; toggle sendiri tidak mengubah order lama.
-- OrderEditBodySection slot details lintas fitur tetap keputusan R0.
-- Prompt 70: tanpa Urutkan, switch langsung, receiptFooter, signOut placeholder90,
-  top services preset Minggu ini, CSV BOM titik koma, piutang ledger, nonaktif tidak hapus data.
+- Terminal/Git/Flutter/test rutin langsung dijalankan tanpa pertanyaan pengguna;
+  tanyakan hanya keputusan penting yang melewati aturan/desain. Batas sistem berlaku.
+- Pengeluaran hanya dummy in-memory; PhotoPicker palsu, belum integrasi kamera.
+- ExpenseRepository mendapat saveCategory untuk Kategori baru prompt 71; tanpa
+  perubahan registry, tema/token, dependensi, lint, PRD, atau fixture.
+- Catat bayar/Ingatkan piutang, AI, signOut masih placeholder prompt selanjutnya.
 - Pembatalan order/tabungan belum rollback lintas repository.
-- Sesudah R7: 71,80,90,100. Catat bayar/Ingatkan piutang masih placeholder.
-- Repo C:/Users/Naufal/Downloads/laurum-app. Branch dev1rev melacak origin/dev1rev.
-- SDK: E:/App Data/flutter/flutter; cache/lock di luar workspace perlu akses eskalasi.
-- Graph lokal kini laurum-app (root C:/Users/Naufal/Downloads/laurum-app);
-  indeks lama E-Latihan-Pemrograman-laurum-projects-laurum menunjuk checkout lama.
-- R3/R4: Android/iOS perangkat, TalkBack/VoiceOver dan printer nyata belum diuji.
+- OrderEditBodySection slot details lintas fitur tetap keputusan R0.
+- OrderCard statusLabel opsional (proposal 001) mengikuti dua mode R4.
+- Custom omzet ringkasan = jumlah daftar nota non-batal; CSV BOM titik koma.
+- Repo aktif: E:/Latihan Pemrograman/laurum-projects/laurum; dev1rev digabung
+  fast-forward dari detached e09a81d pada sesi sebelumnya. Jangan push/merge tanpa izin.
+- SDK E:/App Data/flutter/flutter; cache SDK/.git memerlukan izin sistem jika dibatasi.
+- Graph lokal laurum-app menunjuk C:/Users/Naufal/Downloads/laurum-app;
+  indeks E-Latihan-Pemrograman-laurum-projects-laurum lama. REPO_MAP acuan lokal.
 
 ## Untuk agen penerus
-Baca AGENTS.md, SKILLS.md, STATE.md; verifikasi git status/log. Lanjut bagian di atas.
-Berhenti mendekati sisa usage 10%; simpan perubahan dengan bukti validasi dan commit.
+Baca AGENTS.md, SKILLS.md, STATE.md; verifikasi git status/log lalu lanjut bagian
+Sedang dikerjakan. Riwayat lengkap fase-0..8.md dan catatan R/71 terkait.
