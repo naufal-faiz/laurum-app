@@ -1,6 +1,6 @@
 # Antrean prompt (urut)
 
-Seri R (revisi hasil uji HP, 25 Okt 2026) dikerjakan lebih dulu, berurutan R0 sampai R7; daftar revisi lengkap di docs/revisi/REVISI-01.md. Setelah R7, lanjut No 18.
+Seri R (revisi hasil uji HP, 25 Okt 2026) dikerjakan lebih dulu, berurutan R0 sampai R7; daftar revisi lengkap di docs/revisi/REVISI-01.md. Setelah R7, lanjut No 18. Seri R kedua (2 Nov 2026: R8-R10, daftar di docs/revisi/REVISI-02.md) dikerjakan SEBELUM No 21.
 
 Cara memakai: tempel prompt LANJUT di bawah ke agen setiap kali. Agen mengambil baris pertama berstatus BELUM atau SEDANG, mengerjakannya, mengubah statusnya sendiri, lalu berhenti. Jika ada koreksi, jelaskan ke agen, lalu jalankan LANJUT lagi.
 
@@ -38,6 +38,9 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 18 | 71-lainnya-b.md | Daftar dan Catat Pengeluaran | SELESAI (2026-10-31) | 473 tes hijau; simpan/hapus/kategori/foto palsu dan Laporan reaktif; tinjau perangkat |
 | 19 | 80-ai.md | Layar AI (dummy) | SELESAI (2026-10-31) | 510 tes hijau; detail/approve/tolak/batal, pelanggan baru, riwayat dan status R4; fixture tersinkron atas izin pengguna |
 | 20 | 90-auth-sinkron.md | Masuk Google (dummy), Sinkronisasi, Akun | SELESAI (2026-10-31) | 535 tes hijau; guard/onboarding, pending/sync/retry/offline, logout dan hapus dua langkah dengan cleanup dummy |
+| R8 | R8-transaksi-atomik.md | Revisi 2 Nov: TransactionRunner lintas repository (fondasi) | BELUM | Tinjau rollback nota/tabungan/usulan |
+| R9 | R9-pembayaran-cod.md | Revisi 2 Nov 1,2,6,7,8: COD, kembalian/tabungan, tombol Cetak/Ke antrean, Catat pembayaran | BELUM | **Coba alur COD dan bayar sebagian di HP** |
+| R10 | R10-akun.md | Revisi 2 Nov 3,4,5: Masuk email, Daftar, Lupa password, Kelola akun | BELUM | Tinjau keyboard dan layar baru |
 | 21 | 100-penyelesaian.md | Audit, aksesibilitas, alur akhir, APK | BELUM | **Butuh Android SDK. Coba di HP** |
 
 Setelah No 21 selesai, antrean berikutnya adalah backend (PRD B bagian 14). Prompt-nya disusun terpisah setelah keputusan terbuka PRD B dijawab.

@@ -32,7 +32,7 @@ REPO_MAP 629 berkas. Bukti di docs/progress/90-auth-sinkron.md.
 1. Prompt 90 selesai; siap tinjauan auth/sinkron/akun dummy.
 2. Tinjau kelompok auth/sinkron/akun dan keyboard di Android (juga AI/nav/pengeluaran).
    iOS, pembaca layar, printer/ekspor, foto dan WhatsApp nyata belum diuji.
-3. Berikutnya docs/prompts/100-penyelesaian.md.
+3. Revisi 2 Nov 2026: kerjakan R8, R9, R10 (docs/revisi/REVISI-02.md) SEBELUM docs/prompts/100-penyelesaian.md.
    Jangan memulai prompt berikutnya tanpa sesi/tinjauan kelompok ini.
 
 ## Keputusan dan batas
