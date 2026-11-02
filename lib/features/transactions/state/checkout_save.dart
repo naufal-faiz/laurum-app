@@ -16,7 +16,7 @@ Future<String> saveCheckout(
   Ref ref,
   TransactionDraftState draft,
   CheckoutState state,
-) async {
+) => ref.read(transactionRunnerProvider).run(() async {
   final orderRepository = ref.read(orderRepositoryProvider);
   final savingsRepository = ref.read(savingsRepositoryProvider);
   final profile = await ref.read(businessRepositoryProvider).getProfile();
@@ -97,4 +97,4 @@ Future<String> saveCheckout(
     await savingsRepository.addEntry(entry);
   }
   return orderId;
-}
+});

@@ -1,3 +1,5 @@
+import 'package:laurum/core/services/transaction_runner.dart';
+
 abstract class AuthService {
   bool get isSignedIn;
   String? get currentUserId;
@@ -9,7 +11,16 @@ abstract class AuthService {
   Future<bool> deleteAccount();
 }
 
-class FakeAuthService implements AuthService {
+class FakeAuthService implements AuthService, TransactionParticipant {
+  @override
+  void Function() checkpoint() {
+    final signedIn = isSignedIn, setup = needsBusinessSetup;
+    return () {
+      isSignedIn = signedIn;
+      needsBusinessSetup = setup;
+    };
+  }
+
   FakeAuthService({
     this.isSignedIn = true,
     this.userId = 'fake-user',

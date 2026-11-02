@@ -1,9 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/repositories/service_repository.dart';
 import 'package:laurum/core/domain/service_item.dart';
+import 'package:laurum/core/services/transactional_memory.dart';
 import 'package:laurum/features/services/data/service_fixtures.dart';
 
-class InMemoryServiceRepository extends Notifier<List<ServiceItem>> implements ServiceRepository {
+class InMemoryServiceRepository extends Notifier<List<ServiceItem>>
+    with TransactionalMemory<List<ServiceItem>>
+    implements ServiceRepository {
   void clearLocalData() => state = const [];
   @override
   List<ServiceItem> build() => List.unmodifiable(serviceFixtures);

@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:laurum/core/services/transactional_memory.dart';
 
 // Historical demo summaries disappear with deleted local account data.
-class DummyHistory extends Notifier<bool> {
+class DummyHistory extends Notifier<bool> with TransactionalMemory<bool> {
   @override
   bool build() => true;
   void clear() => state = false;

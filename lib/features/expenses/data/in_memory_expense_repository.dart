@@ -2,9 +2,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/expense.dart';
 import 'package:laurum/core/domain/expense_category.dart';
 import 'package:laurum/core/domain/repositories/expense_repository.dart';
+import 'package:laurum/core/services/transaction_runner.dart';
 import 'package:laurum/features/expenses/data/expense_fixtures.dart';
 
-class InMemoryExpenseRepository extends Notifier<List<Expense>> implements ExpenseRepository {
+class InMemoryExpenseRepository extends Notifier<List<Expense>>
+    implements ExpenseRepository, TransactionParticipant {
+  @override
+  void Function() checkpoint() {
+    final expenses = state, categories = List.of(_categories);
+    return () {
+      _categories = categories;
+      state = expenses;
+    };
+  }
+
   void clearLocalData() {
     _categories = [];
     state = const [];

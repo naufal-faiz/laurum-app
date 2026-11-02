@@ -12,7 +12,7 @@ Sumber: usulan pengguna setelah audit dev1rev (R0-R7, prompt 71/80/90 selesai). 
 | 6 | Tombol halaman Pembayaran | "Cetak struk" (simpan lalu buka struk) dan "Ke antrean" (simpan lalu Beranda). Keduanya sebelumnya memanggil fungsi yang sama (bug) | R9 | BELUM |
 | 7 | Catat pembayaran tidak hilang untuk COD | Tampil selama sisa > 0 dan tidak dibatalkan, termasuk order selesai; juga di Struk dan Piutang | R9 | BELUM |
 | 8 | COD belum diinput tetap di Antrean | Otomatis, karena selesai tertahan; kartu diberi penanda COD | R9 | BELUM |
-| F | (fondasi) pembayaran + tabungan harus atomik | TransactionRunner lintas repository; menutup celah rollback yang tercatat di STATE | R8 | BELUM |
+| F | (fondasi) pembayaran + tabungan harus atomik | TransactionRunner lintas repository; menutup celah rollback yang tercatat di STATE | R8 | SELESAI (2026-11-02) |
 
 Catatan penomoran: usulan awal menyebut R8 = Pembayaran dan R9 = Akun; fondasi atomik dipisah menjadi R8 sehingga menjadi R8-R10.
 

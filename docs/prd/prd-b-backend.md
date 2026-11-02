@@ -18,6 +18,8 @@ Versi 1.0 · 20 Oktober 2026 · Pasangan PRD A (Tampilan). Keputusan dasar: offl
 
 1. **SQLite adalah sumber kebenaran untuk UI.** UI hanya membaca dan menulis lokal. Server mengikuti.
 2. **Setiap penulisan lokal bersifat atomik** dan sekaligus mencatat antrean sinkron (outbox) dalam satu transaksi.
+
+`TransactionRunner.run(body)` membungkus operasi lintas repository (nota dan tabungan, pembatalan dan koreksi pembayaran, persetujuan usulan, serta pembersihan data akun). Implementasi backend wajib memetakan satu pemanggilan terluar ke satu transaksi database lokal SQLite, termasuk outbox; pemanggilan bersarang bergabung ke transaksi tersebut. Implementasi dummy in-memory memakai snapshot/restore seluruh penyimpanan tulis dan counter pending sinkron agar kegagalan membatalkan semua perubahan dan pengecualian tetap diteruskan.
 3. **ID dibuat di klien** (UUID), sehingga membuat data offline tidak pernah bentrok.
 4. **Uang `int` rupiah, berat `int` gram** (jumlah satuan disimpan ribuan: 1 pcs = 1000). Tidak ada float.
 5. **Data keuangan tidak diubah, hanya ditambah** (pembayaran, mutasi tabungan). Koreksi berupa entri baru.

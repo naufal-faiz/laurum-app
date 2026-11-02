@@ -2,11 +2,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/business_profile.dart';
 import 'package:laurum/core/domain/receipt_settings.dart';
 import 'package:laurum/core/domain/repositories/business_repository.dart';
+import 'package:laurum/core/services/transactional_memory.dart';
 import 'package:laurum/features/business/data/business_fixtures.dart';
 
 typedef BusinessState = ({BusinessProfile profile, ReceiptSettings settings});
 
-class InMemoryBusinessRepository extends Notifier<BusinessState> implements BusinessRepository {
+class InMemoryBusinessRepository extends Notifier<BusinessState>
+    with TransactionalMemory<BusinessState>
+    implements BusinessRepository {
   void clearLocalData() => state = (
     profile: BusinessProfile(
       id: state.profile.id,

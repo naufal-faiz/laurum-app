@@ -1,9 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/customer.dart';
 import 'package:laurum/core/domain/repositories/customer_repository.dart';
+import 'package:laurum/core/services/transactional_memory.dart';
 import 'package:laurum/features/customers/data/customer_fixtures.dart';
 
-class InMemoryCustomerRepository extends Notifier<List<Customer>> implements CustomerRepository {
+class InMemoryCustomerRepository extends Notifier<List<Customer>>
+    with TransactionalMemory<List<Customer>>
+    implements CustomerRepository {
   void clearLocalData() => state = const [];
   @override
   List<Customer> build() => List.unmodifiable(customerFixtures);

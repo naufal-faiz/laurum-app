@@ -2,10 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:laurum/core/services/auth_service.dart';
 import 'package:laurum/core/services/local_data_service.dart';
+import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/services/sync_service.dart';
 import 'package:laurum/features/auth/data/auth_fixtures.dart';
 import 'package:laurum/features/auth/data/dummy_account_data.dart';
+import 'package:laurum/features/auth/data/dummy_transaction_runner.dart';
 import 'package:laurum/features/business/data/business_fixtures.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/features/sync/data/sync_fixtures.dart';
@@ -18,6 +20,7 @@ void notifyDummyWrite(Ref ref) {
 }
 
 List<Override> dummySessionOverrides({AuthService? authService, SyncService? syncService}) => [
+  transactionRunnerProvider.overrideWith(dummyTransactionRunner),
   authServiceProvider.overrideWith(
     (ref) => authService ?? FakeAuthService(userId: dummyOwnerId, email: dummyGoogleEmail),
   ),

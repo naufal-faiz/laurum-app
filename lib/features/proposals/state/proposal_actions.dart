@@ -13,30 +13,33 @@ class ProposalActions extends Notifier<AsyncValue<void>> {
     if (state.isLoading) return null;
     state = const AsyncLoading();
     try {
-      final repo = ref.read(proposalRepositoryProvider);
-      final p = await repo.getProposalById(id);
-      if (p == null ||
-          p.status == ProposalStatus.ditolak ||
-          p.status == ProposalStatus.ditutupOtomatis) {
-        throw StateError('Usulan tidak lagi menunggu');
-      }
-      final orderId = p.status == ProposalStatus.disetujui
-          ? p.orderId!
-          : await acceptProposal(ref, p, draft);
-      if (p.status != ProposalStatus.disetujui) {
-        await repo.saveProposal(
-          p.withStatus(
-            ProposalStatus.disetujui,
-            orderId: orderId,
-            customerName: draft.name,
-            phone: draft.phone,
-            address: draft.address,
-            serviceId: draft.serviceId,
-          ),
-        );
-      }
+      final result = await ref.read(transactionRunnerProvider).run(() async {
+        final repo = ref.read(proposalRepositoryProvider);
+        final p = await repo.getProposalById(id);
+        if (p == null ||
+            p.status == ProposalStatus.ditolak ||
+            p.status == ProposalStatus.ditutupOtomatis) {
+          throw StateError('Usulan tidak lagi menunggu');
+        }
+        final orderId = p.status == ProposalStatus.disetujui
+            ? p.orderId!
+            : await acceptProposal(ref, p, draft);
+        if (p.status != ProposalStatus.disetujui) {
+          await repo.saveProposal(
+            p.withStatus(
+              ProposalStatus.disetujui,
+              orderId: orderId,
+              customerName: draft.name,
+              phone: draft.phone,
+              address: draft.address,
+              serviceId: draft.serviceId,
+            ),
+          );
+        }
+        return orderId;
+      });
       state = const AsyncData(null);
-      return orderId;
+      return result;
     } catch (error, stack) {
       state = AsyncError(error, stack);
       return null;

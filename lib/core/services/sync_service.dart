@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:laurum/core/services/transaction_runner.dart';
+
 enum SyncServiceStatus { tersimpan, menyimpan, offline, gagal }
 
 abstract class SyncService {
@@ -12,7 +14,17 @@ abstract class SyncService {
   void recordLocalChange();
 }
 
-class FakeSyncService implements SyncService {
+class FakeSyncService implements SyncService, TransactionParticipant {
+  @override
+  void Function() checkpoint() {
+    final pending = pendingChanges, last = lastSyncedAt, status = _currentStatus;
+    return () {
+      pendingChanges = pending;
+      lastSyncedAt = last;
+      emitStatus(status);
+    };
+  }
+
   FakeSyncService({
     SyncServiceStatus initialStatus = SyncServiceStatus.tersimpan,
     this.pendingChanges = 0,

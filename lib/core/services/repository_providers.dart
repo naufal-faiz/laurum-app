@@ -7,6 +7,7 @@ import 'package:laurum/core/domain/repositories/proposal_repository.dart';
 import 'package:laurum/core/domain/repositories/report_repository.dart';
 import 'package:laurum/core/domain/repositories/savings_repository.dart';
 import 'package:laurum/core/domain/repositories/service_repository.dart';
+import 'package:laurum/core/services/transaction_runner.dart';
 
 final businessRepositoryProvider = Provider<BusinessRepository>((ref) {
   throw UnimplementedError('businessRepositoryProvider not initialized');
@@ -38,4 +39,8 @@ final proposalRepositoryProvider = Provider<ProposalRepository>((ref) {
 
 final reportRepositoryProvider = Provider<ReportRepository>((ref) {
   throw UnimplementedError('reportRepositoryProvider not initialized');
+});
+
+final transactionRunnerProvider = Provider<TransactionRunner>((ref) {
+  throw UnimplementedError('transactionRunnerProvider not initialized');
 });

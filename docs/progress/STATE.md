@@ -1,10 +1,10 @@
 # STATE Laurum
-Diperbarui: 2026-10-31 | Cabang dev1rev
+Diperbarui: 2026-11-02 | Cabang dev1rev
 
 ## Posisi
-Fase 1-8 sampai prompt 90 dan R0-R7 selesai otomatis.
-check_all SEMUA HIJAU: 535 tes, kedua analyzer bersih, check_arch OK,
-REPO_MAP 629 berkas. Bukti di docs/progress/90-auth-sinkron.md.
+Fase 1-8 sampai prompt 90 dan R0-R8 selesai otomatis.
+check_all SEMUA HIJAU: 544 tes, kedua analyzer bersih, check_arch OK, REPO_MAP 637 berkas.
+Bukti dan batas R8 di docs/progress/r8-transaksi-atomik.md.
 
 ## Selesai
 - R0: Section/state; utang Riverpod Section 21 (tidak bertambah).
@@ -27,12 +27,14 @@ REPO_MAP 629 berkas. Bukti di docs/progress/90-auth-sinkron.md.
   jalan langsung ke Edit. Retry tidak membuat pelanggan/order ganda.
 - Prompt 90: Google palsu/guard/onboarding, sync pending/retry/indikator/offline,
   email, peringatan logout, dua konfirmasi hapus dan cleanup data/draf/histori lokal.
+- R8: TransactionRunner untuk checkout, batal, persetujuan AI, cleanup akun;
+  rollback semua store/kategori/sync/sesi dummy; nested dan transaksi antre teruji.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Prompt 90 selesai; siap tinjauan auth/sinkron/akun dummy.
+1. R8 selesai; tinjau rollback dan retry. Berikutnya docs/prompts/R9-pembayaran-cod.md.
 2. Tinjau kelompok auth/sinkron/akun dan keyboard di Android (juga AI/nav/pengeluaran).
    iOS, pembaca layar, printer/ekspor, foto dan WhatsApp nyata belum diuji.
-3. Revisi 2 Nov 2026: kerjakan R8, R9, R10 (docs/revisi/REVISI-02.md) SEBELUM docs/prompts/100-penyelesaian.md.
+3. Kerjakan R9 lalu R10 (docs/revisi/REVISI-02.md) sebelum prompt 100.
    Jangan memulai prompt berikutnya tanpa sesi/tinjauan kelompok ini.
 
 ## Keputusan dan batas
@@ -45,8 +47,8 @@ REPO_MAP 629 berkas. Bukti di docs/progress/90-auth-sinkron.md.
   Tiga usulan aktual dapat dibuka; perubahan status menambah agregat terkait.
 - AI/QR/foto hanya dummy lokal: tidak menautkan atau mengirim pesan.
   Risiko jalur QR PRD B 12 di spec 28; jalur rilis publik belum dipilih.
-- Pembatalan order/tabungan belum rollback lintas repository. Persetujuan baru
-  mengompensasi kegagalan simpan order dengan soft-delete pelanggan baru.
+- TransactionRunner provider wajib untuk operasi lintas repository; implementasi
+  dummy snapshot immutable, backend nanti satu transaksi SQLite termasuk outbox.
 - Catat bayar/Ingatkan piutang masih placeholder; signOut sekarang berfungsi dummy.
 - Auth/Sync hanya simulasi in-memory; tidak ada Google/secure storage/server nyata.
   Keluar menjaga data HP; hapus dua konfirmasi membersihkan repo/draf/baseline demo.
@@ -55,8 +57,5 @@ REPO_MAP 629 berkas. Bukti di docs/progress/90-auth-sinkron.md.
   opsional proposal 001 mengikuti R4. Custom omzet = nota non-batal, CSV BOM titik koma.
 - Tidak mengubah registry/tema/token/lint/PRD/dependensi pada prompt 71/80.
 - Repo E:/Latihan Pemrograman/laurum-projects/laurum, dev1rev. Jangan push/merge.
-- SDK E:/App Data/flutter/flutter; graph laurum-app menunjuk checkout C:/Users/
-  Naufal/Downloads/laurum-app, indeks E lama; pakai REPO_MAP untuk checkout aktif.
-
-## Untuk agen penerus
-Baca AGENTS.md, SKILLS.md, STATE.md; verifikasi git status/log, lanjut bagian di atas.
+- SDK E:/App Data/flutter/flutter; graph E-Latihan-Pemrograman-laurum-projects-laurum
+  terverifikasi menunjuk checkout aktif E:, indeks otomatis diperbarui.

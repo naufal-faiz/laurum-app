@@ -5,6 +5,7 @@ import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/core/domain/repositories/order_repository.dart';
+import 'package:laurum/core/services/transactional_memory.dart';
 import 'package:laurum/features/orders/data/order_event_fixtures.dart';
 import 'package:laurum/features/orders/data/order_fixtures.dart';
 import 'package:laurum/features/orders/data/order_item_fixtures.dart';
@@ -12,7 +13,9 @@ import 'package:laurum/features/orders/data/order_store.dart';
 import 'package:laurum/features/orders/data/order_store_write.dart';
 import 'package:laurum/features/orders/data/payment_fixtures.dart';
 
-class InMemoryOrderRepository extends Notifier<OrderStore> implements OrderRepository {
+class InMemoryOrderRepository extends Notifier<OrderStore>
+    with TransactionalMemory<OrderStore>
+    implements OrderRepository {
   void clearLocalData() => state = OrderStore(orders: [], items: [], payments: [], events: []);
   @override
   OrderStore build() => OrderStore(
@@ -44,7 +47,6 @@ class InMemoryOrderRepository extends Notifier<OrderStore> implements OrderRepos
   @override
   Future<List<OrderEvent>> getEventsByOrderId(String orderId) async =>
       List.unmodifiable(state.events.where((e) => e.orderId == orderId));
-
   @override
   Future<void> saveOrder(
     Order order, {
@@ -52,16 +54,14 @@ class InMemoryOrderRepository extends Notifier<OrderStore> implements OrderRepos
     List<Payment>? payments,
     List<OrderEvent>? events,
     bool useOrderStatus = true,
-  }) async {
-    state = writeOrderStore(
-      state,
-      order,
-      items: items,
-      payments: payments ?? [],
-      events: events ?? [],
-      useOrderStatus: useOrderStatus,
-    );
-  }
+  }) async => state = writeOrderStore(
+    state,
+    order,
+    items: items,
+    payments: payments ?? [],
+    events: events ?? [],
+    useOrderStatus: useOrderStatus,
+  );
 
   @override
   Future<void> updateOrderStatus(

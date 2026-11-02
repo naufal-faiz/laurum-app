@@ -56,10 +56,5 @@ Future<String> acceptProposal(Ref ref, Proposal p, ProposalDraft draft) async {
     address: draft.address.trim(),
   );
   if (isNew) await customers.saveCustomer(customer);
-  try {
-    return (await saveProposalOrder(ref, p, draft, customer.id, service)).id;
-  } catch (_) {
-    if (isNew) await customers.deleteCustomer(customer.id);
-    rethrow;
-  }
+  return (await saveProposalOrder(ref, p, draft, customer.id, service)).id;
 }

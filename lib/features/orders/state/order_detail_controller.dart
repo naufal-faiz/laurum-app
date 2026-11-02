@@ -44,21 +44,24 @@ class OrderActions extends Notifier<OrderActionState> {
     );
   });
 
-  Future<bool> cancel(OrderDetailData data) => _run(data.order.id, () async {
-    final repository = ref.read(orderRepositoryProvider);
-    final savings = ref.read(savingsRepositoryProvider);
-    final result = cancelOrder(
-      data.order,
-      payments: data.payments,
-      savings: await savings.getAllEntries(),
-      correctionPrefix: '${data.order.id}-cancel',
-      at: ref.read(businessClockProvider)(),
-    );
-    await repository.saveOrder(result.order, payments: result.payments, events: [result.event]);
-    for (final entry in result.savings) {
-      await savings.addEntry(entry);
-    }
-  });
+  Future<bool> cancel(OrderDetailData data) => _run(
+    data.order.id,
+    () => ref.read(transactionRunnerProvider).run(() async {
+      final repository = ref.read(orderRepositoryProvider);
+      final savings = ref.read(savingsRepositoryProvider);
+      final result = cancelOrder(
+        data.order,
+        payments: data.payments,
+        savings: await savings.getAllEntries(),
+        correctionPrefix: '${data.order.id}-cancel',
+        at: ref.read(businessClockProvider)(),
+      );
+      await repository.saveOrder(result.order, payments: result.payments, events: [result.event]);
+      for (final entry in result.savings) {
+        await savings.addEntry(entry);
+      }
+    }),
+  );
 
   Future<bool> _run(String orderId, Future<void> Function() action) async {
     if (state.pending.contains(orderId)) return false;

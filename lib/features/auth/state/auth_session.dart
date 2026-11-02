@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/services/sync_service.dart';
 
@@ -58,14 +59,16 @@ class AuthSession extends Notifier<AuthState> {
     await ref.read(authServiceProvider).signOut();
     return true;
   });
-  Future<bool> deleteAccount() => _run(() async {
-    if (ref.read(syncServiceProvider).currentStatus == SyncServiceStatus.offline) {
-      throw StateError('Account deletion requires connectivity');
-    }
-    if (!await ref.read(authServiceProvider).deleteAccount()) return false;
-    await ref.read(localDataServiceProvider).deleteLocalData();
-    return true;
-  });
+  Future<bool> deleteAccount() => _run(
+    () => ref.read(transactionRunnerProvider).run(() async {
+      if (ref.read(syncServiceProvider).currentStatus == SyncServiceStatus.offline) {
+        throw StateError('Account deletion requires connectivity');
+      }
+      if (!await ref.read(authServiceProvider).deleteAccount()) return false;
+      await ref.read(localDataServiceProvider).deleteLocalData();
+      return true;
+    }),
+  );
   Future<bool> _run(Future<bool> Function() action) async {
     if (state.busy) return false;
     state = _snapshot(busy: true);

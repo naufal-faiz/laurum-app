@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/proposal.dart';
 import 'package:laurum/core/services/repository_providers.dart';
+import 'package:laurum/core/services/service_providers.dart';
+import 'package:laurum/features/orders/data/in_memory_order_repository.dart';
 import 'package:laurum/features/proposals/data/in_memory_proposal_repository.dart';
 import 'package:laurum/features/proposals/state/proposal_actions.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
@@ -21,7 +23,7 @@ class FailOnceProposalRepository extends InMemoryProposalRepository {
 }
 
 void main() {
-  test('retry after final proposal write fails reuses existing customer and order', () async {
+  test('final proposal failure rolls back customer and order; retry creates once', () async {
     final scope = ProviderContainer(
       overrides: [
         ...dummyRepositoryOverrides,
@@ -31,10 +33,14 @@ void main() {
     addTearDown(scope.dispose);
     final draft = (await scope.read(proposalDraftProvider('prop-003').future))!;
     final actions = scope.read(proposalActionsProvider('prop-003').notifier);
+    final before = scope.read(inMemoryOrderRepositoryProvider);
+    final pending = scope.read(syncServiceProvider).pendingChanges;
     expect(await actions.approve(draft), isNull);
     expect(scope.read(proposalActionsProvider('prop-003')).hasError, isTrue);
-    expect((await scope.read(customerRepositoryProvider).getCustomers()).length, 49);
-    expect(await actions.reject(), isFalse);
+    expect((await scope.read(customerRepositoryProvider).getCustomers()).length, 48);
+    expect((await scope.read(orderRepositoryProvider).getOrders()).length, 16);
+    expect(scope.read(inMemoryOrderRepositoryProvider), same(before));
+    expect(scope.read(syncServiceProvider).pendingChanges, pending);
     expect(await actions.approve(draft), 'ord-ai-prop-003');
     expect((await scope.read(customerRepositoryProvider).getCustomers()).length, 49);
     expect((await scope.read(orderRepositoryProvider).getOrders()).length, 17);
