@@ -21,11 +21,8 @@ class SignInSection extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.stretch,
     spacing: AppSpacing.screenPadding,
     children: [
-      const AppText('Laurum', variant: AppTextVariant.figure),
-      const AppText('Kasir laundry untuk usaha rumahan'),
-      const AppText('Masuk', variant: AppTextVariant.section),
       if (error != null) BannerMessage(message: error!, variant: BannerMessageVariant.error),
-      if (busy) AppText(restoring ? 'Memulihkan data...' : 'Menghubungkan akun Google...'),
+      if (busy) AppText(restoring ? 'Memulihkan data...' : 'Memproses permintaan...'),
       AppButton(
         'Lanjutkan dengan Google',
         icon: AppIcons.person,

@@ -32,6 +32,10 @@ void main() {
     tester,
   ) async {
     final host = await pumpAntrean(tester, location: '/lainnya');
+    expect(find.text('Hapus akun'), findsNothing);
+    await tester.ensureVisible(find.text('Kelola akun'));
+    await tester.tap(find.text('Kelola akun'));
+    await tester.pumpAndSettle();
     final button = find.text('Hapus akun');
     await tester.ensureVisible(button);
     await tester.tap(button);

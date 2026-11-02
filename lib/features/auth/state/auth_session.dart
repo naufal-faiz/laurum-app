@@ -1,55 +1,56 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:laurum/core/services/auth_service.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/services/sync_service.dart';
+import 'package:laurum/features/auth/state/auth_error.dart';
+import 'package:laurum/features/auth/state/auth_state.dart';
+export 'package:laurum/features/auth/state/auth_state.dart';
 
-typedef AuthState = ({bool signedIn, bool needsSetup, bool busy, String? error});
 final authSessionProvider = NotifierProvider<AuthSession, AuthState>(AuthSession.new);
 
 class AuthSession extends Notifier<AuthState> {
   @override
-  AuthState build() {
-    ref.watch(authServiceProvider);
-    return _snapshot();
-  }
-
-  AuthState _snapshot({bool busy = false, String? error}) {
-    final auth = ref.read(authServiceProvider);
-    return (
-      signedIn: auth.isSignedIn,
-      needsSetup: auth.needsBusinessSetup,
-      busy: busy,
-      error: error,
-    );
-  }
-
+  AuthState build() => authSnapshot(ref.watch(authServiceProvider));
+  AuthState _snapshot({bool busy = false, String? error}) =>
+      authSnapshot(ref.read(authServiceProvider), busy: busy, error: error);
   Future<void> _restore() async {
     try {
       await ref.read(syncServiceProvider).syncNow();
     } catch (_) {
-      /* Login remains available with local data when sync fails. */
+      /* Local data remains usable when restoration fails. */
     }
   }
 
-  Future<bool> signIn() async {
-    if (state.busy) return false;
+  Future<bool> _login(Future<bool> Function(AuthService) action, String failure) => _run(() async {
+    final auth = ref.read(authServiceProvider);
+    if (!await action(auth)) return false;
     state = _snapshot(busy: true);
-    try {
-      final auth = ref.read(authServiceProvider);
-      if (!await auth.signInWithGoogle()) {
-        state = _snapshot(error: 'Masuk dibatalkan. Coba lagi.');
-        return false;
-      }
-      state = _snapshot(busy: true);
-      if (!auth.needsBusinessSetup) await _restore();
-      state = _snapshot();
-      return true;
-    } catch (_) {
-      state = _snapshot(error: 'Gagal masuk. Coba lagi.');
-      return false;
-    }
-  }
-
+    if (!auth.needsBusinessSetup) await _restore();
+    return true;
+  }, failure: failure);
+  Future<bool> signIn() =>
+      _login((auth) => auth.signInWithGoogle(), 'Masuk dibatalkan. Coba lagi.');
+  Future<bool> signInWithPassword(String email, String password) => _login(
+    (auth) => auth.signInWithPassword(email, password),
+    'Email atau password tidak cocok.',
+  );
+  Future<bool> signUp(String email, String password, String name) => _run(() async {
+    await ref.read(authServiceProvider).signUp(email, password, name);
+    return true;
+  });
+  Future<bool> confirmEmail() => _run(
+    () => ref.read(authServiceProvider).confirmEmail(),
+    failure: 'Tautan tidak dapat diproses. Periksa email atau masuk kembali.',
+  );
+  Future<bool> updateProfile(String name, String phone) => _run(() async {
+    await ref.read(authServiceProvider).updateProfile(name, phone);
+    return true;
+  });
+  Future<bool> changePassword(String current, String next) => _run(() async {
+    await ref.read(authServiceProvider).changePassword(current, next);
+    return true;
+  });
   Future<bool> completeSetup() => _run(() async {
     await ref.read(authServiceProvider).completeBusinessSetup();
     await _restore();
@@ -69,15 +70,15 @@ class AuthSession extends Notifier<AuthState> {
       return true;
     }),
   );
-  Future<bool> _run(Future<bool> Function() action) async {
+  Future<bool> _run(Future<bool> Function() action, {String? failure}) async {
     if (state.busy) return false;
     state = _snapshot(busy: true);
     try {
       final ok = await action();
-      state = _snapshot(error: ok ? null : 'Tindakan gagal. Data lokal dipertahankan.');
+      state = _snapshot(error: ok ? null : failure ?? 'Tindakan gagal. Data lokal dipertahankan.');
       return ok;
-    } catch (_) {
-      state = _snapshot(error: 'Tindakan gagal. Periksa koneksi dan coba lagi.');
+    } catch (error) {
+      state = _snapshot(error: authErrorMessage(error));
       return false;
     }
   }

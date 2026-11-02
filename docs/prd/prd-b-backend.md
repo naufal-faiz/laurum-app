@@ -45,7 +45,7 @@ Supabase: Auth (Google) | Postgres + RLS | Storage (foto struk)
 
 ## 4. Autentikasi
 
-- **Satu-satunya metode: Google.** Login native dengan `google_sign_in`, lalu `supabase.auth.signInWithIdToken(provider: google, idToken, accessToken)`. Perlu *Web client ID* di Google Cloud dan provider Google aktif di Supabase (panduan resmi Supabase untuk Flutter).
+- **Metode masuk (R10): email + password dan Google**, melalui AuthService; nomor telepon hanya profil opsional tanpa OTP. Pendaftaran memakai konfirmasi email; reset dan pendaftaran memberi pesan seragam tanpa mengungkap keberadaan akun. Tahap backend menyiapkan SMTP kustom untuk konfirmasi/reset karena layanan email bawaan dibatasi; pembatasan permintaan juga wajib ditegakkan server. Google native tetap melalui `google_sign_in` dan `supabase.auth.signInWithIdToken(provider: google, idToken, accessToken)` dengan Web client ID/provider aktif. Saat ini seluruh alur masih dummy in-memory; tombol Lanjut pada Cek email hanya verifikasi simulasi, bukan bukti verifikasi produksi.
 - Sesi disimpan dengan `flutter_secure_storage` (bukan SharedPreferences biasa).
 - **Alur pertama kali:** Masuk → (akun baru) layar Info Usaha untuk nama usaha → pull awal → Beranda. **Akun lama di HP baru:** Masuk → layar "Memulihkan data..." dengan progres → Beranda.
 - **Keluar:** jika outbox belum kosong, tampilkan peringatan jumlah perubahan yang belum tersinkron. Opsi "Keluar dan hapus data di HP" hanya aktif setelah sinkron tuntas.

@@ -4,23 +4,21 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
+import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
 class SettingsAccountSection extends StatelessWidget {
   const SettingsAccountSection({
     required this.onLogout,
+    required this.onManage,
     this.email = '',
-    this.onDelete,
     this.busy = false,
-    this.deleteHint,
     super.key,
   });
 
-  final VoidCallback onLogout;
-  final VoidCallback? onDelete;
+  final VoidCallback onLogout, onManage;
   final String email;
   final bool busy;
-  final String? deleteHint;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -33,15 +31,9 @@ class SettingsAccountSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: AppSpacing.cardGap,
           children: [
-            const AppText('Email Google', variant: AppTextVariant.label),
+            const AppText('Email', variant: AppTextVariant.label),
             AppText(email.isEmpty ? 'Belum masuk' : email),
-            AppButton(
-              'Hapus akun',
-              icon: AppIcons.delete,
-              variant: AppButtonVariant.destructiveOutline,
-              onPressed: busy ? null : onDelete,
-            ),
-            if (deleteHint != null) AppText(deleteHint!, variant: AppTextVariant.caption),
+            MenuRow(label: 'Kelola akun', icon: AppIcons.person, onTap: busy ? null : onManage),
           ],
         ),
       ),

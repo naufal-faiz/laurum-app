@@ -68,11 +68,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_svgs.dart (4): AppSvgs
 
 ### lib/core/services/
-- auth_service.dart (70): AuthService, FakeAuthService
+- auth_failure.dart (8): AuthFailureKind, AuthFailure
+- auth_service.dart (23): AuthService
 - contact_source.dart (31): ContactItem, ContactSource, ContactPermissionDenied, FakeContactSource
 - dummy_history.dart (11): DummyHistory, dummyHistoryProvider
 - export_service.dart (19): ExportService, FakeExportService
 - external_launcher.dart (25): ExternalLauncher, FakeExternalLauncher
+- fake_auth_account.dart (31): FakeAuthAccount
+- fake_auth_accounts.dart (97): FakeAuthAccounts
+- fake_auth_service.dart (84): FakeAuthService
+- fake_password_auth.dart (76): FakePasswordAuth
 - in_memory_transaction_runner.dart (55): InMemoryTransactionRunner, _TransactionScope
 - local_data_service.dart (14): LocalDataService, FakeLocalDataService
 - photo_picker.dart (16): PhotoPicker, FakePhotoPicker
@@ -101,21 +106,43 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/auth/data/
 - auth_fixtures.dart (1):
-- dummy_account_data.dart (33):
-- dummy_session_overrides.dart (39):
+- dummy_account_data.dart (49):
+- dummy_session_overrides.dart (45):
 - dummy_transaction_runner.dart (23):
 
 ### lib/features/auth/pages/
+- account_edit_sheet.dart (33): AccountEditSheet
 - account_flow.dart (47):
-- auth_routes.dart (24):
-- sign_in_page.dart (21): SignInPage
+- auth_routes.dart (36):
+- change_password_sheet.dart (52): ChangePasswordSheet
+- check_email_page.dart (43): CheckEmailPage
+- manage_account_page.dart (53): ManageAccountPage
+- password_reset_page.dart (26): PasswordResetPage
+- sign_in_page.dart (74): SignInPage
+- sign_up_page.dart (58): SignUpPage
 
 ### lib/features/auth/state/
+- account_edit.dart (52): AccountField, AccountEditView, AccountEdit, accountEditProvider
+- account_view.dart (16): AccountView
+- auth_error.dart (9):
+- auth_form.dart (83): AuthForm, authFormProvider
+- auth_form_view.dart (34): AuthFormKind, AuthSecret, AuthFormView
 - auth_router_refresh.dart (11): authRouterRefreshProvider
-- auth_session.dart (84): AuthState, AuthSession, authSessionProvider
+- auth_session.dart (85): AuthSession, authSessionProvider
+- auth_state.dart (16): AuthState
+- auth_validation.dart (45):
+- password_reset.dart (64): PasswordReset, passwordResetProvider
+- password_reset_view.dart (29): PasswordResetView
 
 ### lib/features/auth/widgets/
-- sign_in_section.dart (36): SignInSection
+- account_danger_section.dart (45): AccountDangerSection
+- account_edit_field_section.dart (34): AccountEditFieldSection
+- account_profile_section.dart (63): AccountProfileSection
+- auth_identity_section.dart (55): AuthIdentitySection
+- auth_passwords_section.dart (59): AuthPasswordsSection
+- auth_secret_field_section.dart (31): AuthSecretFieldSection
+- password_reset_section.dart (36): PasswordResetSection
+- sign_in_section.dart (33): SignInSection
 
 ### lib/features/business/data/
 - business_fixtures.dart (21):
@@ -348,14 +375,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_edit_fields_section.dart (100): ServiceEditFieldsSection
 
 ### lib/features/settings/pages/
-- settings_page.dart (37): SettingsPage
+- settings_page.dart (33): SettingsPage
 
 ### lib/features/settings/state/
 - order_status_setting.dart (31): OrderStatusSettingState, OrderStatusSetting, orderStatusSettingProvider
 
 ### lib/features/settings/widgets/
-- settings_account_section.dart (61): SettingsAccountSection
-- settings_menu_section.dart (87): SettingsMenuSection
+- settings_account_section.dart (53): SettingsAccountSection
+- settings_menu_section.dart (82): SettingsMenuSection
 - settings_operational_section.dart (59): SettingsOperationalSection
 
 ### lib/features/shell/pages/
@@ -425,7 +452,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/
 - main.dart (18):
-- main_dummy.dart (96):
+- main_dummy.dart (97):
 
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
@@ -496,7 +523,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sub_scaffold.dart (62): SubScaffold
 
 ### test/
-- account_actions_test.dart (56):
+- account_actions_test.dart (60):
 - account_rollback_test.dart (56): FailingClearSync
 - add_customer_test.dart (64):
 - ai_golden_test.dart (52):
@@ -533,12 +560,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_text_test.dart (39):
 - atom_gallery_test.dart (75):
 - auth_onboarding_keyboard_test.dart (33):
-- auth_restore_test.dart (43): DeferredRestore
-- auth_routes_test.dart (56):
+- auth_restore_test.dart (45): DeferredRestore
+- auth_routes_test.dart (60):
 - auth_scaffold_test.dart (22):
 - auth_session_test.dart (64):
-- auth_sync_golden_test.dart (82):
-- auth_sync_sections_test.dart (91):
+- auth_sync_golden_test.dart (84):
+- auth_sync_sections_test.dart (93):
 - banner_message_test.dart (23):
 - bottom_nav_bar_test.dart (104):
 - business_info_page_test.dart (50):
@@ -632,6 +659,21 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - proposal_pages_test.dart (72):
 - proposal_retry_test.dart (52): FailOnceProposalRepository
 - proposal_sections_test.dart (92):
+- r10_account_flow_test.dart (64):
+- r10_account_keyboard_test.dart (32):
+- r10_account_sections_test.dart (64):
+- r10_auth_form_test.dart (51): FailingPasswordAuth
+- r10_auth_keyboard_test.dart (34):
+- r10_auth_service_test.dart (83):
+- r10_auth_validation_test.dart (32):
+- r10_form_sections_test.dart (85):
+- r10_onboarding_cleanup_test.dart (35):
+- r10_registration_flow_test.dart (55):
+- r10_reset_state_test.dart (31):
+- r10_signin_reset_flow_test.dart (55):
+- r10_signup_validation_test.dart (35):
+- r10_test_host.dart (65):
+- r10_visual_test.dart (70):
 - r2_navigation_test.dart (56):
 - r3_customer_creation_test.dart (55):
 - r3_service_creation_test.dart (50):
@@ -702,7 +744,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_picker_list_section_test.dart (38):
 - service_picker_test.dart (54):
 - service_row_test.dart (41):
-- settings_page_test.dart (80):
+- settings_page_test.dart (82):
 - sheet_scaffold_test.dart (37):
 - stat_tile_test.dart (24):
 - stepper_field_test.dart (33):

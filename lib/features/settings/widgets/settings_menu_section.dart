@@ -21,9 +21,7 @@ class SettingsMenuSection extends StatelessWidget {
     required this.onLogout,
     this.error,
     this.email = '',
-    this.onDelete,
     this.accountBusy = false,
-    this.deleteHint,
     super.key,
   });
   final String address;
@@ -33,9 +31,7 @@ class SettingsMenuSection extends StatelessWidget {
   final ValueChanged<String> onNavigate;
   final VoidCallback onLogout;
   final String email;
-  final VoidCallback? onDelete;
   final bool accountBusy;
-  final String? deleteHint;
 
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
@@ -77,9 +73,8 @@ class SettingsMenuSection extends StatelessWidget {
         SettingsAccountSection(
           onLogout: onLogout,
           email: email,
-          onDelete: onDelete,
+          onManage: () => onNavigate('/lainnya/akun'),
           busy: accountBusy,
-          deleteHint: deleteHint,
         ),
       ],
     ),

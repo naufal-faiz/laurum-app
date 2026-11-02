@@ -40,7 +40,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | 20 | 90-auth-sinkron.md | Masuk Google (dummy), Sinkronisasi, Akun | SELESAI (2026-10-31) | 535 tes hijau; guard/onboarding, pending/sync/retry/offline, logout dan hapus dua langkah dengan cleanup dummy |
 | R8 | R8-transaksi-atomik.md | Revisi 2 Nov: TransactionRunner lintas repository (fondasi) | SELESAI (2026-11-02) | 544 tes hijau; rollback nota/tabungan/usulan/cleanup akun dan retry teruji |
 | R9 | R9-pembayaran-cod.md | Revisi 2 Nov 1,2,6,7,8: COD, kembalian/tabungan, tombol Cetak/Ke antrean, Catat pembayaran | SELESAI (2026-11-02) | 580 tes hijau; COD kedua mode, uang lebih, tiga pintu Catat bayar, rollback, keyboard dan golden; tinjau Android |
-| R10 | R10-akun.md | Revisi 2 Nov 3,4,5: Masuk email, Daftar, Lupa password, Kelola akun | BELUM | Tinjau keyboard dan layar baru |
+| R10 | R10-akun.md | Revisi 2 Nov 3,4,5: Masuk email, Daftar, Lupa password, Kelola akun | SELESAI (2026-11-02) | check_all 639 tes hijau; auth dummy, profil/password, reset 60 detik, cleanup/rollback, keyboard dan golden; tinjau Android |
 | 21 | 100-penyelesaian.md | Audit, aksesibilitas, alur akhir, APK | BELUM | **Butuh Android SDK. Coba di HP** |
 
 Setelah No 21 selesai, antrean berikutnya adalah backend (PRD B bagian 14). Prompt-nya disusun terpisah setelah keputusan terbuka PRD B dijawab.

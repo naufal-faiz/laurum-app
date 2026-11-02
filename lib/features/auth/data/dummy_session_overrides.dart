@@ -22,7 +22,13 @@ void notifyDummyWrite(Ref ref) {
 List<Override> dummySessionOverrides({AuthService? authService, SyncService? syncService}) => [
   transactionRunnerProvider.overrideWith(dummyTransactionRunner),
   authServiceProvider.overrideWith(
-    (ref) => authService ?? FakeAuthService(userId: dummyOwnerId, email: dummyGoogleEmail),
+    (ref) =>
+        authService ??
+        FakeAuthService(
+          userId: dummyOwnerId,
+          email: dummyGoogleEmail,
+          accounts: dummyAuthAccounts(),
+        ),
   ),
   localDataServiceProvider.overrideWith(
     (ref) => FakeLocalDataService(onDelete: () => clearDummyAccountData(ref)),

@@ -870,10 +870,10 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Spec 25/26 dan progress/80-ai.md mencatat sinkronisasi fixture dan batas dummy.
 
 ## Prompt 90 - autentikasi/sinkronisasi/akun
-- SignInSection: busy/restoring/error/onGoogle; AuthScaffold, tanpa input password.
+- SignInSection: busy/error/onGoogle; bagian tombol Google dan status pada FormScaffold (R10).
 - SyncStatusSection: SyncView/busy/failed/conflictExample/onSync; status dan retry
   dari service palsu, contoh konflik sebagai informasi.
-- SettingsAccountSection kini menerima email/busy/onDelete/deleteHint; Keluar tetap
+- SettingsAccountSection kini menerima email/busy/onManage/onLogout; Keluar tetap
   destructiveOutline di luar kartu. Callback disediakan SettingsPage, bukan provider.
 - Info Usaha menangani onboarding akun baru, guard sampai nama tersimpan; field
   awal nonkosong memakai selectAllOnFocus. Spec 19/22/29/30.
@@ -897,3 +897,23 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   tidak membaca provider/router. Nomor/status OrderSummarySection membungkus pada teks besar.
 - Empat golden r9_cod_* mencakup pembayaran, Detail, kartu Antrean dan Piutang 320 px/2x.
   Spec layar 01/07/08/09/18 mengalahkan pilihan pembayaran lama pada .pen.
+
+## R10 - Akun email dan profil (2 Nov 2026)
+- AuthIdentitySection: name opsional/email, errors/enabled, callback onName/onEmail.
+- AuthSecretFieldSection: label/error/visible/enabled dan callback onChanged;
+  nilai password hanya berada di field, tidak diterima sebagai view-data Section.
+- AuthPasswordsSection: current/confirmation/visible/errors/enabled, callback secret
+  dan toggle. Tombol tampil/sembunyi memakai AppButton + AppIcons.visible yang ada.
+- PasswordResetSection: email/error/enabled/sent dan callback email; respons seragam.
+- AccountProfileSection: AccountView/busy dan callback name/phone/password; email
+  hanya baca, metode Google membatasi aksi password. Email memakai lebar penuh.
+- AccountDangerSection: busy/offline/error dan callback logout/delete; dua konfirmasi
+  tetap milik flow Page. AccountEditFieldSection: field/value/error/enabled/onChanged.
+- Ketujuh Section Stateless, tanpa Riverpod/router, masing-masing punya tes widget.
+- SignIn/SignUp/PasswordResetPage dan CheckEmailPage memakai FormScaffold;
+  ManageAccountPage SubScaffold, dua sheet melalui AppBottomSheet + SheetScaffold.
+- Routes /daftar, /cek-email, /lupa-password, /lainnya/akun; guard dan onboarding tetap.
+- Page membaca authForm/authSession/passwordReset/accountEdit; view tidak menyimpan
+  rahasia. Cache field privat sementara dihapus saat berhasil atau dispose form.
+- Keyboard 300 dp untuk 12 field, ukuran 320 px/teks 2x dan golden; spec 19/29/31-33
+  mengalahkan frame Google-only .pen. Tidak ada perubahan API widget bersama.

@@ -21,7 +21,9 @@ void main() {
     expect(find.text('Otomatisasi AI'), findsOneWidget);
     expect(find.text('Info usaha & alamat'), findsOneWidget);
     expect(find.text('Sinkronisasi'), findsOneWidget);
-    expect(find.text('Email Google'), findsOneWidget);
+    expect(find.text('Email'), findsOneWidget);
+    expect(find.text('Kelola akun'), findsOneWidget);
+    expect(find.text('Hapus akun'), findsNothing);
     expect(find.text('ratna@example.com'), findsOneWidget);
     expect(find.text('Keluar'), findsOneWidget);
     expect(find.text('Laurum v1.0.0'), findsOneWidget);

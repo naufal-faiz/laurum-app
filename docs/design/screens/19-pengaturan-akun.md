@@ -1,5 +1,5 @@
 # 19 - Pengaturan dan Akun
-Rute: /lainnya (tab Lainnya, indeks 3; Transaksi adalah aksi tengah)   Prompt: 70/R4
+Rute: /lainnya (tab Lainnya, indeks 3; Transaksi adalah aksi tengah)   Prompt: 70/R4/R10
 Frame .pen: "Lainnya - Pengaturan & Akun"; State "Keluar dari akun".
 Template: RootScaffold dari RootShellPage; isi memakai SettingsMenuSection.
 
@@ -11,7 +11,7 @@ Komposisi:
   ToggleRow 'Pakai status order', dan MenuRow Sinkronisasi.
 - Toggle default aktif. Deskripsi: "Matikan bila usaha tidak melacak tahap cucian.
   Order baru langsung 'Sedang dikerjakan'." Tidak ada tombol Simpan terpisah.
-- SectionHeader 'AKUN'; AppCard berisi email Google dan AppButton Hapus akun.
+- SectionHeader 'AKUN'; AppCard berisi email sesi dan MenuRow Kelola akun.
   Di bawah kartu: AppButton destructiveOutline 'Keluar' dengan ikon logout.
   AppText 'Laurum v1.0.0'. Tidak ada MenuRow Keluar di dalam kartu (R7).
 
@@ -24,23 +24,23 @@ Data dan provider:
   callback dari SettingsPage. Tidak membaca provider/router di Section.
 - whatsappConnectionProvider untuk status Terhubung/Terputus pada Otomatisasi AI.
 - authSessionProvider menangani masuk/keluar/hapus melalui AuthService palsu.
-- Keluar memperingatkan jumlah pending dan menjaga data HP. Hapus memerlukan
-  dua ConfirmModal, dinonaktifkan saat offline, dan membersihkan data lokal jika sukses.
+- Keluar memperingatkan jumlah pending dan menjaga data HP. Hapus akun hanya
+  tersedia di Kelola akun (spec 33), tetap melalui dua ConfirmModal.
 
 Interaksi:
 - Layanan dan tarif -> /lainnya/layanan; Pengeluaran -> /lainnya/pengeluaran;
   Printer dan struk -> /lainnya/printer; Otomatisasi AI -> /lainnya/ai;
-  Info usaha -> /lainnya/info-usaha; Sinkronisasi -> /lainnya/sinkronisasi.
+  Info usaha -> /lainnya/info-usaha; Sinkronisasi -> /lainnya/sinkronisasi;
+  Kelola akun -> /lainnya/akun.
 - Keluar membuka ConfirmModal 'Keluar dari akun?' dengan pesan
   'Data tetap tersimpan online. Anda bisa masuk lagi kapan saja.', ikon logout,
   dan tombol konfirmasi destruktif.
-  Konfirmasi memanggil signOut lalu menuju /masuk (placeholder prompt 90).
+  Konfirmasi memanggil signOut lalu menuju /masuk (email/password atau Google dummy).
 - Mengubah toggle memperbarui Antrean/Detail lewat invalidasi profil; data order
   lama tidak diubah. Default true mempertahankan tahap/CTA, false memakai alur R4.
 - Checkout membaca profil terkini saat menyimpan; kasir langsung diproses, event
   created mengikuti status aktual dan repository menerima policy yang sama.
-- Persetujuan AI belum tersedia (placeholder prompt 80). initialOrderStatus sudah
-  diuji untuk source whatsappAi kedua mode; caller persetujuan kelak wajib memakainya.
+- Persetujuan AI (prompt 80) memakai initialOrderStatus sesuai mode aktif.
 
 State layar: modal konfirmasi keluar; tab 320 px dan teks 2x diuji.
 R4: simpan gagal/retry, ketukan ganda, golden r4_settings.png, toggle -> checkout ->
@@ -54,3 +54,5 @@ Selisih terhadap .pen:
 - Judul AppBarRoot memakai nama usaha dari Info Usaha, sesuai keputusan global.
 - Pengeluaran belum menampilkan total bulan ini (prompt 71).
 - Toggle R4 ditambahkan sesuai revisi; tidak ada pada frame .pen lama.
+- R10 mengganti Hapus akun dengan Kelola akun; Keluar tetap di luar kartu (R7).
+  Email sesi bisa berasal dari email/password atau Google. Belum diuji di iOS.

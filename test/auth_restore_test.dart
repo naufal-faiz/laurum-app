@@ -29,6 +29,8 @@ void main() {
       overrides: dummyOverrides(authService: FakeAuthService(isSignedIn: false), syncService: sync),
     );
     await pumpAntrean(tester, container: scope, location: '/masuk');
+    await tester.ensureVisible(find.text('Lanjutkan dengan Google'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Lanjutkan dengan Google'));
     await tester.pumpAndSettle();
     expect(find.text('Memulihkan data...'), findsOneWidget);

@@ -40,7 +40,9 @@ void main() {
     expect(find.text('Memulihkan data...'), findsOneWidget);
     expect(tester.widget<AppButton>(find.byType(AppButton)).onPressed, isNull);
   });
-  testWidgets('SettingsAccountSection email, delete and destructive logout', (tester) async {
+  testWidgets('SettingsAccountSection email, manage account and destructive logout', (
+    tester,
+  ) async {
     var deletes = 0;
     var exits = 0;
     await tester.pumpWidget(
@@ -49,14 +51,14 @@ void main() {
         home: Scaffold(
           body: SettingsAccountSection(
             email: 'ratna@example.com',
-            onDelete: () => deletes++,
+            onManage: () => deletes++,
             onLogout: () => exits++,
           ),
         ),
       ),
     );
     expect(find.text('ratna@example.com'), findsOneWidget);
-    await tester.tap(find.text('Hapus akun'));
+    await tester.tap(find.text('Kelola akun'));
     await tester.tap(find.text('Keluar'));
     expect(deletes, 1);
     expect(exits, 1);

@@ -25,8 +25,9 @@ List<Override> dummyOverrides({
   ContactSource? contactSource,
   AuthService? authService,
   SyncService? syncService,
+  DateTime Function()? clock,
 }) => [
-  businessClockProvider.overrideWithValue(() => DateTime(2026, 10, 16, 10, 45)),
+  businessClockProvider.overrideWithValue(clock ?? () => DateTime(2026, 10, 16, 10, 45)),
   contactSourceProvider.overrideWith(
     (ref) => contactSource ?? FakeContactSource(contacts: contactFixtures),
   ),

@@ -13,8 +13,8 @@ final businessInfoProvider = AsyncNotifierProvider<BusinessInfoController, Busin
 class BusinessInfoController extends AsyncNotifier<BusinessInfoState> {
   @override
   Future<BusinessInfoState> build() async {
+    final setup = ref.watch(authSessionProvider.select((session) => session.needsSetup));
     final profile = await ref.read(businessRepositoryProvider).getProfile();
-    final setup = ref.read(authServiceProvider).needsBusinessSetup;
     return BusinessInfoState(
       profile: profile,
       name: setup ? '' : profile.name,

@@ -1,7 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/services/dummy_history.dart';
+import 'package:laurum/core/services/fake_auth_account.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
+import 'package:laurum/features/auth/data/auth_fixtures.dart';
+import 'package:laurum/features/auth/state/password_reset.dart';
+import 'package:laurum/features/business/data/business_fixtures.dart';
 import 'package:laurum/features/business/data/in_memory_business_repository.dart';
 import 'package:laurum/features/business/state/business_info_controller.dart';
 import 'package:laurum/features/customers/data/in_memory_customer_repository.dart';
@@ -13,6 +17,17 @@ import 'package:laurum/features/proposals/data/in_memory_proposal_repository.dar
 import 'package:laurum/features/proposals/state/proposal_review.dart';
 import 'package:laurum/features/services/data/in_memory_service_repository.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
+
+// Public demo credentials only; never a real account or persistent credential store.
+List<FakeAuthAccount> dummyAuthAccounts() => [
+  const FakeAuthAccount(
+    id: dummyOwnerId,
+    email: dummyGoogleEmail,
+    name: 'Bu Ratna',
+    googleLinked: true,
+    password: 'Laundry123!',
+  ),
+];
 
 Future<void> clearDummyAccountData(Ref ref) async {
   await ref.read(transactionRunnerProvider).run(() async {
@@ -30,4 +45,5 @@ Future<void> clearDummyAccountData(Ref ref) async {
   ref.invalidate(expenseFormProvider);
   ref.invalidate(proposalDraftProvider);
   ref.invalidate(businessInfoProvider);
+  ref.invalidate(passwordResetProvider);
 }

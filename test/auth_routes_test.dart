@@ -18,8 +18,10 @@ void main() {
     );
     final host = await pumpAntrean(tester, container: scope, location: '/pelanggan/cust-001');
     expect(host.router.routeInformationProvider.value.uri.path, '/masuk');
-    expect(find.byType(TextField), findsNothing);
-    expect(find.text('Lupa kata sandi?'), findsNothing);
+    expect(find.byType(TextField), findsNWidgets(2));
+    expect(find.text('Lupa password?'), findsOneWidget);
+    await tester.ensureVisible(find.text('Lanjutkan dengan Google'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Lanjutkan dengan Google'));
     await tester.pumpAndSettle();
     expect(find.text('Antrean aktif'), findsOneWidget);
@@ -32,6 +34,8 @@ void main() {
       ),
     );
     final host = await pumpAntrean(tester, container: scope, location: '/masuk');
+    await tester.ensureVisible(find.text('Lanjutkan dengan Google'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Lanjutkan dengan Google'));
     await tester.pumpAndSettle();
     expect(find.text('Info usaha'), findsOneWidget);

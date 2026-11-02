@@ -51,6 +51,8 @@ void main() {
         location: signin ? '/masuk' : '/lainnya/sinkronisasi',
       );
       if (name == 'auth_signin_error') {
+        await tester.ensureVisible(find.text('Lanjutkan dengan Google'));
+        await tester.pumpAndSettle();
         await tester.tap(find.text('Lanjutkan dengan Google'));
         await tester.pumpAndSettle();
       }
