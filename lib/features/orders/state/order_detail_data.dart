@@ -5,9 +5,11 @@ import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_item.dart';
+import 'package:laurum/core/domain/order_rules.dart' show isCompletionHeld;
 import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/services/repository_providers.dart';
+import 'package:laurum/features/orders/state/payment_label.dart' as labels;
 
 const orderStatusLabels = ['Menunggu jemput', 'Diproses', 'Siap', 'Selesai', 'Dibatalkan'];
 
@@ -57,11 +59,9 @@ class OrderDetailData {
   int get paid => paidAmount(payments, orderId: order.id);
   int get outstanding => (order.total - paid).clamp(0, order.total);
   PayStatus get paymentStatus => payStatus(total: order.total, paid: paid);
-  String get paymentLabel => switch (paymentStatus) {
-    PayStatus.belumBayar => 'Belum bayar',
-    PayStatus.dp => 'DP ${Formatters.rupiah(paid)}',
-    PayStatus.lunas => 'Lunas',
-  };
+  String get paymentLabel => labels.paymentLabel(order, paid);
+  bool get completionHeld => isCompletionHeld(order, paid);
+  bool get canRecord => outstanding > 0 && order.status != OrderStatus.dibatalkan;
   bool get isFinal => order.status == OrderStatus.selesai || order.status == OrderStatus.dibatalkan;
   bool get fromWhatsapp => order.source == OrderSource.whatsappAi;
   List<ActivityEntry> get activity => [

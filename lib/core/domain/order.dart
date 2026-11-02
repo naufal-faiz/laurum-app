@@ -20,6 +20,7 @@ class Order extends DomainRecord {
     super.syncState,
     this.proposalId,
     this.note = '',
+    this.payTerm = PayTerm.sekarang,
     this.deletedAt,
   }) : assert(discount >= 0),
        assert(subtotal >= discount),
@@ -35,6 +36,7 @@ class Order extends DomainRecord {
   final int total;
   final String? proposalId;
   final String note;
+  final PayTerm payTerm;
   final DateTime? deletedAt;
   Order withStatus(OrderStatus value, {bool useOrderStatus = true}) {
     final next = nextStatus(
@@ -50,6 +52,8 @@ class Order extends DomainRecord {
       ownerId: ownerId,
       createdAt: createdAt,
       updatedAt: updatedAt,
+      syncState: syncState,
+      payTerm: payTerm,
       orderNo: orderNo,
       customerId: customerId,
       status: value,
@@ -79,6 +83,7 @@ class Order extends DomainRecord {
     total,
     proposalId,
     note,
+    payTerm,
     deletedAt,
   ];
 }

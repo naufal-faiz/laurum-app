@@ -18,6 +18,7 @@ List<String> receiptLines({
   required String customerName,
   required ReceiptSettings settings,
   int savingsBalance = 0,
+  String? paymentLabel,
 }) {
   final active = items.where((i) => i.deletedAt == null).toList();
   final ledger = payments.where((p) => p.deletedAt == null).toList();
@@ -54,7 +55,7 @@ List<String> receiptLines({
     ReceiptLayout.row('SISA BAYAR', Formatters.rupiah(due)),
     if (settings.showSavings && (savingsBalance > 0 || used > 0))
       ReceiptLayout.row('Sisa tabungan', Formatters.rupiah(remaining)),
-    'STATUS: ${_status(due, paid, used, cash)}',
+    'STATUS: ${paymentLabel ?? _status(order, due, used, cash)}',
     ReceiptLayout.rule,
     if (settings.showNote && order.note.isNotEmpty) ...[
       ...ReceiptLayout.note(order.note),
@@ -69,9 +70,9 @@ List<String> receiptLines({
 int _sum(List<Payment> ledger, PayMethod method) =>
     ledger.where((p) => p.method == method).fold<int>(0, (sum, p) => sum + p.amount);
 
-String _status(int due, int paid, int used, int cash) {
+String _status(Order order, int due, int used, int cash) {
   if (due == 0) return used > 0 && cash == 0 ? 'LUNAS (TABUNGAN)' : 'LUNAS';
-  return paid > 0 ? 'DP ${Formatters.rupiah(paid)}' : 'BELUM BAYAR';
+  return '${order.payTerm == PayTerm.cod ? 'COD - SISA' : 'SISA'} ${Formatters.rupiah(due)}';
 }
 
 String _methodLabel(PayMethod method) => switch (method) {

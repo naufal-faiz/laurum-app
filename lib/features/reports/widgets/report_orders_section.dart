@@ -5,6 +5,7 @@ import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/orders/state/payment_label.dart';
 import 'package:laurum/features/reports/state/report_orders_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_search_field.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
@@ -33,7 +34,6 @@ class ReportOrdersSection extends StatelessWidget {
   final ValueChanged<String> onSearch;
   final ValueChanged<int> onFilter;
   final ValueChanged<Order> onOpen;
-
   @override
   Widget build(BuildContext context) {
     final orders = filterReportOrders(data, filter: filter, search: search, range: range);
@@ -57,6 +57,7 @@ class ReportOrdersSection extends StatelessWidget {
             status: order.status,
             statusLabel: orderStatusLabel(order.status, useOrderStatus: useOrderStatus),
             payStatus: data.paymentStatus(order),
+            paymentLabel: paymentLabel(order, data.paid(order)),
             paid: data.paid(order),
             timeLabel: Formatters.jam(order.enteredAt),
             compact: true,

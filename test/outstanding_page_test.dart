@@ -13,26 +13,26 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Semua 5'), findsOneWidget);
-    expect(find.text('Belum bayar 2'), findsOneWidget);
-    expect(find.text('DP 3'), findsOneWidget);
+    expect(find.text('COD 0'), findsOneWidget);
+    expect(find.text('Sebagian 5'), findsOneWidget);
     expect(find.text('A-0128'), findsOneWidget);
     expect(find.text('A-0142'), findsOneWidget);
     expect(find.text('Catat bayar'), findsWidgets);
-    expect(find.text('Ingatkan'), findsWidgets);
+    expect(find.text('Ingatkan'), findsNothing);
     expect(
-      find.text('Piutang tidak dapat dihapus; catat bayar atau tandai lunas di kasir.'),
+      find.text('Piutang tidak dapat dihapus; catat pembayaran untuk mengurangi sisa tagihan.'),
       findsOneWidget,
     );
   });
 
-  testWidgets('filter DP shows only DP notes', (tester) async {
+  testWidgets('non-COD filter includes the legacy outstanding notes', (tester) async {
     await pumpAntrean(tester, location: '/laporan/piutang');
-    await tester.tap(find.text('DP 3'));
+    await tester.tap(find.text('Sebagian 5'));
     await tester.pumpAndSettle();
     expect(find.text('A-0128'), findsOneWidget);
     expect(find.text('A-0136'), findsOneWidget);
     expect(find.text('A-0140'), findsOneWidget);
-    expect(find.text('A-0138'), findsNothing);
-    expect(find.text('A-0142'), findsNothing);
+    expect(find.text('A-0138'), findsOneWidget);
+    expect(find.text('A-0142'), findsOneWidget);
   });
 }

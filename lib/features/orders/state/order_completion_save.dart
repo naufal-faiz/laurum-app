@@ -1,7 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
+import 'package:laurum/core/domain/order_rules.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
@@ -16,6 +18,10 @@ Future<Order> loadCompletableOrder(Ref ref, String id) async {
       order.status == OrderStatus.selesai ||
       order.status == OrderStatus.dibatalkan) {
     throw StateError('Order or mode changed');
+  }
+  final payments = await ref.read(orderRepositoryProvider).getPaymentsByOrderId(id);
+  if (isCompletionHeld(order, paidAmount(payments, orderId: id))) {
+    throw StateError('COD belum lunas');
   }
   return order;
 }

@@ -23,7 +23,6 @@ import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 class OrderDetailPage extends ConsumerWidget {
   const OrderDetailPage({required this.orderId, super.key});
   final String orderId;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final snapshot = ref.watch(orderDetailProvider(orderId));
@@ -65,6 +64,8 @@ class OrderDetailPage extends ConsumerWidget {
               onDelete: () => confirmCancelOrder(context, ref, data, simplified: true),
               onComplete: () => confirmCompleteOrder(context, ref, orderId),
               onWithoutPrint: () => confirmCompleteWithoutPrint(context, ref, orderId),
+              onPayment: () =>
+                  PaymentRecordSheet.show(context, ref, data, completeOnPayment: useStatus),
             ),
       body: OrderDetailContentSection(
         onFillWeight: () => context.push('/order/$orderId/edit'),

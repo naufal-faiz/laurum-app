@@ -29,7 +29,7 @@ void main() {
       ),
     );
     expect(find.text('Rp200.000'), findsOneWidget);
-    expect(find.text('DP Rp50.000'), findsOneWidget);
+    expect(find.text('Sisa Rp200.000'), findsOneWidget);
     final age = tester.widget<AppText>(
       find.ancestor(of: find.text('5 hari lalu'), matching: find.byType(AppText)),
     );

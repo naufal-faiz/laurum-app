@@ -71,3 +71,11 @@ Hubungkan terpisah karena API
 BannerMessage tidak memiliki slot aksi. Detail/persetujuan AI menunggu prompt 80;
 tidak membuat tombol Biarkan/Batalkan order atau data interpretasi yang belum ada di kontrak.
 R4 menyembunyikan chip dan CTA dalam mode sederhana; varian ini belum ada di .pen.
+
+## R9 - COD
+Kartu memakai paymentLabel dari pemetaan state bersama dan penanda COD - belum dibayar
+selama ada sisa. COD belum lunas tetap aktif karena penyelesaian ditolak state/repository.
+Dalam mode aktif, kartu siap menampilkan Terima pembayaran, membuka sheet pembayaran
+yang menyimpan pelunasan dan selesai atomik. Langkah sebelum siap tetap normal.
+Banner Nota {nomor} tersimpan dari tombol Ke antrean tampil sekali selama empat detik.
+Filter/query Antrean dan fixture master tidak diubah. Tes COD 320 px/teks 2x ditambahkan.

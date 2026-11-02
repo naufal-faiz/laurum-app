@@ -1,12 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/business_profile.dart';
 import 'package:laurum/core/domain/customer.dart';
+import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/core/domain/receipt_formatter.dart';
 import 'package:laurum/core/domain/receipt_settings.dart';
 import 'package:laurum/core/services/repository_providers.dart';
+import 'package:laurum/features/orders/state/payment_label.dart';
 
 class ReceiptView {
   const ReceiptView({
@@ -33,6 +35,9 @@ class ReceiptView {
     customerName: customer.name,
     settings: settings,
     savingsBalance: savingsBalance,
+    paymentLabel: paidAmount(payments, orderId: order.id) < order.total
+        ? paymentLabel(order, paidAmount(payments, orderId: order.id)).toUpperCase()
+        : null,
   );
 }
 

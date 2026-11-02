@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/orders/pages/payment_record_sheet.dart';
 import 'package:laurum/features/orders/state/order_detail_controller.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
@@ -25,6 +27,7 @@ class OrderStatusSheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final actions = ref.watch(orderActionsProvider);
     final busy = actions.pending.contains(data.order.id);
+    final held = data.completionHeld && data.order.status == OrderStatus.siap;
     return Padding(
       padding: const EdgeInsets.all(AppSpacing.screenPadding),
       child: Column(
@@ -37,12 +40,17 @@ class OrderStatusSheet extends ConsumerWidget {
           AppCard(
             padding: EdgeInsets.zero,
             child: MenuRow(
-              label: nextStatusLabel(data.order.status),
+              label: held ? 'Terima pembayaran' : nextStatusLabel(data.order.status),
               subtitle: 'Dari ${orderStatusLabel(data.order.status)}',
               icon: AppIcons.check,
               onTap: busy
                   ? null
                   : () async {
+                      if (held) {
+                        await PaymentRecordSheet.show(context, ref, data, completeOnPayment: true);
+                        if (context.mounted) Navigator.of(context).pop();
+                        return;
+                      }
                       final ok = await ref.read(orderActionsProvider.notifier).advance(data.order);
                       if (ok && context.mounted) Navigator.of(context).pop();
                     },

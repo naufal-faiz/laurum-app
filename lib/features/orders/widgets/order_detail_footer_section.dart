@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
@@ -16,6 +17,7 @@ class OrderDetailFooterSection extends StatelessWidget {
     this.onDelete,
     this.onComplete,
     this.onWithoutPrint,
+    this.onPayment,
     super.key,
   });
   final OrderDetailData data;
@@ -23,8 +25,7 @@ class OrderDetailFooterSection extends StatelessWidget {
   final VoidCallback onPrint;
   final VoidCallback onAdvance;
   final bool useOrderStatus, allowWithoutPrint;
-  final VoidCallback? onEdit, onDelete, onComplete, onWithoutPrint;
-
+  final VoidCallback? onEdit, onDelete, onComplete, onWithoutPrint, onPayment;
   @override
   Widget build(BuildContext context) => !useOrderStatus && !data.isFinal
       ? Column(
@@ -51,8 +52,21 @@ class OrderDetailFooterSection extends StatelessWidget {
                 ),
               ],
             ),
-            AppButton('Selesaikan', onPressed: busy ? null : onComplete),
-            if (allowWithoutPrint)
+            if (data.completionHeld)
+              AppButton(
+                'Cetak struk',
+                variant: AppButtonVariant.actionOutline,
+                onPressed: busy ? null : onPrint,
+              ),
+            AppButton(
+              data.completionHeld ? 'Terima pembayaran' : 'Selesaikan',
+              onPressed: busy
+                  ? null
+                  : data.completionHeld
+                  ? onPayment
+                  : onComplete,
+            ),
+            if (allowWithoutPrint && !data.completionHeld)
               AppButton(
                 'Selesaikan tanpa cetak',
                 variant: AppButtonVariant.actionOutline,
@@ -74,8 +88,14 @@ class OrderDetailFooterSection extends StatelessWidget {
             if (!data.isFinal)
               Expanded(
                 child: AppButton(
-                  nextStatusLabel(data.order.status),
-                  onPressed: busy ? null : onAdvance,
+                  data.completionHeld && data.order.status == OrderStatus.siap
+                      ? 'Terima pembayaran'
+                      : nextStatusLabel(data.order.status),
+                  onPressed: busy
+                      ? null
+                      : data.completionHeld && data.order.status == OrderStatus.siap
+                      ? onPayment
+                      : onAdvance,
                 ),
               ),
           ],

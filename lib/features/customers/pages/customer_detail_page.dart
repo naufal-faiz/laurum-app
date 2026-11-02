@@ -45,7 +45,10 @@ class CustomerDetailPage extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.screenPadding),
                     CustomerSavingsSection(data: data),
                     const SizedBox(height: AppSpacing.screenPadding),
-                    CustomerOrdersSection(data: data),
+                    CustomerOrdersSection(
+                      data: data,
+                      onOpen: (order) => context.push('/order/${order.id}'),
+                    ),
                   ],
                 ),
         ),

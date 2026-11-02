@@ -30,6 +30,8 @@ File bisa dibaca (format JSON, 8.939 node, 36 objek tingkat atas).
 
 **Dalam lingkup:** 33 layar dan state-nya, tema dan token, navigasi, katalog komponen, Widgetbook, data dummy dari DATA MASTER (Prompt 0 di dokumen sebelumnya), tes widget dasar.
 
+Revisi pembayaran R9 (2 Nov 2026): kasir memilih Bayar sekarang (jumlah positif, boleh sebagian) atau Bayar nanti (COD); status bayar tetap turunan. COD dengan sisa tagihan menahan penyelesaian pada semua jalur, sedangkan sisa non-COD tetap boleh selesai dan dibayar kemudian lewat Detail, Struk atau Piutang. Kelebihan tunai dipilih Kembalian atau Simpan ke tabungan, bukan omzet. Footer pembayaran memisahkan Cetak struk (simpan lalu buka nota) dan Ke antrean (simpan lalu notifikasi satu kali). Piutang memakai filter Semua/COD/Sebagian, label sisa tagihan, serta Catat bayar tanpa tombol Ingatkan.
+
 **Di luar lingkup fase ini:** backend nyata dan sinkronisasi (PRD B), AI nyata, printer Bluetooth nyata (diganti `FakePrintService`), Play Billing, notifikasi, dark mode, tablet/landscape, bahasa selain Indonesia.
 
 ## 4. Stack UI

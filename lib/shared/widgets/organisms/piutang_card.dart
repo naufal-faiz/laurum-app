@@ -19,8 +19,10 @@ class PiutangCard extends StatelessWidget {
     this.dateLabel = '',
     this.onPay,
     this.onRemind,
+    this.paymentLabel,
   }) : assert(total > 0 && paid >= 0 && paid < total);
   final String customerName, orderNo, summary, ageLabel, dateLabel;
+  final String? paymentLabel;
   final int total, paid;
   final VoidCallback? onPay, onRemind;
   @override
@@ -48,7 +50,7 @@ class PiutangCard extends StatelessWidget {
           ],
         ),
         AppStatusText(
-          paid == 0 ? 'Belum bayar' : 'DP ${Formatters.rupiah(paid)}',
+          paymentLabel ?? 'Sisa ${Formatters.rupiah(total - paid)}',
           variant: paid == 0 ? AppStatusTextVariant.belumBayar : AppStatusTextVariant.dp,
         ),
         Wrap(
@@ -65,13 +67,14 @@ class PiutangCard extends StatelessWidget {
             Expanded(
               child: AppButton('Catat bayar', variant: AppButtonVariant.action, onPressed: onPay),
             ),
-            Expanded(
-              child: AppButton(
-                'Ingatkan',
-                variant: AppButtonVariant.actionOutline,
-                onPressed: onRemind,
+            if (onRemind != null)
+              Expanded(
+                child: AppButton(
+                  'Ingatkan',
+                  variant: AppButtonVariant.actionOutline,
+                  onPressed: onRemind,
+                ),
               ),
-            ),
           ],
         ),
       ],

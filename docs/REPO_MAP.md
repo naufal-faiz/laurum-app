@@ -20,20 +20,21 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - business_profile.dart (50): BusinessProfile
 - cancellation.dart (69):
 - customer.dart (25): Customer
-- domain_enums.dart (16): OrderStatus, PayStatus, ServiceKind, PayMethod, SavingsKind, ProposalStatus, OrderSource, RecordSyncState
+- domain_enums.dart (18): OrderStatus, PayStatus, PayTerm, ServiceKind, PayMethod, SavingsKind, ProposalStatus, OrderSource, RecordSyncState
 - domain_record.dart (18): DomainRecord
 - expense.dart (36): Expense
 - expense_category.dart (19): ExpenseCategory
 - money.dart (34):
-- order.dart (84): Order
+- order.dart (89): Order
 - order_event.dart (37): OrderEvent
 - order_item.dart (41): OrderItem
 - order_number_generator.dart (35): OrderNumberGenerator
-- order_rules.dart (43):
+- order_rules.dart (46):
 - payment.dart (37): Payment
 - payment_corrections.dart (42):
+- payment_excess.dart (20):
 - proposal.dart (70): Proposal
-- receipt_formatter.dart (82):
+- receipt_formatter.dart (83):
 - receipt_layout.dart (77): ReceiptLayout
 - receipt_settings.dart (38): ReceiptSettings
 - report.dart (73):
@@ -137,7 +138,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/customers/pages/
 - customer_deposit_page.dart (71): CustomerDepositPage
-- customer_detail_page.dart (53): CustomerDetailPage
+- customer_detail_page.dart (56): CustomerDetailPage
 - customer_directory_page.dart (69): CustomerDirectoryPage
 - customer_edit_sheet.dart (68): CustomerEditSheet
 - customer_import_page.dart (67): CustomerImportPage
@@ -162,7 +163,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_directory_list_section.dart (93): CustomerDirectoryListSection
 - customer_edit_form_section.dart (65): CustomerEditFormSection
 - customer_import_list_section.dart (94): CustomerImportListSection
-- customer_orders_section.dart (36): CustomerOrdersSection
+- customer_orders_section.dart (39): CustomerOrdersSection
 - customer_profile_section.dart (75): CustomerProfileSection
 - customer_savings_header_section.dart (66): CustomerSavingsHeaderSection
 - customer_savings_list_section.dart (58): CustomerSavingsListSection
@@ -204,47 +205,51 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_queue_process_fixtures.dart (81):
 - order_queue_ready_fixtures.dart (42):
 - order_store.dart (20): OrderStore
-- order_store_write.dart (89):
+- order_store_write.dart (97):
 - payment_fixtures.dart (31):
 
 ### lib/features/orders/pages/
-- antrean_page.dart (97): AntreanPage
+- antrean_page.dart (101): AntreanPage
 - order_cancel_flow.dart (24):
 - order_completion_flow.dart (36):
 - order_detail_menu_flow.dart (22):
-- order_detail_page.dart (101): OrderDetailPage
+- order_detail_page.dart (102): OrderDetailPage
 - order_edit_page.dart (84): OrderEditPage
 - order_menu_sheet.dart (60): OrderMenuAction, OrderMenuSheet
-- order_status_sheet.dart (59): OrderStatusSheet
-- payment_record_sheet.dart (78): PaymentRecordSheet
+- order_status_sheet.dart (67): OrderStatusSheet
+- payment_record_flow.dart (28):
+- payment_record_sheet.dart (71): PaymentRecordSheet
 
 ### lib/features/orders/state/
-- antrean_controller.dart (84): AntreanFilter, AntreanActionState, AntreanActions, antreanFilterProvider, antreanActionsProvider
+- antrean_controller.dart (90): AntreanFilter, AntreanActionState, AntreanActions, antreanFilterProvider, antreanActionsProvider
 - antrean_data.dart (68): AntreanData, antreanDataProvider
 - antrean_filter_view.dart (9): AntreanFilterView
 - order_completion_controller.dart (57): OrderCompletionState, OrderCompletion, orderCompletionProvider
-- order_completion_save.dart (47):
-- order_detail_controller.dart (88): OrderActionState, OrderActions, orderActionsProvider
+- order_completion_save.dart (53):
+- order_detail_controller.dart (95): OrderActionState, OrderActions, orderActionsProvider
 - order_detail_data.dart (98): ActivityEntry, OrderDetailData, orderDetailProvider
 - order_edit_controller.dart (101): OrderEditState, OrderEdit, orderEditProvider
 - order_edit_item.dart (25):
-- order_edit_order.dart (21):
-- order_payment_controller.dart (81): OrderPaymentState, OrderPaymentAction, orderPaymentProvider
-- payment_draft.dart (33): PaymentDraftState, PaymentDraft, paymentDraftProvider
+- order_edit_order.dart (22):
+- order_payment_controller.dart (56): OrderPaymentState, OrderPaymentAction, orderPaymentProvider
+- order_payment_save.dart (86):
+- payment_draft.dart (41): PaymentDraftState, PaymentDraft, paymentDraftProvider
+- payment_label.dart (10):
 
 ### lib/features/orders/widgets/
-- antrean_orders_section.dart (50): AntreanOrdersSection
+- antrean_orders_section.dart (54): AntreanOrdersSection
 - antrean_status_section.dart (74): AntreanStatusSection
 - order_customer_section.dart (56): OrderCustomerSection
 - order_detail_body_section.dart (35): OrderDetailBodySection
 - order_detail_content_section.dart (70): OrderDetailContentSection
-- order_detail_footer_section.dart (83): OrderDetailFooterSection
+- order_detail_footer_section.dart (103): OrderDetailFooterSection
 - order_edit_body_section.dart (61): OrderEditBodySection
 - order_edit_customer_section.dart (43): OrderEditCustomerSection
 - order_items_section.dart (76): OrderItemsSection
 - order_payment_section.dart (44): OrderPaymentSection
 - order_summary_section.dart (56): OrderSummarySection
 - order_timeline_section.dart (55): OrderTimelineSection
+- payment_record_input_section.dart (58): PaymentRecordInputSection
 
 ### lib/features/printer/data/
 - receipt_demo.dart (74):
@@ -303,13 +308,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_top_services.dart (35):
 
 ### lib/features/reports/pages/
-- outstanding_page.dart (59): OutstandingPage
+- outstanding_page.dart (73): OutstandingPage
 - report_page.dart (105): ReportPage
 - report_range_flow.dart (41):
 
 ### lib/features/reports/state/
-- outstanding_controller.dart (95): PaymentRecordState, PaymentRecordController, paymentRecordProvider
-- outstanding_data.dart (68): OutstandingRow, OutstandingListData, OutstandingFilter, outstandingListProvider, outstandingFilterProvider
+- outstanding_data.dart (69): OutstandingRow, OutstandingListData, OutstandingFilter, outstandingListProvider, outstandingFilterProvider
 - report_custom_data.dart (55): CustomReportData
 - report_custom_range.dart (24): ReportCustomRange, reportCustomRangeProvider
 - report_export.dart (97): ReportExportState, ReportExport, reportExportProvider
@@ -319,9 +323,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_view.dart (92): ReportView, reportViewProvider
 
 ### lib/features/reports/widgets/
-- outstanding_list_section.dart (77): OutstandingListSection
+- outstanding_list_section.dart (76): OutstandingListSection
 - report_body_section.dart (105): ReportBodySection
-- report_orders_section.dart (103): ReportOrdersSection
+- report_orders_section.dart (104): ReportOrdersSection
 
 ### lib/features/services/data/
 - in_memory_service_repository.dart (67): InMemoryServiceRepository, inMemoryServiceRepositoryProvider
@@ -382,8 +386,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - contact_picker_sheet.dart (58): ContactPickerSheet, contactsProvider
 - customer_picker_sheet.dart (97): CustomerPickerSheet
 - discount_sheet.dart (74): DiscountSheet
-- payment_page.dart (63): PaymentPage
-- receipt_page.dart (90): ReceiptPage
+- payment_flow.dart (19):
+- payment_page.dart (90): PaymentPage
+- receipt_page.dart (76): ReceiptPage
 - service_picker_page.dart (54): ServicePickerPage
 - transaction_leave_flow.dart (22):
 - transaction_line_sheet.dart (76): TransactionLineSheet
@@ -393,24 +398,27 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/transactions/state/
 - add_customer_form.dart (102): AddCustomerState, AddCustomerForm, addCustomerFormProvider
-- cash_input.dart (23): CashInput, cashInputProvider
+- cash_input.dart (37): CashInput, cashInputProvider
+- checkout_data.dart (35): CheckoutState
 - checkout_item.dart (33):
-- checkout_save.dart (100):
-- checkout_state.dart (89): PaymentMode, CheckoutState, Checkout, checkoutControllerProvider
+- checkout_notice.dart (20): CheckoutNotice, checkoutNoticeProvider
+- checkout_save.dart (101):
+- checkout_state.dart (36): Checkout, checkoutControllerProvider
 - discount_input.dart (19): DiscountInputState, DiscountInput, discountInputProvider
-- payment_quote.dart (34): PaymentQuote
+- payment_quote.dart (40): PaymentQuote
 - receipt_print_controller.dart (59): ReceiptPrintState, ReceiptPrint, receiptPrintProvider
-- receipt_view.dart (55): ReceiptView, receiptViewProvider
+- receipt_view.dart (60): ReceiptView, receiptViewProvider
 - transaction_draft.dart (110): DraftLine, TransactionDraftState, TransactionDraft, transactionDraftProvider
 - transaction_providers.dart (32): ServiceSearch, CustomerSearch, serviceCatalogProvider, customerCatalogProvider, customerBalanceProvider, serviceSearchProvider, customerSearchProvider
 - weight_edit.dart (79): WeightEditState, WeightEdit, weightEditProvider
 
 ### lib/features/transactions/widgets/
 - add_customer_form_section.dart (77): AddCustomerFormSection
-- payment_method_section.dart (78): PaymentMethodSection
-- payment_savings_section.dart (65): PaymentSavingsSection
-- payment_summary_section.dart (86): PaymentSummarySection
-- receipt_status_section.dart (95): ReceiptStatusSection
+- payment_method_section.dart (72): PaymentMethodSection
+- payment_savings_section.dart (47): PaymentSavingsSection
+- payment_summary_section.dart (56): PaymentSummarySection
+- receipt_actions_section.dart (53): ReceiptActionsSection
+- receipt_status_section.dart (96): ReceiptStatusSection
 - service_picker_list_section.dart (84): ServicePickerListSection
 - transaction_customer_section.dart (57): TransactionCustomerSection
 - transaction_details_section.dart (66): TransactionDetailsSection
@@ -469,8 +477,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_row.dart (57): ExpenseRow
 - nota_card.dart (75): NotaCard
 - numpad.dart (62): NumpadVariant, Numpad
-- order_card.dart (99): OrderCard
-- piutang_card.dart (80): PiutangCard
+- order_card.dart (100): OrderCard
+- piutang_card.dart (83): PiutangCard
 - proposal_card.dart (63): ProposalCard
 - receipt_preview.dart (36): ReceiptPreview
 - receipt_toggle_list.dart (65): ReceiptToggleList
@@ -607,6 +615,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_number_generator_test.dart (34):
 - organism_gallery.dart (54):
 - outstanding_page_test.dart (38):
+- payment_golden_test.dart (60):
 - payment_page_test.dart (59):
 - period_tabs_test.dart (29):
 - piutang_card_test.dart (43):
@@ -637,7 +646,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r4_completion_test_host.dart (38): CompletionPrinter
 - r4_detail_completion_test.dart (84):
 - r4_detail_print_failure_test.dart (57):
-- r4_finish_flow_test.dart (83):
+- r4_finish_flow_test.dart (84):
 - r4_finish_test_host.dart (48):
 - r4_order_completion_test.dart (81):
 - r4_order_policy_test.dart (72):
@@ -654,6 +663,23 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r5_report_body_section_test.dart (58):
 - r5_report_visual_test.dart (70):
 - r5_report_widgets_test.dart (100): HeldReportExport
+- r9_cards_test.dart (60):
+- r9_checkout_flow_test.dart (67):
+- r9_checkout_host.dart (29):
+- r9_checkout_state_test.dart (52):
+- r9_completion_guards_test.dart (25):
+- r9_input_test.dart (32):
+- r9_order_fixture.dart (22):
+- r9_payment_entrypoints_test.dart (44):
+- r9_payment_keyboard_test.dart (60):
+- r9_payment_rollback_test.dart (68): FailingExcessSavings
+- r9_payment_rules_test.dart (83):
+- r9_payment_sections_test.dart (89):
+- r9_payment_state_test.dart (84):
+- r9_payment_visual_test.dart (60):
+- r9_receipt_sections_test.dart (84):
+- r9_section_host.dart (10):
+- r9_validation_flow_test.dart (39):
 - raised_navigation_test.dart (52):
 - receipt_fixtures.dart (86):
 - receipt_formatter_settings_test.dart (31):
@@ -696,7 +722,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_customer_section_test.dart (50):
 - transaction_draft_test.dart (43):
 - transaction_flow_rollback_test.dart (77): FailingSavings
-- transaction_golden_test.dart (118):
+- transaction_golden_test.dart (70):
 - transaction_page_test.dart (136):
 - transaction_runner_test.dart (91): TransactionValue
 - weekly_bar_chart_test.dart (30):
@@ -765,12 +791,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_row_use_case.dart (44):
 - expense_row_use_case.dart (27):
 - fixture_labels.dart (10):
-- nota_card_use_case.dart (51):
+- nota_card_use_case.dart (54):
 - numpad_use_case.dart (23):
 - o1.dart (23):
 - o2.dart (25):
-- order_card_use_case.dart (67):
-- piutang_card_use_case.dart (37):
+- order_card_use_case.dart (68):
+- piutang_card_use_case.dart (40):
 - proposal_card_use_case.dart (33):
 - receipt_preview_use_case.dart (106):
 - receipt_toggle_list_use_case.dart (36):

@@ -3,12 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/orders/pages/payment_record_flow.dart';
 import 'package:laurum/features/orders/state/antrean_controller.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/orders/state/antrean_filter_view.dart';
 import 'package:laurum/features/orders/widgets/antrean_orders_section.dart';
 import 'package:laurum/features/orders/widgets/antrean_status_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/transactions/state/checkout_notice.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
@@ -25,6 +27,7 @@ class AntreanPage extends ConsumerWidget {
     final actions = ref.watch(antreanActionsProvider);
     final controller = ref.read(antreanActionsProvider.notifier);
     final data = snapshot.value;
+    final notice = ref.watch(checkoutNoticeProvider);
     if (data == null) {
       return AntreanStatusSection(
         loading: snapshot.isLoading,
@@ -37,6 +40,7 @@ class AntreanPage extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.screenPadding),
       children: [
+        if (notice != null) BannerMessage(message: notice),
         SectionHeader(
           title: 'Antrean aktif',
           subtitle: '${data.orders.length} order aktif',
@@ -88,7 +92,7 @@ class AntreanPage extends ConsumerWidget {
           pending: actions.pending,
           useOrderStatus: useStatus,
           onOpen: (order) => context.push('/order/${order.id}'),
-          onAdvance: (order) => controller.advance(order.id, order.status),
+          onAdvance: (order) => advanceQueueOrder(context, ref, order, data.paid(order)),
         ),
         const SizedBox(height: AppSpacing.appBarHeight),
       ],

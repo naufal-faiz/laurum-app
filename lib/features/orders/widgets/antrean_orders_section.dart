@@ -4,6 +4,7 @@ import 'package:laurum/core/domain/order_rules.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
+import 'package:laurum/features/orders/state/payment_label.dart';
 import 'package:laurum/shared/widgets/organisms/order_card.dart';
 
 class AntreanOrdersSection extends StatelessWidget {
@@ -37,9 +38,12 @@ class AntreanOrdersSection extends StatelessWidget {
             status: order.status,
             statusLabel: orderStatusLabel(order.status, useOrderStatus: useOrderStatus),
             payStatus: data.paymentStatus(order),
+            paymentLabel: paymentLabel(order, data.paid(order)),
             paid: data.paid(order),
             timeLabel: Formatters.jam(order.enteredAt),
-            detail: data.detail(order),
+            detail: isCompletionHeld(order, data.paid(order))
+                ? 'COD - belum dibayar'
+                : data.detail(order),
             showAction: useOrderStatus,
             onTap: () => onOpen(order),
             onAction: !useOrderStatus || pending.contains(order.id) ? null : () => onAdvance(order),

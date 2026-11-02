@@ -20,8 +20,10 @@ class NotaCard extends StatelessWidget {
     this.timeLabel = '',
     this.paid = 0,
     this.onTap,
+    this.paymentLabel,
   }) : assert(total >= 0 && paid >= 0);
   final String orderNo, customerName, summary, timeLabel;
+  final String? paymentLabel;
   final int total, paid;
   final OrderStatus status;
   final PayStatus payStatus;
@@ -29,11 +31,9 @@ class NotaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const labels = ['Menunggu jemput', 'Diproses', 'Siap', 'Selesai', 'Dibatalkan'];
-    final payment = switch (payStatus) {
-      PayStatus.belumBayar => 'Belum bayar',
-      PayStatus.dp => 'DP ${Formatters.rupiah(paid)}',
-      PayStatus.lunas => 'Lunas',
-    };
+    final payment =
+        paymentLabel ??
+        (payStatus == PayStatus.lunas ? 'Lunas' : 'Sisa ${Formatters.rupiah(total - paid)}');
     return InkWell(
       onTap: onTap,
       child: AppCard(

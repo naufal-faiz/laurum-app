@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:laurum/core/domain/customer.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/services/repository_providers.dart';
+import 'package:laurum/features/orders/state/payment_label.dart';
 
 class OutstandingRow {
   const OutstandingRow(this.order, this.customer, this.paid, this.outstandingAmount);
@@ -13,7 +13,7 @@ class OutstandingRow {
   final int paid;
   final int outstandingAmount;
   PayStatus get status => payStatus(total: order.total, paid: paid);
-  String get statusLabel => status == PayStatus.belumBayar ? 'Belum bayar' : 'DP ${paid ~/ 1000}k';
+  String get statusLabel => paymentLabel(order, paid);
 }
 
 class OutstandingListData {
@@ -22,12 +22,13 @@ class OutstandingListData {
   int get totalOutstanding => rows.fold(0, (sum, r) => sum + r.outstandingAmount);
   int get unpaidCount => rows.where((r) => r.status == PayStatus.belumBayar).length;
   int get dpCount => rows.where((r) => r.status == PayStatus.dp).length;
+  int get codCount => rows.where((r) => r.order.payTerm == PayTerm.cod).length;
   int get customerCount => {...rows.map((r) => r.customer.id)}.length;
 }
 
 List<OutstandingRow> filterOutstanding(List<OutstandingRow> rows, int filter) {
-  if (filter == 1) return rows.where((r) => r.status == PayStatus.belumBayar).toList();
-  if (filter == 2) return rows.where((r) => r.status == PayStatus.dp).toList();
+  if (filter == 1) return rows.where((r) => r.order.payTerm == PayTerm.cod).toList();
+  if (filter == 2) return rows.where((r) => r.order.payTerm == PayTerm.sekarang).toList();
   return rows;
 }
 

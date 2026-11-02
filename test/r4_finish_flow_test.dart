@@ -66,7 +66,8 @@ void main() {
         }
         expect((await repo.getOrderById(id))!.status, OrderStatus.selesai);
         expect(printer.calls, 1);
-        expect(await repo.getPaymentsByOrderId(id), isEmpty);
+        final recorded = await repo.getPaymentsByOrderId(id);
+        expect(recorded.single.amount, 1000);
       }
       host.router.go('/antrean');
       await tester.pumpAndSettle();
@@ -76,7 +77,7 @@ void main() {
       );
       final after = (await scope.read(customerSummariesProvider.future))
           .singleWhere((r) => r.customer.id == 'cust-001');
-      expect(after.debt, before.debt + (action == 'delete' ? 0 : 9000));
+      expect(after.debt, before.debt + (action == 'delete' ? 0 : 8000));
       expect(tester.takeException(), isNull);
     });
   }

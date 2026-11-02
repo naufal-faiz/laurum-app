@@ -11,6 +11,7 @@ Order orderEditOrder(Order original, TransactionDraftState draft, DateTime now) 
   customerId: original.customerId,
   status: original.status,
   source: original.source,
+  payTerm: original.payTerm,
   discount: draft.discount,
   enteredAt: original.enteredAt,
   estimatedAt: estimateReady(original.enteredAt, draft.lines.map((line) => line.service)),

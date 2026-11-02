@@ -16,7 +16,7 @@ class CashInputSheet extends ConsumerWidget {
   final int due;
 
   static Future<void> show(BuildContext context, WidgetRef ref, int due, int current) {
-    ref.read(cashInputProvider.notifier).start(current <= 0 ? due : current);
+    ref.read(cashInputProvider.notifier).start(current);
     return AppBottomSheet.show<void>(
       context: context,
       title: 'Uang diterima',

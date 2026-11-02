@@ -2,6 +2,8 @@ enum OrderStatus { menungguJemput, diproses, siap, selesai, dibatalkan }
 
 enum PayStatus { belumBayar, dp, lunas }
 
+enum PayTerm { sekarang, cod }
+
 enum ServiceKind { kiloan, satuan }
 
 enum PayMethod { tunai, qris, transfer, tabungan }

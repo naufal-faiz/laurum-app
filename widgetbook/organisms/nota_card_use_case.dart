@@ -31,6 +31,9 @@ final notaCardUseCase = WidgetbookUseCase(
                 paid: paidAmount(paymentFixtures, orderId: id),
               ),
               paid: paidAmount(paymentFixtures, orderId: id),
+              paymentLabel: id == 'ord-0142'
+                  ? 'COD - sisa ${Formatters.rupiah(order.total)}'
+                  : null,
               timeLabel: Formatters.jam(order.enteredAt),
               onTap: () {},
             ),

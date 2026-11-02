@@ -48,6 +48,7 @@ final orderCardUseCase = WidgetbookUseCase(
             payStatus: PayStatus.belumBayar,
             showAction: false,
             statusLabel: 'Sedang dikerjakan',
+            paymentLabel: 'COD - sisa ${Formatters.rupiah(order.total)}',
             onTap: () {},
           ),
         OrderCard(

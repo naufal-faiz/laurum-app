@@ -25,17 +25,17 @@ class OrderSummarySection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: AppSpacing.cardGap,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Wrap(
+            spacing: AppSpacing.cardGap,
+            runSpacing: AppSpacing.cardGap,
+            alignment: WrapAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const AppText('No. nota', variant: AppTextVariant.caption),
-                    AppText(order.orderNo, variant: AppTextVariant.titleSub),
-                  ],
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const AppText('No. nota', variant: AppTextVariant.caption),
+                  AppText(order.orderNo, variant: AppTextVariant.titleSub),
+                ],
               ),
               AppBadge(
                 policy.orderStatusLabel(order.status, useOrderStatus: useOrderStatus),

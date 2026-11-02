@@ -30,9 +30,10 @@ class OrderCard extends StatelessWidget {
     this.onAction,
     this.showAction = true,
     this.statusLabel,
+    this.paymentLabel,
   }) : assert(total >= 0 && paid >= 0);
   final String orderNo, customerName, summary, timeLabel, detail;
-  final String? statusLabel;
+  final String? statusLabel, paymentLabel;
   final int total, paid;
   final OrderStatus status;
   final PayStatus payStatus;
@@ -47,12 +48,12 @@ class OrderCard extends StatelessWidget {
         ? 1
         : 0;
     const actions = ['Tandai dijemput', 'Tandai siap', 'Serahkan', null, null];
-    final action = actions[status.index];
-    final payment = switch (payStatus) {
-      PayStatus.belumBayar => 'Belum bayar',
-      PayStatus.dp => 'DP ${Formatters.rupiah(paid)}',
-      PayStatus.lunas => 'Lunas',
-    };
+    final action = status == OrderStatus.siap && (paymentLabel?.startsWith('COD') ?? false)
+        ? 'Terima pembayaran'
+        : actions[status.index];
+    final payment =
+        paymentLabel ??
+        (payStatus == PayStatus.lunas ? 'Lunas' : 'Sisa ${Formatters.rupiah(total - paid)}');
     return InkWell(
       onTap: onTap,
       child: AppCard(

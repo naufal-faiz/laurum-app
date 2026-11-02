@@ -1,34 +1,26 @@
 # 18 - Daftar Piutang
-Rute: /laporan/piutang   Prompt: 60
-Frame .pen: "Laporan - Daftar Piutang"; State "Piutang kosong".
-Template: RootScaffold dari RootShellPage; BottomNavBar dengan Laporan aktif.
+Rute: /laporan/piutang. Frame .pen: Laporan - Daftar Piutang.
 
-Komposisi:
-- SectionHeader(title: 'Piutang', subtitle: 'Total piutang usaha Rp400.500 / 5 nota belum lunas - 5 pelanggan').
-- ChipBar: Semua (5), Belum bayar (2), DP (3); jumlah dari filter aktif.
-- PiutangCard per nota urut tertua: nomor, nama pelanggan, tanggal, total piutang sisa,
-  status (Belum bayar/DP), CTA "Catat bayar" dan "Ingatkan".
-- AppText catatan "Piutang tidak dapat dihapus; catat bayar atau tandai lunas di kasir.".
+## R9 (2 Nov 2026)
+- OutstandingListSection Stateless: data, filter, jam bisnis dan callback dari Page.
+- SectionHeader total piutang, jumlah nota dan pelanggan; tetap menghitung semua sisa
+  order non-batal, termasuk order selesai dengan pembayaran sebagian.
+- ChipBar Semua | COD | Sebagian dengan jumlah masing-masing. COD berdasarkan
+  Order.payTerm; Sebagian adalah non-COD dengan sisa (termasuk nota lama yang belum dibayar).
+- PiutangCard urut tertua: nomor, nama, tanggal/usia netral, sisa, paymentLabel dari
+  pemetaan state yang sama dengan Antrean/Detail/Struk/Laporan.
+- Catat bayar membuka PaymentRecordSheet order tersebut melalui openOrderPayment.
+  Uang diterima diterapkan maksimal sisa; kelebihan tunai dipilih kembalian/tabungan.
+  Pembayaran, setoran kelebihan dan event selesai COD tersimpan atomik lewat runner R8.
+- Ingatkan disembunyikan (onRemind null); bukan placeholder aktif.
+- Catatan: 'Piutang tidak dapat dihapus; catat pembayaran untuk mengurangi sisa tagihan.'
+- Kosong/error/loading tetap memakai EmptyState/AppSkeleton dari registry.
 
-Data dan provider:
-- outstandingOrdersProvider: filter order dengan piutang > 0 (paymentReceived < total),
-  urutkan createdAt ascending (tertua dulu), berikut customer dan payment info.
-- outstandingFilterProvider: indeks chip (0 semua, 1 belum bayar, 2 DP).
-- Sumber: OrderRepository + CustomerRepository + PaymentRepository.
-- DATA MASTER: 5 nota piutang, total Rp400.500, Belum bayar 2, DP 3.
-
-Interaksi:
-- Chip memfilter daftar tanpa mengubah hitungan.
-- "Catat bayar" membuka sheet Numpad (maks piutang sisa), update Payment dan Order
-  (paymentReceived += nominal), kembali ke daftar dengan saldo baru.
-- "Ingatkan" memanggil ExternalLauncher.launchWhatsApp dengan teks siap kirim (template
-  di fixture, tidak mengirim otomatis).
-- State kosong (State "Piutang kosong"): EmptyState 'Tidak ada piutang', deskripsi
-  'Semua nota sudah lunas.', aksi tidak ada.
-
-Format: uang int rupiah; tanggal lewat Formatters. Tanpa jatuh tempo.
-
-Selisih terhadap .pen:
-- Tanpa Atur; header ringkasan disatukan SectionHeader.
-- ChipBar menempatkan Semua di depan urutan filter.
-- Catatan ditambah akhir (bukan status bar sticky).
+## Data dan verifikasi
+outstandingListProvider membaca OrderRepository, CustomerRepository, pembayaran aktual.
+Tidak ada paymentReceived/PayStatus yang disimpan. outstandingFilterProvider menyimpan
+indeks pilihan. Fixture master tetap 5 nota, Rp400.500; semua payTerm sekarang sehingga
+filter awal Semua 5 / COD 0 / Sebagian 5. Order COD tambahan hanya di tes.
+Tes Catat bayar dari order selesai, filter, callback Section, tanpa Ingatkan, 320 px/2x.
+Selisih .pen: dua filter bayar lama diganti COD/Sebagian; tombol Ingatkan dihapus.
+Belum diuji manual di Android/iOS; tidak ada WhatsApp atau jaringan nyata.

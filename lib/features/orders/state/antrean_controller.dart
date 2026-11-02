@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_rules.dart';
 import 'package:laurum/core/services/repository_providers.dart';
@@ -43,6 +44,11 @@ class AntreanActions extends Notifier<AntreanActionState> {
         throw StateError('Order changed; reload before advancing');
       }
       final next = nextStatus(order.status);
+      final payments = await repository.getPaymentsByOrderId(id);
+      if (next == OrderStatus.selesai &&
+          isCompletionHeld(order, paidAmount(payments, orderId: id))) {
+        throw StateError('COD belum lunas');
+      }
       final now = ref.read(businessClockProvider)();
       await repository.updateOrderStatus(
         id,

@@ -62,7 +62,7 @@ Tabel yang sama di SQLite dan Postgres. Kolom umum di semua tabel kecuali dicata
 | `devices` | code (A, B, ...), name, last\_seen\_at |
 | `customers` | name, phone, address, notes, is\_active. Unik `(owner_id, phone)` untuk baris aktif |
 | `services` | name, kind (`kiloan`/`satuan`), price, duration\_days, is\_active, sort\_order |
-| `orders` | order\_no (unik per owner), customer\_id, status, source (`kasir`/`whatsapp_ai`), proposal\_id, discount, note, entered\_at, estimated\_at, subtotal, total |
+| `orders` | order\_no (unik per owner), customer\_id, status, source (`kasir`/`whatsapp_ai`), pay\_term (`sekarang`/`cod`, default `sekarang`), proposal\_id, discount, note, entered\_at, estimated\_at, subtotal, total |
 | `order_items` | order\_id, service\_id, service\_name (snapshot), unit, qty\_milli, unit\_price, line\_total |
 | `payments` | order\_id, method (`tunai`/`qris`/`transfer`/`tabungan`), amount, received, paid\_at, note. **Tidak diubah** |
 | `savings_entries` | customer\_id, kind (`setor`/`pakai`/`penyesuaian`), amount, method, order\_id, note. **Tidak diubah, tanpa soft delete** |
@@ -83,6 +83,7 @@ Tabel yang sama di SQLite dan Postgres. Kolom umum di semua tabel kecuali dicata
 - **Estimasi selesai** = tanggal masuk + durasi layanan terlama (hari kalender), jam 17.00 WIB.
 - **Total** = jumlah `line_total` − diskon. `line_total = round(qty_milli x unit_price / 1000)`.
 - **Status bayar (turunan, tidak disimpan):** `dibayar = jumlah payments`. `0` → belum bayar; `0 < dibayar < total` → DP; `dibayar >= total` → lunas.
+- **R9:** `pay_term` adalah pilihan pengguna yang disimpan; status bayar tetap turunan. COD dengan sisa tidak boleh selesai. Pelunasan COD otomatis selesai pada mode sederhana, atau bersama aksi Terima pembayaran pada langkah siap di mode aktif. Payment.amount hanya bagian yang diterapkan ke tagihan; received menyimpan uang diterima. Kelebihan tunai masuk kembalian atau SavingsEntry setor terkait order dan ID pembayaran. Pembayaran, setoran dan event selesai wajib satu TransactionRunner/transaksi lokal; nilai kelebihan tidak menambah omzet nota.
 - **Piutang** = jumlah `total − dibayar` untuk order tidak dibatalkan dengan sisa > 0. Tidak ada jatuh tempo. Usia ditampilkan netral ("4 hari lalu").
 - **Saldo tabungan** = setor − pakai ± penyesuaian. Tidak disimpan, selalu dihitung dari mutasi.
 - **Bayar dengan tabungan** membuat satu `payments` (method `tabungan`) **dan** satu `savings_entries` (`pakai`, terhubung ke order) dalam **satu transaksi lokal**. Sisa dibayar tunai/QRIS/transfer. Jika kelebihan bayar dan pengguna memilih menyimpannya, dibuat `savings_entries` `setor`.

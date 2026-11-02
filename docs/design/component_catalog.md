@@ -468,7 +468,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Berkas: lib/shared/widgets/organisms/order_card.dart (99 baris).
 - API wajib: orderNo, customerName, summary, total int, status OrderStatus, payStatus PayStatus.
   Opsi: timeLabel/detail kosong, paid int 0, compact/needsReview/cancelRequested false,
-  onTap/onAction. Data yang sudah diformat dibuat lewat Formatters oleh pemanggil.
+    onTap/onAction, paymentLabel String? untuk label sisa/COD. Data yang sudah diformat dibuat lewat Formatters oleh pemanggil.
 - R4: showAction default true mengendalikan tampilnya tombol secara terpisah dari
   callback null (disabled). statusLabel opsional default null memakai label enum;
   Antrean meneruskan label core policy 'Sedang dikerjakan' saat mode sederhana.
@@ -489,7 +489,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 ## NotaCard
 - Berkas: lib/shared/widgets/organisms/nota_card.dart.
 - API wajib: orderNo, customerName, summary, total int, status OrderStatus, payStatus PayStatus.
-  Opsi: timeLabel kosong (hasil Formatters), paid int 0, onTap.
+    Opsi: timeLabel kosong (hasil Formatters), paid int 0, onTap, paymentLabel String?.
 - Varian: lima status order, tiga status bayar, callback aktif/nonaktif; tanpa aksi progres.
 - Contoh: NotaCard(orderNo: number, customerName: name, summary: items, total: total,
   status: status, payStatus: payment, paid: paid, onTap: open).
@@ -514,7 +514,9 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 ## PiutangCard
 - Berkas: lib/shared/widgets/organisms/piutang_card.dart.
 - API wajib: customerName, orderNo, summary, total int, paid int, ageLabel netral.
-  Opsi: dateLabel kosong (hasil Formatters), onPay, onRemind.
+    Opsi: dateLabel kosong (hasil Formatters), onPay, onRemind, paymentLabel String?.
+    onRemind null menyembunyikan tombol Ingatkan (R9). Label default memakai sisa tagihan;
+    pemanggil memakai paymentLabel dari pemetaan state agar COD dan Lunas konsisten.
   total > 0 dan 0 <= paid < total; sisa dihitung total - paid.
 - Varian: belum bayar/DP, tombol aktif/disabled; tidak ada jatuh tempo.
 - Contoh: PiutangCard(customerName: name, orderNo: number, summary: items, total: total,
@@ -877,3 +879,21 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   awal nonkosong memakai selectAllOnFocus. Spec 19/22/29/30.
 - RootScaffold di Antrean/Pelanggan/Laporan/Lainnya, AI/riwayat dan pengeluaran
   mengikuti satu service SyncIndicator. Tidak ada perubahan API widget bersama.
+
+## R9 - Pembayaran COD (2 Nov 2026)
+- OrderCard/NotaCard/PiutangCard menerima paymentLabel String?; default menampilkan
+  Lunas atau sisa rupiah. Untuk COD, Page/Section memakai paymentLabel dari state bersama.
+  Kartu order siap dengan label COD memakai aksi Terima pembayaran.
+- PiutangCard.onRemind null menghilangkan tombol Ingatkan. Contoh:
+  PiutangCard(..., paymentLabel: label, onPay: record, onRemind: null).
+- PaymentRecordInputSection (orders/widgets, 58 baris): amount/due int rupiah, method,
+  saveExcess, error; callback onMethod/onExcess/onKey. Menyusun AppText, ChipBar,
+  BannerMessage dan Numpad. Tes: r9_payment_sections_test.dart.
+- ReceiptActionsSection (transactions/widgets, 53 baris): busy, onPrint/onWhatsApp,
+  onNew/onOrder dan onRecord opsional; tombol pembayaran hilang bila onRecord null.
+  Tes: r9_receipt_sections_test.dart; alur: r9_payment_entrypoints_test.dart.
+- PaymentSummarySection, PaymentSavingsSection, PaymentMethodSection, ReceiptStatusSection,
+  OutstandingListSection dan CustomerOrdersSection menyusun data/callback dari Page;
+  tidak membaca provider/router. Nomor/status OrderSummarySection membungkus pada teks besar.
+- Empat golden r9_cod_* mencakup pembayaran, Detail, kartu Antrean dan Piutang 320 px/2x.
+  Spec layar 01/07/08/09/18 mengalahkan pilihan pembayaran lama pada .pen.

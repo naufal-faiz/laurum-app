@@ -4,7 +4,7 @@ Template: SubScaffold (AppBarSub, tanpa nav)
 
 Komposisi:
 - ReceiptStatusSection: AppCard Nomor nota, AppStatusText Lunas/DP/Belum bayar,
-  'Pembayaran tersimpan.', status printer (nama + Terhubung / belum terhubung).
+  konfirmasi pembayaran tersimpan atau dicatat saat diterima, status printer (nama + Terhubung / belum terhubung).
 - BannerMessage error 'Struk gagal dicetak. Pastikan printer menyala dan Bluetooth aktif.'
   + AppButton 'Coba lagi' dan 'Pengaturan printer'.
 - ReceiptPreview dari receiptLines data tersimpan; lebar 320/384 sesuai ReceiptSettings.
@@ -32,3 +32,13 @@ fixture nota yang memang menyimpan nama pendek.
 Selisih terhadap .pen: struk tidak dicetak otomatis saat nota dibuka (tombol Cetak struk);
 status printer berasal dari FakePrintService, bukan Bluetooth nyata. iOS belum diuji;
 printer Bluetooth Classic tidak didukung iOS non-MFi.
+
+## R9 - pembayaran lanjutan
+ReceiptStatusSection kini Stateless: data cetak/printer dan callback disuplai Page.
+Label bayar memakai pemetaan state bersama: Lunas, Sisa Rp X, COD - sisa Rp X.
+ReceiptActionsSection menambah Catat pembayaran selama ada sisa dan nota tidak batal,
+termasuk nota selesai. Aksi membuka PaymentRecordSheet yang sama dengan Detail/Piutang.
+Membuka atau mencetak struk COD tidak menyelesaikan order. Struk menampilkan sisa/COD,
+bukan label DP/Belum bayar. Keberhasilan pembayaran memuat ulang preview dan label.
+Penyimpanan pembayaran/kelebihan tabungan atomik lewat TransactionRunner R8.
+Selisih .pen: aksi pembayaran tambahan dan label sisa; tes callback, alur dan 320 px/2x.

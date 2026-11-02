@@ -59,12 +59,12 @@ void main() {
       customerName: 'Pak Dedi',
       settings: receiptSettings(),
     );
-    expect(dp, contains('STATUS: DP Rp10.000'));
+    expect(dp, contains('STATUS: SISA Rp46.500'));
     expect(
       dp.any((line) => line.startsWith('Dibayar QRIS') && line.endsWith('Rp10.000')),
       isTrue,
     );
-    expect(unpaid, contains('STATUS: BELUM BAYAR'));
+    expect(unpaid, contains('STATUS: SISA Rp56.500'));
     expect(unpaid.where((line) => line.startsWith('Tabungan dipakai')), isEmpty);
   });
 }

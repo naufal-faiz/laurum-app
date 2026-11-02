@@ -61,3 +61,22 @@ Selisih terhadap .pen: MenuRow tidak punya warna destruktif, jadi 'Batalkan orde
 memakai AppButton destructiveOutline di dalam sheet; jejak aktivitas tidak menampilkan
 'Oleh Pemilik' dan tidak mengulang jam di judul; tombol Cetak struk dan CTA sejajar
 dalam satu baris footer.
+
+## R9 - COD dan pembayaran pada order selesai (menggantikan batas R4 terkait pembayaran)
+- Catat pembayaran tersedia selama sisa > 0 dan tidak batal, termasuk order selesai.
+- Label pembayaran sama dengan Antrean/Struk/Piutang: Lunas / Sisa Rp X / COD - sisa Rp X.
+- COD dengan sisa tertahan: mode sederhana menampilkan Edit/Hapus, Cetak struk outline,
+  dan Terima pembayaran. Tidak ada aksi Selesaikan tanpa cetak untuk melewati tahanan.
+- Mode aktif: langkah siap mengganti Serahkan menjadi Terima pembayaran; aksi yang sama
+  di kartu Antrean dan menu Ubah status membuka PaymentRecordSheet untuk pelunasan.
+- Mode sederhana otomatis selesai setelah COD lunas. Mode aktif melalui Catat pembayaran
+  biasa hanya melepas tahanan; aksi Terima pembayaran di langkah siap menyimpan pembayaran
+  dan event selesai bersama. Pembayaran sebagian tetap disimpan tanpa menyelesaikan COD.
+- State dan repository menolak penyelesaian COD yang belum lunas, termasuk callback usang.
+- Kelebihan tunai dapat dikembalikan atau disetor ke tabungan; payment.amount maksimal sisa.
+  Pembayaran, setoran dan status/event tersimpan dalam satu TransactionRunner.
+- Non-COD bayar sebagian tetap boleh selesai; pembayaran lanjutan tidak mengubah status.
+- Fixture tidak berubah; tes COD kedua mode, rollback, keyboard 300 dp, 320 px/2x.
+Selisih .pen: pengecualian empat aksi untuk COD tertahan dan sheet pilihan kelebihan.
+Header nomor nota/status membungkus agar nomor tidak terjepit vertikal pada teks 2x.
+Belum diuji manual di Android/iOS; pencetakan masih layanan palsu.

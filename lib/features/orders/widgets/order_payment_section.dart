@@ -30,7 +30,7 @@ class OrderPaymentSection extends StatelessWidget {
             ),
             InfoRow(label: 'Terbayar', value: Formatters.rupiah(data.paid)),
             InfoRow(label: 'Sisa piutang', value: Formatters.rupiah(data.outstanding)),
-            if (!data.isFinal)
+            if (data.canRecord)
               AppButton(
                 'Catat pembayaran',
                 variant: AppButtonVariant.actionOutline,

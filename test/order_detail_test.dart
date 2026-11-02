@@ -15,7 +15,7 @@ void main() {
     expect(find.text('Detail order'), findsOneWidget);
     expect(find.text('A-0142'), findsOneWidget);
     expect(find.text('Diproses'), findsOneWidget);
-    expect(find.text('Belum bayar'), findsWidgets);
+    expect(find.text('Sisa Rp31.500'), findsWidgets);
     expect(find.text('Jumat, 16 Okt 2026 10.15 WIB'), findsOneWidget);
     expect(find.text('Minggu, 18 Okt 2026 17.00 WIB'), findsOneWidget);
     expect(find.text('Pak Dedi Budiarto'), findsOneWidget);

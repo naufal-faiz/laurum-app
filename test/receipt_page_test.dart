@@ -34,7 +34,7 @@ void main() {
     draft.add(serviceFixtures.firstWhere((s) => s.id == 'srv-004'));
     final checkout = scope.read(checkoutControllerProvider.notifier);
     checkout.setSavings(value: true, due: 6500);
-    checkout.setMode(PaymentMode.lunas, due: 6500);
+
     checkout.setReceived(10000, due: 6500);
     final orderId = (await checkout.save())!;
 

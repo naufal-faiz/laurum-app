@@ -4,14 +4,14 @@ Sumber: usulan pengguna setelah audit dev1rev (R0-R7, prompt 71/80/90 selesai). 
 ## Daftar revisi
 | No | Permintaan | Keputusan | Prompt | Status |
 | --- | --- | --- | --- | --- |
-| 1 | Payment COD; hapus status DP/belum bayar/lunas; COD menahan selesai; belum bayar masuk piutang | Pilihan UI hanya Bayar sekarang / COD. PayStatus tetap sebagai nilai turunan (Piutang, Laporan, fixture). DP = Bayar sekarang kurang dari total. Order.payTerm baru | R9 | BELUM |
-| 2 | Toggle kembalian/tabungan bila bayar lebih | Tunai saja; default Kembalian; Simpan ke tabungan = setoran, bukan omzet; juga di Catat pembayaran | R9 (+R8) | BELUM |
+| 1 | Payment COD; hapus status DP/belum bayar/lunas; COD menahan selesai; belum bayar masuk piutang | Pilihan UI hanya Bayar sekarang / COD. PayStatus tetap sebagai nilai turunan (Piutang, Laporan, fixture). DP = Bayar sekarang kurang dari total. Order.payTerm baru | R9 | SELESAI (2026-11-02) |
+| 2 | Toggle kembalian/tabungan bila bayar lebih | Tunai saja; default Kembalian; Simpan ke tabungan = setoran, bukan omzet; juga di Catat pembayaran | R9 (+R8) | SELESAI (2026-11-02) |
 | 3 | Sembunyikan hapus akun atau buat Kelola akun | Halaman Kelola akun (nama, no. telp, email, ganti password, Google, Keluar); Hapus akun di Zona berbahaya, tidak disembunyikan | R10 | BELUM |
 | 4 | Login email atau no. telp + password | Email+password dan Google; no. telp hanya profil (tanpa OTP) | R10 | BELUM |
 | 5 | Halaman Daftar | Daftar + Cek email + Lupa password | R10 | BELUM |
-| 6 | Tombol halaman Pembayaran | "Cetak struk" (simpan lalu buka struk) dan "Ke antrean" (simpan lalu Beranda). Keduanya sebelumnya memanggil fungsi yang sama (bug) | R9 | BELUM |
-| 7 | Catat pembayaran tidak hilang untuk COD | Tampil selama sisa > 0 dan tidak dibatalkan, termasuk order selesai; juga di Struk dan Piutang | R9 | BELUM |
-| 8 | COD belum diinput tetap di Antrean | Otomatis, karena selesai tertahan; kartu diberi penanda COD | R9 | BELUM |
+| 6 | Tombol halaman Pembayaran | "Cetak struk" (simpan lalu buka struk) dan "Ke antrean" (simpan lalu Beranda). Keduanya sebelumnya memanggil fungsi yang sama (bug) | R9 | SELESAI (2026-11-02) |
+| 7 | Catat pembayaran tidak hilang untuk COD | Tampil selama sisa > 0 dan tidak dibatalkan, termasuk order selesai; juga di Struk dan Piutang | R9 | SELESAI (2026-11-02) |
+| 8 | COD belum diinput tetap di Antrean | Otomatis, karena selesai tertahan; kartu diberi penanda COD | R9 | SELESAI (2026-11-02) |
 | F | (fondasi) pembayaran + tabungan harus atomik | TransactionRunner lintas repository; menutup celah rollback yang tercatat di STATE | R8 | SELESAI (2026-11-02) |
 
 Catatan penomoran: usulan awal menyebut R8 = Pembayaran dan R9 = Akun; fondasi atomik dipisah menjadi R8 sehingga menjadi R8-R10.

@@ -4,12 +4,14 @@ import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_number_generator.dart';
 import 'package:laurum/core/domain/order_rules.dart';
 import 'package:laurum/core/domain/payment.dart';
+import 'package:laurum/core/domain/payment_excess.dart';
 import 'package:laurum/core/domain/savings_entry.dart';
 import 'package:laurum/core/domain/savings_rules.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/features/transactions/state/checkout_item.dart';
 import 'package:laurum/features/transactions/state/checkout_state.dart';
+import 'package:laurum/features/transactions/state/payment_quote.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
 
 Future<String> saveCheckout(
@@ -25,16 +27,9 @@ Future<String> saveCheckout(
   if (customer == null) throw StateError('Pelanggan tidak ditemukan');
   final balance = await savingsRepository.getBalance(customerId);
   final total = draft.total;
-  final savingsUsed = state.useSavings ? (balance < total ? balance : total) : 0;
-  final due = total - savingsUsed;
-  final cashPaid = switch (state.mode) {
-    PaymentMode.lunas => due,
-    PaymentMode.dp => state.received < due ? state.received : due,
-    PaymentMode.belumBayar => 0,
-  };
-  final received = state.method == PayMethod.tunai
-      ? (state.received == 0 ? cashPaid : state.received)
-      : cashPaid;
+  final quote = quotePayment(total: total, balance: balance, state: state);
+  if (!quote.valid) throw StateError('Isi jumlah atau pilih Bayar nanti (COD)');
+  final savingsUsed = quote.savingsUsed, cashPaid = quote.cashPaid;
   final now = ref.read(businessClockProvider)();
   final orders = await orderRepository.getOrders();
   final orderNo = const OrderNumberGenerator().nextOrderNo(orders.map((o) => o.orderNo));
@@ -47,6 +42,7 @@ Future<String> saveCheckout(
     customerId: customerId,
     status: initialOrderStatus(OrderSource.kasir, useOrderStatus: profile.useOrderStatus),
     source: OrderSource.kasir,
+    payTerm: state.payTerm,
     discount: draft.discount,
     enteredAt: now,
     estimatedAt: estimateReady(now, draft.lines.map((line) => line.service)),
@@ -81,9 +77,14 @@ Future<String> saveCheckout(
         orderId: orderId,
         method: state.method,
         amount: cashPaid,
-        received: received,
+        received: quote.received,
         paidAt: now,
       ),
+    );
+  }
+  if (quote.deposit > 0) {
+    entries.add(
+      paymentExcess(order, paymentId: '$orderId-pay-cash', amount: quote.deposit, at: now),
     );
   }
   await orderRepository.saveOrder(

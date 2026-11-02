@@ -1,5 +1,8 @@
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/service_item.dart';
+
+bool isCompletionHeld(Order order, int paid) => order.payTerm == PayTerm.cod && paid < order.total;
 
 // DateTime represents WIB wall-clock time; UTC conversion belongs at the data boundary.
 DateTime estimateReady(DateTime enteredAt, Iterable<ServiceItem> services) {

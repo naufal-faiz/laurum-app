@@ -82,7 +82,7 @@ void main() {
     );
     expect(find.text('Sedang dikerjakan'), findsOneWidget);
     expect(find.text('Diproses'), findsNothing);
-    expect(find.text('Belum bayar'), findsOneWidget);
+    expect(find.text('Sisa Rp31.500'), findsOneWidget);
     expect(find.text('Rp31.500'), findsOneWidget);
   });
   registerOrganismGallery('order_card', orderCardUseCase.builder, height: 1500);

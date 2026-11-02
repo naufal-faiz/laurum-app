@@ -25,6 +25,9 @@ final piutangCardUseCase = WidgetbookUseCase(
               summary: fixtureOrderSummary(id),
               total: order.total,
               paid: paidAmount(paymentFixtures, orderId: id),
+              paymentLabel: id == 'ord-0142'
+                  ? 'COD - sisa ${Formatters.rupiah(order.total)}'
+                  : null,
               dateLabel: Formatters.tanggal(order.enteredAt, ringkas: true),
               ageLabel:
                   '${DateTime(2026, 10, 16).difference(DateTime(order.enteredAt.year, order.enteredAt.month, order.enteredAt.day)).inDays} hari lalu',

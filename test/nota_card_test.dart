@@ -27,7 +27,7 @@ void main() {
         ),
       ),
     );
-    expect(find.text('DP Rp10.000'), findsOneWidget);
+    expect(find.text('Sisa Rp15.000'), findsOneWidget);
     expect(find.text('Menunggu jemput'), findsOneWidget);
     expect(find.byType(TextButton), findsNothing);
     await tester.tap(find.text('A-0140'));

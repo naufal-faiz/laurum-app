@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/cancellation.dart';
+import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_rules.dart';
@@ -27,6 +29,11 @@ class OrderActions extends Notifier<OrderActionState> {
       throw StateError('Status order berubah');
     }
     final next = nextStatus(current.status);
+    final payments = await repository.getPaymentsByOrderId(order.id);
+    if (next == OrderStatus.selesai &&
+        isCompletionHeld(current, paidAmount(payments, orderId: order.id))) {
+      throw StateError('COD belum lunas');
+    }
     final now = ref.read(businessClockProvider)();
     await repository.updateOrderStatus(
       order.id,

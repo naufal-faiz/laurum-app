@@ -34,10 +34,10 @@ Future<String> createR4Order(
     scope.read(checkoutControllerProvider.notifier).setSavings(value: true, due: 0);
     await tester.pumpAndSettle();
   } else {
-    await tester.tap(find.text('Belum bayar'));
+    scope.read(checkoutControllerProvider.notifier).setReceived(1000);
     await tester.pumpAndSettle();
   }
-  await tester.tap(find.text('Simpan saja'));
+  await tester.tap(find.text('Cetak struk'));
   await tester.pumpAndSettle();
   final order = (await scope.read(orderRepositoryProvider).getOrderByOrderNo('A-0143'))!;
   await tester.ensureVisible(find.text('Lihat order'));

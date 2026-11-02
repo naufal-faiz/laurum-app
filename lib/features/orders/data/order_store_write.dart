@@ -1,8 +1,10 @@
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/domain_record.dart';
+import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_item.dart';
+import 'package:laurum/core/domain/order_rules.dart';
 import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/features/orders/data/order_store.dart';
 
@@ -32,7 +34,9 @@ OrderStore writeOrderStore(
     if (old.status != order.status) {
       old.withStatus(order.status, useOrderStatus: useOrderStatus);
     }
-    if (old.ownerId != order.ownerId || old.customerId != order.customerId) {
+    if (old.ownerId != order.ownerId ||
+        old.customerId != order.customerId ||
+        old.payTerm != order.payTerm) {
       throw StateError('Order identity cannot change');
     }
   }
@@ -66,6 +70,10 @@ OrderStore writeOrderStore(
     throw ArgumentError('Item ID already belongs to another order');
   }
   final nextPayments = appendLedger(state.payments, payments);
+  if (order.status == OrderStatus.selesai &&
+      isCompletionHeld(order, paidAmount(nextPayments, orderId: order.id))) {
+    throw StateError('COD belum lunas');
+  }
   if (order.status == OrderStatus.dibatalkan &&
       PayMethod.values.any(
         (method) =>
