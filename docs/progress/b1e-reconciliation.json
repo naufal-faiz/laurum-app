@@ -1,0 +1,216 @@
+{
+  "commit": "70041af",
+  "fixture_rows": {
+    "orders": 16,
+    "items": 16,
+    "payments": 14,
+    "expenses": 18,
+    "savings": 7
+  },
+  "periods": {
+    "today": {
+      "target": {
+        "revenue": 375000,
+        "transaction_count": 12,
+        "expenses": 145000,
+        "profit": 230000,
+        "cash_in": 343500,
+        "active_outstanding": 400500,
+        "savings_balance": 430000,
+        "cash_from_orders": 328500,
+        "savings_used": 0,
+        "new_outstanding": 46500
+      },
+      "actual": {
+        "revenue": 177000,
+        "transaction_count": 6,
+        "expenses": 145000,
+        "profit": 32000,
+        "cash_in": 130500,
+        "active_outstanding": 400500,
+        "savings_balance": 430000,
+        "cash_from_orders": 130500,
+        "savings_used": 0,
+        "new_outstanding": 46500
+      },
+      "missing_to_target": {
+        "revenue": 198000,
+        "transaction_count": 6,
+        "expenses": 0,
+        "profit": 198000,
+        "cash_in": 213000,
+        "active_outstanding": 0,
+        "savings_balance": 0,
+        "cash_from_orders": 198000,
+        "savings_used": 0,
+        "new_outstanding": 0
+      }
+    },
+    "week": {
+      "target": {
+        "revenue": 1800000,
+        "transaction_count": 58,
+        "expenses": 850000,
+        "profit": 950000,
+        "cash_in": 1699500,
+        "active_outstanding": 400500,
+        "savings_balance": 430000,
+        "cash_from_orders": 1574500,
+        "savings_used": 25000,
+        "new_outstanding": 200500
+      },
+      "actual": {
+        "revenue": 589000,
+        "transaction_count": 14,
+        "expenses": 850000,
+        "profit": -261000,
+        "cash_in": 500000,
+        "active_outstanding": 400500,
+        "savings_balance": 430000,
+        "cash_from_orders": 388500,
+        "savings_used": 0,
+        "new_outstanding": 200500
+      },
+      "missing_to_target": {
+        "revenue": 1211000,
+        "transaction_count": 44,
+        "expenses": 0,
+        "profit": 1211000,
+        "cash_in": 1199500,
+        "active_outstanding": 0,
+        "savings_balance": 0,
+        "cash_from_orders": 1186000,
+        "savings_used": 25000,
+        "new_outstanding": 0
+      }
+    },
+    "month": {
+      "target": {
+        "revenue": 4250000,
+        "transaction_count": 135,
+        "expenses": 1850000,
+        "profit": 2400000,
+        "cash_in": 4050000,
+        "active_outstanding": 400500,
+        "savings_balance": 430000,
+        "cash_from_orders": 3750000,
+        "savings_used": 99500,
+        "new_outstanding": 400500
+      },
+      "actual": {
+        "revenue": 864000,
+        "transaction_count": 16,
+        "expenses": 1850000,
+        "profit": -986000,
+        "cash_in": 868500,
+        "active_outstanding": 400500,
+        "savings_balance": 430000,
+        "cash_from_orders": 438500,
+        "savings_used": 25000,
+        "new_outstanding": 400500
+      },
+      "missing_to_target": {
+        "revenue": 3386000,
+        "transaction_count": 119,
+        "expenses": 0,
+        "profit": 3386000,
+        "cash_in": 3181500,
+        "active_outstanding": 0,
+        "savings_balance": 0,
+        "cash_from_orders": 3311500,
+        "savings_used": 74500,
+        "new_outstanding": 0
+      }
+    }
+  },
+  "daily": [
+    {
+      "date": "2026-10-12",
+      "revenue": 0,
+      "transaction_count": 0
+    },
+    {
+      "date": "2026-10-13",
+      "revenue": 0,
+      "transaction_count": 0
+    },
+    {
+      "date": "2026-10-14",
+      "revenue": 248000,
+      "transaction_count": 3
+    },
+    {
+      "date": "2026-10-15",
+      "revenue": 164000,
+      "transaction_count": 5
+    },
+    {
+      "date": "2026-10-16",
+      "revenue": 177000,
+      "transaction_count": 6
+    },
+    {
+      "date": "2026-10-17",
+      "revenue": 0,
+      "transaction_count": 0
+    },
+    {
+      "date": "2026-10-18",
+      "revenue": 0,
+      "transaction_count": 0
+    }
+  ],
+  "week_order_numbers": [
+    "A-0127",
+    "A-0129",
+    "A-0130",
+    "A-0141",
+    "A-0139",
+    "A-0132",
+    "A-0140",
+    "A-0133",
+    "A-0134",
+    "A-0135",
+    "A-0137",
+    "A-0142",
+    "A-0136",
+    "A-0138"
+  ],
+  "week_top_services": [
+    {
+      "id": "srv-003",
+      "name": "Cuci setrika",
+      "unit": "kg",
+      "qty_milli": 33500,
+      "revenue": 301500
+    },
+    {
+      "id": "srv-001",
+      "name": "Cuci kering lipat",
+      "unit": "kg",
+      "qty_milli": 18000,
+      "revenue": 108000
+    },
+    {
+      "id": "srv-004",
+      "name": "Bed cover",
+      "unit": "pcs",
+      "qty_milli": 4000,
+      "revenue": 100000
+    },
+    {
+      "id": "srv-002",
+      "name": "Cuci kiloan",
+      "unit": "kg",
+      "qty_milli": 8500,
+      "revenue": 59500
+    },
+    {
+      "id": "srv-005",
+      "name": "Selimut tebal",
+      "unit": "pcs",
+      "qty_milli": 1000,
+      "revenue": 20000
+    }
+  ]
+}
