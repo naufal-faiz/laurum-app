@@ -48,12 +48,14 @@ ReceiptSettings copySettings(
   ownerId: current.ownerId,
   createdAt: current.createdAt,
   updatedAt: current.updatedAt,
+  syncState: current.syncState,
   paperMm: paperMm ?? current.paperMm,
   fontSize: fontSize ?? current.fontSize,
   showAddress: showAddress ?? current.showAddress,
   showCustomer: showCustomer ?? current.showCustomer,
   showSavings: showSavings ?? current.showSavings,
   showNote: showNote ?? current.showNote,
+  deletedAt: current.deletedAt,
 );
 
 BusinessProfile copyProfile(
@@ -65,10 +67,12 @@ BusinessProfile copyProfile(
   ownerId: current.ownerId,
   createdAt: current.createdAt,
   updatedAt: current.updatedAt,
+  syncState: current.syncState,
   name: current.name,
   address: current.address,
   phone: current.phone,
   receiptFooter: receiptFooter ?? current.receiptFooter,
   receiptNote: receiptNote ?? current.receiptNote,
   useOrderStatus: current.useOrderStatus,
+  deletedAt: current.deletedAt,
 );

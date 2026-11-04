@@ -45,12 +45,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_totals.dart (30): ReportTotals
 
 ### lib/core/domain/repositories/
-- business_repository.dart (10): BusinessRepository
+- business_repository.dart (8): BusinessRepository
 - customer_repository.dart (9): CustomerRepository
 - expense_repository.dart (13): ExpenseRepository
 - local_settings_repository.dart (6): LocalSettingsRepository
 - order_repository.dart (38): OrderRepository
 - proposal_repository.dart (13): ProposalRepository
+- receipt_settings_repository.dart (6): ReceiptSettingsRepository
 - report_repository.dart (10): ReportRepository
 - savings_repository.dart (9): SavingsRepository
 - service_repository.dart (8): ServiceRepository
@@ -113,7 +114,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - local_settings_providers.dart (11): localSettingsRepositoryProvider, orderNumberGeneratorProvider
 - photo_picker.dart (16): PhotoPicker, FakePhotoPicker
 - print_service.dart (96): PrintStatus, PrinterDevice, ReceiptData, PrintService, FakePrintService
-- repository_providers.dart (46): businessRepositoryProvider, customerRepositoryProvider, serviceRepositoryProvider, orderRepositoryProvider, savingsRepositoryProvider, expenseRepositoryProvider, proposalRepositoryProvider, reportRepositoryProvider, transactionRunnerProvider
+- repository_providers.dart (51): businessRepositoryProvider, receiptSettingsRepositoryProvider, customerRepositoryProvider, serviceRepositoryProvider, orderRepositoryProvider, savingsRepositoryProvider, expenseRepositoryProvider, proposalRepositoryProvider, reportRepositoryProvider, transactionRunnerProvider
 - service_providers.dart (41): printServiceProvider, externalLauncherProvider, contactSourceProvider, photoPickerProvider, exportServiceProvider, authServiceProvider, localDataServiceProvider, syncServiceProvider
 - sync_service.dart (93): SyncServiceStatus, SyncService, FakeSyncService
 - transaction_runner.dart (8): TransactionRunner, TransactionParticipant
@@ -177,6 +178,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/business/data/
 - business_fixtures.dart (21):
+- business_storage_mapping.dart (47):
+- drift_business_repository.dart (68): DriftBusinessRepository
 - in_memory_business_repository.dart (52): BusinessState, InMemoryBusinessRepository, inMemoryBusinessRepositoryProvider
 
 ### lib/features/business/pages/
@@ -319,7 +322,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_record_input_section.dart (58): PaymentRecordInputSection
 
 ### lib/features/printer/data/
+- drift_receipt_settings_repository.dart (54): DriftReceiptSettingsRepository
+- in_memory_receipt_settings_repository.dart (14): InMemoryReceiptSettingsRepository
 - receipt_demo.dart (74):
+- receipt_storage_mapping.dart (47):
 
 ### lib/features/printer/pages/
 - bluetooth_sheet.dart (44): BluetoothSheet
@@ -328,8 +334,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/printer/state/
 - printer_connection.dart (93): PrinterConnectionController, printerConnectionProvider
-- printer_settings.dart (85): PrinterSettingsState, PrinterSettingsController, printerSettingsProvider
-- printer_state.dart (74): PrinterConnectionState
+- printer_settings.dart (91): PrinterSettingsState, PrinterSettingsController, printerSettingsProvider
+- printer_state.dart (78): PrinterConnectionState
+- save_printer_settings.dart (25):
 
 ### lib/features/printer/widgets/
 - printer_connection_section.dart (79): PrinterConnectionSection
@@ -396,8 +403,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_orders_section.dart (104): ReportOrdersSection
 
 ### lib/features/services/data/
-- in_memory_service_repository.dart (72): InMemoryServiceRepository, inMemoryServiceRepositoryProvider
+- drift_service_repository.dart (63): DriftServiceRepository
+- in_memory_service_repository.dart (80): InMemoryServiceRepository, inMemoryServiceRepositoryProvider
 - service_fixtures.dart (67):
+- service_storage_mapping.dart (58):
 
 ### lib/features/services/pages/
 - service_directory_page.dart (71): ServiceDirectoryPage
@@ -617,18 +626,20 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - confirm_modal_test.dart (74):
 
 ### test/contracts/
-- business_contract.dart (36):
+- business_contract.dart (44):
+- business_values.dart (43):
 - customer_contract.dart (51):
 - customer_query_contract.dart (49):
 - expense_contract.dart (49):
 - local_settings_contract.dart (27):
 - order_contract.dart (73):
 - order_payment_contract.dart (44):
+- receipt_settings_contract.dart (41):
 - record_values.dart (28):
 - repository_factory.dart (3): RepositoryFactory
 - savings_contract.dart (43):
 - savings_extra_contract.dart (43):
-- service_contract.dart (25):
+- service_contract.dart (61):
 - transaction_runner_contract.dart (60): RunnerHarness
 
 ### test/
@@ -712,6 +723,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - period_tabs_test.dart (29):
 
 ### test/persistence/
+- b1c_harness.dart (31): B1cHarness
+- business_service_atomic_test.dart (73):
+- business_service_contracts_test.dart (53):
+- business_service_reopen_test.dart (46):
+- business_service_scope_test.dart (59):
 - customer_keys_migration_test.dart (69):
 - customer_query_plan_test.dart (20):
 - customer_savings_atomic_test.dart (98):
@@ -730,6 +746,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### test/persistence/
 - outbox_writer_test.dart (67):
+- printer_repository_integration_test.dart (75):
 
 ### test/
 - piutang_card_test.dart (43):

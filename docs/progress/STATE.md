@@ -2,57 +2,58 @@
 Diperbarui: 2026-11-04 | Cabang dev2backend
 
 ## Posisi
-BP0 SELESAI pada 8e51cda: UUID, local_settings, rentang dan 8 suite kontrak.
-UI dummy prompt 100/R0-R10 selesai; bukti docs/progress/fase-ui.md.
-B1a SELESAI pada c22ec5b: database per akun, outbox, runner dan LocalSettings Drift.
-B1b SELESAI: repository pelanggan/tabungan Drift dan migrasi skema v1->v2.
-check_all SEMUA HIJAU (exit 0): 759 tes, kedua analyzer bersih, check_arch OK,
-REPO_MAP 787. Bukti %TEMP%/laurum-b1b-check.log; ringkasan docs/progress/b1b.md.
-Baseline B1b 740 tes hijau; log %TEMP%/laurum-b1b-baseline.log.
+UI dummy prompt 100/R0-R10 selesai; docs/progress/fase-ui.md.
+BP0 selesai 8e51cda; B1a selesai c22ec5b; B1b selesai 8821b17.
+B1c SELESAI: usaha/layanan/struk Drift dan integrasi repository pengaturan printer.
+check_all akhir: 781 tes lolos, kedua analyzer bersih, check_arch OK, exit 0;
+REPO_MAP 804 berkas. Bukti %TEMP%/laurum-b1c-check.log.
+Baseline bersih B1c: 759 tes, analyzer bersih, check_arch OK, exit 0.
+Bukti %TEMP%/laurum-b1c-baseline-clean.log; tes terarah B1c 84 hijau.
+Rencana docs/plans/B1c-usaha-layanan.md; laporan docs/progress/b1c.md.
 
-## Selesai B1b
-- Prompt B1b-drift-pelanggan.md; rencana docs/plans/B1b-pelanggan-tabungan.md.
-- DriftCustomerRepository/DriftSavingsRepository: owner scope, soft delete, ledger
-  append-only, SQL SUM saldo, outbox + data atomik dan updatedAt lokal/pending.
-- Skema v2 tetap 16 tabel: name_key/phone_key lokal, indeks unik nomor aktif,
-  indeks prefiks nama/nomor dan owner/updated_at. Nomor asli tetap dipertahankan.
-- Pencarian API prefiks (LIKE + UNION), alias 0/62/+62/8 sama; UI belum disambung.
-- Kontrak InMemory/Drift memeriksa semua field bisnis; updatedAt/syncState diuji
-  terpisah karena metadata penyimpanan. Retry ledger mengabaikan metadata itu saja.
-- 55 tes terarah hijau: kontrak, SQL plan, rollback trigger, owner/parent, metadata,
-  migrasi data lama dan collision alias (migrasi batal atomik, tanpa merge/hapus).
-- Snapshot v1 tidak diubah; v2 dibekukan. Perubahan skema berikut wajib migrasi/tes.
-  Helper snapshot dihasilkan dengan --data-classes --companions.
-- Self-review: Dart baru non-generated <=100 baris; fixture/registry/tema/lint tetap.
-- SDK Windows path berspasi gagal hook native. Sebelum SEMUA perintah Dart/Flutter
-  pada setiap proses PowerShell baru: . ./tool/windows_native_sdk.ps1
-  Helper memakai junction Flutter + salinan Dart di Temp (~588 MB), hanya per proses.
-  Source SDK tetap E:/App Data/flutter/flutter. Instruksi lengkap di README.
-- LANGKAH BERIKUTNYA: B1c-drift-usaha-layanan.md. Berhenti setelah commit B1b.
+## Selesai B1c
+- DriftBusinessRepository/DriftServiceRepository/DriftReceiptSettingsRepository:
+  owner scope, updatedAt lokal/pending, data dan outbox atomik; profil default status true.
+- ReceiptSettingsRepository baru; adapter InMemory berbagi state bisnis lama untuk
+  notifikasi/rollback/cleanup. BusinessRepository tetap menyediakan jembatan API struk.
+- PrinterSettings dan receiptView memakai antarmuka struk. Simpan profil+struk lewat
+  TransactionRunner; footer/note digabung dengan profil terbaru agar mode/nama tetap.
+- Printer_id/printer_name tetap LocalSettingsRepository lokal, tanpa outbox sinkron.
+- Katalog sortOrder lalu urutan insert stabil; filter aktif/soft delete pada dua backend.
+- Profil/struk satu baris per owner dijaga transaksi repository; ID tersimpan tak boleh
+  berubah. Belum ada UNIQUE(owner_id) SQL; sync/penulisan langsung nanti wajib menjaganya.
+- Default kosong memakai UUID v4, tanpa menulis database/outbox, stabil per instance.
+- Skema tetap v2/16 tabel; snapshot v1/v2 tidak diubah. Migrasi berikut wajib tes.
+- Tes: kontrak dua backend, rollback trigger/gabungan + retry, metadata/owner/ID,
+  database file ditutup/dibuka ulang, status mode setelah form dibuka dan golden printer.
+- Tidak ada widget/layar baru. Spec 06 diperbarui untuk aliran data; golden lama cocok.
+- AiPreferences TETAP in-memory sampai B7; catatan batasan wajib dipertahankan.
+- LANGKAH BERIKUTNYA: B1d-drift-order-pembayaran.md. Berhenti setelah commit B1c.
 
-## Antrean
-1. Prompt berikutnya: docs/prompts/B1c-drift-usaha-layanan.md; lanjut B1d-B1f, lalu B0.
-2. Aplikasi tetap in-memory sampai wiring B1f. Database Android/iOS belum diuji;
-   pengujian SQLite tahap ini di Windows. Tidak ada perubahan layar/.pen/fixture.
-3. B0 hanya Supabase lokal (Docker/CLI). B2/B3/B5-B8 MENUNGGU. Jangan push/merge.
-4. Pengguna meminta kebutuhan Supabase cloud disampaikan pada akhir fase ketika perlu.
-   B1b belum memerlukan cloud/key; agen tetap dilarang mengubah proyek cloud.
+## Antrean dan lingkungan
+1. Sesudah B1c selesai: docs/prompts/B1d-drift-order-pembayaran.md, lalu B1e/B1f dan B0.
+2. Aplikasi tetap InMemory sampai B1f. Database Android/iOS belum diuji;
+   SQLite native Windows diuji. Printer asli ditunda; tampilan/fixture tetap.
+3. Sebelum SEMUA perintah Dart/Flutter pada setiap proses PowerShell baru:
+   . ./tool/windows_native_sdk.ps1 (SDK asli E:/App Data/flutter/flutter berspasi).
+   Junction Flutter + salinan Dart (~588 MB) di Temp; lingkungan hanya per proses.
+4. B0 hanya Supabase lokal (Docker/CLI); cloud/key belum dibutuhkan pada B1c.
+   Pengguna meminta kebutuhan cloud disampaikan di akhir fase ketika diperlukan.
+   Agen dilarang mengubah proyek cloud. B2/B3/B5-B8 MENUNGGU; jangan push/merge.
 
 ## Keputusan dan batas
-- AGENTS 19-22: persistensi hanya data/core persistence/sync; tanpa shared_preferences.
-  Preferensi perangkat local_settings, bisnis/struk tersinkron, sesi secure storage.
-- UUID dan namespace retry sesuai docs/progress/bp0-id.md (28 titik, 21 v4/7 v5).
-  Fixture teks baru dipetakan saat seed B1f; nomor nota terpisah dari ID.
+- Persistensi hanya data/core persistence/sync; tanpa shared_preferences.
+  Preferensi perangkat local_settings, bisnis/struk sinkron, sesi secure storage.
+- UUID/namespace retry: docs/progress/bp0-id.md (28 titik, 21 v4/7 v5); seed UUID B1f.
 - Lintas repository wajib TransactionRunner; nested gagal menggagalkan transaksi luar.
-- Payload outbox snake_case/UTC ISO tanpa sync_state atau key pencarian lokal.
+- Payload snake_case/UTC ISO tanpa sync_state/key pencarian lokal. B1b memakai prefiks
+  nama/nomor dan normalisasi alias 0/62/+62/8; UI pencarian belum disambung.
 - PRD B 5 belum memuat order_events; tabel tersedia sesuai domain/B1d (laporan B1a).
-- PayStatus turunan; COD bersisa tidak boleh selesai. Tabungan sebagian dengan bayar nol
-  wajib COD; tagihan tertutup tabungan boleh disimpan. Kelebihan tunai bukan omzet.
-- Catat bayar mode aktif melepas tahanan; Terima bayar di siap sekaligus selesai.
-  Mode sederhana otomatis selesai saat COD lunas; non-COD lama belum lunas didukung.
-- Semua data/account/sync aplikasi masih dummy; password bukan state UI/log/error.
-  CSV BOM/titik koma; Ingatkan piutang tersembunyi; omzet dari nota non-batal.
+- PayStatus turunan; COD bersisa ditahan; tabungan sebagian dengan bayar nol wajib COD.
+  Kelebihan tunai bukan omzet. Catat bayar aktif melepas tahanan, Terima bayar siap selesai;
+  mode sederhana otomatis selesai saat COD lunas; non-COD lama belum lunas didukung.
+- Semua auth/account/sync masih dummy; password bukan state UI/log/error.
 - Fixture 48 pelanggan/12 antrean, cust-010/A-0137, AI 142/8/3 agregat tetap.
-- Registry 60/60, Section debt 14 tetap. Utang runtime 101-110/tool lama: fase-ui/bp0-id.
+- Registry 60/60, Section debt 14. Utang runtime 101-110/tool lama: fase-ui/bp0-id.
 - Slot lintas fitur OrderEditBodySection izin R0; statusLabel R4. iOS belum diuji.
 - Graph E-Latihan-Pemrograman-laurum-projects-laurum auto-index checkout E: aktif.

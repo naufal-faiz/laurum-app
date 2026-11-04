@@ -14,8 +14,11 @@ Komposisi:
 - Footer: AppButton('Simpan pengaturan') + AppButton('Cetak uji').
 
 Data dan provider:
-- printerSettingsProvider (AsyncNotifier) memuat ReceiptSettings + BusinessProfile;
-  edit langsung mengubah state; save menulis ke BusinessRepository.
+- printerSettingsProvider (AsyncNotifier) memuat ReceiptSettings lewat
+  ReceiptSettingsRepository dan BusinessProfile lewat BusinessRepository.
+  Edit langsung mengubah state; save menulis keduanya lewat TransactionRunner.
+- Printer yang dipilih disimpan di LocalSettingsRepository (printer_id/printer_name),
+  hanya lokal di perangkat dan tidak masuk outbox sinkron.
 - printerConnectionProvider (Notifier) memegang status, devices, connected, notice.
 - printServiceProvider / FakePrintService: discover, connect, printReceipt(ReceiptData),
   enableBluetooth; dapat disetel gagal/tidak terhubung.
@@ -25,7 +28,8 @@ Interaksi:
 - Cari printer -> discover; jika Bluetooth mati buka BluetoothSheet 'Aktifkan Bluetooth',
   lalu daftar printer palsu (MenuRow) -> connect.
 - Mengubah kertas/huruf/toggle/teks langsung memperbarui pratinjau; Simpan menulis
-  ReceiptSettings dan BusinessProfile (footer/note).
+  ReceiptSettings dan BusinessProfile (footer/note) secara atomik; memakai profil
+  terbaru agar perubahan nama/status order setelah form dibuka tetap dipertahankan.
 - Cetak uji mengirim List<String> 32 kolom + paperMm/fontSize ke PrintService;
   sukses menampilkan notice, gagal menampilkan BannerMessage error.
 - Ganti membuka daftar printer lagi.

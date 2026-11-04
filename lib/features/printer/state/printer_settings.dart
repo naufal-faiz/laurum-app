@@ -3,6 +3,7 @@ import 'package:laurum/core/domain/business_profile.dart';
 import 'package:laurum/core/domain/receipt_settings.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/printer/state/printer_state.dart';
+import 'package:laurum/features/printer/state/save_printer_settings.dart';
 
 class PrinterSettingsState {
   const PrinterSettingsState({
@@ -35,7 +36,7 @@ class PrinterSettingsController extends AsyncNotifier<PrinterSettingsState> {
   Future<PrinterSettingsState> build() async {
     final repository = ref.watch(businessRepositoryProvider);
     return PrinterSettingsState(
-      settings: await repository.getReceiptSettings(),
+      settings: await ref.watch(receiptSettingsRepositoryProvider).getReceiptSettings(),
       profile: await repository.getProfile(),
     );
   }
@@ -78,8 +79,13 @@ class PrinterSettingsController extends AsyncNotifier<PrinterSettingsState> {
     final current = state.value;
     if (current == null) return;
     final repository = ref.read(businessRepositoryProvider);
-    await repository.saveReceiptSettings(current.settings);
-    await repository.saveProfile(current.profile);
-    _set((s) => s.copyWith(notice: 'Pengaturan struk disimpan.'));
+    final profile = await savePrinterSettings(
+      repository,
+      ref.read(receiptSettingsRepositoryProvider),
+      ref.read(transactionRunnerProvider),
+      current.settings,
+      current.profile,
+    );
+    _set((s) => s.copyWith(profile: profile, notice: 'Pengaturan struk disimpan.'));
   }
 }

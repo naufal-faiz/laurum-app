@@ -18,9 +18,17 @@ class InMemoryServiceRepository extends Notifier<List<ServiceItem>>
 
   @override
   Future<List<ServiceItem>> getServices({bool includeInactive = false}) async {
-    return List.unmodifiable(
-      state.where((s) => s.deletedAt == null && (includeInactive || s.isActive)),
-    );
+    final entries =
+        state.indexed
+            .where(
+              (e) => e.$2.deletedAt == null && (includeInactive || e.$2.isActive),
+            )
+            .toList()
+          ..sort((a, b) {
+            final order = a.$2.sortOrder.compareTo(b.$2.sortOrder);
+            return order == 0 ? a.$1.compareTo(b.$1) : order;
+          });
+    return List.unmodifiable(entries.map((e) => e.$2));
   }
 
   @override

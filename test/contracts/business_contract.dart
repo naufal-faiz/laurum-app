@@ -3,6 +3,7 @@ import 'package:laurum/core/domain/business_profile.dart';
 import 'package:laurum/core/domain/receipt_settings.dart';
 import 'package:laurum/core/domain/repositories/business_repository.dart';
 
+import 'business_values.dart';
 import 'repository_factory.dart';
 
 void runBusinessRepositoryContract(RepositoryFactory<BusinessRepository> factory) {
@@ -14,6 +15,10 @@ void runBusinessRepositoryContract(RepositoryFactory<BusinessRepository> factory
       ownerId: 'owner',
       createdAt: DateTime(2026),
       name: 'Laundry',
+      address: 'Jalan Melati',
+      phone: '08123456',
+      receiptFooter: 'Terima kasih',
+      receiptNote: 'Simpan nota ini',
       useOrderStatus: false,
     );
     final settings = ReceiptSettings(
@@ -26,11 +31,14 @@ void runBusinessRepositoryContract(RepositoryFactory<BusinessRepository> factory
     );
     await repo.saveProfile(profile);
     await repo.saveReceiptSettings(settings);
-    expect(await repo.getProfile(), profile);
-    expect(await repo.getReceiptSettings(), settings);
+    expect(businessValue(await repo.getProfile()), businessValue(profile));
+    expect(receiptValue(await repo.getReceiptSettings()), receiptValue(settings));
     final changed = profile.withOrderStatus(enabled: true);
     await repo.saveProfile(changed);
-    expect(await repo.getProfile(), changed);
-    expect(await repo.getReceiptSettings(), settings);
+    expect(businessValue(await repo.getProfile()), businessValue(changed));
+    expect(receiptValue(await repo.getReceiptSettings()), receiptValue(settings));
+  });
+  test('order status is enabled by default', () async {
+    expect((await repo.getProfile()).useOrderStatus, isTrue);
   });
 }

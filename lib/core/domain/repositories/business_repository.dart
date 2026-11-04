@@ -1,10 +1,8 @@
 import 'package:laurum/core/domain/business_profile.dart';
-import 'package:laurum/core/domain/receipt_settings.dart';
+import 'package:laurum/core/domain/repositories/receipt_settings_repository.dart';
 
-abstract class BusinessRepository {
+// Receipt methods remain available as a compatibility bridge for older callers.
+abstract class BusinessRepository implements ReceiptSettingsRepository {
   Future<BusinessProfile> getProfile();
   Future<void> saveProfile(BusinessProfile profile);
-
-  Future<ReceiptSettings> getReceiptSettings();
-  Future<void> saveReceiptSettings(ReceiptSettings settings);
 }

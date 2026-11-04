@@ -4,6 +4,7 @@ import 'package:laurum/core/domain/repositories/customer_repository.dart';
 import 'package:laurum/core/domain/repositories/expense_repository.dart';
 import 'package:laurum/core/domain/repositories/order_repository.dart';
 import 'package:laurum/core/domain/repositories/proposal_repository.dart';
+import 'package:laurum/core/domain/repositories/receipt_settings_repository.dart';
 import 'package:laurum/core/domain/repositories/report_repository.dart';
 import 'package:laurum/core/domain/repositories/savings_repository.dart';
 import 'package:laurum/core/domain/repositories/service_repository.dart';
@@ -11,6 +12,10 @@ import 'package:laurum/core/services/transaction_runner.dart';
 
 final businessRepositoryProvider = Provider<BusinessRepository>((ref) {
   throw UnimplementedError('businessRepositoryProvider not initialized');
+});
+
+final receiptSettingsRepositoryProvider = Provider<ReceiptSettingsRepository>((ref) {
+  throw UnimplementedError('receiptSettingsRepositoryProvider not initialized');
 });
 
 final customerRepositoryProvider = Provider<CustomerRepository>((ref) {

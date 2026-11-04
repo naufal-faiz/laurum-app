@@ -54,7 +54,7 @@ final receiptViewProvider = FutureProvider.family<ReceiptView?, String>((ref, id
     payments: await orders.getPaymentsByOrderId(id),
     customer: customer,
     business: await business.getProfile(),
-    settings: await business.getReceiptSettings(),
+    settings: await ref.watch(receiptSettingsRepositoryProvider).getReceiptSettings(),
     savingsBalance: await ref.watch(savingsRepositoryProvider).getBalance(order.customerId),
   );
 });

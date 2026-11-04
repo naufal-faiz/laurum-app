@@ -15,6 +15,7 @@ import 'package:laurum/features/customers/data/in_memory_customer_repository.dar
 import 'package:laurum/features/customers/data/in_memory_savings_repository.dart';
 import 'package:laurum/features/expenses/data/in_memory_expense_repository.dart';
 import 'package:laurum/features/orders/data/in_memory_order_repository.dart';
+import 'package:laurum/features/printer/data/in_memory_receipt_settings_repository.dart';
 import 'package:laurum/features/proposals/data/in_memory_proposal_repository.dart';
 import 'package:laurum/features/reports/data/in_memory_report_repository.dart';
 import 'package:laurum/features/reports/data/report_repository_view.dart';
@@ -33,6 +34,9 @@ List<Override> dummyOverrides({
     (ref) => contactSource ?? FakeContactSource(contacts: contactFixtures),
   ),
   ...dummySessionOverrides(authService: authService, syncService: syncService),
+  receiptSettingsRepositoryProvider.overrideWith(
+    (ref) => InMemoryReceiptSettingsRepository(ref.watch(businessRepositoryProvider)),
+  ),
   businessRepositoryProvider.overrideWith(
     (ref) {
       ref.listen(inMemoryBusinessRepositoryProvider, (_, _) => notifyDummyWrite(ref));
@@ -89,10 +93,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('id_ID');
   final container = ProviderContainer(overrides: dummyRepositoryOverrides);
-  runApp(
-    UncontrolledProviderScope(
-      container: container,
-      child: LaurumApp(router: createAppRouter(container: container)),
-    ),
-  );
+  final app = LaurumApp(router: createAppRouter(container: container));
+  runApp(UncontrolledProviderScope(container: container, child: app));
 }
