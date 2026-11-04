@@ -1,10 +1,12 @@
 # STATE Laurum
-Diperbarui: 2026-11-04 | Cabang dev1rev
+Diperbarui: 2026-11-04 | Cabang dev2backend
 
 ## Posisi
 UI dummy sampai prompt 100, R0-R10 dan koreksi struk selesai.
 check_all SEMUA HIJAU: 688 tes, kedua analyzer bersih, check_arch OK, REPO_MAP 714 berkas.
-Bukti: docs/progress/fase-ui.md; APK final dibangun, dipasang dan diluncurkan Android 12.
+Bukti UI: docs/progress/fase-ui.md; APK final dibangun, dipasang dan diluncurkan Android 12.
+Integrasi dokumen dev2backend: check_all diulang 4 Nov, exit 0; 688 tes/714 berkas.
+Bukti pemeriksaan: %TEMP%/laurum-backend-docs-check.log (check_all: SEMUA HIJAU).
 
 ## Selesai
 - Registry 60/60; semua feature memakai Page/Sheet/Section. Utang Section tetap 14.
@@ -29,14 +31,20 @@ Bukti: docs/progress/fase-ui.md; APK final dibangun, dipasang dan diluncurkan An
   README, katalog dan 33 spec diperbarui; utang lama dicatat tanpa mengubah checker.
 
 ## Langkah berikutnya
-1. Tinjau APK final dan catatan docs/progress/fase-ui.md (smoke perangkat berhasil;
-   semua alur/keyboard/TalkBack/printer nyata belum diuji manual, iOS belum diuji).
-2. Jawab keputusan PRD B bagian 16 sebelum menyusun prompt backend B0; belum ada
-   berkas prompt backend dan belum memulai implementasi. Jangan membuat tag/push/merge.
-3. Utang audit: 15 berkas runtime 101-110 baris (tidak ada >110), test/tool lama
-   >110 tercatat di fase-ui.md; padding LockedRow dan PRD A Google-only lama perlu tinjauan.
+1. Integrasi dokumen backend 4 Nov: INDEX2/STATE2 digabung ke berkas utama;
+   progres UI prompt 100 tetap selesai (HEAD UI 94c5fc9), backend belum dimulai.
+2. Lengkapi docs/backend/ROADMAP.md: dirujuk BP0/INDEX tetapi belum ada di checkout.
+   Setelah prasyarat terpenuhi, urutan BP0 -> B1a-B1f -> B0; B2/B3/B5-B8 MENUNGGU.
+   B0 hanya Supabase lokal, memerlukan Docker Desktop dan CLI; jangan mengubah cloud.
+3. PRD B 16 kini berisi keputusan default; AGENTS aturan 19-22 dan delapan prompt
+   backend sudah dibaca. Tidak perlu menyusun ulang prompt atau menjalankan BP0 saat integrasi.
+4. Tinjau APK/catatan fase-ui.md; alur/keyboard/TalkBack/printer nyata belum seluruhnya
+   diuji manual, iOS belum diuji. Utang: 15 runtime 101-110 baris, test/tool lama >110,
+   padding LockedRow dan PRD A Google-only; rincian fase-ui.md. Jangan tag/push/merge.
 
 ## Keputusan dan batas
+- Backend: UUID lewat IdGenerator, kontrak InMemory/Drift bersama; preferensi lokal
+  di SQLite local_settings, sesi di secure storage, tanpa shared_preferences/rahasia repo.
 - Terminal/Git/Flutter/test rutin langsung; tanya hanya keputusan di luar izin/desain.
 - PayStatus turunan, tidak dipilih/disimpan. COD bersisa tidak boleh selesai.
   Nol dengan tabungan sebagian wajib COD; tagihan tertutup tabungan boleh disimpan.

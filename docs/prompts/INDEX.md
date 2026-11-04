@@ -1,6 +1,6 @@
 # Antrean prompt (urut)
 
-Seri R (revisi hasil uji HP, 25 Okt 2026) dikerjakan lebih dulu, berurutan R0 sampai R7; daftar revisi lengkap di docs/revisi/REVISI-01.md. Setelah R7, lanjut No 18. Seri R kedua (2 Nov 2026: R8-R10, daftar di docs/revisi/REVISI-02.md) dikerjakan SEBELUM No 21.
+Seri R (revisi hasil uji HP, 25 Okt 2026) dikerjakan lebih dulu, berurutan R0 sampai R7; daftar revisi lengkap di docs/revisi/REVISI-01.md. Setelah R7, lanjut No 18. Backend (4 Nov 2026): setelah No 21 kerjakan BP0, lalu B1a-B1f (B0 setelah B1f, karena hasil B1 langsung terlihat di HP); rencana di docs/backend/ROADMAP.md. Baris berstatus MENUNGGU jangan diambil. Seri R kedua (2 Nov 2026: R8-R10, daftar di docs/revisi/REVISI-02.md) dikerjakan SEBELUM No 21.
 
 Cara memakai: tempel prompt LANJUT di bawah ke agen setiap kali. Agen mengambil baris pertama berstatus BELUM atau SEDANG, mengerjakannya, mengubah statusnya sendiri, lalu berhenti. Jika ada koreksi, jelaskan ke agen, lalu jalankan LANJUT lagi.
 
@@ -42,6 +42,18 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | R9 | R9-pembayaran-cod.md | Revisi 2 Nov 1,2,6,7,8: COD, kembalian/tabungan, tombol Cetak/Ke antrean, Catat pembayaran | SELESAI (2026-11-02) | 580 tes hijau; COD kedua mode, uang lebih, tiga pintu Catat bayar, rollback, keyboard dan golden; tinjau Android |
 | R10 | R10-akun.md | Revisi 2 Nov 3,4,5: Masuk email, Daftar, Lupa password, Kelola akun | SELESAI (2026-11-02) | check_all 639 tes hijau; auth dummy, profil/password, reset 60 detik, cleanup/rollback, keyboard dan golden; tinjau Android |
 | 21 | 100-penyelesaian.md | Audit, aksesibilitas, alur akhir, APK | SELESAI (2026-11-04) | check_all 688 tes; 34 rute 320px/1,3x, alur penerimaan, audit .pen/state/keyboard; APK final dibangun, dipasang dan dijalankan di Samsung Android 12. Catatan: progress/fase-ui.md |
+| BP0 | BP0-persiapan-backend.md | Backend: IdGenerator, tes kontrak, antarmuka rentang, local_settings, aturan 19-22 | BELUM | Tinjau tabel ID dan suite kontrak |
+| B1a | B1a-drift-fondasi.md | Drift: database per akun, tabel, outbox, runner | BELUM | Tinjau cara menjalankan SQLite di test |
+| B1b | B1b-drift-pelanggan.md | Drift: pelanggan dan tabungan | BELUM | |
+| B1c | B1c-drift-usaha-layanan.md | Drift: usaha, struk, layanan, pengaturan lokal | BELUM | |
+| B1d | B1d-drift-order-pembayaran.md | Drift: order, pembayaran, nomor nota, alur atomik | BELUM | Tinjau benchmark |
+| B1e | B1e-drift-pengeluaran-laporan.md | Drift: pengeluaran dan Laporan dari ledger | BELUM | **Keputusan bila rekonsiliasi gagal** |
+| B1f | B1f-drift-penyambungan.md | Drift: sambung ke aplikasi, seed demo, persistensi | BELUM | **Coba tutup-buka aplikasi di HP** |
+| B0 | B0-supabase.md | Supabase lokal: skema, RLS, RPC, Auth, tes RLS | BELUM | **Perlu Docker Desktop dan Supabase CLI** |
+| B2 | (belum ditulis) | SyncEngine | MENUNGGU | Minta penyusunan setelah B1f |
+| B3 | (belum ditulis) | Auth nyata, pemulihan, hapus akun | MENUNGGU | Siapkan Google OAuth dan SMTP |
+| B5-B8 | (belum ditulis) | Printer nyata, Play Store, AI, Pro | MENUNGGU | Lihat docs/backend/ROADMAP.md |
 
-Setelah No 21 selesai, antrean berikutnya adalah backend (PRD B bagian 14). Prompt-nya disusun terpisah setelah keputusan terbuka PRD B dijawab.
+Setelah No 21 selesai, kerjakan backend: BP0, lalu B1a-B1f (B0 setelah B1f, karena hasil B1 langsung terlihat di HP), rencana di docs/backend/ROADMAP.md. Baris berstatus MENUNGGU belum punya prompt dan jangan diambil; minta penyusunannya setelah B1f SELESAI.
 
+Catatan integrasi 4 Nov 2026: docs/backend/ROADMAP.md yang dirujuk antrean dan BP0 belum tersedia di checkout ini. Lengkapi dokumen tersebut sebelum memulai BP0.

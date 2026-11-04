@@ -43,13 +43,52 @@ Supabase: Auth (Google) | Postgres + RLS | Storage (foto struk)
 - `SyncEngine` berjalan di latar dan hanya mengekspos `Stream<SyncStatus>` untuk `SyncIndicator`.
 - Dependensi (pasang versi terbaru lewat `flutter pub add`): `drift`, `drift_flutter` (atau `sqlite3_flutter_libs`), `supabase_flutter`, `google_sign_in`, `connectivity_plus`, `workmanager`, `flutter_secure_storage`, `uuid`, `path_provider`.
 
+### 3.1 Struktur repo dan batas lapisan (diputuskan 4 Nov 2026)
+
+Satu repo (monorepo). "Backend" = proyek Supabase, bukan server buatan sendiri.
+
+```
+laurum/
+  lib/                      aplikasi Flutter
+    core/persistence/       database Drift, tabel, migrasi, DriftTransactionRunner
+    core/sync/              outbox, SyncEngine, klien Supabase (RemoteApi)
+    features/<f>/data/      InMemory* dan Drift* di balik antarmuka yang sama
+  supabase/                 config.toml, migrations/, functions/, tests/ (pgTAP)
+  test/  tool/  docs/
+```
+
+- Hanya `core/persistence`, `core/sync`, dan `features/*/data` boleh mengimpor `drift`, `supabase_flutter`, `flutter_secure_storage`, `connectivity_plus`, `workmanager`, `path_provider`. `state/`, `widgets/`, `pages/`, `shared/` hanya lewat repository.
+- Pekerja AI (B7) punya runtime dan rahasia sendiri; diputuskan saat B7, kemungkinan repo terpisah.
+- Dependensi ditambahkan hanya pada fase yang memakainya.
+
+### 3.2 Penyimpanan preferensi (tanpa shared_preferences)
+
+| Jenis | Tempat |
+| --- | --- |
+| Pakai status order, info usaha | `businesses` (disinkronkan) |
+| Format struk | `receipt_settings` (disinkronkan) |
+| Printer terpasang, kode perangkat, counter nota | `local_settings` (SQLite, lokal) |
+| Sesi login | `flutter_secure_storage` |
+| Pengaturan AI yang dipakai worker | Supabase (fase AI) |
+| Filter dan keadaan layar | tidak disimpan |
+
+`shared_preferences` tidak dipakai: preferensi bisnis harus ikut sinkron dan pulih saat instal ulang, dan semua penulisan harus ikut `TransactionRunner`.
+
+### 3.3 Strategi ID dan database per akun
+
+- Kolom `id` bertipe uuid. Baris baru memakai UUID v4 dari `IdGenerator`. ID turunan deterministik (UUID v5 dari ID induk + label) hanya bila kode bergantung pada percobaan ulang yang idempoten (contoh: order dari usulan AI). ID bergaya teks seperti `ord-0137` atau `<orderId>-pay-cash` TIDAK boleh masuk database; fixture dipetakan ke UUID v5 saat seed.
+- ID pembayaran berbasis hitungan (`-payment-N`) dilarang karena bisa bentrok antar perangkat.
+- Satu berkas SQLite per akun (`laurum_<ownerId>.db`). Ganti akun di HP yang sama tidak mencampur data; hapus akun menghapus berkasnya.
+- Nomor nota `<kode perangkat>-<urut>`; v1 satu perangkat (kode `A`), counter di `local_settings`.
+- Outbox ditulis sejak B1 (dalam transaksi yang sama dengan data); mesin kirimnya baru di B2.
+
 ## 4. Autentikasi
 
 - **Metode masuk (R10): email + password dan Google**, melalui AuthService; nomor telepon hanya profil opsional tanpa OTP. Pendaftaran memakai konfirmasi email; reset dan pendaftaran memberi pesan seragam tanpa mengungkap keberadaan akun. Tahap backend menyiapkan SMTP kustom untuk konfirmasi/reset karena layanan email bawaan dibatasi; pembatasan permintaan juga wajib ditegakkan server. Google native tetap melalui `google_sign_in` dan `supabase.auth.signInWithIdToken(provider: google, idToken, accessToken)` dengan Web client ID/provider aktif. Saat ini seluruh alur masih dummy in-memory; tombol Lanjut pada Cek email hanya verifikasi simulasi, bukan bukti verifikasi produksi.
 - Sesi disimpan dengan `flutter_secure_storage` (bukan SharedPreferences biasa).
 - **Alur pertama kali:** Masuk → (akun baru) layar Info Usaha untuk nama usaha → pull awal → Beranda. **Akun lama di HP baru:** Masuk → layar "Memulihkan data..." dengan progres → Beranda.
 - **Keluar:** jika outbox belum kosong, tampilkan peringatan jumlah perubahan yang belum tersinkron. Opsi "Keluar dan hapus data di HP" hanya aktif setelah sinkron tuntas.
-- **Hapus akun (wajib untuk Play Store):** di Pengaturan dan Akun (dalam aplikasi) **plus** tautan web publik untuk permintaan hapus akun. Menghapus akun menghapus semua baris milik pengguna di server, file di Storage, dan akun Auth, lalu data lokal. Alur memerlukan konfirmasi dua langkah.
+- **Hapus akun (wajib untuk Play Store):** di Kelola akun, bagian Zona berbahaya (dalam aplikasi) **plus** tautan web publik untuk permintaan hapus akun. Menghapus akun menghapus semua baris milik pengguna di server, file di Storage, dan akun Auth, lalu data lokal. Alur memerlukan konfirmasi dua langkah.
 - Perangkat: tabel `devices` mencatat tiap HP yang login (kode `A`, `B`, ...).
 
 ## 5. Model data
@@ -120,7 +159,7 @@ Tabel yang sama di SQLite dan Postgres. Kolom umum di semua tabel kecuali dicata
 
 - **RLS di semua tabel:** `owner_id = (select auth.uid())` untuk select, insert (`with check`), update; tabel append-only tanpa kebijakan update/delete. Kunci `service_role` tidak pernah ada di aplikasi.
 - **Storage:** bucket privat, kebijakan berdasar awalan folder `owner_id`.
-- **Provider:** hanya Google yang aktif; pendaftaran email dimatikan.
+- **Provider (R10):** Google dan email+password aktif; pendaftaran email memakai konfirmasi; password minimal 8 karakter; pembatasan laju diatur di Auth; SMTP kustom wajib di produksi. Nomor telepon tidak dipakai untuk masuk (tanpa penyedia SMS).
 - **Indeks:** `(owner_id, updated_at)` di tiap tabel (untuk pull), `orders(owner_id, status)`, `orders(owner_id, entered_at)`, `payments(order_id)`.
 - **Fungsi server:** `sync_push`, `delete_my_account` (menghapus semua data pemilik), `app_config`.
 - **Batas paket gratis (diperiksa Juli–Agustus 2026):** 500 MB database per proyek, 1 GB storage, 50.000 MAU, **proyek dijeda setelah 7 hari tidak aktif**, tanpa backup harian. Semua pengguna berbagi satu proyek.
@@ -169,19 +208,21 @@ Tabel yang sama di SQLite dan Postgres. Kolom umum di semua tabel kecuali dicata
 - `ReceiptFormatter` (fungsi murni) menghasilkan **baris 32 kolom** yang sama dipakai `ReceiptPreview` dan ESC/POS, sehingga preview dan cetakan selalu identik. Diuji dengan golden text.
 - Pemilihan paket Bluetooth ESC/POS dilakukan saat fase printer; agen wajib memeriksa dukungan Android 12+ sebelum memilih.
 
-## 14. Fase backend
+## 14. Fase backend (revisi 4 Nov 2026; rincian di docs/backend/ROADMAP.md)
 
 | Fase | Hasil | Selesai bila |
 | --- | --- | --- |
-| B0 | Proyek Supabase, migrasi awal, RLS, provider Google, `delete_my_account`, CI migrasi | Tes RLS: pengguna A tidak bisa membaca data B |
-| B1 | Skema Drift + repository `Drift*` menggantikan `InMemory*` layar demi layar | Semua layar PRD A berjalan di data lokal nyata, data bertahan setelah restart |
-| B2 | Outbox, `SyncEngine`, status sinkron, layar Sinkronisasi | Nota dibuat offline muncul di HP kedua setelah online |
-| B3 | Integrasi Auth Google, onboarding, pemulihan data, keluar dan hapus akun | Instal ulang memulihkan semua data |
-| B4 | Logika ledger, piutang, laporan, tes unit | Angka laporan cocok dengan DATA MASTER |
+| BP0 | Persiapan: aturan 19-22, IdGenerator, tes kontrak repository, antarmuka rentang, local_settings | Semua tes lama hijau, kontrak jalan di InMemory |
+| B0 | Supabase lokal: skema, RLS, trigger, `sync_push`, `delete_my_account`, Edge Function hapus akun, config Auth | `supabase test db`: pengguna A tidak bisa membaca atau menulis data B |
+| B1 | Drift/SQLite: B1a fondasi, B1b pelanggan+tabungan, B1c usaha+struk+layanan, B1d order+pembayaran, B1e pengeluaran+laporan dari ledger, B1f penyambungan | Semua layar berjalan di data lokal nyata, data bertahan setelah restart, kontrak lolos di Drift |
+| B2 | SyncEngine: kirim outbox, tarik kursor, konflik, backoff, layar Sinkronisasi | Nota offline muncul di database server setelah online; tes dua perangkat simulasi |
+| B3 | Auth nyata (email+password, Google), onboarding, pemulihan data, keluar, hapus akun | Instal ulang memulihkan semua data |
 | B5 | Printer nyata | Cetak 58 mm identik dengan preview |
 | B6 | Persiapan Play Store | Closed test berjalan, Data safety dan kebijakan privasi siap |
 | B7 | AI | Usulan dari worker muncul dan bisa disetujui |
 | B8 | Pro | Pembelian membuka `entitlements` |
+
+Catatan: Laporan dari ledger (dulu B4) dikerjakan di B1e karena repository tidak bisa diganti selagi masih ada baseline fixture.
 
 ## 15. Pengujian
 
@@ -193,13 +234,13 @@ Tabel yang sama di SQLite dan Postgres. Kolom umum di semua tabel kecuali dicata
 
 **Target kualitas:** buka aplikasi offline < 2 detik; baca lokal p95 < 100 ms; sinkron 100 perubahan < 5 detik di 4G; tidak ada kehilangan data pada skenario di atas.
 
-## 16. Keputusan terbuka
+## 16. Keputusan (4 Nov 2026; default dipilih bersama pengguna, dapat diubah)
 
-1. Akun Play: pribadi (12 penguji x 14 hari) atau organisasi?
-2. Perlu multi-perangkat sejak awal (HP kedua), atau satu HP per akun dulu? (Desain sudah mendukung keduanya.)
-3. Jalur WhatsApp untuk rilis publik: resmi (Cloud API) atau tetap tidak resmi?
-4. Kapan pindah ke Supabase Pro? Disarankan sebelum rilis publik luas.
-5. Crash reporting (Sentry/Crashlytics) atau cukup log lokal?
+1. Akun Play: pribadi (12 penguji x 14 hari) sebagai default; ubah ke organisasi bila ada badan usaha.
+2. Perangkat: v1 satu HP per akun (kode perangkat `A`). Skema `devices` dipertahankan agar multi-perangkat bisa menyusul tanpa migrasi besar.
+3. WhatsApp: jalur tidak resmi hanya untuk uji internal; rilis publik memerlukan Cloud API resmi. Diputuskan final di B7.
+4. Pro: dikerjakan sebelum rilis publik luas; masa pengembangan memakai paket gratis atau Supabase lokal.
+5. Crash reporting: log lokal di v1; evaluasi Crashlytics di B6.
 
 ## 17. Catatan iOS
 
