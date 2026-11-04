@@ -43,7 +43,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | R10 | R10-akun.md | Revisi 2 Nov 3,4,5: Masuk email, Daftar, Lupa password, Kelola akun | SELESAI (2026-11-02) | check_all 639 tes hijau; auth dummy, profil/password, reset 60 detik, cleanup/rollback, keyboard dan golden; tinjau Android |
 | 21 | 100-penyelesaian.md | Audit, aksesibilitas, alur akhir, APK | SELESAI (2026-11-04) | check_all 688 tes; 34 rute 320px/1,3x, alur penerimaan, audit .pen/state/keyboard; APK final dibangun, dipasang dan dijalankan di Samsung Android 12. Catatan: progress/fase-ui.md |
 | BP0 | BP0-persiapan-backend.md | Backend: IdGenerator, tes kontrak, antarmuka rentang, local_settings, aturan 19-22 | SELESAI (2026-11-04) | check_all 719 tes; 28 titik ID, 7 kontrak repository + 1 runner, counter rollback dan rentang. Audit: docs/progress/bp0-id.md |
-| B1a | B1a-drift-fondasi.md | Drift: database per akun, tabel, outbox, runner | BELUM | Tinjau cara menjalankan SQLite di test |
+| B1a | B1a-drift-fondasi.md | Drift: database per akun, tabel, outbox, runner | SELESAI (2026-11-04) | check_all 740 tes; 16 tabel/skema v1, isolasi akun, outbox atomik, savepoint dan kontrak BP0. Lihat docs/progress/b1a-drift-fondasi.md |
 | B1b | B1b-drift-pelanggan.md | Drift: pelanggan dan tabungan | BELUM | |
 | B1c | B1c-drift-usaha-layanan.md | Drift: usaha, struk, layanan, pengaturan lokal | BELUM | |
 | B1d | B1d-drift-order-pembayaran.md | Drift: order, pembayaran, nomor nota, alur atomik | BELUM | Tinjau benchmark |

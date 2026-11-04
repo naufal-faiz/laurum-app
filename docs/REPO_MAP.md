@@ -9,7 +9,7 @@ Semua widget sudah dibuat.
 
 ## Dependensi
 
-flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, flutter_test, flutter_lints, widgetbook, riverpod_lint
+flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner
 
 ## Berkas (jumlah baris): nama deklarasi
 
@@ -68,6 +68,30 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/core/icons/
 - app_icons.dart (50): AppIcons
 - app_svgs.dart (4): AppSvgs
+
+### lib/core/persistence/
+- app_database.dart (55): AppDatabase
+- app_database_factory.dart (59): AppDatabaseFactory
+- business_records.dart (14): BusinessRecords
+- customer_records.dart (16): CustomerRecords
+- device_records.dart (12): DeviceRecords
+- drift_local_settings_repository.dart (39): DriftLocalSettingsRepository
+- drift_transaction_runner.dart (42): DriftTransactionRunner, _DriftScope
+- entitlement_records.dart (16): EntitlementRecords
+- expense_category_records.dart (10): ExpenseCategoryRecords
+- expense_records.dart (21): ExpenseRecords
+- local_setting_records.dart (16): LocalSettingRecords
+- order_event_records.dart (16): OrderEventRecords
+- order_item_records.dart (23): OrderItemRecords
+- order_records.dart (32): OrderRecords
+- outbox_records.dart (23): OutboxRecords
+- outbox_writer.dart (49): OutboxWriter
+- payment_records.dart (22): PaymentRecords
+- receipt_setting_records.dart (20): ReceiptSettingRecords
+- record_columns.dart (17): RecordColumns, SoftDeleteColumns
+- savings_records.dart (26): SavingsRecords
+- service_records.dart (21): ServiceRecords
+- sync_cursor_records.dart (12): SyncCursorRecords
 
 ### lib/core/services/
 - auth_failure.dart (8): AuthFailureKind, AuthFailure
@@ -673,6 +697,23 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_golden_test.dart (60):
 - payment_page_test.dart (59):
 - period_tabs_test.dart (29):
+
+### test/persistence/
+- database_factory_test.dart (51):
+- database_migration_test.dart (28):
+- database_schema_test.dart (63):
+- date_time_storage_test.dart (29):
+- drift_contracts_test.dart (30):
+- drift_runner_test.dart (55):
+
+### test/persistence/generated/
+- schema.dart (22): GeneratedHelper
+- schema_v1.dart (8453): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV1
+
+### test/persistence/
+- outbox_writer_test.dart (67):
+
+### test/
 - piutang_card_test.dart (43):
 - platform_services_test.dart (83):
 - printer_page_test.dart (100):
