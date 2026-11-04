@@ -39,6 +39,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_formatter.dart (83):
 - receipt_layout.dart (77): ReceiptLayout
 - receipt_settings.dart (38): ReceiptSettings
+- record_content.dart (13):
 - report.dart (73):
 - report_baseline.dart (13): ReportBaseline
 - report_range.dart (16): ReportRange
@@ -78,22 +79,25 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_keys_migration.dart (26):
 - customer_records.dart (25): CustomerRecords
 - device_records.dart (12): DeviceRecords
+- drift_local_data_service.dart (48): DriftLocalDataService
 - drift_local_settings_repository.dart (39): DriftLocalSettingsRepository
-- drift_transaction_runner.dart (42): DriftTransactionRunner, _DriftScope
+- drift_transaction_runner.dart (47): DriftTransactionRunner, _DriftScope
 - entitlement_records.dart (16): EntitlementRecords
 - expense_category_records.dart (10): ExpenseCategoryRecords
 - expense_records.dart (21): ExpenseRecords
 - local_setting_records.dart (16): LocalSettingRecords
 - order_event_records.dart (16): OrderEventRecords
+- order_indexes_migration.dart (25):
 - order_item_records.dart (23): OrderItemRecords
-- order_records.dart (32): OrderRecords
+- order_records.dart (34): OrderRecords
 - outbox_records.dart (23): OutboxRecords
 - outbox_writer.dart (49): OutboxWriter
-- payment_records.dart (22): PaymentRecords
+- payment_records.dart (23): PaymentRecords
 - receipt_setting_records.dart (20): ReceiptSettingRecords
 - record_columns.dart (17): RecordColumns, SoftDeleteColumns
 - savings_records.dart (27): SavingsRecords
 - service_records.dart (21): ServiceRecords
+- sql_timestamp.dart (6):
 - sync_cursor_records.dart (12): SyncCursorRecords
 
 ### lib/core/services/
@@ -264,19 +268,32 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_list_section.dart (97): ExpenseListSection
 
 ### lib/features/orders/data/
+- drift_order_reader.dart (58): DriftOrderReader
+- drift_order_repository.dart (67): DriftOrderRepository
 - in_memory_order_repository.dart (104): InMemoryOrderRepository, inMemoryOrderRepositoryProvider
 - order_event_fixtures.dart (26):
+- order_event_storage.dart (54):
 - order_fixture_factory.dart (26):
 - order_fixtures.dart (8):
 - order_history_fixtures.dart (43):
 - order_item_fixtures.dart (43):
+- order_item_storage.dart (51):
+- order_ledger.dart (14):
+- order_payment_validation.dart (31):
 - order_queue_fixtures.dart (8):
 - order_queue_process_fixtures.dart (81):
 - order_queue_ready_fixtures.dart (42):
+- order_range_queries.dart (71):
+- order_snapshot_write.dart (89):
+- order_sql_enum.dart (4):
+- order_storage_read.dart (25):
+- order_storage_write.dart (45):
 - order_store.dart (20): OrderStore
 - order_store_seed.dart (14):
-- order_store_write.dart (97):
+- order_store_write.dart (93):
+- order_write_state.dart (63):
 - payment_fixtures.dart (31):
+- payment_storage.dart (49):
 
 ### lib/features/orders/pages/
 - antrean_page.dart (101): AntreanPage
@@ -632,8 +649,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_query_contract.dart (49):
 - expense_contract.dart (49):
 - local_settings_contract.dart (27):
-- order_contract.dart (73):
+- order_contract.dart (78):
+- order_extra_contract.dart (66):
+- order_item_contract.dart (17):
 - order_payment_contract.dart (44):
+- order_values.dart (62):
 - receipt_settings_contract.dart (41):
 - record_values.dart (28):
 - repository_factory.dart (3): RepositoryFactory
@@ -724,6 +744,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### test/persistence/
 - b1c_harness.dart (31): B1cHarness
+- b1d_commands.dart (44):
+- b1d_harness.dart (89): B1dHarness
+- b1d_overrides.dart (39):
 - business_service_atomic_test.dart (73):
 - business_service_contracts_test.dart (53):
 - business_service_reopen_test.dart (46):
@@ -738,13 +761,25 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - date_time_storage_test.dart (29):
 - drift_contracts_test.dart (30):
 - drift_runner_test.dart (55):
+- failing_b1d_proposal.dart (15): FailingB1dProposal
 
 ### test/persistence/generated/
-- schema.dart (25): GeneratedHelper
+- schema.dart (28): GeneratedHelper
 - schema_v1.dart (8453): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV1
 - schema_v2.dart (8547): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV2
+- schema_v3.dart (8562): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV3
 
 ### test/persistence/
+- order_account_cleanup_test.dart (39):
+- order_checkout_atomic_test.dart (60):
+- order_completion_atomic_test.dart (25):
+- order_contracts_test.dart (28):
+- order_edit_cancel_flow_test.dart (62):
+- order_payment_flow_test.dart (48):
+- order_proposal_flow_test.dart (66):
+- order_query_plan_test.dart (39):
+- order_storage_scope_test.dart (90):
+- order_time_migration_test.dart (47):
 - outbox_writer_test.dart (67):
 - printer_repository_integration_test.dart (75):
 
@@ -886,6 +921,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### tool/
 - backend_rules.dart (52):
+- benchmark_orders.dart (89):
 - check_all.dart (37): Step
 - check_arch.dart (202): Rule, Registry
 - pen_frame.dart (42):

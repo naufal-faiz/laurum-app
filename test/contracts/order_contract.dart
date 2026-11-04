@@ -5,11 +5,16 @@ import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/domain/repositories/order_repository.dart';
 
 import '../domain_samples.dart';
+import 'order_extra_contract.dart';
+import 'order_item_contract.dart';
 import 'order_payment_contract.dart';
+import 'order_values.dart';
 import 'repository_factory.dart';
 
 void runOrderRepositoryContract(RepositoryFactory<OrderRepository> factory) {
   runOrderPaymentContract(factory);
+  runOrderItemContract(factory);
+  runOrderExtraContract(factory);
   late OrderRepository repo;
   setUp(() async => repo = await factory());
   test('snapshot retry preserves items, payments and events without duplicates', () async {
@@ -28,16 +33,16 @@ void runOrderRepositoryContract(RepositoryFactory<OrderRepository> factory) {
     for (var n = 0; n < 2; n++) {
       await repo.saveOrder(row, items: [line], payments: [paid], events: [event]);
     }
-    expect(await repo.getOrders(), [row]);
-    expect(await repo.getOrderById('o'), row);
-    expect(await repo.getOrderByOrderNo('o'), row);
+    expect((await repo.getOrders()).map(orderValue), [orderValue(row)]);
+    expect(orderValue(await repo.getOrderById('o')), orderValue(row));
+    expect(orderValue(await repo.getOrderByOrderNo('o')), orderValue(row));
     expect(await repo.getOrderById('missing'), isNull);
-    expect(await repo.getItemsByOrderId('o'), [line]);
-    expect(await repo.getPaymentsByOrderId('o'), [paid]);
-    expect(await repo.getEventsByOrderId('o'), [event]);
+    expect((await repo.getItemsByOrderId('o')).map(itemValue), [itemValue(line)]);
+    expect((await repo.getPaymentsByOrderId('o')).map(paymentValue), [paymentValue(paid)]);
+    expect((await repo.getEventsByOrderId('o')).map(eventValue), [eventValue(event)]);
     expect((await repo.getOrders()).clear, throwsUnsupportedError);
     await expectLater(repo.addPayment(payment('p', amount: 50)), throwsStateError);
-    expect(await repo.getAllPayments(), [paid]);
+    expect((await repo.getAllPayments()).map(paymentValue), [paymentValue(paid)]);
   });
   test('invalid snapshot is atomic and status cannot move back from final', () async {
     await repo.saveOrder(order('o', total: 1000), items: [item('i')]);

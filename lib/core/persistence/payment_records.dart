@@ -5,6 +5,7 @@ import 'package:laurum/core/persistence/record_columns.dart';
 @DataClassName('PaymentRow')
 @TableIndex.sql('CREATE INDEX payments_order ON payments (order_id);')
 @TableIndex.sql('CREATE INDEX payments_paid ON payments (paid_at);')
+@TableIndex.sql('CREATE INDEX payments_owner_paid ON payments (owner_id, paid_at);')
 class PaymentRecords extends Table with RecordColumns, SoftDeleteColumns {
   @override
   String get tableName => 'payments';

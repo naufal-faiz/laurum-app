@@ -20,7 +20,7 @@ void main() {
     await oldDb.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 2);
+    await verifier.migrateAndValidate(db, 3);
     final settings = DriftLocalSettingsRepository(db);
     await db.validateDatabaseSchema();
     expect(await settings.getInt('counter'), 143);

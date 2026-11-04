@@ -46,7 +46,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | B1a | B1a-drift-fondasi.md | Drift: database per akun, tabel, outbox, runner | SELESAI (2026-11-04) | check_all 740 tes; 16 tabel/skema v1, isolasi akun, outbox atomik, savepoint dan kontrak BP0. Lihat docs/progress/b1a-drift-fondasi.md |
 | B1b | B1b-drift-pelanggan.md | Drift: pelanggan dan tabungan | SELESAI (2026-11-04) | check_all 759 tes; kontrak dua backend, outbox atomik, skema v2 dan indeks prefiks. Lihat docs/progress/b1b.md |
 | B1c | B1c-drift-usaha-layanan.md | Drift: usaha, struk, layanan, pengaturan lokal | SELESAI (2026-11-04) | check_all 781 tes; kontrak dua backend, outbox/rollback atomik, printer lokal dan golden tetap. Lihat docs/progress/b1c.md; AI preferences tetap InMemory sampai B7 |
-| B1d | B1d-drift-order-pembayaran.md | Drift: order, pembayaran, nomor nota, alur atomik | BELUM | Tinjau benchmark |
+| B1d | B1d-drift-order-pembayaran.md | Drift: order, pembayaran, nomor nota, alur atomik | SELESAI (2026-11-04) | check_all 848 tes; kontrak dua backend, rollback tiap alur/counter/outbox, skema v3. Benchmark Windows memory p95 15,018 ms; lihat docs/progress/b1d.md |
 | B1e | B1e-drift-pengeluaran-laporan.md | Drift: pengeluaran dan Laporan dari ledger | BELUM | **Keputusan bila rekonsiliasi gagal** |
 | B1f | B1f-drift-penyambungan.md | Drift: sambung ke aplikasi, seed demo, persistensi | BELUM | **Coba tutup-buka aplikasi di HP** |
 | B0 | B0-supabase.md | Supabase lokal: skema, RLS, RPC, Auth, tes RLS | BELUM | **Perlu Docker Desktop dan Supabase CLI** |

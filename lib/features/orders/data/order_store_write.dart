@@ -1,22 +1,14 @@
 import 'package:laurum/core/domain/domain_enums.dart';
-import 'package:laurum/core/domain/domain_record.dart';
 import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/core/domain/order_rules.dart';
 import 'package:laurum/core/domain/payment.dart';
+import 'package:laurum/core/domain/record_content.dart';
+import 'package:laurum/features/orders/data/order_ledger.dart';
+import 'package:laurum/features/orders/data/order_payment_validation.dart';
 import 'package:laurum/features/orders/data/order_store.dart';
-
-List<T> appendLedger<T extends DomainRecord>(Iterable<T> old, Iterable<T> added) {
-  final byId = {for (final row in old) row.id: row};
-  for (final row in added) {
-    final existing = byId[row.id];
-    if (existing != null && existing != row) throw StateError('Ledger is immutable');
-    byId[row.id] = row;
-  }
-  return List.unmodifiable(byId.values);
-}
 
 OrderStore writeOrderStore(
   OrderStore state,
@@ -27,7 +19,7 @@ OrderStore writeOrderStore(
   bool useOrderStatus = true,
 }) {
   final old = state.orders.where((o) => o.id == order.id).firstOrNull;
-  if (old != null && old != order) {
+  if (old != null && !sameRecordContent(old, order)) {
     if (old.status == OrderStatus.selesai || old.status == OrderStatus.dibatalkan) {
       throw StateError('Order status is final');
     }
@@ -56,13 +48,16 @@ OrderStore writeOrderStore(
   }
   if (old != null && (old.status == OrderStatus.selesai || old.status == OrderStatus.dibatalkan)) {
     final original = state.items.where((i) => i.orderId == order.id).toList();
-    if (original.length != nextItems.length || !nextItems.every(original.contains)) {
+    if (original.length != nextItems.length ||
+        !nextItems.every((i) => original.any((o) => sameRecordContent(o, i)))) {
       throw StateError('Final order items cannot change');
     }
   }
   if (order.deletedAt != null ||
       (order.status == OrderStatus.dibatalkan &&
-          payments.any((p) => p.amount > 0 && !state.payments.contains(p)))) {
+          payments.any(
+            (p) => p.amount > 0 && !state.payments.any((old) => sameRecordContent(old, p)),
+          ))) {
     throw StateError('Cannot pay a deleted or cancelled order');
   }
   final unrelated = state.items.where((i) => i.orderId != order.id).toList();
@@ -70,6 +65,7 @@ OrderStore writeOrderStore(
     throw ArgumentError('Item ID already belongs to another order');
   }
   final nextPayments = appendLedger(state.payments, payments);
+  validateOrderPayments(order, state.payments, payments, nextPayments);
   if (order.status == OrderStatus.selesai &&
       isCompletionHeld(order, paidAmount(nextPayments, orderId: order.id))) {
     throw StateError('COD belum lunas');

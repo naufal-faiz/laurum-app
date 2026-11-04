@@ -9993,6 +9993,14 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'orders_status_entered',
     'CREATE INDEX orders_status_entered ON orders (status, entered_at)',
   );
+  late final Index ordersOwnerStatus = Index(
+    'orders_owner_status',
+    'CREATE INDEX orders_owner_status ON orders (owner_id, status)',
+  );
+  late final Index ordersOwnerEntered = Index(
+    'orders_owner_entered',
+    'CREATE INDEX orders_owner_entered ON orders (owner_id, entered_at)',
+  );
   late final Index itemsOrder = Index(
     'items_order',
     'CREATE INDEX items_order ON order_items (order_id)',
@@ -10004,6 +10012,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Index paymentsPaid = Index(
     'payments_paid',
     'CREATE INDEX payments_paid ON payments (paid_at)',
+  );
+  late final Index paymentsOwnerPaid = Index(
+    'payments_owner_paid',
+    'CREATE INDEX payments_owner_paid ON payments (owner_id, paid_at)',
   );
   late final Index savingsOwnerUpdated = Index(
     'savings_owner_updated',
@@ -10054,9 +10066,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     ordersOwnerNumber,
     ordersEntered,
     ordersStatusEntered,
+    ordersOwnerStatus,
+    ordersOwnerEntered,
     itemsOrder,
     paymentsOrder,
     paymentsPaid,
+    paymentsOwnerPaid,
     savingsOwnerUpdated,
     savingsCustomerCreated,
     expensesSpent,

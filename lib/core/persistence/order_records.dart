@@ -6,6 +6,8 @@ import 'package:laurum/core/persistence/record_columns.dart';
 @TableIndex.sql('CREATE UNIQUE INDEX orders_owner_number ON orders (owner_id, order_no);')
 @TableIndex.sql('CREATE INDEX orders_entered ON orders (entered_at);')
 @TableIndex.sql('CREATE INDEX orders_status_entered ON orders (status, entered_at);')
+@TableIndex.sql('CREATE INDEX orders_owner_status ON orders (owner_id, status);')
+@TableIndex.sql('CREATE INDEX orders_owner_entered ON orders (owner_id, entered_at);')
 class OrderRecords extends Table with RecordColumns, SoftDeleteColumns {
   @override
   String get tableName => 'orders';

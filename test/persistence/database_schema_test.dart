@@ -9,7 +9,7 @@ void main() {
   tearDown(() => db.close());
   test('current schema creates complete PRD tables without payment status', () async {
     await db.customSelect('SELECT 1').get();
-    expect(db.schemaVersion, 2);
+    expect(db.schemaVersion, 3);
     expect(db.allTables.map((t) => t.actualTableName).toSet(), {
       'businesses',
       'devices',

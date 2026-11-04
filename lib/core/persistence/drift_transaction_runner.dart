@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:laurum/core/persistence/app_database.dart';
+import 'package:laurum/core/services/in_memory_transaction_runner.dart';
 import 'package:laurum/core/services/transaction_runner.dart';
 
 class DriftTransactionRunner implements TransactionRunner {
-  DriftTransactionRunner(this.db);
+  DriftTransactionRunner(this.db, {Iterable<TransactionParticipant> Function()? participants})
+    : _memory = InMemoryTransactionRunner(participants ?? () => const []);
   final AppDatabase db;
+  final InMemoryTransactionRunner _memory;
   final Object _zoneKey = Object();
 
   @override
@@ -20,18 +23,20 @@ class DriftTransactionRunner implements TransactionRunner {
         rethrow;
       }
     }
-    final scope = _DriftScope();
-    try {
-      return await db.transaction(
-        () => runZoned(() async {
-          final result = await body();
-          if (scope.error != null) Error.throwWithStackTrace(scope.error!, scope.stack!);
-          return result;
-        }, zoneValues: {_zoneKey: scope}),
-      );
-    } finally {
-      scope.open = false;
-    }
+    return _memory.run(() async {
+      final scope = _DriftScope();
+      try {
+        return await db.transaction(
+          () => runZoned(() async {
+            final result = await body();
+            if (scope.error != null) Error.throwWithStackTrace(scope.error!, scope.stack!);
+            return result;
+          }, zoneValues: {_zoneKey: scope}),
+        );
+      } finally {
+        scope.open = false;
+      }
+    });
   }
 }
 

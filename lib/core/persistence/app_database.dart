@@ -1,6 +1,5 @@
 import 'package:drift/drift.dart';
 import 'package:laurum/core/persistence/business_records.dart';
-import 'package:laurum/core/persistence/customer_keys_migration.dart';
 import 'package:laurum/core/persistence/customer_records.dart';
 import 'package:laurum/core/persistence/device_records.dart';
 import 'package:laurum/core/persistence/entitlement_records.dart';
@@ -8,6 +7,7 @@ import 'package:laurum/core/persistence/expense_category_records.dart';
 import 'package:laurum/core/persistence/expense_records.dart';
 import 'package:laurum/core/persistence/local_setting_records.dart';
 import 'package:laurum/core/persistence/order_event_records.dart';
+import 'package:laurum/core/persistence/order_indexes_migration.dart';
 import 'package:laurum/core/persistence/order_item_records.dart';
 import 'package:laurum/core/persistence/order_records.dart';
 import 'package:laurum/core/persistence/outbox_records.dart';
@@ -42,11 +42,11 @@ part 'app_database.g.dart';
 class AppDatabase extends _$AppDatabase {
   AppDatabase(super.e);
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (m) => m.createAll(),
-    onUpgrade: (m, from, to) => migrateCustomerKeys(this, m, from, to),
+    onUpgrade: (m, from, to) => migrateOrderIndexes(this, m, from, to),
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');
     },

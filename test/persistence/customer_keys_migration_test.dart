@@ -35,7 +35,7 @@ Future<void> seedOldCustomers(v1.DatabaseAtV1 old, {bool collision = false}) asy
 }
 
 void main() {
-  test('v1 -> v2 backfills indexed keys and preserves display values', () async {
+  test('v1 -> current backfills indexed keys and preserves display values', () async {
     final verifier = SchemaVerifier(GeneratedHelper());
     final schema = await verifier.schemaAt(1);
     final old = v1.DatabaseAtV1(schema.newConnection());
@@ -43,7 +43,7 @@ void main() {
     await old.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 2);
+    await verifier.migrateAndValidate(db, 3);
     final rows = await readCustomers(db, 'owner', query: 'é');
     expect(rows.single.name, 'Élodie');
     expect(rows.single.phone, '+62 812-3456-7890');
