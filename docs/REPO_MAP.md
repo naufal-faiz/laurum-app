@@ -240,7 +240,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_cancel_flow.dart (24):
 - order_completion_flow.dart (19):
 - order_detail_menu_flow.dart (22):
-- order_detail_page.dart (100): OrderDetailPage
+- order_detail_page.dart (93): OrderDetailPage
 - order_edit_page.dart (84): OrderEditPage
 - order_menu_sheet.dart (60): OrderMenuAction, OrderMenuSheet
 - order_status_sheet.dart (67): OrderStatusSheet
@@ -269,7 +269,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_customer_section.dart (56): OrderCustomerSection
 - order_detail_body_section.dart (35): OrderDetailBodySection
 - order_detail_content_section.dart (70): OrderDetailContentSection
-- order_detail_footer_section.dart (95): OrderDetailFooterSection
+- order_detail_footer_section.dart (99): OrderDetailFooterSection
 - order_edit_body_section.dart (61): OrderEditBodySection
 - order_edit_customer_section.dart (43): OrderEditCustomerSection
 - order_items_section.dart (76): OrderItemsSection
@@ -637,6 +637,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - numpad_test.dart (47):
 - order_actions_test.dart (72):
 - order_card_test.dart (89):
+- order_detail_receipt_test.dart (80):
 - order_detail_test.dart (89):
 - order_edit_test.dart (80):
 - order_number_generator_test.dart (34):

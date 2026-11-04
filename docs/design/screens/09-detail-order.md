@@ -50,7 +50,9 @@ Interaksi:
   cancelOrder, order keluar dari laporan dan saldo tabungan kembali.
 - Catat pembayaran -> AppBottomSheet Numpad (Tunai/QRIS/Transfer) menyimpan Payment +
   event; Terbayar/Sisa piutang, kartu Antrean, dan Laporan berubah.
-- Cetak struk memakai receiptLines data tersimpan; gagal menampilkan BannerMessage.
+- Cetak struk selalu membuka /transaksi/nota/:id, termasuk COD tertahan/order final.
+  Tidak memanggil PrintService di Detail. Pencetakan/retry dan akses Pengaturan printer
+  berada di receipt agar printer belum terdeteksi ditangani di satu tempat.
 - Buka WhatsApp memakai ExternalLauncher palsu.
 
 State layar: loading skeleton, gagal memuat, nota tidak ditemukan, modal batalkan
@@ -62,6 +64,9 @@ Selisih terhadap .pen: MenuRow tidak punya warna destruktif, jadi 'Batalkan orde
 memakai AppButton destructiveOutline di dalam sheet; jejak aktivitas tidak menampilkan
 'Oleh Pemilik' dan tidak mengulang jam di judul; tombol Cetak struk dan CTA sejajar
 dalam satu baris footer.
+Koreksi lanjutan 4 Nov: kedua tombol sama lebar dan tinggi, font bodyStrong 14 sp
+(actionOutline/action). Tinggi baris mengikuti tombol tertinggi saat teks membungkus;
+ukuran normal minimum 48 dp. Berlaku juga CTA status berikutnya/Terima pembayaran.
 
 ## R9 - COD dan pembayaran pada order selesai (menggantikan batas R4 terkait pembayaran)
 - Catat pembayaran tersedia selama sisa > 0 dan tidak batal, termasuk order selesai.

@@ -66,30 +66,34 @@ class OrderDetailFooterSection extends StatelessWidget {
             ),
           ],
         )
-      : Row(
-          spacing: AppSpacing.cardGap,
-          children: [
-            Expanded(
-              child: AppButton(
-                'Cetak struk',
-                variant: AppButtonVariant.actionOutline,
-                icon: AppIcons.printer,
-                onPressed: busy ? null : onPrint,
-              ),
-            ),
-            if (!data.isFinal)
+      : IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: AppSpacing.cardGap,
+            children: [
               Expanded(
                 child: AppButton(
-                  data.completionHeld && data.order.status == OrderStatus.siap
-                      ? 'Terima pembayaran'
-                      : nextStatusLabel(data.order.status),
-                  onPressed: busy
-                      ? null
-                      : data.completionHeld && data.order.status == OrderStatus.siap
-                      ? onPayment
-                      : onAdvance,
+                  'Cetak struk',
+                  variant: AppButtonVariant.actionOutline,
+                  icon: AppIcons.printer,
+                  onPressed: busy ? null : onPrint,
                 ),
               ),
-          ],
+              if (!data.isFinal)
+                Expanded(
+                  child: AppButton(
+                    data.completionHeld && data.order.status == OrderStatus.siap
+                        ? 'Terima pembayaran'
+                        : nextStatusLabel(data.order.status),
+                    variant: AppButtonVariant.action,
+                    onPressed: busy
+                        ? null
+                        : data.completionHeld && data.order.status == OrderStatus.siap
+                        ? onPayment
+                        : onAdvance,
+                  ),
+                ),
+            ],
+          ),
         );
 }

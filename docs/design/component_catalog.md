@@ -932,3 +932,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   menjalankan orderCompletionProvider. Tidak ada jalur state/UI tanpa cetak.
 - Guard COD/mode/status dan event setelah cetak tetap diperiksa; callback Section
   tetap dari Page. Spec 07/08/09 menang atas .pen/ketentuan R4 lama yang berbeda.
+- Detail: onPrint hanya navigasi receipt untuk semua status, tanpa memanggil printer.
+  OrderDetailFooterSection memasangkan Cetak struk dan CTA status dengan ukuran/font
+  sama (actionOutline/action, bodyStrong 14 sp); IntrinsicHeight menyamakan tinggi
+  baris saat teks membungkus. Pengaturan/retry printer tetap dari receipt.

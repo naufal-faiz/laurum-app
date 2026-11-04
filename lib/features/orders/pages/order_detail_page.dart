@@ -16,7 +16,6 @@ import 'package:laurum/features/orders/widgets/order_detail_content_section.dart
 import 'package:laurum/features/orders/widgets/order_detail_footer_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
-import 'package:laurum/features/transactions/state/receipt_view.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 
@@ -57,7 +56,7 @@ class OrderDetailPage extends ConsumerWidget {
               data: data,
               busy: busy,
               useOrderStatus: useStatus,
-              onPrint: () => _print(ref),
+              onPrint: () => context.push('/transaksi/nota/$orderId'),
               onAdvance: () => ref.read(orderActionsProvider.notifier).advance(data.order),
               onEdit: () => context.push('/order/$orderId/edit'),
               onDelete: () => confirmCancelOrder(context, ref, data, simplified: true),
@@ -90,11 +89,5 @@ class OrderDetailPage extends ConsumerWidget {
         },
       ),
     );
-  }
-
-  Future<void> _print(WidgetRef ref) async {
-    ref.invalidate(receiptViewProvider(orderId));
-    final view = await ref.read(receiptViewProvider(orderId).future);
-    if (view != null) await ref.read(receiptPrintProvider.notifier).printReceipt(view);
   }
 }

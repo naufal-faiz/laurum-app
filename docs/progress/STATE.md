@@ -3,7 +3,7 @@ Diperbarui: 2026-11-04 | Cabang dev1rev
 
 ## Posisi
 Fase 1-8 sampai prompt 90, R0-R10 dan koreksi struk 4 Nov selesai otomatis.
-check_all SEMUA HIJAU: 646 tes, kedua analyzer bersih, check_arch OK, REPO_MAP 707 berkas.
+check_all SEMUA HIJAU: 650 tes, kedua analyzer bersih, check_arch OK, REPO_MAP 708 berkas.
 Bukti: docs/progress/2026-11-04-struk.md; R9/R10 dan fondasi rollback R8 tetap hijau.
 
 ## Selesai
@@ -31,10 +31,11 @@ Bukti: docs/progress/2026-11-04-struk.md; R9/R10 dan fondasi rollback R8 tetap h
 - Koreksi 4 Nov: Selesaikan -> konfirmasi -> struk; cetak berhasil baru selesai.
   Tanpa cetak dihapus; saldo/switch sejajar, aksi struk responsif, preview center.
   Koreksi lanjutan: border cetak, ukuran tombol sama dan font 14 sp; grid dua kolom.
+  Semua Cetak di Detail membuka receipt; Cetak/Tandai siap sama ukuran/font.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Berhenti untuk tinjauan Nota tersimpan: border cetak dan ukuran/font tombol seragam;
-   dua kolom normal/satu kolom teks besar. check_all 646 tes hijau.
+1. Berhenti untuk tinjauan Detail: semua Cetak struk membuka receipt; pasangan Cetak/
+   Tandai siap sama ukuran/font. check_all 650 tes hijau.
 2. Tinjau Android R9/R10 dan koreksi struk: COD/pembayaran, akun, keyboard dan tampilan.
    Android/iOS perangkat, printer dan SMTP nyata belum diuji.
 3. Setelah tinjauan: docs/prompts/100-penyelesaian.md; belum dimulai.
