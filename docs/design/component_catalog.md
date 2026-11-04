@@ -889,7 +889,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - PaymentRecordInputSection (orders/widgets, 58 baris): amount/due int rupiah, method,
   saveExcess, error; callback onMethod/onExcess/onKey. Menyusun AppText, ChipBar,
   BannerMessage dan Numpad. Tes: r9_payment_sections_test.dart.
-- ReceiptActionsSection (transactions/widgets, 84 baris): busy, onPrint/onWhatsApp,
+- ReceiptActionsSection (transactions/widgets): busy, onPrint/onWhatsApp,
   onHome/onOrder dan onRecord opsional; tombol pembayaran hilang bila onRecord null.
   Tes: r9_receipt_sections_test.dart; alur: r9_payment_entrypoints_test.dart.
 - PaymentSummarySection, PaymentSavingsSection, PaymentMethodSection, ReceiptStatusSection,
@@ -921,10 +921,11 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 ## Koreksi Detail/Pembayaran/Struk - 4 Nov 2026
 - PaymentSavingsSection: saldo fleksibel di kiri dan AppSwitch di kanan dalam Row
   spaceBetween; alokasi/sisa tetap di bawah. Tes mengunci posisi sejajar.
-- ReceiptActionsSection: baris Catat pembayaran opsional/WhatsApp/ikon cetak,
-  lalu Lihat detail (lebih lebar)/Ke beranda. onHome menggantikan onNew.
-  Teks >1,3x: Catat pembayaran dan navigasi memakai lebar penuh; WhatsApp/cetak
-  tetap sejajar. Label aksesibilitas AppIconButton: Cetak struk.
+- ReceiptActionsSection: tombol dua kolom sama lebar/tinggi 48 dp, teks bodyStrong
+  14 sp. WhatsApp/cetak/Catat pembayaran opsional/Lihat detail/Ke beranda.
+  Teks >1,3x memakai satu kolom dengan tinggi seragam yang mengikuti skala teks.
+  Cetak memakai AppButton actionOutline tanpa teks, Tooltip Cetak struk dan ikon
+  terpusat. AppButton menghilangkan jarak ikon-teks bila label kosong; API tetap.
 - ReceiptPreview memusatkan blok monospasi dengan lebar intrinsik di dalam kertas;
   formatter/isi cetak tetap. Berlaku di Nota Tersimpan dan preview Printer.
 - Konfirmasi Selesaikan hanya navigasi ke struk complete=1; ikon cetak/retry di sana

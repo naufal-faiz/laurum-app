@@ -10,7 +10,7 @@ Komposisi:
 - ReceiptPreview dari receiptLines data tersimpan; lebar 320/384 sesuai ReceiptSettings.
   Kertas dan blok monospasi terpusat; perataan antar baris formatter tetap dipertahankan.
 - ReceiptActionsSection: WhatsApp + AppIconButton cetak; Lihat detail + Ke beranda.
-  Tombol cetak hanya ikon printer, tooltip/semantics Cetak struk (koreksi 4 Nov 2026).
+  Tombol cetak hanya ikon printer berborder, tooltip/semantics Cetak struk (4 Nov 2026).
 
 Data dan provider:
 - receiptViewProvider(:id): Order, OrderItem, Payment, Customer, BusinessProfile,
@@ -49,11 +49,12 @@ bukan label DP/Belum bayar. Keberhasilan pembayaran memuat ulang preview dan lab
 Penyimpanan pembayaran/kelebihan tabungan atomik lewat TransactionRunner R8.
 Selisih .pen: aksi pembayaran tambahan dan label sisa; tes callback, alur dan 320 px/2x.
 
-## Susunan aksi - koreksi 4 Nov 2026
-- Nota bersisa (termasuk COD): baris pertama Catat pembayaran (flex 3), WhatsApp
-  (flex 2), ikon cetak 48 dp. Nota lunas: WhatsApp memanjang dan ikon cetak.
-- Baris kedua Lihat detail (flex 3), Ke beranda (flex 2). Semua nonaktif saat cetak.
-- Teks diperbesar >1,3x: Catat pembayaran memakai baris penuh agar kata tidak terpotong,
-  WhatsApp + cetak tetap sejajar, navigasi mendapat lebar penuh. Tidak mengecilkan teks.
+## Susunan aksi - koreksi lanjutan 4 Nov 2026
+- Semua tombol berukuran sama: dua kolom sama lebar, tinggi 48 dp dan teks bodyStrong
+  14 sp. Urutan WhatsApp, cetak, Catat pembayaran bila bersisa, Lihat detail, Ke beranda.
+- Cetak memakai AppButton actionOutline tanpa teks, ikon terpusat dan border yang sama;
+  seluruh bidang bisa ditekan. WhatsApp/Catat pembayaran memakai action (font sama).
+- Teks >1,3x: satu kolom; tinggi seragam mengikuti dua baris teks atau minimum 48 dp.
+  Semua aksi nonaktif saat cetak. Tidak mengecilkan skala teks aksesibilitas.
 - Isi struk dan API widget bersama tetap; ReceiptPreview memusatkan blok teks dengan
   lebar intrinsik. Belum diuji manual di Android/iOS atau printer nyata.

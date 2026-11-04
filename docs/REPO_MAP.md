@@ -444,7 +444,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_method_section.dart (72): PaymentMethodSection
 - payment_savings_section.dart (55): PaymentSavingsSection
 - payment_summary_section.dart (56): PaymentSummarySection
-- receipt_actions_section.dart (84): ReceiptActionsSection
+- receipt_actions_section.dart (81): ReceiptActionsSection
 - receipt_status_section.dart (96): ReceiptStatusSection
 - service_picker_list_section.dart (84): ServicePickerListSection
 - transaction_customer_section.dart (57): TransactionCustomerSection
@@ -541,7 +541,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_bar_root_test.dart (32):
 - app_bar_sub_test.dart (26):
 - app_bottom_sheet_test.dart (45):
-- app_button_test.dart (44):
+- app_button_test.dart (71):
 - app_card_test.dart (51):
 - app_chip_test.dart (41):
 - app_divider_test.dart (41):
@@ -723,7 +723,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r9_section_host.dart (10):
 - r9_validation_flow_test.dart (39):
 - raised_navigation_test.dart (52):
-- receipt_actions_layout_test.dart (69):
+- receipt_actions_layout_test.dart (74):
 - receipt_cod_visual_test.dart (36):
 - receipt_fixtures.dart (86):
 - receipt_formatter_settings_test.dart (31):

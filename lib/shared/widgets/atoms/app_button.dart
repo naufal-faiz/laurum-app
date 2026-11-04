@@ -35,7 +35,7 @@ class AppButton extends StatelessWidget {
         children: [
           if (icon != null) ...[
             AppIcon(icon!, size: AppDimensions.iconAction, color: foreground),
-            const SizedBox(width: AppControlTokens.iconGap),
+            if (label.isNotEmpty) const SizedBox(width: AppControlTokens.iconGap),
           ],
           Flexible(
             child: AppText(

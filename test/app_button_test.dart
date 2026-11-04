@@ -6,6 +6,33 @@ import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 
 void main() {
+  testWidgets('icon-only button centers icon and responds across its full width', (tester) async {
+    var taps = 0;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: Scaffold(
+          body: SizedBox(
+            width: 160,
+            height: 48,
+            child: Tooltip(
+              message: 'Cetak struk',
+              child: AppButton(
+                '',
+                variant: AppButtonVariant.actionOutline,
+                icon: AppIcons.printer,
+                onPressed: () => taps++,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    final rect = tester.getRect(find.byType(TextButton));
+    expect(tester.getCenter(find.byType(AppIcon)), rect.center);
+    await tester.tapAt(rect.topLeft + const Offset(8, 24));
+    expect(taps, 1);
+  });
   testWidgets('button renders variants and respects its public contract', (tester) async {
     var taps = 0;
     for (final variant in AppButtonVariant.values) {
