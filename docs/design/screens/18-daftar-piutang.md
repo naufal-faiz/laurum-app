@@ -24,3 +24,9 @@ filter awal Semua 5 / COD 0 / Sebagian 5. Order COD tambahan hanya di tes.
 Tes Catat bayar dari order selesai, filter, callback Section, tanpa Ingatkan, 320 px/2x.
 Selisih .pen: dua filter bayar lama diganti COD/Sebagian; tombol Ingatkan dihapus.
 Belum diuji manual di Android/iOS; tidak ada WhatsApp atau jaringan nyata.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

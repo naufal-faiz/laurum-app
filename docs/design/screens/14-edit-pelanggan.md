@@ -30,3 +30,9 @@ ditambahkan. Tanpa widget/token baru. Tutup sheet membuang draf tanpa menyimpan.
 Tes: nama kosong/nomor duplikat, normalisasi nomor sendiri, simpan profil,
 batal konfirmasi, nonaktif dan preservasi histori.
 Keyboard/perangkat nyata belum diuji; belum diuji di iOS.
+
+
+## Audit penyelesaian UI - prompt 100
+Sheet diperiksa melalui tes fitur/keyboard 300 dp, bukan rute mandiri.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

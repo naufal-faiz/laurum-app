@@ -58,3 +58,9 @@ Selisih .pen: aksi pembayaran tambahan dan label sisa; tes callback, alur dan 32
   Semua aksi nonaktif saat cetak. Tidak mengecilkan skala teks aksesibilitas.
 - Isi struk dan API widget bersama tetap; ReceiptPreview memusatkan blok teks dengan
   lebar intrinsik. Belum diuji manual di Android/iOS atau printer nyata.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

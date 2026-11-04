@@ -30,3 +30,9 @@ field dan footer di atas keyboard 300 dp, 320 px/2x dan golden.
 Selisih .pen: pesan Tautan sudah dikirim diganti pesan kondisional generik; cooldown
 60 detik ditambahkan. Pengiriman email sebenarnya belum ada (dummy in-memory).
 Android/iOS dan SMTP nyata belum diuji manual.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

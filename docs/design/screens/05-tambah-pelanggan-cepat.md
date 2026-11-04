@@ -37,3 +37,9 @@ Selisih terhadap .pen: tinggi sheet dibatasi 500 px agar dapat digulir; tidak ad
 R3 (30 Oktober 2026): Baru di sebelah Pilih pelanggan membuka sheet dengan forOrder=true.
 Page memilih customerId dari hasil sheet; tutup tanpa simpan mempertahankan draf.
 Tes alur langsung dan keyboard 300 dp ditulis, tervalidasi otomatis 31 Oktober 2026 (check_all: 387 tes) tanpa SDK.
+
+
+## Audit penyelesaian UI - prompt 100
+Sheet diperiksa melalui tes fitur/keyboard 300 dp, bukan rute mandiri.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

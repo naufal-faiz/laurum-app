@@ -56,3 +56,9 @@ Selisih terhadap .pen:
 - Toggle R4 ditambahkan sesuai revisi; tidak ada pada frame .pen lama.
 - R10 mengganti Hapus akun dengan Kelola akun; Keluar tetap di luar kartu (R7).
   Email sesi bisa berasal dari email/password atau Google. Belum diuji di iOS.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

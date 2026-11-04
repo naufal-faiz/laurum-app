@@ -43,3 +43,9 @@ Teks 320 px/2x, login salah/benar, Google/pemulihan, dan disposal password diuji
 PRD A bagian 11 masih mencatat keputusan Google-only lama; tidak diubah tanpa izin
 perubahan PRD A pada R10. Spec R10 dan layar ini menjadi acuan implementasi auth terbaru.
 Android/iOS dan integrasi autentikasi nyata belum diuji manual.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

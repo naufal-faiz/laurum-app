@@ -40,3 +40,9 @@ Format: sama dengan Buat Transaksi; berat gram, uang rupiah int.
 
 Selisih terhadap .pen: baris layanan tetap MenuRow + sheet (bukan stepper inline di
 kartu), jumlah layanan di subtitle, dan simpan tidak mencetak struk otomatis.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

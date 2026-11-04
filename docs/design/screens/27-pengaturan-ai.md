@@ -18,3 +18,9 @@ Selisih .pen: empat tab/nav revisi terbaru; status relatif pembaruan tidak dikar
 angka ringkasan riwayat kini mengikuti fixture yang disetujui pengguna pada 31 Okt.
 Verifikasi: toggle, batal/putus/sambung, golden terhubung/terputus, 320 px/teks 2x.
 Perangkat Android/iOS dan TalkBack/VoiceOver belum diuji untuk layar ini.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

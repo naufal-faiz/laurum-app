@@ -35,3 +35,9 @@ grup A-Z), dan tanpa chip kategori.
 R3 (30 Oktober 2026): ServicePickerListSection menerima services/query/onSearch/onSelect.
 Kode dan tes dua rute, keyboard serta baris terakhir disiapkan tanpa SDK; tervalidasi otomatis 31 Oktober 2026 (check_all: 387 tes).
 Selisih baru dari .pen: FAB mengikuti revisi R3. Golden R3 ditinjau; Android/iOS perangkat belum ditinjau.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

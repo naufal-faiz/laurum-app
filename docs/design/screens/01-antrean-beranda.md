@@ -79,3 +79,9 @@ Dalam mode aktif, kartu siap menampilkan Terima pembayaran, membuka sheet pembay
 yang menyimpan pelunasan dan selesai atomik. Langkah sebelum siap tetap normal.
 Banner Nota {nomor} tersimpan dari tombol Ke antrean tampil sekali selama empat detik.
 Filter/query Antrean dan fixture master tidak diubah. Tes COD 320 px/teks 2x ditambahkan.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

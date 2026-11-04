@@ -33,6 +33,11 @@ class RootShellPage extends ConsumerWidget {
               const BannerMessage(
                 message: 'Mode offline. Data tersimpan di HP dan disinkronkan otomatis.',
               ),
+            if (sync.hasError || sync.value == SyncServiceStatus.gagal)
+              const BannerMessage(
+                message: 'Sinkronisasi gagal. Data di HP tetap tersimpan.',
+                variant: BannerMessageVariant.error,
+              ),
             if (navigationShell.currentIndex == 0 && !ref.watch(whatsappConnectionProvider)) ...[
               const BannerMessage(
                 message: 'WhatsApp terputus. AI berhenti membaca pesan.',

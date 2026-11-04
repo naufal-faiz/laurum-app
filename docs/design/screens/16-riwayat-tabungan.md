@@ -39,3 +39,9 @@ Selisih terhadap .pen:
 - Status 'Pelanggan Aktif' memakai AppStatusText varian lunas, bukan badge hijau baru.
 - Mutasi yang belum punya catatan tidak menampilkan baris Catatan kosong.
 - Referensi memakai nomor nota dari OrderRepository, bukan teks bebas.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

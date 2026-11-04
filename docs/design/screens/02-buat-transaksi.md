@@ -50,3 +50,9 @@ bukan kartu dengan StepperField langsung; tidak ada ikon kasir pada app bar (App
 
 R3 (30 Oktober 2026): kode dan tes disiapkan tanpa SDK; tervalidasi otomatis 31 Oktober 2026 (check_all: 387 tes).
 TransactionCustomerSection menerima customer/balance dan onChoose/onCreate dari Page.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

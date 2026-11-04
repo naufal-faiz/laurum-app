@@ -65,7 +65,7 @@ class ServiceEditFieldsSection extends StatelessWidget {
           errorText: state.priceError,
           child: AppTextField(
             label: 'Harga',
-            hint: '9000',
+            hint: '0',
             value: state.priceText,
             enabled: !state.busy,
             keyboardType: TextInputType.number,

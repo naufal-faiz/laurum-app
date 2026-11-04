@@ -3,6 +3,8 @@ Rute: /lainnya/layanan/baru dan /lainnya/layanan/:id   Prompt: 70
 Frame .pen: "Lainnya - Tambah Layanan" dan "Lainnya - Edit Layanan".
 Template: FormScaffold (satu form dipakai keduanya).
 
+Audit 100: harga baru kosong dengan hint 0 (bukan contoh 9000); mengikuti AGENTS 16a.
+
 Komposisi:
 - AppBarSub: 'Tambah layanan' atau 'Edit layanan'.
 - Form Edit: AppText 'Perubahan harga tidak memengaruhi nota yang sudah tercetak.'.
@@ -36,3 +38,9 @@ Selisih terhadap .pen:
 R3: form baru juga dibuka dari FAB Pilih Layanan via push. Simpan/kembali
 mengembalikan pengguna ke pemilih; katalog dimuat ulang. Tes alur disiapkan,
 lulus pemeriksaan SDK pada 31 Oktober 2026 (387 tes total).
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

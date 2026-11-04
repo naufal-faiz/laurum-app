@@ -53,3 +53,9 @@ Selisih terhadap .pen:
 - Tanpa header huruf A/B/D per grup; daftar diurutkan nama.
 - Tanpa tombol 'Bantuan' pada app bar; tanpa avatar inisial (memakai ikon person).
 - Ringkasan diletakkan di footer (bukan sticky bar terpisah).
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

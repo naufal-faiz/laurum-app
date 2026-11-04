@@ -40,3 +40,9 @@ pengaturan perataan header, pilihan ukuran huruf hanya Normal/Besar (11/13),
 pratinjau 80 mm tetap 32 kolom, dan tidak ada status koneksi nyata.
 iOS: printer thermal banyak memakai Bluetooth Classic (SPP) yang tidak tersedia untuk
 aksesori non-MFi; perlu BLE/Wi-Fi sebelum rilis iOS. Fitur ini **belum diuji di iOS**.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

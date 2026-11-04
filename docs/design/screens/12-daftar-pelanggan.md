@@ -47,3 +47,9 @@ Verifikasi: tes fixture/filter/normalisasi, pembatalan, tambah pelanggan/navigas
 loading/kosong/error/retry, serta lebar 320 px pada teks 2x.
 Perangkat Android, keyboard nyata, dan TalkBack belum diuji; belum diuji di iOS.
 Panggilan telepon masih palsu; integrasi platform belum diuji di iOS.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

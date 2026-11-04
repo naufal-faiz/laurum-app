@@ -86,3 +86,9 @@ ukuran normal minimum 48 dp. Berlaku juga CTA status berikutnya/Terima pembayara
 Selisih .pen: pengecualian empat aksi untuk COD tertahan dan sheet pilihan kelebihan.
 Header nomor nota/status membungkus agar nomor tidak terjepit vertikal pada teks 2x.
 Belum diuji manual di Android/iOS; pencetakan masih layanan palsu.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

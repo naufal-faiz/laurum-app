@@ -32,3 +32,9 @@ Prompt 90 - onboarding:
   router ke Antrean. Kembali membuka konfirmasi keluar dengan peringatan pending.
 - Field awal nonkosong memakai selectAllOnFocus; keyboard 300 dp diuji juga
   dalam mode onboarding. Tidak ada Google atau penyimpanan kredensial nyata.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

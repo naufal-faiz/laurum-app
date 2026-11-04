@@ -17,6 +17,7 @@ import 'package:laurum/features/expenses/data/in_memory_expense_repository.dart'
 import 'package:laurum/features/orders/data/in_memory_order_repository.dart';
 import 'package:laurum/features/proposals/data/in_memory_proposal_repository.dart';
 import 'package:laurum/features/reports/data/in_memory_report_repository.dart';
+import 'package:laurum/features/reports/data/report_repository_view.dart';
 import 'package:laurum/features/services/data/in_memory_service_repository.dart';
 import 'package:laurum/features/shell/pages/app_router.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
@@ -76,8 +77,8 @@ List<Override> dummyOverrides({
   ),
   reportRepositoryProvider.overrideWith(
     (ref) {
-      ref.listen(inMemoryReportRepositoryProvider, (_, _) => ref.notifyListeners());
-      return ref.read(inMemoryReportRepositoryProvider.notifier);
+      ref.watch(inMemoryReportRepositoryProvider);
+      return ReportRepositoryView(ref.read(inMemoryReportRepositoryProvider.notifier));
     },
   ),
 ];

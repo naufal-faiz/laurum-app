@@ -936,3 +936,15 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   OrderDetailFooterSection memasangkan Cetak struk dan CTA status dengan ukuran/font
   sama (actionOutline/action, bodyStrong 14 sp); IntrinsicHeight menyamakan tinggi
   baris saat teks membungkus. Pengaturan/retry printer tetap dari receipt.
+
+## Prompt 100 - Audit penyelesaian UI dummy
+- Registry tetap 60/60, tanpa widget atau API widget bersama baru.
+- RootShellPage: banner offline dan gagal sinkron menjaga data/pending; indikator
+  dan state service yang sama dipakai empat tab. Tes pada skala teks 1,3.
+- ServiceEditFieldsSection: harga baru kosong dengan hint 0, sesuai aturan input.
+- 34 rute diperiksa pada 320 px/teks 1,3; empat tab lolos guideline label/target 44 dp.
+  Tes keyboard 300 dp tetap; 14 Section lama dalam daftar utang tidak bertambah.
+- Alur penerimaan baru mencakup pelanggan baru/setor tabungan/pilih layanan/berat,
+  tabungan + tunai/receipt/Antrean/siap/serahkan/Laporan; tidak memerlukan printer nyata.
+- Perbandingan frame dan state .pen serta batas Android/iOS/integrasi dicatat di
+  progress/fase-ui.md. Audit tidak mengubah desain/token atau aturan checker/lint.

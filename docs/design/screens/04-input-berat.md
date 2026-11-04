@@ -37,3 +37,9 @@ qtyMilli = gram untuk kg dan pcs*1000 untuk satuan.
 
 Selisih terhadap .pen: chip memakai AppChip (bukan NominalChips +Rp); tinggi sheet
 mengikuti isi (numpad + footer), tanpa handle kustom karena AppBottomSheet standar.
+
+
+## Audit penyelesaian UI - prompt 100
+Sheet diperiksa melalui tes fitur/keyboard 300 dp, bukan rute mandiri.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

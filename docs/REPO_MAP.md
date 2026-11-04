@@ -331,6 +331,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_daily.dart (42):
 - report_daily_fixtures.dart (2):
 - report_fixtures.dart (83):
+- report_repository_view.dart (17): ReportRepositoryView
 - report_snapshot.dart (21):
 - report_top_services.dart (35):
 
@@ -390,7 +391,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (8):
-- root_shell_page.dart (53): RootShellPage
+- root_shell_page.dart (58): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (27): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, shellSyncStatusProvider, whatsappConnectionProvider
@@ -452,7 +453,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/
 - main.dart (18):
-- main_dummy.dart (97):
+- main_dummy.dart (98):
 
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
@@ -770,6 +771,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_golden_test.dart (70):
 - transaction_page_test.dart (136):
 - transaction_runner_test.dart (91): TransactionValue
+- ui_final_accessibility_test.dart (52):
+- ui_final_flow_host.dart (53):
+- ui_final_flow_test.dart (83):
+- ui_final_routes.dart (36):
+- ui_final_sync_test.dart (33):
 - weekly_bar_chart_test.dart (30):
 - weight_edit_test.dart (184):
 - weight_input_display_test.dart (38):

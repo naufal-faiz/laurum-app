@@ -38,3 +38,9 @@ prompt hanya meminta order terakhir. Inisial memakai helper yang sudah ada (PB, 
 Tanggal/jam mengikuti Formatters. Warna/widget/token tidak diubah.
 Tes: angka master, saldo ledger, rute, edit/nonaktif, loading/error/retry/kosong,
 320 px dengan teks 2x. Perangkat dan WhatsApp nyata belum diuji; belum diuji di iOS.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

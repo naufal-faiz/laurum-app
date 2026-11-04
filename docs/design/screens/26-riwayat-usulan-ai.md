@@ -17,3 +17,9 @@ Selisih .pen: urutan terbaru dahulu; banner menjelaskan batas ringkasan historis
 nav empat tab dan tombol Transaksi mengikuti revisi terakhir pengguna.
 Verifikasi: hitungan fixture, perubahan status, filter, buka detail, retry,
 golden, 320 px/teks 2x. Perangkat Android/iOS belum diuji untuk layar ini.
+
+
+## Audit penyelesaian UI - prompt 100
+Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
+State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
+APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
