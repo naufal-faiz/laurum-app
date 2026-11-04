@@ -26,9 +26,17 @@ class PaymentSavingsSection extends StatelessWidget {
       spacing: AppSpacing.cardGap,
       children: [
         const AppText('Tabungan pelanggan', variant: AppTextVariant.bodyStrong),
-        if (balance > 0)
-          AppSwitch(value: useSavings, label: 'Pakai tabungan', onChanged: onChanged),
-        AppText('Saldo: ${Formatters.rupiah(balance)}', color: AppColors.primary),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          spacing: AppSpacing.cardGap,
+          children: [
+            Expanded(
+              child: AppText('Saldo: ${Formatters.rupiah(balance)}', color: AppColors.primary),
+            ),
+            if (balance > 0)
+              AppSwitch(value: useSavings, label: 'Pakai tabungan', onChanged: onChanged),
+          ],
+        ),
         if (quote.savingsUsed > 0) ...[
           AppText(
             'Tabungan dipakai -${Formatters.rupiah(quote.savingsUsed)}',

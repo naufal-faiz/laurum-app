@@ -47,10 +47,17 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Cetak struk'));
       await tester.pumpAndSettle();
+      expect(printer.calls, 0);
+      await tester.ensureVisible(find.byTooltip('Cetak struk'));
+      await tester.tap(find.byTooltip('Cetak struk'));
+      await tester.pumpAndSettle();
       expect(printer.calls, 1);
       final repo = scope.read(orderRepositoryProvider);
       expect((await repo.getOrderById('ord-0142'))!.status, OrderStatus.selesai);
       expect(await repo.getPaymentsByOrderId('ord-0142'), isEmpty);
+      await tester.tap(find.byTooltip('Kembali'));
+      await tester.pumpAndSettle();
+      expect(find.text('Detail order'), findsOneWidget);
       await tester.tap(find.byTooltip('Kembali'));
       await tester.pumpAndSettle();
       await tester.scrollUntilVisible(find.text('Semua 11'), -300, scrollable: scroll);

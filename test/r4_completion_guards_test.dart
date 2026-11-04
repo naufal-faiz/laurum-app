@@ -48,7 +48,7 @@ void main() {
       (await scope.read(orderRepositoryProvider).getOrderById(id))!.status,
       OrderStatus.diproses,
     );
-    expect(scope.read(orderCompletionProvider(id)).allowWithoutPrint, isFalse);
+    expect(scope.read(orderCompletionProvider(id)).error, isNotNull);
   });
 
   test('concurrent receipt requests use the printer once', () async {

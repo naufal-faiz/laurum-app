@@ -238,9 +238,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/orders/pages/
 - antrean_page.dart (101): AntreanPage
 - order_cancel_flow.dart (24):
-- order_completion_flow.dart (36):
+- order_completion_flow.dart (19):
 - order_detail_menu_flow.dart (22):
-- order_detail_page.dart (102): OrderDetailPage
+- order_detail_page.dart (100): OrderDetailPage
 - order_edit_page.dart (84): OrderEditPage
 - order_menu_sheet.dart (60): OrderMenuAction, OrderMenuSheet
 - order_status_sheet.dart (67): OrderStatusSheet
@@ -251,7 +251,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_controller.dart (90): AntreanFilter, AntreanActionState, AntreanActions, antreanFilterProvider, antreanActionsProvider
 - antrean_data.dart (68): AntreanData, antreanDataProvider
 - antrean_filter_view.dart (9): AntreanFilterView
-- order_completion_controller.dart (57): OrderCompletionState, OrderCompletion, orderCompletionProvider
+- order_completion_controller.dart (47): OrderCompletionState, OrderCompletion, orderCompletionProvider
 - order_completion_save.dart (53):
 - order_detail_controller.dart (95): OrderActionState, OrderActions, orderActionsProvider
 - order_detail_data.dart (98): ActivityEntry, OrderDetailData, orderDetailProvider
@@ -269,7 +269,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_customer_section.dart (56): OrderCustomerSection
 - order_detail_body_section.dart (35): OrderDetailBodySection
 - order_detail_content_section.dart (70): OrderDetailContentSection
-- order_detail_footer_section.dart (103): OrderDetailFooterSection
+- order_detail_footer_section.dart (95): OrderDetailFooterSection
 - order_edit_body_section.dart (61): OrderEditBodySection
 - order_edit_customer_section.dart (43): OrderEditCustomerSection
 - order_items_section.dart (76): OrderItemsSection
@@ -415,7 +415,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - discount_sheet.dart (74): DiscountSheet
 - payment_flow.dart (19):
 - payment_page.dart (90): PaymentPage
-- receipt_page.dart (76): ReceiptPage
+- receipt_page.dart (89): ReceiptPage
 - service_picker_page.dart (54): ServicePickerPage
 - transaction_leave_flow.dart (22):
 - transaction_line_sheet.dart (76): TransactionLineSheet
@@ -442,9 +442,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/transactions/widgets/
 - add_customer_form_section.dart (77): AddCustomerFormSection
 - payment_method_section.dart (72): PaymentMethodSection
-- payment_savings_section.dart (47): PaymentSavingsSection
+- payment_savings_section.dart (55): PaymentSavingsSection
 - payment_summary_section.dart (56): PaymentSummarySection
-- receipt_actions_section.dart (53): ReceiptActionsSection
+- receipt_actions_section.dart (84): ReceiptActionsSection
 - receipt_status_section.dart (96): ReceiptStatusSection
 - service_picker_list_section.dart (84): ServicePickerListSection
 - transaction_customer_section.dart (57): TransactionCustomerSection
@@ -507,7 +507,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_card.dart (100): OrderCard
 - piutang_card.dart (83): PiutangCard
 - proposal_card.dart (63): ProposalCard
-- receipt_preview.dart (36): ReceiptPreview
+- receipt_preview.dart (44): ReceiptPreview
 - receipt_toggle_list.dart (65): ReceiptToggleList
 - report_summary.dart (109): ReportSummary
 - savings_row.dart (74): SavingsRow
@@ -680,17 +680,17 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r3_service_picker_keyboard_test.dart (36):
 - r4_antrean_action_test.dart (26):
 - r4_antrean_filter_test.dart (30):
-- r4_antrean_flow_test.dart (65):
+- r4_antrean_flow_test.dart (72):
 - r4_antrean_orders_section_test.dart (60):
 - r4_antrean_page_test.dart (70):
 - r4_business_profile_test.dart (57):
 - r4_completion_guards_test.dart (72):
 - r4_completion_test_host.dart (38): CompletionPrinter
-- r4_detail_completion_test.dart (84):
-- r4_detail_print_failure_test.dart (57):
+- r4_detail_completion_test.dart (95):
+- r4_detail_print_failure_test.dart (40):
 - r4_finish_flow_test.dart (84):
 - r4_finish_test_host.dart (48):
-- r4_order_completion_test.dart (81):
+- r4_order_completion_test.dart (80):
 - r4_order_policy_test.dart (72):
 - r4_order_repository_policy_test.dart (87):
 - r4_order_store_guards_test.dart (66):
@@ -716,18 +716,20 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r9_payment_keyboard_test.dart (60):
 - r9_payment_rollback_test.dart (68): FailingExcessSavings
 - r9_payment_rules_test.dart (83):
-- r9_payment_sections_test.dart (89):
+- r9_payment_sections_test.dart (93):
 - r9_payment_state_test.dart (84):
 - r9_payment_visual_test.dart (60):
 - r9_receipt_sections_test.dart (84):
 - r9_section_host.dart (10):
 - r9_validation_flow_test.dart (39):
 - raised_navigation_test.dart (52):
+- receipt_actions_layout_test.dart (69):
+- receipt_cod_visual_test.dart (36):
 - receipt_fixtures.dart (86):
 - receipt_formatter_settings_test.dart (31):
 - receipt_formatter_test.dart (70):
-- receipt_page_test.dart (67):
-- receipt_preview_test.dart (28):
+- receipt_page_test.dart (73):
+- receipt_preview_test.dart (32):
 - receipt_template_lines.dart (28):
 - receipt_toggle_list_test.dart (37):
 - report_export_test.dart (60): RetryExportService

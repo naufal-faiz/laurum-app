@@ -4,7 +4,6 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
-import 'package:laurum/shared/widgets/organisms/confirm_modal.dart';
 
 import 'antrean_test_host.dart';
 import 'r4_completion_test_host.dart';
@@ -12,11 +11,11 @@ import 'r4_finish_test_host.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
-  for (final action in ['success', 'fallback', 'delete']) {
+  for (final action in ['success', 'retry', 'delete']) {
     testWidgets('toggle off -> checkout -> $action preserves ledger and updates queue', (
       tester,
     ) async {
-      final printer = CompletionPrinter(printSucceeds: action != 'fallback');
+      final printer = CompletionPrinter(printSucceeds: action != 'retry');
       final scope = await completionScope(printer, tracking: true);
       final host = await pumpAntrean(tester, container: scope, location: '/lainnya');
       final before = (await scope.read(customerSummariesProvider.future))
@@ -48,24 +47,25 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(find.text('Cetak struk'));
         await tester.pumpAndSettle();
-        if (action == 'fallback') {
+        expect(printer.calls, 0);
+        await tester.ensureVisible(find.byTooltip('Cetak struk'));
+        await tester.tap(find.byTooltip('Cetak struk'));
+        await tester.pumpAndSettle();
+        if (action == 'retry') {
           expect((await repo.getOrderById(id))!.status, OrderStatus.diproses);
           expect(
             (await scope.read(antreanDataProvider.future)).orders.map((o) => o.id),
             contains(id),
           );
-          await tester.tap(find.text('Selesaikan tanpa cetak'));
-          await tester.pumpAndSettle();
-          await tester.tap(
-            find.descendant(
-              of: find.byType(ConfirmModal),
-              matching: find.text('Selesaikan tanpa cetak'),
-            ),
-          );
+          expect(find.text('Selesaikan tanpa cetak'), findsNothing);
+          printer.printSucceeds = true;
+          await printer.connect(printer.devices.first);
+          await tester.ensureVisible(find.text('Coba lagi'));
+          await tester.tap(find.text('Coba lagi'));
           await tester.pumpAndSettle();
         }
         expect((await repo.getOrderById(id))!.status, OrderStatus.selesai);
-        expect(printer.calls, 1);
+        expect(printer.calls, action == 'retry' ? 2 : 1);
         final recorded = await repo.getPaymentsByOrderId(id);
         expect(recorded.single.amount, 1000);
       }

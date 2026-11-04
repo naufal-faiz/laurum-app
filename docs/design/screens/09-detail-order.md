@@ -29,18 +29,19 @@ orderActionsProvider (pending/error), receiptPrintProvider (cetak dari data ters
 - Badge diproses menjadi 'Sedang dikerjakan'; status lama tidak diubah saat toggle.
 - Edit memakai rute yang sama; Hapus memakai ConfirmModal 'Hapus nota ini?' dan
   alur pembatalan/koreksi ledger, bukan menghapus riwayat.
-- Selesaikan membuka konfirmasi cetak memakai ReceiptView/PrintService yang ada.
-  Sukses cetak baru menyimpan status selesai + OrderEvent dan keluar dari Antrean.
-- Gagal/exception/batal cetak: tetap aktif, BannerMessage dan aksi 'Selesaikan
-  tanpa cetak'. Aksi itu wajib ConfirmModal terpisah; batal tidak mengubah order.
+- Selesaikan membuka konfirmasi, lalu Cetak struk menuju /transaksi/nota/:id?complete=1.
+  Halaman struk belum mencetak otomatis. Ikon cetak menjalankan guard/PrintService;
+  sukses cetak baru menyimpan status selesai + OrderEvent dan keluar dari Antrean.
+- Gagal/exception/batal cetak: tetap aktif; gagal menampilkan BannerMessage dan retry
+  di halaman struk. Jalur Selesaikan tanpa cetak dihapus sesuai koreksi 4 Nov 2026.
 - Order lama Menunggu jemput atau Siap boleh langsung selesai (izin 31 Okt 2026).
 - Order final hanya Cetak struk. Lunas tidak wajib; sisa piutang tetap tercatat.
 - Ketukan ganda diblokir; order dan pengaturan diperiksa ulang sesudah mencetak.
 - ContentSection Stateless, data/callback dari Page. Provider tambahan:
   businessProfileProvider dan orderCompletionProvider(:id).
 - Golden r4_order_detail.png: 390 x 844. Android/iOS dan printer nyata belum diuji.
-- Selisih .pen R4: footer dua baris Edit/Hapus lalu Selesaikan, dengan satu baris
-  tambahan untuk tanpa cetak setelah gagal/batal, mengikuti spec R4.
+- Selisih .pen: footer dua baris Edit/Hapus lalu Selesaikan. Konfirmasi membuka
+  struk dan tidak menyediakan aksi tanpa cetak, sesuai koreksi pengguna 4 Nov 2026.
 
 Interaksi:
 - CTA memajukan satu status (nextStatus) + OrderEvent; Antrean ikut berubah.

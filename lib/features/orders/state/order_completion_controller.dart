@@ -4,7 +4,7 @@ import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
 import 'package:laurum/features/transactions/state/receipt_view.dart';
 
-typedef OrderCompletionState = ({bool busy, bool allowWithoutPrint, String? error});
+typedef OrderCompletionState = ({bool busy, String? error});
 final orderCompletionProvider =
     NotifierProvider.family<OrderCompletion, OrderCompletionState, String>(OrderCompletion.new);
 
@@ -13,34 +13,24 @@ class OrderCompletion extends Notifier<OrderCompletionState> {
   final String _id;
   @override
   OrderCompletionState build() {
-    return (busy: false, allowWithoutPrint: false, error: null);
+    return (busy: false, error: null);
   }
 
-  void cancelPrint() {
-    if (!state.busy) _fail('Cetak dibatalkan. Order belum diselesaikan.', allowWithoutPrint: true);
-  }
-
-  Future<bool> complete({bool withoutPrint = false}) async {
-    if (state.busy || (withoutPrint && !state.allowWithoutPrint)) return false;
-    state = (busy: true, allowWithoutPrint: false, error: null);
+  Future<bool> complete() async {
+    if (state.busy) return false;
+    state = (busy: true, error: null);
     try {
       final order = await loadCompletableOrder(ref, _id);
-      if (!withoutPrint) {
-        // Fetch a fresh receipt after any payment/edit made since the last print.
-        ref.invalidate(receiptViewProvider(_id));
-        final view = await ref.read(receiptViewProvider(_id).future);
-        if (view == null || view.order != order) throw StateError('Receipt changed');
-        final ok = await ref.read(receiptPrintProvider.notifier).printReceipt(view);
-        if (!ok) {
-          return _fail(
-            ref.read(receiptPrintProvider).error ?? 'Cetak belum berhasil.',
-            allowWithoutPrint: true,
-          );
-        }
+      // Fetch a fresh receipt after any payment/edit made since the last print.
+      ref.invalidate(receiptViewProvider(_id));
+      final view = await ref.read(receiptViewProvider(_id).future);
+      if (view == null || view.order != order) throw StateError('Receipt changed');
+      final ok = await ref.read(receiptPrintProvider.notifier).printReceipt(view);
+      if (!ok) {
+        return _fail(ref.read(receiptPrintProvider).error ?? 'Cetak belum berhasil.');
       }
       await saveOrderCompletion(ref, order);
-      if (withoutPrint) ref.read(receiptPrintProvider.notifier).clearResult();
-      state = (busy: false, allowWithoutPrint: false, error: null);
+      state = (busy: false, error: null);
       return true;
     } on StateError {
       ref.invalidate(orderDetailProvider(_id));
@@ -50,8 +40,8 @@ class OrderCompletion extends Notifier<OrderCompletionState> {
     }
   }
 
-  bool _fail(String message, {bool allowWithoutPrint = false}) {
-    state = (busy: false, allowWithoutPrint: allowWithoutPrint, error: message);
+  bool _fail(String message) {
+    state = (busy: false, error: message);
     return false;
   }
 }

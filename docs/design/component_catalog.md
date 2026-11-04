@@ -889,8 +889,8 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - PaymentRecordInputSection (orders/widgets, 58 baris): amount/due int rupiah, method,
   saveExcess, error; callback onMethod/onExcess/onKey. Menyusun AppText, ChipBar,
   BannerMessage dan Numpad. Tes: r9_payment_sections_test.dart.
-- ReceiptActionsSection (transactions/widgets, 53 baris): busy, onPrint/onWhatsApp,
-  onNew/onOrder dan onRecord opsional; tombol pembayaran hilang bila onRecord null.
+- ReceiptActionsSection (transactions/widgets, 84 baris): busy, onPrint/onWhatsApp,
+  onHome/onOrder dan onRecord opsional; tombol pembayaran hilang bila onRecord null.
   Tes: r9_receipt_sections_test.dart; alur: r9_payment_entrypoints_test.dart.
 - PaymentSummarySection, PaymentSavingsSection, PaymentMethodSection, ReceiptStatusSection,
   OutstandingListSection dan CustomerOrdersSection menyusun data/callback dari Page;
@@ -917,3 +917,17 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   rahasia. Cache field privat sementara dihapus saat berhasil atau dispose form.
 - Keyboard 300 dp untuk 12 field, ukuran 320 px/teks 2x dan golden; spec 19/29/31-33
   mengalahkan frame Google-only .pen. Tidak ada perubahan API widget bersama.
+
+## Koreksi Detail/Pembayaran/Struk - 4 Nov 2026
+- PaymentSavingsSection: saldo fleksibel di kiri dan AppSwitch di kanan dalam Row
+  spaceBetween; alokasi/sisa tetap di bawah. Tes mengunci posisi sejajar.
+- ReceiptActionsSection: baris Catat pembayaran opsional/WhatsApp/ikon cetak,
+  lalu Lihat detail (lebih lebar)/Ke beranda. onHome menggantikan onNew.
+  Teks >1,3x: Catat pembayaran dan navigasi memakai lebar penuh; WhatsApp/cetak
+  tetap sejajar. Label aksesibilitas AppIconButton: Cetak struk.
+- ReceiptPreview memusatkan blok monospasi dengan lebar intrinsik di dalam kertas;
+  formatter/isi cetak tetap. Berlaku di Nota Tersimpan dan preview Printer.
+- Konfirmasi Selesaikan hanya navigasi ke struk complete=1; ikon cetak/retry di sana
+  menjalankan orderCompletionProvider. Tidak ada jalur state/UI tanpa cetak.
+- Guard COD/mode/status dan event setelah cetak tetap diperiksa; callback Section
+  tetap dari Page. Spec 07/08/09 menang atas .pen/ketentuan R4 lama yang berbeda.

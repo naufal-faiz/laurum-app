@@ -12,11 +12,9 @@ class OrderDetailFooterSection extends StatelessWidget {
     required this.onPrint,
     required this.onAdvance,
     this.useOrderStatus = true,
-    this.allowWithoutPrint = false,
     this.onEdit,
     this.onDelete,
     this.onComplete,
-    this.onWithoutPrint,
     this.onPayment,
     super.key,
   });
@@ -24,8 +22,8 @@ class OrderDetailFooterSection extends StatelessWidget {
   final bool busy;
   final VoidCallback onPrint;
   final VoidCallback onAdvance;
-  final bool useOrderStatus, allowWithoutPrint;
-  final VoidCallback? onEdit, onDelete, onComplete, onWithoutPrint, onPayment;
+  final bool useOrderStatus;
+  final VoidCallback? onEdit, onDelete, onComplete, onPayment;
   @override
   Widget build(BuildContext context) => !useOrderStatus && !data.isFinal
       ? Column(
@@ -66,12 +64,6 @@ class OrderDetailFooterSection extends StatelessWidget {
                   ? onPayment
                   : onComplete,
             ),
-            if (allowWithoutPrint && !data.completionHeld)
-              AppButton(
-                'Selesaikan tanpa cetak',
-                variant: AppButtonVariant.actionOutline,
-                onPressed: busy ? null : onWithoutPrint,
-              ),
           ],
         )
       : Row(

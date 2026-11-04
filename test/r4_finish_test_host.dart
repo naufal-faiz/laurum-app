@@ -40,9 +40,9 @@ Future<String> createR4Order(
   await tester.tap(find.text('Cetak struk'));
   await tester.pumpAndSettle();
   final order = (await scope.read(orderRepositoryProvider).getOrderByOrderNo('A-0143'))!;
-  await tester.ensureVisible(find.text('Lihat order'));
+  await tester.ensureVisible(find.text('Lihat detail'));
   await tester.pumpAndSettle();
-  await tester.tap(find.text('Lihat order'));
+  await tester.tap(find.text('Lihat detail'));
   await tester.pumpAndSettle();
   return order.id;
 }

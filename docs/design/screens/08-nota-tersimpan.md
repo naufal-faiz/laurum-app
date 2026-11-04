@@ -8,7 +8,9 @@ Komposisi:
 - BannerMessage error 'Struk gagal dicetak. Pastikan printer menyala dan Bluetooth aktif.'
   + AppButton 'Coba lagi' dan 'Pengaturan printer'.
 - ReceiptPreview dari receiptLines data tersimpan; lebar 320/384 sesuai ReceiptSettings.
-- AppButton 'Cetak struk', 'Kirim lewat WhatsApp', 'Transaksi baru', 'Lihat order'.
+  Kertas dan blok monospasi terpusat; perataan antar baris formatter tetap dipertahankan.
+- ReceiptActionsSection: WhatsApp + AppIconButton cetak; Lihat detail + Ke beranda.
+  Tombol cetak hanya ikon printer, tooltip/semantics Cetak struk (koreksi 4 Nov 2026).
 
 Data dan provider:
 - receiptViewProvider(:id): Order, OrderItem, Payment, Customer, BusinessProfile,
@@ -20,7 +22,11 @@ Interaksi:
 - Cetak struk mengirim 32 kolom + paperMm/fontSize; sukses notice, gagal banner + retry.
 - Pengaturan printer membuka /lainnya/printer.
 - Kirim lewat WhatsApp memakai nomor pelanggan dan teks struk; gagal menampilkan banner.
-- Transaksi baru ke /transaksi/baru; Lihat order ke /order/:id (placeholder prompt 40).
+- Ke beranda ke /antrean; Lihat detail ke /order/:id.
+- Dibuka dari Selesaikan pada Detail dengan query complete=1: ikon cetak dan retry
+  memakai orderCompletionProvider. Cetak berhasil baru menyelesaikan order; gagal
+  atau kembali tetap aktif. Guard memeriksa ulang mode/status/COD saat mencetak.
+  Membuka struk biasa tetap hanya mencetak tanpa mengubah status.
 - Kembali ke /antrean bila tidak ada tumpukan rute.
 
 State: loading skeleton, gagal memuat, nota tidak ditemukan, cetak sukses/gagal,
@@ -42,3 +48,12 @@ Membuka atau mencetak struk COD tidak menyelesaikan order. Struk menampilkan sis
 bukan label DP/Belum bayar. Keberhasilan pembayaran memuat ulang preview dan label.
 Penyimpanan pembayaran/kelebihan tabungan atomik lewat TransactionRunner R8.
 Selisih .pen: aksi pembayaran tambahan dan label sisa; tes callback, alur dan 320 px/2x.
+
+## Susunan aksi - koreksi 4 Nov 2026
+- Nota bersisa (termasuk COD): baris pertama Catat pembayaran (flex 3), WhatsApp
+  (flex 2), ikon cetak 48 dp. Nota lunas: WhatsApp memanjang dan ikon cetak.
+- Baris kedua Lihat detail (flex 3), Ke beranda (flex 2). Semua nonaktif saat cetak.
+- Teks diperbesar >1,3x: Catat pembayaran memakai baris penuh agar kata tidak terpotong,
+  WhatsApp + cetak tetap sejajar, navigasi mendapat lebar penuh. Tidak mengecilkan teks.
+- Isi struk dan API widget bersama tetap; ReceiptPreview memusatkan blok teks dengan
+  lebar intrinsik. Belum diuji manual di Android/iOS atau printer nyata.

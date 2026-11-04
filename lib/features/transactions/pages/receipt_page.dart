@@ -7,6 +7,7 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/pages/payment_record_flow.dart';
+import 'package:laurum/features/orders/state/order_completion_controller.dart';
 import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
 import 'package:laurum/features/transactions/state/receipt_view.dart';
 import 'package:laurum/features/transactions/widgets/receipt_actions_section.dart';
@@ -23,6 +24,9 @@ class ReceiptPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final view = ref.watch(receiptViewProvider(orderId));
     final printing = ref.watch(receiptPrintProvider);
+    final completion = ref.watch(orderCompletionProvider(orderId));
+    final completing = GoRouterState.of(context).uri.queryParameters['complete'] == '1';
+    final busy = printing.printing || completion.busy;
     final printer = ref.watch(printServiceProvider);
     final controller = ref.read(receiptPrintProvider.notifier);
     return SubScaffold(
@@ -45,10 +49,14 @@ class ReceiptPage extends ConsumerWidget {
                   children: [
                     ReceiptStatusSection(
                       view: receipt,
-                      printState: printing,
+                      printState: (
+                        printing: busy,
+                        error: completing ? completion.error ?? printing.error : printing.error,
+                        notice: printing.notice,
+                      ),
                       printerStatus: printer.status,
                       printerName: printer.connectedPrinter?.name,
-                      onRetry: () => controller.printReceipt(receipt),
+                      onRetry: () => _print(ref, receipt, completing),
                       onSettings: () => context.push('/lainnya/printer'),
                     ),
                     ReceiptPreview(
@@ -56,10 +64,10 @@ class ReceiptPage extends ConsumerWidget {
                       width: receipt.settings.paperMm == 80 ? 384 : 320,
                     ),
                     ReceiptActionsSection(
-                      busy: printing.printing,
-                      onPrint: () => controller.printReceipt(receipt),
+                      busy: busy,
+                      onPrint: () => _print(ref, receipt, completing),
                       onWhatsApp: () => controller.sendWhatsApp(receipt),
-                      onNew: () => context.go('/transaksi/baru'),
+                      onHome: () => context.go('/antrean'),
                       onOrder: () => context.push('/order/$orderId'),
                       onRecord:
                           receipt.order.status != OrderStatus.dibatalkan &&
@@ -73,4 +81,9 @@ class ReceiptPage extends ConsumerWidget {
       ),
     );
   }
+
+  Future<bool> _print(WidgetRef ref, ReceiptView receipt, bool completing) =>
+      completing && receipt.order.status != OrderStatus.selesai
+      ? ref.read(orderCompletionProvider(orderId).notifier).complete()
+      : ref.read(receiptPrintProvider.notifier).printReceipt(receipt);
 }

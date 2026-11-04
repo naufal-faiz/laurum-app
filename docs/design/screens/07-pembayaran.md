@@ -7,6 +7,8 @@ Template: FormScaffold, body gulir dan dua tombol footer sticky.
   Bayar sekarang (default) / Bayar nanti (COD). Tidak ada pilihan PayStatus.
 - PaymentSavingsSection: saldo, Pakai tabungan, pemakaian, sisa bayar/saldo.
   Tabungan boleh dipakai sebagian atau seluruhnya pada kedua pilihan.
+  Saldo dan switch sejajar spaceBetween (saldo kiri fleksibel, switch kanan),
+  sesuai koreksi 4 Nov 2026; label aksesibilitas switch tetap Pakai tabungan.
 - PaymentMethodSection: Tunai/QRIS/Transfer dan Uang diterima lewat CashInputSheet.
   Nilai awal = sisa setelah tabungan; nilai nol yang sengaja dimasukkan tetap nol.
   Bayar sekarang tanpa pembayaran positif tidak dapat disimpan; pesan
@@ -32,7 +34,7 @@ Numpad: angka pertama mengganti nilai awal, backspace awal mengosongkan, tanpa n
 
 ## Verifikasi dan selisih .pen
 R9 mengganti tiga chip status serta dua tombol lama; menambah pilihan kelebihan tunai.
-Ringkasan pelanggan/total dan saldo disusun vertikal agar teks besar tetap terbaca.
+Ringkasan pelanggan/total vertikal; saldo membungkus di kiri switch agar teks besar terbaca.
 Spec R9 menang atas frame lama. Fixture DATA MASTER tidak diubah.
 Tes domain/state, alur dua tujuan tombol, COD, kelebihan dan rollback; tampilan 320 px
 teks 2x dan inset keyboard 300 dp untuk halaman serta CashInputSheet.

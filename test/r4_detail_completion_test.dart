@@ -48,7 +48,18 @@ void main() {
     expect(printer.calls, 0);
     await tester.tap(find.text('Cetak struk'));
     await tester.pumpAndSettle();
+    expect(find.text('Nota tersimpan'), findsOneWidget);
+    expect(printer.calls, 0);
+    expect(
+      (await scope.read(orderRepositoryProvider).getOrderById('ord-0142'))!.status,
+      OrderStatus.diproses,
+    );
+    await tester.ensureVisible(find.byTooltip('Cetak struk'));
+    await tester.tap(find.byTooltip('Cetak struk'));
+    await tester.pumpAndSettle();
     expect(printer.calls, 1);
+    await tester.tap(find.byTooltip('Kembali'));
+    await tester.pumpAndSettle();
     expect(find.text('Selesai'), findsOneWidget);
     expect(find.text('Cetak struk'), findsOneWidget);
     expect(find.text('Edit'), findsNothing);

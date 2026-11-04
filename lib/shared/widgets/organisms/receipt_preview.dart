@@ -20,13 +20,21 @@ class ReceiptPreview extends StatelessWidget {
           color: AppColors.surface,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (final line in lines)
-                  AppText(line, variant: AppTextVariant.monoReceipt, color: AppColors.receiptInk),
-              ],
+            child: Center(
+              child: IntrinsicWidth(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for (final line in lines)
+                      AppText(
+                        line,
+                        variant: AppTextVariant.monoReceipt,
+                        color: AppColors.receiptInk,
+                      ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),

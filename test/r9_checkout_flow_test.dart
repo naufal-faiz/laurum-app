@@ -33,8 +33,8 @@ void main() {
       final orders = scope.read(orderRepositoryProvider);
       expect((await orders.getOrderById('ord-0143'))!.status, OrderStatus.diproses);
       expect(find.text('COD - sisa Rp25.000'), findsOneWidget);
-      await tester.ensureVisible(find.text('Lihat order'));
-      await tester.tap(find.text('Lihat order'));
+      await tester.ensureVisible(find.text('Lihat detail'));
+      await tester.tap(find.text('Lihat detail'));
       await tester.pumpAndSettle();
       if (mode) {
         await tester.tap(find.text('Tandai siap'));

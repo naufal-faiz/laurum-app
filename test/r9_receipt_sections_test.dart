@@ -41,7 +41,7 @@ void main() {
         busy: false,
         onPrint: () {},
         onWhatsApp: () {},
-        onNew: () {},
+        onHome: () {},
         onOrder: () {},
         onRecord: () => recorded = true,
       ),
@@ -54,7 +54,7 @@ void main() {
         busy: false,
         onPrint: () {},
         onWhatsApp: () {},
-        onNew: () {},
+        onHome: () {},
         onOrder: () {},
       ),
     );

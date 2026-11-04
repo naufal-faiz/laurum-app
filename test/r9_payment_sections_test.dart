@@ -46,6 +46,10 @@ void main() {
     );
     expect(find.text('Tabungan dipakai -Rp18.500'), findsOneWidget);
     expect(find.text('Sisa bayar Rp6.500'), findsOneWidget);
+    final saldo = tester.getRect(find.text('Saldo: Rp18.500'));
+    final toggle = tester.getRect(find.byType(AppSwitch));
+    expect(saldo.center.dy, toggle.center.dy);
+    expect(saldo.right, lessThan(toggle.left));
     await tester.tap(find.byType(AppSwitch));
     expect(enabled, isTrue);
   });

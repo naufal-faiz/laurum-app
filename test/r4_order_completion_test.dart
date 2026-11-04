@@ -31,21 +31,20 @@ void main() {
   });
 
   for (final throws in [false, true]) {
-    test('print failure/exception ($throws) allows explicit completion without print', () async {
+    test('print failure/exception ($throws) keeps order active on retry', () async {
       final printer = CompletionPrinter(printSucceeds: false)..throwsOnPrint = throws;
       final scope = await completionScope(printer);
       addTearDown(scope.dispose);
       final controller = scope.read(provider.notifier);
-      expect(await controller.complete(withoutPrint: true), isFalse);
       expect(await controller.complete(), isFalse);
       expect(scope.read(provider).busy, isFalse);
-      expect(scope.read(provider).allowWithoutPrint, isTrue);
+      expect(scope.read(provider).error, isNotNull);
       expect(
         (await scope.read(orderRepositoryProvider).getOrderById(id))!.status,
         OrderStatus.diproses,
       );
-      expect(await controller.complete(withoutPrint: true), isTrue);
-      expect(printer.calls, 1);
+      expect(await controller.complete(), isFalse);
+      expect(printer.calls, 2);
     });
   }
 

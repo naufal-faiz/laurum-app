@@ -1,10 +1,10 @@
 # STATE Laurum
-Diperbarui: 2026-11-02 | Cabang dev1rev
+Diperbarui: 2026-11-04 | Cabang dev1rev
 
 ## Posisi
-Fase 1-8 sampai prompt 90 dan R0-R10 selesai otomatis.
-check_all SEMUA HIJAU: 639 tes, kedua analyzer bersih, check_arch OK, REPO_MAP 705 berkas.
-Bukti: docs/progress/r10-akun.md; pembayaran R9 dan fondasi rollback R8 tetap hijau.
+Fase 1-8 sampai prompt 90, R0-R10 dan koreksi struk 4 Nov selesai otomatis.
+check_all SEMUA HIJAU: 645 tes, kedua analyzer bersih, check_arch OK, REPO_MAP 707 berkas.
+Bukti: docs/progress/2026-11-04-struk.md; R9/R10 dan fondasi rollback R8 tetap hijau.
 
 ## Selesai
 - R0: Section/state; utang Section kini 14 setelah migrasi R9 (hanya boleh menyusut).
@@ -26,16 +26,15 @@ Bukti: docs/progress/r10-akun.md; pembayaran R9 dan fondasi rollback R8 tetap hi
 - R9: PayTerm sekarang/COD, nominal positif, kembalian/setoran uang lebih atomik;
   COD tertahan state/repository, pelunasan sesuai mode; dua tujuan tombol kasir.
   Catat pembayaran Detail/Struk/Piutang termasuk order selesai; label sisa/COD.
-  36 tes tambahan, keyboard 300 dp dan visual 320 px/2x; fixture tidak berubah.
 - R10: email/password + Google dummy, daftar/cek email/onboarding, reset 60 detik;
   Kelola akun dan sheet nama/telepon/password, Hapus hanya di Kelola (dua konfirmasi).
-  59 tes tambahan, 12 field keyboard/320 px/2x; profil/kredensial ikut rollback R8.
+- Koreksi 4 Nov: Selesaikan -> konfirmasi -> struk; cetak berhasil baru selesai.
+  Tanpa cetak dihapus; saldo/switch sejajar, aksi struk responsif, preview center.
 
 ## Sedang dikerjakan / langkah tepat berikutnya
-1. Berhenti untuk tinjauan R10: masuk/daftar/reset, edit profil/password, keluar/hapus
-   dua konfirmasi; Android perangkat, iOS dan SMTP nyata belum diuji.
-2. Tinjau Android R9: COD kedua mode, uang lebih, Catat bayar order selesai,
-   tujuan tombol, keyboard dan layar; printer nyata belum diuji.
+1. Berhenti untuk tinjauan koreksi Detail/Pembayaran/Struk 4 Nov.
+2. Tinjau Android R9/R10 dan koreksi struk: COD/pembayaran, akun, keyboard dan tampilan.
+   Android/iOS perangkat, printer dan SMTP nyata belum diuji.
 3. Setelah tinjauan: docs/prompts/100-penyelesaian.md; belum dimulai.
 
 ## Keputusan dan batas
@@ -59,7 +58,7 @@ Bukti: docs/progress/r10-akun.md; pembayaran R9 dan fondasi rollback R8 tetap hi
   Demo satu owner/perangkat; profil akun terpisah dari Info Usaha dan struk.
 - OrderEditBodySection slot lintas fitur tetap keputusan R0; statusLabel proposal 001
   mengikuti R4. Omzet = nota non-batal, ekspor CSV BOM titik koma.
-- R9 memakai izin perubahan tiga organism dan paragraf PRD; registry/tema/token/lint/
-  dependensi/DATA MASTER tidak berubah. R10 izin AuthService/rute dan paragraf PRD B.
+- Koreksi struk memakai permintaan eksplisit 4 Nov; PRD/registry/tema/token/lint/
+  dependensi/DATA MASTER tetap. Detail struk baru mengikuti spec 07/08/09.
 - SDK E:/App Data/flutter/flutter; graph E-Latihan-Pemrograman-laurum-projects-laurum
   menunjuk checkout aktif E: dan diperbarui otomatis. Baca REPO_MAP untuk navigasi ringkas.

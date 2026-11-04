@@ -23,6 +23,10 @@ void main() {
     expect(find.byType(AppText), findsNWidgets(receiptTemplateLines.length));
     expect(find.text(receiptTemplateLines.first), findsOneWidget);
     expect(find.text('STATUS: LUNAS'), findsOneWidget);
+    final longest = receiptTemplateLines.reduce((a, b) => a.length >= b.length ? a : b);
+    final textRect = tester.getRect(find.text(longest).first);
+    final paperRect = tester.getRect(find.byType(ClipPath));
+    expect(textRect.center.dx, closeTo(paperRect.center.dx, 0.1));
   });
   registerOrganismGallery('receipt_preview', receiptPreviewUseCase.builder, height: 1200);
 }
