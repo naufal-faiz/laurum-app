@@ -4,7 +4,9 @@ import 'package:laurum/core/domain/repositories/savings_repository.dart';
 import 'package:laurum/core/domain/savings_entry.dart';
 import 'package:laurum/core/domain/savings_rules.dart';
 import 'package:laurum/core/services/transactional_memory.dart';
+import 'package:laurum/features/customers/data/savings_entry_content.dart';
 import 'package:laurum/features/customers/data/savings_fixtures.dart';
+import 'package:laurum/features/customers/data/savings_history.dart';
 
 class InMemorySavingsRepository extends Notifier<List<SavingsEntry>>
     with TransactionalMemory<List<SavingsEntry>>
@@ -20,9 +22,7 @@ class InMemorySavingsRepository extends Notifier<List<SavingsEntry>>
 
   @override
   Future<List<SavingsEntry>> getEntriesByCustomerId(String customerId) async {
-    final entries = state.where((e) => e.customerId == customerId).toList()
-      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
-    return List.unmodifiable(entries);
+    return savingsHistory(state.where((e) => e.customerId == customerId));
   }
 
   @override
@@ -38,7 +38,9 @@ class InMemorySavingsRepository extends Notifier<List<SavingsEntry>>
   Future<void> addEntry(SavingsEntry entry) async {
     final existing = state.where((e) => e.id == entry.id);
     if (existing.isNotEmpty) {
-      if (existing.single != entry) throw StateError('Savings entries are immutable');
+      if (!sameSavingsContent(existing.single, entry)) {
+        throw StateError('Savings entries are immutable');
+      }
       return;
     }
     if (entry.kind != SavingsKind.penyesuaian && entry.amount <= 0) {

@@ -3,9 +3,12 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/repositories/savings_repository.dart';
 
 import '../domain_samples.dart';
+import 'record_values.dart';
 import 'repository_factory.dart';
+import 'savings_extra_contract.dart';
 
 void runSavingsRepositoryContract(RepositoryFactory<SavingsRepository> factory) {
+  runSavingsExtraContract(factory);
   late SavingsRepository repo;
   setUp(() async => repo = await factory());
   test('ledger balance, customer isolation and descending history', () async {
@@ -20,7 +23,7 @@ void runSavingsRepositoryContract(RepositoryFactory<SavingsRepository> factory) 
     await repo.addEntry(used);
     await repo.addEntry(saving('other', customerId: 'other'));
     expect(await repo.getBalance('c'), 60);
-    expect((await repo.getEntriesByCustomerId('c')).first, used);
+    expect(savingsValue((await repo.getEntriesByCustomerId('c')).first), savingsValue(used));
     expect(await repo.getAllEntries(), hasLength(3));
     expect((await repo.getAllEntries()).clear, throwsUnsupportedError);
   });
@@ -28,7 +31,7 @@ void runSavingsRepositoryContract(RepositoryFactory<SavingsRepository> factory) 
     final entry = saving('a');
     await repo.addEntry(entry);
     await repo.addEntry(entry);
-    expect(await repo.getAllEntries(), [entry]);
+    expect((await repo.getAllEntries()).map(savingsValue), [savingsValue(entry)]);
     await expectLater(repo.addEntry(saving('a', amount: 20)), throwsStateError);
     await expectLater(
       repo.addEntry(saving('b', amount: 101, kind: SavingsKind.pakai)),

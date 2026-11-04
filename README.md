@@ -21,7 +21,7 @@ APK debug: `build/app/outputs/flutter-apk/app-debug.apk`. Akun uji publik untuk 
 
 ## SQLite dan pengujian backend
 
-Fondasi B1a memakai skema versi 1, berkas `laurum_<ownerId>.db` per akun,
+Fondasi persistensi memakai skema versi 2, berkas `laurum_<ownerId>.db` per akun,
 outbox dan LocalSettings. Tidak memerlukan Supabase cloud, key, atau Docker.
 Tes SQLite berjalan dengan `NativeDatabase.memory()` dan berkas sementara pada
 Windows; integrasi database pada Android/iOS belum diuji. Tidak perlu menyalin DLL manual.
@@ -48,7 +48,7 @@ dart run drift_dev schema dump lib/core/persistence/app_database.dart test/persi
 dart run drift_dev schema generate --data-classes --companions test/persistence/schema test/persistence/generated
 ```
 
-Snapshot v1 dibekukan; perubahan skema berikutnya wajib menaikkan versi, menulis
+Snapshot v1 dan v2 dibekukan; perubahan skema berikutnya wajib menaikkan versi, menulis
 migrasi dan menambah tes. Timestamp disimpan sebagai teks ISO-8601 untuk menjaga
 presisi subdetik; jangan mengubah opsi tersebut tanpa migrasi. Lihat
 [dokumentasi DateTime Drift](https://drift.simonbinder.eu/guides/datetime-migrations/).

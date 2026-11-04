@@ -7,9 +7,9 @@ void main() {
   late AppDatabase db;
   setUp(() => db = AppDatabase(NativeDatabase.memory()));
   tearDown(() => db.close());
-  test('v1 creates complete PRD schema and local metadata without payment status', () async {
+  test('current schema creates complete PRD tables without payment status', () async {
     await db.customSelect('SELECT 1').get();
-    expect(db.schemaVersion, 1);
+    expect(db.schemaVersion, 2);
     expect(db.allTables.map((t) => t.actualTableName).toSet(), {
       'businesses',
       'devices',

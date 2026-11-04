@@ -2,6 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/domain/customer.dart';
 import 'package:laurum/core/domain/repositories/customer_repository.dart';
 
+import 'customer_query_contract.dart';
+import 'record_values.dart';
 import 'repository_factory.dart';
 
 Customer contractCustomer(String id, {String phone = '', bool active = true}) => Customer(
@@ -14,6 +16,7 @@ Customer contractCustomer(String id, {String phone = '', bool active = true}) =>
 );
 
 void runCustomerRepositoryContract(RepositoryFactory<CustomerRepository> factory) {
+  runCustomerQueryContract(factory);
   late CustomerRepository repo;
   setUp(() async => repo = await factory());
   test('empty, insert, update and lookup', () async {
@@ -22,8 +25,8 @@ void runCustomerRepositoryContract(RepositoryFactory<CustomerRepository> factory
     await repo.saveCustomer(contractCustomer('a'));
     final changed = contractCustomer('a', phone: '081234567890');
     await repo.saveCustomer(changed);
-    expect(await repo.getCustomers(), [changed]);
-    expect(await repo.getCustomerById('a'), changed);
+    expect((await repo.getCustomers()).map(customerValue), [customerValue(changed)]);
+    expect(customerValue(await repo.getCustomerById('a')), customerValue(changed));
     expect((await repo.getCustomers()).clear, throwsUnsupportedError);
   });
   test('active phone uniqueness ignores punctuation and allows same row update', () async {

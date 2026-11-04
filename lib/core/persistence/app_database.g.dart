@@ -1344,6 +1344,30 @@ class $CustomerRecordsTable extends CustomerRecords
     requiredDuringInsert: false,
     defaultValue: const Constant(''),
   );
+  static const VerificationMeta _nameKeyMeta = const VerificationMeta(
+    'nameKey',
+  );
+  @override
+  late final GeneratedColumn<String> nameKey = GeneratedColumn<String>(
+    'name_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _phoneKeyMeta = const VerificationMeta(
+    'phoneKey',
+  );
+  @override
+  late final GeneratedColumn<String> phoneKey = GeneratedColumn<String>(
+    'phone_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
   static const VerificationMeta _addressMeta = const VerificationMeta(
     'address',
   );
@@ -1391,6 +1415,8 @@ class $CustomerRecordsTable extends CustomerRecords
     deletedAt,
     name,
     phone,
+    nameKey,
+    phoneKey,
     address,
     notes,
     isActive,
@@ -1460,6 +1486,18 @@ class $CustomerRecordsTable extends CustomerRecords
         phone.isAcceptableOrUnknown(data['phone']!, _phoneMeta),
       );
     }
+    if (data.containsKey('name_key')) {
+      context.handle(
+        _nameKeyMeta,
+        nameKey.isAcceptableOrUnknown(data['name_key']!, _nameKeyMeta),
+      );
+    }
+    if (data.containsKey('phone_key')) {
+      context.handle(
+        _phoneKeyMeta,
+        phoneKey.isAcceptableOrUnknown(data['phone_key']!, _phoneKeyMeta),
+      );
+    }
     if (data.containsKey('address')) {
       context.handle(
         _addressMeta,
@@ -1519,6 +1557,14 @@ class $CustomerRecordsTable extends CustomerRecords
         DriftSqlType.string,
         data['${effectivePrefix}phone'],
       )!,
+      nameKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name_key'],
+      )!,
+      phoneKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}phone_key'],
+      )!,
       address: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}address'],
@@ -1549,6 +1595,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
   final DateTime? deletedAt;
   final String name;
   final String phone;
+  final String nameKey;
+  final String phoneKey;
   final String address;
   final String notes;
   final bool isActive;
@@ -1561,6 +1609,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
     this.deletedAt,
     required this.name,
     required this.phone,
+    required this.nameKey,
+    required this.phoneKey,
     required this.address,
     required this.notes,
     required this.isActive,
@@ -1580,6 +1630,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
     }
     map['name'] = Variable<String>(name);
     map['phone'] = Variable<String>(phone);
+    map['name_key'] = Variable<String>(nameKey);
+    map['phone_key'] = Variable<String>(phoneKey);
     map['address'] = Variable<String>(address);
     map['notes'] = Variable<String>(notes);
     map['is_active'] = Variable<bool>(isActive);
@@ -1596,6 +1648,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
       deletedAt: deletedAt == null && nullToAbsent ? const Value.absent() : Value(deletedAt),
       name: Value(name),
       phone: Value(phone),
+      nameKey: Value(nameKey),
+      phoneKey: Value(phoneKey),
       address: Value(address),
       notes: Value(notes),
       isActive: Value(isActive),
@@ -1616,6 +1670,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
       deletedAt: serializer.fromJson<DateTime?>(json['deletedAt']),
       name: serializer.fromJson<String>(json['name']),
       phone: serializer.fromJson<String>(json['phone']),
+      nameKey: serializer.fromJson<String>(json['nameKey']),
+      phoneKey: serializer.fromJson<String>(json['phoneKey']),
       address: serializer.fromJson<String>(json['address']),
       notes: serializer.fromJson<String>(json['notes']),
       isActive: serializer.fromJson<bool>(json['isActive']),
@@ -1633,6 +1689,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
       'deletedAt': serializer.toJson<DateTime?>(deletedAt),
       'name': serializer.toJson<String>(name),
       'phone': serializer.toJson<String>(phone),
+      'nameKey': serializer.toJson<String>(nameKey),
+      'phoneKey': serializer.toJson<String>(phoneKey),
       'address': serializer.toJson<String>(address),
       'notes': serializer.toJson<String>(notes),
       'isActive': serializer.toJson<bool>(isActive),
@@ -1648,6 +1706,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
     Value<DateTime?> deletedAt = const Value.absent(),
     String? name,
     String? phone,
+    String? nameKey,
+    String? phoneKey,
     String? address,
     String? notes,
     bool? isActive,
@@ -1660,6 +1720,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
     deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
     name: name ?? this.name,
     phone: phone ?? this.phone,
+    nameKey: nameKey ?? this.nameKey,
+    phoneKey: phoneKey ?? this.phoneKey,
     address: address ?? this.address,
     notes: notes ?? this.notes,
     isActive: isActive ?? this.isActive,
@@ -1674,6 +1736,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
       deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
       name: data.name.present ? data.name.value : this.name,
       phone: data.phone.present ? data.phone.value : this.phone,
+      nameKey: data.nameKey.present ? data.nameKey.value : this.nameKey,
+      phoneKey: data.phoneKey.present ? data.phoneKey.value : this.phoneKey,
       address: data.address.present ? data.address.value : this.address,
       notes: data.notes.present ? data.notes.value : this.notes,
       isActive: data.isActive.present ? data.isActive.value : this.isActive,
@@ -1691,6 +1755,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
           ..write('deletedAt: $deletedAt, ')
           ..write('name: $name, ')
           ..write('phone: $phone, ')
+          ..write('nameKey: $nameKey, ')
+          ..write('phoneKey: $phoneKey, ')
           ..write('address: $address, ')
           ..write('notes: $notes, ')
           ..write('isActive: $isActive')
@@ -1708,6 +1774,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
     deletedAt,
     name,
     phone,
+    nameKey,
+    phoneKey,
     address,
     notes,
     isActive,
@@ -1724,6 +1792,8 @@ class CustomerRow extends DataClass implements Insertable<CustomerRow> {
           other.deletedAt == this.deletedAt &&
           other.name == this.name &&
           other.phone == this.phone &&
+          other.nameKey == this.nameKey &&
+          other.phoneKey == this.phoneKey &&
           other.address == this.address &&
           other.notes == this.notes &&
           other.isActive == this.isActive);
@@ -1738,6 +1808,8 @@ class CustomerRecordsCompanion extends UpdateCompanion<CustomerRow> {
   final Value<DateTime?> deletedAt;
   final Value<String> name;
   final Value<String> phone;
+  final Value<String> nameKey;
+  final Value<String> phoneKey;
   final Value<String> address;
   final Value<String> notes;
   final Value<bool> isActive;
@@ -1751,6 +1823,8 @@ class CustomerRecordsCompanion extends UpdateCompanion<CustomerRow> {
     this.deletedAt = const Value.absent(),
     this.name = const Value.absent(),
     this.phone = const Value.absent(),
+    this.nameKey = const Value.absent(),
+    this.phoneKey = const Value.absent(),
     this.address = const Value.absent(),
     this.notes = const Value.absent(),
     this.isActive = const Value.absent(),
@@ -1765,6 +1839,8 @@ class CustomerRecordsCompanion extends UpdateCompanion<CustomerRow> {
     this.deletedAt = const Value.absent(),
     required String name,
     this.phone = const Value.absent(),
+    this.nameKey = const Value.absent(),
+    this.phoneKey = const Value.absent(),
     this.address = const Value.absent(),
     this.notes = const Value.absent(),
     this.isActive = const Value.absent(),
@@ -1782,6 +1858,8 @@ class CustomerRecordsCompanion extends UpdateCompanion<CustomerRow> {
     Expression<DateTime>? deletedAt,
     Expression<String>? name,
     Expression<String>? phone,
+    Expression<String>? nameKey,
+    Expression<String>? phoneKey,
     Expression<String>? address,
     Expression<String>? notes,
     Expression<bool>? isActive,
@@ -1796,6 +1874,8 @@ class CustomerRecordsCompanion extends UpdateCompanion<CustomerRow> {
       if (deletedAt != null) 'deleted_at': deletedAt,
       if (name != null) 'name': name,
       if (phone != null) 'phone': phone,
+      if (nameKey != null) 'name_key': nameKey,
+      if (phoneKey != null) 'phone_key': phoneKey,
       if (address != null) 'address': address,
       if (notes != null) 'notes': notes,
       if (isActive != null) 'is_active': isActive,
@@ -1812,6 +1892,8 @@ class CustomerRecordsCompanion extends UpdateCompanion<CustomerRow> {
     Value<DateTime?>? deletedAt,
     Value<String>? name,
     Value<String>? phone,
+    Value<String>? nameKey,
+    Value<String>? phoneKey,
     Value<String>? address,
     Value<String>? notes,
     Value<bool>? isActive,
@@ -1826,6 +1908,8 @@ class CustomerRecordsCompanion extends UpdateCompanion<CustomerRow> {
       deletedAt: deletedAt ?? this.deletedAt,
       name: name ?? this.name,
       phone: phone ?? this.phone,
+      nameKey: nameKey ?? this.nameKey,
+      phoneKey: phoneKey ?? this.phoneKey,
       address: address ?? this.address,
       notes: notes ?? this.notes,
       isActive: isActive ?? this.isActive,
@@ -1860,6 +1944,12 @@ class CustomerRecordsCompanion extends UpdateCompanion<CustomerRow> {
     if (phone.present) {
       map['phone'] = Variable<String>(phone.value);
     }
+    if (nameKey.present) {
+      map['name_key'] = Variable<String>(nameKey.value);
+    }
+    if (phoneKey.present) {
+      map['phone_key'] = Variable<String>(phoneKey.value);
+    }
     if (address.present) {
       map['address'] = Variable<String>(address.value);
     }
@@ -1886,6 +1976,8 @@ class CustomerRecordsCompanion extends UpdateCompanion<CustomerRow> {
           ..write('deletedAt: $deletedAt, ')
           ..write('name: $name, ')
           ..write('phone: $phone, ')
+          ..write('nameKey: $nameKey, ')
+          ..write('phoneKey: $phoneKey, ')
           ..write('address: $address, ')
           ..write('notes: $notes, ')
           ..write('isActive: $isActive, ')
@@ -9875,7 +9967,19 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   );
   late final Index customersActivePhone = Index(
     'customers_active_phone',
-    'CREATE UNIQUE INDEX customers_active_phone ON customers (owner_id, phone) WHERE is_active = 1 AND deleted_at IS NULL AND phone <> \'\'',
+    'CREATE UNIQUE INDEX customers_active_phone ON customers (owner_id, phone_key) WHERE is_active = 1 AND deleted_at IS NULL AND phone_key <> \'\'',
+  );
+  late final Index customersNamePrefix = Index(
+    'customers_name_prefix',
+    'CREATE INDEX customers_name_prefix ON customers (owner_id, name_key COLLATE NOCASE)',
+  );
+  late final Index customersPhonePrefix = Index(
+    'customers_phone_prefix',
+    'CREATE INDEX customers_phone_prefix ON customers (owner_id, phone_key COLLATE NOCASE)',
+  );
+  late final Index customersOwnerUpdated = Index(
+    'customers_owner_updated',
+    'CREATE INDEX customers_owner_updated ON customers (owner_id, updated_at)',
   );
   late final Index ordersOwnerNumber = Index(
     'orders_owner_number',
@@ -9900,6 +10004,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Index paymentsPaid = Index(
     'payments_paid',
     'CREATE INDEX payments_paid ON payments (paid_at)',
+  );
+  late final Index savingsOwnerUpdated = Index(
+    'savings_owner_updated',
+    'CREATE INDEX savings_owner_updated ON savings_entries (owner_id, updated_at)',
   );
   late final Index savingsCustomerCreated = Index(
     'savings_customer_created',
@@ -9940,12 +10048,16 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     syncCursorRecords,
     devicesOwnerCode,
     customersActivePhone,
+    customersNamePrefix,
+    customersPhonePrefix,
+    customersOwnerUpdated,
     ordersOwnerNumber,
     ordersEntered,
     ordersStatusEntered,
     itemsOrder,
     paymentsOrder,
     paymentsPaid,
+    savingsOwnerUpdated,
     savingsCustomerCreated,
     expensesSpent,
     eventsOrderTime,

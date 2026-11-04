@@ -8,7 +8,7 @@ import 'generated/schema.dart';
 import 'generated/schema_v1.dart' as v1;
 
 void main() {
-  test('frozen v1 schema opens unchanged and retains its data', () async {
+  test('frozen v1 migrates to current schema and retains its data', () async {
     final verifier = SchemaVerifier(GeneratedHelper());
     final schema = await verifier.schemaAt(1);
     final oldDb = v1.DatabaseAtV1(schema.newConnection());
@@ -20,7 +20,7 @@ void main() {
     await oldDb.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 1);
+    await verifier.migrateAndValidate(db, 2);
     final settings = DriftLocalSettingsRepository(db);
     await db.validateDatabaseSchema();
     expect(await settings.getInt('counter'), 143);

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/customer.dart';
+import 'package:laurum/core/domain/customer_search.dart';
 import 'package:laurum/core/domain/repositories/customer_repository.dart';
 import 'package:laurum/core/services/transactional_memory.dart';
 import 'package:laurum/features/customers/data/customer_fixtures.dart';
@@ -17,9 +18,14 @@ class InMemoryCustomerRepository extends Notifier<List<Customer>>
   }
 
   @override
-  Future<List<Customer>> getCustomers({bool includeInactive = false}) async {
+  Future<List<Customer>> getCustomers({bool includeInactive = false, String query = ''}) async {
     return List.unmodifiable(
-      state.where((c) => c.deletedAt == null && (includeInactive || c.isActive)),
+      state.where(
+        (c) =>
+            c.deletedAt == null &&
+            (includeInactive || c.isActive) &&
+            matchesCustomerPrefix(c.name, c.phone, query),
+      ),
     );
   }
 
@@ -31,7 +37,7 @@ class InMemoryCustomerRepository extends Notifier<List<Customer>>
 
   @override
   Future<void> saveCustomer(Customer customer) async {
-    final phone = customer.phone.replaceAll(RegExp(r'\D'), '');
+    final phone = customerPhoneKey(customer.phone);
     if (phone.isNotEmpty &&
         customer.isActive &&
         customer.deletedAt == null &&
@@ -41,7 +47,7 @@ class InMemoryCustomerRepository extends Notifier<List<Customer>>
               c.ownerId == customer.ownerId &&
               c.isActive &&
               c.deletedAt == null &&
-              c.phone.replaceAll(RegExp(r'\D'), '') == phone,
+              customerPhoneKey(c.phone) == phone,
         )) {
       throw StateError('Active customer phone must be unique');
     }
