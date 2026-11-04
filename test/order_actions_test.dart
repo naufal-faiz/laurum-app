@@ -7,7 +7,7 @@ import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/orders/state/order_detail_controller.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/features/orders/state/order_payment_controller.dart';
-import 'package:laurum/features/reports/data/report_fixtures.dart';
+import 'package:laurum/features/reports/data/report_samples.dart';
 import 'package:laurum/features/services/data/service_fixtures.dart';
 import 'package:laurum/features/transactions/state/checkout_state.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';

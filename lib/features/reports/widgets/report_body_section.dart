@@ -39,10 +39,6 @@ class ReportBodySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final daily = data.daily;
-    final amounts = daily?.whereType<int>().toList() ?? <int>[];
-    final average = amounts.isEmpty ? 0 : amounts.fold(0, (sum, n) => sum + n) ~/ amounts.length;
-    final peak = amounts.fold(0, (max, value) => value > max ? value : max);
-    const dayNames = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
     return ListView(
       key: ValueKey((data.period, data.range)),
       padding: const EdgeInsets.all(AppSpacing.screenPadding)
@@ -69,14 +65,12 @@ class ReportBodySection extends StatelessWidget {
             WeeklyBarChart(
               labels: data.dayLabels,
               amounts: daily,
-              averageLabel: 'Rata-rata ${Formatters.rupiah(average)}/hari',
+              averageLabel: 'Rata-rata ${Formatters.rupiah(data.dailyAverage)}/hari',
             ),
-            if (data.period == 1 && peak > 0) AppText('Puncak: ${dayNames[daily.indexOf(peak)]}'),
+            if (data.peakDayName != null) AppText('Puncak: ${data.peakDayName}'),
           ] else
-            BannerMessage(
-              message: data.period == 3
-                  ? 'Grafik harian ditampilkan untuk rentang hingga 7 hari.'
-                  : 'Rincian omzet harian belum tersedia untuk periode ini.',
+            const BannerMessage(
+              message: 'Grafik harian ditampilkan untuk rentang hingga 7 hari.',
             ),
           const SizedBox(height: AppSpacing.screenPadding),
           if (data.services != null)

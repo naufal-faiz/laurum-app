@@ -18,31 +18,38 @@ void main() {
   testWidgets('weekly report shows master values, exports and switches periods', (tester) async {
     final host = await pumpAntrean(tester, location: '/laporan');
     final summary = tester.widget<ReportSummary>(find.byType(ReportSummary));
-    expect(summary.totals.revenue, 1800000);
-    expect(find.text('Rp950.000'), findsOneWidget);
+    expect(summary.totals.revenue, 589000);
+    expect(find.text('-Rp261.000'), findsOneWidget);
     expect(summary.totals.expenses, 850000);
     await tester.scrollUntilVisible(find.byType(WeeklyBarChart), 300, scrollable: vertical);
     await tester.pumpAndSettle();
-    expect(find.text('Rata-rata Rp360.000/hari'), findsOneWidget);
-    expect(find.text('Puncak: Kamis'), findsOneWidget);
+    expect(find.text('Rata-rata Rp117.800/hari'), findsOneWidget);
+    expect(find.text('Puncak: Rabu'), findsOneWidget);
     await tester.scrollUntilVisible(find.byType(TopServices), 300, scrollable: vertical);
     await tester.pumpAndSettle();
-    expect(find.text('Rp882.000'), findsOneWidget);
+    expect(find.text('Rp301.500'), findsOneWidget);
     await tester.tap(find.text('Ekspor Excel'));
     await tester.pumpAndSettle();
     expect(find.text('Laporan siap diekspor.'), findsOneWidget);
     final export = host.container.read(exportServiceProvider) as FakeExportService;
     expect(export.exportedReports.single.fileName, 'laporan-1.csv');
-    expect(export.exportedReports.single.content, contains('"Pendapatan";1800000'));
+    expect(export.exportedReports.single.content, contains('"Pendapatan";589000'));
     await tester.tap(find.descendant(of: find.byType(PeriodTabs), matching: find.text('Hari ini')));
     await tester.pumpAndSettle();
-    expect(find.text('Rp230.000'), findsOneWidget);
-    expect(find.byType(TopServices), findsNothing);
+    expect(find.text('Rp32.000'), findsOneWidget);
+    await tester.scrollUntilVisible(find.byType(TopServices), 300, scrollable: vertical);
+    expect(
+      tester
+          .widget<TopServices>(find.byType(TopServices))
+          .services
+          .fold<int>(0, (n, s) => n + s.revenue),
+      177000,
+    );
     await tester.tap(
       find.descendant(of: find.byType(PeriodTabs), matching: find.text('Bulan ini')),
     );
     await tester.pumpAndSettle();
-    expect(find.text('Rp2.400.000'), findsOneWidget);
+    expect(find.text('-Rp986.000'), findsOneWidget);
     expect(find.byType(WeeklyBarChart), findsNothing);
     await tester.scrollUntilVisible(
       find.textContaining('Piutang aktif Rp400.500'),

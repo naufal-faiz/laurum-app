@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/reports/data/report_fixtures.dart';
+import 'package:laurum/features/reports/data/report_samples.dart';
 import 'package:laurum/shared/widgets/organisms/top_services.dart';
 import 'package:widgetbook/widgetbook.dart';
 
@@ -8,6 +8,6 @@ final topServicesUseCase = WidgetbookUseCase(
   name: 'Semua varian',
   builder: (context) => SingleChildScrollView(
     padding: const EdgeInsets.all(AppSpacing.screenPadding),
-    child: TopServices(services: weekTopServicesFixtures),
+    child: TopServices(services: weekTopServicesSamples),
   ),
 );

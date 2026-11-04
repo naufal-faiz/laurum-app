@@ -5,7 +5,7 @@ import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/business/data/business_fixtures.dart';
-import 'package:laurum/features/reports/data/report_fixtures.dart';
+import 'package:laurum/features/reports/data/report_samples.dart';
 import 'package:laurum/main_dummy.dart';
 
 void main() {
@@ -43,10 +43,14 @@ void main() {
     sub.close();
   });
 
-  test('unsupported period fails explicitly instead of showing another period', () async {
+  test('all ranges calculate their own ledger without historical fallback', () async {
     final reports = container.read(reportRepositoryProvider);
     final range = ReportRange(DateTime(2025), DateTime(2026));
-    await expectLater(reports.getReport(range), throwsUnsupportedError);
-    await expectLater(reports.getTopServices(todayRange), throwsUnsupportedError);
+    expect((await reports.getReport(range)).revenue, 0);
+    expect((await reports.getReport(range)).activeOutstanding, 400500);
+    expect(
+      (await reports.getTopServices(todayRange)).fold<int>(0, (sum, s) => sum + s.revenue),
+      177000,
+    );
   });
 }

@@ -14,15 +14,15 @@ void main() {
         home: const Scaffold(
           body: WeeklyBarChart(
             labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
-            amounts: [340000, 385000, 290000, 410000, 375000, null, null],
-            averageLabel: 'Rata-rata Rp360.000/hari',
-            peakLabel: 'Puncak: Kamis',
+            amounts: [0, 0, 248000, 164000, 177000, null, null],
+            averageLabel: 'Rata-rata Rp117.800/hari',
+            peakLabel: 'Puncak: Rabu',
           ),
         ),
       ),
     );
     expect(find.text('Aktivitas omzet harian'), findsOneWidget);
-    expect(find.text('340k'), findsOneWidget);
+    expect(find.text('248k'), findsOneWidget);
     expect(find.text('—'), findsNWidgets(2));
     expect(find.text('Sab'), findsOneWidget);
   });

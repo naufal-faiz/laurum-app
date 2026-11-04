@@ -13,7 +13,7 @@ import 'generated/schema_v2.dart' as v2;
 
 void main() {
   for (final version in [1, 2]) {
-    test('v$version -> v3 retains old records and normalizes precise time ranges', () async {
+    test('v$version -> current retains old records and normalizes precise time ranges', () async {
       final verifier = SchemaVerifier(GeneratedHelper());
       final schema = await verifier.schemaAt(version);
       final GeneratedDatabase old = version == 1
@@ -32,7 +32,7 @@ void main() {
       await old.close();
       final db = AppDatabase(schema.newConnection());
       addTearDown(db.close);
-      await verifier.migrateAndValidate(db, 3);
+      await verifier.migrateAndValidate(db, 4);
       final repo = DriftOrderRepository(db, 'owner', OutboxWriter(db, DriftTransactionRunner(db)));
       final start = DateTime.parse('2026-11-04T03:00:00.000001Z').toLocal();
       final range = ReportRange(start, start.add(const Duration(microseconds: 1)));

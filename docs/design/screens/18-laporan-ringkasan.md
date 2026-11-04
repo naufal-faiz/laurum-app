@@ -1,6 +1,8 @@
 # 18 - Laporan - Ringkasan
 Rute: /laporan (tab)   Prompt: 60, bagian pertama
 Frame .pen: "Laporan - Ringkasan", State - Laporan kosong.
+Rekonsiliasi B1e (izin 4 Nov 2026): angka ledger pada spec/DATA MASTER menggantikan
+angka historis lama di .pen. Golden diperbarui, struktur/tampilan widget tetap.
 Template: RootScaffold dari RootShellPage; tanpa FooterBar ekspor (R5).
 
 Komposisi:
@@ -20,24 +22,24 @@ Data/provider:
   reportViewProvider, reportExportProvider, reportOrdersProvider,
   reportOrdersFilterProvider (0..3), reportOrdersSearchProvider.
 - Daftar nota memakai orderRepository (item, payment, pelanggan) difilter range aktif.
-  Untuk preset, ringkasan tetap baseline DATA MASTER dan daftar hanya memuat nota
-  yang benar-benar tersimpan; baseline historis tidak dibuat menjadi nota fiktif.
-  Untuk rentang kustom, omzet ringkasan sama dengan jumlah nota non-batal yang tampil.
+  Seluruh periode memakai ledger yang sama. Omzet/jumlah transaksi berasal dari nota
+  non-batal yang benar-benar tersimpan, sesuai daftar nota pada rentang tersebut.
 - Mode status order nonaktif memakai label kebijakan 'Sedang dikerjakan' pada nota.
 - Periode dihitung dari businessClockProvider; minggu Senin sampai Minggu.
-- ReportRepository menyediakan totals/top services; OrderRepository menghitung jumlah
-  nota belum lunas (order dibatalkan/dihapus dikecualikan).
-- Minggu: pendapatan Rp1.800.000, 58 transaksi, pengeluaran Rp850.000, laba Rp950.000,
-  kas Rp1.699.500, tabungan Rp430.000, piutang Rp400.500/5 nota.
-- Grafik: fixture 340/385/290/410/375 ribu, Sab/Min null, rata-rata Rp360.000,
-  puncak Kamis. Nilai = baseline harian + order kini - order fixture awal.
-- Top services dari repository, diurutkan pendapatan menurun. Rincian Hari/Bulan
-  tidak tersedia menurut DATA MASTER bagian Penjelasan baseline; tampilkan keterangan.
-- Hari ini memakai satu batang sesuai total hari ini. Grafik Bulan belum tersedia.
+- ReportRepository menyediakan totals, grafik harian, layanan terlaris dan jumlah
+  nota belum lunas; posisi piutang/tabungan memakai seluruh ledger akun.
+- Minggu: pendapatan Rp589.000, 14 transaksi, pengeluaran Rp850.000, laba -Rp261.000,
+  kas Rp500.000, tabungan Rp430.000, piutang Rp400.500/5 nota.
+- Grafik: ledger 0/0/248/164/177 ribu, Sab/Min null, rata-rata Rp117.800,
+  puncak Rabu. Hari lampau tanpa nota bernilai nol, masa depan belum memiliki batang.
+- Top services seluruh periode dari snapshot item dan alokasi diskon yang sama;
+  urutan berdasarkan pendapatan. Minggu memuat lima layanan nyata, tanpa bucket fiktif.
+- Hari ini memakai satu batang. Grafik tampilan dibatasi tujuh hari; data harian
+  bulan tetap dihitung repository, tampilan bulan memakai pesan batas tujuh hari.
 - Perubahan checkout/pembayaran/setoran mengikuti notifikasi repository.
-- Rentang kustom memakai komposisi Order/Expense/SavingsRepository di state,
-  buildReport dengan baseline nol, topServices/allocateRevenue dari item aktual.
-  Kontrak ReportRepository dan DATA MASTER tidak berubah; tiga preset tetap baseline.
+- Semua preset dan rentang kustom melewati ReportRepository dan buildReport yang sama.
+  InMemory menghitung ledger; Drift memakai query range dan posisi SQL lalu fungsi
+  domain yang sama. Angka DATA MASTER/golden direkonsiliasi dengan izin 4 Nov 2026.
 - Batas kalender 1 Jan 2026 sampai tanggal businessClockProvider. Mulai/akhir di UI
   inklusif (satu hari boleh), ReportRange akhir eksklusif. Label 12-18 Okt atau 16 Okt;
   lintas bulan/tahun menampilkan kedua ujung yang diperlukan melalui Formatters.

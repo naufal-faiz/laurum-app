@@ -40,8 +40,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_layout.dart (77): ReceiptLayout
 - receipt_settings.dart (38): ReceiptSettings
 - record_content.dart (13):
-- report.dart (73):
-- report_baseline.dart (13): ReportBaseline
+- report.dart (71):
+- report_daily.dart (16):
+- report_positions.dart (37): ReportPositions
 - report_range.dart (16): ReportRange
 - report_totals.dart (30): ReportTotals
 
@@ -63,7 +64,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - savings_rules.dart (59):
 - service_item.dart (38): ServiceItem
 - service_revenue.dart (15): ServiceRevenue
-- top_services.dart (56):
+- top_services.dart (58):
 
 ### lib/core/formatters/
 - formatters.dart (55): Formatters
@@ -81,10 +82,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - device_records.dart (12): DeviceRecords
 - drift_local_data_service.dart (48): DriftLocalDataService
 - drift_local_settings_repository.dart (39): DriftLocalSettingsRepository
-- drift_transaction_runner.dart (47): DriftTransactionRunner, _DriftScope
+- drift_transaction_runner.dart (63): DriftTransactionRunner, _DriftScope
 - entitlement_records.dart (16): EntitlementRecords
 - expense_category_records.dart (10): ExpenseCategoryRecords
-- expense_records.dart (21): ExpenseRecords
+- expense_records.dart (22): ExpenseRecords
 - local_setting_records.dart (16): LocalSettingRecords
 - order_event_records.dart (16): OrderEventRecords
 - order_indexes_migration.dart (25):
@@ -95,7 +96,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_records.dart (23): PaymentRecords
 - receipt_setting_records.dart (20): ReceiptSettingRecords
 - record_columns.dart (17): RecordColumns, SoftDeleteColumns
-- savings_records.dart (27): SavingsRecords
+- report_indexes_migration.dart (28):
+- savings_records.dart (29): SavingsRecords
 - service_records.dart (21): ServiceRecords
 - sql_timestamp.dart (6):
 - sync_cursor_records.dart (12): SyncCursorRecords
@@ -206,7 +208,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - savings_entry_content.dart (13):
 - savings_fixtures.dart (86):
 - savings_history.dart (10):
-- savings_storage_mapping.dart (43):
+- savings_storage_mapping.dart (45):
 - validate_savings_parent.dart (21):
 
 ### lib/features/customers/pages/
@@ -243,9 +245,15 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_savings_section.dart (54): CustomerSavingsSection
 
 ### lib/features/expenses/data/
+- drift_expense_reader.dart (28): DriftExpenseReader
+- drift_expense_repository.dart (91): DriftExpenseRepository
 - expense_category_fixtures.dart (35):
+- expense_category_storage.dart (35):
 - expense_fixtures.dart (10):
-- in_memory_expense_repository.dart (97): InMemoryExpenseRepository, inMemoryExpenseRepositoryProvider
+- expense_photo_store.dart (35): ExpensePhotoStore
+- expense_queries.dart (31):
+- expense_storage.dart (60):
+- in_memory_expense_repository.dart (98): InMemoryExpenseRepository, inMemoryExpenseRepositoryProvider
 - prior_expense_fixtures.dart (72):
 - week_expense_fixtures.dart (48):
 
@@ -390,14 +398,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - whatsapp_link_section.dart (75): WhatsappLinkSection
 
 ### lib/features/reports/data/
-- in_memory_report_repository.dart (91): InMemoryReportRepository, inMemoryReportRepositoryProvider
-- report_adjustments.dart (16):
-- report_daily.dart (42):
-- report_daily_fixtures.dart (2):
-- report_fixtures.dart (83):
-- report_repository_view.dart (17): ReportRepositoryView
-- report_snapshot.dart (21):
-- report_top_services.dart (35):
+- drift_report_repository.dart (42): DriftReportRepository
+- in_memory_report_repository.dart (62): InMemoryReportRepository, inMemoryReportRepositoryProvider
+- report_positions_sql.dart (35):
+- report_range_queries.dart (63):
+- report_ranges.dart (6):
+- report_repository_view.dart (18): ReportRepositoryView
+- report_samples.dart (31):
 
 ### lib/features/reports/pages/
 - outstanding_page.dart (73): OutstandingPage
@@ -406,17 +413,17 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/reports/state/
 - outstanding_data.dart (69): OutstandingRow, OutstandingListData, OutstandingFilter, outstandingListProvider, outstandingFilterProvider
-- report_custom_data.dart (55): CustomReportData
 - report_custom_range.dart (24): ReportCustomRange, reportCustomRangeProvider
+- report_daily_view.dart (10):
 - report_export.dart (97): ReportExportState, ReportExport, reportExportProvider
 - report_orders_controller.dart (24): ReportOrdersFilter, ReportOrdersSearch, reportOrdersFilterProvider, reportOrdersSearchProvider
 - report_orders_data.dart (68): ReportOrdersData, reportOrdersProvider
 - report_period.dart (30): ReportPeriod, reportPeriodProvider
-- report_view.dart (92): ReportView, reportViewProvider
+- report_view.dart (77): ReportView, reportViewProvider
 
 ### lib/features/reports/widgets/
 - outstanding_list_section.dart (76): OutstandingListSection
-- report_body_section.dart (105): ReportBodySection
+- report_body_section.dart (99): ReportBodySection
 - report_orders_section.dart (104): ReportOrdersSection
 
 ### lib/features/services/data/
@@ -647,7 +654,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - business_values.dart (43):
 - customer_contract.dart (51):
 - customer_query_contract.dart (49):
-- expense_contract.dart (49):
+- expense_contract.dart (66):
+- expense_values.dart (17):
 - local_settings_contract.dart (27):
 - order_contract.dart (78):
 - order_extra_contract.dart (66):
@@ -656,6 +664,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_values.dart (62):
 - receipt_settings_contract.dart (41):
 - record_values.dart (28):
+- report_contract.dart (98): ReportContractContext, ReportContractFactory
+- report_mutation_contract.dart (51):
 - repository_factory.dart (3): RepositoryFactory
 - savings_contract.dart (43):
 - savings_extra_contract.dart (43):
@@ -678,15 +688,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_savings_section_test.dart (48):
 - date_group_header_test.dart (24):
 - discount_input_test.dart (118):
-- domain_baseline_test.dart (51):
 - domain_cancel_test.dart (74):
-- domain_flow_test.dart (53):
+- domain_flow_test.dart (51):
 - domain_models_1_test.dart (38):
 - domain_models_2_test.dart (42):
 - domain_models_3_test.dart (28):
 - domain_money_test.dart (48):
 - domain_order_models_test.dart (30):
-- domain_report_test.dart (77):
+- domain_report_test.dart (74):
 - domain_samples.dart (89):
 - domain_savings_test.dart (87):
 - domain_schedule_test.dart (35):
@@ -698,8 +707,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - dummy_live_creation_test.dart (59):
 - dummy_order_atomicity_test.dart (77):
 - dummy_provider_notifications_test.dart (71):
-- dummy_report_baseline_test.dart (39):
-- dummy_report_mutation_test.dart (52):
+- dummy_report_ledger_test.dart (39):
+- dummy_report_mutation_test.dart (56):
 - dummy_repository_regression_test.dart (52):
 - dummy_savings_integration_test.dart (49):
 - empty_state_test.dart (28):
@@ -761,13 +770,17 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - date_time_storage_test.dart (29):
 - drift_contracts_test.dart (30):
 - drift_runner_test.dart (55):
+- expense_atomic_test.dart (73):
+- expense_contracts_test.dart (20):
+- expense_photos_test.dart (82):
 - failing_b1d_proposal.dart (15): FailingB1dProposal
 
 ### test/persistence/generated/
-- schema.dart (28): GeneratedHelper
+- schema.dart (31): GeneratedHelper
 - schema_v1.dart (8453): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV1
 - schema_v2.dart (8547): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV2
 - schema_v3.dart (8562): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV3
+- schema_v4.dart (8611): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV4
 
 ### test/persistence/
 - order_account_cleanup_test.dart (39):
@@ -782,6 +795,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_time_migration_test.dart (47):
 - outbox_writer_test.dart (67):
 - printer_repository_integration_test.dart (75):
+- report_contracts_test.dart (30):
+- report_migration_test.dart (42):
+- report_scope_plan_test.dart (45):
+- report_seed.dart (45):
 
 ### test/
 - piutang_card_test.dart (43):
@@ -872,8 +889,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_template_lines.dart (28):
 - receipt_toggle_list_test.dart (37):
 - report_export_test.dart (60): RetryExportService
+- report_memory_contract_test.dart (32):
 - report_orders_test.dart (108):
-- report_page_test.dart (69):
+- report_page_test.dart (76):
 - report_states_test.dart (61):
 - report_summary_test.dart (36):
 - report_view_test.dart (81):
@@ -922,10 +940,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### tool/
 - backend_rules.dart (52):
 - benchmark_orders.dart (89):
+- benchmark_reports.dart (53):
 - check_all.dart (37): Step
 - check_arch.dart (202): Rule, Registry
 - pen_frame.dart (42):
 - repo_map.dart (100):
+- report_benchmark_seed.dart (80):
 
 ### widgetbook/atoms/
 - app_avatar_use_case.dart (19):

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/theme/app_theme.dart';
-import 'package:laurum/features/reports/data/report_fixtures.dart';
+import 'package:laurum/features/reports/data/report_samples.dart';
 import 'package:laurum/shared/widgets/organisms/report_summary.dart';
 
 import '../widgetbook/organisms/report_summary_use_case.dart';
@@ -16,7 +16,7 @@ void main() {
         home: Scaffold(
           body: SingleChildScrollView(
             child: ReportSummary(
-              totals: weekBaseline.totals,
+              totals: weekReportSample,
               expenseSummary: 'Deterjen & operasional',
               unpaidCount: 5,
               onOutstandingTap: () => opened++,
@@ -25,8 +25,8 @@ void main() {
         ),
       ),
     );
-    expect(find.text('Rp950.000'), findsOneWidget);
-    expect(find.textContaining('Rp1.800.000'), findsOneWidget);
+    expect(find.text('-Rp261.000'), findsOneWidget);
+    expect(find.textContaining('Rp589.000'), findsOneWidget);
     expect(find.textContaining('Rp400.500'), findsOneWidget);
     expect(find.textContaining('5 nota belum lunas'), findsOneWidget);
     await tester.tap(find.textContaining('Piutang aktif'));

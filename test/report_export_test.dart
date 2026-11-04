@@ -41,9 +41,9 @@ void main() {
     expect(service.exportedReports, hasLength(1));
     final content = service.exportedReports.single.content;
     expect(content, contains('"Laporan";"Minggu ini"'));
-    expect(content, contains('"Jum";375000'));
+    expect(content, contains('"Jum";177000'));
     expect(content, contains('"Sab";""'));
-    expect(content, contains('"Cuci setrika";882000'));
+    expect(content, contains('"Cuci setrika";301500'));
     expect(content, contains('"Tabungan pelanggan";430000'));
   });
 

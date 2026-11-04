@@ -1,89 +1,60 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:laurum/core/domain/report_baseline.dart';
+import 'package:laurum/core/domain/report.dart';
+import 'package:laurum/core/domain/report_daily.dart';
+import 'package:laurum/core/domain/report_positions.dart';
 import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/domain/report_totals.dart';
 import 'package:laurum/core/domain/repositories/report_repository.dart';
 import 'package:laurum/core/domain/service_revenue.dart';
 import 'package:laurum/core/domain/top_services.dart';
-import 'package:laurum/core/services/dummy_history.dart';
 import 'package:laurum/features/customers/data/in_memory_savings_repository.dart';
-import 'package:laurum/features/customers/data/savings_fixtures.dart';
-import 'package:laurum/features/expenses/data/expense_fixtures.dart';
 import 'package:laurum/features/expenses/data/in_memory_expense_repository.dart';
 import 'package:laurum/features/orders/data/in_memory_order_repository.dart';
-import 'package:laurum/features/orders/data/order_fixtures.dart';
-import 'package:laurum/features/orders/data/order_item_fixtures.dart';
-import 'package:laurum/features/orders/data/order_store.dart';
-import 'package:laurum/features/orders/data/payment_fixtures.dart';
-import 'package:laurum/features/reports/data/report_adjustments.dart';
-import 'package:laurum/features/reports/data/report_fixtures.dart';
-import 'package:laurum/features/reports/data/report_snapshot.dart';
-import 'package:laurum/features/reports/data/report_top_services.dart';
+import 'package:laurum/features/reports/data/report_ranges.dart';
 
 class InMemoryReportRepository extends Notifier<ReportTotals> implements ReportRepository {
-  final _initialOrders = OrderStore(
-    orders: orderFixtures,
-    items: orderItemFixtures,
-    payments: paymentFixtures,
-    events: [],
-  );
-
-  ReportTotals _report(ReportRange range) => !ref.read(dummyHistoryProvider)
-      ? reportSnapshot(
-          range,
-          ref.read(inMemoryOrderRepositoryProvider),
-          ref.read(inMemoryExpenseRepositoryProvider),
-          ref.read(inMemorySavingsRepositoryProvider),
-        )
-      : adjustReport(
-          _baseline(range).totals,
-          reportSnapshot(range, _initialOrders, expenseFixtures, savingsFixtures),
-          reportSnapshot(
-            range,
-            ref.read(inMemoryOrderRepositoryProvider),
-            ref.read(inMemoryExpenseRepositoryProvider),
-            ref.read(inMemorySavingsRepositoryProvider),
-          ),
-        );
-
-  ReportBaseline _baseline(ReportRange range) {
-    if (!ref.read(dummyHistoryProvider)) return ReportBaseline(range: range);
-    if (range == todayRange) return todayBaseline;
-    if (range == weekRange) return weekBaseline;
-    if (range == monthRange) return monthBaseline;
-    throw UnsupportedError('Dummy baseline exists only for today, week and month');
+  ReportTotals _report(ReportRange range) {
+    final orders = ref.read(inMemoryOrderRepositoryProvider);
+    return buildReport(
+      range: range,
+      orders: orders.orders,
+      payments: orders.payments,
+      expenses: ref.read(inMemoryExpenseRepositoryProvider),
+      savings: ref.read(inMemorySavingsRepositoryProvider),
+    );
   }
 
   @override
   ReportTotals build() {
-    ref.watch(dummyHistoryProvider);
     ref.watch(inMemoryOrderRepositoryProvider);
     ref.watch(inMemoryExpenseRepositoryProvider);
     ref.watch(inMemorySavingsRepositoryProvider);
     return _report(weekRange);
   }
 
-  // Items/events can change without changing weekly totals, but affect queries.
   @override
   bool updateShouldNotify(ReportTotals previous, ReportTotals next) => true;
-
-  @override
-  Future<ReportBaseline> getBaseline(ReportRange range) async => _baseline(range);
-
   @override
   Future<ReportTotals> getReport(ReportRange range) async => _report(range);
-
   @override
   Future<List<ServiceRevenue>> getTopServices(ReportRange range) async {
-    if (!ref.read(dummyHistoryProvider)) {
-      final store = ref.read(inMemoryOrderRepositoryProvider);
-      return topServices(store.orders, store.items, range: range);
-    }
-    if (range != weekRange) {
-      throw UnsupportedError('Dummy top-service baseline exists only for this week');
-    }
-    return adjustedTopServices(_initialOrders, ref.read(inMemoryOrderRepositoryProvider), range);
+    final store = ref.read(inMemoryOrderRepositoryProvider);
+    return topServices(store.orders, store.items, range: range);
   }
+
+  @override
+  Future<int> getUnpaidCount() async {
+    final store = ref.read(inMemoryOrderRepositoryProvider);
+    return ledgerPositions(
+      store.orders,
+      store.payments,
+      ref.read(inMemorySavingsRepositoryProvider),
+    ).unpaidCount;
+  }
+
+  @override
+  Future<List<int>> getDailyRevenue(ReportRange range) async =>
+      dailyRevenue(range, ref.read(inMemoryOrderRepositoryProvider).orders);
 }
 
 final inMemoryReportRepositoryProvider = NotifierProvider<InMemoryReportRepository, ReportTotals>(

@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/domain/report_totals.dart';
-import 'package:laurum/features/reports/data/report_fixtures.dart';
+import 'package:laurum/features/reports/data/report_samples.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/main_dummy.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';

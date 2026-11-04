@@ -1,7 +1,8 @@
 # B1e - Audit rekonsiliasi sebelum laporan ledger (4 Nov 2026)
 
-Status B1e: SEDANG, menunggu keputusan pengguna pada langkah 3. Implementasi belum
-dimulai; audit ini tidak mengubah kode aplikasi, angka DATA MASTER, fixture atau golden.
+Status dokumen: audit historis sebelum persetujuan. Pengguna telah menyetujui angka
+ledger pada 4 Nov 2026; implementasi dilanjutkan (lihat b1e.md). Kolom target di bawah
+merekam angka lama untuk menjelaskan selisih, bukan konfigurasi laporan saat ini.
 Dasar kode: 70041af, cabang dev2backend.
 
 ## Temuan dan keputusan yang diperlukan
@@ -19,12 +20,11 @@ Prompt [B1e langkah 3](../prompts/B1e-drift-pengeluaran-laporan.md) menyatakan:
 DATA MASTER juga menyatakan riwayat tidak dibuat menjadi puluhan nota fiktif dan
 preset lama memakai baseline. Karena itu tidak menambah order/pembayaran agar cocok.
 
-Usulan untuk disetujui: angka dan penjelasan bagian laporan DATA MASTER, grafik,
+Keputusan pengguna: angka dan penjelasan bagian laporan DATA MASTER, grafik,
 layanan terlaris serta ekspektasi/golden terkait mengikuti ledger aktual di bawah.
 Rincian fixture order/pembayaran/pengeluaran/tabungan/pelanggan tetap.
-Alternatif: pengguna melengkapi detail ledger historis di DATA MASTER terlebih dahulu;
-rekonsiliasi diulang setelah rincian baru diberikan. Keputusan angka laporan masih
-diperlukan sebelum implementasi.
+Pengguna menyetujui perhitungan sesuai ledger: "tentu saja angkanya harus sesuai.
+perbaiki semua selisih itu agar hasilnya masuk akal". Rincian historis tambahan tidak dibuat.
 
 ## Ringkasan hasil (rupiah)
 
@@ -101,7 +101,6 @@ REPO_MAP diperbarui: 840 berkas
 check_all: SEMUA HIJAU
 ```
 
-Perubahan sesi hanya dokumentasi/hasil audit, bukan penyelesaian implementasi B1e.
-DriftExpenseRepository, penghapusan baseline, kontrak laporan dan benchmark B1e
-belum dikerjakan karena keputusan langkah 3 wajib lebih dahulu. Cloud/key belum perlu.
-Setelah keputusan, lanjutkan docs/plans/B1e-pengeluaran-laporan.md; B1f belum dimulai.
+Pada commit audit 2fb58eb, perubahan hanya dokumentasi; aplikasi belum berubah.
+Implementasi sesudah persetujuan dicatat di docs/progress/b1e.md. Cloud/key belum perlu;
+B1f tetap sesudah B1e selesai.

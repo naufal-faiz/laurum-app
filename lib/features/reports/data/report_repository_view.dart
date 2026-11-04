@@ -1,4 +1,3 @@
-import 'package:laurum/core/domain/report_baseline.dart';
 import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/domain/report_totals.dart';
 import 'package:laurum/core/domain/repositories/report_repository.dart';
@@ -11,7 +10,9 @@ class ReportRepositoryView implements ReportRepository {
   @override
   Future<ReportTotals> getReport(ReportRange range) => source.getReport(range);
   @override
-  Future<ReportBaseline> getBaseline(ReportRange range) => source.getBaseline(range);
+  Future<int> getUnpaidCount() => source.getUnpaidCount();
+  @override
+  Future<List<int>> getDailyRevenue(ReportRange range) => source.getDailyRevenue(range);
   @override
   Future<List<ServiceRevenue>> getTopServices(ReportRange range) => source.getTopServices(range);
 }

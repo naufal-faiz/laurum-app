@@ -43,7 +43,7 @@ void main() {
     await old.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 3);
+    await verifier.migrateAndValidate(db, 4);
     final rows = await readCustomers(db, 'owner', query: 'é');
     expect(rows.single.name, 'Élodie');
     expect(rows.single.phone, '+62 812-3456-7890');

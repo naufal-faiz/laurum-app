@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/expense.dart';
 import 'package:laurum/core/domain/report.dart';
-import 'package:laurum/core/domain/report_baseline.dart';
 import 'package:laurum/core/domain/report_range.dart';
 
 import 'domain_samples.dart';
@@ -11,7 +10,6 @@ void main() {
   final range = ReportRange(DateTime(2026, 10, 12), DateTime(2026, 10, 19));
   test('period flows differ from current balances and revenue cohort', () {
     final result = buildReport(
-      baseline: ReportBaseline(range: range),
       orders: [
         order('o'),
         order('old', total: 80, enteredAt: DateTime(2026, 10)),
@@ -56,7 +54,6 @@ void main() {
   });
   test('overpayment is cash flow but reconciliation caps applied payment', () {
     final result = buildReport(
-      baseline: ReportBaseline(range: range),
       orders: [order('o')],
       payments: [payment('p', amount: 150)],
       expenses: [],

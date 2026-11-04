@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/domain/cancellation.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/reports/data/report_fixtures.dart';
+import 'package:laurum/features/reports/data/report_samples.dart';
 import 'package:laurum/main_dummy.dart';
 
 void main() {

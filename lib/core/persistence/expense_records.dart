@@ -3,6 +3,7 @@ import 'package:laurum/core/persistence/expense_category_records.dart';
 import 'package:laurum/core/persistence/record_columns.dart';
 
 @DataClassName('ExpenseRow')
+@TableIndex.sql('CREATE INDEX expenses_owner_spent ON expenses (owner_id, spent_at);')
 @TableIndex.sql('CREATE INDEX expenses_spent ON expenses (spent_at);')
 class ExpenseRecords extends Table with RecordColumns, SoftDeleteColumns {
   @override

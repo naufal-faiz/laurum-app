@@ -1,15 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:laurum/core/domain/domain_enums.dart';
-import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/domain/report_totals.dart';
 import 'package:laurum/core/domain/service_revenue.dart';
 import 'package:laurum/core/formatters/formatters.dart';
-import 'package:laurum/core/services/dummy_history.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/reports/data/report_daily.dart';
-import 'package:laurum/features/reports/state/report_custom_data.dart';
 import 'package:laurum/features/reports/state/report_custom_range.dart';
+import 'package:laurum/features/reports/state/report_daily_view.dart';
 import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 
@@ -27,6 +23,19 @@ class ReportView {
   final ReportTotals totals;
   final List<int?>? daily;
   final List<ServiceRevenue>? services;
+  int get dailyAverage {
+    final values = daily?.whereType<int>().toList() ?? <int>[];
+    return values.isEmpty ? 0 : values.fold<int>(0, (sum, n) => sum + n) ~/ values.length;
+  }
+
+  String? get peakDayName {
+    final values = daily;
+    if (period != 1 || values == null) return null;
+    final peak = values.whereType<int>().fold<int>(0, (a, b) => a > b ? a : b);
+    if (peak == 0) return null;
+    return ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'][values.indexOf(peak)];
+  }
+
   bool get isEmpty =>
       totals.transactionCount == 0 &&
       totals.revenue == 0 &&
@@ -47,46 +56,22 @@ final reportViewProvider = FutureProvider<ReportView>((ref) async {
   final now = ref.watch(businessClockProvider)();
   final custom = ref.watch(reportCustomRangeProvider);
   final range = reportPeriodRange(period, now, custom: custom);
-  if (period == 3) {
-    final data = await customReportData(ref, range);
-    return ReportView(
-      period: period,
-      range: range,
-      totals: data.totals,
-      unpaidCount: data.unpaidCount,
-      daily: data.daily,
-      services: data.services,
-    );
-  }
   final reports = ref.watch(reportRepositoryProvider);
-  final repository = ref.watch(orderRepositoryProvider);
   final totals = await reports.getReport(range);
-  final orders = await repository.getOrders();
-  final payments = await repository.getAllPayments();
+  final amounts = await reports.getDailyRevenue(range);
   List<ServiceRevenue>? services;
   try {
-    services = (await reports.getTopServices(range)).toList()
-      ..sort((a, b) => b.revenue.compareTo(a.revenue));
-  } on UnsupportedError {
+    services = await reports.getTopServices(range);
+  } on ArgumentError {
+    // An incomplete historical snapshot has no invented service attribution.
     services = null;
   }
   return ReportView(
     period: period,
     range: range,
     totals: totals,
-    unpaidCount: orders
-        .where(
-          (o) =>
-              o.deletedAt == null &&
-              o.status != OrderStatus.dibatalkan &&
-              outstanding([o], payments) > 0,
-        )
-        .length,
-    daily: period == 0
-        ? [totals.revenue]
-        : ref.watch(dummyHistoryProvider)
-        ? reportDailyRevenue(range, orders, now)
-        : actualDailyRevenue(range, orders),
+    unpaidCount: await reports.getUnpaidCount(),
+    daily: visibleDailyRevenue(range, amounts, now),
     services: services,
   );
 });

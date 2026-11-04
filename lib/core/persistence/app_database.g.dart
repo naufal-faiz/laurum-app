@@ -5166,6 +5166,18 @@ class $SavingsRecordsTable extends SavingsRecords with TableInfo<$SavingsRecords
     requiredDuringInsert: false,
     defaultValue: const Constant('pending'),
   );
+  static const VerificationMeta _createdKeyMeta = const VerificationMeta(
+    'createdKey',
+  );
+  @override
+  late final GeneratedColumn<String> createdKey = GeneratedColumn<String>(
+    'created_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
   static const VerificationMeta _customerIdMeta = const VerificationMeta(
     'customerId',
   );
@@ -5238,6 +5250,7 @@ class $SavingsRecordsTable extends SavingsRecords with TableInfo<$SavingsRecords
     createdAt,
     updatedAt,
     syncState,
+    createdKey,
     customerId,
     kind,
     amount,
@@ -5288,6 +5301,12 @@ class $SavingsRecordsTable extends SavingsRecords with TableInfo<$SavingsRecords
       context.handle(
         _syncStateMeta,
         syncState.isAcceptableOrUnknown(data['sync_state']!, _syncStateMeta),
+      );
+    }
+    if (data.containsKey('created_key')) {
+      context.handle(
+        _createdKeyMeta,
+        createdKey.isAcceptableOrUnknown(data['created_key']!, _createdKeyMeta),
       );
     }
     if (data.containsKey('customer_id')) {
@@ -5363,6 +5382,10 @@ class $SavingsRecordsTable extends SavingsRecords with TableInfo<$SavingsRecords
         DriftSqlType.string,
         data['${effectivePrefix}sync_state'],
       )!,
+      createdKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}created_key'],
+      )!,
       customerId: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}customer_id'],
@@ -5402,6 +5425,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
   final DateTime createdAt;
   final DateTime? updatedAt;
   final String syncState;
+  final String createdKey;
   final String customerId;
   final String kind;
   final int amount;
@@ -5414,6 +5438,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
     required this.createdAt,
     this.updatedAt,
     required this.syncState,
+    required this.createdKey,
     required this.customerId,
     required this.kind,
     required this.amount,
@@ -5431,6 +5456,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
       map['updated_at'] = Variable<DateTime>(updatedAt);
     }
     map['sync_state'] = Variable<String>(syncState);
+    map['created_key'] = Variable<String>(createdKey);
     map['customer_id'] = Variable<String>(customerId);
     map['kind'] = Variable<String>(kind);
     map['amount'] = Variable<int>(amount);
@@ -5449,6 +5475,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
       createdAt: Value(createdAt),
       updatedAt: updatedAt == null && nullToAbsent ? const Value.absent() : Value(updatedAt),
       syncState: Value(syncState),
+      createdKey: Value(createdKey),
       customerId: Value(customerId),
       kind: Value(kind),
       amount: Value(amount),
@@ -5469,6 +5496,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime?>(json['updatedAt']),
       syncState: serializer.fromJson<String>(json['syncState']),
+      createdKey: serializer.fromJson<String>(json['createdKey']),
       customerId: serializer.fromJson<String>(json['customerId']),
       kind: serializer.fromJson<String>(json['kind']),
       amount: serializer.fromJson<int>(json['amount']),
@@ -5486,6 +5514,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime?>(updatedAt),
       'syncState': serializer.toJson<String>(syncState),
+      'createdKey': serializer.toJson<String>(createdKey),
       'customerId': serializer.toJson<String>(customerId),
       'kind': serializer.toJson<String>(kind),
       'amount': serializer.toJson<int>(amount),
@@ -5501,6 +5530,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
     DateTime? createdAt,
     Value<DateTime?> updatedAt = const Value.absent(),
     String? syncState,
+    String? createdKey,
     String? customerId,
     String? kind,
     int? amount,
@@ -5513,6 +5543,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt.present ? updatedAt.value : this.updatedAt,
     syncState: syncState ?? this.syncState,
+    createdKey: createdKey ?? this.createdKey,
     customerId: customerId ?? this.customerId,
     kind: kind ?? this.kind,
     amount: amount ?? this.amount,
@@ -5527,6 +5558,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
       syncState: data.syncState.present ? data.syncState.value : this.syncState,
+      createdKey: data.createdKey.present ? data.createdKey.value : this.createdKey,
       customerId: data.customerId.present ? data.customerId.value : this.customerId,
       kind: data.kind.present ? data.kind.value : this.kind,
       amount: data.amount.present ? data.amount.value : this.amount,
@@ -5544,6 +5576,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('syncState: $syncState, ')
+          ..write('createdKey: $createdKey, ')
           ..write('customerId: $customerId, ')
           ..write('kind: $kind, ')
           ..write('amount: $amount, ')
@@ -5561,6 +5594,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
     createdAt,
     updatedAt,
     syncState,
+    createdKey,
     customerId,
     kind,
     amount,
@@ -5577,6 +5611,7 @@ class SavingsRow extends DataClass implements Insertable<SavingsRow> {
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt &&
           other.syncState == this.syncState &&
+          other.createdKey == this.createdKey &&
           other.customerId == this.customerId &&
           other.kind == this.kind &&
           other.amount == this.amount &&
@@ -5591,6 +5626,7 @@ class SavingsRecordsCompanion extends UpdateCompanion<SavingsRow> {
   final Value<DateTime> createdAt;
   final Value<DateTime?> updatedAt;
   final Value<String> syncState;
+  final Value<String> createdKey;
   final Value<String> customerId;
   final Value<String> kind;
   final Value<int> amount;
@@ -5604,6 +5640,7 @@ class SavingsRecordsCompanion extends UpdateCompanion<SavingsRow> {
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
     this.syncState = const Value.absent(),
+    this.createdKey = const Value.absent(),
     this.customerId = const Value.absent(),
     this.kind = const Value.absent(),
     this.amount = const Value.absent(),
@@ -5618,6 +5655,7 @@ class SavingsRecordsCompanion extends UpdateCompanion<SavingsRow> {
     required DateTime createdAt,
     this.updatedAt = const Value.absent(),
     this.syncState = const Value.absent(),
+    this.createdKey = const Value.absent(),
     required String customerId,
     required String kind,
     required int amount,
@@ -5638,6 +5676,7 @@ class SavingsRecordsCompanion extends UpdateCompanion<SavingsRow> {
     Expression<DateTime>? createdAt,
     Expression<DateTime>? updatedAt,
     Expression<String>? syncState,
+    Expression<String>? createdKey,
     Expression<String>? customerId,
     Expression<String>? kind,
     Expression<int>? amount,
@@ -5652,6 +5691,7 @@ class SavingsRecordsCompanion extends UpdateCompanion<SavingsRow> {
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
       if (syncState != null) 'sync_state': syncState,
+      if (createdKey != null) 'created_key': createdKey,
       if (customerId != null) 'customer_id': customerId,
       if (kind != null) 'kind': kind,
       if (amount != null) 'amount': amount,
@@ -5668,6 +5708,7 @@ class SavingsRecordsCompanion extends UpdateCompanion<SavingsRow> {
     Value<DateTime>? createdAt,
     Value<DateTime?>? updatedAt,
     Value<String>? syncState,
+    Value<String>? createdKey,
     Value<String>? customerId,
     Value<String>? kind,
     Value<int>? amount,
@@ -5682,6 +5723,7 @@ class SavingsRecordsCompanion extends UpdateCompanion<SavingsRow> {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       syncState: syncState ?? this.syncState,
+      createdKey: createdKey ?? this.createdKey,
       customerId: customerId ?? this.customerId,
       kind: kind ?? this.kind,
       amount: amount ?? this.amount,
@@ -5709,6 +5751,9 @@ class SavingsRecordsCompanion extends UpdateCompanion<SavingsRow> {
     }
     if (syncState.present) {
       map['sync_state'] = Variable<String>(syncState.value);
+    }
+    if (createdKey.present) {
+      map['created_key'] = Variable<String>(createdKey.value);
     }
     if (customerId.present) {
       map['customer_id'] = Variable<String>(customerId.value);
@@ -5742,6 +5787,7 @@ class SavingsRecordsCompanion extends UpdateCompanion<SavingsRow> {
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('syncState: $syncState, ')
+          ..write('createdKey: $createdKey, ')
           ..write('customerId: $customerId, ')
           ..write('kind: $kind, ')
           ..write('amount: $amount, ')
@@ -10017,6 +10063,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'payments_owner_paid',
     'CREATE INDEX payments_owner_paid ON payments (owner_id, paid_at)',
   );
+  late final Index savingsOwnerCreated = Index(
+    'savings_owner_created',
+    'CREATE INDEX savings_owner_created ON savings_entries (owner_id, created_key)',
+  );
   late final Index savingsOwnerUpdated = Index(
     'savings_owner_updated',
     'CREATE INDEX savings_owner_updated ON savings_entries (owner_id, updated_at)',
@@ -10024,6 +10074,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final Index savingsCustomerCreated = Index(
     'savings_customer_created',
     'CREATE INDEX savings_customer_created ON savings_entries (customer_id, created_at)',
+  );
+  late final Index expensesOwnerSpent = Index(
+    'expenses_owner_spent',
+    'CREATE INDEX expenses_owner_spent ON expenses (owner_id, spent_at)',
   );
   late final Index expensesSpent = Index(
     'expenses_spent',
@@ -10072,8 +10126,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     paymentsOrder,
     paymentsPaid,
     paymentsOwnerPaid,
+    savingsOwnerCreated,
     savingsOwnerUpdated,
     savingsCustomerCreated,
+    expensesOwnerSpent,
     expensesSpent,
     eventsOrderTime,
     outboxCreated,

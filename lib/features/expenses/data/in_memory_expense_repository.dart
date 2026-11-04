@@ -33,7 +33,8 @@ class InMemoryExpenseRepository extends Notifier<List<Expense>>
   }
 
   @override
-  Future<List<ExpenseCategory>> getCategories() async => List.unmodifiable(_categories);
+  Future<List<ExpenseCategory>> getCategories() async =>
+      List.unmodifiable(_categories.where((c) => c.deletedAt == null));
 
   @override
   Future<void> saveCategory(ExpenseCategory category) async {

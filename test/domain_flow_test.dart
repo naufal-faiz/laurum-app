@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/domain/cancellation.dart';
 import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/report.dart';
-import 'package:laurum/core/domain/report_baseline.dart';
 import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/domain/savings_rules.dart';
 
@@ -33,7 +32,6 @@ void main() {
     );
     final range = ReportRange(DateTime(2026, 10), DateTime(2026, 11));
     final report = buildReport(
-      baseline: ReportBaseline(range: range),
       orders: [cancelled.order],
       payments: [...payments, ...cancelled.payments],
       expenses: [],

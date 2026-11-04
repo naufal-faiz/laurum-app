@@ -33,14 +33,30 @@ class DriftTransactionRunner implements TransactionRunner {
             return result;
           }, zoneValues: {_zoneKey: scope}),
         );
+      } catch (_) {
+        for (final undo in scope.rollback) {
+          try {
+            await undo();
+          } catch (_) {
+            // File cleanup is best effort; preserve the original transaction failure.
+          }
+        }
+        rethrow;
       } finally {
         scope.open = false;
       }
     });
   }
+
+  void onRollback(Future<void> Function() undo) {
+    final scope = Zone.current[_zoneKey];
+    if (scope is! _DriftScope || !scope.open) throw StateError('No active transaction');
+    scope.rollback.add(undo);
+  }
 }
 
 class _DriftScope {
+  final rollback = <Future<void> Function()>[];
   bool open = true;
   Object? error;
   StackTrace? stack;

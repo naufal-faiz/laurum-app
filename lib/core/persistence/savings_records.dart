@@ -4,6 +4,7 @@ import 'package:laurum/core/persistence/order_records.dart';
 import 'package:laurum/core/persistence/record_columns.dart';
 
 @DataClassName('SavingsRow')
+@TableIndex.sql('CREATE INDEX savings_owner_created ON savings_entries (owner_id, created_key);')
 @TableIndex.sql('CREATE INDEX savings_owner_updated ON savings_entries (owner_id, updated_at);')
 @TableIndex.sql(
   'CREATE INDEX savings_customer_created ON savings_entries (customer_id, created_at);',
@@ -11,6 +12,7 @@ import 'package:laurum/core/persistence/record_columns.dart';
 class SavingsRecords extends Table with RecordColumns {
   @override
   String get tableName => 'savings_entries';
+  TextColumn get createdKey => text().withDefault(const Constant(''))();
   TextColumn get customerId => text().references(CustomerRecords, #id)();
   TextColumn get kind => text()();
   IntColumn get amount => integer()();

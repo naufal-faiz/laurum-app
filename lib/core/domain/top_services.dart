@@ -11,6 +11,10 @@ List<ServiceRevenue> topServices(
   ReportRange? range,
 }) {
   final snapshots = items.where((i) => i.deletedAt == null).toList();
+  final byOrder = <(String, String), List<OrderItem>>{};
+  for (final item in snapshots) {
+    byOrder.putIfAbsent((item.ownerId, item.orderId), () => []).add(item);
+  }
   final grouped = <String, ServiceRevenue>{};
   final active =
       orders
@@ -26,9 +30,7 @@ List<ServiceRevenue> topServices(
           return date != 0 ? date : a.id.compareTo(b.id);
         });
   for (final order in active) {
-    final lines = snapshots
-        .where((i) => i.ownerId == order.ownerId && i.orderId == order.id)
-        .toList();
+    final lines = byOrder[(order.ownerId, order.id)] ?? <OrderItem>[];
     if (lines.fold(0, (sum, i) => sum + i.lineTotal) != order.subtotal) {
       throw ArgumentError('Incomplete order item snapshots');
     }

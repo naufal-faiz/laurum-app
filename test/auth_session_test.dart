@@ -8,7 +8,7 @@ import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/services/sync_service.dart';
 import 'package:laurum/features/auth/state/auth_session.dart';
 import 'package:laurum/features/proposals/state/proposal_history.dart';
-import 'package:laurum/features/reports/data/report_fixtures.dart';
+import 'package:laurum/features/reports/data/report_samples.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/main_dummy.dart';
 

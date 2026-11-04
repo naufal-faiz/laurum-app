@@ -62,11 +62,11 @@ Tidak ada konsep jatuh tempo. Usia ditampilkan netral ("4 hari lalu").
 - 12 Okt 09.10 Listrik & air Rp620.000, token PLN dan PDAM
 
 ## Laporan "Minggu ini" (Sen 12 - Min 18 Okt)
-- Pendapatan Rp1.800.000 (58 transaksi); Pengeluaran Rp850.000; Estimasi laba bersih Rp950.000
-- Kas masuk Rp1.699.500 (tunai, QRIS, transfer, termasuk setoran tabungan)
+- Pendapatan Rp589.000 (14 transaksi); Pengeluaran Rp850.000; Estimasi laba bersih -Rp261.000
+- Kas masuk Rp500.000 (tunai, QRIS, transfer, termasuk setoran tabungan)
 - Tabungan pelanggan Rp430.000 (titipan, bukan omzet); Piutang aktif Rp400.500 (5 nota)
-- Omzet harian: Sen 340k, Sel 385k, Rab 290k, Kam 410k, Jum 375k; Sab dan Min kosong (belum terjadi, batang putus-putus). Rata-rata Rp360.000/hari, puncak Kamis.
-- Layanan terlaris (berdasar pendapatan): Cuci setrika 98 kg Rp882.000 (49%), Cuci kiloan 70 kg Rp490.000 (27%), Bed cover 14 pcs Rp350.000 (19%), Lainnya Rp78.000 (4%)
+- Omzet harian: Sen 0, Sel 0, Rab 248k, Kam 164k, Jum 177k; Sab dan Min kosong (belum terjadi, batang putus-putus). Rata-rata Rp117.800/hari, puncak Rabu.
+- Layanan terlaris (berdasar pendapatan): Cuci setrika 33,5 kg Rp301.500 (51%), Cuci kering lipat 18 kg Rp108.000 (18%), Bed cover 4 pcs Rp100.000 (17%), Cuci kiloan 8,5 kg Rp59.500 (10%), Selimut tebal 1 pcs Rp20.000 (3%). Persentase dibulatkan per layanan.
 - Rekonsiliasi: Pendapatan = kas dari nota + tabungan terpakai + piutang baru
 
 ## Order pengisi
@@ -87,19 +87,19 @@ Order pengisi untuk melengkapi antrean aktif 12 order (Jemput 3, Proses 5, Siap 
   - A-0129 | Danang Kos Putri | Cuci kering lipat 6 kg Rp36.000 | Lunas
   - A-0130 | Siti Rohmah | Cuci setrika 3 kg Rp27.000 | Lunas
 
-## Baseline laporan tambahan
+## Laporan periode lain dari ledger (rekonsiliasi B1e disetujui 4 Nov 2026)
 - Hari ini (Jumat, 16 Okt 2026):
-  - Pendapatan: Rp375.000 (12 transaksi)
+  - Pendapatan: Rp177.000 (6 transaksi)
   - Pengeluaran: Rp145.000 (Bahan cuci Rp110.000 + Kemasan Rp35.000)
-  - Estimasi laba bersih: Rp230.000
-  - Kas masuk: Rp343.500
+  - Estimasi laba bersih: Rp32.000
+  - Kas masuk: Rp130.500
   - Tabungan pelanggan: Rp430.000 (posisi saat ini)
   - Piutang aktif: Rp400.500 (posisi saat ini)
 - Bulan ini (Okt 2026):
-  - Pendapatan: Rp4.250.000 (135 transaksi)
+  - Pendapatan: Rp864.000 (16 transaksi)
   - Pengeluaran: Rp1.850.000 (18 transaksi)
-  - Estimasi laba bersih: Rp2.400.000
-  - Kas masuk: Rp4.050.000
+  - Estimasi laba bersih: -Rp986.000
+  - Kas masuk: Rp868.500
   - Tabungan pelanggan: Rp430.000 (posisi saat ini)
   - Piutang aktif: Rp400.500 (posisi saat ini)
 
@@ -173,17 +173,15 @@ Tiga status awal menunggu; pesan dummy, bukan hasil integrasi WhatsApp.
 - prop-003 Agus Pratama, 16 Okt 10.45 (baru saja): "Halo, saya Agus. Saya ingin mencuci 1 bed cover. Bisa dibantu?". 0856-4400-1234, belum terdaftar; alamat kosong opsional, Bed cover 1 pcs.
 - Rekaman cust-010 lama menjadi Pelanggan 10, telepon 0812-0000-0010; A-0137 tetap mengacu cust-010. Ini menyelesaikan benturan Agus lama dengan varian pelanggan baru; jumlah awal tetap 48. Agus hanya dibuat saat usulan disetujui.
 - Ringkasan historis usulan: 142 disetujui, 8 ditolak, 3 ditutup otomatis, ditambah 3 usulan menunggu di atas. Ringkasan historis tidak dibuat menjadi ratusan rekaman pesan fiktif; perubahan dari tiga usulan aktual menambah penghitung status terkait.
-### Penjelasan baseline dan struk
-- Rekonsiliasi Hari ini: kas dari nota Rp328.500 + tabungan terpakai Rp0 + piutang baru Rp46.500.
-- Minggu ini: Rp1.574.500 + Rp25.000 + Rp200.500 = Rp1.800.000.
+### Penjelasan laporan ledger dan struk (B1e, 4 Nov 2026)
+- Seluruh periode dan rentang kustom dihitung dari order/pembayaran/pengeluaran/tabungan yang dirinci; tidak ada tambahan baseline historis. Seed tetap 16 order, 14 pembayaran, 18 pengeluaran dan 7 mutasi tabungan.
+- Rekonsiliasi Hari ini: kas cohort nota Rp130.500 + tabungan terpakai Rp0 + piutang baru Rp46.500 = Rp177.000.
+- Minggu ini: Rp388.500 + Rp0 + Rp200.500 = Rp589.000.
   Piutang A-0128 Rp200.000 berasal dari sebelum minggu ini, sehingga hanya masuk posisi piutang.
-- Bulan ini: Rp3.750.000 + Rp99.500 + Rp400.500 = Rp4.250.000.
-- Kas masuk mencakup arus setoran/pelunasan historis; berbeda dari kas cohort nota periode.
-- Baseline mencakup fixture awal. Perubahan menghitung baseline + snapshot kini - snapshot awal
-  melalui buildReport, termasuk pelunasan nota lama, edit/hapus, dan pembatalan.
-- Rincian layanan terlaris hanya tersedia untuk Minggu ini. “Lainnya” bukan Selimut tebal
-  dan tidak memiliki satuan/kuantitas terdefinisi (nilai internal 0, satuan kosong).
-  Permintaan top services Hari/Bulan atau laporan rentang lain ditolak eksplisit, tidak memakai angka minggu.
+- Bulan ini: Rp438.500 + Rp25.000 + Rp400.500 = Rp864.000.
+- Kas masuk memakai tanggal pembayaran/setoran, berbeda dari kas cohort nota berdasarkan tanggal masuk order. Setoran bukan omzet. Pengeluaran, piutang aktif Rp400.500 dan saldo tabungan Rp430.000 tetap sesuai ledger.
+- Laba negatif minggu/bulan mencerminkan pendapatan seed yang lebih kecil dari pengeluaran; tidak ditutup dengan transaksi tambahan. Rincian audit sebelum persetujuan ada di docs/progress/b1e-reconciliation.md.
+- Rincian layanan seluruh periode dihitung dari snapshot item dan alokasi diskon yang sama. Tidak ada kelompok “Lainnya” fiktif. Grafik mengikuti ledger; rentang lebih dari tujuh hari tetap tidak ditampilkan pada widget grafik yang ada.
 - Footer/note usaha mengikuti template struk: “Terima kasih atas kepercayaan Anda” /
   “Pakaian bersih, wangi & rapi”; tidak ada klausul batas pengambilan 30 hari.
 
