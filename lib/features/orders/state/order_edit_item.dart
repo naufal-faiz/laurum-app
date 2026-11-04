@@ -1,4 +1,5 @@
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/id_generator.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
@@ -8,10 +9,11 @@ OrderItem orderEditItem(
   Order order,
   List<OrderItem> current,
   DateTime now,
+  IdGenerator ids,
 ) {
   final existing = current.where((item) => item.serviceId == line.service.id).firstOrNull;
   return OrderItem(
-    id: existing?.id ?? '${order.id}-item-${line.service.id}',
+    id: existing?.id ?? ids.newId(),
     ownerId: order.ownerId,
     createdAt: existing?.createdAt ?? now,
     orderId: order.id,

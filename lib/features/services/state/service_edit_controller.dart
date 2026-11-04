@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/service_item.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/services/state/service_copy.dart';
@@ -16,7 +17,6 @@ final serviceEditProvider =
 class ServiceEditController extends AsyncNotifier<ServiceEditState> {
   ServiceEditController(this.serviceId);
   final String serviceId;
-
   @override
   Future<ServiceEditState> build() async {
     if (serviceId.isEmpty) return const ServiceEditState();
@@ -47,7 +47,6 @@ class ServiceEditController extends AsyncNotifier<ServiceEditState> {
 
   void setDuration(int days) => _edit((s) => s.copyWith(durationDays: days));
   void setActive({required bool value}) => _edit((s) => s.copyWith(isActive: value));
-
   Future<bool> save() async {
     final current = state.value;
     if (current == null || current.busy) return false;
@@ -70,7 +69,7 @@ class ServiceEditController extends AsyncNotifier<ServiceEditState> {
       if (current.original == null) {
         final all = await repository.getServices(includeInactive: true);
         saved = ServiceItem(
-          id: 'srv-${DateTime.now().microsecondsSinceEpoch}',
+          id: ref.read(idGeneratorProvider).newId(),
           ownerId: ref.read(authServiceProvider).currentUserId ?? 'owner',
           createdAt: now,
           name: name,

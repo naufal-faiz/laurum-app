@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/expense_category.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/expenses/state/expense_form_controller.dart';
@@ -31,7 +32,7 @@ class ExpenseCategoryController extends Notifier<ExpenseCategoryDraft> {
       }
       final now = ref.read(businessClockProvider)();
       final category = ExpenseCategory(
-        id: 'cat-${DateTime.now().microsecondsSinceEpoch}',
+        id: ref.read(idGeneratorProvider).newId(),
         ownerId: ref.read(authServiceProvider).currentUserId ?? 'owner',
         createdAt: now,
         name: name,

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/features/orders/state/order_payment_controller.dart';
 import 'package:laurum/features/reports/state/report_period.dart';
@@ -11,10 +12,17 @@ import 'package:laurum/features/transactions/state/checkout_state.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/main_dummy.dart';
 
+import 'fake_id_generator.dart';
+
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
   test('week matches DATA MASTER and changing period never reuses weekly detail', () async {
-    final scope = ProviderContainer(overrides: dummyRepositoryOverrides);
+    final scope = ProviderContainer(
+      overrides: [
+        ...dummyRepositoryOverrides,
+        idGeneratorProvider.overrideWithValue(FakeIdGenerator(newValues: ['ord-0143'])),
+      ],
+    );
     addTearDown(scope.dispose);
     final week = await scope.read(reportViewProvider.future);
     expect(week.totals.revenue, 1800000);
@@ -36,7 +44,12 @@ void main() {
     expect(month.daily, isNull);
   });
   test('checkout updates today/week and daily bar; debt payment updates cash and count', () async {
-    final scope = ProviderContainer(overrides: dummyRepositoryOverrides);
+    final scope = ProviderContainer(
+      overrides: [
+        ...dummyRepositoryOverrides,
+        idGeneratorProvider.overrideWithValue(FakeIdGenerator(newValues: ['ord-0143'])),
+      ],
+    );
     addTearDown(scope.dispose);
     await scope.read(reportViewProvider.future);
     final draft = scope.read(transactionDraftProvider.notifier)..selectCustomer('cust-001');

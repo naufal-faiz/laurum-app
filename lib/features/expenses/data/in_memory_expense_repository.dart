@@ -1,12 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/expense.dart';
 import 'package:laurum/core/domain/expense_category.dart';
+import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/domain/repositories/expense_repository.dart';
 import 'package:laurum/core/services/transaction_runner.dart';
 import 'package:laurum/features/expenses/data/expense_fixtures.dart';
 
 class InMemoryExpenseRepository extends Notifier<List<Expense>>
     implements ExpenseRepository, TransactionParticipant {
+  InMemoryExpenseRepository() : _empty = false;
+  InMemoryExpenseRepository.empty() : _empty = true;
+  final bool _empty;
   @override
   void Function() checkpoint() {
     final expenses = state, categories = List.of(_categories);
@@ -23,7 +27,10 @@ class InMemoryExpenseRepository extends Notifier<List<Expense>>
 
   List<ExpenseCategory> _categories = List.of(expenseCategoryFixtures);
   @override
-  List<Expense> build() => List.unmodifiable(expenseFixtures);
+  List<Expense> build() {
+    if (_empty) _categories = [];
+    return List.unmodifiable(_empty ? [] : expenseFixtures);
+  }
 
   @override
   Future<List<ExpenseCategory>> getCategories() async => List.unmodifiable(_categories);
@@ -44,6 +51,9 @@ class InMemoryExpenseRepository extends Notifier<List<Expense>>
     }).toList();
   }
 
+  @override
+  Future<List<Expense>> getExpensesInRange(ReportRange range) =>
+      getExpenses(from: range.start, to: range.end);
   @override
   Future<void> saveExpense(Expense expense) async {
     final idx = state.indexWhere((e) => e.id == expense.id);

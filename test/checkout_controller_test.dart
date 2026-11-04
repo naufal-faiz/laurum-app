@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/receipt_formatter.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/business/data/business_fixtures.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
@@ -13,6 +14,7 @@ import 'package:laurum/features/transactions/state/checkout_state.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/main_dummy.dart';
 
+import 'fake_id_generator.dart';
 import 'receipt_fixtures.dart';
 import 'receipt_template_lines.dart';
 
@@ -20,7 +22,12 @@ void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
 
   test('checkout saves A-0143 atomically with savings and cash', () async {
-    final container = ProviderContainer(overrides: dummyRepositoryOverrides);
+    final container = ProviderContainer(
+      overrides: [
+        ...dummyRepositoryOverrides,
+        idGeneratorProvider.overrideWithValue(FakeIdGenerator(newValues: ['ord-0143'])),
+      ],
+    );
     addTearDown(container.dispose);
     final draft = container.read(transactionDraftProvider.notifier);
     draft.selectCustomer('cust-001');

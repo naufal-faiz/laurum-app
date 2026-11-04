@@ -3,6 +3,7 @@ import 'package:laurum/core/services/auth_service.dart';
 import 'package:laurum/core/services/contact_source.dart';
 import 'package:laurum/core/services/export_service.dart';
 import 'package:laurum/core/services/external_launcher.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/local_data_service.dart';
 import 'package:laurum/core/services/photo_picker.dart';
 import 'package:laurum/core/services/print_service.dart';
@@ -29,7 +30,7 @@ final exportServiceProvider = Provider<ExportService>((ref) {
 });
 
 final authServiceProvider = Provider<AuthService>((ref) {
-  return FakeAuthService();
+  return FakeAuthService(ids: ref.read(idGeneratorProvider));
 });
 final localDataServiceProvider = Provider<LocalDataService>((ref) => FakeLocalDataService());
 

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/proposal.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/orders/data/in_memory_order_repository.dart';
@@ -9,6 +10,8 @@ import 'package:laurum/features/proposals/data/in_memory_proposal_repository.dar
 import 'package:laurum/features/proposals/state/proposal_actions.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
 import 'package:laurum/main_dummy.dart';
+
+import 'fake_id_generator.dart';
 
 class FailOnceProposalRepository extends InMemoryProposalRepository {
   bool _fail = true;
@@ -27,6 +30,11 @@ void main() {
     final scope = ProviderContainer(
       overrides: [
         ...dummyRepositoryOverrides,
+        idGeneratorProvider.overrideWithValue(
+          FakeIdGenerator(
+            derivedValues: {'prop-003/order': 'ord-ai-prop-003'},
+          ),
+        ),
         inMemoryProposalRepositoryProvider.overrideWith(FailOnceProposalRepository.new),
       ],
     );

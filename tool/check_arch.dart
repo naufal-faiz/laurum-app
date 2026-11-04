@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'backend_rules.dart';
+
 const maxLines = 110;
 const theme = 'lib/core/theme/';
 const shared = 'lib/shared/widgets/';
@@ -87,7 +89,7 @@ Registry loadRegistry() {
 }
 
 List<String> checkFile(String path, String text, Registry reg) {
-  final out = <String>[];
+  final out = checkBackendFile(path, text);
   void add(int line, String msg) => out.add('$path:$line: $msg');
   final lines = const LineSplitter().convert(text);
   if (lines.length > maxLines) add(lines.length, 'file ${lines.length} baris (maks $maxLines)');
@@ -181,7 +183,7 @@ List<String> checkFile(String path, String text, Registry reg) {
 
 void main() {
   final reg = loadRegistry();
-  final problems = <String>[];
+  final problems = checkBackendPubspec(File('pubspec.yaml').readAsStringSync());
   final files = Directory('lib')
       .listSync(recursive: true)
       .whereType<File>()

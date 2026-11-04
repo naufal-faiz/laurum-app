@@ -9,9 +9,14 @@ import 'package:laurum/features/customers/data/savings_fixtures.dart';
 class InMemorySavingsRepository extends Notifier<List<SavingsEntry>>
     with TransactionalMemory<List<SavingsEntry>>
     implements SavingsRepository {
+  InMemorySavingsRepository() : _empty = false;
+  InMemorySavingsRepository.empty() : _empty = true;
+  final bool _empty;
   void clearLocalData() => state = const [];
   @override
-  List<SavingsEntry> build() => List.unmodifiable(savingsFixtures);
+  List<SavingsEntry> build() {
+    return List.unmodifiable(_empty ? [] : savingsFixtures);
+  }
 
   @override
   Future<List<SavingsEntry>> getEntriesByCustomerId(String customerId) async {

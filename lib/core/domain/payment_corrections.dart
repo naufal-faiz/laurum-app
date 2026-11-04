@@ -1,4 +1,5 @@
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/id_generator.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/payment.dart';
 
@@ -7,6 +8,7 @@ List<Payment> paymentCorrections(
   Iterable<Payment> payments, {
   required String prefix,
   required DateTime at,
+  IdGenerator ids = const IdGenerator(),
 }) {
   final ledger = payments.toList();
   final corrections = <Payment>[];
@@ -22,7 +24,7 @@ List<Payment> paymentCorrections(
         .fold(0, (sum, p) => sum + p.amount);
     if (amount < 0) throw StateError('Negative net payment before cancellation');
     if (amount == 0) continue;
-    final id = '$prefix-payment-${method.name}';
+    final id = ids.derived(prefix, 'payment-${method.name}');
     if (ledger.any((p) => p.id == id)) throw ArgumentError('Duplicate correction ID');
     corrections.add(
       Payment(

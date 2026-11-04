@@ -4,6 +4,7 @@ import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/core/domain/payment_excess.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 
@@ -28,7 +29,7 @@ Future<void> saveOrderPayment(
   }
   final amount = received.clamp(0, due), extra = (received - due).clamp(0, received);
   final now = ref.read(businessClockProvider)();
-  final paymentId = '$id-payment-${payments.length + 1}';
+  final paymentId = ref.read(idGeneratorProvider).newId();
   final profile = await ref.read(businessRepositoryProvider).getProfile();
   final complete =
       order.payTerm == PayTerm.cod &&
@@ -37,7 +38,7 @@ Future<void> saveOrderPayment(
       (!profile.useOrderStatus || (completeOnPayment && order.status == OrderStatus.siap));
   final events = [
     OrderEvent(
-      id: '$paymentId-event',
+      id: ref.read(idGeneratorProvider).newId(),
       ownerId: order.ownerId,
       createdAt: now,
       orderId: id,
@@ -48,7 +49,7 @@ Future<void> saveOrderPayment(
   if (complete) {
     events.add(
       OrderEvent(
-        id: '$id-status-selesai',
+        id: ref.read(idGeneratorProvider).newId(),
         ownerId: order.ownerId,
         createdAt: now,
         orderId: id,
@@ -81,6 +82,14 @@ Future<void> saveOrderPayment(
   if (method == PayMethod.tunai && saveExcess && extra > 0) {
     await ref
         .read(savingsRepositoryProvider)
-        .addEntry(paymentExcess(order, paymentId: paymentId, amount: extra, at: now));
+        .addEntry(
+          paymentExcess(
+            order,
+            paymentId: paymentId,
+            amount: extra,
+            at: now,
+            ids: ref.read(idGeneratorProvider),
+          ),
+        );
   }
 });

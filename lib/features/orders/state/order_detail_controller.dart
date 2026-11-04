@@ -5,6 +5,7 @@ import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_rules.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
@@ -39,7 +40,7 @@ class OrderActions extends Notifier<OrderActionState> {
       order.id,
       next,
       event: OrderEvent(
-        id: '${order.id}-status-${next.name}',
+        id: ref.read(idGeneratorProvider).newId(),
         ownerId: order.ownerId,
         createdAt: now,
         orderId: order.id,
@@ -60,6 +61,7 @@ class OrderActions extends Notifier<OrderActionState> {
         data.order,
         payments: data.payments,
         savings: await savings.getAllEntries(),
+        ids: ref.read(idGeneratorProvider),
         correctionPrefix: '${data.order.id}-cancel',
         at: ref.read(businessClockProvider)(),
       );

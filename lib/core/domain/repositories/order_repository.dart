@@ -3,9 +3,12 @@ import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/core/domain/payment.dart';
+import 'package:laurum/core/domain/report_range.dart';
 
 abstract class OrderRepository {
   Future<List<Order>> getOrders({OrderStatus? status});
+  Future<List<Order>> getOrdersInRange(ReportRange range, {OrderStatus? status});
+  Future<List<Payment>> getPaymentsInRange(ReportRange range);
   Future<Order?> getOrderById(String id);
   Future<Order?> getOrderByOrderNo(String orderNo);
   Future<List<OrderItem>> getItemsByOrderId(String orderId);

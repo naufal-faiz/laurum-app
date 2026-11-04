@@ -1,6 +1,24 @@
+import 'package:laurum/core/domain/repositories/local_settings_repository.dart';
+
 class OrderNumberGenerator {
-  const OrderNumberGenerator({this.deviceCode = 'A'});
+  const OrderNumberGenerator({this.deviceCode = 'A', this.settings});
   final String deviceCode;
+  final LocalSettingsRepository? settings;
+
+  // Called inside TransactionRunner so a failed checkout restores the counter.
+  Future<String> reserveOrderNo(Iterable<String> existingOrderNos) async {
+    final local = settings;
+    if (local == null) throw StateError('Local settings not initialized');
+    final code = await local.getString('device_code') ?? deviceCode;
+    final generator = OrderNumberGenerator(deviceCode: code);
+    final saved = await local.getInt('order_counter_$code') ?? 0;
+    final candidate = generator.nextOrderNo(existingOrderNos);
+    final highest = generator.parseSequence(candidate)! - 1;
+    final sequence = (saved > highest ? saved : highest) + 1;
+    final result = generator.format(sequence);
+    await local.setInt('order_counter_$code', sequence);
+    return result;
+  }
 
   void _validateDevice() {
     if (!RegExp(r'^[A-Z]+$').hasMatch(deviceCode)) {

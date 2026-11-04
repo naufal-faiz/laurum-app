@@ -7,9 +7,14 @@ import 'package:laurum/features/services/data/service_fixtures.dart';
 class InMemoryServiceRepository extends Notifier<List<ServiceItem>>
     with TransactionalMemory<List<ServiceItem>>
     implements ServiceRepository {
+  InMemoryServiceRepository() : _empty = false;
+  InMemoryServiceRepository.empty() : _empty = true;
+  final bool _empty;
   void clearLocalData() => state = const [];
   @override
-  List<ServiceItem> build() => List.unmodifiable(serviceFixtures);
+  List<ServiceItem> build() {
+    return List.unmodifiable(_empty ? [] : serviceFixtures);
+  }
 
   @override
   Future<List<ServiceItem>> getServices({bool includeInactive = false}) async {

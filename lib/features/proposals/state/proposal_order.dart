@@ -2,10 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_item.dart';
-import 'package:laurum/core/domain/order_number_generator.dart';
 import 'package:laurum/core/domain/order_rules.dart';
 import 'package:laurum/core/domain/proposal.dart';
 import 'package:laurum/core/domain/service_item.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
+import 'package:laurum/core/services/local_settings_providers.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
@@ -23,12 +24,14 @@ Future<Order> saveProposalOrder(
   final kilo = service.kind == ServiceKind.kiloan;
   final total = kilo ? 0 : service.price;
   final order = Order(
-    id: 'ord-ai-${proposal.id}',
+    id: ref.read(idGeneratorProvider).derived(proposal.id, 'order'),
     ownerId: proposal.ownerId,
     createdAt: now,
-    orderNo: const OrderNumberGenerator().nextOrderNo(
-      (await repo.getOrders()).map((o) => o.orderNo),
-    ),
+    orderNo: await ref
+        .read(orderNumberGeneratorProvider)
+        .reserveOrderNo(
+          (await repo.getOrders()).map((o) => o.orderNo),
+        ),
     customerId: customerId,
     status: initialOrderStatus(OrderSource.whatsappAi, useOrderStatus: profile.useOrderStatus),
     source: OrderSource.whatsappAi,
@@ -48,7 +51,7 @@ Future<Order> saveProposalOrder(
     useOrderStatus: profile.useOrderStatus,
     items: [
       OrderItem(
-        id: '${order.id}-item',
+        id: ref.read(idGeneratorProvider).derived(order.id, 'item'),
         ownerId: order.ownerId,
         createdAt: now,
         orderId: order.id,

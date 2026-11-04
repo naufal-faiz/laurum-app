@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/features/services/data/service_fixtures.dart';
@@ -7,7 +8,14 @@ import 'package:laurum/features/transactions/state/checkout_state.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/main_dummy.dart';
 
-ProviderContainer r9Scope() => ProviderContainer(overrides: dummyRepositoryOverrides);
+import 'fake_id_generator.dart';
+
+ProviderContainer r9Scope() => ProviderContainer(
+  overrides: [
+    ...dummyRepositoryOverrides,
+    idGeneratorProvider.overrideWithValue(FakeIdGenerator(newValues: ['ord-0143'])),
+  ],
+);
 Future<OrderDetailData> r9Checkout(
   ProviderContainer scope, {
   bool useStatus = false,

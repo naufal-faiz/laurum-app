@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/features/expenses/state/expense_form_controller.dart';
+import 'package:laurum/main_dummy.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 
 import 'antrean_test_host.dart';
+import 'fake_id_generator.dart';
 import 'keyboard_test_helper.dart';
 
 void main() {
@@ -30,7 +34,16 @@ void main() {
   }
   testWidgets('new category keyboard, validation and selection', (tester) async {
     configureKeyboardTest(tester);
-    final host = await pumpAntrean(tester, location: '/lainnya/pengeluaran/baru');
+    final host = await pumpAntrean(
+      tester,
+      location: '/lainnya/pengeluaran/baru',
+      container: ProviderContainer(
+        overrides: [
+          ...dummyRepositoryOverrides,
+          idGeneratorProvider.overrideWithValue(FakeIdGenerator(newValues: ['cat-new-test'])),
+        ],
+      ),
+    );
     final button = find.text('Kategori baru');
     await tester.ensureVisible(button);
     await tester.tap(button);

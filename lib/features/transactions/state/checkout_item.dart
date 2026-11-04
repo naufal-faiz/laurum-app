@@ -1,7 +1,9 @@
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/id_generator.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_item.dart';
+import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
 
 OrderItem checkoutItem(
@@ -9,8 +11,9 @@ OrderItem checkoutItem(
   String ownerId,
   DateTime now,
   DraftLine line,
+  IdGenerator ids,
 ) => OrderItem(
-  id: '$orderId-item-${line.service.id}',
+  id: ids.newId(),
   ownerId: ownerId,
   createdAt: now,
   orderId: orderId,
@@ -22,8 +25,8 @@ OrderItem checkoutItem(
   lineTotal: line.total,
 );
 
-OrderEvent checkoutCreatedEvent(Order order, DateTime now) => OrderEvent(
-  id: '${order.id}-created',
+OrderEvent checkoutCreatedEvent(Order order, DateTime now, IdGenerator ids) => OrderEvent(
+  id: ids.newId(),
   ownerId: order.ownerId,
   createdAt: now,
   orderId: order.id,
@@ -31,3 +34,15 @@ OrderEvent checkoutCreatedEvent(Order order, DateTime now) => OrderEvent(
   kind: 'created',
   toStatus: order.status,
 );
+
+Payment checkoutCashPayment(String id, Order order, PayMethod method, int amount, int received) =>
+    Payment(
+      id: id,
+      ownerId: order.ownerId,
+      createdAt: order.createdAt,
+      orderId: order.id,
+      method: method,
+      amount: amount,
+      received: received,
+      paidAt: order.createdAt,
+    );

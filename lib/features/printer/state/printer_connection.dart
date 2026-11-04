@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:laurum/core/services/local_settings_providers.dart';
 import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/printer/state/printer_state.dart';
@@ -44,6 +45,11 @@ class PrinterConnectionController extends Notifier<PrinterConnectionState> {
     _set((s) => s.copyWith(busy: true, clearNotice: true));
     final service = ref.read(printServiceProvider);
     final ok = await service.connect(device);
+    if (ok) {
+      final settings = ref.read(localSettingsRepositoryProvider);
+      await settings.setString('printer_id', device.id);
+      await settings.setString('printer_name', device.name);
+    }
     _set(
       (s) => s.copyWith(
         status: service.status,

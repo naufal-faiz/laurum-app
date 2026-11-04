@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/customer.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
@@ -39,7 +40,6 @@ class AddCustomerState {
 class AddCustomerForm extends Notifier<AddCustomerState> {
   @override
   AddCustomerState build() => const AddCustomerState();
-
   void setName(String value) => state = state.copyWith(name: value);
   void setPhone(String value) => state = state.copyWith(phone: value);
   void setAddress(String value) => state = state.copyWith(address: value);
@@ -71,7 +71,7 @@ class AddCustomerForm extends Notifier<AddCustomerState> {
     }
     final now = ref.read(businessClockProvider)();
     final customer = Customer(
-      id: 'cust-new-${customers.length + 1}',
+      id: ref.read(idGeneratorProvider).newId(),
       ownerId: ref.read(authServiceProvider).currentUserId ?? 'owner',
       createdAt: now,
       name: name,

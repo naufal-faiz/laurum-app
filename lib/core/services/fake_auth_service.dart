@@ -1,3 +1,4 @@
+import 'package:laurum/core/domain/id_generator.dart';
 import 'package:laurum/core/services/auth_service.dart';
 import 'package:laurum/core/services/fake_auth_account.dart';
 import 'package:laurum/core/services/fake_auth_accounts.dart';
@@ -14,6 +15,7 @@ class FakeAuthService with FakePasswordAuth implements AuthService, TransactionP
     this.deleteSucceeds = true,
     this.rateLimited = false,
     Iterable<FakeAuthAccount> accounts = const [],
+    IdGenerator ids = const IdGenerator(),
   }) : accountStore = FakeAuthAccounts(
          FakeAuthAccount(
            id: userId,
@@ -22,6 +24,7 @@ class FakeAuthService with FakePasswordAuth implements AuthService, TransactionP
            needsSetup: needsBusinessSetup,
          ),
          accounts,
+         ids: ids,
        );
   @override
   final FakeAuthAccounts accountStore;

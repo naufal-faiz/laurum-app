@@ -1,17 +1,34 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/pages/order_edit_page.dart';
 import 'package:laurum/features/proposals/state/proposal_history.dart';
+import 'package:laurum/main_dummy.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 
 import 'antrean_test_host.dart';
+import 'fake_id_generator.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
   testWidgets('Rina address confirmation, approval and Edit weight route', (tester) async {
-    final host = await pumpAntrean(tester, location: '/antrean/usulan/prop-002');
+    final host = await pumpAntrean(
+      tester,
+      location: '/antrean/usulan/prop-002',
+      container: ProviderContainer(
+        overrides: [
+          ...dummyRepositoryOverrides,
+          idGeneratorProvider.overrideWithValue(
+            FakeIdGenerator(
+              derivedValues: {'prop-002/order': 'ord-ai-prop-002'},
+            ),
+          ),
+        ],
+      ),
+    );
     expect(find.text('Bu Rina'), findsOneWidget);
     expect(find.textContaining('Periksa dan sesuaikan'), findsOneWidget);
     await tester.tap(find.widgetWithText(AppButton, 'Setujui jadi order'));

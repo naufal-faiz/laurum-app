@@ -4,6 +4,7 @@ import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_rules.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
@@ -37,7 +38,7 @@ Future<void> saveOrderCompletion(Ref ref, Order expected) async {
         OrderStatus.selesai,
         useOrderStatus: false,
         event: OrderEvent(
-          id: '${current.id}-status-selesai',
+          id: ref.read(idGeneratorProvider).newId(),
           ownerId: current.ownerId,
           createdAt: now,
           orderId: current.id,

@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/services/dummy_history.dart';
 import 'package:laurum/core/services/fake_auth_account.dart';
+import 'package:laurum/core/services/in_memory_local_settings_repository.dart';
+import 'package:laurum/core/services/local_settings_providers.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/auth/data/auth_fixtures.dart';
@@ -32,6 +34,7 @@ List<FakeAuthAccount> dummyAuthAccounts() => [
 Future<void> clearDummyAccountData(Ref ref) async {
   await ref.read(transactionRunnerProvider).run(() async {
     ref.read(dummyHistoryProvider.notifier).clear();
+    (ref.read(localSettingsRepositoryProvider) as InMemoryLocalSettingsRepository).clearLocalData();
     ref.read(inMemoryOrderRepositoryProvider.notifier).clearLocalData();
     ref.read(inMemoryCustomerRepositoryProvider.notifier).clearLocalData();
     ref.read(inMemorySavingsRepositoryProvider.notifier).clearLocalData();

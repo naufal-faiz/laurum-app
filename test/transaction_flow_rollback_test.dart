@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/domain/savings_entry.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
+import 'package:laurum/core/services/local_settings_providers.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/customers/data/in_memory_savings_repository.dart';
@@ -11,6 +13,8 @@ import 'package:laurum/features/services/data/service_fixtures.dart';
 import 'package:laurum/features/transactions/state/checkout_state.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/main_dummy.dart';
+
+import 'fake_id_generator.dart';
 
 class FailingSavings extends InMemorySavingsRepository {
   bool _fail = true;
@@ -28,6 +32,7 @@ void main() {
     scope = ProviderContainer(
       overrides: [
         ...dummyRepositoryOverrides,
+        idGeneratorProvider.overrideWithValue(FakeIdGenerator(newValues: ['ord-0143'])),
         inMemorySavingsRepositoryProvider.overrideWith(FailingSavings.new),
       ],
     );
@@ -47,6 +52,7 @@ void main() {
     final savings = scope.read(inMemorySavingsRepositoryProvider);
     final pending = scope.read(syncServiceProvider).pendingChanges;
     expect(await scope.read(checkoutControllerProvider.notifier).save(), isNull);
+    expect(await scope.read(localSettingsRepositoryProvider).getInt('order_counter_A'), isNull);
     expect(scope.read(inMemoryOrderRepositoryProvider), same(orders));
     expect(scope.read(inMemorySavingsRepositoryProvider), same(savings));
     expect(scope.read(syncServiceProvider).pendingChanges, pending);
@@ -54,7 +60,9 @@ void main() {
     (scope.read(inMemorySavingsRepositoryProvider.notifier) as FailingSavings).setFailure(
       value: false,
     );
+    (scope.read(idGeneratorProvider) as FakeIdGenerator).reset();
     expect(await scope.read(checkoutControllerProvider.notifier).save(), 'ord-0143');
+    expect(await scope.read(localSettingsRepositoryProvider).getInt('order_counter_A'), 143);
   });
   test('cancel failure rolls back payment corrections, status, event and savings', () async {
     await prepare();

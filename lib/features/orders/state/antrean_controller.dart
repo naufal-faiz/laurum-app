@@ -3,6 +3,7 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_rules.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
@@ -54,7 +55,7 @@ class AntreanActions extends Notifier<AntreanActionState> {
         id,
         next,
         event: OrderEvent(
-          id: '$id-status-${next.name}',
+          id: ref.read(idGeneratorProvider).newId(),
           ownerId: order.ownerId,
           createdAt: now,
           orderId: id,

@@ -1,4 +1,5 @@
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/id_generator.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_rules.dart';
@@ -12,10 +13,17 @@ import 'package:laurum/core/domain/savings_entry.dart';
   required Iterable<SavingsEntry> savings,
   required String correctionPrefix,
   required DateTime at,
+  IdGenerator ids = const IdGenerator(),
 }) {
   if (order.deletedAt != null) throw StateError('Deleted order');
   final status = nextStatus(order.status, cancel: true);
-  final corrections = paymentCorrections(order, payments, prefix: correctionPrefix, at: at);
+  final corrections = paymentCorrections(
+    order,
+    payments,
+    prefix: correctionPrefix,
+    at: at,
+    ids: ids,
+  );
   final refund = -corrections
       .where((p) => p.method == PayMethod.tabungan)
       .fold(0, (sum, p) => sum + p.amount);
@@ -36,7 +44,7 @@ import 'package:laurum/core/domain/savings_entry.dart';
             },
       );
   if (refund != used) throw StateError('Savings and payment ledger do not reconcile');
-  final id = '$correctionPrefix-savings';
+  final id = ids.derived(correctionPrefix, 'savings');
   if (refund > 0 && ledger.any((e) => e.id == id)) throw ArgumentError('Duplicate correction ID');
   return (
     order: order.withStatus(status),
@@ -56,7 +64,7 @@ import 'package:laurum/core/domain/savings_entry.dart';
         ),
     ]),
     event: OrderEvent(
-      id: '$correctionPrefix-event',
+      id: ids.derived(correctionPrefix, 'event'),
       ownerId: order.ownerId,
       createdAt: at,
       orderId: order.id,

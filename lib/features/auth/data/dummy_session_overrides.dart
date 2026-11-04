@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:laurum/core/services/auth_service.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/local_data_service.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
@@ -25,6 +26,7 @@ List<Override> dummySessionOverrides({AuthService? authService, SyncService? syn
     (ref) =>
         authService ??
         FakeAuthService(
+          ids: ref.read(idGeneratorProvider),
           userId: dummyOwnerId,
           email: dummyGoogleEmail,
           accounts: dummyAuthAccounts(),

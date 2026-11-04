@@ -7,9 +7,14 @@ import 'package:laurum/features/customers/data/customer_fixtures.dart';
 class InMemoryCustomerRepository extends Notifier<List<Customer>>
     with TransactionalMemory<List<Customer>>
     implements CustomerRepository {
+  InMemoryCustomerRepository() : _empty = false;
+  InMemoryCustomerRepository.empty() : _empty = true;
+  final bool _empty;
   void clearLocalData() => state = const [];
   @override
-  List<Customer> build() => List.unmodifiable(customerFixtures);
+  List<Customer> build() {
+    return List.unmodifiable(_empty ? [] : customerFixtures);
+  }
 
   @override
   Future<List<Customer>> getCustomers({bool includeInactive = false}) async {

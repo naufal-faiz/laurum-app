@@ -1,14 +1,19 @@
+import 'package:laurum/core/domain/id_generator.dart';
 import 'package:laurum/core/services/auth_failure.dart';
 import 'package:laurum/core/services/fake_auth_account.dart';
 
 class FakeAuthAccounts {
-  FakeAuthAccounts(this.initial, Iterable<FakeAuthAccount> accounts)
-    : _records = {for (final account in accounts) account.email.toLowerCase(): account},
-      profile = initial {
+  FakeAuthAccounts(
+    this.initial,
+    Iterable<FakeAuthAccount> accounts, {
+    this.ids = const IdGenerator(),
+  }) : _records = {for (final account in accounts) account.email.toLowerCase(): account},
+       profile = initial {
     profile = _records[initial.email] ?? initial;
     _records.putIfAbsent(initial.email, () => initial);
   }
   final FakeAuthAccount initial;
+  final IdGenerator ids;
   Map<String, FakeAuthAccount> _records;
   FakeAuthAccount profile;
   FakeAuthAccount? _pending;
@@ -43,7 +48,7 @@ class FakeAuthAccounts {
     _pending = _records.containsKey(address)
         ? null
         : FakeAuthAccount(
-            id: 'account-${_records.length + 1}',
+            id: ids.newId(),
             email: address,
             name: name.trim(),
             password: password,

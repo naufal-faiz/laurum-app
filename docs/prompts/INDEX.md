@@ -42,7 +42,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | R9 | R9-pembayaran-cod.md | Revisi 2 Nov 1,2,6,7,8: COD, kembalian/tabungan, tombol Cetak/Ke antrean, Catat pembayaran | SELESAI (2026-11-02) | 580 tes hijau; COD kedua mode, uang lebih, tiga pintu Catat bayar, rollback, keyboard dan golden; tinjau Android |
 | R10 | R10-akun.md | Revisi 2 Nov 3,4,5: Masuk email, Daftar, Lupa password, Kelola akun | SELESAI (2026-11-02) | check_all 639 tes hijau; auth dummy, profil/password, reset 60 detik, cleanup/rollback, keyboard dan golden; tinjau Android |
 | 21 | 100-penyelesaian.md | Audit, aksesibilitas, alur akhir, APK | SELESAI (2026-11-04) | check_all 688 tes; 34 rute 320px/1,3x, alur penerimaan, audit .pen/state/keyboard; APK final dibangun, dipasang dan dijalankan di Samsung Android 12. Catatan: progress/fase-ui.md |
-| BP0 | BP0-persiapan-backend.md | Backend: IdGenerator, tes kontrak, antarmuka rentang, local_settings, aturan 19-22 | BELUM | Tinjau tabel ID dan suite kontrak |
+| BP0 | BP0-persiapan-backend.md | Backend: IdGenerator, tes kontrak, antarmuka rentang, local_settings, aturan 19-22 | SELESAI (2026-11-04) | check_all 719 tes; 28 titik ID, 7 kontrak repository + 1 runner, counter rollback dan rentang. Audit: docs/progress/bp0-id.md |
 | B1a | B1a-drift-fondasi.md | Drift: database per akun, tabel, outbox, runner | BELUM | Tinjau cara menjalankan SQLite di test |
 | B1b | B1b-drift-pelanggan.md | Drift: pelanggan dan tabungan | BELUM | |
 | B1c | B1c-drift-usaha-layanan.md | Drift: usaha, struk, layanan, pengaturan lokal | BELUM | |
@@ -56,4 +56,4 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 
 Setelah No 21 selesai, kerjakan backend: BP0, lalu B1a-B1f (B0 setelah B1f, karena hasil B1 langsung terlihat di HP), rencana di docs/backend/ROADMAP.md. Baris berstatus MENUNGGU belum punya prompt dan jangan diambil; minta penyusunannya setelah B1f SELESAI.
 
-Catatan integrasi 4 Nov 2026: docs/backend/ROADMAP.md yang dirujuk antrean dan BP0 belum tersedia di checkout ini. Lengkapi dokumen tersebut sebelum memulai BP0.
+Catatan 4 Nov 2026: docs/backend/ROADMAP.md sudah tersedia dan dibaca; urutan lokal dahulu tetap berlaku.

@@ -3,6 +3,7 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
@@ -61,17 +62,17 @@ class OrderEdit extends AsyncNotifier<OrderEditState> {
       final paid = paidAmount(await repository.getPaymentsByOrderId(orderId), orderId: orderId);
       if (draft.total < paid) throw StateError('Total di bawah pembayaran');
       final currentItems = await repository.getItemsByOrderId(orderId);
-      final events = await repository.getEventsByOrderId(orderId);
       final now = ref.read(businessClockProvider)();
       final order = orderEditOrder(data.order, draft, now);
       await repository.saveOrder(
         order,
         items: [
-          for (final line in draft.lines) orderEditItem(line, order, currentItems, now),
+          for (final line in draft.lines)
+            orderEditItem(line, order, currentItems, now, ref.read(idGeneratorProvider)),
         ],
         events: [
           OrderEvent(
-            id: '${order.id}-edited-${events.length + 1}',
+            id: ref.read(idGeneratorProvider).newId(),
             ownerId: order.ownerId,
             createdAt: now,
             orderId: order.id,

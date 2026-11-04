@@ -3,6 +3,7 @@ import 'package:laurum/core/domain/cancellation.dart';
 import 'package:laurum/core/domain/customer.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/proposal.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/proposals/state/proposal_order.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
@@ -19,6 +20,7 @@ Future<String> acceptProposal(Ref ref, Proposal p, ProposalDraft draft) async {
         order,
         payments: await orders.getPaymentsByOrderId(order.id),
         savings: await savings.getAllEntries(),
+        ids: ref.read(idGeneratorProvider),
         correctionPrefix: '${p.id}-cancel',
         at: ref.read(businessClockProvider)(),
       );
@@ -48,7 +50,7 @@ Future<String> acceptProposal(Ref ref, Proposal p, ProposalDraft draft) async {
   final isNew = customer == null;
   if (isNew && !draft.phoneValid) throw StateError('Nomor WhatsApp tidak valid');
   customer ??= Customer(
-    id: 'cust-ai-${p.id}',
+    id: ref.read(idGeneratorProvider).derived(p.id, 'customer'),
     ownerId: p.ownerId,
     createdAt: ref.read(businessClockProvider)(),
     name: draft.name.trim(),

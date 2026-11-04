@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/customer.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/customers/state/customer_import_data.dart';
@@ -36,14 +37,12 @@ class CustomerImportSelection extends Notifier<CustomerImportState> {
     final repository = ref.read(customerRepositoryProvider);
     final at = ref.read(businessClockProvider)();
     final owner = ref.read(authServiceProvider).currentUserId ?? 'owner';
-    var sequence = (await repository.getCustomers(includeInactive: true)).length;
     var saved = 0;
     for (final row in chosen) {
-      sequence++;
       try {
         await repository.saveCustomer(
           Customer(
-            id: 'cust-new-$sequence',
+            id: ref.read(idGeneratorProvider).newId(),
             ownerId: owner,
             createdAt: at,
             name: row.contact.name,

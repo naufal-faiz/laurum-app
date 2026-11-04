@@ -1,12 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/services/dummy_history.dart';
 import 'package:laurum/core/services/in_memory_transaction_runner.dart';
+import 'package:laurum/core/services/local_settings_providers.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/services/transaction_runner.dart';
 
 TransactionRunner dummyTransactionRunner(Ref ref) => InMemoryTransactionRunner(() {
   final stores = <Object>[
+    ref.read(localSettingsRepositoryProvider),
     ref.read(orderRepositoryProvider),
     ref.read(customerRepositoryProvider),
     ref.read(savingsRepositoryProvider),

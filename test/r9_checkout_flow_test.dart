@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/services/id_generator_provider.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/features/services/data/service_fixtures.dart';
@@ -9,6 +10,7 @@ import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/main_dummy.dart';
 
 import 'antrean_test_host.dart';
+import 'fake_id_generator.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
@@ -16,7 +18,12 @@ void main() {
     testWidgets('COD cashier -> receipt -> held detail -> payment completes mode=$mode', (
       tester,
     ) async {
-      final scope = ProviderContainer(overrides: dummyRepositoryOverrides);
+      final scope = ProviderContainer(
+        overrides: [
+          ...dummyRepositoryOverrides,
+          idGeneratorProvider.overrideWithValue(FakeIdGenerator(newValues: ['ord-0143'])),
+        ],
+      );
       final business = scope.read(businessRepositoryProvider);
       await business.saveProfile((await business.getProfile()).withOrderStatus(enabled: mode));
       scope.read(transactionDraftProvider.notifier)
@@ -51,7 +58,12 @@ void main() {
     });
   }
   testWidgets('Ke antrean saves and shows notice once instead of opening receipt', (tester) async {
-    final scope = ProviderContainer(overrides: dummyRepositoryOverrides);
+    final scope = ProviderContainer(
+      overrides: [
+        ...dummyRepositoryOverrides,
+        idGeneratorProvider.overrideWithValue(FakeIdGenerator(newValues: ['ord-0143'])),
+      ],
+    );
     scope.read(transactionDraftProvider.notifier)
       ..selectCustomer('cust-001')
       ..add(serviceFixtures.firstWhere((s) => s.id == 'srv-004'));
