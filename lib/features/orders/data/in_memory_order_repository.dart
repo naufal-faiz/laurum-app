@@ -4,54 +4,19 @@ import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_event.dart';
 import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/core/domain/payment.dart';
-import 'package:laurum/core/domain/report_range.dart';
-import 'package:laurum/core/domain/repositories/order_repository.dart';
 import 'package:laurum/core/services/transactional_memory.dart';
+import 'package:laurum/features/orders/data/in_memory_order_reader.dart';
 import 'package:laurum/features/orders/data/order_store.dart';
 import 'package:laurum/features/orders/data/order_store_seed.dart';
 import 'package:laurum/features/orders/data/order_store_write.dart';
 
-class InMemoryOrderRepository extends Notifier<OrderStore>
-    with TransactionalMemory<OrderStore>
-    implements OrderRepository {
+class InMemoryOrderRepository extends InMemoryOrderReader with TransactionalMemory<OrderStore> {
   InMemoryOrderRepository() : _empty = false;
   InMemoryOrderRepository.empty() : _empty = true;
   final bool _empty;
   void clearLocalData() => state = OrderStore(orders: [], items: [], payments: [], events: []);
   @override
   OrderStore build() => initialOrderStore(empty: _empty);
-  @override
-  Future<List<Order>> getOrders({OrderStatus? status}) async => List.unmodifiable(
-    state.orders.where((o) => o.deletedAt == null && (status == null || o.status == status)),
-  );
-  @override
-  Future<List<Order>> getOrdersInRange(ReportRange range, {OrderStatus? status}) async =>
-      List.unmodifiable(
-        (await getOrders(status: status)).where((o) => range.contains(o.enteredAt)),
-      );
-  @override
-  Future<List<Payment>> getPaymentsInRange(ReportRange range) async => List.unmodifiable(
-    state.payments.where((p) => p.deletedAt == null && range.contains(p.paidAt)),
-  );
-  @override
-  Future<Order?> getOrderById(String id) async =>
-      state.orders.where((o) => o.id == id && o.deletedAt == null).firstOrNull;
-  @override
-  Future<Order?> getOrderByOrderNo(String orderNo) async =>
-      state.orders.where((o) => o.orderNo == orderNo && o.deletedAt == null).firstOrNull;
-  @override
-  Future<List<OrderItem>> getItemsByOrderId(String orderId) async => List.unmodifiable(
-    state.items.where((i) => i.orderId == orderId && i.deletedAt == null),
-  );
-  @override
-  Future<List<Payment>> getPaymentsByOrderId(String orderId) async => List.unmodifiable(
-    state.payments.where((p) => p.orderId == orderId && p.deletedAt == null),
-  );
-  @override
-  Future<List<Payment>> getAllPayments() async => state.payments;
-  @override
-  Future<List<OrderEvent>> getEventsByOrderId(String orderId) async =>
-      List.unmodifiable(state.events.where((e) => e.orderId == orderId));
   @override
   Future<void> saveOrder(
     Order order, {

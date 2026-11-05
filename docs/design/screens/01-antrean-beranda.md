@@ -18,6 +18,14 @@ Template: RootScaffold pada RootShellPage, empat cabang StatefulShellRoute.
 - BannerMessage dan AppButton Hubungkan hanya saat koneksi WhatsApp palsu terputus.
 
 ## Data dan provider
+Mulai B1f, main memakai Drift per akun (mode memory tetap tersedia secara eksplisit).
+Sebelum rute dibangun, root menampilkan Membuka data lokal atau error penyimpanan
+dengan Coba lagi; teks pengecualian tidak ditampilkan. Empty state antrean tetap.
+Order/item/pembayaran dibatasi status aktif lewat getActiveOrders/getActiveItems/
+getActivePayments; tidak membaca seluruh riwayat atau satu query untuk setiap nota.
+Data bisnis bertahan saat restart; AI/usulan/WhatsApp tetap in-memory sampai B7.
+Database/foto native belum diuji di iOS. Rincian dan hasil perangkat: docs/progress/b1f.md.
+
 Fixture DATA MASTER melalui antarmuka repository publik; tanpa membaca fixture di page.
 antreanDataProvider menggabungkan order/items/payment/customer/proposal.
 antreanFilterProvider menyimpan filter; antreanActionsProvider mengunci aksi dan error.

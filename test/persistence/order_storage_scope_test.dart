@@ -81,6 +81,9 @@ void main() {
       expect(await foreign.getOrderById(id), isNull);
       expect(await foreign.getOrderByOrderNo(order.orderNo), isNull);
       expect(await foreign.getItemsByOrderId(id), isEmpty);
+      expect(await foreign.getActiveOrders(), isEmpty);
+      expect(await foreign.getActiveItems(), isEmpty);
+      expect(await foreign.getActivePayments(), isEmpty);
       expect(await foreign.getPaymentsByOrderId(id), isEmpty);
       expect(await foreign.getEventsByOrderId(id), isEmpty);
       await expectLater(foreign.saveOrder(order), throwsStateError);

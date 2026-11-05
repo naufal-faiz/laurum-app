@@ -1,5 +1,12 @@
-# 30 - Sinkronisasi (dummy, layar baru)
+# 30 - Sinkronisasi
 Rute: /lainnya/sinkronisasi | Prompt: 90
+Pembaruan B1f: main memakai DriftSyncService. Pending berasal dari COUNT outbox,
+termasuk sesudah restart. Nol = tersimpan lokal; ada antrean = menyimpan.
+Sinkron sekarang membaca ulang jumlah, tidak mengirim atau menghapus outbox;
+lastSyncedAt tetap kosong sampai mesin kirim B2 tersedia. Belum ada klaim sinkron server.
+Bagian perilaku palsu di bawah hanya berlaku untuk mode memory/tes dummy.
+Database native belum diuji di iOS; hasil Android dicatat di docs/progress/b1f.md.
+
 Tidak ada frame .pen. Disusun dari registry sesuai prompt; template SubScaffold.
 Komposisi: SyncStatusSection (AppCard status/jumlah tertunda/waktu terakhir,
 AppButton Sinkron sekarang, BannerMessage offline/gagal, contoh konflik informasi).

@@ -3,6 +3,7 @@ import 'package:laurum/core/services/auth_service.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/services/sync_service.dart';
+import 'package:laurum/features/auth/state/account_identity.dart';
 import 'package:laurum/features/auth/state/auth_error.dart';
 import 'package:laurum/features/auth/state/auth_state.dart';
 export 'package:laurum/features/auth/state/auth_state.dart';
@@ -25,6 +26,7 @@ class AuthSession extends Notifier<AuthState> {
   Future<bool> _login(Future<bool> Function(AuthService) action, String failure) => _run(() async {
     final auth = ref.read(authServiceProvider);
     if (!await action(auth)) return false;
+    ref.read(accountIdentityProvider.notifier).refresh();
     state = _snapshot(busy: true);
     if (!auth.needsBusinessSetup) await _restore();
     return true;
@@ -60,24 +62,29 @@ class AuthSession extends Notifier<AuthState> {
     await ref.read(authServiceProvider).signOut();
     return true;
   });
-  Future<bool> deleteAccount() => _run(
-    () => ref.read(transactionRunnerProvider).run(() async {
+  Future<bool> deleteAccount() => _run(() async {
+    final local = ref.read(localDataServiceProvider);
+    final deleted = await ref.read(transactionRunnerProvider).run(() async {
       if (ref.read(syncServiceProvider).currentStatus == SyncServiceStatus.offline) {
         throw StateError('Account deletion requires connectivity');
       }
       if (!await ref.read(authServiceProvider).deleteAccount()) return false;
-      await ref.read(localDataServiceProvider).deleteLocalData();
+      await local.deleteLocalData();
       return true;
-    }),
-  );
+    });
+    if (deleted) await local.finishDelete();
+    return deleted;
+  });
   Future<bool> _run(Future<bool> Function() action, {String? failure}) async {
     if (state.busy) return false;
     state = _snapshot(busy: true);
     try {
       final ok = await action();
+      ref.read(accountIdentityProvider.notifier).refresh();
       state = _snapshot(error: ok ? null : failure ?? 'Tindakan gagal. Data lokal dipertahankan.');
       return ok;
     } catch (error) {
+      ref.read(accountIdentityProvider.notifier).refresh();
       state = _snapshot(error: authErrorMessage(error));
       return false;
     }

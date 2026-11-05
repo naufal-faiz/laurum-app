@@ -10,6 +10,8 @@ import 'package:laurum/features/auth/data/auth_fixtures.dart';
 import 'package:laurum/features/auth/data/dummy_account_data.dart';
 import 'package:laurum/features/auth/data/dummy_transaction_runner.dart';
 import 'package:laurum/features/business/data/business_fixtures.dart';
+import 'package:laurum/features/customers/data/customer_history_offsets.dart';
+import 'package:laurum/features/customers/state/customer_history_offsets.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/features/sync/data/sync_fixtures.dart';
 import 'package:laurum/features/sync/state/sync_view.dart';
@@ -21,6 +23,7 @@ void notifyDummyWrite(Ref ref) {
 }
 
 List<Override> dummySessionOverrides({AuthService? authService, SyncService? syncService}) => [
+  customerHistoryOffsetsProvider.overrideWithValue(memoryCustomerHistoryOffsets()),
   transactionRunnerProvider.overrideWith(dummyTransactionRunner),
   authServiceProvider.overrideWith(
     (ref) =>

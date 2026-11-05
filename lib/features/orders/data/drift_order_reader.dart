@@ -7,6 +7,7 @@ import 'package:laurum/core/domain/payment.dart';
 import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/domain/repositories/order_repository.dart';
 import 'package:laurum/core/persistence/app_database.dart';
+import 'package:laurum/features/orders/data/active_order_queries.dart';
 import 'package:laurum/features/orders/data/order_event_storage.dart';
 import 'package:laurum/features/orders/data/order_item_storage.dart';
 import 'package:laurum/features/orders/data/order_range_queries.dart';
@@ -15,6 +16,12 @@ abstract class DriftOrderReader implements OrderRepository {
   DriftOrderReader(this.db, this.ownerId);
   final AppDatabase db;
   final String ownerId;
+  @override
+  Future<List<OrderItem>> getActiveItems() => readActiveItems(db, ownerId);
+  @override
+  Future<List<Order>> getActiveOrders() => readOrders(db, ownerId, activeOnly: true);
+  @override
+  Future<List<Payment>> getActivePayments() => readActivePayments(db, ownerId);
   @override
   Future<List<Order>> getOrders({OrderStatus? status}) => readOrders(db, ownerId, status: status);
   @override

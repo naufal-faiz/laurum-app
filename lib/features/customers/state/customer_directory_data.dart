@@ -5,8 +5,7 @@ import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/savings_rules.dart';
 import 'package:laurum/core/services/repository_providers.dart';
-import 'package:laurum/features/customers/data/customer_history_fixtures.dart';
-import 'package:laurum/features/orders/data/order_fixtures.dart';
+import 'package:laurum/features/customers/state/customer_history_offsets.dart';
 import 'package:laurum/features/transactions/state/add_customer_form.dart';
 
 class CustomerDirectoryRow {
@@ -47,6 +46,7 @@ final customerSummariesProvider = FutureProvider<List<CustomerDirectoryRow>>((re
   final customers = ref.watch(customerRepositoryProvider);
   final orders = ref.watch(orderRepositoryProvider);
   final savings = ref.watch(savingsRepositoryProvider);
+  final offsets = ref.watch(customerHistoryOffsetsProvider);
   final people = await customers.getCustomers(includeInactive: true);
   final notes = await orders.getOrders();
   final payments = await orders.getAllPayments();
@@ -57,15 +57,13 @@ final customerSummariesProvider = FutureProvider<List<CustomerDirectoryRow>>((re
   final rows = <CustomerDirectoryRow>[];
   for (final person in people) {
     final current = active(notes, person.id);
-    final initial = active(orderFixtures, person.id);
-    final baseline = customerHistoryFixtures[person.id];
+    final offset = offsets[person.id];
     final total = current.fold(0, (sum, o) => sum + o.total);
-    final initialTotal = initial.fold(0, (sum, o) => sum + o.total);
     rows.add(
       CustomerDirectoryRow(
         person,
-        baseline == null ? current.length : baseline.orderCount + current.length - initial.length,
-        baseline == null ? total : baseline.revenue + total - initialTotal,
+        current.length + (offset?.orderCount ?? 0),
+        total + (offset?.revenue ?? 0),
         outstanding(current, payments),
         savingsBalance(entries, customerId: person.id),
         current

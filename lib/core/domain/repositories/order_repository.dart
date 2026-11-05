@@ -7,11 +7,14 @@ import 'package:laurum/core/domain/report_range.dart';
 
 abstract class OrderRepository {
   Future<List<Order>> getOrders({OrderStatus? status});
+  Future<List<Order>> getActiveOrders();
   Future<List<Order>> getOrdersInRange(ReportRange range, {OrderStatus? status});
   Future<List<Payment>> getPaymentsInRange(ReportRange range);
   Future<Order?> getOrderById(String id);
   Future<Order?> getOrderByOrderNo(String orderNo);
   Future<List<OrderItem>> getItemsByOrderId(String orderId);
+  Future<List<OrderItem>> getActiveItems();
+  Future<List<Payment>> getActivePayments();
   Future<List<Payment>> getPaymentsByOrderId(String orderId);
   Future<List<Payment>> getAllPayments();
   Future<List<OrderEvent>> getEventsByOrderId(String orderId);

@@ -13,6 +13,8 @@ class DriftLocalDataService implements LocalDataService {
   final DriftTransactionRunner runner;
   final Future<void> Function()? clearMemory;
   @override
+  Future<void> finishDelete() async {}
+  @override
   Future<void> deleteLocalData() => runner.run(() async {
     for (final table in db.allTables.where((t) => t.$columns.any((c) => c.$name == 'owner_id'))) {
       final foreign = await db

@@ -7,5 +7,5 @@ final localSettingsRepositoryProvider = Provider<LocalSettingsRepository>(
   (ref) => InMemoryLocalSettingsRepository(),
 );
 final orderNumberGeneratorProvider = Provider<OrderNumberGenerator>(
-  (ref) => OrderNumberGenerator(settings: ref.read(localSettingsRepositoryProvider)),
+  (ref) => OrderNumberGenerator(settings: ref.watch(localSettingsRepositoryProvider)),
 );

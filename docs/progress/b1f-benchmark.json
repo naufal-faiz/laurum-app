@@ -1,0 +1,62 @@
+{
+    "date":  "2026-11-05",
+    "device":  "Samsung SM-N975F",
+    "android":  "12",
+    "build_mode":  "profile",
+    "dataset":  {
+                    "orders":  5000,
+                    "active_orders":  12,
+                    "archived_orders":  4988,
+                    "items":  5000,
+                    "payments":  8000
+                },
+    "measurement":  "ActivityTaskManager START to Flutter endOfFrame; cold process, OS file cache not cleared",
+    "excluded":  "Initial dataset preparation and locked-screen runs",
+    "target_ms":  2000,
+    "initial":  {
+                    "activity_to_frame_ms":  2904,
+                    "local_reads_p95_ms":  1564.198
+                },
+    "active_queries_before_gate":  {
+                                       "activity_to_frame_ms":  2200,
+                                       "local_reads_p95_ms":  45.471
+                                   },
+    "final_runs":  [
+                       {
+                           "run":  1,
+                           "seeded_now":  false,
+                           "activity_to_queue_frame_ms":  728,
+                           "main_to_queue_frame_ms":  207.858,
+                           "local_reads_samples":  30,
+                           "local_reads_median_ms":  17.186,
+                           "local_reads_p95_ms":  25.96
+                       },
+                       {
+                           "run":  2,
+                           "seeded_now":  false,
+                           "activity_to_queue_frame_ms":  614,
+                           "main_to_queue_frame_ms":  203.768,
+                           "local_reads_samples":  30,
+                           "local_reads_median_ms":  16.421,
+                           "local_reads_p95_ms":  20.36
+                       },
+                       {
+                           "run":  3,
+                           "seeded_now":  false,
+                           "activity_to_queue_frame_ms":  622,
+                           "main_to_queue_frame_ms":  211.182,
+                           "local_reads_samples":  30,
+                           "local_reads_median_ms":  16.565,
+                           "local_reads_p95_ms":  36.511
+                       }
+                   ],
+    "all_final_runs_under_target":  true,
+    "main_debug_smoke":  {
+                             "main_apk_installed":  true,
+                             "force_stop_and_reopen":  true,
+                             "database_count":  1,
+                             "database_checksum_unchanged":  true,
+                             "own_app_focused":  true,
+                             "screenshot_used":  false
+                         }
+}

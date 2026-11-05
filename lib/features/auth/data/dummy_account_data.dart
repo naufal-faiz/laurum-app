@@ -21,9 +21,9 @@ import 'package:laurum/features/services/data/in_memory_service_repository.dart'
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
 
 // Public demo credentials only; never a real account or persistent credential store.
-List<FakeAuthAccount> dummyAuthAccounts() => [
-  const FakeAuthAccount(
-    id: dummyOwnerId,
+List<FakeAuthAccount> dummyAuthAccounts({String ownerId = dummyOwnerId}) => [
+  FakeAuthAccount(
+    id: ownerId,
     email: dummyGoogleEmail,
     name: 'Bu Ratna',
     googleLinked: true,

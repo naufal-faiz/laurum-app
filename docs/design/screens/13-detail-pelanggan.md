@@ -14,6 +14,8 @@ Komposisi:
   tanpa mutasi, dan tanpa nota.
 
 Data/provider:
+- B1f main/Drift memakai statistik ledger aktual seperti spec 12; tidak menambah
+  ringkasan historis fixture. Angka Pak Dedi di bawah khusus entry demo memory.
 - customerDetailProvider(id) memakai customerSummariesProvider (termasuk nonaktif),
   reportOrdersProvider dan SavingsRepository. Daftar tetap memfilter pelanggan aktif.
 - Pak Dedi: 0813-7788-1122; total Rp580.000; 16 order; piutang Rp31.500; saldo Rp50.000.

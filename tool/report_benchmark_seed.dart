@@ -3,9 +3,15 @@ import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/persistence/app_database.dart';
 import 'package:laurum/core/persistence/sql_timestamp.dart';
 
-Future<({String owner, ReportRange range})> seedReportBenchmark(AppDatabase db) async {
+Future<({String owner, ReportRange range})> seedReportBenchmark(
+  AppDatabase db, {
+  String? ownerId,
+}) async {
   const ids = IdGenerator();
-  final owner = ids.newId(), customer = ids.newId(), service = ids.newId(), category = ids.newId();
+  final owner = ownerId ?? ids.newId(),
+      customer = ids.newId(),
+      service = ids.newId(),
+      category = ids.newId();
   final day = DateTime(2026, 9);
   final created = day.toIso8601String();
   final orders = List.generate(5000, (_) => ids.newId());

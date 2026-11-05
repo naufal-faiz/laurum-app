@@ -14,6 +14,13 @@ Template: SubScaffold; sheet melalui AppBottomSheet + SheetScaffold.
   tombol tampil/sembunyi, footer Simpan password dan BannerMessage error yang tetap terlihat.
 
 ## Data dan provider
+B1f: database mengikuti currentUserId sesi dan identitas akun dipisahkan dari aksi auth
+untuk menghindari siklus provider. Keluar menutup tanpa menghapus berkas. Hapus akun
+membersihkan baris+outbox+local_settings lewat runner; sesudah commit baru menghapus
+berkas DB/sidecar/foto akun. Akun lain tidak disentuh. Draf akun lama dibersihkan.
+Auth/password masih palsu di memori sampai B3; tidak ada token/sandi disimpan ke DB.
+Database/foto native belum diuji di iOS. Bukti: docs/progress/b1f.md.
+
 AuthService/accountView, authSessionProvider, accountEditProvider, authFormProvider(password),
 shellSyncProvider. Profil akun terpisah dari nama/alamat/telepon usaha pada struk.
 Tidak menyimpan password/token di state tampilan. Nilai input rahasia dibuang saat sheet ditutup.

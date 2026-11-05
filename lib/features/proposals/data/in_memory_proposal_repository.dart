@@ -5,12 +5,14 @@ import 'package:laurum/core/domain/repositories/proposal_repository.dart';
 import 'package:laurum/core/services/transactional_memory.dart';
 import 'package:laurum/features/proposals/data/proposal_fixtures.dart';
 
+final proposalSeedProvider = Provider<List<Proposal>?>((ref) => null);
+
 class InMemoryProposalRepository extends Notifier<List<Proposal>>
     with TransactionalMemory<List<Proposal>>
     implements ProposalRepository {
   void clearLocalData() => state = const [];
   @override
-  List<Proposal> build() => List.unmodifiable(proposalFixtures);
+  List<Proposal> build() => List.unmodifiable(ref.watch(proposalSeedProvider) ?? proposalFixtures);
 
   @override
   Future<List<Proposal>> getProposals({ProposalStatus? status}) async {

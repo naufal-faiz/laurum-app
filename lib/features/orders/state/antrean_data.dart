@@ -47,22 +47,19 @@ final antreanDataProvider = FutureProvider<AntreanData>((ref) async {
   final repository = ref.watch(orderRepositoryProvider);
   final customers = ref.watch(customerRepositoryProvider);
   final proposals = ref.watch(proposalRepositoryProvider);
-  final orders =
-      (await repository.getOrders())
-          .where((o) => o.status != OrderStatus.selesai && o.status != OrderStatus.dibatalkan)
-          .toList()
-        ..sort((a, b) => b.enteredAt.compareTo(a.enteredAt));
+  final orders = (await repository.getActiveOrders()).toList()
+    ..sort((a, b) => b.enteredAt.compareTo(a.enteredAt));
   final pending = await proposals.getProposals(status: ProposalStatus.menunggu);
   final customerList = await customers.getCustomers(includeInactive: true);
   final items = <String, List<OrderItem>>{};
-  for (final order in orders) {
-    items[order.id] = await repository.getItemsByOrderId(order.id);
+  for (final item in await repository.getActiveItems()) {
+    (items[item.orderId] ??= []).add(item);
   }
   return AntreanData(
     orders,
     pending,
     {for (final c in customerList) c.id: c},
     items,
-    await repository.getAllPayments(),
+    await repository.getActivePayments(),
   );
 });

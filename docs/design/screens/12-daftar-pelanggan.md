@@ -16,6 +16,11 @@ Komposisi:
 - EmptyState untuk kosong/tanpa hasil/error; AppSkeleton saat memuat.
 
 Data dan provider:
+- B1f main/Drift: jumlah order dan total historis berasal dari transaksi tersimpan,
+  mengecualikan pembatalan/soft delete. Tidak menambahkan ringkasan fixture;
+  customerHistoryOffsetsProvider kosong secara default. Selisih angka terhadap
+  .pen/riwayat ringkasan di bawah disengaja agar cocok dengan ledger aktual.
+- Entry memory saja menginjeksi offset historis DATA MASTER; tampilan demo lama tetap.
 - customerDirectoryProvider membaca CustomerRepository, OrderRepository,
   SavingsRepository. Hanya pelanggan aktif yang ditampilkan.
 - Fixture awal: 48 pelanggan, lima pemilik piutang, lima pemilik tabungan.

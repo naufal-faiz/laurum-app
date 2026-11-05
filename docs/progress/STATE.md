@@ -1,58 +1,59 @@
 # STATE Laurum
-Diperbarui: 2026-11-04 | Cabang dev2backend
+Diperbarui: 2026-11-05 | Cabang dev2backend
 
 ## Posisi
-UI 100/R0-R10 selesai. BP0 8e51cda, B1a c22ec5b, B1b 8821b17, B1c f9bd41c,
-B1d 70041af selesai; audit B1e 2fb58eb. B1e SELESAI: pengeluaran dan laporan ledger.
-check_all 869 tes, dua analyzer tanpa isu, check_arch OK, REPO_MAP860, exit0; log Temp/laurum-b1e-check.log.
-Baseline sesudah persetujuan 848 tes hijau, exit 0; laurum-b1e-approved-baseline.log di Temp.
-Rencana docs/plans/B1e-pengeluaran-laporan.md; laporan docs/progress/b1e.md.
+UI 100/R0-R10, BP0 dan B1a-f SELESAI. B1e b2a2d91; B1f wiring Drift selesai.
+check_all akhir: 882 tes, dua analyzer tanpa isu, check_arch OK, REPO_MAP895, exit0.
+Bukti: docs/progress/b1f.md, b1f-benchmark.json; Temp/laurum-b1f-final-check.log.
+Rencana: docs/plans/B1f-penyambungan.md. Tidak push/merge.
 
-## Pekerjaan B1e
-- Pengguna menyetujui seluruh angka mengikuti ledger aktual pada 4 Nov 2026.
-  Audit awal docs/progress/b1e-reconciliation.md/.json adalah bukti historis, bukan target aktif.
-- DATA MASTER/spec 18 diperbarui: hari 177.000/6, minggu 589.000/14, bulan 864.000/16;
-  pengeluaran 145.000/850.000/1.850.000, laba 32.000/-261.000/-986.000.
-  Kas 130.500/500.000/868.500; posisi piutang 400.500 dan tabungan 430.000 tetap.
-- ReportBaseline/getBaseline dan penyesuaian fixture dihapus. Satu jalur ReportRepository
-  untuk preset/kustom/CSV/grafik/layanan. buildReport/domain dipakai InMemory dan Drift;
-  ReportPositions adalah posisi global aktual, bukan baseline pendapatan.
-- Query SQL membatasi cohort/flow/biaya/setoran ke range, saldo/utang memakai agregat akun.
-  Harian/layanan dihitung dari snapshot; grafik UI tetap max7hari, masa depan null.
-- DriftExpenseRepository + kategori, owner/parent, metadata, outbox/soft delete atomik.
-  Foto disalin ke app-support/expense_photos/<owner>/UUID, sumber tidak diubah;
-  callback rollback runner membuang salinan baru termasuk bila outer transaction gagal.
-- Skema v4/16 tabel: expense spent_at canonical + owner index; savings created_key
-  terindeks sebagai turunan created_at (created_at asli/identitas UTC tetap).
-  Snapshot v1/v2/v3 utuh; v4 dihasilkan dengan --data-classes --companions.
-- SQL/sync berikutnya wajib created_key=sqlTimestamp(created_at); entered_at/paid_at/
-  spent_at juga sqlTimestamp UTC enam digit. Migrasi v1-v3->v4 diuji.
-- 159 tes terarah hijau; mutasi laporan/kategori/query plan juga lolos check_all akhir.
-  Tiga golden angka baru ditinjau dan diperbarui; 7 tes UI/view/CSV/body lolos.
-- Benchmark bulan 5.000 order/8.000 bayar: p95 totals183,348ms, harian67,782ms,
-  layanan119,201ms (Windows memory; non-gating; rincian laporan).
-- LANGKAH BERIKUTNYA: docs/prompts/B1f-drift-penyambungan.md.
-  Berhenti setelah commit B1e; .pen masih angka lama, spec18/DATA MASTER ledger menang.
+## Hasil B1f
+- Main default Drift; LAURUM_STORE=memory/entry dummy tetap untuk tes/demo.
+  Satu MaterialApp.router, gate loading/error/retry; root49 baris, widget baru0.
+- AccountStorage serial per akun; keluar menutup tanpa menghapus. Repository bisnis,
+  tabungan, pengeluaran, struk, laporan dan local_settings semuanya Drift.
+- AccountIdentity memutus siklus AuthSession -> localData -> DB -> AuthSession.
+  Draf dibersihkan saat ganti identitas; generator nota watch local_settings.
+- Monitor SQL milik akun dibatalkan sebelum close; UI memakai stream salinan.
+  Listener paused tidak menahan close. Jangan mengekspos tableUpdates mentah ke UI.
+- Antrean getActiveOrders/Items/Payments: SQL owner/status/soft-delete, tanpa N+1
+  atau membaca seluruh riwayat. Kontrak dua backend dan alur widget lulus.
+- Seed DATA MASTER atomik+outbox+marker; ID/FK UUID v5 idempoten per akun.
+  Debug/profile atau DEMO_SEED=true hanya akun demo kosong; release normal kosong.
+  Identitas stub release terpisah dari demo; onboarding membaca profil tersimpan.
+- Pending = COUNT outbox; syncNow hanya refresh, tidak menghapus/mengaku terkirim.
+- Hapus akun: auth+SQL atomik; finishDelete setelah commit menghapus DB/sidecar/foto.
+  Finalisasi menolak data yang dipulihkan rollback; file akun lain tetap.
+- Statistik pelanggan Drift murni ledger; offset historis hanya override memory.
+- Samsung SM-N975F Android12, profile, 5.000 nota (12 aktif/4.988 arsip):
+  cold process Activity->frame728/614/622ms; p95 30 baca25,960/20,360/36,511ms.
+  Cache OS tidak dikosongkan; seed awal/run layar terkunci dikecualikan.
+- APK utama debug terpasang; force-stop/reopen mempertahankan checksum DB.
+  Pengaturan layar kembali0; berkas tangkapan yang tidak relevan dihapus.
+- Tes native widget harus pump frame di antara I/O agar future Riverpod diperbarui.
+- LANGKAH BERIKUTNYA: docs/prompts/B0-supabase.md; perlu Docker Desktop/Supabase CLI.
+  Berhenti menunggu tinjauan B1f. B2/B3 belum ditulis; susun dari temuan b1f.md.
 
-## Lingkungan dan batas
-- Aplikasi tetap InMemory sampai B1f, sesudahnya B0 lokal. Android/iOS database/foto
-  belum diuji. B1f lifecycle harus membersihkan foto/folder akun sesudah commit;
-  file lama jangan dihapus saat masih diperlukan outbox. Upload foto baru B2.
-- Sebelum SEMUA Dart/Flutter pada proses PowerShell baru: . ./tool/windows_native_sdk.ps1
-  SDK asli E:/App Data/flutter/flutter berspasi; junction Flutter+salinan Dart di Temp
-  (~588MB), lingkungan hanya per proses. Cloud/key belum dibutuhkan; beri tahu saat perlu.
-- Jangan push/merge atau mengubah proyek cloud. B2/B3/B5-B8 MENUNGGU.
-- AI settings/usulan, auth/sync tetap dummy/memory sampai B7/B3/B2; printer/picker native
-  belum disambung. Preferensi perangkat local_settings; bisnis/struk sinkron; tanpa shared_preferences.
-- DriftTransactionRunner checkpoint memory sementara; nested gagal menggagalkan outer.
-  Cleanup FK/outbox/settings atomik, tutup/hapus file DB setelah commit.
-- Namespace retry BP0 tetap; seed UUID pada B1f. Payload snake_case/UTC ISO tanpa
-  sync_state/pay_status/key pencarian lokal. B1b pencarian prefiks belum wiring UI.
-- B1c profil/struk satu baris per owner dijaga repository, belum UNIQUE(owner_id) SQL.
-- PRD B5 belum memuat order_events; tabel tersedia sesuai domain/B1d (laporan B1a).
-- PayStatus turunan; COD bersisa ditahan; tabungan sebagian+bayar nol wajib COD.
-  Kelebihan tunai bukan omzet; mode sederhana selesai saat COD lunas; non-COD lama didukung.
-- Fixture transaksi tetap 48 pelanggan/12 antrean; cust-010/A-0137 dan AI 142/8/3 tetap.
+## Keputusan dan batas
+- B1e ledger disetujui: omzet hari177.000/6, minggu589.000/14, bulan864.000/16;
+  biaya145.000/850.000/1.850.000; laba32.000/-261.000/-986.000.
+  Kas130.500/500.000/868.500; piutang400.500 dan tabungan430.000 tetap.
+  Audit b1e-reconciliation historis; .pen kalah dari spec18/DATA MASTER.
+- Skema v4/16 tabel, snapshot v1-v4 beku. created_key=sqlTimestamp(created_at);
+  entered_at/paid_at/spent_at UTC enam digit. Perubahan skema wajib migrasi+tes.
+- Foto lama dipertahankan untuk outbox sampai lifecycle/account deletion; upload B2.
+- Sebelum SEMUA Dart/Flutter pada PowerShell baru: . ./tool/windows_native_sdk.ps1.
+  SDK berspasi; alias Flutter+salinan Dart di Temp, hanya lingkungan proses (~588MB).
+  Gradle menyiapkan SDK Platform35/CMake3.22.1; paket Flutter tidak berubah.
+- Cloud/key belum perlu. Jangan mengubah proyek cloud. B2/B3/B5-B8 MENUNGGU.
+- Auth/sandi/sesi palsu di memori sampai B3; akun baru tidak pulih sesudah proses
+  berakhir, data bisnis tetap di DB. AI/usulan/WhatsApp memory sampai B7;
+  printer/picker/ekspor native belum disambung. iOS belum diuji.
+- Preferensi perangkat local_settings; bisnis/struk sinkron; tanpa shared_preferences.
+- Namespace retry BP0 tetap; payload snake_case/UTC ISO tanpa sync_state/pay_status/key lokal.
+- B1c profil/struk satu baris per owner dijaga repo, belum UNIQUE(owner_id) SQL.
+- PRD B5 belum memuat order_events; tabel tersedia sesuai domain/B1d.
+- PayStatus turunan; COD bersisa ditahan; tabungan sebagian+bayar nol wajib COD;
+  kelebihan tunai bukan omzet; mode sederhana selesai saat COD lunas.
 - Registry60/60, Section debt14; utang runtime101-110/tool: fase-ui/bp0-id.
-- Slot OrderEditBodySection izin R0, statusLabel R4. check_all bisa hijau dengan info
-  Riverpod: baca log dan bersihkan info baru. Tidak ada ignore lint manual/dependensi baru.
+  Registry/tema/lint/dependensi/skema/golden/fixture transaksi tidak diubah B1f.
