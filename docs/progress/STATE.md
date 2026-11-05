@@ -5,35 +5,33 @@ Diperbarui: 2026-11-05 | Cabang dev2backend
 UI100/R0-R10, BP0 dan B1a-f SELESAI. HEAD dasar B1f0275f3b.
 B1f: check_all882 tes, dua analyzer tanpa isu, archOK, REPO_MAP895, exit0.
 Bukti B1f: docs/progress/b1f.md dan b1f-benchmark.json. Tidak push/merge.
-B0 SEDANG: docs/prompts/B0-supabase.md; rencana docs/plans/B0-supabase-lokal.md.
+B0 SELESAI: docs/prompts/B0-supabase.md; rencana docs/plans/B0-supabase-lokal.md.
 Berkas/bukti/selisih rinci: docs/progress/b0.md dan supabase/README.md.
 
-## Sedang dikerjakan — B0
+## Hasil B0
 - CLI npm Supabase3.0.0 terkunci di supabase/package-lock.json; Docker29.9.2/WSL2.
 - Config/Auth/Mailpit, empat migrasi schema/RLS/triggers/RPC, Edge delete-account,
-  pgTAP semua tabel/Storage, enam tes handler Node, tes runtime disiapkan.
+  pgTAP semua tabel/Storage, enam tes handler Node dan tes runtime nyata lulus.
 - Tidak mengubah lib/pubspec/PRD, tidak mengakses/mengubah cloud, tanpa kunci repo.
-- Start gagal saat pull/extract: C: tinggal4,7MB, containerd read-only.
-  Pengguna sudah memindahkan Docker ke E: lewat UI dan menyalakannya kembali.
-  Server29.9.2 merespons; pengunduhan image diulang. Jangan factory reset/prune/VHDX.
+- Docker dipindahkan pengguna ke E: setelah C: tinggal4,7MB dan extract gagal.
 - db reset exit0; pgTAP140/140 PASS. 47 policy public +4 Storage terpasang.
   Cleanup role tanpa akses schema Auth, UID dari verified claims; RLS tetap auth.uid.
-- Node handler6 pass/0 fail, parser PowerShell OK; runtime Auth/Storage/Edge belum.
+- Node handler6 PASS; runtime1 PASS: Auth min8/konfirmasi, Storage privat,
+  purge A tanpa menyentuh B. Cleanup akhir auth_users/storage_objects/customers=0.
 - check_all HIJAU:882 tes, dua analyzer tanpa isu, archOK, map895, exit0.
   BOT=true/FLUTTER_SUPPRESS_ANALYTICS=true hanya proses mencegah crash telemetry.
   Bukti Temp/laurum-b0-check-all-retry.log, laurum-b0-reset.log, laurum-b0-pgtap.log.
-- Edge Runtime v1.77.9 SIGSEGV139 juga saat binary kosong --help, bukan handler.
-  Docker history COPY binary167MB, file dalam container40MB: cache ekstraksi rusak.
-  Image rm/pull biasa masih memakai cache lama. Sedang rm image/restart Docker/pull.
-  Analytics dinonaktifkan (Vector gagal host IPv6:2375); start --exclude edge-runtime
-  berhasil, health database/Auth/Storage normal. Jangan ignore-health-check.
+- Snapshot Edge rusak: binary40MB, arsip resmi166.846.080byte. Dipulihkan dari
+  arsip resmi ke image cache laurum-edge-runtime-recovered:v1.77.9, tag CLI lokal
+  menunjuk recovered; digest berubah karena layer pemulihan, versi tetap1.77.9.
+  Tidak publish image/ubah volume. Binary/runtime/HTTP lulus setelah pemulihan.
+- Analytics opsional off (Vector host IPv6:2375 gagal); startup normal tanpa exclude
+  exit0. Stack lokal aktif, tanpa ignore-health-check. Bukti Temp/laurum-b0-runtime.log.
 - Cache SDK sementara kini E:\laurum-b0-native-dart-sdk (tanpa spasi), junction
   Temp/laurum-native-dart-sdk menunjuk ke sana. SDK asli tetap. Path berspasi
   mematahkan native hook; jangan pindah cache ini ke folder repo berspasi.
-- LANGKAH BERIKUTNYA: selesaikan perbaikan cache binary Edge tanpa hapus volume;
-  functions serve dan
-  ./supabase/tests/runtime.ps1 (kunci lokal hanya env proses). check_all wajib.
-  Update STATE/INDEX/b0.md, commit final lalu berhenti. B2/B3 MENUNGGU/belum ditulis.
+- LANGKAH BERIKUTNYA: berhenti untuk tinjauan B0. B2/B3 MENUNGGU/belum ditulis;
+  susun prompt dari temuan b0.md/b1f.md dan putuskan protokol edit item sebelum sync.
 
 ## Hasil B1f dan batas yang tetap berlaku
 - Main default Drift; memory/dummy untuk tes. Satu MaterialApp.router, root49baris.

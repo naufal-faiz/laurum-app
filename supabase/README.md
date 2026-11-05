@@ -38,6 +38,12 @@ lalu aktifkan `[auth.external.google].enabled` dan restart stack ketika B3 disia
 Google OAuth dan SMTP produksi perlu konfigurasi pemilik proyek sebelum rilis.
 Tidak perlu akun cloud, login CLI, URL cloud atau kunci cloud untuk B0.
 Output start/status mengandung rahasia lokal: jangan salin ke repo, log atau chat.
+Analytics Logflare/Vector lokal dimatikan karena B0 tidak memerlukannya dan jalur
+host Docker IPv6:2375 pada mesin uji tidak terjangkau. Health check layanan utama
+tetap aktif. Tidak perlu mengekspos Docker daemon tanpa TLS.
+Mesin uji sempat kehabisan C: dan memiliki snapshot binary Edge yang terpotong;
+cache lokal dipulihkan dari binary lengkap di arsip image resmi versi yang sama.
+Rincian/bukti ada di docs/progress/b0.md; instalasi sehat tidak memerlukan langkah itu.
 
 ## Kontrak database
 

@@ -26,7 +26,7 @@ test("Local Auth, Storage isolation and deployed account deletion", async () => 
       email: `b0-${randomUUID()}@example.test`, password: "short",
     } });
     assert.equal(weak.status, 422, "Auth enforces password length");
-    assert.equal((await weak.json()).code, "weak_password", "Failure is password validation");
+    assert.equal((await weak.json()).error_code, "weak_password", "Failure is password validation");
     const settings = await (await api("/auth/v1/settings")).json();
     assert.equal(settings.mailer_autoconfirm, false, "Email confirmation is required");
     for (let i = 0; i < 2; i++) {
@@ -70,6 +70,7 @@ test("Local Auth, Storage isolation and deployed account deletion", async () => 
     assert.equal((await api(`/storage/v1/object/expense-photos/${b.paths[0]}`, { token: b.token })).status,
       200, "B Storage bytes retained");
     assert.equal((await api(`/auth/v1/admin/users/${a.id}`, { admin: true })).status, 404, "A Auth user removed");
+    assert.equal((await api(`/auth/v1/admin/users/${b.id}`, { admin: true })).status, 200, "B Auth user retained");
     const objects = await api("/storage/v1/object/list/expense-photos", {
       admin: true, method: "POST", body: { prefix: a.id, limit: 100 },
     });
