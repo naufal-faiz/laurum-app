@@ -53,3 +53,8 @@ app.*.map.json
 *.keystore
 *.jks
 android/key.properties
+
+# Local Supabase tooling and runtime (never credentials)
+supabase/node_modules/
+supabase/.temp/
+supabase/.branches/

@@ -1,0 +1,12 @@
+{
+  "name": "laurum-local-backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test functions/delete-account/handler.test.ts"
+  },
+  "description": "Pinned development CLI for the local Laurum Supabase stack",
+  "devDependencies": {
+    "supabase": "3.0.0"
+  }
+}
