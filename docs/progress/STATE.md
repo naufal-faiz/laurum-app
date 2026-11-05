@@ -2,9 +2,8 @@
 Diperbarui: 2026-11-05 | Cabang dev2backend
 
 ## Posisi
-UI100/R0-R10, BP0 dan B1a-f SELESAI. HEAD dasar B1f0275f3b.
-B1f: check_all882 tes, dua analyzer tanpa isu, archOK, REPO_MAP895, exit0.
-Bukti B1f: docs/progress/b1f.md dan b1f-benchmark.json. Tidak push/merge.
+UI100/R0-R10, BP0, B1a-f dan B0 SELESAI; dasar37ffe59. B2 menunggu persetujuan.
+Bukti B1f: docs/progress/b1f.md dan b1f-benchmark.json; tanpa push/merge.
 B0 SELESAI: docs/prompts/B0-supabase.md; rencana docs/plans/B0-supabase-lokal.md.
 Berkas/bukti/selisih rinci: docs/progress/b0.md dan supabase/README.md.
 
@@ -20,7 +19,7 @@ Berkas/bukti/selisih rinci: docs/progress/b0.md dan supabase/README.md.
   purge A tanpa menyentuh B. Cleanup akhir auth_users/storage_objects/customers=0.
 - check_all HIJAU:882 tes, dua analyzer tanpa isu, archOK, map895, exit0.
   BOT=true/FLUTTER_SUPPRESS_ANALYTICS=true hanya proses mencegah crash telemetry.
-  Bukti Temp/laurum-b0-check-all-retry.log, laurum-b0-reset.log, laurum-b0-pgtap.log.
+  Check terbaru persiapan B2: Temp/laurum-b2-preparation-check.log (882 tes, exit0).
 - Snapshot Edge rusak: binary40MB, arsip resmi166.846.080byte. Dipulihkan dari
   arsip resmi ke image cache laurum-edge-runtime-recovered:v1.77.9, tag CLI lokal
   menunjuk recovered; digest berubah karena layer pemulihan, versi tetap1.77.9.
@@ -30,8 +29,10 @@ Berkas/bukti/selisih rinci: docs/progress/b0.md dan supabase/README.md.
 - Cache SDK sementara kini E:\laurum-b0-native-dart-sdk (tanpa spasi), junction
   Temp/laurum-native-dart-sdk menunjuk ke sana. SDK asli tetap. Path berspasi
   mematahkan native hook; jangan pindah cache ini ke folder repo berspasi.
-- LANGKAH BERIKUTNYA: berhenti untuk tinjauan B0. B2/B3 MENUNGGU/belum ditulis;
-  susun prompt dari temuan b0.md/b1f.md dan putuskan protokol edit item sebelum sync.
+- Persiapan B2: docs/plans/B2-kontrak-sinkronisasi.md dan prompt draf
+  docs/prompts/B2a-sync-contract.md tersedia; INDEX tetap MENUNGGU, PRD belum diubah.
+- LANGKAH BERIKUTNYA: tunggu persetujuan usulan (AGENTS13: PRD perlu izin).
+  Setelah disetujui, catat izin dan kerjakan B2a saja; jangan mulai B2b/B3.
 
 ## Hasil B1f dan batas yang tetap berlaku
 - Main default Drift; memory/dummy untuk tes. Satu MaterialApp.router, root49baris.

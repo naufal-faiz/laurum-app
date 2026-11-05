@@ -50,7 +50,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | B1e | B1e-drift-pengeluaran-laporan.md | Drift: pengeluaran dan Laporan dari ledger | SELESAI (2026-11-04) | check_all 869 tes; angka ledger disetujui, DATA MASTER/golden/CSV sesuai, schema v4, kontrak dua backend, rollback foto dan benchmark bulan. Lihat docs/progress/b1e.md |
 | B1f | B1f-drift-penyambungan.md | Drift: sambung ke aplikasi, seed demo, persistensi | SELESAI (2026-11-05) | check_all 882 tes; default Drift, seed UUID, akun/outbox/lifecycle, benchmark Android 5.000 nota 614–728ms; APK utama terpasang dan DB bertahan setelah restart. Lihat docs/progress/b1f.md |
 | B0 | B0-supabase.md | Supabase lokal: skema, RLS, RPC, Auth, tes RLS | SELESAI (2026-11-05) | CLI3.0.0; reset exit0, pgTAP140 PASS, handler6 PASS, runtime Auth/Storage/Edge PASS, check_all882 hijau. Docker di E:, cache Edge dipulihkan. Lihat docs/progress/b0.md; B2 perlu prompt dan keputusan edit item |
-| B2 | (belum ditulis) | SyncEngine | MENUNGGU | Minta penyusunan setelah B1f |
+| B2 | B2a-sync-contract.md (draf) | SyncEngine: kontrak server dahulu | MENUNGGU | Usulan docs/plans/B2-kontrak-sinkronisasi.md siap ditinjau; menunggu izin revisi PRD/item dan atomisitas. Belum ada implementasi B2 |
 | B3 | (belum ditulis) | Auth nyata, pemulihan, hapus akun | MENUNGGU | Siapkan Google OAuth dan SMTP |
 | B5-B8 | (belum ditulis) | Printer nyata, Play Store, AI, Pro | MENUNGGU | Lihat docs/backend/ROADMAP.md |
 
