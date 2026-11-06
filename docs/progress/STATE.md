@@ -1,11 +1,30 @@
 # STATE Laurum
-Diperbarui: 2026-11-05 | Cabang dev2backend
+Diperbarui: 2026-11-06 | Cabang dev2backend
 
 ## Posisi
-UI100/R0-R10, BP0, B1a-f dan B0 SELESAI; dasar37ffe59. B2 menunggu persetujuan.
+UI100/R0-R10, BP0, B1a-f, B0 dan **B2a SELESAI**; B2b belum ditulis. B2 disetujui
+pengguna 6 Nov 2026. Bukti B2a: docs/progress/b2a.md.
 Bukti B1f: docs/progress/b1f.md dan b1f-benchmark.json; tanpa push/merge.
 B0 SELESAI: docs/prompts/B0-supabase.md; rencana docs/plans/B0-supabase-lokal.md.
-Berkas/bukti/selisih rinci: docs/progress/b0.md dan supabase/README.md.
+Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md dan supabase/README.md.
+
+## Hasil B2a (6 Nov 2026)
+- Migrasi baru `20261106062912_b2a_sync_groups.sql`; empat migrasi B0 utuh.
+  Wire schema5 (`app_config.min_schema_version=5`).
+- Item nota mutable/soft-delete selama order belum final, immutable setelah final;
+  id/owner/order_id tetap; tanpa DELETE klien.
+- `sync_push` grup atomik: fragmen >50, hash kanonik SHA-256, receipt idempoten per
+  owner, retry tidak memundurkan edit baru, rollback utuh bila satu anggota gagal.
+- `sync_pull` tuple `(updated_at,id)` UTC6, maks500, tombstone, lock per owner;
+  `private.owner_clock` menjaga updated_at monoton.
+- `delete_my_account` membersihkan grup/fragmen/receipt; isolasi dua owner diuji.
+- PRD B §6–8 direvisi terbatas; README memuat kontrak dan pemulihan antrean v4.
+- db reset exit0; pgTAP219/219 PASS; runtime1 PASS; check_all HIJAU 882 tes,
+  archOK, REPO_MAP895, exit0. Tidak ada paket Flutter/UI/cloud yang diubah.
+- LANGKAH BERIKUTNYA: tinjauan pengguna, lalu tulis prompt B2b dari kontrak teruji
+  (Drift v5, metadata grup outbox, receipt/konflik, SyncEngine transport palsu).
+  Jangan mulai B2c/B3 sebelum B2b selesai.
+
 
 ## Hasil B0
 - CLI npm Supabase3.0.0 terkunci di supabase/package-lock.json; Docker29.9.2/WSL2.
@@ -29,10 +48,8 @@ Berkas/bukti/selisih rinci: docs/progress/b0.md dan supabase/README.md.
 - Cache SDK sementara kini E:\laurum-b0-native-dart-sdk (tanpa spasi), junction
   Temp/laurum-native-dart-sdk menunjuk ke sana. SDK asli tetap. Path berspasi
   mematahkan native hook; jangan pindah cache ini ke folder repo berspasi.
-- Persiapan B2: docs/plans/B2-kontrak-sinkronisasi.md dan prompt draf
-  docs/prompts/B2a-sync-contract.md tersedia; INDEX tetap MENUNGGU, PRD belum diubah.
-- LANGKAH BERIKUTNYA: tunggu persetujuan usulan (AGENTS13: PRD perlu izin).
-  Setelah disetujui, catat izin dan kerjakan B2a saja; jangan mulai B2b/B3.
+- B2a: migrasi/tes server selesai; PRD B5/7/8 dan README sudah sesuai kontrak grup.
+  B2b belum ditulis; antrean v4 mengikuti protokol pemulihan eksplisit di README.
 
 ## Hasil B1f dan batas yang tetap berlaku
 - Main default Drift; memory/dummy untuk tes. Satu MaterialApp.router, root49baris.
@@ -51,9 +68,9 @@ Berkas/bukti/selisih rinci: docs/progress/b0.md dan supabase/README.md.
 - Cloud/key belum diperlukan B0; Google OAuth+SMTP produksi perlu konfigurasi B3.
   Auth/sesi/AI/usulan/WhatsApp masih dummy sampai B3/B7. Printer/picker/ekspor belum.
 - Foto lama dipertahankan untuk outbox sampai lifecycle/delete; upload B2.
-- Payload snake_case/UTC ISO tanpa sync_state/pay_status/key lokal. B2 tambah envelope
-  schema_version4 dan urutan master/order/ledger/selesaiCOD; server append-only item
-  berbeda dengan edit/soft-delete lokal B1d, protokol WAJIB diputuskan sebelum sync.
+- Payload snake_case/UTC ISO tanpa sync_state/pay_status/key lokal. Wire schema5 dan
+  metadata grup (group_id/hash/fragmen/change_id) tersedia di server; adapter klien baru
+  di B2b. Urutan master/order/ledger/selesaiCOD tetap wajib.
 - order_events domain B1d disertakan server, ringkasan PRD B5 belum mencantumkan.
 - PayStatus turunan, COD bersisa ditahan, transaksi multi-repo lewat TransactionRunner.
 - Preferensi bisnis/struk sinkron, perangkat local_settings; tanpa shared_preferences.

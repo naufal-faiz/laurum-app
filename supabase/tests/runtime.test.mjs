@@ -1,6 +1,16 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
+
+// Mirrors private.canonical_json: sorted keys, ordered arrays, integer numbers.
+const canonical = (value) => {
+  if (value === null || typeof value === "boolean") return JSON.stringify(value);
+  if (typeof value === "number") return String(value);
+  if (typeof value === "string") return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map(canonical).join(",")}]`;
+  return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonical(value[key])}`).join(",")}}`;
+};
+const hash = (value) => createHash("sha256").update(canonical(value), "utf8").digest("hex");
 
 // Keys stay in process memory. This test can only address the local API.
 const base = "http://127.0.0.1:54321";
@@ -45,12 +55,37 @@ test("Local Auth, Storage isolation and deployed account deletion", async () => 
     }
     const [a, b] = users;
     for (const user of users) {
-      const response = await api("/rest/v1/rpc/sync_push", { token: user.token, method: "POST", body: { changes: [{
-        table: "customers", row_id: user.id, op: "upsert", schema_version: 4,
-        payload: { id: user.id, owner_id: user === a ? b.id : a.id, name: "B0 synthetic" },
-      }] } });
-      assert.equal(response.status, 200, "Authenticated RPC available");
-      assert.equal((await response.json())[0].status, "ok", "JWT owner overrides forged payload owner");
+      const changes = [{
+        change_id: randomUUID(), table: "customers", row_id: user.id, op: "upsert", schema_version: 5,
+        payload: { id: user.id, owner_id: user === a ? b.id : a.id, name: "B2a synthetic" },
+      }];
+      const groupId = randomUUID();
+      const body = {
+        p_changes: changes, p_group_id: groupId, p_group_hash: hash(changes),
+        p_fragment_index: 1, p_fragment_count: 1, p_fragment_hash: hash(changes),
+      };
+      const response = await api("/rest/v1/rpc/sync_push", { token: user.token, method: "POST", body });
+      assert.equal(response.status, 200, "Authenticated group RPC available");
+      const receipt = await response.json();
+      assert.equal(receipt.status, "committed", "Group commits atomically");
+      assert.equal(receipt.results[0].change_id, changes[0].change_id, "Result maps back to the outbox id");
+      assert.equal(receipt.results[0].status, "ok", "JWT owner overrides forged payload owner");
+      assert.match(receipt.results[0].updated_at, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}Z$/,
+        "Server timestamp is UTC with six digits");
+      const retry = await api("/rest/v1/rpc/sync_push", { token: user.token, method: "POST", body });
+      assert.deepEqual(await retry.json(), receipt, "Identical retry returns the same receipt");
+      const changed = { ...body, p_changes: [{ ...changes[0], payload: { ...changes[0].payload, name: "Changed" } }] };
+      const mismatch = await api("/rest/v1/rpc/sync_push", { token: user.token, method: "POST", body: changed });
+      assert.notEqual(mismatch.status, 200, "Same group id with different content is rejected");
+      const pulled = await api("/rest/v1/rpc/sync_pull", { token: user.token, method: "POST", body: {
+        p_table: "customers", p_limit: 500,
+      } });
+      assert.equal(pulled.status, 200, "Pull RPC is available");
+      const page = await pulled.json();
+      assert.equal(page.rows.length, 1, "Pull sees only the owner row");
+      assert.equal(page.rows[0].id, user.id, "Pull row is the owner row");
+      assert.match(page.next_cursor.updated_at, /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}Z$/,
+        "Pull cursor is UTC with six digits");
       user.paths = [`${user.id}/test.jpg`, `${user.id}/nested/test.jpg`];
       for (const path of user.paths) {
         const uploaded = await api(`/storage/v1/object/expense-photos/${path}`, {

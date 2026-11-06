@@ -102,7 +102,7 @@ Tabel yang sama di SQLite dan Postgres. Kolom umum di semua tabel kecuali dicata
 | `customers` | name, phone, address, notes, is\_active. Unik `(owner_id, phone)` untuk baris aktif |
 | `services` | name, kind (`kiloan`/`satuan`), price, duration\_days, is\_active, sort\_order |
 | `orders` | order\_no (unik per owner), customer\_id, status, source (`kasir`/`whatsapp_ai`), pay\_term (`sekarang`/`cod`, default `sekarang`), proposal\_id, discount, note, entered\_at, estimated\_at, subtotal, total |
-| `order_items` | order\_id, service\_id, service\_name (snapshot), unit, qty\_milli, unit\_price, line\_total |
+| `order_items` | order\_id, service\_id, service\_name (snapshot), unit, qty\_milli, unit\_price, line\_total. Boleh diedit atau soft-delete selama order belum final; `id`, `owner_id`, `order_id` tetap; setelah final dikunci server dan tidak ada hard delete |
 | `payments` | order\_id, method (`tunai`/`qris`/`transfer`/`tabungan`), amount, received, paid\_at, note. **Tidak diubah** |
 | `savings_entries` | customer\_id, kind (`setor`/`pakai`/`penyesuaian`), amount, method, order\_id, note. **Tidak diubah, tanpa soft delete** |
 | `expense_categories` | name, is\_default |
@@ -129,21 +129,29 @@ Tabel yang sama di SQLite dan Postgres. Kolom umum di semua tabel kecuali dicata
 - **Pembatalan order** mengubah status menjadi `dibatalkan` dan mengeluarkan order dari laporan. Pembayaran yang sudah masuk dibalik dengan entri koreksi (nominal negatif), bukan dihapus.
 - **Laporan periode** (zona WIB): Pendapatan = total order tidak dibatalkan yang masuk pada periode. Pengeluaran = jumlah `expenses`. Laba = Pendapatan − Pengeluaran. Kas masuk = payments non-tabungan + setoran tabungan. Piutang aktif dan saldo tabungan adalah posisi saat ini, bukan arus periode. Rekonsiliasi: `Pendapatan = kas dari nota + tabungan terpakai + piutang baru`.
 - **Layanan terlaris** diurutkan berdasarkan pendapatan, bukan volume.
+- **Finalisasi di server.** Status `selesai`/`dibatalkan` bersifat final: server menolak perubahan yang memundurkan status. Order final mengunci seluruh nilai bisnis (termasuk `order_items`); hanya `updated_at` yang boleh berubah. `id`, `owner_id`, dan `order_id` tidak pernah berubah. Tidak ada hard delete dari klien. COD dengan sisa tagihan > 0 ditolak saat finalisasi, baik oleh pengguna maupun oleh aturan server (constraint deferred + pemeriksaan eksplisit di `sync_push`).
 
 ## 7. Sinkronisasi
 
 **Outbox.** Setiap penulisan lokal menambahkan baris `outbox(id, table, row_id, op, payload, created_at, attempts, last_error)` pada transaksi yang sama dengan datanya.
 
-**Push.** Kirim batch (maks 50) ke RPC `sync_push(changes jsonb)` yang melakukan upsert per tabel dalam satu transaksi server. Server mengisi `updated_at = now()` lewat trigger dan mengembalikannya. Baris outbox dihapus bila berhasil. Idempotent karena ID dari klien.
+**Push (grup atomik).** Klien mengirim satu grup perubahan ke RPC `sync_push(p_changes, p_group_id, p_group_hash, p_fragment_index, p_fragment_count, p_fragment_hash)`. Grup > 50 perubahan dipecah menjadi fragmen bernomor; fragmen ditampung privat dan tidak terlihat sampai lengkap, lalu seluruh grup diterapkan dalam **satu transaksi server**. Bila satu baris gagal, seluruh grup dibatalkan (tidak ada penerapan sebagian). Server mengisi `updated_at` lewat trigger dan mengembalikan baris yang tersimpan.
 
-**Pull.** Per tabel: `select * where updated_at > :cursor order by updated_at, id limit 500`, ulangi sampai habis. Kursor disimpan di `sync_cursors`. Soft delete ikut tersinkron.
+- **Idempoten.** ID baris berasal dari klien (UUID v4). Grup yang sama dikirim ulang mengembalikan **tanda terima (receipt) yang sama** tanpa menerapkan ulang. `p_group_hash` adalah SHA-256 dari JSON kanonik isi grup (kunci objek diurutkan, urutan array dipertahankan, angka bilangan bulat); grup dengan `p_group_id` sama tetapi hash berbeda ditolak sebagai konflik.
+- **Riwayat tanda terima.** Tanda terima committed/rejected disimpan per pemilik sampai akun dihapus, sehingga pengiriman ulang setelah koneksi putus tetap aman.
+- **Kunci penulisan.** Semua penulisan dan pull memakai kunci advisory per pemilik (`laurum_sync:<owner_id>`), sehingga urutan `updated_at` monoton dan pull tidak melihat keadaan separuh jadi. `private.owner_clock` menjaga `updated_at` tidak pernah mundur, termasuk saat migrasi dari data lama.
+- **Metadata protokol.** Setiap permintaan membawa versi skema wire; server menolak klien di bawah `app_config.min_schema_version` dengan kode khusus (saat ini versi wire 5).
+- Baris outbox dihapus hanya setelah tanda terima committed diterima.
+
+**Pull (aman).** Per tabel: ambil `p_limit` baris (maks 500) dengan `(updated_at, id) > (p_cursor_updated_at, p_cursor_id)` diurutkan `updated_at, id` lewat RPC `sync_pull(p_table, p_cursor_updated_at, p_cursor_id, p_limit)`. Kursor tuple `(updated_at, id)` disimpan di `sync_cursors`, sehingga baris dengan `updated_at` sama tidak terlewat maupun terduplikasi. Timestamp UTC 6 digit; soft delete (tombstone) ikut tersinkron. Ulangi sampai halaman kosong.
 
 **Konflik.**
 
 - Tabel biasa (customers, services, expenses, settings): **terakhir menulis menang** berdasarkan `updated_at` server. Baris yang masih punya perubahan di outbox tidak ditimpa pull sampai push selesai.
-- `orders`: LWW per baris, dengan penjaga: status final tidak bisa dimundurkan.
-- `payments`, `savings_entries`, `order_items`: **hanya tambah** (tidak ada konflik).
-- Pelanggaran unik (`phone`, `order_no`): server menolak, klien menandai `sync_state` konflik dan menampilkan penyelesaian di layar Sinkronisasi (gabung pelanggan atau ganti nomor).
+- `orders`: LWW per baris, dengan penjaga: status final tidak bisa dimundurkan dan nilai order final terkunci.
+- `order_items`: boleh diubah atau soft-delete selama order belum final; `id`, `owner_id`, `order_id` tetap; setelah final dikunci. Tidak ada hard delete.
+- `payments`, `savings_entries`: **hanya tambah** (tidak ada konflik).
+- Pelanggaran unik (`phone`, `order_no`): server menolak grup, klien menandai `sync_state` konflik dan menampilkan penyelesaian di layar Sinkronisasi (gabung pelanggan atau ganti nomor).
 
 **Pemicu sinkron.** Setelah login; aplikasi kembali ke foreground; koneksi pulih (`connectivity_plus`); 2 detik setelah penulisan (debounce); periodik tiap \~15 menit lewat `workmanager`; tombol "Sinkron sekarang". Gagal → percobaan ulang dengan backoff eksponensial (maks 15 menit).
 
@@ -157,11 +165,11 @@ Tabel yang sama di SQLite dan Postgres. Kolom umum di semua tabel kecuali dicata
 
 ## 8. Supabase
 
-- **RLS di semua tabel:** `owner_id = (select auth.uid())` untuk select, insert (`with check`), update; tabel append-only tanpa kebijakan update/delete. Kunci `service_role` tidak pernah ada di aplikasi.
+- **RLS di semua tabel:** `owner_id = (select auth.uid())` untuk select, insert (`with check`), update; tabel append-only tanpa kebijakan update/delete. `order_items` punya kebijakan update untuk pemilik (editable sebelum final, dijaga trigger) dan tidak punya izin delete; `payments`/`savings_entries` append-only. Kunci `service_role` tidak pernah ada di aplikasi.
 - **Storage:** bucket privat, kebijakan berdasar awalan folder `owner_id`.
 - **Provider (R10):** Google dan email+password aktif; pendaftaran email memakai konfirmasi; password minimal 8 karakter; pembatasan laju diatur di Auth; SMTP kustom wajib di produksi. Nomor telepon tidak dipakai untuk masuk (tanpa penyedia SMS).
 - **Indeks:** `(owner_id, updated_at)` di tiap tabel (untuk pull), `orders(owner_id, status)`, `orders(owner_id, entered_at)`, `payments(order_id)`.
-- **Fungsi server:** `sync_push`, `delete_my_account` (menghapus semua data pemilik), `app_config`.
+- **Fungsi server:** `sync_push` (grup atomik + fragmen + tanda terima), `sync_pull` (halaman tuple `(updated_at, id)`), `delete_my_account` (menghapus semua data pemilik, termasuk grup/fragmen/tanda terima dan kursor), `app_config` (versi skema minimum). Penjaga dan helper tinggal di skema `private`.
 - **Batas paket gratis (diperiksa Juli–Agustus 2026):** 500 MB database per proyek, 1 GB storage, 50.000 MAU, **proyek dijeda setelah 7 hari tidak aktif**, tanpa backup harian. Semua pengguna berbagi satu proyek.
   - Estimasi kasar: ≈ 2,5 KB per order termasuk indeks → laundry 15 order/hari ≈ 14 MB per tahun → 500 MB cukup untuk ±30 pengguna aktif selama setahun. **Rencanakan Pro (≈ US$25/bulan) sebelum rilis publik luas.**
   - Mitigasi masa pengembangan: ping harian terjadwal agar proyek tidak dijeda, dan `pg_dump` mingguan ke tempat penyimpanan pribadi. Aplikasi tetap berjalan saat server dijeda karena offline-first.

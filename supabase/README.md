@@ -20,7 +20,7 @@ Biarkan functions serve aktif; dari PowerShell kedua pada root repo:
 & ./supabase/node_modules/.bin/supabase.cmd stop --workdir .
 ```
 
-`db reset` menghapus data stack lokal ini dan menjalankan empat migrasi dari nol.
+`db reset` menghapus data stack lokal ini dan menjalankan lima migrasi dari nol.
 Jangan menambahkan `--no-backup` saat stop jika ingin mempertahankan data lokal.
 Start pertama mengunduh beberapa GB image; sediakan setidaknya 15–20 GB ruang bebas
 di drive penyimpanan Docker. Jika C: sempit, pindahkan Disk image location melalui
@@ -57,8 +57,10 @@ Semua tabel owner mempunyai indeks pull `(owner_id,updated_at,id)`.
 Tanggal timestamptz; uang bigint rupiah; qty_milli integer (gram untuk kg).
 
 RLS: baca milik sendiri; insert/update milik sendiri untuk tabel biasa; tidak ada
-hard delete oleh klien. Soft delete tetap ikut pull. Ledger pembayaran/tabungan,
-item dan event hanya insert; retry identik diperbolehkan lewat RPC.
+hard delete oleh klien. Soft delete tetap ikut pull. Ledger pembayaran/tabungan dan
+event hanya insert; retry identik diperbolehkan lewat RPC. `order_items` boleh
+di-insert/update/soft-delete selama order milik sendiri belum final; `id`, `owner_id`
+dan `order_id` tidak dapat berubah dan role authenticated tidak punya DELETE.
 Entitlements hanya bisa dibaca, tidak termasuk whitelist push (mencegah self-upgrade).
 Payments memiliki deleted_at null untuk kompatibilitas wire; savings tanpa kolom itu.
 Trigger menolak mutasi ledger juga oleh service_role biasa. Hanya fungsi cleanup
@@ -68,28 +70,90 @@ Status final tidak boleh berubah; COD bersisa tidak bisa selesai.
 Bucket expense-photos privat, JPEG maksimal200KB, prefix UUID pemilik.
 Kebijakan Storage mencakup SELECT/INSERT/UPDATE/DELETE dengan pengecekan tujuan rename.
 
-`sync_push(changes jsonb)` menerima array maksimal50 dan mengembalikan array hasil:
+## Kontrak sinkronisasi (B2a, wire schema 5)
 
-```json
-[
-  {
-    "table": "customers",
-    "row_id": "<UUID v4>",
-    "op": "upsert",
-    "schema_version": 4,
-    "payload": {"id": "<UUID v4 yang sama>", "name": "...", "phone": "..."}
-  }
-]
+`app_config.min_schema_version = 5`. Permintaan di bawah versi itu ditolak dengan
+`schema_too_old`; `schema_version` ikut di envelope perubahan, bukan parameter RPC.
+
+### Push grup atomik
+
+```
+POST /rest/v1/rpc/sync_push
+{
+  "p_changes": [
+    {"table":"orders","row_id":"<uuid>","op":"upsert","schema_version":5,
+     "payload":{"id":"<uuid>","order_no":"A-0001", "...":"..."}}
+  ],
+  "p_group_id": "<uuid v4 grup>",
+  "p_group_hash": "<sha256 hex isi grup>",
+  "p_fragment_index": 1,
+  "p_fragment_count": 1,
+  "p_fragment_hash": "<sha256 hex fragmen>"
+}
 ```
 
-Owner payload diabaikan, updated_at diabaikan; owner berasal dari JWT terverifikasi.
-`op=delete` membuat tombstone (payload tidak diperlukan), tidak berlaku bagi ledger.
-Hasil tiap perubahan: table, row_id, status `ok`/`konflik`/`ditolak`, updated_at server
-(null saat gagal), code generik saat gagal. Versi kurang dari app_config memberi
-`schema_too_old`; konflik unik memberi `unique_conflict`. Pesan SQL/PII tidak dikirim.
-Sub-transaksi per perubahan mempertahankan hasil lain jika satu baris gagal.
-Retry dengan nilai sama tidak mengubah timestamp atau menggandakan ledger.
-Nomor telepon harus dikanonisasi oleh adapter B2 sesuai kontrak lokal.
+- `p_changes` maksimal 50 perubahan. Grup lebih besar dikirim sebagai fragmen
+  `1..p_fragment_count`; fragmen ditampung di `private.sync_fragments` dan tidak
+  terlihat di tabel bisnis/pull. Setelah fragmen terakhir lengkap dan hashes cocok,
+  seluruh grup diterapkan dalam satu transaksi.
+- `p_group_hash` = SHA-256 hex dari JSON kanonik seluruh isi grup: kunci objek
+  diurutkan, urutan array dipertahankan, angka bilangan bulat, UTF-8 tanpa spasi
+  tambahan. `p_fragment_hash` memakai aturan sama atas `p_changes` fragmen itu.
+- Setiap perubahan wajib punya `change_id` UUID (untuk dipetakan ke outbox), `row_id`
+  UUID yang sama dengan `payload.id`, `op` (`upsert`/`delete`), dan `schema_version`.
+- Owner selalu dari JWT terverifikasi; `owner_id` di payload diabaikan, `updated_at`
+  diisi server. `op=delete` membuat tombstone dan tidak berlaku bagi ledger.
+- Hasil respons:
+
+```json
+{
+  "group_id": "<uuid grup>",
+  "status": "committed",
+  "results": [
+    {"change_id":"<uuid>","table":"orders","row_id":"<uuid>","status":"ok","updated_at":"2026-11-06T06:29:12.123456Z"}
+  ]
+}
+```
+
+`status` grup: `committed`, `rejected`, atau `staged` (fragmen belum lengkap; berisi
+`received`, `expected`, dan `results` kosong). `results[].status`: `ok` atau `ditolak`.
+Saat rejected ada `code` grup dan tiap hasil membawa `code` generik yang sama
+(`final_locked`, `cod_outstanding`, `broken_reference`, `unique_conflict`, dll);
+pesan SQL dan PII tidak dikirim. Permintaan tidak valid (hash salah, fragmen palsu,
+tabel di luar whitelist, versi skema terlalu lama) ditolak sebagai error RPC dan
+tidak membuat receipt parsial.
+- **Atomisitas.** Satu anggota gagal → seluruh grup rollback; tidak ada hasil parsial.
+  Grup lain tetap terisolasi.
+- **Retry.** Grup identik yang dikirim ulang mengembalikan receipt yang sama
+  (`committed`/`rejected`) tanpa menerapkan ulang snapshot lama. `group_id` sama dengan
+  hash/count berbeda → error `group_mismatch`.
+- **Receipt.** Tanda terima disimpan per owner di `private.sync_groups` sampai akun
+  dihapus. Outbox klien hanya boleh menghapus ID yang tercantum `ok` pada receipt
+  committed; receipt rejected dipakai untuk menandai konflik.
+- Semua penulisan mengambil advisory lock per owner (`laurum_sync:<owner_id>`);
+  `private.owner_clock` menjaga `updated_at` monoton, termasuk untuk data lama.
+
+### Pull aman
+
+```
+POST /rest/v1/rpc/sync_pull
+{"p_table":"orders","p_cursor_updated_at":"2026-11-06T06:00:00.000000Z",
+ "p_cursor_id":"<uuid>","p_limit":500}
+```
+
+Mengembalikan `{"table":"orders","rows":[...],"next_cursor":{"updated_at":"...","id":"..."},"has_more":true}`.
+Urutan `(updated_at, id)` dengan perbandingan tuple; `p_limit` 1..500. Timestamp UTC
+enam digit; tombstone (`deleted_at`) ikut. Kursor disimpan klien di `sync_cursors` dan
+diulang sampai `has_more=false`. Pull juga mengambil lock owner yang sama sehingga tidak
+kehilangan commit yang selesai setelah halaman sebelumnya.
+
+### Pemulihan antrean v4
+
+Antrean lama belum punya `group_id`. Jangan menebak grup dari `created_at`, jangan
+menghapus antrean lama, dan jangan mengganti UUID ledger agar retry tampak berhasil.
+Sebelum B2b mengirim: kelompokkan outbox berdasarkan operasi bisnis yang diketahui,
+beri `group_id` baru secara eksplisit, lalu kirim sebagai satu grup. Baris yang sudah
+terkirim tanpa receipt dibiarkan sampai bisa direkonsiliasi lewat pull; ID baris tetap.
 
 `delete_my_account()` hanya menghapus baris domain milik sesi; tidak menghapus Auth
 atau byte Storage. Edge `delete-account` harus dipanggil untuk alur lengkap:
@@ -104,17 +168,17 @@ penutupan sesi/sinkronisasi lintas perangkat disambungkan di B3.
 
 ## Tindak lanjut B2
 
-- Item lokal B1d dapat diedit/soft-delete, server B0 append-only sesuai PRD.
-  Putuskan protokol rekonsiliasi sebelum SyncEngine diaktifkan; jangan diam-diam
-  mengirim UPDATE item atau menghapus outbox yang ditolak.
-- Kirim dependency berurutan (master → order → ledger → penyelesaian COD).
-  Penyelesaian COD yang tiba sebelum pembayaran harus diulang setelah ledger masuk.
-- `schema_version` envelope harus ditambahkan adapter B2; tidak ada sync di UI B0.
-- pgTAP memeriksa dua owner untuk semua tabel, Storage, retry, konflik, versi,
-  FK, final status, service-role ledger guard, dan cleanup akun.
-  Tes handler Node memakai HTTP stub. runtime.ps1 menguji Auth/Storage/Edge nyata
-  dengan dua akun sintetis yang dibersihkan setelah tes; kunci lokal hanya di env
-  proses. Jangan menjalankan pengujian ini pada proyek cloud.
+- Kontrak server B2a selesai (wire schema 5). B2b harus memakai `group_id`/hash dan
+  receipt di atas; kirim dependency berurutan (master → order → ledger → penyelesaian
+  COD) di dalam grup yang sama, bukan menunggu percobaan terpisah.
+- Antrean v4 lama mengikuti protokol pemulihan di atas; jangan menebak grup dari waktu.
+- Adapter B2 yang menangani transport, retry, dan pemetaan receipt ke outbox belum ada.
+- pgTAP memeriksa dua owner untuk semua tabel, Storage, retry, konflik, versi, FK,
+  final status, item mutable/lock, grup atomik, fragmen, receipt, pull tuple,
+  service-role ledger guard, dan cleanup akun.
+  Tes handler Node memakai HTTP stub. runtime.ps1 menguji Auth/Storage/Edge nyata dan
+  kontrak push/pull lewat REST dengan dua akun sintetis yang dibersihkan setelah tes;
+  kunci lokal hanya di env proses. Jangan menjalankan pengujian ini pada proyek cloud.
 
 Sumber: [CLI lokal](https://supabase.com/docs/guides/local-development/cli/getting-started),
 [konfigurasi](https://supabase.com/docs/guides/local-development/cli/config),

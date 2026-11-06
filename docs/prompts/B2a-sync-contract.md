@@ -1,10 +1,12 @@
 # B2a — kontrak server untuk sinkronisasi nota
 
-DRAF; JANGAN DIEKSEKUSI sebelum pengguna menyetujui docs/plans/B2-kontrak-sinkronisasi.md.
-INDEX tetap MENUNGGU sampai persetujuan dicatat. Ikuti _COMMON.md A,D,E,F dan AGENTS19–22.
+DISETUJUI PENGGUNA (6 Nov 2026) dan SELESAI. Usulan induk
+docs/plans/B2-kontrak-sinkronisasi.md sudah disetujui; jangan bertanya ulang.
+INDEX: B2a SELESAI (2026-11-06); bukti di docs/progress/b2a.md.
+Ikuti _COMMON.md A,D,E,F dan AGENTS19–22.
 Prasyarat: B0/B1f selesai; baca STATE, progress/b0.md, progress/b1f.md dan PRD B5–9.
 
-## Izin yang diminta (belum berlaku)
+## Izin yang diminta (berlaku)
 - Revisi terbatas PRD B5/7/8 sesuai usulan: item mutable sebelum final, atomisitas grup,
   metadata protokol dan pull yang aman. Jangan mengubah fitur laundry, UI atau registry.
 - Tambah migrasi Postgres melalui CLI migration new, pgTAP, tes runtime dan README.
