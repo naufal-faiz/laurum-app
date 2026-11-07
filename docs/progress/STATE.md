@@ -20,12 +20,15 @@ Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md, b2c.md dan supa
 - `SyncCoordinator` push dulu; pull dilewati bila push terblokir.
 - `supabase_flutter ^2.18.3` dipasang lewat `flutter pub add`; `shared_preferences`
   hanya transitif dan tidak diimpor (aturan 20 tetap hijau).
-- check_all HIJAU 926 tes (+20 dari B2b), 1 tes integrasi dilewati, archOK, REPO_MAP941,
-  exit0.
-- Tes integrasi dua akun lokal BELUM dijalankan: daemon Docker tidak aktif
-  (`npipe:////./pipe/dockerDesktopLinuxEngine` tidak ada). Perintahnya di b2c.md.
-- LANGKAH BERIKUTNYA: tinjauan pengguna, lalu jalankan tes integrasi lokal saat Docker
-  aktif dan tulis B2d (indikator/retry/koneksi). Jangan mulai B3.
+- Tes integrasi dua akun lokal SUDAH dijalankan (7 Nov 2026): stack `--exclude studio`
+  (health check Studio timeout), db reset exit0, pgTAP 219/219 PASS, tes dua akun lulus.
+- Peninjauan menemukan dan memperbaiki dua masalah foto: path foto perangkat tidak lagi
+  masuk payload (server menolak path non-`owner_id/`), dan pull dengan `photo_path` null
+  tidak menghapus lampiran lokal. Upload/download foto tetap B2e.
+- check_all HIJAU 928 tes (+22 dari B2b), 1 tes integrasi dilewati tanpa env lokal,
+  archOK, REPO_MAP941, exit0.
+- LANGKAH BERIKUTNYA: tinjauan pengguna, lalu tulis B2d (indikator/retry/koneksi).
+  Jangan mulai B3.
 
 ## Hasil B2b (7 Nov 2026)
 - Drift v5: outbox punya group_id/group_seq/requires_recovery/conflict_code;

@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/expense.dart';
 import 'package:laurum/core/domain/expense_category.dart';
 import 'package:laurum/core/persistence/app_database.dart';
 import 'package:laurum/core/persistence/drift_transaction_runner.dart';
 import 'package:laurum/core/persistence/outbox_writer.dart';
 import 'package:laurum/core/persistence/sql_timestamp.dart';
 import 'package:laurum/features/expenses/data/drift_expense_repository.dart';
+import 'package:laurum/features/expenses/data/expense_storage.dart';
 
 import '../contracts/expense_contract.dart';
 import '../domain_samples.dart';
@@ -70,4 +72,18 @@ void main() {
       expect(await repo.getExpenses(), hasLength(1));
     },
   );
+  test('a device-local photo path never enters the wire payload', () {
+    final expense = Expense(
+      id: 'e',
+      ownerId: 'owner',
+      createdAt: day,
+      categoryId: 'cat',
+      amount: 100,
+      spentAt: day,
+      photoPath: r'C:\photos\receipt.jpg',
+    );
+    final payload = expensePayload(expense, day);
+    expect(payload.containsKey('photo_path'), isFalse);
+    expect(payload['amount'], 100);
+  });
 }

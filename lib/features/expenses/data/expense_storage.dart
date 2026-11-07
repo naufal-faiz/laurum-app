@@ -42,7 +42,9 @@ Map<String, Object?> expensePayload(Expense e, DateTime at) => {
   'spent_at': e.spentAt.toUtc().toIso8601String(),
   'vendor': e.vendor,
   'note': e.note,
-  'photo_path': e.photoPath,
+  // Photos upload in B2e. A device-local path is not a server path, and the
+  // server rejects paths that do not start with the owner id. Omitting the key
+  // also preserves any value a later client already stored on the server.
 };
 Expense expenseCopy(Expense e, {String? photo, DateTime? deletedAt}) => Expense(
   id: e.id,

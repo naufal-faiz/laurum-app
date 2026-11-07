@@ -84,6 +84,26 @@ void main() {
     expect(customer.syncState, 'pending');
   });
 
+  test('a null remote photo path never erases a local expense attachment', () async {
+    final rows = allWireRows();
+    final category = rows.firstWhere((row) => row['id'] == wireCategory);
+    final expense = rows.firstWhere((row) => row['id'] == wireExpense);
+    await applier.apply('expense_categories', [category]);
+    await applier.apply('expenses', [expense]);
+    await db.customStatement(
+      "UPDATE expenses SET photo_path = 'C:/photos/receipt.jpg' WHERE id = '$wireExpense'",
+    );
+    await applier.apply('expenses', [expense]);
+    expect((await db.select(db.expenseRecords).getSingle()).photoPath, 'C:/photos/receipt.jpg');
+    await applier.apply('expenses', [
+      {...expense, 'photo_path': '$wireOwner/receipt.jpg'},
+    ]);
+    expect(
+      (await db.select(db.expenseRecords).getSingle()).photoPath,
+      '$wireOwner/receipt.jpg',
+    );
+  });
+
   test('foreign owners, unknown tables and malformed ids are rejected', () async {
     await expectLater(
       applier.apply('customers', [customerRow(owner: wireOtherOwner)]),

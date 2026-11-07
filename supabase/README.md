@@ -180,7 +180,8 @@ penutupan sesi/sinkronisasi lintas perangkat disambungkan di B3.
   Retry, indikator, koneksi, dan periode tetap B2d; upload foto tetap B2e.
 - Tes integrasi dua akun `test/sync/supabase_sync_local_test.dart` hanya berjalan bila
   `LAURUM_LOCAL_SUPABASE_URL=http://127.0.0.1:54321` dan kedua kunci lokal ada di env
-  proses. Tes ini belum dijalankan saat B2c ditutup karena Docker tidak aktif.
+  proses. Tes ini lulus pada 7 Nov 2026 (pgTAP 219/219 PASS). Foto belum diunggah;
+  `photo_path` lokal tidak dikirim dan pull null tidak menghapus lampiran sampai B2e.
 - pgTAP memeriksa dua owner untuk semua tabel, Storage, retry, konflik, versi, FK,
   final status, item mutable/lock, grup atomik, fragmen, receipt, pull tuple,
   service-role ledger guard, dan cleanup akun.

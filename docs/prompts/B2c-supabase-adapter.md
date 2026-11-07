@@ -18,5 +18,6 @@ Prasyarat: B2a dan B2b SELESAI; kontrak di supabase/README.md.
 
 ## Batas
 - Tanpa UI, Auth nyata, upload foto, cloud, push, atau merge. B2d/B2e/B3 terpisah.
-- Tes integrasi lokal belum dijalankan saat B2c ditutup karena Docker tidak aktif;
-  perintah dan syaratnya ada di docs/progress/b2c.md.
+- Tes integrasi lokal sudah dijalankan pada 7 Nov 2026 (pgTAP219 PASS, dua akun lulus).
+  Foto belum diunggah; path perangkat tidak dikirim dan pull null tidak menghapus
+  lampiran lokal sampai B2e.

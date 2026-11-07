@@ -94,7 +94,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - drift_sync_ack_writer.dart (50): DriftSyncAckWriter
 - drift_sync_cursor_store.dart (38): DriftSyncCursorStore
 - drift_sync_outbox_store.dart (99): DriftSyncOutboxStore
-- drift_sync_remote_applier.dart (82): DriftSyncRemoteApplier
+- drift_sync_remote_applier.dart (86): DriftSyncRemoteApplier
 - drift_sync_service.dart (60): DriftSyncService
 - drift_transaction_runner.dart (79): DriftTransactionRunner, _DriftScope
 - entitlement_records.dart (16): EntitlementRecords
@@ -302,7 +302,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_fixtures.dart (10):
 - expense_photo_store.dart (35): ExpensePhotoStore
 - expense_queries.dart (31):
-- expense_storage.dart (60):
+- expense_storage.dart (62):
 - in_memory_expense_repository.dart (98): InMemoryExpenseRepository, inMemoryExpenseRepositoryProvider
 - prior_expense_fixtures.dart (72):
 - week_expense_fixtures.dart (48):
@@ -836,8 +836,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - drift_sync_close_test.dart (22):
 - drift_sync_cursor_store_test.dart (44):
 - drift_sync_outbox_store_test.dart (123):
-- drift_sync_remote_applier_test.dart (100):
-- expense_atomic_test.dart (73):
+- drift_sync_remote_applier_test.dart (120):
+- expense_atomic_test.dart (89):
 - expense_contracts_test.dart (20):
 - expense_photos_test.dart (82):
 - failing_b1d_proposal.dart (15): FailingB1dProposal

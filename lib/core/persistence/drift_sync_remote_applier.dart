@@ -55,6 +55,10 @@ class DriftSyncRemoteApplier implements SyncRemoteApplier {
     if (table == 'savings_entries') {
       values['created_key'] = sqlTimestamp(DateTime.parse(values['created_at']! as String));
     }
+    if (table == 'expenses' && values['photo_path'] == null) {
+      // Photos upload in B2e; a null server value must not erase a local attachment.
+      values.remove('photo_path');
+    }
     final names = values.keys.toList();
     final updates = names
         .where((name) => name != 'id')
