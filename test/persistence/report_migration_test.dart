@@ -7,7 +7,7 @@ import 'generated/schema.dart';
 import 'generated/schema_v3.dart' as v3;
 
 void main() {
-  test('v3 -> v4 backfills range keys without changing original savings timestamps', () async {
+  test('v3 -> current backfills range keys without changing original savings timestamps', () async {
     final verifier = SchemaVerifier(GeneratedHelper());
     final schema = await verifier.schemaAt(3);
     final old = v3.DatabaseAtV3(schema.newConnection());
@@ -26,7 +26,7 @@ void main() {
     await old.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 4);
+    await verifier.migrateAndValidate(db, 5);
     final savings = await db
         .customSelect('SELECT created_at,created_key FROM savings_entries')
         .getSingle();

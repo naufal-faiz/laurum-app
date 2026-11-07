@@ -51,7 +51,8 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | B1f | B1f-drift-penyambungan.md | Drift: sambung ke aplikasi, seed demo, persistensi | SELESAI (2026-11-05) | check_all 882 tes; default Drift, seed UUID, akun/outbox/lifecycle, benchmark Android 5.000 nota 614–728ms; APK utama terpasang dan DB bertahan setelah restart. Lihat docs/progress/b1f.md |
 | B0 | B0-supabase.md | Supabase lokal: skema, RLS, RPC, Auth, tes RLS | SELESAI (2026-11-05) | CLI3.0.0; reset exit0, pgTAP140 PASS, handler6 PASS, runtime Auth/Storage/Edge PASS, check_all882 hijau. Docker di E:, cache Edge dipulihkan. Lihat docs/progress/b0.md; B2 perlu prompt dan keputusan edit item |
 | B2a | B2a-sync-contract.md | SyncEngine: kontrak server grup atomik + pull aman | SELESAI (2026-11-06) | Wire schema5; migrasi baru (4 B0 utuh); item mutable sebelum final, grup atomik/fragmen/receipt, retry idempoten, pull tuple UTC6; pgTAP219 PASS, runtime1 PASS, check_all882 hijau. Lihat docs/progress/b2a.md |
-| B2b | (belum ditulis) | Drift v5: metadata grup, receipt/konflik, SyncEngine transport palsu | MENUNGGU | Tulis prompt dari kontrak B2a; jangan mulai sebelum B2a ditinjau |
+| B2b | B2b-sync-engine.md | Drift v5: metadata grup, receipt/konflik, SyncEngine transport palsu | SELESAI (2026-11-07) | check_all906 hijau; grup per transaksi, legacy eksplisit, fragmen/hash, retry receipt, konflik; kontrak store Drift+InMemory. Lihat docs/progress/b2b.md |
+| B2c | (belum ditulis) | Adapter Supabase, push/pull nyata dua akun, pemetaan seluruh tabel | MENUNGGU | Tulis prompt dari kontrak B2a/B2b; jangan mulai sebelum B2b ditinjau |
 | B3 | (belum ditulis) | Auth nyata, pemulihan, hapus akun | MENUNGGU | Siapkan Google OAuth dan SMTP |
 | B5-B8 | (belum ditulis) | Printer nyata, Play Store, AI, Pro | MENUNGGU | Lihat docs/backend/ROADMAP.md |
 

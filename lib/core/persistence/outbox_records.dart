@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 
 @DataClassName('OutboxEntry')
 @TableIndex(name: 'outbox_created', columns: {#createdAt})
+@TableIndex(name: 'outbox_group', columns: {#groupId, #groupSeq})
 class OutboxRecords extends Table {
   @override
   String get tableName => 'outbox';
@@ -13,6 +14,10 @@ class OutboxRecords extends Table {
   DateTimeColumn get createdAt => dateTime()();
   IntColumn get attempts => integer().withDefault(const Constant(0))();
   TextColumn get lastError => text().nullable()();
+  TextColumn get groupId => text().nullable()();
+  IntColumn get groupSeq => integer().nullable()();
+  BoolColumn get requiresRecovery => boolean().withDefault(const Constant(false))();
+  TextColumn get conflictCode => text().nullable()();
   @override
   Set<Column<Object>> get primaryKey => {id};
   @override

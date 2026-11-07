@@ -12,8 +12,8 @@ import 'package:laurum/core/persistence/order_records.dart';
 import 'package:laurum/core/persistence/outbox_records.dart';
 import 'package:laurum/core/persistence/payment_records.dart';
 import 'package:laurum/core/persistence/receipt_setting_records.dart';
-import 'package:laurum/core/persistence/report_indexes_migration.dart';
 import 'package:laurum/core/persistence/savings_records.dart';
+import 'package:laurum/core/persistence/schema_migration.dart';
 import 'package:laurum/core/persistence/service_records.dart';
 import 'package:laurum/core/persistence/sync_cursor_records.dart';
 
@@ -42,11 +42,11 @@ part 'app_database.g.dart';
 class AppDatabase extends _$AppDatabase {
   AppDatabase(super.e);
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (m) => m.createAll(),
-    onUpgrade: (m, from, to) => migrateReportIndexes(this, m, from, to),
+    onUpgrade: (m, from, to) => migrateSchema(this, m, from, to),
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');
     },

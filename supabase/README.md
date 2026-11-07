@@ -151,7 +151,9 @@ kehilangan commit yang selesai setelah halaman sebelumnya.
 
 Antrean lama belum punya `group_id`. Jangan menebak grup dari `created_at`, jangan
 menghapus antrean lama, dan jangan mengganti UUID ledger agar retry tampak berhasil.
-Sebelum B2b mengirim: kelompokkan outbox berdasarkan operasi bisnis yang diketahui,
+Klien v5 menandai baris lama `requires_recovery=1` dan menolak mengirimnya; baris itu
+baru masuk grup setelah pemulihan eksplisit `recoverLegacyGroup(groupId, changeIds)`.
+Sebelum B2c mengirim: kelompokkan outbox berdasarkan operasi bisnis yang diketahui,
 beri `group_id` baru secara eksplisit, lalu kirim sebagai satu grup. Baris yang sudah
 terkirim tanpa receipt dibiarkan sampai bisa direkonsiliasi lewat pull; ID baris tetap.
 

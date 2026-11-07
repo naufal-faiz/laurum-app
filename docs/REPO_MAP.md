@@ -9,7 +9,7 @@ Semua widget sudah dibuat.
 
 ## Dependensi
 
-flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner
+flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner
 
 ## Berkas (jumlah baris): nama deklarasi
 
@@ -91,8 +91,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - drift_local_data_service.dart (50): DriftLocalDataService
 - drift_local_settings_repository.dart (39): DriftLocalSettingsRepository
 - drift_repository_overrides.dart (60):
+- drift_sync_outbox_store.dart (106): DriftSyncOutboxStore
 - drift_sync_service.dart (60): DriftSyncService
-- drift_transaction_runner.dart (63): DriftTransactionRunner, _DriftScope
+- drift_transaction_runner.dart (79): DriftTransactionRunner, _DriftScope
 - entitlement_records.dart (16): EntitlementRecords
 - expense_category_records.dart (10): ExpenseCategoryRecords
 - expense_records.dart (22): ExpenseRecords
@@ -101,17 +102,19 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_indexes_migration.dart (25):
 - order_item_records.dart (23): OrderItemRecords
 - order_records.dart (34): OrderRecords
-- outbox_records.dart (23): OutboxRecords
-- outbox_writer.dart (49): OutboxWriter
+- outbox_records.dart (28): OutboxRecords
+- outbox_writer.dart (59): OutboxWriter
 - payment_records.dart (23): PaymentRecords
 - receipt_setting_records.dart (20): ReceiptSettingRecords
 - record_columns.dart (17): RecordColumns, SoftDeleteColumns
 - report_indexes_migration.dart (28):
 - savings_records.dart (29): SavingsRecords
+- schema_migration.dart (12):
 - service_records.dart (21): ServiceRecords
 - sql_timestamp.dart (6):
 - storage_providers.dart (64): storageGateEnabledProvider, accountStorageProvider, activeOwnerProvider, accountStoreProvider, accountChangesProvider
 - sync_cursor_records.dart (12): SyncCursorRecords
+- sync_groups_migration.dart (18):
 
 ### lib/core/services/
 - auth_failure.dart (8): AuthFailureKind, AuthFailure
@@ -137,6 +140,19 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_service.dart (93): SyncServiceStatus, SyncService, FakeSyncService
 - transaction_runner.dart (8): TransactionRunner, TransactionParticipant
 - transactional_memory.dart (10): TransactionalMemory
+
+### lib/core/sync/
+- canonical_json.dart (16):
+- in_memory_outbox_store.dart (104): InMemoryOutboxStore, _Row
+- sync_change.dart (25): SyncChange
+- sync_engine.dart (104): SyncEngine
+- sync_group.dart (7): SyncGroup
+- sync_hash.dart (6):
+- sync_outbox_store.dart (14): SyncOutboxStore
+- sync_push_request.dart (27): SyncPushRequest
+- sync_push_result.dart (47): SyncGroupStatus, SyncChangeResult, SyncPushResult
+- sync_run_result.dart (15): SyncRunStatus, SyncRunResult
+- sync_transport.dart (6): SyncTransport
 
 ### lib/core/theme/
 - app_borders.dart (7): AppBorders
@@ -793,25 +809,27 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_savings_contracts_test.dart (33):
 - customer_summary_ledger_test.dart (44):
 - database_factory_test.dart (51):
-- database_migration_test.dart (28):
-- database_schema_test.dart (63):
+- database_migration_test.dart (56):
+- database_schema_test.dart (73):
 - date_time_storage_test.dart (29):
 - demo_seed_atomic_test.dart (45):
 - demo_seeder_test.dart (50):
 - drift_contracts_test.dart (30):
 - drift_runner_test.dart (55):
 - drift_sync_close_test.dart (22):
+- drift_sync_outbox_store_test.dart (56):
 - expense_atomic_test.dart (73):
 - expense_contracts_test.dart (20):
 - expense_photos_test.dart (82):
 - failing_b1d_proposal.dart (15): FailingB1dProposal
 
 ### test/persistence/generated/
-- schema.dart (31): GeneratedHelper
+- schema.dart (34): GeneratedHelper
 - schema_v1.dart (8453): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV1
 - schema_v2.dart (8547): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV2
 - schema_v3.dart (8562): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV3
 - schema_v4.dart (8611): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV4
+- schema_v5.dart (8778): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV5
 
 ### test/persistence/
 - order_account_cleanup_test.dart (39):
@@ -824,7 +842,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_query_plan_test.dart (39):
 - order_storage_scope_test.dart (93):
 - order_time_migration_test.dart (47):
-- outbox_writer_test.dart (67):
+- outbox_group_operation_test.dart (43):
+- outbox_writer_test.dart (97):
 - printer_repository_integration_test.dart (75):
 - report_contracts_test.dart (30):
 - report_migration_test.dart (42):
@@ -943,6 +962,15 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - store_configuration_test.dart (11):
 - sub_scaffold_fab_test.dart (37):
 - sub_scaffold_test.dart (32):
+
+### test/sync/
+- canonical_json_test.dart (35):
+- fake_sync_transport.dart (62): FakeSyncTransport
+- in_memory_outbox_store_test.dart (13):
+- sync_engine_test.dart (93):
+- sync_store_contract.dart (93):
+
+### test/
 - sync_changes_test.dart (25):
 - sync_indicator_test.dart (23):
 - sync_page_test.dart (68):

@@ -9,7 +9,7 @@ void main() {
   tearDown(() => db.close());
   test('current schema creates complete PRD tables without payment status', () async {
     await db.customSelect('SELECT 1').get();
-    expect(db.schemaVersion, 4);
+    expect(db.schemaVersion, 5);
     expect(db.allTables.map((t) => t.actualTableName).toSet(), {
       'businesses',
       'devices',
@@ -32,6 +32,16 @@ void main() {
     expect(orders.map((r) => r.read<String>('name')), isNot(contains('pay_status')));
     final savings = await db.customSelect('PRAGMA table_info(savings_entries)').get();
     expect(savings.map((r) => r.read<String>('name')), isNot(contains('deleted_at')));
+    final outbox = await db.customSelect('PRAGMA table_info(outbox)').get();
+    expect(
+      outbox.map((r) => r.read<String>('name')),
+      containsAll([
+        'group_id',
+        'group_seq',
+        'requires_recovery',
+        'conflict_code',
+      ]),
+    );
     final fk = await db.customSelect('PRAGMA foreign_keys').getSingle();
     expect(fk.read<int>('foreign_keys'), 1);
     await db.validateDatabaseSchema();

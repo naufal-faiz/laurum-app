@@ -9037,6 +9037,54 @@ class $OutboxRecordsTable extends OutboxRecords with TableInfo<$OutboxRecordsTab
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _groupIdMeta = const VerificationMeta(
+    'groupId',
+  );
+  @override
+  late final GeneratedColumn<String> groupId = GeneratedColumn<String>(
+    'group_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _groupSeqMeta = const VerificationMeta(
+    'groupSeq',
+  );
+  @override
+  late final GeneratedColumn<int> groupSeq = GeneratedColumn<int>(
+    'group_seq',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _requiresRecoveryMeta = const VerificationMeta(
+    'requiresRecovery',
+  );
+  @override
+  late final GeneratedColumn<bool> requiresRecovery = GeneratedColumn<bool>(
+    'requires_recovery',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("requires_recovery" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _conflictCodeMeta = const VerificationMeta(
+    'conflictCode',
+  );
+  @override
+  late final GeneratedColumn<String> conflictCode = GeneratedColumn<String>(
+    'conflict_code',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -9047,6 +9095,10 @@ class $OutboxRecordsTable extends OutboxRecords with TableInfo<$OutboxRecordsTab
     createdAt,
     attempts,
     lastError,
+    groupId,
+    groupSeq,
+    requiresRecovery,
+    conflictCode,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -9117,6 +9169,36 @@ class $OutboxRecordsTable extends OutboxRecords with TableInfo<$OutboxRecordsTab
         lastError.isAcceptableOrUnknown(data['last_error']!, _lastErrorMeta),
       );
     }
+    if (data.containsKey('group_id')) {
+      context.handle(
+        _groupIdMeta,
+        groupId.isAcceptableOrUnknown(data['group_id']!, _groupIdMeta),
+      );
+    }
+    if (data.containsKey('group_seq')) {
+      context.handle(
+        _groupSeqMeta,
+        groupSeq.isAcceptableOrUnknown(data['group_seq']!, _groupSeqMeta),
+      );
+    }
+    if (data.containsKey('requires_recovery')) {
+      context.handle(
+        _requiresRecoveryMeta,
+        requiresRecovery.isAcceptableOrUnknown(
+          data['requires_recovery']!,
+          _requiresRecoveryMeta,
+        ),
+      );
+    }
+    if (data.containsKey('conflict_code')) {
+      context.handle(
+        _conflictCodeMeta,
+        conflictCode.isAcceptableOrUnknown(
+          data['conflict_code']!,
+          _conflictCodeMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -9158,6 +9240,22 @@ class $OutboxRecordsTable extends OutboxRecords with TableInfo<$OutboxRecordsTab
         DriftSqlType.string,
         data['${effectivePrefix}last_error'],
       ),
+      groupId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}group_id'],
+      ),
+      groupSeq: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}group_seq'],
+      ),
+      requiresRecovery: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}requires_recovery'],
+      )!,
+      conflictCode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}conflict_code'],
+      ),
     );
   }
 
@@ -9176,6 +9274,10 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
   final DateTime createdAt;
   final int attempts;
   final String? lastError;
+  final String? groupId;
+  final int? groupSeq;
+  final bool requiresRecovery;
+  final String? conflictCode;
   const OutboxEntry({
     required this.id,
     required this.targetTable,
@@ -9185,6 +9287,10 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
     required this.createdAt,
     required this.attempts,
     this.lastError,
+    this.groupId,
+    this.groupSeq,
+    required this.requiresRecovery,
+    this.conflictCode,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -9199,6 +9305,16 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
     if (!nullToAbsent || lastError != null) {
       map['last_error'] = Variable<String>(lastError);
     }
+    if (!nullToAbsent || groupId != null) {
+      map['group_id'] = Variable<String>(groupId);
+    }
+    if (!nullToAbsent || groupSeq != null) {
+      map['group_seq'] = Variable<int>(groupSeq);
+    }
+    map['requires_recovery'] = Variable<bool>(requiresRecovery);
+    if (!nullToAbsent || conflictCode != null) {
+      map['conflict_code'] = Variable<String>(conflictCode);
+    }
     return map;
   }
 
@@ -9212,6 +9328,12 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
       createdAt: Value(createdAt),
       attempts: Value(attempts),
       lastError: lastError == null && nullToAbsent ? const Value.absent() : Value(lastError),
+      groupId: groupId == null && nullToAbsent ? const Value.absent() : Value(groupId),
+      groupSeq: groupSeq == null && nullToAbsent ? const Value.absent() : Value(groupSeq),
+      requiresRecovery: Value(requiresRecovery),
+      conflictCode: conflictCode == null && nullToAbsent
+          ? const Value.absent()
+          : Value(conflictCode),
     );
   }
 
@@ -9229,6 +9351,10 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       attempts: serializer.fromJson<int>(json['attempts']),
       lastError: serializer.fromJson<String?>(json['lastError']),
+      groupId: serializer.fromJson<String?>(json['groupId']),
+      groupSeq: serializer.fromJson<int?>(json['groupSeq']),
+      requiresRecovery: serializer.fromJson<bool>(json['requiresRecovery']),
+      conflictCode: serializer.fromJson<String?>(json['conflictCode']),
     );
   }
   @override
@@ -9243,6 +9369,10 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'attempts': serializer.toJson<int>(attempts),
       'lastError': serializer.toJson<String?>(lastError),
+      'groupId': serializer.toJson<String?>(groupId),
+      'groupSeq': serializer.toJson<int?>(groupSeq),
+      'requiresRecovery': serializer.toJson<bool>(requiresRecovery),
+      'conflictCode': serializer.toJson<String?>(conflictCode),
     };
   }
 
@@ -9255,6 +9385,10 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
     DateTime? createdAt,
     int? attempts,
     Value<String?> lastError = const Value.absent(),
+    Value<String?> groupId = const Value.absent(),
+    Value<int?> groupSeq = const Value.absent(),
+    bool? requiresRecovery,
+    Value<String?> conflictCode = const Value.absent(),
   }) => OutboxEntry(
     id: id ?? this.id,
     targetTable: targetTable ?? this.targetTable,
@@ -9264,6 +9398,10 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
     createdAt: createdAt ?? this.createdAt,
     attempts: attempts ?? this.attempts,
     lastError: lastError.present ? lastError.value : this.lastError,
+    groupId: groupId.present ? groupId.value : this.groupId,
+    groupSeq: groupSeq.present ? groupSeq.value : this.groupSeq,
+    requiresRecovery: requiresRecovery ?? this.requiresRecovery,
+    conflictCode: conflictCode.present ? conflictCode.value : this.conflictCode,
   );
   OutboxEntry copyWithCompanion(OutboxRecordsCompanion data) {
     return OutboxEntry(
@@ -9275,6 +9413,12 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       attempts: data.attempts.present ? data.attempts.value : this.attempts,
       lastError: data.lastError.present ? data.lastError.value : this.lastError,
+      groupId: data.groupId.present ? data.groupId.value : this.groupId,
+      groupSeq: data.groupSeq.present ? data.groupSeq.value : this.groupSeq,
+      requiresRecovery: data.requiresRecovery.present
+          ? data.requiresRecovery.value
+          : this.requiresRecovery,
+      conflictCode: data.conflictCode.present ? data.conflictCode.value : this.conflictCode,
     );
   }
 
@@ -9288,7 +9432,11 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
           ..write('payload: $payload, ')
           ..write('createdAt: $createdAt, ')
           ..write('attempts: $attempts, ')
-          ..write('lastError: $lastError')
+          ..write('lastError: $lastError, ')
+          ..write('groupId: $groupId, ')
+          ..write('groupSeq: $groupSeq, ')
+          ..write('requiresRecovery: $requiresRecovery, ')
+          ..write('conflictCode: $conflictCode')
           ..write(')'))
         .toString();
   }
@@ -9303,6 +9451,10 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
     createdAt,
     attempts,
     lastError,
+    groupId,
+    groupSeq,
+    requiresRecovery,
+    conflictCode,
   );
   @override
   bool operator ==(Object other) =>
@@ -9315,7 +9467,11 @@ class OutboxEntry extends DataClass implements Insertable<OutboxEntry> {
           other.payload == this.payload &&
           other.createdAt == this.createdAt &&
           other.attempts == this.attempts &&
-          other.lastError == this.lastError);
+          other.lastError == this.lastError &&
+          other.groupId == this.groupId &&
+          other.groupSeq == this.groupSeq &&
+          other.requiresRecovery == this.requiresRecovery &&
+          other.conflictCode == this.conflictCode);
 }
 
 class OutboxRecordsCompanion extends UpdateCompanion<OutboxEntry> {
@@ -9327,6 +9483,10 @@ class OutboxRecordsCompanion extends UpdateCompanion<OutboxEntry> {
   final Value<DateTime> createdAt;
   final Value<int> attempts;
   final Value<String?> lastError;
+  final Value<String?> groupId;
+  final Value<int?> groupSeq;
+  final Value<bool> requiresRecovery;
+  final Value<String?> conflictCode;
   final Value<int> rowid;
   const OutboxRecordsCompanion({
     this.id = const Value.absent(),
@@ -9337,6 +9497,10 @@ class OutboxRecordsCompanion extends UpdateCompanion<OutboxEntry> {
     this.createdAt = const Value.absent(),
     this.attempts = const Value.absent(),
     this.lastError = const Value.absent(),
+    this.groupId = const Value.absent(),
+    this.groupSeq = const Value.absent(),
+    this.requiresRecovery = const Value.absent(),
+    this.conflictCode = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   OutboxRecordsCompanion.insert({
@@ -9348,6 +9512,10 @@ class OutboxRecordsCompanion extends UpdateCompanion<OutboxEntry> {
     required DateTime createdAt,
     this.attempts = const Value.absent(),
     this.lastError = const Value.absent(),
+    this.groupId = const Value.absent(),
+    this.groupSeq = const Value.absent(),
+    this.requiresRecovery = const Value.absent(),
+    this.conflictCode = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id),
        targetTable = Value(targetTable),
@@ -9364,6 +9532,10 @@ class OutboxRecordsCompanion extends UpdateCompanion<OutboxEntry> {
     Expression<DateTime>? createdAt,
     Expression<int>? attempts,
     Expression<String>? lastError,
+    Expression<String>? groupId,
+    Expression<int>? groupSeq,
+    Expression<bool>? requiresRecovery,
+    Expression<String>? conflictCode,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -9375,6 +9547,10 @@ class OutboxRecordsCompanion extends UpdateCompanion<OutboxEntry> {
       if (createdAt != null) 'created_at': createdAt,
       if (attempts != null) 'attempts': attempts,
       if (lastError != null) 'last_error': lastError,
+      if (groupId != null) 'group_id': groupId,
+      if (groupSeq != null) 'group_seq': groupSeq,
+      if (requiresRecovery != null) 'requires_recovery': requiresRecovery,
+      if (conflictCode != null) 'conflict_code': conflictCode,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -9388,6 +9564,10 @@ class OutboxRecordsCompanion extends UpdateCompanion<OutboxEntry> {
     Value<DateTime>? createdAt,
     Value<int>? attempts,
     Value<String?>? lastError,
+    Value<String?>? groupId,
+    Value<int?>? groupSeq,
+    Value<bool>? requiresRecovery,
+    Value<String?>? conflictCode,
     Value<int>? rowid,
   }) {
     return OutboxRecordsCompanion(
@@ -9399,6 +9579,10 @@ class OutboxRecordsCompanion extends UpdateCompanion<OutboxEntry> {
       createdAt: createdAt ?? this.createdAt,
       attempts: attempts ?? this.attempts,
       lastError: lastError ?? this.lastError,
+      groupId: groupId ?? this.groupId,
+      groupSeq: groupSeq ?? this.groupSeq,
+      requiresRecovery: requiresRecovery ?? this.requiresRecovery,
+      conflictCode: conflictCode ?? this.conflictCode,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -9430,6 +9614,18 @@ class OutboxRecordsCompanion extends UpdateCompanion<OutboxEntry> {
     if (lastError.present) {
       map['last_error'] = Variable<String>(lastError.value);
     }
+    if (groupId.present) {
+      map['group_id'] = Variable<String>(groupId.value);
+    }
+    if (groupSeq.present) {
+      map['group_seq'] = Variable<int>(groupSeq.value);
+    }
+    if (requiresRecovery.present) {
+      map['requires_recovery'] = Variable<bool>(requiresRecovery.value);
+    }
+    if (conflictCode.present) {
+      map['conflict_code'] = Variable<String>(conflictCode.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -9447,6 +9643,10 @@ class OutboxRecordsCompanion extends UpdateCompanion<OutboxEntry> {
           ..write('createdAt: $createdAt, ')
           ..write('attempts: $attempts, ')
           ..write('lastError: $lastError, ')
+          ..write('groupId: $groupId, ')
+          ..write('groupSeq: $groupSeq, ')
+          ..write('requiresRecovery: $requiresRecovery, ')
+          ..write('conflictCode: $conflictCode, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -10091,6 +10291,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'outbox_created',
     'CREATE INDEX outbox_created ON outbox (created_at)',
   );
+  late final Index outboxGroup = Index(
+    'outbox_group',
+    'CREATE INDEX outbox_group ON outbox (group_id, group_seq)',
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -10133,6 +10337,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     expensesSpent,
     eventsOrderTime,
     outboxCreated,
+    outboxGroup,
   ];
   @override
   DriftDatabaseOptions get options => const DriftDatabaseOptions(storeDateTimeAsText: true);

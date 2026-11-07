@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:drift/drift.dart' show Value, Variable;
 import 'package:laurum/core/domain/id_generator.dart';
 import 'package:laurum/core/persistence/app_database.dart';
 import 'package:laurum/core/persistence/drift_transaction_runner.dart';
@@ -31,6 +32,13 @@ class OutboxWriter {
     final encoded = jsonEncode(payload);
     return runner.run(() async {
       final result = await mutate();
+      final groupId = runner.currentGroupId;
+      final next = await db
+          .customSelect(
+            'SELECT COALESCE(MAX(group_seq), 0) + 1 AS n FROM outbox WHERE group_id = ?',
+            variables: [Variable(groupId)],
+          )
+          .getSingle();
       await db
           .into(db.outboxRecords)
           .insert(
@@ -41,6 +49,8 @@ class OutboxWriter {
               op: op,
               payload: encoded,
               createdAt: clock(),
+              groupId: Value(groupId),
+              groupSeq: Value(next.read<int>('n')),
             ),
           );
       return result;

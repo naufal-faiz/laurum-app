@@ -32,7 +32,7 @@ void main() {
       await old.close();
       final db = AppDatabase(schema.newConnection());
       addTearDown(db.close);
-      await verifier.migrateAndValidate(db, 4);
+      await verifier.migrateAndValidate(db, 5);
       final repo = DriftOrderRepository(db, 'owner', OutboxWriter(db, DriftTransactionRunner(db)));
       final start = DateTime.parse('2026-11-04T03:00:00.000001Z').toLocal();
       final range = ReportRange(start, start.add(const Duration(microseconds: 1)));

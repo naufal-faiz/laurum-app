@@ -1,6 +1,6 @@
 # Usulan B2 — sinkronisasi yang mempertahankan nota dan ledger
-Status: DISETUJUI PENGGUNA (6 Nov 2026). Empat keputusan di bawah berlaku; B2a boleh
-mengubah PRD terbatas dan menambah migrasi/tes server. B2b+ menunggu giliran.
+Status: DISETUJUI PENGGUNA (6 Nov 2026). Empat keputusan di bawah berlaku; B2a dan B2b
+SELESAI (7 Nov 2026). B2c+ menunggu giliran.
 Dasar: PRD B7–9, hasil B0/B1f, OrderEdit dan OutboxWriter yang sudah diverifikasi.
 Tujuan: perubahan offline sampai ke server/perangkat lain tanpa nota setengah berubah,
 tanpa pembayaran ganda, tanpa menimpa perubahan lokal yang masih menunggu kirim.

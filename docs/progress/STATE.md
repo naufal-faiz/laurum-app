@@ -1,12 +1,23 @@
 # STATE Laurum
-Diperbarui: 2026-11-06 | Cabang dev2backend
+Diperbarui: 2026-11-07 | Cabang dev2backend
 
 ## Posisi
-UI100/R0-R10, BP0, B1a-f, B0 dan **B2a SELESAI**; B2b belum ditulis. B2 disetujui
-pengguna 6 Nov 2026. Bukti B2a: docs/progress/b2a.md.
+UI100/R0-R10, BP0, B1a-f, B0, **B2a dan B2b SELESAI**; B2c belum ditulis. B2 disetujui
+pengguna 6 Nov 2026. Bukti B2a/B2b: docs/progress/b2a.md dan b2b.md.
 Bukti B1f: docs/progress/b1f.md dan b1f-benchmark.json; tanpa push/merge.
 B0 SELESAI: docs/prompts/B0-supabase.md; rencana docs/plans/B0-supabase-lokal.md.
-Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md dan supabase/README.md.
+Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md dan supabase/README.md.
+
+## Hasil B2b (7 Nov 2026)
+- Drift v5: outbox punya group_id/group_seq/requires_recovery/conflict_code;
+  snapshot v5 ditambah, v1–v4 beku. Baris baru = satu grup per transaksi bisnis.
+- Migrasi v4 tidak menebak grup: baris lama diblokir sampai pemulihan eksplisit.
+- SyncOutboxStore (Drift+InMemory): ack selektif, attempts, konflik, legacy recovery.
+- SyncEngine: hash kanonik SHA-256 (crypto disetujui), fragmen >50, receipt idempoten,
+  retry setelah respons hilang, konflik/legacy memblokir grup berikutnya.
+- check_all HIJAU 906 tes, archOK, REPO_MAP917, exit0. Tanpa UI/Supabase/network.
+- LANGKAH BERIKUTNYA: tinjauan pengguna, lalu tulis prompt B2c (adapter Supabase,
+  push/pull nyata dua akun lokal, pemetaan seluruh tabel). Jangan mulai B3.
 
 ## Hasil B2a (6 Nov 2026)
 - Migrasi baru `20261106062912_b2a_sync_groups.sql`; empat migrasi B0 utuh.
@@ -48,8 +59,8 @@ Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md dan supabase/README.md.
 - Cache SDK sementara kini E:\laurum-b0-native-dart-sdk (tanpa spasi), junction
   Temp/laurum-native-dart-sdk menunjuk ke sana. SDK asli tetap. Path berspasi
   mematahkan native hook; jangan pindah cache ini ke folder repo berspasi.
-- B2a: migrasi/tes server selesai; PRD B5/7/8 dan README sudah sesuai kontrak grup.
-  B2b belum ditulis; antrean v4 mengikuti protokol pemulihan eksplisit di README.
+- B2a/B2b: kontrak server dan mesin lokal selesai; PRD B5/7/8 dan README sesuai
+  kontrak grup. Antrean v4 memakai pemulihan eksplisit di mesin B2b.
 
 ## Hasil B1f dan batas yang tetap berlaku
 - Main default Drift; memory/dummy untuk tes. Satu MaterialApp.router, root49baris.
@@ -63,14 +74,14 @@ Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md dan supabase/README.md.
   APK utama terpasang, restart mempertahankan checksum DB; iOS belum diuji.
 - B1e ledger disetujui: omzet177.000/589.000/864.000; biaya145.000/850.000/1.850.000;
   laba32.000/-261.000/-986.000, kas130.500/500.000/868.500; piutang400.500/tabungan430.000.
-- Drift v4/16tabel, snapshotv1-v4 beku. created_key lokal; UTC6digit untuk tanggal.
+- Drift v5/16tabel, snapshot v1–v4 beku + v5; created_key lokal; UTC6digit.
 - Sebelum SEMUA Dart/Flutter: . ./tool/windows_native_sdk.ps1.
 - Cloud/key belum diperlukan B0; Google OAuth+SMTP produksi perlu konfigurasi B3.
   Auth/sesi/AI/usulan/WhatsApp masih dummy sampai B3/B7. Printer/picker/ekspor belum.
 - Foto lama dipertahankan untuk outbox sampai lifecycle/delete; upload B2.
 - Payload snake_case/UTC ISO tanpa sync_state/pay_status/key lokal. Wire schema5 dan
-  metadata grup (group_id/hash/fragmen/change_id) tersedia di server; adapter klien baru
-  di B2b. Urutan master/order/ledger/selesaiCOD tetap wajib.
+  metadata grup tersedia di server + mesin lokal; adapter transport baru di B2c.
+  Urutan master/order/ledger/selesaiCOD tetap wajib.
 - order_events domain B1d disertakan server, ringkasan PRD B5 belum mencantumkan.
 - PayStatus turunan, COD bersisa ditahan, transaksi multi-repo lewat TransactionRunner.
 - Preferensi bisnis/struk sinkron, perangkat local_settings; tanpa shared_preferences.

@@ -1,15 +1,29 @@
 import 'dart:async';
 
+import 'package:laurum/core/domain/id_generator.dart';
 import 'package:laurum/core/persistence/app_database.dart';
 import 'package:laurum/core/services/in_memory_transaction_runner.dart';
 import 'package:laurum/core/services/transaction_runner.dart';
 
 class DriftTransactionRunner implements TransactionRunner {
-  DriftTransactionRunner(this.db, {Iterable<TransactionParticipant> Function()? participants})
-    : _memory = InMemoryTransactionRunner(participants ?? () => const []);
+  DriftTransactionRunner(
+    this.db, {
+    Iterable<TransactionParticipant> Function()? participants,
+    this.ids = const IdGenerator(),
+  }) : _memory = InMemoryTransactionRunner(participants ?? () => const []);
   final AppDatabase db;
+  final IdGenerator ids;
   final InMemoryTransactionRunner _memory;
   final Object _zoneKey = Object();
+
+  // Every top-level business transaction is one sync group. Nested calls reuse it.
+  String get currentGroupId {
+    final active = Zone.current[_zoneKey];
+    if (active is! _DriftScope || !active.open) {
+      throw StateError('No active transaction');
+    }
+    return active.groupId;
+  }
 
   @override
   Future<T> run<T>(Future<T> Function() body) async {
@@ -24,7 +38,7 @@ class DriftTransactionRunner implements TransactionRunner {
       }
     }
     return _memory.run(() async {
-      final scope = _DriftScope();
+      final scope = _DriftScope(ids.newId());
       try {
         return await db.transaction(
           () => runZoned(() async {
@@ -56,6 +70,8 @@ class DriftTransactionRunner implements TransactionRunner {
 }
 
 class _DriftScope {
+  _DriftScope(this.groupId);
+  final String groupId;
   final rollback = <Future<void> Function()>[];
   bool open = true;
   Object? error;

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:drift/drift.dart' show OrderingTerm;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/persistence/app_database.dart';
@@ -35,6 +36,35 @@ void main() {
     expect(row.op, 'upsert');
     expect(jsonDecode(row.payload), {'name': 'Ratna'});
     expect(row.attempts, 0);
+    expect(row.groupId, isNotNull);
+    expect(row.groupId![14], '4');
+    expect(row.groupSeq, 1);
+    expect(row.requiresRecovery, isFalse);
+    expect(row.conflictCode, isNull);
+  });
+  test('one business transaction shares a group and keeps insertion order', () async {
+    await runner.run(() async {
+      await write();
+      await writer.write(
+        table: 'customers',
+        rowId: 'row-id-2',
+        payload: {'name': 'Sari'},
+        mutate: () => settings.setInt('second', 2),
+      );
+    });
+    final rows = await (db.select(
+      db.outboxRecords,
+    )..orderBy([(t) => OrderingTerm(expression: t.groupSeq)])).get();
+    expect(rows, hasLength(2));
+    expect(rows.map((r) => r.groupId).toSet(), hasLength(1));
+    expect(rows.map((r) => r.groupSeq), [1, 2]);
+  });
+  test('a separate transaction gets a different group', () async {
+    await write();
+    await write();
+    final rows = await db.select(db.outboxRecords).get();
+    expect(rows.map((r) => r.groupId).toSet(), hasLength(2));
+    expect(rows.map((r) => r.groupSeq), [1, 1]);
   });
   test('outer rollback removes both data and outbox', () async {
     await expectLater(
