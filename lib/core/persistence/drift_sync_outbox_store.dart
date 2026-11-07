@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:drift/drift.dart';
 import 'package:laurum/core/persistence/app_database.dart';
+import 'package:laurum/core/persistence/drift_sync_ack_writer.dart';
 import 'package:laurum/core/sync/sync_change.dart';
 import 'package:laurum/core/sync/sync_group.dart';
 import 'package:laurum/core/sync/sync_outbox_store.dart';
@@ -9,6 +10,7 @@ import 'package:laurum/core/sync/sync_outbox_store.dart';
 class DriftSyncOutboxStore implements SyncOutboxStore {
   DriftSyncOutboxStore(this.db);
   final AppDatabase db;
+  late final _ack = DriftSyncAckWriter(db);
   static final _uuid = RegExp(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$');
 
   @override
@@ -49,13 +51,7 @@ class DriftSyncOutboxStore implements SyncOutboxStore {
   ];
 
   @override
-  Future<void> ackGroup(String groupId, Set<String> changeIds) async {
-    if (changeIds.isEmpty) return;
-    await (db.delete(db.outboxRecords)..where(
-          (t) => t.groupId.equals(groupId) & t.id.isIn(changeIds),
-        ))
-        .go();
-  }
+  Future<void> ackGroup(String groupId, Set<String> changeIds) => _ack.ackGroup(groupId, changeIds);
 
   @override
   Future<void> recordFailure(String groupId, String code) => db.customStatement(
@@ -64,10 +60,7 @@ class DriftSyncOutboxStore implements SyncOutboxStore {
   );
 
   @override
-  Future<void> markConflict(String groupId, String code) => db.customStatement(
-    'UPDATE outbox SET conflict_code = ?, last_error = ? WHERE group_id = ?',
-    [code, code, groupId],
-  );
+  Future<void> markConflict(String groupId, String code) => _ack.markConflict(groupId, code);
 
   @override
   Future<void> recoverLegacyGroup(String groupId, List<String> changeIds) async {

@@ -6,6 +6,7 @@ import 'package:laurum/core/sync/sync_push_request.dart';
 import 'package:laurum/core/sync/sync_push_result.dart';
 import 'package:laurum/core/sync/sync_run_result.dart';
 import 'package:laurum/core/sync/sync_transport.dart';
+import 'package:laurum/core/sync/sync_transport_exception.dart';
 
 class SyncEngine {
   SyncEngine(this.store, this.transport);
@@ -76,6 +77,9 @@ class SyncEngine {
           continue;
         }
         return result;
+      } on SyncTransportException catch (error) {
+        await store.recordFailure(request.groupId, error.code);
+        return null;
       } catch (_) {
         await store.recordFailure(request.groupId, 'transport_failure');
         return null;

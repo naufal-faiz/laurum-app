@@ -174,7 +174,13 @@ penutupan sesi/sinkronisasi lintas perangkat disambungkan di B3.
   receipt di atas; kirim dependency berurutan (master → order → ledger → penyelesaian
   COD) di dalam grup yang sama, bukan menunggu percobaan terpisah.
 - Antrean v4 lama mengikuti protokol pemulihan di atas; jangan menebak grup dari waktu.
-- Adapter B2 yang menangani transport, retry, dan pemetaan receipt ke outbox belum ada.
+- Klien B2c sudah menyambungkan `sync_push`/`sync_pull` di `SupabaseSyncTransport`,
+  menyimpan kursor di `sync_cursors`, dan memetakan 13 tabel lewat
+  `DriftSyncRemoteApplier`. Baris yang masih punya entri outbox tidak ditimpa pull.
+  Retry, indikator, koneksi, dan periode tetap B2d; upload foto tetap B2e.
+- Tes integrasi dua akun `test/sync/supabase_sync_local_test.dart` hanya berjalan bila
+  `LAURUM_LOCAL_SUPABASE_URL=http://127.0.0.1:54321` dan kedua kunci lokal ada di env
+  proses. Tes ini belum dijalankan saat B2c ditutup karena Docker tidak aktif.
 - pgTAP memeriksa dua owner untuk semua tabel, Storage, retry, konflik, versi, FK,
   final status, item mutable/lock, grup atomik, fragmen, receipt, pull tuple,
   service-role ledger guard, dan cleanup akun.

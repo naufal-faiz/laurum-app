@@ -2,11 +2,30 @@
 Diperbarui: 2026-11-07 | Cabang dev2backend
 
 ## Posisi
-UI100/R0-R10, BP0, B1a-f, B0, **B2a dan B2b SELESAI**; B2c belum ditulis. B2 disetujui
-pengguna 6 Nov 2026. Bukti B2a/B2b: docs/progress/b2a.md dan b2b.md.
+UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, dan B2c SELESAI**; B2d belum ditulis. B2
+disetujui pengguna 6 Nov 2026. Bukti B2a/B2b/B2c: docs/progress/b2a.md, b2b.md, b2c.md.
 Bukti B1f: docs/progress/b1f.md dan b1f-benchmark.json; tanpa push/merge.
 B0 SELESAI: docs/prompts/B0-supabase.md; rencana docs/plans/B0-supabase-lokal.md.
-Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md dan supabase/README.md.
+Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md, b2c.md dan supabase/README.md.
+
+## Hasil B2c (7 Nov 2026)
+- Adapter `SupabaseSyncTransport` (push+pull RPC), parsing wire, dan pemetaan galat aman.
+- Pull per tabel dengan kursor `(updated_at,id)` di `sync_cursors`, urutan dependensi,
+  maks 500 per halaman, kursor tidak maju = berhenti.
+- `DriftSyncRemoteApplier` memetakan 13 tabel owner: upsert, tombstone, timestamp UTC6,
+  `name_key`/`phone_key`/`created_key`, `sync_state=synced`; baris yang masih punya
+  entri outbox tidak pernah ditimpa pull.
+- Ack hanya menghapus ID `ok` dan menandai `synced` bila outbox bersih; konflik menandai
+  baris lokal `conflict`. `SyncEngine` mencatat kode galat transport yang aman.
+- `SyncCoordinator` push dulu; pull dilewati bila push terblokir.
+- `supabase_flutter ^2.18.3` dipasang lewat `flutter pub add`; `shared_preferences`
+  hanya transitif dan tidak diimpor (aturan 20 tetap hijau).
+- check_all HIJAU 926 tes (+20 dari B2b), 1 tes integrasi dilewati, archOK, REPO_MAP941,
+  exit0.
+- Tes integrasi dua akun lokal BELUM dijalankan: daemon Docker tidak aktif
+  (`npipe:////./pipe/dockerDesktopLinuxEngine` tidak ada). Perintahnya di b2c.md.
+- LANGKAH BERIKUTNYA: tinjauan pengguna, lalu jalankan tes integrasi lokal saat Docker
+  aktif dan tulis B2d (indikator/retry/koneksi). Jangan mulai B3.
 
 ## Hasil B2b (7 Nov 2026)
 - Drift v5: outbox punya group_id/group_seq/requires_recovery/conflict_code;
