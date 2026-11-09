@@ -50,6 +50,10 @@ dan supabase/README.md.
   belum ada akun uji/peti surat, `GOOGLE_WEB_CLIENT_ID` + SHA-1 Android belum ada.
 - LANGKAH BERIKUTNYA: tinjauan pengguna, lalu B3b (konfirmasi/pemulihan) —
   docs/prompts/B3b-konfirmasi-pemulihan.md. Jangan mulai B3c sebelum B3b selesai.
+- Keputusan 9 Nov 2026: pengguna menyetujui dependensi `workmanager` untuk sinkron
+  latar di B3c (pasang, jangan tunda). Sinkron "Sinkron sekarang" masih hanya
+  menghitung ulang outbox karena `AccountStore` membuat `DriftSyncService(db)`
+  tanpa `SyncCycle`; gerbang baru dibuka di B3c.
 
 ## Hasil B2d (9 Nov 2026)
 - Mesin pemicu murni: debounce 2 dtk, backoff eksponensial 2 dtk → 15 mnt, periodik

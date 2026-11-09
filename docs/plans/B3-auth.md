@@ -18,7 +18,8 @@ Tiga irisan supaya tiap sesi berhenti di titik hijau:
 3. **B3c — hapus akun dan sinkronisasi nyata.** Panggilan Edge `delete-account`
    (dua konfirmasi yang ada), pembersihan lokal, registrasi `devices`,
    `SyncCoordinator` disuntikkan ke `DriftSyncService` (gerbang B2d terbuka), dan
-   `workmanager` untuk sinkron latar bila disetujui.
+   `workmanager` untuk sinkron latar — **disetujui pengguna 9 Nov 2026** (pasang
+   `workmanager`, jangan tunda), dengan bootstrap Auth + database di isolate.
 
 Irisan ini tidak mengubah PRD, registry, tema, atau lint. Tanpa push/merge.
 

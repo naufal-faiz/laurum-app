@@ -14,8 +14,9 @@ Butuh migrasi `supabase/migrations` sudah diterapkan ke proyek cloud oleh pemili
    tetap tertutup dan tidak ada panggilan jaringan.
 4. Registrasi perangkat (`devices`) saat login pertama di perangkat; tes dengan
    transport palsu.
-5. `workmanager` untuk sinkron latar HANYA bila pengguna menyetujui dependensi;
-   jika tidak, catat sebagai tunda dan tutup sesi.
+5. `workmanager` untuk sinkron latar (DISETUJUI pengguna 9 Nov 2026 — pasang,
+   jangan tunda): bootstrap Auth, Supabase, dan database di isolate, lalu jadwalkan
+   siklus saat aplikasi tidak aktif.
 6. check_all hijau; docs/progress/b3c.md, INDEX, STATE, commit, berhenti.
 
 ## Batas
