@@ -1,14 +1,10 @@
 # STATE Laurum
-Diperbarui: 2026-11-09 | Cabang newdesign
+Diperbarui: 2026-11-09 11:08 | Cabang newdesign
 
 ## Mode Redesign UI (Aktif di cabang newdesign)
-- Prasyarat: branch `newdesign` aktif; MCP FigCraft terhubung ke dokumen `docs/design/new-design-laurum.figcraft` (ping/`doc.list` sukses, 30 frame terdeteksi).
-- Pemetaan: `docs/design/redesign/figma_map.md` telah dibuat berisi 33 layar dari `docs/design/screens/`. Kolom frame Figma dikosongkan menunggu penentuan oleh pengguna sesuai aturan UI-4.
-- Layar selesai/ditunda: 29-masuk-google (paritas selesai, redesign struktur WIP 60% — pending split private widgets), 31-daftar (pemetaan+paritas selesai, belum kode).
-- Proposal yang menunggu: (1) token gradient biru hero ✅, (2) shadow auth card ✅, (3) font Inter untuk hero ✅ — semuanya disetujui & diterapkan commit 1dce91e.
-- Selisih desain: lihat bagian "Selisih desain" di 29-masuk-google.md dan 31-daftar.md. Hero + floating card struktur baru diterapkan (Stack + SingleChildScrollView).
-- Tes yang diubah: tidak ada (belum ada kode yang diubah).
-- Status verifikasi visual: belum dimulai.
+- Layar selesai: 29-masuk-google (arch ✅ refactor, paritas UI-7 struktur OK — test pending), 31-daftar (mapping+paritas selesai, belum kode).
+- Proposal: (1) gradient ✅, (2) shadow ✅, (3) Inter font ✅ — semua diterapkan.
+- Commit 0415d46: SignInPage refactor — split 3 public Sections (hero 143L, form card 97L, password label 39L), main page 52L.
 
 ## Posisi
 UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, B2c, B2d, B3a, dan B3c SELESAI**;
