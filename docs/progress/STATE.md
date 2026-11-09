@@ -2,13 +2,13 @@
 Diperbarui: 2026-11-09 | Cabang dev2backend
 
 ## Posisi
-UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, B2c, dan B2d SELESAI**; B2e+ dan B3 menunggu.
+UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, B2c, B2d, dan B3a SELESAI**; B3b, B3c, B2e+ menunggu.
 B2 disetujui pengguna 6 Nov 2026. Bukti B2a/B2b/B2c/B2d: docs/progress/b2a.md, b2b.md,
-b2c.md, b2d.md.
+b2c.md, b2d.md. B3 dibagi B3a/B3b/B3c: docs/plans/B3-auth.md; bukti B3a: docs/progress/b3a.md.
 Bukti B1f: docs/progress/b1f.md dan b1f-benchmark.json; tanpa push/merge.
 B0 SELESAI: docs/prompts/B0-supabase.md; rencana docs/plans/B0-supabase-lokal.md.
-Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md, b2c.md, b2d.md dan
-supabase/README.md.
+Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md, b2c.md, b2d.md, b3a.md
+dan supabase/README.md.
 
 ## Aset merek dan ikon launcher (9 Nov 2026)
 - `assets/icons/` didaftarkan di pubspec; `AppSvgs` memuat `google`, `facebook`,
@@ -25,6 +25,31 @@ supabase/README.md.
 - Golden yang berubah karena ikon merek sudah diperbarui: customer_row, auth_signin(+error),
   r10_signin(+error,320_2x), r4_order_detail, order_detail_actions_1x.
 
+
+## Hasil B3a (9 Nov 2026)
+- Konfigurasi publik lewat `--dart-define`/`--dart-define-from-file=.env.local`:
+  `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `GOOGLE_WEB_CLIENT_ID`
+  (`core/services/auth_config.dart`). Tanpa konfigurasi aplikasi tetap mode dummy
+  dan tidak menyentuh jaringan.
+- Sesi Supabase disimpan di `flutter_secure_storage` (`SecureSessionStorage`,
+  `SecurePkceStorage`) — aturan 20; `shared_preferences` tetap transitif dan tidak
+  diimpor. `initializeSupabase` memulihkan sesi sebelum UI dan menerima deep link
+  `laurum://auth-callback` (intent filter Android dipasang).
+- `SupabaseAuthService` (+ `SupabaseAuthGateway`, `SupabaseAccountActions`,
+  `GoogleSignInTokenSource`) mengimplementasikan `AuthService`: masuk email+password,
+  daftar dengan konfirmasi email, Google id-token, profil `user_metadata`, ganti
+  password dengan verifikasi password lama, reset seragam, keluar. Galat Supabase
+  dipetakan ke `AuthFailure`; kredensial salah/duplikat memakai pesan seragam.
+  `deleteAccount` sengaja `unavailable` sampai B3c.
+- `main.dart`: Auth nyata hanya bila build Drift + konfigurasi tersedia.
+- check_all HIJAU 960 tes (+17 tes Auth), 1 integrasi dilewati tanpa env lokal,
+  archOK, REPO_MAP970. Tanpa UI baru, cloud diubah, push, atau merge.
+- Pemeriksaan cloud baca-saja: `/auth/v1/settings` 200 (Google + email aktif,
+  `mailer_autoconfirm=false`), `/auth/v1/health` 200 dengan kunci publik.
+- BELUM BISA DIUJI: migrasi cloud belum diterapkan (`app_config`/`orders` PGRST205),
+  belum ada akun uji/peti surat, `GOOGLE_WEB_CLIENT_ID` + SHA-1 Android belum ada.
+- LANGKAH BERIKUTNYA: tinjauan pengguna, lalu B3b (konfirmasi/pemulihan) —
+  docs/prompts/B3b-konfirmasi-pemulihan.md. Jangan mulai B3c sebelum B3b selesai.
 
 ## Hasil B2d (9 Nov 2026)
 - Mesin pemicu murni: debounce 2 dtk, backoff eksponensial 2 dtk → 15 mnt, periodik
