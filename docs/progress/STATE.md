@@ -4,10 +4,10 @@ Diperbarui: 2026-11-09 | Cabang newdesign
 ## Mode Redesign UI (Aktif di cabang newdesign)
 - Prasyarat: branch `newdesign` aktif; MCP FigCraft terhubung ke dokumen `docs/design/new-design-laurum.figcraft` (ping/`doc.list` sukses, 30 frame terdeteksi).
 - Pemetaan: `docs/design/redesign/figma_map.md` telah dibuat berisi 33 layar dari `docs/design/screens/`. Kolom frame Figma dikosongkan menunggu penentuan oleh pengguna sesuai aturan UI-4.
-- Layar selesai/ditunda: belum ada (menunggu masukan layar dan frame dari pengguna untuk analisis Paritas Redesign).
-- Proposal yang menunggu: tidak ada.
-- Selisih desain: belum ada.
-- Tes yang diubah: tidak ada.
+- Layar selesai/ditunda: 29-masuk-google (pemetaan+paritas selesai, belum kode), 31-daftar (pemetaan+paritas selesai, belum kode).
+- Proposal yang menunggu: (1) token gradient biru hero, (2) shadow auth card, (3) font Inter untuk hero — ketiganya diperlukan sebelum implementasi layar Masuk/Daftar.
+- Selisih desain: lihat bagian "Selisih desain" di 29-masuk-google.md dan 31-daftar.md. Poin kritis: struktur hero+kartu mengambang berbeda dari FormScaffold lama; perlu diskusi template sebelum kode.
+- Tes yang diubah: tidak ada (belum ada kode yang diubah).
 - Status verifikasi visual: belum dimulai.
 
 ## Posisi
