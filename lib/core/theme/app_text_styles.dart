@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppTextStyles {
-  static const fontFamily = 'Plus Jakarta Sans';
-  static const numpad = TextStyle(
+  static const fontFamily = 'Inter';
+  static const hero = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 18,
-    height: 24 / 18,
+    fontSize: 28,
+    height: 34 / 28,
     fontWeight: FontWeight.w700,
   );
-  static const monoFamily = 'IBM Plex Mono';
+  static const brand = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 16,
+    height: 20 / 16,
+    fontWeight: FontWeight.w700,
+  );
+  static const brandSub = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 11,
+    height: 14 / 11,
+    fontWeight: FontWeight.w600,
+  );
   static const titleRoot = TextStyle(
     fontFamily: fontFamily,
     fontSize: 24,
@@ -48,8 +59,8 @@ abstract final class AppTextStyles {
   );
   static const input = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 16,
-    height: 24 / 16,
+    fontSize: 14,
+    height: 20 / 14,
     fontWeight: FontWeight.w400,
   );
   static const label = TextStyle(
@@ -64,22 +75,28 @@ abstract final class AppTextStyles {
     height: 16 / 12,
     fontWeight: FontWeight.w400,
   );
+  static const meta = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 11,
+    height: 15 / 11,
+    fontWeight: FontWeight.w400,
+  );
+  static const micro = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 11,
+    height: 15 / 11,
+    fontWeight: FontWeight.w600,
+  );
   static const cta = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 16,
-    height: 22 / 16,
+    fontSize: 15,
+    height: 20 / 15,
+    fontWeight: FontWeight.w600,
+  );
+  static const numpad = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 18,
+    height: 24 / 18,
     fontWeight: FontWeight.w700,
-  );
-  static const monoLabel = TextStyle(
-    fontFamily: monoFamily,
-    fontSize: 12,
-    height: 16 / 12,
-    fontWeight: FontWeight.w400,
-  );
-  static const monoReceipt = TextStyle(
-    fontFamily: monoFamily,
-    fontSize: 11,
-    height: 16 / 11,
-    fontWeight: FontWeight.w400,
   );
 }

@@ -53,7 +53,7 @@ void main() {
       expect(find.byType(AppIcon), findsOneWidget);
       expect(
         tester.getSize(find.byType(TextButton)).height,
-        variant == AppButtonVariant.cta ? 56 : 48,
+        variant == AppButtonVariant.cta ? 50 : 48,
       );
       await tester.tap(find.byType(TextButton));
     }

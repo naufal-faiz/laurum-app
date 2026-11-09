@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 
+import 'test_fonts.dart';
+
 void registerTemplateGallery(String name, WidgetBuilder builder, {double height = 844}) {
   setUpAll(() => initializeDateFormatting('id_ID'));
   testWidgets('$name gallery', (tester) async {
-    for (final entry in {
-      'Plus Jakarta Sans': 'assets/fonts/PlusJakartaSans.ttf',
-      'IBM Plex Mono': 'assets/fonts/IBMPlexMono-Regular.ttf',
-      'packages/ionicons/Ionicons': 'packages/ionicons/assets/fonts/Ionicons.ttf',
-    }.entries) {
-      await (FontLoader(entry.key)..addFont(rootBundle.load(entry.value))).load();
-    }
+    await loadTestFonts();
     tester.view.physicalSize = Size(390, height);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);

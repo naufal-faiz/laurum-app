@@ -15,11 +15,11 @@ class SignInHeroSection extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.authHeroGradientStart, AppColors.authHeroGradientEnd],
+          colors: [AppColors.heroGradientStart, AppColors.heroGradientEnd],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: AppRadius.authHero,
+        borderRadius: AppRadius.hero,
       ),
       child: const Stack(
         children: [
@@ -27,7 +27,7 @@ class SignInHeroSection extends StatelessWidget {
             right: -80,
             top: -80,
             child: DecoratedBox(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.authHeroBlob),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.heroBlob),
               child: SizedBox(width: 210, height: 210),
             ),
           ),
@@ -35,7 +35,7 @@ class SignInHeroSection extends StatelessWidget {
             right: -30,
             top: 120,
             child: DecoratedBox(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.authHeroBlobSoft),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.heroBlobSoft),
               child: SizedBox(width: 120, height: 120),
             ),
           ),
@@ -43,7 +43,7 @@ class SignInHeroSection extends StatelessWidget {
             right: 136,
             top: 96,
             child: DecoratedBox(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.authHeroDot),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.heroDot),
               child: SizedBox(width: 4, height: 4),
             ),
           ),
@@ -51,7 +51,7 @@ class SignInHeroSection extends StatelessWidget {
             right: 120,
             top: 112,
             child: DecoratedBox(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.authHeroDot),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.heroDot),
               child: SizedBox(width: 4, height: 4),
             ),
           ),
@@ -59,7 +59,7 @@ class SignInHeroSection extends StatelessWidget {
             right: 102,
             top: 130,
             child: DecoratedBox(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.authHeroDot),
+              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.heroDot),
               child: SizedBox(width: 4, height: 4),
             ),
           ),

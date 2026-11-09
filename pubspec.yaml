@@ -109,14 +109,6 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
   fonts:
-    - family: Plus Jakarta Sans
-      fonts:
-        - asset: assets/fonts/PlusJakartaSans.ttf
-          weight: 400
-        - asset: assets/fonts/PlusJakartaSans.ttf
-          weight: 600
-        - asset: assets/fonts/PlusJakartaSans.ttf
-          weight: 700
     - family: IBM Plex Mono
       fonts:
         - asset: assets/fonts/IBMPlexMono-Regular.ttf

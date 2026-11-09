@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
-import 'package:laurum/core/theme/app_field_styles.dart';
+import 'package:laurum/core/theme/app_field_decoration.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 
 class AppTextField extends StatefulWidget {
@@ -26,8 +26,7 @@ class AppTextField extends StatefulWidget {
     this.leadingIcon,
     this.trailing,
     this.dense = false,
-  }) : assert(minLines > 0 && maxLines >= minLines),
-       assert(!obscureText || maxLines == 1);
+  }) : assert(minLines > 0 && maxLines >= minLines && (!obscureText || maxLines == 1));
   final String label, value;
   final String? hint, errorText;
   final ValueChanged<String>? onChanged, onSubmitted;
@@ -74,16 +73,6 @@ class _AppTextFieldState extends State<AppTextField> {
     super.dispose();
   }
 
-  InputDecoration get _decoration => AppFieldStyles.of(
-    dense: widget.dense,
-    hint: widget.hint,
-    error: widget.errorText,
-    enabled: widget.enabled,
-    prefixIcon: widget.leadingIcon == null
-        ? null
-        : AppIcon(widget.leadingIcon!, size: 16, color: AppColors.authLabel),
-    suffixIcon: widget.trailing,
-  );
   @override
   Widget build(BuildContext context) => Semantics(
     label: widget.label,
@@ -101,9 +90,18 @@ class _AppTextFieldState extends State<AppTextField> {
       onChanged: widget.onChanged,
       onSubmitted: widget.onSubmitted,
       scrollPadding: widget.dense ? const EdgeInsets.only(bottom: 330) : const EdgeInsets.all(20),
-      style: AppFieldStyles.textStyle(dense: widget.dense, enabled: widget.enabled),
+      style: AppFieldDecoration.style(dense: widget.dense, enabled: widget.enabled),
       cursorColor: AppColors.primary,
-      decoration: _decoration,
+      decoration: AppFieldDecoration.of(
+        dense: widget.dense,
+        hint: widget.hint,
+        error: widget.errorText,
+        enabled: widget.enabled,
+        prefixIcon: widget.leadingIcon == null
+            ? null
+            : AppIcon(widget.leadingIcon!, size: 16, color: AppColors.ink3),
+        suffixIcon: widget.trailing,
+      ),
     ),
   );
 }

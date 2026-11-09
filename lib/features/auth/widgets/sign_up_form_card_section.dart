@@ -3,6 +3,7 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_shadows.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/auth/widgets/auth_email_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_name_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_or_section.dart';
@@ -46,13 +47,13 @@ class SignUpFormCardSection extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         color: AppColors.surface,
-        borderRadius: AppRadius.authCard,
-        boxShadow: AppShadows.authCard,
+        borderRadius: AppRadius.cardLarge,
+        boxShadow: AppShadows.cardElevated,
       ),
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.all(AppSpacing.largeX),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        spacing: 12,
+        spacing: AppSpacing.medium,
         children: [
           if (error != null) BannerMessage(message: error!, variant: BannerMessageVariant.error),
           AuthNameFieldSection(

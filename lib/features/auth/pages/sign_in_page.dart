@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/auth/state/auth_form.dart';
 import 'package:laurum/features/auth/state/auth_form_view.dart';
 import 'package:laurum/features/auth/state/auth_session.dart';
@@ -31,7 +32,7 @@ class SignInPage extends ConsumerWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
                   child: SignInFormCardSection(
                     email: form.email,
                     visible: form.visible,
@@ -51,14 +52,14 @@ class SignInPage extends ConsumerWidget {
                     onSignUp: () => context.go('/daftar'),
                   ),
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: AppSpacing.xxlarge),
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
                   child: SignInFeatureBarSection(),
                 ),
-                const SizedBox(height: 18),
+                const SizedBox(height: AppSpacing.largeX),
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
                   child: AuthTrustSection(),
                 ),
               ],

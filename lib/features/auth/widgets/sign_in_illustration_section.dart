@@ -12,7 +12,7 @@ class SignInIllustrationSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return const DecoratedBox(
       decoration: BoxDecoration(
-        color: AppColors.authIllustration,
+        color: AppColors.illustration,
         borderRadius: AppRadius.chip,
       ),
       child: SizedBox(

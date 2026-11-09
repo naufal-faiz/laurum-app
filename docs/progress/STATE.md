@@ -2,26 +2,37 @@
 Diperbarui: 2026-11-10 | Cabang newdesign
 
 ## Mode Redesign UI (Aktif di cabang newdesign)
-- **Lapisan aktif: 1 (token), MENUNGGU PERSETUJUAN** proposal
-  `docs/design/proposals/006-lapisan-token.md`. Sesi 10 Nov 2026 tidak mengubah kode.
-- Keputusan global `docs/design/redesign/decisions.md` sudah terisi (5 butir, disetujui
-  pengguna 10 Nov 2026 "ya semua"): primer #2675C9, hijau jadi status sukses, Inter
-  global, skala auth + minimum 11, tombol 50/44/40, variabel & komponen FigCraft.
-- Proposal lapisan: 006 token (menunggu). Setelah disetujui: lapisan 2 atoms →
-  3 molecules → 4 organisms → 5 templates → 6 Page/Section (UI-21).
-- Utang token auth (UI-23) tercatat di proposal 006: `app_auth_text_styles.dart`,
-  `app_field_styles.dart`, `AppColors.auth*`, `AppRadius.auth*`, `AppShadows.auth*`.
-  Sebelum lapisan 1: hanya boleh menyusut. Sesudahnya: dilarang ada.
-- Prasyarat FigCraft: aplikasi FigCraft sudah dibuka (proses `figcraft.exe` berjalan),
-  tetapi **MCP port 9876 belum listen** sehingga tool FigCraft tidak tersedia di sesi
-  ini. File tetap terbaca read-only lewat `figcraft-cli info`
-  (2757 node, 30 frame, 0 style/variabel). Nyalakan control server/MCP di aplikasi
-  sebelum lapisan desain berikutnya.
-- Tes yang diubah: tidak ada di sesi ini (hanya dokumen).
-- Layar 29-masuk-google dan 31-daftar sudah berkode dengan token auth; keduanya
-  menunggu rework komposisi murni di lapisan 6 (UI-29) setelah lapisan 1–5 selesai.
-- Status verifikasi visual: layar 29 & 31 pernah dibandingkan lewat golden widget test;
-  **belum dijalankan di emulator Android** (visual belum diverifikasi perangkat).
+- **Lapisan 1 (token): SELESAI 10 Nov 2026** — proposal
+  `docs/design/proposals/006-lapisan-token.md` disetujui dan diterapkan.
+  Berikutnya: proposal `007-lapisan-atoms` (gerbang UI-21).
+- Keputusan global terisi (5 butir, pengguna 10 Nov 2026): primer `#2675C9`, hijau
+  menjadi `success`, Inter global, skala auth + minimum 11, tombol 50/44/40,
+  variabel & komponen FigCraft.
+- Utang token auth (UI-23) **nol**: `app_auth_text_styles.dart`, `app_field_styles.dart`,
+  `AppColors.auth*`, `AppRadius.auth*`, `AppShadows.auth*` sudah dihapus dan seluruh
+  pemakai (16 Section auth + `AppTextField`) memakai token global.
+- Token baru global: `hero*`, `brandGoogle*`, `success*`, `cardLarge`, `raised`,
+  `cardElevated`, skala `AppSpacing` 4–32, `buttonLarge/Medium/Small`, `fieldHeight`,
+  `barHeight`, `backButton`, `iconTiny/iconLarge`; mono dipisah ke
+  `AppMonoTextStyles`, dekorasi field ke `AppFieldDecoration`.
+- Font: Inter 400/600/700 global; Plus Jakarta Sans dilepas dari `pubspec.yaml` dan
+  asetnya dihapus.
+- Alias sementara: `AppColors.blue/blueTint/blueInk` masih ada untuk badge "Diproses"
+  sampai lapisan molecules/organisms membersihkan pemakai.
+- Layar 29 & 31 masih memakai primitif Section (Material/InkWell/Container) dan
+  template `Scaffold+Stack`; perapian murni dilakukan di lapisan 6 (UI-29).
+- **Golden bergeser (UI-28): 112 dari 113.** Semua kecuali `receipt_preview`
+  (struk memakai `receiptInk` + IBM Plex Mono yang tidak berubah). Alasan: font global
+  Inter, primer/ink/border baru, input 16→14, CTA 56→50, radius input/aksi 8→12,
+  skala teks. Golden sudah diperbarui dalam sesi ini setelah persetujuan proposal.
+- Tes yang diubah: `test/app_button_test.dart` (tinggi CTA 56 → 50 sesuai keputusan 4);
+  `test/atom_gallery_test.dart`, `molecule_gallery.dart`, `organism_gallery.dart`,
+  `template_gallery.dart`, `antrean_test_host.dart` (loader font → Inter lewat
+  `test/test_fonts.dart`). Tidak ada assertion perilaku yang dilemahkan.
+- Prasyarat FigCraft: MCP tersambung kembali di sesi ini; file terbaca (2.757 node,
+  30 frame, 0 style/variabel).
+- Status verifikasi visual: golden widget test sudah diperbarui; **belum dijalankan di
+  emulator Android** (visual belum diverifikasi perangkat).
 
 ## Prasyarat FigCraft (catatan)
 - `opencode.json` memakai `figcraft-cli.exe mcp --attach 9876`.

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_mono_text_styles.dart';
 import 'package:laurum/core/theme/app_text_styles.dart';
 
 enum AppTextVariant {
@@ -29,8 +30,8 @@ enum AppTextVariant {
     caption => AppTextStyles.caption,
     cta => AppTextStyles.cta,
     numpad => AppTextStyles.numpad,
-    monoLabel => AppTextStyles.monoLabel,
-    monoReceipt => AppTextStyles.monoReceipt,
+    monoLabel => AppMonoTextStyles.label,
+    monoReceipt => AppMonoTextStyles.receipt,
   };
 }
 

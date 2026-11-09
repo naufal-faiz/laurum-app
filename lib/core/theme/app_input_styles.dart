@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/core/theme/app_text_styles.dart';
@@ -12,6 +13,7 @@ abstract final class AppInputStyles {
   static const skeletonShort = 96.0;
   static const skeletonMedium = 192.0;
   static const numpadHeight = 56.0;
+
   static const border = OutlineInputBorder(
     borderRadius: AppRadius.input,
     borderSide: BorderSide(color: AppColors.borderStrong),
@@ -23,6 +25,47 @@ abstract final class AppInputStyles {
   static const errorBorder = OutlineInputBorder(
     borderRadius: AppRadius.input,
     borderSide: BorderSide(color: AppColors.error),
+  );
+
+  // Field form (48 dp, radius 12) untuk layar auth dan seterusnya.
+  static const fieldPadding = EdgeInsets.only(right: 10, top: 13, bottom: 13);
+  static const fieldPrefixConstraints = BoxConstraints(minWidth: 41, minHeight: 48);
+  static const fieldSuffixConstraints = BoxConstraints(minWidth: 38, minHeight: 48);
+
+  static TextStyle fieldTextStyle({required bool enabled}) =>
+      AppTextStyles.input.copyWith(color: enabled ? AppColors.ink : AppColors.ink3);
+
+  static InputDecoration field({
+    String? hint,
+    String? error,
+    bool enabled = true,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+  }) => InputDecoration(
+    hintText: hint,
+    errorText: error,
+    errorMaxLines: 2,
+    hintStyle: AppTextStyles.input.copyWith(color: AppColors.placeholder),
+    errorStyle: AppTextStyles.meta.copyWith(color: AppColors.errorInk),
+    filled: true,
+    fillColor: !enabled
+        ? AppColors.chipIdle
+        : error != null
+        ? AppColors.errorTint
+        : AppColors.surface,
+    isDense: true,
+    contentPadding: fieldPadding,
+    constraints: const BoxConstraints(minHeight: AppDimensions.fieldHeight),
+    prefixIcon: prefixIcon,
+    prefixIconConstraints: fieldPrefixConstraints,
+    suffixIcon: suffixIcon,
+    suffixIconConstraints: fieldSuffixConstraints,
+    border: border,
+    enabledBorder: border,
+    disabledBorder: border,
+    focusedBorder: focusBorder,
+    errorBorder: errorBorder,
+    focusedErrorBorder: errorBorder,
   );
 
   static InputDecoration decoration({String? hint, String? error, bool enabled = true}) =>

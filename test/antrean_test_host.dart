@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/app.dart';
 import 'package:laurum/features/shell/pages/app_router.dart';
 import 'package:laurum/main_dummy.dart';
+
+import 'test_fonts.dart';
 
 Future<({ProviderContainer container, GoRouter router})> pumpAntrean(
   WidgetTester tester, {
@@ -14,13 +15,7 @@ Future<({ProviderContainer container, GoRouter router})> pumpAntrean(
   bool settle = true,
   double textScale = 1,
 }) async {
-  for (final font in {
-    'Plus Jakarta Sans': 'assets/fonts/PlusJakartaSans.ttf',
-    'IBM Plex Mono': 'assets/fonts/IBMPlexMono-Regular.ttf',
-    'packages/ionicons/Ionicons': 'packages/ionicons/assets/fonts/Ionicons.ttf',
-  }.entries) {
-    await (FontLoader(font.key)..addFont(rootBundle.load(font.value))).load();
-  }
+  await loadTestFonts();
   final scope = container ?? ProviderContainer(overrides: dummyRepositoryOverrides);
   final router = createAppRouter(container: scope, initialLocation: location);
   addTearDown(() async {

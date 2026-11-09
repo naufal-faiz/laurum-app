@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_shadows.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/auth/widgets/auth_email_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_or_section.dart';
 import 'package:laurum/features/auth/widgets/auth_password_field_section.dart';
@@ -40,10 +41,10 @@ class SignInFormCardSection extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         color: AppColors.surface,
-        borderRadius: AppRadius.authCard,
-        boxShadow: AppShadows.authCard,
+        borderRadius: AppRadius.cardLarge,
+        boxShadow: AppShadows.cardElevated,
       ),
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.all(AppSpacing.largeX),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -53,7 +54,7 @@ class SignInFormCardSection extends StatelessWidget {
             error: errors['email'],
             onEmail: onEmail,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.medium),
           AuthPasswordFieldSection(
             visible: visible,
             busy: busy,
@@ -62,18 +63,18 @@ class SignInFormCardSection extends StatelessWidget {
             onToggle: onToggle,
             onForgot: onForgot,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.medium),
           AuthSubmitSection(busy: busy, onSubmit: onSubmit),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.medium),
           const AuthOrSection(),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.medium),
           SignInSection(
             busy: busy,
             restoring: restoring,
             error: error,
             onGoogle: onGoogle,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.medium),
           SignInSignupLinkSection(busy: busy, onSignUp: onSignUp),
         ],
       ),

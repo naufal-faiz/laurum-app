@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 
 abstract final class AppControlTokens {
-  static const ctaHeight = 56.0;
+  static const buttonLarge = 50.0;
+  static const buttonMedium = 44.0;
+  static const buttonSmall = 40.0;
+  static const ctaHeight = buttonLarge;
   static const iconGap = 8.0;
   static const avatarSize = 40.0;
   static const switchHeight = 28.0;

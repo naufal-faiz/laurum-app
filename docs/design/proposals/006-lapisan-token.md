@@ -1,8 +1,8 @@
 # 006 - Lapisan 1: Token Global (Redesign UI)
 
-Status: **menunggu persetujuan pengguna** (gerbang UI-21). Sesi 10 Nov 2026 tidak
-mengubah kode. Keputusan global: `docs/design/redesign/decisions.md` (5 butir, disetujui
-pengguna 10 Nov 2026). Rencana lapisan: `docs/plans/redesign-atomic.md`.
+Status: **DISETUJUI pengguna 10 Nov 2026 ("saya setuju pembaruannya") dan diterapkan
+pada sesi yang sama.** Keputusan global: `docs/design/redesign/decisions.md` (5 butir,
+disetujui pengguna 10 Nov 2026). Rencana lapisan: `docs/plans/redesign-atomic.md`.
 
 ## Lingkup dan izin
 
@@ -240,7 +240,36 @@ input 16→14, tombol 56→50, radius input 8→12); layar auth 29/31 berubah pa
 
 ## Persetujuan yang diminta
 
-- [ ] Setujui tabel token (a), nilai turunan `ink2`, `successInk`, dan `ctaHeight` 50.
-- [ ] Setujui rencana migrasi utang auth (b) dan penghapusan 2 berkas tema + entri auth*.
-- [ ] Setujui daftar golden yang bergeser (c) sebagai konsekuensi global.
-- [ ] Izin terpisah: ubah `pubspec.yaml` (Inter global, hapus Plus Jakarta Sans).
+- [x] Setujui tabel token (a), nilai turunan `ink2`, `successInk`, dan `ctaHeight` 50.
+- [x] Setujui rencana migrasi utang auth (b) dan penghapusan 2 berkas tema + entri auth*.
+- [x] Setujui daftar golden yang bergeser (c) sebagai konsekuensi global.
+- [x] Izin terpisah: ubah `pubspec.yaml` (Inter global, hapus Plus Jakarta Sans).
+
+## Hasil penerapan (10 Nov 2026)
+
+- `app_colors.dart`, `app_text_styles.dart`, `app_radius.dart`, `app_shadows.dart`,
+  `app_spacing.dart`, `app_dimensions.dart`, `app_control_tokens.dart`,
+  `app_input_styles.dart` diperbarui sesuai tabel (a).
+- Berkas baru: `app_mono_text_styles.dart` (mono dipisah agar batas 110 baris) dan
+  `app_field_decoration.dart` (dekorasi field global).
+- Dihapus: `app_auth_text_styles.dart`, `app_field_styles.dart`, seluruh entri `auth*`.
+- 16 Section auth + `AppTextField` dimigrasikan ke token global; spacing literal pada
+  Section auth diganti `AppSpacing` (posisi/ukuran komponen ditunda ke lapisan organisme).
+- `pubspec.yaml`: registrasi Plus Jakarta Sans dihapus; `Inter` 400/600/700 menjadi
+  font global. Aset `PlusJakartaSans.ttf` dan OFL-nya dihapus.
+- Verifikasi: `dart analyze` bersih, `check_arch` OK. Golden diperbarui setelah
+  seluruh tes dijalankan; daftar diff dilaporkan di STATE (UI-28).
+
+### Tes yang diubah (UI-18)
+- `test/app_button_test.dart` — tinggi CTA 56 → 50 sesuai keputusan 4 (kontrak visual).
+- `test/atom_gallery_test.dart`, `test/molecule_gallery.dart`,
+  `test/organism_gallery.dart`, `test/template_gallery.dart`,
+  `test/antrean_test_host.dart` — loader font memakai `test/test_fonts.dart`
+  (Inter 400/600/700, IBM Plex Mono, Ionicons). Tidak ada assertion dilemahkan.
+- `AppTextField` mengembalikan `scrollPadding` non-dense ke 20 (330 hanya untuk field
+  dense/auth) agar field pada layar lain tidak tergeser di bawah app bar saat keyboard
+  terbuka.
+
+### Golden yang bergeser
+112 dari 113 golden berubah; hanya `goldens/receipt_preview.png` tidak berubah
+(struk: `receiptInk` + IBM Plex Mono). Daftar lengkap per kategori ada di bagian (c).

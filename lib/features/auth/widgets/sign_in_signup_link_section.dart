@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:laurum/core/theme/app_auth_text_styles.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_text_styles.dart';
 
 /// "Belum punya akun? Daftar" of frame `LAURUM · Masuk`.
 class SignInSignupLinkSection extends StatelessWidget {
@@ -19,7 +19,7 @@ class SignInSignupLinkSection extends StatelessWidget {
             'Belum punya akun?',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppAuthTextStyles.body.copyWith(color: AppColors.authLabel),
+            style: AppTextStyles.caption.copyWith(color: AppColors.ink3),
           ),
         ),
         const SizedBox(width: 4),
@@ -30,7 +30,7 @@ class SignInSignupLinkSection extends StatelessWidget {
               'Daftar',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppAuthTextStyles.bodyStrong.copyWith(color: AppColors.authPrimary),
+              style: AppTextStyles.label.copyWith(color: AppColors.primary),
             ),
           ),
         ),

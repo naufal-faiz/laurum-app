@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
-import 'package:laurum/core/theme/app_auth_text_styles.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/core/theme/app_text_styles.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 
@@ -30,7 +31,7 @@ class AuthPasswordFieldSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final labelStyle = AppAuthTextStyles.label.copyWith(color: AppColors.authLabel);
+    final labelStyle = AppTextStyles.label.copyWith(color: AppColors.ink3);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -53,13 +54,13 @@ class AuthPasswordFieldSection extends StatelessWidget {
                     'Lupa password?',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: AppAuthTextStyles.label.copyWith(color: AppColors.authPrimary),
+                    style: AppTextStyles.label.copyWith(color: AppColors.primary),
                   ),
                 ),
               ),
           ],
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: AppSpacing.xsmall),
         AppTextField(
           label: label,
           dense: true,
@@ -72,7 +73,7 @@ class AuthPasswordFieldSection extends StatelessWidget {
           textInputAction: TextInputAction.done,
           onChanged: onPassword,
           trailing: Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: AppSpacing.smallMedium),
             child: SizedBox(
               width: 32,
               height: 32,
@@ -83,7 +84,7 @@ class AuthPasswordFieldSection extends StatelessWidget {
                   child: AppIcon(
                     visible ? AppIcons.visibleOff : AppIcons.visible,
                     size: 22,
-                    color: busy ? AppColors.authLabel : AppColors.authPrimaryInk,
+                    color: busy ? AppColors.ink3 : AppColors.primaryInk,
                   ),
                 ),
               ),

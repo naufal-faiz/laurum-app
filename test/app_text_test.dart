@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_mono_text_styles.dart';
 import 'package:laurum/core/theme/app_text_styles.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
@@ -33,7 +34,7 @@ void main() {
     expect(tester.widget<Text>(find.text('body')).style?.fontFamily, AppTextStyles.fontFamily);
     expect(
       tester.widget<Text>(find.text('monoReceipt')).style?.fontFamily,
-      AppTextStyles.monoFamily,
+      AppMonoTextStyles.family,
     );
   });
 }

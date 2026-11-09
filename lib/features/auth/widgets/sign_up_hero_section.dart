@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_svgs.dart';
-import 'package:laurum/core/theme/app_auth_text_styles.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_radius.dart';
+import 'package:laurum/core/theme/app_text_styles.dart';
 import 'package:laurum/shared/widgets/atoms/app_svg.dart';
 
 /// Gradient hero of frame `LAURUM · Daftar`: 390x230, bottom corners 32,
@@ -19,11 +19,11 @@ class SignUpHeroSection extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppColors.authHeroGradientStart, AppColors.authHeroGradientEnd],
+          colors: [AppColors.heroGradientStart, AppColors.heroGradientEnd],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: AppRadius.authHero,
+        borderRadius: AppRadius.hero,
       ),
       child: Stack(
         children: [
@@ -33,7 +33,7 @@ class SignUpHeroSection extends StatelessWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.authHeroBlob,
+                color: AppColors.heroBlob,
               ),
               child: SizedBox(width: 210, height: 210),
             ),
@@ -44,7 +44,7 @@ class SignUpHeroSection extends StatelessWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.authHeroBlobSoft,
+                color: AppColors.heroBlobSoft,
               ),
               child: SizedBox(width: 110, height: 110),
             ),
@@ -58,9 +58,9 @@ class SignUpHeroSection extends StatelessWidget {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: AppColors.authIllustration,
+                  color: AppColors.illustration,
                   shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.authBackBorder),
+                  border: Border.all(color: AppColors.backBorder),
                 ),
                 child: const Center(
                   child: ColorFiltered(
@@ -76,7 +76,7 @@ class SignUpHeroSection extends StatelessWidget {
             top: 110,
             child: Text(
               'Daftar',
-              style: AppAuthTextStyles.heroTitle.copyWith(color: AppColors.surface),
+              style: AppTextStyles.hero.copyWith(color: AppColors.surface),
             ),
           ),
           Positioned(
@@ -84,7 +84,7 @@ class SignUpHeroSection extends StatelessWidget {
             top: 148,
             child: Text(
               'Buat akun untuk mulai mengelola usaha',
-              style: AppAuthTextStyles.heroSub.copyWith(color: AppColors.authHeroTagline),
+              style: AppTextStyles.body.copyWith(color: AppColors.heroTagline),
             ),
           ),
         ],

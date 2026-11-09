@@ -13,11 +13,10 @@ abstract final class AppShadows {
   // The C/Modal frames in laurum-ready.pen have no shadow effect.
   static const modal = <BoxShadow>[];
 
-  // Auth redesign: masuk card (0 14 32, #174B83 12.5%) and Google button.
-  static const authCard = [
+  static const cardElevated = [
     BoxShadow(color: Color(0x20174B83), offset: Offset(0, 14), blurRadius: 32),
   ];
-  static const authGoogle = [
+  static const raised = [
     BoxShadow(color: Color(0x0D174B83), offset: Offset(0, 3), blurRadius: 10),
   ];
 }

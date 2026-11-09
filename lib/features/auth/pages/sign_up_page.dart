@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/auth/state/auth_form.dart';
 import 'package:laurum/features/auth/state/auth_form_view.dart';
 import 'package:laurum/features/auth/state/auth_session.dart';
@@ -28,7 +29,7 @@ class SignUpPage extends ConsumerWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
                   child: SignUpFormCardSection(
                     name: form.name,
                     email: form.email,
@@ -54,9 +55,9 @@ class SignUpPage extends ConsumerWidget {
                     onSignIn: () => context.go('/masuk'),
                   ),
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: AppSpacing.xxlarge),
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
                   child: AuthTrustSection(text: 'Data kamu aman & terenkripsi'),
                 ),
               ],

@@ -188,20 +188,20 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_trigger.dart (73): SyncTrigger
 
 ### lib/core/theme/
-- app_auth_text_styles.dart (84): AppAuthTextStyles
 - app_borders.dart (7): AppBorders
 - app_button_styles.dart (53): AppButtonVariant, AppButtonStyles
-- app_colors.dart (54): AppColors
-- app_control_tokens.dart (16): AppControlTokens
-- app_dimensions.dart (8): AppDimensions
-- app_field_styles.dart (71): AppFieldStyles
-- app_input_styles.dart (61): AppInputStyles
+- app_colors.dart (64): AppColors
+- app_control_tokens.dart (19): AppControlTokens
+- app_dimensions.dart (13): AppDimensions
+- app_field_decoration.dart (34): AppFieldDecoration
+- app_input_styles.dart (104): AppInputStyles
 - app_molecule_styles.dart (32): AppMoleculeStyles
 - app_molecule_tokens.dart (15): AppMoleculeTokens
-- app_radius.dart (22): AppRadius
-- app_shadows.dart (23): AppShadows
-- app_spacing.dart (9): AppSpacing
-- app_text_styles.dart (85): AppTextStyles
+- app_mono_text_styles.dart (19): AppMonoTextStyles
+- app_radius.dart (20): AppRadius
+- app_shadows.dart (22): AppShadows
+- app_spacing.dart (22): AppSpacing
+- app_text_styles.dart (102): AppTextStyles
 - app_theme.dart (53): AppTheme
 - receipt_edge_clipper.dart (27): ReceiptEdgeClipper
 
@@ -229,8 +229,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - check_email_page.dart (43): CheckEmailPage
 - manage_account_page.dart (53): ManageAccountPage
 - password_reset_page.dart (26): PasswordResetPage
-- sign_in_page.dart (71): SignInPage
-- sign_up_page.dart (69): SignUpPage
+- sign_in_page.dart (72): SignInPage
+- sign_up_page.dart (70): SignUpPage
 
 ### lib/features/auth/state/
 - account_edit.dart (52): AccountField, AccountEditView, AccountEdit, accountEditProvider
@@ -250,24 +250,24 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - account_danger_section.dart (45): AccountDangerSection
 - account_edit_field_section.dart (34): AccountEditFieldSection
 - account_profile_section.dart (63): AccountProfileSection
-- auth_email_field_section.dart (45): AuthEmailFieldSection
+- auth_email_field_section.dart (46): AuthEmailFieldSection
 - auth_identity_section.dart (55): AuthIdentitySection
 - auth_name_field_section.dart (45): AuthNameFieldSection
-- auth_or_section.dart (22): AuthOrSection
-- auth_password_field_section.dart (96): AuthPasswordFieldSection
+- auth_or_section.dart (23): AuthOrSection
+- auth_password_field_section.dart (97): AuthPasswordFieldSection
 - auth_passwords_section.dart (59): AuthPasswordsSection
 - auth_secret_field_section.dart (31): AuthSecretFieldSection
 - auth_submit_section.dart (48): AuthSubmitSection
-- auth_trust_section.dart (31): AuthTrustSection
+- auth_trust_section.dart (32): AuthTrustSection
 - password_reset_section.dart (36): PasswordResetSection
 - sign_in_brand_section.dart (70): SignInBrandSection
-- sign_in_feature_bar_section.dart (76): SignInFeatureBarSection
-- sign_in_form_card_section.dart (82): SignInFormCardSection
+- sign_in_feature_bar_section.dart (77): SignInFeatureBarSection
+- sign_in_form_card_section.dart (83): SignInFormCardSection
 - sign_in_hero_section.dart (72): SignInHeroSection
 - sign_in_illustration_section.dart (27): SignInIllustrationSection
-- sign_in_section.dart (80): SignInSection
+- sign_in_section.dart (81): SignInSection
 - sign_in_signup_link_section.dart (40): SignInSignupLinkSection
-- sign_up_form_card_section.dart (104): SignUpFormCardSection
+- sign_up_form_card_section.dart (105): SignUpFormCardSection
 - sign_up_hero_section.dart (94): SignUpHeroSection
 - sign_up_signin_link_section.dart (40): SignUpSignInLinkSection
 
@@ -638,8 +638,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_status_text.dart (22): AppStatusTextVariant, AppStatusText
 - app_svg.dart (29): AppSvg
 - app_switch.dart (50): AppSwitch
-- app_text.dart (66): AppTextVariant, AppText
-- app_text_field.dart (109): AppTextField, _AppTextFieldState
+- app_text.dart (67): AppTextVariant, AppText
+- app_text_field.dart (107): AppTextField, _AppTextFieldState
 
 ### lib/shared/widgets/molecules/
 - app_bar_root.dart (48): AppBarRoot
@@ -702,7 +702,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_golden_test.dart (52):
 - antrean_page_test.dart (61):
 - antrean_states_test.dart (82):
-- antrean_test_host.dart (50):
+- antrean_test_host.dart (45):
 - antrean_test_host_test.dart (22):
 - app_avatar_test.dart (28):
 - app_badge_test.dart (29):
@@ -725,8 +725,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_switch_test.dart (42):
 - app_text_field_focus_test.dart (53):
 - app_text_field_test.dart (70):
-- app_text_test.dart (39):
-- atom_gallery_test.dart (75):
+- app_text_test.dart (40):
+- atom_gallery_test.dart (68):
 
 ### test/auth/
 - auth_config_test.dart (87):
@@ -842,7 +842,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - local_settings_test.dart (35):
 - locked_row_test.dart (25):
 - menu_row_test.dart (25):
-- molecule_gallery.dart (35):
+- molecule_gallery.dart (30):
 - nominal_chips_test.dart (25):
 - nominal_input_test.dart (77):
 - nota_card_test.dart (37):
@@ -854,7 +854,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_detail_test.dart (89):
 - order_edit_test.dart (80):
 - order_number_generator_test.dart (34):
-- organism_gallery.dart (54):
+- organism_gallery.dart (49):
 - outstanding_page_test.dart (38):
 - payment_golden_test.dart (60):
 - payment_page_test.dart (59):
@@ -1054,7 +1054,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_changes_test.dart (25):
 - sync_indicator_test.dart (23):
 - sync_page_test.dart (68):
-- template_gallery.dart (54):
+- template_gallery.dart (49):
+- test_fonts.dart (22):
 - toggle_row_test.dart (25):
 
 ### test/tool/

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 
@@ -19,18 +18,12 @@ import '../widgetbook/atoms/app_status_text_use_case.dart';
 import '../widgetbook/atoms/app_switch_use_case.dart';
 import '../widgetbook/atoms/app_text_field_use_case.dart';
 import '../widgetbook/atoms/app_text_use_case.dart';
+import 'test_fonts.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() async {
-    for (final font in {
-      'Plus Jakarta Sans': 'assets/fonts/PlusJakartaSans.ttf',
-      'IBM Plex Mono': 'assets/fonts/IBMPlexMono-Regular.ttf',
-      'packages/ionicons/Ionicons': 'packages/ionicons/assets/fonts/Ionicons.ttf',
-    }.entries) {
-      final loader = FontLoader(font.key)..addFont(rootBundle.load(font.value));
-      await loader.load();
-    }
+    await loadTestFonts();
   });
   for (final entry in {
     'app_text': appTextUseCase,

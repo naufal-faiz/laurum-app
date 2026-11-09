@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 
+import 'test_fonts.dart';
+
 void registerMoleculeGolden(String name, WidgetBuilder builder) {
   testWidgets('$name gallery', (tester) async {
-    for (final entry in {
-      'Plus Jakarta Sans': 'assets/fonts/PlusJakartaSans.ttf',
-      'IBM Plex Mono': 'assets/fonts/IBMPlexMono-Regular.ttf',
-      'packages/ionicons/Ionicons': 'packages/ionicons/assets/fonts/Ionicons.ttf',
-    }.entries) {
-      await (FontLoader(entry.key)..addFont(rootBundle.load(entry.value))).load();
-    }
+    await loadTestFonts();
     tester.view.physicalSize = const Size(390, 900);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
