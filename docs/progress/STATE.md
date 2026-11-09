@@ -1,5 +1,14 @@
 # STATE Laurum
-Diperbarui: 2026-11-09 | Cabang dev2backend
+Diperbarui: 2026-11-09 | Cabang newdesign
+
+## Mode Redesign UI (Aktif di cabang newdesign)
+- Prasyarat: branch `newdesign` aktif; MCP FigCraft terhubung ke dokumen `docs/design/new-design-laurum.figcraft` (ping/`doc.list` sukses, 30 frame terdeteksi).
+- Pemetaan: `docs/design/redesign/figma_map.md` telah dibuat berisi 33 layar dari `docs/design/screens/`. Kolom frame Figma dikosongkan menunggu penentuan oleh pengguna sesuai aturan UI-4.
+- Layar selesai/ditunda: belum ada (menunggu masukan layar dan frame dari pengguna untuk analisis Paritas Redesign).
+- Proposal yang menunggu: tidak ada.
+- Selisih desain: belum ada.
+- Tes yang diubah: tidak ada.
+- Status verifikasi visual: belum dimulai.
 
 ## Posisi
 UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, B2c, B2d, B3a, dan B3c SELESAI**;
