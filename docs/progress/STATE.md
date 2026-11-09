@@ -1,55 +1,34 @@
 # STATE Laurum
-Diperbarui: 2026-11-09 | Cabang newdesign
+Diperbarui: 2026-11-10 | Cabang newdesign
 
 ## Mode Redesign UI (Aktif di cabang newdesign)
-- Layar selesai: **29-masuk-google** dan **31-daftar** (kode + golden diperbarui);
-  berikutnya 32-lupa-password (frame sudah ada).
-- Proposal: 002 gradient ✅, 003 shadow ✅, 004 fitur bar/trust + T&C (ditunda ke 95%) ✅,
-  005 API AppTextField (`leadingIcon`/`trailing`/`dense`) ✅ **disetujui pengguna**
-  (perubahan tampilan/API atom boleh selama logika sistem tidak berubah).
-- check_all HIJAU: 965 tes (1 dilewati), archOK, REPO_MAP993, exit0 (sebelum revisi
-  daftar; jalankan ulang setelah commit).
-- Tes yang diubah/diperbarui: lihat bagian "Tes yang diubah" di spec 29 dan 31.
-- Status verifikasi visual: golden widget test 390/320 sudah sesuai struktur Figma;
+- **Lapisan aktif: 1 (token), MENUNGGU PERSETUJUAN** proposal
+  `docs/design/proposals/006-lapisan-token.md`. Sesi 10 Nov 2026 tidak mengubah kode.
+- Keputusan global `docs/design/redesign/decisions.md` sudah terisi (5 butir, disetujui
+  pengguna 10 Nov 2026 "ya semua"): primer #2675C9, hijau jadi status sukses, Inter
+  global, skala auth + minimum 11, tombol 50/44/40, variabel & komponen FigCraft.
+- Proposal lapisan: 006 token (menunggu). Setelah disetujui: lapisan 2 atoms →
+  3 molecules → 4 organisms → 5 templates → 6 Page/Section (UI-21).
+- Utang token auth (UI-23) tercatat di proposal 006: `app_auth_text_styles.dart`,
+  `app_field_styles.dart`, `AppColors.auth*`, `AppRadius.auth*`, `AppShadows.auth*`.
+  Sebelum lapisan 1: hanya boleh menyusut. Sesudahnya: dilarang ada.
+- Prasyarat FigCraft: aplikasi FigCraft sudah dibuka (proses `figcraft.exe` berjalan),
+  tetapi **MCP port 9876 belum listen** sehingga tool FigCraft tidak tersedia di sesi
+  ini. File tetap terbaca read-only lewat `figcraft-cli info`
+  (2757 node, 30 frame, 0 style/variabel). Nyalakan control server/MCP di aplikasi
+  sebelum lapisan desain berikutnya.
+- Tes yang diubah: tidak ada di sesi ini (hanya dokumen).
+- Layar 29-masuk-google dan 31-daftar sudah berkode dengan token auth; keduanya
+  menunggu rework komposisi murni di lapisan 6 (UI-29) setelah lapisan 1–5 selesai.
+- Status verifikasi visual: layar 29 & 31 pernah dibandingkan lewat golden widget test;
   **belum dijalankan di emulator Android** (visual belum diverifikasi perangkat).
 
-## Revisi UX ikon mata + halaman Daftar (9 Nov 2026)
-- Ikon mata kini berubah: `eye` saat password tersembunyi, `eye-off` saat terlihat
-  (`AppIcons.visible` / `AppIcons.visibleOff`), tanpa kotak.
-- Halaman Daftar mengikuti frame `LAURUM · Daftar`: hero 230 (tombol kembali lingkaran
-  36 + panah putih, judul, sub), kartu berisi Nama/Email/Password/Konfirmasi,
-  Tombol Daftar + centang, "atau", Google (aset SVG), "Sudah punya akun? Masuk",
-  trust statis. T&C belum dibuat (proposal 004).
-- Google pada Daftar memakai aksi `signIn()` yang sudah ada (tanpa state baru).
-- Section baru: `sign_up_hero_section`, `auth_name_field_section`,
-  `sign_up_form_card_section`, `sign_up_signin_link_section`,
-  `auth_submit_section`, `auth_or_section`, `auth_trust_section`
-  (menggantikan `sign_in_submit/or/trust_section`).
-- `AppTextField` dense `scrollPadding` 330 agar field + tombol simpan tetap terlihat
-  pada keyboard 300 dp (aturan 16e) di dua layar auth.
+## Prasyarat FigCraft (catatan)
+- `opencode.json` memakai `figcraft-cli.exe mcp --attach 9876`.
+- Jika port tidak listen: buka FigCraft → aktifkan control server (port 9876), lalu
+  mulai sesi baru agar MCP terhubung. Tanpa itu, jangan menebak desain; pakai
+  `figcraft-cli info/render` untuk membaca berkas.
 
-
-## 29-masuk-google — hasil redesign (9 Nov 2026)
-- Hero 340 dp gradient `#2E7FD8→#1B5FA3` radius bawah 32, ornamen blob/dot, logo 38,
-  merek Inter 16/9, judul 28, sub 13, ilustrasi lingkaran 118 + ikon baju.
-- **Back button dihapus** (frame tidak punya; keluhan pengguna ditutup).
-- Kartu 342 radius 24 padding 18 gap 12, shadow 0 14 32 #174B83@12.5%.
-- Field 48 radius 12 (ikon mail/lock 16), label 12/600, input 14, placeholder 14.
-- **Revisi UX 9 Nov**: semua ukuran font dinaikkan (label 12, input 14, tombol 15,
-  body 12, meta 11, chip 10.5); kotak tombol mata dihapus (ikon mata polos 22,
-  area sentuh 32); huruf "G" diganti `AppSvg(AppSvgs.google)`.
-- Tombol Masuk 50 radius 14 #2675C9 + panah; "atau" dengan garis; Google 48
-  putih + aset SVG Google; link Daftar.
-- Fitur bar 342x46 #F4F6F8 (3 item) dan trust bar — statis, tanpa aksi.
-- Proposal 005 (AppTextField `leadingIcon`/`trailing`/`dense`) **disetujui pengguna**:
-  perubahan tampilan/API atom boleh selama logika sistem tidak berubah.
-- File: `sign_in_hero_section`, `sign_in_brand_section`, `sign_in_illustration_section`,
-  `sign_in_form_card_section`, `auth_email_field_section`,
-  `auth_password_field_section`, `sign_in_submit_section`, `sign_in_or_section`,
-  `sign_in_section` (Google), `sign_in_signup_link_section`,
-  `sign_in_feature_bar_section`, `sign_in_trust_section`, `sign_in_page`.
-- Token: `AppAuthTextStyles`, `AppFieldStyles`, warna/radius/shadow auth di theme.
-- Font: Inter-Regular/SemiBold/Bold.otf (varian lain dihapus dari assets/fonts).
 
 ## Posisi
 UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, B2c, B2d, B3a, dan B3c SELESAI**;
