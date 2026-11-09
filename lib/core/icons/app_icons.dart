@@ -37,6 +37,7 @@ enum AppIcons {
   privacy(Ionicons.shieldCheckmarkOutline),
   expand(Ionicons.chevronDownOutline),
   next(Ionicons.chevronForwardOutline),
+  arrowForward(Ionicons.arrowForwardOutline),
   more(Ionicons.ellipsisVertical),
   visible(Ionicons.eyeOutline),
   mail(Ionicons.mailOutline),

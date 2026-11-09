@@ -1,10 +1,32 @@
 # STATE Laurum
-Diperbarui: 2026-11-09 11:08 | Cabang newdesign
+Diperbarui: 2026-11-09 | Cabang newdesign
 
 ## Mode Redesign UI (Aktif di cabang newdesign)
-- Layar selesai: 29-masuk-google (arch ✅ refactor, paritas UI-7 struktur OK — test pending), 31-daftar (mapping+paritas selesai, belum kode).
-- Proposal: (1) gradient ✅, (2) shadow ✅, (3) Inter font ✅ — semua diterapkan.
-- Commit 0415d46: SignInPage refactor — split 3 public Sections (hero 143L, form card 97L, password label 39L), main page 52L.
+- Layar selesai: **29-masuk-google (SELESAI, kode + golden diperbarui)**; 31-daftar menunggu.
+- Proposal: 002 gradient ✅ diterapkan, 003 shadow ✅ diterapkan, 004 fitur bar/trust ✅
+  (tampilan saja; T&C checkbox ditunda sampai 95%), 005 API AppTextField
+  (`leadingIcon`/`trailing`/`dense`) — **menunggu persetujuan pengguna**.
+- check_all HIJAU: 965 tes (1 dilewati), archOK, REPO_MAP988, exit0.
+- Tes yang diubah/diperbarui: lihat bagian "Tes yang diubah" di 29-masuk-google.md.
+- Status verifikasi visual: golden widget test 390/320 sudah sesuai struktur Figma;
+  **belum dijalankan di emulator Android** (visual belum diverifikasi perangkat).
+
+## 29-masuk-google — hasil redesign (9 Nov 2026)
+- Hero 340 dp gradient `#2E7FD8→#1B5FA3` radius bawah 32, ornamen blob/dot, logo 38,
+  merek Inter 15/7, judul 26, sub 10, ilustrasi lingkaran 118 + ikon baju.
+- **Back button dihapus** (frame tidak punya; keluhan pengguna ditutup).
+- Kartu 342 radius 24 padding 18 gap 12, shadow 0 14 32 #174B83@12.5%.
+- Field 48 radius 12 (ikon mail/lock 16, mata 28x28), label 8.5/600.
+- Tombol Masuk 50 radius 14 #2675C9 + panah; "atau" dengan garis; Google 48
+  putih + kotak G; link Daftar.
+- Fitur bar 342x46 #F4F6F8 (3 item) dan trust bar — statis, tanpa aksi.
+- File: `sign_in_hero_section`, `sign_in_brand_section`, `sign_in_illustration_section`,
+  `sign_in_form_card_section`, `auth_email_field_section`,
+  `auth_password_field_section`, `sign_in_submit_section`, `sign_in_or_section`,
+  `sign_in_section` (Google), `sign_in_signup_link_section`,
+  `sign_in_feature_bar_section`, `sign_in_trust_section`, `sign_in_page`.
+- Token: `AppAuthTextStyles`, `AppFieldStyles`, warna/radius/shadow auth di theme.
+- Font: Inter-Regular/SemiBold/Bold.otf (varian lain dihapus dari assets/fonts).
 
 ## Posisi
 UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, B2c, B2d, B3a, dan B3c SELESAI**;

@@ -49,7 +49,8 @@ Future<void> fillAuthField(WidgetTester tester, String label, String value) asyn
 }
 
 Future<void> tapAuthButton(WidgetTester tester, String label) async {
-  final button = find.widgetWithText(AppButton, label).last;
+  final appButton = find.widgetWithText(AppButton, label);
+  final button = appButton.evaluate().isNotEmpty ? appButton.last : find.text(label).last;
   await tester.ensureVisible(button);
   await tester.pumpAndSettle();
   await tester.tap(button);

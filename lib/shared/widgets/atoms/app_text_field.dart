@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
-import 'package:laurum/core/theme/app_input_styles.dart';
-import 'package:laurum/core/theme/app_text_styles.dart';
+import 'package:laurum/core/theme/app_field_styles.dart';
+import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 
 class AppTextField extends StatefulWidget {
   const AppTextField({
@@ -22,6 +23,9 @@ class AppTextField extends StatefulWidget {
     this.minLines = 1,
     this.maxLines = 1,
     this.textInputAction,
+    this.leadingIcon,
+    this.trailing,
+    this.dense = false,
   }) : assert(minLines > 0 && maxLines >= minLines),
        assert(!obscureText || maxLines == 1);
   final String label, value;
@@ -30,7 +34,9 @@ class AppTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final List<TextInputFormatter>? inputFormatters;
-  final bool enabled, readOnly, obscureText, selectAllOnFocus;
+  final bool enabled, readOnly, obscureText, selectAllOnFocus, dense;
+  final AppIcons? leadingIcon;
+  final Widget? trailing;
   final int minLines, maxLines;
 
   @override
@@ -56,21 +62,28 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   void didUpdateWidget(covariant AppTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.value != widget.value && _controller.text != widget.value) {
-      _controller.value = TextEditingValue(
-        text: widget.value,
-        selection: TextSelection.collapsed(offset: widget.value.length),
-      );
-    }
+    if (oldWidget.value == widget.value) return;
+    _controller.text = widget.value;
+    _controller.selection = TextSelection.collapsed(offset: widget.value.length);
   }
 
   @override
   void dispose() {
-    _focusNode.dispose();
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
+  InputDecoration get _decoration => AppFieldStyles.of(
+    dense: widget.dense,
+    hint: widget.hint,
+    error: widget.errorText,
+    enabled: widget.enabled,
+    prefixIcon: widget.leadingIcon == null
+        ? null
+        : AppIcon(widget.leadingIcon!, size: 16, color: AppColors.authLabel),
+    suffixIcon: widget.trailing,
+  );
   @override
   Widget build(BuildContext context) => Semantics(
     label: widget.label,
@@ -87,13 +100,10 @@ class _AppTextFieldState extends State<AppTextField> {
       inputFormatters: widget.inputFormatters,
       onChanged: widget.onChanged,
       onSubmitted: widget.onSubmitted,
-      style: AppTextStyles.input.copyWith(color: widget.enabled ? AppColors.ink : AppColors.ink3),
+      scrollPadding: widget.dense ? const EdgeInsets.only(bottom: 240) : const EdgeInsets.all(20),
+      style: AppFieldStyles.textStyle(dense: widget.dense, enabled: widget.enabled),
       cursorColor: AppColors.primary,
-      decoration: AppInputStyles.decoration(
-        hint: widget.hint,
-        error: widget.errorText,
-        enabled: widget.enabled,
-      ),
+      decoration: _decoration,
     ),
   );
 }

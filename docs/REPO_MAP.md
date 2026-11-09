@@ -70,7 +70,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - formatters.dart (55): Formatters
 
 ### lib/core/icons/
-- app_icons.dart (50): AppIcons
+- app_icons.dart (52): AppIcons
 - app_svgs.dart (9): AppSvgs
 
 ### lib/core/persistence/
@@ -188,16 +188,18 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_trigger.dart (73): SyncTrigger
 
 ### lib/core/theme/
+- app_auth_text_styles.dart (89): AppAuthTextStyles
 - app_borders.dart (7): AppBorders
 - app_button_styles.dart (53): AppButtonVariant, AppButtonStyles
-- app_colors.dart (33): AppColors
+- app_colors.dart (53): AppColors
 - app_control_tokens.dart (16): AppControlTokens
 - app_dimensions.dart (8): AppDimensions
+- app_field_styles.dart (71): AppFieldStyles
 - app_input_styles.dart (61): AppInputStyles
 - app_molecule_styles.dart (32): AppMoleculeStyles
 - app_molecule_tokens.dart (15): AppMoleculeTokens
-- app_radius.dart (14): AppRadius
-- app_shadows.dart (15): AppShadows
+- app_radius.dart (22): AppRadius
+- app_shadows.dart (23): AppShadows
 - app_spacing.dart (9): AppSpacing
 - app_text_styles.dart (85): AppTextStyles
 - app_theme.dart (53): AppTheme
@@ -227,7 +229,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - check_email_page.dart (43): CheckEmailPage
 - manage_account_page.dart (53): ManageAccountPage
 - password_reset_page.dart (26): PasswordResetPage
-- sign_in_page.dart (74): SignInPage
+- sign_in_page.dart (71): SignInPage
 - sign_up_page.dart (58): SignUpPage
 
 ### lib/features/auth/state/
@@ -248,11 +250,22 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - account_danger_section.dart (45): AccountDangerSection
 - account_edit_field_section.dart (34): AccountEditFieldSection
 - account_profile_section.dart (63): AccountProfileSection
+- auth_email_field_section.dart (45): AuthEmailFieldSection
 - auth_identity_section.dart (55): AuthIdentitySection
+- auth_password_field_section.dart (102): AuthPasswordFieldSection
 - auth_passwords_section.dart (59): AuthPasswordsSection
 - auth_secret_field_section.dart (31): AuthSecretFieldSection
 - password_reset_section.dart (36): PasswordResetSection
-- sign_in_section.dart (33): SignInSection
+- sign_in_brand_section.dart (70): SignInBrandSection
+- sign_in_feature_bar_section.dart (76): SignInFeatureBarSection
+- sign_in_form_card_section.dart (82): SignInFormCardSection
+- sign_in_hero_section.dart (72): SignInHeroSection
+- sign_in_illustration_section.dart (27): SignInIllustrationSection
+- sign_in_or_section.dart (22): SignInOrSection
+- sign_in_section.dart (96): SignInSection
+- sign_in_signup_link_section.dart (40): SignInSignupLinkSection
+- sign_in_submit_section.dart (43): SignInSubmitSection
+- sign_in_trust_section.dart (29): SignInTrustSection
 
 ### lib/features/business/data/
 - business_fixtures.dart (21):
@@ -622,7 +635,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_svg.dart (29): AppSvg
 - app_switch.dart (50): AppSwitch
 - app_text.dart (66): AppTextVariant, AppText
-- app_text_field.dart (99): AppTextField, _AppTextFieldState
+- app_text_field.dart (109): AppTextField, _AppTextFieldState
 
 ### lib/shared/widgets/molecules/
 - app_bar_root.dart (48): AppBarRoot
@@ -720,12 +733,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### test/
 - auth_onboarding_keyboard_test.dart (33):
-- auth_restore_test.dart (45): DeferredRestore
+- auth_restore_test.dart (53): DeferredRestore
 - auth_routes_test.dart (60):
 - auth_scaffold_test.dart (22):
 - auth_session_test.dart (64):
 - auth_sync_golden_test.dart (84):
-- auth_sync_sections_test.dart (93):
+- auth_sync_sections_test.dart (100):
 - banner_message_test.dart (23):
 - bottom_nav_bar_test.dart (104):
 - bp0_id_flow_test.dart (61):
@@ -925,7 +938,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r10_account_keyboard_test.dart (32):
 - r10_account_sections_test.dart (64):
 - r10_auth_form_test.dart (51): FailingPasswordAuth
-- r10_auth_keyboard_test.dart (34):
+- r10_auth_keyboard_test.dart (40):
 - r10_auth_service_test.dart (83):
 - r10_auth_validation_test.dart (32):
 - r10_form_sections_test.dart (85):
@@ -934,7 +947,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r10_reset_state_test.dart (31):
 - r10_signin_reset_flow_test.dart (55):
 - r10_signup_validation_test.dart (35):
-- r10_test_host.dart (65):
+- r10_test_host.dart (66):
 - r10_visual_test.dart (70):
 - r2_navigation_test.dart (56):
 - r3_customer_creation_test.dart (55):

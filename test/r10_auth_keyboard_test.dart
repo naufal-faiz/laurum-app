@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:laurum/features/auth/widgets/sign_in_submit_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 
 import 'antrean_test_host.dart';
@@ -26,7 +27,12 @@ void main() {
         await expectKeyboardVisible(
           tester,
           field: authField(label),
-          save: find.widgetWithText(AppButton, save),
+          save: entry.key == '/masuk'
+              ? find.descendant(
+                  of: find.byType(SignInSubmitSection),
+                  matching: find.text(save),
+                )
+              : find.widgetWithText(AppButton, save),
         );
       });
     }

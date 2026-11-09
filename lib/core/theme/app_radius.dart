@@ -11,4 +11,12 @@ abstract final class AppRadius {
   static const sheet = BorderRadius.vertical(top: Radius.circular(28));
   static const numpad = BorderRadius.all(Radius.circular(12));
   static const modal = BorderRadius.all(Radius.circular(16));
+
+  // Auth redesign (frame LAURUM · Masuk / · Daftar, FigCraft)
+  static const authCard = BorderRadius.all(Radius.circular(24));
+  static const authField = BorderRadius.all(Radius.circular(12));
+  static const authBar = BorderRadius.all(Radius.circular(12));
+  static const authLogo = BorderRadius.all(Radius.circular(12));
+  static const authEye = BorderRadius.all(Radius.circular(9));
+  static const authHero = BorderRadius.vertical(bottom: Radius.circular(32));
 }

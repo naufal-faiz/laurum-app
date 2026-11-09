@@ -31,8 +31,23 @@ abstract final class AppColors {
   static const appBarBg = Color(0xD9F8F9FF);
   static const receiptInk = Color(0xFF000000);
 
-  // Hero gradient (auth screens)
-  static const authHeroGradientStart = Color(0xFF2E7BD9);
+  // Auth redesign (frame LAURUM · Masuk / · Daftar, FigCraft)
+  static const authHeroGradientStart = Color(0xFF2E7FD8);
   static const authHeroGradientEnd = Color(0xFF1B5FA3);
   static const authHeroTagline = Color(0xFFDCEBF9);
+  static const authHeroBlob = Color(0x1AFFFFFF);
+  static const authHeroBlobSoft = Color(0x14FFFFFF);
+  static const authHeroDot = Color(0x80FFFFFF);
+  static const authIllustration = Color(0xFF4A90DA);
+  static const authPrimary = Color(0xFF2675C9);
+  static const authPrimaryInk = Color(0xFF174B83);
+  static const authInk = Color(0xFF26364A);
+  static const authLabel = Color(0xFF7C8DA3);
+  static const authPlaceholder = Color(0xFFB7C2CF);
+  static const authFieldBorder = Color(0xFFDDE3E8);
+  static const authDivider = Color(0xFFE7EDF4);
+  static const authChipBg = Color(0xFFF4F6F8);
+  static const authEyeBorder = Color(0xFFE9EEF4);
+  static const authGoogleBlue = Color(0xFF4285F4);
+  static const authGoogleBorder = Color(0xFFE3E9F0);
 }

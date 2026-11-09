@@ -1,12 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/services/auth_service.dart';
 import 'package:laurum/core/services/sync_service.dart';
+import 'package:laurum/features/auth/widgets/sign_in_section.dart';
 import 'package:laurum/main_dummy.dart';
-import 'package:laurum/shared/widgets/atoms/app_button.dart';
 
 import 'antrean_test_host.dart';
 
@@ -35,7 +36,14 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Memulihkan data...'), findsOneWidget);
     expect(
-      tester.widget<AppButton>(find.widgetWithText(AppButton, 'Lanjutkan dengan Google')).onPressed,
+      tester
+          .widget<InkWell>(
+            find.descendant(
+              of: find.byType(SignInSection),
+              matching: find.byType(InkWell),
+            ),
+          )
+          .onTap,
       isNull,
     );
     sync.finish();

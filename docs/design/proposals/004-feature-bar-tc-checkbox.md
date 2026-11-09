@@ -1,40 +1,21 @@
 # 004 - Feature Bar & T&C Checkbox (Redesign UI, tampilan saja)
 
-**Izin pengguna:** 9 Nov 2026 (redesign branch, UI-9 + UI-15)
+**Izin pengguna:** 9 Nov 2026 (redesign branch)
 
-## Masalah
+## Keputusan pengguna (9 Nov 2026)
 
-Figma Masuk (29) + Daftar (31) menambah dua elemen baru tanpa PRD:
+1. **Feature bar** ("Antrean rapi", "Struk otomatis", "Laporan harian") —
+   dibuat sebagai **tampilan saja** (fasilitas visual, tanpa aksi/data).
+   Diterapkan di `SignInFeatureBarSection` (Masuk). Tidak ada provider,
+   tidak ada navigasi, tidak ada data baru.
+2. **Trust bar** ("Data usaha kamu aman & terenkripsi") — teks statis,
+   diterapkan di `SignInTrustSection`.
+3. **Checkbox Syarat & Ketentuan (halaman Daftar)** — TIDAK dibuat sekarang.
+   Masuk proposal ini sebagai pengingat: implementasikan saat aplikasi
+   mencapai 95% (butuh alur T&C backend + penerimaan versi dokumen).
 
-### 1. Feature bar (Masuk, bawah kartu)
-- Tiga chip: "Antrean rapi", "Struk otomatis", "Laporan harian"
-- Warna/ukuran: belum ada spek detail
+## Sisa pekerjaan saat 95%
 
-### 2. T&C Checkbox (Daftar, dalam kartu)
-- Checkbox + "Saya setuju dengan" + link "Syarat & Ketentuan"
-- Fungsi: TAMPILAN SAJA, tidak perlu validasi/logika bisnis
-- Catatan: calon fitur untuk reminder 95% (PR T&C nyata di backend)
-
-## Keputusan
-
-Kedua elemen baru tetap tampilan visual di Figma. **Jangan implementasikan sampai PRD resmi memasukkan fungsionalnya.**
-
-### Feature bar
-- Status: **SKIP sampai ada PRD untuk fitur/pemakaian di mana**
-- Proposal upgrade: docs/design/proposals/NNN-feature-bar-ui.md (sebelum 95%)
-
-### T&C Checkbox
-- Status: **SKIP logika validasi; buat widget bisu** (tidak perlu provider/state)
-- atau: **tampilkan text saja tanpa checkbox** jika user hanya ingin dekoratif
-- Proposal upgrade: docs/design/proposals/NNN-tc-agreement-workflow.md (target 95%, siapkan backend T&C endpoint)
-
-## Konteks
-
-Aturan UI-9 & UI-15 (AGENTS.md):
-- Elemen Figma tanpa PRD → jangan dibuat
-- Teks contoh Figma → jangan disalin, pakai label spec
-
-## Persetujuan
-
-- [ ] Feature bar: SKIP untuk saat ini?
-- [ ] T&C Checkbox: Buat widget bisu (hanya text) atau SKIP juga?
+- Endpoint/versi dokumen T&C, penyimpanan penerimaan per akun, layar T&C,
+  validasi wajib centang saat daftar.
+- Ganti teks statis trust bar bila ada kebijakan privasi resmi.

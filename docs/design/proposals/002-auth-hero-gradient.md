@@ -1,29 +1,16 @@
 # 002 - Token Gradient Hero Auth (Masuk & Daftar)
 
-**Izin pengguna:** 9 Nov 2026 (redesign branch, UI-12)
+**Status:** DISETUJUI pengguna 9 Nov 2026, diterapkan (nilai final dari frame FigCraft).
 
-## Masalah
+## Nilai final (frame `LAURUM · Masuk`, node Hero 4294968693)
 
-Figma hero zone (Masuk, Daftar) pakai gradient linear diagonal biru:
-- Start: `#2E7BD9` (biru cerah)
-- End: `#1B5FA3` (biru gelap)
-- Arah: ~45° (top-left to bottom-right)
+- Linear gradient arah top-left → bottom-right (`from [0,0]` ke `to [1,1]`).
+- Start `#2E7FD8`, end `#1B5FA3`.
+- Radius sudut bawah 32 (`AppRadius.authHero`).
 
-Token warna sekarang hanya solid. Tidak ada `authGradient` atau `heroGradient` di `AppColors`.
+Token: `AppColors.authHeroGradientStart` / `AppColors.authHeroGradientEnd`.
 
-## Solusi
-
-Tambah ke `lib/core/theme/app_colors.dart`:
-- `authHeroGradient` → `LinearGradient(colors: [Color(0xFF2E7BD9), Color(0xFF1B5FA3)], ...)`
-
-Atau: constant `authGradientStart` + `authGradientEnd` (warna saja), buat gradient di widget.
-
-## Dampak
-
-- Masuk + Daftar hero zone
-- Proposal 003 (shadow) akan tertaut
-
-## Persetujuan
-
-- [ ] Gradient warna & arah OK
-- [ ] Pilih: LinearGradient const di theme vs colors saja
+Elemen dekoratif hero (dari frame, bukan token warna baru):
+- Ellipse putih 210x210 opacity 10% di (236,-80) → `AppColors.authHeroBlob`.
+- Ellipse putih 120x120 opacity 8% di (300,120) → `AppColors.authHeroBlobSoft`.
+- Tiga dot putih 4x4 opacity 50% → `AppColors.authHeroDot`.

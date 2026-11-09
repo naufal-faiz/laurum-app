@@ -38,7 +38,14 @@ void main() {
       ),
     );
     expect(find.text('Memulihkan data...'), findsOneWidget);
-    expect(tester.widget<AppButton>(find.byType(AppButton)).onPressed, isNull);
+    expect(
+      tester
+          .widget<InkWell>(
+            find.descendant(of: find.byType(SignInSection), matching: find.byType(InkWell)),
+          )
+          .onTap,
+      isNull,
+    );
   });
   testWidgets('SettingsAccountSection email, manage account and destructive logout', (
     tester,

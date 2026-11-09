@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/features/auth/state/auth_form.dart';
 import 'package:laurum/features/auth/state/auth_form_view.dart';
 import 'package:laurum/features/auth/state/auth_session.dart';
+import 'package:laurum/features/auth/widgets/sign_in_feature_bar_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_form_card_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_hero_section.dart';
-import 'package:laurum/shared/widgets/atoms/app_svg.dart';
-import 'package:laurum/shared/widgets/molecules/banner_message.dart';
+import 'package:laurum/features/auth/widgets/sign_in_trust_section.dart';
 
 class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});
@@ -22,55 +22,46 @@ class SignInPage extends ConsumerWidget {
     final error = form.error ?? session.error;
 
     return Scaffold(
+      backgroundColor: AppColors.surface,
       body: Stack(
         children: [
           const SignInHeroSection(),
           SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 320, bottom: 24),
             child: Column(
               children: [
-                const SizedBox(height: 280),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.screenPadding,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: SignInFormCardSection(
-                    form: form,
+                    email: form.email,
+                    visible: form.visible,
                     busy: busy,
+                    restoring: session.signedIn,
+                    errors: form.errors,
+                    error: error,
                     onEmail: controller.email,
                     onPassword: (value) => controller.secret(AuthSecret.password, value),
-                    onTogglePassword: controller.toggleVisible,
-                    onForgotPassword: () => context.go('/lupa-password'),
-                    onSignIn: controller.submit,
+                    onToggle: controller.toggleVisible,
+                    onForgot: () => context.go('/lupa-password'),
+                    onSubmit: controller.submit,
                     onGoogle: () {
                       controller.clearError();
                       ref.read(authSessionProvider.notifier).signIn();
                     },
                     onSignUp: () => context.go('/daftar'),
-                    sessionBusy: session.busy,
-                    sessionSignedIn: session.signedIn,
                   ),
                 ),
-                const SizedBox(height: 24),
-                if (error != null)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.screenPadding,
-                    ),
-                    child: BannerMessage(
-                      message: error,
-                      variant: BannerMessageVariant.error,
-                    ),
-                  ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 32),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  child: SignInFeatureBarSection(),
+                ),
+                const SizedBox(height: 18),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  child: SignInTrustSection(),
+                ),
               ],
-            ),
-          ),
-          Positioned(
-            top: MediaQuery.of(context).viewPadding.top + 8,
-            left: 16,
-            child: GestureDetector(
-              onTap: () => context.pop(),
-              child: const AppSvg('assets/icons/cursor-back.svg', size: 24),
             ),
           ),
         ],

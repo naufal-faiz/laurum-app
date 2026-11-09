@@ -49,15 +49,47 @@ Sumber tunggal nilai desain. Semua nilai di sini hidup HANYA di `lib/core/theme/
 
 | Nama | Nilai | Pemakaian |
 | --- | --- | --- |
-| `authHeroGradient` | Linear 45°: start `#2E7BD9`, end `#1B5FA3` | Hero zone Masuk & Daftar |
+| `authHeroGradient` | Linear top-left→bottom-right: start `#2E7FD8`, end `#1B5FA3` | Hero zone Masuk & Daftar |
+
+## Warna auth (frame `LAURUM · Masuk` / `· Daftar`)
+
+| Nama | Hex | Pemakaian |
+| --- | --- | --- |
+| `authPrimary` | `#2675C9` | tombol Masuk, link "Lupa password?"/"Daftar", ikon fitur bar |
+| `authPrimaryInk` | `#174B83` | ikon mata dalam field |
+| `authInk` | `#26364A` | teks tombol Google dan label fitur bar |
+| `authLabel` | `#7C8DA3` | label field, "atau", trust bar |
+| `authPlaceholder` | `#B7C2CF` | placeholder field auth |
+| `authFieldBorder` | `#DDE3E8` | border field 48 dp dan tombol Google |
+| `authDivider` | `#E7EDF4` | garis pemisah "atau" |
+| `authChipBg` | `#F4F6F8` | tombol mata, fitur bar |
+| `authEyeBorder` | `#E9EEF4` | border tombol mata |
+| `authIllustration` | `#4A90DA` | lingkaran ilustrasi hero |
+| `authHeroTagline` | `#DCEBF9` | tagline hero |
+| `authHeroBlob` / `authHeroBlobSoft` / `authHeroDot` | putih 10% / 8% / 50% | ornamen hero |
+| `authGoogleBlue` / `authGoogleBorder` | `#4285F4` / `#E3E9F0` | huruf G dan border kotak G |
+
+## Tipografi auth (`AppAuthTextStyles`, Inter)
+
+Domain font `Inter` (`assets/fonts/Inter-Regular.otf`, `Inter-SemiBold.otf`,
+`Inter-Bold.otf`; bobot 400/600/700). Token: `heroTitle` 26/700, `heroBrand` 15/700,
+`heroBrandSub` 7/600, `heroSub` 10/400, `label` 8.5/600, `input` 10.5/400,
+`button` 11/600, `body` 9/400, `bodyStrong` 9/600, `meta` 8.5/400,
+`google` 10.5/600, `googleMark` 12/700, `chip` 8/600.
 
 ## Bayangan (`AppShadows`)
 
 | Nama | Warna/Offset/Blur | Pemakaian |
 | --- | --- | --- |
-| `authCard` | biru 0x20134B87, offset (0,4), blur 12 | Kartu Masuk & Daftar |
+| `authCard` | `#174B83` 12.5%, offset (0,14), blur 32 | Kartu Masuk & Daftar |
+| `authGoogle` | `#174B83` 5%, offset (0,3), blur 10 | Tombol Google |
 
-## Tipografi (`AppTextStyles`; Plus Jakarta Sans + Inter hero)
+## Radius auth (`AppRadius`)
+
+`authCard` 24, `authField` 12, `authBar` 12, `authLogo` 12, `authEye` 9,
+`authHero` sudut bawah 32.
+
+## Tipografi (`AppTextStyles`; Plus Jakarta Sans)
 
 Nilai `height` Flutter = tinggi baris / ukuran font.
 
