@@ -168,6 +168,27 @@ Kegagalan memberi kode umum dan mempertahankan Auth agar bisa mencoba ulang;
 operasi database/Storage/Auth bukan transaksi terdistribusi. UI dua konfirmasi dan
 penutupan sesi/sinkronisasi lintas perangkat disambungkan di B3.
 
+## Pemeriksaan cloud (baca-saja)
+
+Perintah `db push` tanpa `--remote` menargetkan stack lokal 127.0.0.1:54322. Bila
+Docker Desktop belum jalan, hasilnya `DbConnectError ... ECONNREFUSED 127.0.0.1:54322`;
+itu bukan kesalahan migrasi. Untuk memeriksa proyek cloud terhubung tanpa menulis
+apa pun ke cloud (aman bagi agen, aturan 19):
+
+```powershell
+& ./supabase/node_modules/.bin/supabase.cmd db push --dry-run --remote --workdir .
+& ./supabase/node_modules/.bin/supabase.cmd migration list --remote --workdir .
+```
+
+`--dry-run` hanya mencetak migrasi yang akan diterapkan. Menerapkan sungguhan
+(`supabase db push --remote` tanpa `--dry-run`) MENULIS ke cloud dan hanya boleh
+dilakukan pemilik proyek, bukan agen. Di PowerShell, alihkan `*>` ke berkas log
+supaya baris stderr CLI tidak tampil sebagai `NativeCommandError`; kode keluar
+sebenarnya ada di `$LASTEXITCODE`.
+
+Status 9 Nov 2026: proyek `laurumdb` (iczxtytiomlrpngitdlf) belum punya satu pun
+migrasi terpasang; kelima migrasi repo masih tertunda.
+
 ## Tindak lanjut B2
 
 - Kontrak server B2a selesai (wire schema 5). B2b harus memakai `group_id`/hash dan
