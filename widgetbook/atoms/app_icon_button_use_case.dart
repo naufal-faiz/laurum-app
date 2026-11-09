@@ -12,8 +12,8 @@ final appIconButtonUseCase = WidgetbookUseCase(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: AppSpacing.cardGap,
       children: [
-        AppIconButton(AppIcons.person, label: 'Enabled', onPressed: () {}),
-        const AppIconButton(AppIcons.person, label: 'Disabled'),
+        AppIconButton(icon: AppIcons.person, label: 'Enabled', onPressed: () {}),
+        const AppIconButton(icon: AppIcons.person, label: 'Disabled'),
       ],
     ),
   ),

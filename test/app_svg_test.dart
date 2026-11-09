@@ -36,7 +36,10 @@ void main() {
     final svg = tester.widget<SvgPicture>(find.byType(SvgPicture));
     expect((svg.bytesLoader as SvgAssetLoader).theme?.currentColor, AppColors.primary);
     expect(svg.semanticsLabel, 'Test asset');
-    expect(AppSvgs.paths, isEmpty);
+    expect(AppSvgs.paths, isNotEmpty);
+    for (final path in AppSvgs.paths) {
+      expect(File(path).existsSync(), isTrue, reason: path);
+    }
     expect(tester.takeException(), isNull);
   });
 }

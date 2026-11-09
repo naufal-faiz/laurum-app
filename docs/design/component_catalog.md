@@ -237,13 +237,15 @@ Parameter warna/ukuran pada pemakaian harus berasal dari `core/theme`.
   `color = AppColors.ink2`, `semanticLabel`, `key`.
 - Memuat SVG lokal lewat SvgPicture.asset, currentColor melalui SvgTheme.
   Tanpa label berarti dekoratif. Aset harus memakai currentColor, bukan warna tetap.
-- Pola contoh setelah aset pertama tersedia:
-  `AppSvg(AppSvgs.<namaAset>, semanticLabel: label)`.
-- AppSvgs.paths masih kosong; tidak ada aset SVG produksi baru.
-  Saat aset pertama hadir, tambahkan konstanta bernama, daftarkan aset di pubspec,
-  lalu tambahkan use-case. **Use-case dan perbandingan visual SVG ditunda.**
+- Pola contoh: `AppSvg(AppSvgs.<namaAset>, semanticLabel: label)`.
+- Aset produksi saat ini: `app_svgs.dart` mendaftarkan `google`, `facebook`,
+  `whatsapp`, dan `cursorBack` dari `assets/icons/` (didaftarkan di pubspec).
+  Ikon merek memakai warna tetap resmi, jadi `AppSvg.color` tidak mengubahnya;
+  aturan currentColor hanya berlaku untuk ikon monokrom. `facebook` dan
+  `cursorBack` belum dipakai UI karena PRD A hanya menetapkan login Google.
 - Tes memuat `test/fixtures/test_icon.svg` lewat bundle khusus tes,
-  memeriksa currentColor dan label. Fixture ini bukan ikon produksi.
+  memeriksa currentColor dan label, serta memastikan setiap path `AppSvgs.paths`
+  ada di disk. Fixture ini bukan ikon produksi.
 
 ## Verifikasi visual kelompok ini
 
@@ -264,25 +266,29 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 | Gap | gxvLY, gKNjY | jarak kartu 12 cocok |
 | Divider | plTzD | tebal 1 cocok; warna border menggantikan chipIdle berdasarkan tokens.md |
 | Kartu | i1jkP, Xa0qs, JrA3v | radius/padding 16, border 1, rail 4 cocok; tinggi mengikuti konten |
-| SVG | belum ada aset produksi | use-case dan perbandingan ditunda sesuai instruksi |
+| SVG | google, facebook, whatsapp, cursor-back | ikon merek resmi; warna tetap sesuai merek |
 
 ## AppButton
-- Berkas: lib/shared/widgets/atoms/app_button.dart (54 baris).
-- Parameter: label wajib; variant = cta; icon opsional (AppIcons); onPressed opsional; key.
+- Berkas: lib/shared/widgets/atoms/app_button.dart.
+- Parameter: label wajib; variant = cta; icon (AppIcons) atau iconAsset (String SVG)
+  opsional dan saling eksklusif; onPressed opsional; key.
 - Varian: cta, secondary, action, actionOutline, destructiveOutline, destructiveFilled.
 - onPressed null menonaktifkan aksi. Label dapat membungkus; tinggi minimum 56 untuk CTA,
   48 untuk lainnya. Lebar mengikuti konten; parent boleh memberi lebar penuh.
 - Contoh: AppButton(label, variant: AppButtonVariant.action, icon: AppIcons.check, onPressed: onTap).
+- Ikon merek: AppButton('Lanjutkan dengan Google', iconAsset: AppSvgs.google, onPressed: onGoogle).
 - Widgetbook: semua enam varian dengan ikon + CTA disabled; tes render, tinggi dan callback.
 - Referensi: B4bt3y, Ax5fO, h8n1Hk, azFlV, xpKx9, e32I1Q.
 - Selisih: CTA/secondary memakai token cta 16/22 w700; desain w600. Aksi memakai bodyStrong 14/20 w600.
 
 ## AppIconButton
-- Berkas: lib/shared/widgets/atoms/app_icon_button.dart (39 baris).
-- Parameter: icon dan label wajib; onPressed opsional; color = primary; key.
+- Berkas: lib/shared/widgets/atoms/app_icon_button.dart.
+- Parameter: label wajib; tepat satu dari icon (AppIcons) atau iconAsset (String SVG);
+  onPressed opsional; color = primary; key.
 - label menjadi tooltip/nama aksesibel. Ukuran sentuh 48, ikon 20, radius action 8,
   tanpa latar (transparan) agar tidak tampak kotak putih di app bar.
-- Contoh: AppIconButton(AppIcons.person, label: label, onPressed: onTap).
+- Contoh: AppIconButton(icon: AppIcons.person, label: label, onPressed: onTap).
+- Ikon merek: AppIconButton(iconAsset: AppSvgs.whatsapp, label: 'Hubungi', onPressed: onContact).
 - Widgetbook: enabled/disabled. Tes tooltip, AppIcon, ukuran, callback dan disabled.
 - Referensi jo0oP; glyph Ionicons menggantikan Lucide sesuai PRD.
 

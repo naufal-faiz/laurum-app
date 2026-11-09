@@ -43,7 +43,7 @@ class OrderDetailPage extends ConsumerWidget {
       trailing: !useStatus
           ? null
           : AppIconButton(
-              AppIcons.more,
+              icon: AppIcons.more,
               label: 'Menu order',
               color: AppColors.ink,
               onPressed: data == null || data.isFinal || busy

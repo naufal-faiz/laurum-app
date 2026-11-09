@@ -18,7 +18,7 @@ final appBarSubUseCase = WidgetbookUseCase(
           title: 'Subpage with action',
           backLabel: 'Back',
           onBack: () {},
-          trailing: AppIconButton(AppIcons.more, label: 'More', onPressed: () {}),
+          trailing: AppIconButton(icon: AppIcons.more, label: 'More', onPressed: () {}),
         ),
       ],
     ),

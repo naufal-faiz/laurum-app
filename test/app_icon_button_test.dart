@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/icons/app_svgs.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
+import 'package:laurum/shared/widgets/atoms/app_svg.dart';
 
 void main() {
   testWidgets('icon_button renders variants and respects its public contract', (tester) async {
@@ -12,7 +14,7 @@ void main() {
       MaterialApp(
         theme: AppTheme.light,
         home: Scaffold(
-          body: AppIconButton(AppIcons.person, label: 'Open', onPressed: () => taps++),
+          body: AppIconButton(icon: AppIcons.person, label: 'Open', onPressed: () => taps++),
         ),
       ),
     );
@@ -25,9 +27,25 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         theme: AppTheme.light,
-        home: const Scaffold(body: AppIconButton(AppIcons.person, label: 'Disabled')),
+        home: const Scaffold(
+          body: AppIconButton(icon: AppIcons.person, label: 'Disabled'),
+        ),
       ),
     );
     expect(tester.widget<IconButton>(find.byType(IconButton)).onPressed, isNull);
+  });
+  testWidgets('icon_button renders a bundled brand asset instead of a glyph', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: const Scaffold(
+          body: AppIconButton(iconAsset: AppSvgs.whatsapp, label: 'WhatsApp'),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(AppSvg), findsOneWidget);
+    expect(find.byType(AppIcon), findsNothing);
+    expect(tester.takeException(), isNull);
   });
 }

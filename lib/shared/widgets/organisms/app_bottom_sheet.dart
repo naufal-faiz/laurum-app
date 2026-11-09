@@ -79,7 +79,7 @@ class AppBottomSheet extends StatelessWidget {
               ),
             ),
             AppIconButton(
-              AppIcons.close,
+              icon: AppIcons.close,
               label: 'Tutup',
               color: AppColors.ink2,
               onPressed: () => Navigator.of(context).pop(),

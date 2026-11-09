@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/icons/app_svgs.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
@@ -25,7 +25,7 @@ class SignInSection extends StatelessWidget {
       if (busy) AppText(restoring ? 'Memulihkan data...' : 'Memproses permintaan...'),
       AppButton(
         'Lanjutkan dengan Google',
-        icon: AppIcons.person,
+        iconAsset: AppSvgs.google,
         onPressed: busy ? null : onGoogle,
       ),
     ],

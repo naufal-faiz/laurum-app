@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/formatters/formatters.dart';
-import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/icons/app_svgs.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/customers/pages/customer_edit_sheet.dart';
@@ -45,7 +45,7 @@ class CustomerProfileSection extends ConsumerWidget {
               AppButton(
                 'Buka WhatsApp',
                 variant: AppButtonVariant.actionOutline,
-                icon: AppIcons.chat,
+                iconAsset: AppSvgs.whatsapp,
                 onPressed: customer.phone.isEmpty
                     ? null
                     : () => ref

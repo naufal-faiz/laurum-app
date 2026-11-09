@@ -71,7 +71,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/core/icons/
 - app_icons.dart (50): AppIcons
-- app_svgs.dart (4): AppSvgs
+- app_svgs.dart (9): AppSvgs
 
 ### lib/core/persistence/
 - account_local_data_service.dart (27): AccountLocalDataService
@@ -584,13 +584,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
 - app_badge.dart (31): AppBadgeVariant, AppBadge
-- app_button.dart (54): AppButton
+- app_button.dart (65): AppButton
 - app_card.dart (47): AppCardRail, AppCard
 - app_chip.dart (40): AppChip
 - app_divider.dart (16): AppDivider
 - app_gap.dart (19): AppGap
 - app_icon.dart (27): AppIcon
-- app_icon_button.dart (39): AppIconButton
+- app_icon_button.dart (46): AppIconButton
 - app_numpad_key.dart (54): AppNumpadKeyValue, AppNumpadKey
 - app_search_field.dart (88): AppSearchField, _AppSearchFieldState
 - app_skeleton.dart (25): AppSkeleton
@@ -627,7 +627,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_bottom_sheet.dart (93): AppBottomSheet
 - bottom_nav_bar.dart (110): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
-- customer_row.dart (98): CustomerRow
+- customer_row.dart (102): CustomerRow
 - expense_row.dart (57): ExpenseRow
 - nota_card.dart (75): NotaCard
 - numpad.dart (62): NumpadVariant, Numpad
@@ -673,14 +673,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_chip_test.dart (41):
 - app_divider_test.dart (41):
 - app_gap_test.dart (33):
-- app_icon_button_test.dart (33):
+- app_icon_button_test.dart (51):
 - app_icon_test.dart (29):
 - app_numpad_key_test.dart (43):
 - app_router_test.dart (64):
 - app_search_field_test.dart (66):
 - app_skeleton_test.dart (32):
 - app_status_text_test.dart (26):
-- app_svg_test.dart (42): SvgTestBundle
+- app_svg_test.dart (45): SvgTestBundle
 - app_switch_test.dart (42):
 - app_text_field_focus_test.dart (53):
 - app_text_field_test.dart (70):

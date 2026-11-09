@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/formatters/formatters.dart';
-import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/icons/app_svgs.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
@@ -46,7 +46,7 @@ class OrderCustomerSection extends StatelessWidget {
             AppButton(
               'Buka WhatsApp',
               variant: AppButtonVariant.actionOutline,
-              icon: AppIcons.chat,
+              iconAsset: AppSvgs.whatsapp,
               onPressed: onWhatsApp,
             ),
         ],

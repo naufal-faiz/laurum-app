@@ -1,5 +1,5 @@
 # STATE Laurum
-Diperbarui: 2026-11-07 | Cabang dev2backend
+Diperbarui: 2026-11-09 | Cabang dev2backend
 
 ## Posisi
 UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, dan B2c SELESAI**; B2d belum ditulis. B2
@@ -7,6 +7,22 @@ disetujui pengguna 6 Nov 2026. Bukti B2a/B2b/B2c: docs/progress/b2a.md, b2b.md, 
 Bukti B1f: docs/progress/b1f.md dan b1f-benchmark.json; tanpa push/merge.
 B0 SELESAI: docs/prompts/B0-supabase.md; rencana docs/plans/B0-supabase-lokal.md.
 Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md, b2c.md dan supabase/README.md.
+
+## Aset merek dan ikon launcher (9 Nov 2026)
+- `assets/icons/` didaftarkan di pubspec; `AppSvgs` memuat `google`, `facebook`,
+  `whatsapp`, `cursorBack`. Ikon merek berwarna tetap (bukan currentColor).
+- `AppButton`/`AppIconButton` menerima `iconAsset` selain `icon` (saling eksklusif,
+  API lama tetap jalan). Dipakai di tombol Google, ikon Hubungi daftar pelanggan,
+  serta tombol Buka WhatsApp pada detail pelanggan dan detail order.
+- `facebook.svg` dan `cursor-back.svg` belum dipakai UI: PRD A hanya menetapkan login
+  Google; fitur login Facebook tidak ada dan tidak ditambahkan.
+- Ikon launcher: PNG legacy + adaptive (back/fore) berdimensi benar; XML
+  `mipmap-anydpi-v26/ic_launcher.xml` merujuk lapisan adaptive. Pratinjau komposit
+  menunjukkan kartu putih + logo "LAURUM" mengisi area terlihat mask; latar hitam hanya
+  di margin crop. Terpasang dan diperiksa di SM-N975F (Android, wireless).
+- Golden yang berubah karena ikon merek sudah diperbarui: customer_row, auth_signin(+error),
+  r10_signin(+error,320_2x), r4_order_detail, order_detail_actions_1x.
+
 
 ## Hasil B2c (7 Nov 2026)
 - Adapter `SupabaseSyncTransport` (push+pull RPC), parsing wire, dan pemetaan galat aman.

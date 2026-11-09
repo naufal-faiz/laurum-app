@@ -31,7 +31,7 @@ class AppBarSub extends StatelessWidget {
             spacing: AppMoleculeTokens.gap,
             children: [
               AppIconButton(
-                AppIcons.back,
+                icon: AppIcons.back,
                 label: backLabel,
                 color: AppColors.ink,
                 onPressed: onBack,

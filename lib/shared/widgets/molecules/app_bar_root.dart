@@ -38,7 +38,7 @@ class AppBarRoot extends StatelessWidget {
                 ),
               ),
               syncIndicator,
-              AppIconButton(AppIcons.avatar, label: accountLabel, onPressed: onAccount),
+              AppIconButton(icon: AppIcons.avatar, label: accountLabel, onPressed: onAccount),
             ],
           ),
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/formatters/formatters.dart';
-import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/icons/app_svgs.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_molecule_tokens.dart';
 import 'package:laurum/core/theme/app_radius.dart';
@@ -39,9 +39,9 @@ class CustomerRow extends StatelessWidget {
         spacing: AppMoleculeTokens.gap,
         children: [
           Row(
+            spacing: AppMoleculeTokens.gap,
             children: [
               AppAvatar(initials: initials),
-              const SizedBox(width: AppMoleculeTokens.gap),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +51,11 @@ class CustomerRow extends StatelessWidget {
                   ],
                 ),
               ),
-              AppIconButton(AppIcons.phone, label: 'Hubungi $name', onPressed: onContact),
+              AppIconButton(
+                iconAsset: AppSvgs.whatsapp,
+                label: 'Hubungi $name',
+                onPressed: onContact,
+              ),
             ],
           ),
           if (outstanding > 0)
