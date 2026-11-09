@@ -45,7 +45,19 @@ Sumber tunggal nilai desain. Semua nilai di sini hidup HANYA di `lib/core/theme/
 | Status bayar (teks, tanpa pil) | Lunas `primary`, Belum bayar `error`, DP `warningInk` (12/16 w600) |
 | Rail kartu | `warningBorder` (perlu dicek) atau `error` (usulan batal), lebar 4 |
 
-## Tipografi (`AppTextStyles`; Plus Jakarta Sans)
+## Gradien (`AppColors` + Dart `LinearGradient`)
+
+| Nama | Nilai | Pemakaian |
+| --- | --- | --- |
+| `authHeroGradient` | Linear 45°: start `#2E7BD9`, end `#1B5FA3` | Hero zone Masuk & Daftar |
+
+## Bayangan (`AppShadows`)
+
+| Nama | Warna/Offset/Blur | Pemakaian |
+| --- | --- | --- |
+| `authCard` | biru 0x20134B87, offset (0,4), blur 12 | Kartu Masuk & Daftar |
+
+## Tipografi (`AppTextStyles`; Plus Jakarta Sans + Inter hero)
 
 Nilai `height` Flutter = tinggi baris / ukuran font.
 

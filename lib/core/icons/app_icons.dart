@@ -23,6 +23,7 @@ enum AppIcons {
   location(Ionicons.locationOutline),
   close(Ionicons.close),
   service(Ionicons.shirtOutline),
+  droplet(Ionicons.waterOutline),
   queue(Ionicons.fileTrayOutline),
   queueActive(Ionicons.fileTray),
   printer(Ionicons.printOutline),

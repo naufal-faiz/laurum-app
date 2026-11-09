@@ -1,0 +1,14 @@
+{
+      "mcp": {
+        "figcraft": {
+          "command": [
+            "E:\\App Data\\FigCraft\\figcraft-cli.exe",
+            "mcp",
+            "--attach",
+            "9876"
+          ],
+          "enabled": true,
+          "type": "local"
+        }
+      }
+    }

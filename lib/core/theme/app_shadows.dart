@@ -12,4 +12,8 @@ abstract final class AppShadows {
   ];
   // The C/Modal frames in laurum-ready.pen have no shadow effect.
   static const modal = <BoxShadow>[];
+  // Auth card shadow (Masuk & Daftar)
+  static const authCard = [
+    BoxShadow(color: Color(0x20134B87), offset: Offset(0, 4), blurRadius: 12),
+  ];
 }

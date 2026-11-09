@@ -30,4 +30,9 @@ abstract final class AppColors {
   static const scrim = Color(0x66131B2E);
   static const appBarBg = Color(0xD9F8F9FF);
   static const receiptInk = Color(0xFF000000);
+
+  // Hero gradient (auth screens)
+  static const authHeroGradientStart = Color(0xFF2E7BD9);
+  static const authHeroGradientEnd = Color(0xFF1B5FA3);
+  static const authHeroTagline = Color(0xFFDCEBF9);
 }

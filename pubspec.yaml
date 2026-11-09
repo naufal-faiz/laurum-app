@@ -121,3 +121,7 @@ flutter:
       fonts:
         - asset: assets/fonts/IBMPlexMono-Regular.ttf
           weight: 400
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter_18pt-Regular.ttf
+          weight: 400
