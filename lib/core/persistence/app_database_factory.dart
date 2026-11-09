@@ -36,7 +36,13 @@ class AppDatabaseFactory {
   }
 
   Future<AppDatabase> open() => _serial(() async {
-    return _database ??= AppDatabase(NativeDatabase.createInBackground(await databaseFile()));
+    return _database ??= AppDatabase(
+      NativeDatabase.createInBackground(
+        await databaseFile(),
+        // A background sync isolate writes while the app may be open.
+        setup: (db) => db.execute('PRAGMA busy_timeout = 5000'),
+      ),
+    );
   });
 
   Future<void> _close() async {

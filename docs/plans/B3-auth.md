@@ -1,6 +1,7 @@
 # B3 — Auth nyata, pemulihan, hapus akun
 
-Status: dirancang 9 Nov 2026, dikerjakan bertahap B3a → B3c. Dasar: PRD B §4, §8,
+Status: dirancang 9 Nov 2026, dikerjakan bertahap B3a → B3c. **B3a dan B3c SELESAI
+9 Nov 2026** (B3c lebih dulu atas permintaan pengguna); **B3b BELUM**. Dasar: PRD B §4, §8,
 §9, §14; docs/backend/ROADMAP.md baris B3; B2d selesai.
 
 ## Ruang lingkup

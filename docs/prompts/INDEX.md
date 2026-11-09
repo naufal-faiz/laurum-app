@@ -55,10 +55,14 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | B2c | B2c-supabase-adapter.md | Adapter Supabase, push/pull nyata dua akun, pemetaan seluruh tabel | SELESAI (2026-11-07) | check_all928 hijau; push/pull RPC, kursor tuple, 13 tabel, ack/konflik, koordinator push-lalu-pull; tes integrasi dua akun nyata LULUS (pgTAP219 PASS); path foto lokal tidak dikirim dan tidak dihapus pull. Lihat docs/progress/b2c.md |
 | B2d | B2d-sync-scheduler.md | Pemicu sinkron: debounce, retry backoff, koneksi, foreground, periodik | SELESAI (2026-11-09) | check_all hijau; scheduler 2 dtk/15 mnt, gate tertutup tanpa Auth, lastSyncedAt persisten, monitor koneksi nyata di main; workmanager ditunda ke B3. Lihat docs/progress/b2d.md |
 | B3a | B3a-auth-fondasi.md | Fondasi Auth nyata: konfigurasi, sesi aman, gateway Supabase, deep link | SELESAI (2026-11-09) | check_all hijau (960 tes), 17 tes Auth lulus; `flutter_secure_storage` + `google_sign_in`; tanpa konfigurasi tetap dummy. Cloud belum punya migrasi, akun uji, dan Google Web Client ID. Lihat docs/progress/b3a.md |
-| B3b | B3b-konfirmasi-pemulihan.md | Konfirmasi email nyata, penyegaran via deep link, layar password baru | BELUM | Butuh akun uji/peti surat untuk verifikasi manual |
-| B3c | B3c-hapus-akun-sinkron.md | Hapus akun lewat Edge, gerbang SyncCoordinator, devices | BELUM | Butuh migrasi cloud diterapkan pemilik |
+| B3b | B3b-konfirmasi-pemulihan.md | Konfirmasi email nyata, penyegaran via deep link, layar password baru | BELUM | Dikerjakan setelah B3c (prioritas pengguna: sinkron); butuh akun uji/peti surat untuk verifikasi manual |
+| B3c | B3c-hapus-akun-sinkron.md | Hapus akun lewat Edge, gerbang SyncCoordinator, devices, workmanager | SELESAI (2026-11-09) | check_all hijau (965 tes); gerbang sinkron + devices + hapus akun nyata; `workmanager 0.10.10` terpasang tetapi belum diuji di perangkat, iOS belum. Lihat docs/progress/b3c.md |
 | B5-B8 | (belum ditulis) | Printer nyata, Play Store, AI, Pro | MENUNGGU | Lihat docs/backend/ROADMAP.md |
 
 Setelah No 21 selesai, kerjakan backend: BP0, lalu B1a-B1f (B0 setelah B1f, karena hasil B1 langsung terlihat di HP), rencana di docs/backend/ROADMAP.md. Baris berstatus MENUNGGU belum punya prompt dan jangan diambil; minta penyusunannya setelah B1f SELESAI.
 
 Catatan 4 Nov 2026: docs/backend/ROADMAP.md sudah tersedia dan dibaca; urutan lokal dahulu tetap berlaku.
+
+Catatan 9 Nov 2026: B3c dikerjakan sebelum B3b atas permintaan pengguna (prioritas
+sinkron); gerbang sinkron hanya bergantung pada sesi B3a. Migrasi cloud sudah
+diterapkan pemilik, jadi B3c tidak lagi memblokir. B3b tetap BELUM.

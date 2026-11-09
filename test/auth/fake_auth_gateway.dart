@@ -24,7 +24,7 @@ class FakeAuthGateway implements AuthGateway {
   FakeAuthGateway({this.user});
   AuthIdentity? user;
   AuthException? signInError, signUpError, googleError, profileError, passwordError, resetError;
-  AuthException? verifyError, updatePasswordError;
+  AuthException? verifyError, updatePasswordError, deleteError;
   final calls = <String>[];
   String? lastReset, lastGoogleToken;
 
@@ -85,6 +85,13 @@ class FakeAuthGateway implements AuthGateway {
   @override
   Future<void> signOut() async {
     calls.add('signOut');
+    user = null;
+  }
+
+  @override
+  Future<void> deleteAccount() async {
+    calls.add('deleteAccount');
+    if (deleteError != null) throw deleteError!;
     user = null;
   }
 }

@@ -2,13 +2,16 @@
 Diperbarui: 2026-11-09 | Cabang dev2backend
 
 ## Posisi
-UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, B2c, B2d, dan B3a SELESAI**; B3b, B3c, B2e+ menunggu.
+UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, B2c, B2d, B3a, dan B3c SELESAI**;
+B3b, B2e+ menunggu.
 B2 disetujui pengguna 6 Nov 2026. Bukti B2a/B2b/B2c/B2d: docs/progress/b2a.md, b2b.md,
-b2c.md, b2d.md. B3 dibagi B3a/B3b/B3c: docs/plans/B3-auth.md; bukti B3a: docs/progress/b3a.md.
+b2c.md, b2d.md. B3 dibagi B3a/B3b/B3c: docs/plans/B3-auth.md; bukti B3a: docs/progress/b3a.md,
+bukti B3c: docs/progress/b3c.md. B3c dikerjakan sebelum B3b atas permintaan
+pengguna (prioritas sinkron).
 Bukti B1f: docs/progress/b1f.md dan b1f-benchmark.json; tanpa push/merge.
 B0 SELESAI: docs/prompts/B0-supabase.md; rencana docs/plans/B0-supabase-lokal.md.
-Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md, b2c.md, b2d.md, b3a.md
-dan supabase/README.md.
+Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md, b2c.md, b2d.md, b3a.md,
+b3c.md dan supabase/README.md.
 
 ## Aset merek dan ikon launcher (9 Nov 2026)
 - `assets/icons/` didaftarkan di pubspec; `AppSvgs` memuat `google`, `facebook`,
@@ -25,6 +28,29 @@ dan supabase/README.md.
 - Golden yang berubah karena ikon merek sudah diperbarui: customer_row, auth_signin(+error),
   r10_signin(+error,320_2x), r4_order_detail, order_detail_actions_1x.
 
+
+## Hasil B3c (9 Nov 2026)
+- Hapus akun nyata: `AuthGateway.deleteAccount` + `SupabaseAuthGateway` memanggil
+  Edge `delete-account`, memetakan `FunctionException.status` ke `AuthException`,
+  lalu menutup sesi lokal; `SupabaseAuthService.deleteAccount` lewat mixin
+  `SupabaseAccountActions` (429 → requestLimit, jaringan/5xx → unavailable).
+  Alur dua konfirmasi + TransactionRunner + `finishDelete` dari R10/B1f tetap.
+- Gerbang B2d dibuka: `supabaseSyncCycle` merakit SyncCoordinator dengan transport
+  Supabase + store Drift; `supabaseSyncCycleFromSession` dipakai `main.dart` agar
+  tidak mengimpor `supabase_flutter` (aturan 19). Tanpa Auth nyata gerbang tetap
+  tertutup (tanpa timer/jaringan, outbox dummy tetap bersih).
+- `device_registrar.dart`: identitas install stabil di `local_settings`
+  (`device_identity`, UUID v4; JANGAN pakai `device_code` — itu prefiks nomor nota)
+  dan satu baris `devices` lewat OutboxWriter, hanya saat gerbang terbuka.
+- `workmanager 0.10.10` (disetujui pengguna): task `laurum.sync.periodic` tiap
+  15 menit, dispatcher isolate memulihkan Supabase → owner → database → satu siklus;
+  `AppDatabaseFactory` memasang `busy_timeout = 5000`.
+- check_all HIJAU 965 tes (1 integrasi dilewati tanpa env), archOK, REPO_MAP975,
+  exit0. Migrasi cloud sudah diterapkan pemilik (remote = local, 5/5).
+- BELUM DIUJI: workmanager di perangkat (Android) dan iOS (butuh BGTaskScheduler);
+  sinkron ujung-ke-ujung ke cloud; Google login (tanpa Web Client ID/SHA-1).
+- LANGKAH BERIKUTNYA: uji sinkron di perangkat, lalu B3b
+  (docs/prompts/B3b-konfirmasi-pemulihan.md) — butuh akun uji/peti surat.
 
 ## Hasil B3a (9 Nov 2026)
 - Konfigurasi publik lewat `--dart-define`/`--dart-define-from-file=.env.local`:
@@ -48,12 +74,11 @@ dan supabase/README.md.
   `mailer_autoconfirm=false`), `/auth/v1/health` 200 dengan kunci publik.
 - BELUM BISA DIUJI: migrasi cloud belum diterapkan (`app_config`/`orders` PGRST205),
   belum ada akun uji/peti surat, `GOOGLE_WEB_CLIENT_ID` + SHA-1 Android belum ada.
-- LANGKAH BERIKUTNYA: tinjauan pengguna, lalu B3b (konfirmasi/pemulihan) —
-  docs/prompts/B3b-konfirmasi-pemulihan.md. Jangan mulai B3c sebelum B3b selesai.
+- LANGKAH BERIKUTNYA (historis B3a): tinjauan pengguna, lalu B3b — kini B3c sudah
+  selesai lebih dulu; lihat bagian B3c di atas.
 - Keputusan 9 Nov 2026: pengguna menyetujui dependensi `workmanager` untuk sinkron
-  latar di B3c (pasang, jangan tunda). Sinkron "Sinkron sekarang" masih hanya
-  menghitung ulang outbox karena `AccountStore` membuat `DriftSyncService(db)`
-  tanpa `SyncCycle`; gerbang baru dibuka di B3c.
+  latar di B3c (pasang, jangan tunda). Status: terpasang dan dijadwalkan di
+  `main.dart`; belum diuji di perangkat.
 
 ## Hasil B2d (9 Nov 2026)
 - Mesin pemicu murni: debounce 2 dtk, backoff eksponensial 2 dtk → 15 mnt, periodik

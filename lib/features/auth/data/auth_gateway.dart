@@ -11,6 +11,7 @@ abstract interface class AuthGateway {
   Future<AuthIdentity> changePassword(String password);
   Future<void> sendPasswordReset(String email);
   Future<void> signOut();
+  Future<void> deleteAccount();
 }
 
 /// Supplies a Google ID token from the native account picker. Returns null when

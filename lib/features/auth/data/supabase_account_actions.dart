@@ -43,4 +43,14 @@ mixin SupabaseAccountActions implements AuthService {
       throw failureFor(error);
     }
   }
+
+  @override
+  Future<bool> deleteAccount() async {
+    try {
+      await gateway.deleteAccount();
+    } on AuthException catch (error) {
+      throw failureFor(error);
+    }
+    return true;
+  }
 }

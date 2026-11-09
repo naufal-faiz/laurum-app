@@ -129,16 +129,35 @@ void main() {
     );
   });
 
-  test('sign out clears the session; deletion is not claimed before B3c', () async {
+  test('sign out clears the session and keeps the local rollback checkpoint', () async {
     await auth.signInWithPassword('ratna@example.com', 'Laundry123!');
     final restore = auth.checkpoint();
-    await expectLater(auth.deleteAccount(), throwsA(isA<AuthFailure>()));
-    expect(auth.isSignedIn, isTrue);
     restore();
     await auth.signOut();
     expect(auth.isSignedIn, isFalse);
     expect(auth.currentUserId, isNull);
     expect(auth.name, isEmpty);
     expect(auth.needsBusinessSetup, isFalse);
+  });
+
+  test('deletion calls the edge function, clears the session, and stays safe on failure', () async {
+    await auth.signInWithPassword('ratna@example.com', 'Laundry123!');
+    expect(await auth.deleteAccount(), isTrue);
+    expect(gateway.calls.last, 'deleteAccount');
+    expect(auth.isSignedIn, isFalse);
+    expect(auth.currentUserId, isNull);
+
+    gateway.user = identity();
+    gateway.deleteError = error('server_error', status: '500');
+    await expectLater(
+      auth.deleteAccount(),
+      throwsA(isA<AuthFailure>().having((e) => e.kind, 'kind', AuthFailureKind.unavailable)),
+    );
+    expect(auth.isSignedIn, isTrue);
+    gateway.deleteError = error('over_request_rate_limit', status: '429');
+    await expectLater(
+      auth.deleteAccount(),
+      throwsA(isA<AuthFailure>().having((e) => e.kind, 'kind', AuthFailureKind.requestLimit)),
+    );
   });
 }

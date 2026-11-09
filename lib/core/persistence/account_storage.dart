@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:laurum/core/persistence/account_local_data_service.dart';
 import 'package:laurum/core/persistence/account_store.dart';
+import 'package:laurum/core/persistence/app_database.dart';
 import 'package:laurum/core/persistence/app_database_factory.dart';
 import 'package:laurum/core/persistence/drift_local_data_service.dart';
 import 'package:laurum/core/services/transaction_runner.dart';
+import 'package:laurum/core/sync/sync_coordinator.dart';
 import 'package:path_provider/path_provider.dart';
 
 class AccountStorage {
@@ -13,11 +15,15 @@ class AccountStorage {
     this.prepare,
     this.participants,
     this.clock,
+    this.cycle,
   }) : directory = directory ?? getApplicationSupportDirectory;
   final Future<Directory> Function() directory;
   final Future<void> Function(AccountStore)? prepare;
   final Iterable<TransactionParticipant> Function()? participants;
   final DateTime Function()? clock;
+
+  /// Null keeps the B2d gate closed: no timers and no network.
+  final SyncCycle? Function(AppDatabase db, String ownerId)? cycle;
   AccountStore? _store;
   AppDatabaseFactory? _factory;
   Future<void> _tail = Future.value();
@@ -42,6 +48,7 @@ class AccountStorage {
         directory: directory,
         participants: participants,
         clock: clock,
+        cycle: cycle?.call(db, ownerId),
       );
       await prepare?.call(store);
       await store.start();

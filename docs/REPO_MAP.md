@@ -9,7 +9,7 @@ Semua widget sudah dibuat.
 
 ## Dependensi
 
-flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, supabase_flutter, connectivity_plus, flutter_secure_storage, google_sign_in, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner, fake_async
+flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, supabase_flutter, connectivity_plus, flutter_secure_storage, google_sign_in, workmanager, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner, fake_async
 
 ## Berkas (jumlah baris): nama deklarasi
 
@@ -76,10 +76,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/core/persistence/
 - account_local_data_service.dart (27): AccountLocalDataService
 - account_repositories.dart (51): AccountRepositories
-- account_storage.dart (88): AccountStorage
-- account_store.dart (27): AccountStore
+- account_storage.dart (95): AccountStorage
+- account_store.dart (41): AccountStore
 - app_database.dart (54): AppDatabase
-- app_database_factory.dart (59): AppDatabaseFactory
+- app_database_factory.dart (65): AppDatabaseFactory
 - business_records.dart (14): BusinessRecords
 - customer_keys_migration.dart (26):
 - customer_records.dart (25): CustomerRecords
@@ -87,6 +87,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - demo_seed_payloads.dart (35):
 - demo_seeder.dart (63): DemoSeeder
 - device_records.dart (12): DeviceRecords
+- device_registrar.dart (76): DeviceRegistrar
 - drift_change_monitor.dart (22): DriftChangeMonitor
 - drift_local_data_service.dart (50): DriftLocalDataService
 - drift_local_settings_repository.dart (39): DriftLocalSettingsRepository
@@ -117,7 +118,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - secure_session_storage.dart (43): SecureSessionStorage, SecurePkceStorage
 - service_records.dart (21): ServiceRecords
 - sql_timestamp.dart (6):
-- storage_providers.dart (64): storageGateEnabledProvider, accountStorageProvider, activeOwnerProvider, accountStoreProvider, accountChangesProvider
+- storage_providers.dart (74): storageGateEnabledProvider, syncCycleFactoryProvider, accountStorageProvider, activeOwnerProvider, accountStoreProvider, accountChangesProvider
 - supabase_bootstrap.dart (25):
 - sync_bindings.dart (41): syncConnectionMonitorProvider, syncBindingsProvider
 - sync_cursor_records.dart (12): SyncCursorRecords
@@ -154,10 +155,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transactional_memory.dart (10): TransactionalMemory
 
 ### lib/core/sync/
+- background_sync.dart (47):
 - canonical_json.dart (16):
 - connection_monitor.dart (20): ConnectionMonitor, NoopConnectionMonitor
 - connectivity_connection_monitor.dart (37): ConnectivityConnectionMonitor
 - in_memory_outbox_store.dart (104): InMemoryOutboxStore, _Row
+- supabase_sync_cycle.dart (24):
 - supabase_sync_transport.dart (65): SupabaseSyncTransport
 - supabase_sync_wire.dart (77):
 - sync_change.dart (25): SyncChange
@@ -203,7 +206,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/auth/data/
 - auth_error_mapping.dart (25):
 - auth_fixtures.dart (1):
-- auth_gateway.dart (20): AuthGateway, GoogleTokenSource
+- auth_gateway.dart (21): AuthGateway, GoogleTokenSource
 - auth_identity.dart (14): AuthIdentity
 - dummy_account_data.dart (52):
 - dummy_session_overrides.dart (50):
@@ -211,10 +214,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - google_token_source.dart (28): GoogleSignInTokenSource
 - local_auth_service.dart (18):
 - reset_account_drafts.dart (26):
-- supabase_account_actions.dart (46): SupabaseAccountActions
+- supabase_account_actions.dart (56): SupabaseAccountActions
 - supabase_auth_factory.dart (12):
-- supabase_auth_gateway.dart (89): SupabaseAuthGateway
-- supabase_auth_service.dart (108): SupabaseAuthService
+- supabase_auth_gateway.dart (102): SupabaseAuthGateway
+- supabase_auth_service.dart (106): SupabaseAuthService
 
 ### lib/features/auth/pages/
 - account_edit_sheet.dart (33): AccountEditSheet
@@ -599,7 +602,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_details_section.dart (66): TransactionDetailsSection
 
 ### lib/
-- main.dart (35):
+- main.dart (48):
 - main_dummy.dart (101):
 
 ### lib/shared/widgets/atoms/
@@ -711,9 +714,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### test/auth/
 - auth_config_test.dart (87):
 - auth_error_mapping_test.dart (46):
-- fake_auth_gateway.dart (104): FakeAuthGateway, FakeGoogleTokenSource
+- fake_auth_gateway.dart (111): FakeAuthGateway, FakeGoogleTokenSource
 - secure_session_storage_test.dart (38): MemoryTokenStore
-- supabase_auth_service_test.dart (144):
+- supabase_auth_service_test.dart (163):
 
 ### test/
 - auth_onboarding_keyboard_test.dart (33):
@@ -861,6 +864,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - date_time_storage_test.dart (29):
 - demo_seed_atomic_test.dart (45):
 - demo_seeder_test.dart (50):
+- device_registrar_test.dart (48):
 - drift_contracts_test.dart (30):
 - drift_runner_test.dart (55):
 - drift_sync_close_test.dart (22):
@@ -1022,6 +1026,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_bindings_test.dart (59): _FakeMonitor
 - sync_coordinator_test.dart (81): _RecordingPullTransport, _MemoryCursors, _NoopApplier
 - sync_engine_test.dart (93):
+- sync_gate_wiring_test.dart (65): _Cycle
 - sync_pull_runner_test.dart (122): _MemoryCursors, _RecordingApplier, _FakePullTransport, _FailingPullTransport
 - sync_pull_wire_test.dart (100):
 - sync_scheduler_test.dart (136):

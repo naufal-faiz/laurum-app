@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/persistence/account_storage.dart';
 import 'package:laurum/core/persistence/account_store.dart';
+import 'package:laurum/core/persistence/app_database.dart';
 import 'package:laurum/core/persistence/demo_fixture_id.dart';
 import 'package:laurum/core/persistence/demo_seeder.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/services/store_configuration.dart';
 import 'package:laurum/core/services/transaction_runner.dart';
+import 'package:laurum/core/sync/sync_coordinator.dart';
 import 'package:laurum/features/auth/data/reset_account_drafts.dart';
 import 'package:laurum/features/auth/state/account_identity.dart';
 import 'package:laurum/features/auth/state/auth_session.dart';
@@ -16,9 +18,17 @@ import 'package:laurum/features/shell/state/shell_state.dart';
 
 final storageGateEnabledProvider = Provider<bool>((ref) => false);
 final demoOwnerId = demoFixtureId('laurum-demo', 'owner-001');
+
+/// Real sync cycle factory, overridden by main when Supabase Auth exists.
+/// Returning null keeps the B2d gate closed: no timers and no network.
+final syncCycleFactoryProvider = Provider<SyncCycle? Function(AppDatabase, String)>(
+  (ref) =>
+      (db, ownerId) => null,
+);
 final accountStorageProvider = Provider<AccountStorage>((ref) {
   final manager = AccountStorage(
     clock: ref.read(businessClockProvider),
+    cycle: ref.read(syncCycleFactoryProvider),
     participants: () => [
       ref.read(authServiceProvider) as TransactionParticipant,
       ref.read(inMemoryProposalRepositoryProvider.notifier),

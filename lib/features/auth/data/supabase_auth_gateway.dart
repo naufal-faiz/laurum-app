@@ -61,7 +61,20 @@ class SupabaseAuthGateway implements AuthGateway {
 
   @override
   Future<void> signOut() => _auth.signOut();
+
+  @override
+  Future<void> deleteAccount() async {
+    try {
+      await _client.functions.invoke(deleteAccountFunction);
+    } on FunctionException catch (error) {
+      throw AuthException('delete failed', statusCode: '${error.status}');
+    }
+    // The Edge function already removed the account; only the local session is left.
+    await _auth.signOut();
+  }
 }
+
+const deleteAccountFunction = 'delete-account';
 
 String normalizeAuthEmail(String email) => email.trim().toLowerCase();
 

@@ -16,7 +16,6 @@ class SupabaseAuthService
   final AuthGateway _gateway;
   final GoogleTokenSource _google;
   bool _needsSetup = true, _awaitingEmail = false;
-
   AuthIdentity? get _user => _gateway.currentUser;
   @override
   AuthGateway get gateway => _gateway;
@@ -40,17 +39,14 @@ class SupabaseAuthService
   bool get needsBusinessSetup => isSignedIn && _needsSetup;
   @override
   Future<void> completeBusinessSetup() async => _needsSetup = false;
-
   @override
   Future<bool> signInWithPassword(String email, String password) =>
       _login(() => _gateway.signInWithPassword(email, password));
-
   @override
   Future<bool> signInWithGoogle() async => _login(() async {
     final token = await _google.idToken();
     return token == null ? null : await _gateway.signInWithGoogleIdToken(token);
   });
-
   @override
   Future<void> signUp(String email, String password, String name) async {
     try {
@@ -83,7 +79,12 @@ class SupabaseAuthService
   }
 
   @override
-  Future<bool> deleteAccount() async => throw const AuthFailure(AuthFailureKind.unavailable);
+  Future<bool> deleteAccount() async {
+    final deleted = await super.deleteAccount();
+    _awaitingEmail = false;
+    _needsSetup = true;
+    return deleted;
+  }
 
   @override
   void Function() checkpoint() => () {};
@@ -92,17 +93,14 @@ class SupabaseAuthService
   Future<bool> _login(Future<AuthIdentity?> Function() action) async {
     try {
       final user = await action();
-      return user != null && _signedIn(user);
+      if (user == null) return false;
+      _awaitingEmail = false;
+      _needsSetup = true;
+      return user.id.isNotEmpty;
     } on AuthException catch (error) {
       final kind = classifyAuthError(error);
       if (kind == null) return false;
       throw AuthFailure(kind);
     }
-  }
-
-  bool _signedIn(AuthIdentity user) {
-    _awaitingEmail = false;
-    _needsSetup = true;
-    return user.id.isNotEmpty;
   }
 }
