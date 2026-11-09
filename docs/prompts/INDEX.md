@@ -53,6 +53,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | B2a | B2a-sync-contract.md | SyncEngine: kontrak server grup atomik + pull aman | SELESAI (2026-11-06) | Wire schema5; migrasi baru (4 B0 utuh); item mutable sebelum final, grup atomik/fragmen/receipt, retry idempoten, pull tuple UTC6; pgTAP219 PASS, runtime1 PASS, check_all882 hijau. Lihat docs/progress/b2a.md |
 | B2b | B2b-sync-engine.md | Drift v5: metadata grup, receipt/konflik, SyncEngine transport palsu | SELESAI (2026-11-07) | check_all906 hijau; grup per transaksi, legacy eksplisit, fragmen/hash, retry receipt, konflik; kontrak store Drift+InMemory. Lihat docs/progress/b2b.md |
 | B2c | B2c-supabase-adapter.md | Adapter Supabase, push/pull nyata dua akun, pemetaan seluruh tabel | SELESAI (2026-11-07) | check_all928 hijau; push/pull RPC, kursor tuple, 13 tabel, ack/konflik, koordinator push-lalu-pull; tes integrasi dua akun nyata LULUS (pgTAP219 PASS); path foto lokal tidak dikirim dan tidak dihapus pull. Lihat docs/progress/b2c.md |
+| B2d | B2d-sync-scheduler.md | Pemicu sinkron: debounce, retry backoff, koneksi, foreground, periodik | SELESAI (2026-11-09) | check_all hijau; scheduler 2 dtk/15 mnt, gate tertutup tanpa Auth, lastSyncedAt persisten, monitor koneksi nyata di main; workmanager ditunda ke B3. Lihat docs/progress/b2d.md |
 | B3 | (belum ditulis) | Auth nyata, pemulihan, hapus akun | MENUNGGU | Siapkan Google OAuth dan SMTP |
 | B5-B8 | (belum ditulis) | Printer nyata, Play Store, AI, Pro | MENUNGGU | Lihat docs/backend/ROADMAP.md |
 

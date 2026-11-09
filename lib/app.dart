@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/persistence/storage_providers.dart';
+import 'package:laurum/core/persistence/sync_bindings.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 
@@ -13,6 +14,7 @@ class LaurumApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(syncBindingsProvider);
     final storage = ref.watch(storageGateEnabledProvider) ? ref.watch(accountStoreProvider) : null;
     return MaterialApp.router(
       title: 'Laurum',

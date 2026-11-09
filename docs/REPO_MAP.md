@@ -9,12 +9,12 @@ Semua widget sudah dibuat.
 
 ## Dependensi
 
-flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, supabase_flutter, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner
+flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, supabase_flutter, connectivity_plus, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner, fake_async
 
 ## Berkas (jumlah baris): nama deklarasi
 
 ### lib/
-- app.dart (49): LaurumApp
+- app.dart (51): LaurumApp
 
 ### lib/core/domain/
 - business_profile.dart (50): BusinessProfile
@@ -95,7 +95,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - drift_sync_cursor_store.dart (38): DriftSyncCursorStore
 - drift_sync_outbox_store.dart (99): DriftSyncOutboxStore
 - drift_sync_remote_applier.dart (86): DriftSyncRemoteApplier
-- drift_sync_service.dart (60): DriftSyncService
+- drift_sync_service.dart (105): DriftSyncService
 - drift_transaction_runner.dart (79): DriftTransactionRunner, _DriftScope
 - entitlement_records.dart (16): EntitlementRecords
 - expense_category_records.dart (10): ExpenseCategoryRecords
@@ -117,8 +117,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_records.dart (21): ServiceRecords
 - sql_timestamp.dart (6):
 - storage_providers.dart (64): storageGateEnabledProvider, accountStorageProvider, activeOwnerProvider, accountStoreProvider, accountChangesProvider
+- sync_bindings.dart (41): syncConnectionMonitorProvider, syncBindingsProvider
 - sync_cursor_records.dart (12): SyncCursorRecords
 - sync_groups_migration.dart (18):
+- sync_last_at_store.dart (19): SyncLastAtStore
+- sync_outbox_counter.dart (19): SyncOutboxCounter
 
 ### lib/core/services/
 - auth_failure.dart (8): AuthFailureKind, AuthFailure
@@ -131,6 +134,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - fake_auth_accounts.dart (102): FakeAuthAccounts
 - fake_auth_service.dart (87): FakeAuthService
 - fake_password_auth.dart (76): FakePasswordAuth
+- fake_sync_service.dart (103): FakeSyncService
 - id_generator_provider.dart (4): idGeneratorProvider
 - in_memory_local_settings_repository.dart (26): InMemoryLocalSettingsRepository
 - in_memory_transaction_runner.dart (55): InMemoryTransactionRunner, _TransactionScope
@@ -141,17 +145,19 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - repository_providers.dart (51): businessRepositoryProvider, receiptSettingsRepositoryProvider, customerRepositoryProvider, serviceRepositoryProvider, orderRepositoryProvider, savingsRepositoryProvider, expenseRepositoryProvider, proposalRepositoryProvider, reportRepositoryProvider, transactionRunnerProvider
 - service_providers.dart (41): printServiceProvider, externalLauncherProvider, contactSourceProvider, photoPickerProvider, exportServiceProvider, authServiceProvider, localDataServiceProvider, syncServiceProvider
 - store_configuration.dart (10):
-- sync_service.dart (93): SyncServiceStatus, SyncService, FakeSyncService
+- sync_service.dart (34): SyncServiceStatus, SyncService
 - transaction_runner.dart (8): TransactionRunner, TransactionParticipant
 - transactional_memory.dart (10): TransactionalMemory
 
 ### lib/core/sync/
 - canonical_json.dart (16):
+- connection_monitor.dart (20): ConnectionMonitor, NoopConnectionMonitor
+- connectivity_connection_monitor.dart (37): ConnectivityConnectionMonitor
 - in_memory_outbox_store.dart (104): InMemoryOutboxStore, _Row
 - supabase_sync_transport.dart (65): SupabaseSyncTransport
 - supabase_sync_wire.dart (77):
 - sync_change.dart (25): SyncChange
-- sync_coordinator.dart (24): SyncCycleResult, SyncCoordinator
+- sync_coordinator.dart (31): SyncCycleResult, SyncCycle, SyncCoordinator
 - sync_cursor_store.dart (6): SyncCursorStore
 - sync_engine.dart (108): SyncEngine
 - sync_group.dart (7): SyncGroup
@@ -167,9 +173,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_push_result.dart (47): SyncGroupStatus, SyncChangeResult, SyncPushResult
 - sync_remote_applier.dart (3): SyncRemoteApplier
 - sync_run_result.dart (15): SyncRunStatus, SyncRunResult
+- sync_scheduler.dart (108): SyncScheduler
 - sync_table_names.dart (34):
+- sync_timing.dart (13):
 - sync_transport.dart (6): SyncTransport
 - sync_transport_exception.dart (7): SyncTransportException
+- sync_trigger.dart (73): SyncTrigger
 
 ### lib/core/theme/
 - app_borders.dart (7): AppBorders
@@ -578,8 +587,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_details_section.dart (66): TransactionDetailsSection
 
 ### lib/
-- main.dart (22):
-- main_dummy.dart (98):
+- main.dart (26):
+- main_dummy.dart (101):
 
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
@@ -837,6 +846,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - drift_sync_cursor_store_test.dart (44):
 - drift_sync_outbox_store_test.dart (123):
 - drift_sync_remote_applier_test.dart (120):
+- drift_sync_service_test.dart (127): _Cycle
 - expense_atomic_test.dart (89):
 - expense_contracts_test.dart (20):
 - expense_photos_test.dart (82):
@@ -988,10 +998,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - fake_sync_transport.dart (62): FakeSyncTransport
 - in_memory_outbox_store_test.dart (13):
 - supabase_sync_local_test.dart (281):
+- sync_bindings_test.dart (59): _FakeMonitor
 - sync_coordinator_test.dart (81): _RecordingPullTransport, _MemoryCursors, _NoopApplier
 - sync_engine_test.dart (93):
 - sync_pull_runner_test.dart (122): _MemoryCursors, _RecordingApplier, _FakePullTransport, _FailingPullTransport
 - sync_pull_wire_test.dart (100):
+- sync_scheduler_test.dart (136):
 - sync_store_contract.dart (93):
 
 ### test/

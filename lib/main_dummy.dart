@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/app.dart';
+import 'package:laurum/core/persistence/sync_bindings.dart';
 import 'package:laurum/core/services/auth_service.dart';
 import 'package:laurum/core/services/contact_source.dart';
 import 'package:laurum/core/services/repository_providers.dart';
@@ -92,7 +93,9 @@ final dummyRepositoryOverrides = dummyOverrides();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('id_ID');
-  final container = ProviderContainer(overrides: dummyRepositoryOverrides);
+  final container = ProviderContainer(
+    overrides: [...dummyRepositoryOverrides, realConnectionMonitor()],
+  );
   final app = LaurumApp(router: createAppRouter(container: container));
   runApp(UncontrolledProviderScope(container: container, child: app));
 }

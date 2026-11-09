@@ -2,11 +2,13 @@
 Diperbarui: 2026-11-09 | Cabang dev2backend
 
 ## Posisi
-UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, dan B2c SELESAI**; B2d belum ditulis. B2
-disetujui pengguna 6 Nov 2026. Bukti B2a/B2b/B2c: docs/progress/b2a.md, b2b.md, b2c.md.
+UI100/R0-R10, BP0, B1a-f, B0, **B2a, B2b, B2c, dan B2d SELESAI**; B2e+ dan B3 menunggu.
+B2 disetujui pengguna 6 Nov 2026. Bukti B2a/B2b/B2c/B2d: docs/progress/b2a.md, b2b.md,
+b2c.md, b2d.md.
 Bukti B1f: docs/progress/b1f.md dan b1f-benchmark.json; tanpa push/merge.
 B0 SELESAI: docs/prompts/B0-supabase.md; rencana docs/plans/B0-supabase-lokal.md.
-Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md, b2c.md dan supabase/README.md.
+Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md, b2c.md, b2d.md dan
+supabase/README.md.
 
 ## Aset merek dan ikon launcher (9 Nov 2026)
 - `assets/icons/` didaftarkan di pubspec; `AppSvgs` memuat `google`, `facebook`,
@@ -23,6 +25,28 @@ Berkas/bukti/selisih rinci: docs/progress/b0.md, b2a.md, b2b.md, b2c.md dan supa
 - Golden yang berubah karena ikon merek sudah diperbarui: customer_row, auth_signin(+error),
   r10_signin(+error,320_2x), r4_order_detail, order_detail_actions_1x.
 
+
+## Hasil B2d (9 Nov 2026)
+- Mesin pemicu murni: debounce 2 dtk, backoff eksponensial 2 dtk → 15 mnt, periodik
+  15 mnt saat aplikasi aktif, satu siklus pada satu waktu; offline menghentikan timer
+  dan koneksi pulih langsung mencoba lagi. `triggerNow` meneruskan galat ke aksi manual.
+- `SyncCycle` (dipenuhi `SyncCoordinator`) disuntikkan ke `DriftSyncService`; selama
+  gerbang B3 belum ada (Auth/Supabase belum diinisialisasi) tidak ada timer/jaringan,
+  `syncNow` hanya menghitung ulang outbox.
+- `ConnectionMonitor`/`ConnectivityConnectionMonitor` (connectivity_plus ^7.3.2) memberi
+  nilai awal lalu perubahan; default `NoopConnectionMonitor` senyap agar tes tidak
+  menyentuh plugin. `syncBindingsProvider` menyambungkan koneksi + `AppLifecycleListener`
+  (resume memicu sync) dan dipasang di akar aplikasi; main memakai monitor nyata.
+- `DriftSyncService` menyimpan `sync_last_at` di `local_settings` (aturan 20) dan status
+  offline/gagal/tersimpan/menyimpan berasal dari trigger + jumlah outbox.
+- `workmanager` (sinkron latar isolate) sengaja ditunda ke B3: butuh sesi Auth,
+  inisialisasi Supabase, dan bootstrap database di isolate.
+- check_all HIJAU 943 tes (+14 dari B2c), 1 tes integrasi dilewati tanpa env lokal,
+  archOK, REPO_MAP953, exit0. Tes baru: scheduler 7, binding 1, Drift service 6.
+  Tanpa UI baru, cloud, push, atau merge.
+- LANGKAH BERIKUTNYA: tinjauan pengguna, lalu B3 (Auth nyata). Butuh kredensial Google
+  OAuth, SMTP, dan URL/kunci publik Supabase lewat `--dart-define`. Jangan mulai B3
+  tanpa itu.
 
 ## Hasil B2c (7 Nov 2026)
 - Adapter `SupabaseSyncTransport` (push+pull RPC), parsing wire, dan pemetaan galat aman.
