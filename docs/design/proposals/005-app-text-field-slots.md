@@ -1,7 +1,7 @@
 # 005 - AppTextField: parameter `leadingIcon`, `trailing`, `dense`
 
-**Status:** diterapkan sementara untuk redesign 29-masuk-google; menunggu persetujuan
-pengguna (aturan 13 / UI-13: perubahan API widget registry).
+**Status:** DISETUJUI pengguna 9 Nov 2026 — perubahan tampilan/API atom diizinkan
+selama tidak mengubah logika sistem. Diterapkan untuk redesign 29-masuk-google.
 
 ## Alasan
 
@@ -33,4 +33,5 @@ Semua pemakaian lama tetap identik.
 
 ## Persetujuan
 
-- [ ] Setujui penambahan 3 parameter opsional ini ke `AppTextField`
+- [x] Disetujui pengguna 9 Nov 2026: perubahan tampilan/API atom diizinkan selama
+  tidak mengubah logika sistem (state, data, alur tetap sama).

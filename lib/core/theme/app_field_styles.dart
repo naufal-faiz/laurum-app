@@ -7,7 +7,7 @@ import 'package:laurum/core/theme/app_text_styles.dart';
 
 /// Field metrics for the auth redesign (frame LAURUM · Masuk): 48 dp, radius 12.
 abstract final class AppFieldStyles {
-  static const padding = EdgeInsets.only(right: 10, top: 15, bottom: 15);
+  static const padding = EdgeInsets.only(right: 10, top: 13, bottom: 13);
   static const border = OutlineInputBorder(
     borderRadius: AppRadius.authField,
     borderSide: BorderSide(color: AppColors.authFieldBorder),

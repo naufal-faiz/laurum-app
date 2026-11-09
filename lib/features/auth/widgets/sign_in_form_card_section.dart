@@ -3,11 +3,11 @@ import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_shadows.dart';
 import 'package:laurum/features/auth/widgets/auth_email_field_section.dart';
+import 'package:laurum/features/auth/widgets/auth_or_section.dart';
 import 'package:laurum/features/auth/widgets/auth_password_field_section.dart';
-import 'package:laurum/features/auth/widgets/sign_in_or_section.dart';
+import 'package:laurum/features/auth/widgets/auth_submit_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_signup_link_section.dart';
-import 'package:laurum/features/auth/widgets/sign_in_submit_section.dart';
 
 /// White 342x348 card that overlaps the hero of frame `LAURUM · Masuk`.
 class SignInFormCardSection extends StatelessWidget {
@@ -63,9 +63,9 @@ class SignInFormCardSection extends StatelessWidget {
             onForgot: onForgot,
           ),
           const SizedBox(height: 12),
-          SignInSubmitSection(busy: busy, onSubmit: onSubmit),
+          AuthSubmitSection(busy: busy, onSubmit: onSubmit),
           const SizedBox(height: 12),
-          const SignInOrSection(),
+          const AuthOrSection(),
           const SizedBox(height: 12),
           SignInSection(
             busy: busy,

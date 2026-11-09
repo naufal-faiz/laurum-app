@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:laurum/core/services/service_providers.dart';
 
 import 'antrean_test_host.dart';
@@ -18,10 +19,12 @@ void main() {
     await fillAuthField(tester, 'Password', 'NewPass123!');
     await fillAuthField(tester, 'Konfirmasi password', 'NewPass123!');
     expect(tester.widget<TextField>(authField('Password')).obscureText, isTrue);
-    await tapAuthButton(tester, 'Tampilkan password');
+    await tester.tap(find.byIcon(Ionicons.eyeOutline).first);
+    await tester.pumpAndSettle();
     expect(tester.widget<TextField>(authField('Password')).obscureText, isFalse);
     expect(tester.widget<TextField>(authField('Password')).controller!.text, 'NewPass123!');
-    await tapAuthButton(tester, 'Sembunyikan password');
+    await tester.tap(find.byIcon(Ionicons.eyeOffOutline).first);
+    await tester.pumpAndSettle();
     await tapAuthButton(tester, 'Daftar');
     expect(host.router.routeInformationProvider.value.uri.path, '/cek-email');
     expect(scope.read(authServiceProvider).isSignedIn, isFalse);

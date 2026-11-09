@@ -5,10 +5,10 @@ import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/features/auth/state/auth_form.dart';
 import 'package:laurum/features/auth/state/auth_form_view.dart';
 import 'package:laurum/features/auth/state/auth_session.dart';
+import 'package:laurum/features/auth/widgets/auth_trust_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_feature_bar_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_form_card_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_hero_section.dart';
-import 'package:laurum/features/auth/widgets/sign_in_trust_section.dart';
 
 class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});
@@ -59,7 +59,7 @@ class SignInPage extends ConsumerWidget {
                 const SizedBox(height: 18),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24),
-                  child: SignInTrustSection(),
+                  child: AuthTrustSection(),
                 ),
               ],
             ),

@@ -72,10 +72,11 @@ Sumber tunggal nilai desain. Semua nilai di sini hidup HANYA di `lib/core/theme/
 ## Tipografi auth (`AppAuthTextStyles`, Inter)
 
 Domain font `Inter` (`assets/fonts/Inter-Regular.otf`, `Inter-SemiBold.otf`,
-`Inter-Bold.otf`; bobot 400/600/700). Token: `heroTitle` 26/700, `heroBrand` 15/700,
-`heroBrandSub` 7/600, `heroSub` 10/400, `label` 8.5/600, `input` 10.5/400,
-`button` 11/600, `body` 9/400, `bodyStrong` 9/600, `meta` 8.5/400,
-`google` 10.5/600, `googleMark` 12/700, `chip` 8/600.
+`Inter-Bold.otf`; bobot 400/600/700). Revisi UX 9 Nov 2026: ukuran dinaikkan dari
+nilai frame agar ramah dibaca, hierarki tetap.
+Token: `heroTitle` 28/700, `heroBrand` 16/700, `heroBrandSub` 9/600, `heroSub` 13/400,
+`label` 12/600, `input` 14/400, `button` 15/600, `body` 12/400, `bodyStrong` 12/600,
+`meta` 11/400, `google` 14/600, `chip` 10.5/600.
 
 ## Bayangan (`AppShadows`)
 

@@ -100,7 +100,7 @@ class _AppTextFieldState extends State<AppTextField> {
       inputFormatters: widget.inputFormatters,
       onChanged: widget.onChanged,
       onSubmitted: widget.onSubmitted,
-      scrollPadding: widget.dense ? const EdgeInsets.only(bottom: 240) : const EdgeInsets.all(20),
+      scrollPadding: widget.dense ? const EdgeInsets.only(bottom: 330) : const EdgeInsets.all(20),
       style: AppFieldStyles.textStyle(dense: widget.dense, enabled: widget.enabled),
       cursorColor: AppColors.primary,
       decoration: _decoration,

@@ -1,93 +1,63 @@
 # 31 - Daftar dan Cek email
 Rute: /daftar, /cek-email. Fase: R10. Frame Figma: `LAURUM · Daftar` (ID: 4294968748).
-Template: FormScaffold.
+Template: hero gradient 230 + kartu putih mengambang (Stack + SingleChildScrollView).
 
 ## Paritas redesign (UI-7)
 
 | Butir | Jenis | Centang | Catatan |
 |---|---|---|---|
-| `authFormProvider(signUp).name` | Data | | Dibaca → AuthIdentitySection |
-| `authFormProvider(signUp).email` | Data | | Dibaca → AuthIdentitySection |
-| `authFormProvider(signUp).errors` | Data | | Validasi field |
-| `authFormProvider(signUp).visible` | Data | | Visibilitas password |
-| `authFormProvider(signUp).busy` | Data | | Semua aksi disabled |
-| `authFormProvider(signUp).error` | Data | | BannerMessage di footer |
-| `controller.name(v)` | Aksi | | onChanged field Nama |
-| `controller.email(v)` | Aksi | | onChanged field Email |
-| `controller.secret(password, v)` | Aksi | | onChanged field Password |
-| `controller.secret(confirmation, v)` | Aksi | | onChanged field Konfirmasi |
-| `controller.toggleVisible()` | Aksi | | Tombol Tampilkan/Sembunyikan |
-| `controller.submit()` | Aksi | | Tombol Daftar + navigasi /cek-email |
-| `context.go('/masuk')` | Nav | | onBack + link "Sudah punya akun? Masuk" |
-| `context.go('/cek-email')` | Nav | | Setelah submit sukses |
-| Keadaan normal (form kosong) | State | | |
-| Keadaan busy/loading | State | | Tombol Daftar disable |
-| Keadaan error validasi (Nama/Email/Pw/Konfirmasi) | State | | Error di bawah field |
-| Keadaan error operasi | State | | BannerMessage footer |
-| Keadaan Cek email (setelah submit) | State | | Instruksi generik, tidak sebut email |
+| `authFormProvider(signUp).name` | Data | ✅ | AuthNameFieldSection |
+| `authFormProvider(signUp).email` | Data | ✅ | AuthEmailFieldSection |
+| `authFormProvider(signUp).errors` | Data | ✅ | errors name/email/password/confirmation |
+| `authFormProvider(signUp).visible` | Data | ✅ | Kedua field password |
+| `authFormProvider(signUp).busy` | Data | ✅ | Semua field/tombol disabled |
+| `authFormProvider(signUp).error` | Data | ✅ | BannerMessage di dalam kartu |
+| `controller.name(v)` | Aksi | ✅ | onChanged field Nama |
+| `controller.email(v)` | Aksi | ✅ | onChanged field Email |
+| `controller.secret(password, v)` | Aksi | ✅ | onChanged field Password |
+| `controller.secret(confirmation, v)` | Aksi | ✅ | onChanged field Konfirmasi |
+| `controller.toggleVisible()` | Aksi | ✅ | Ikon mata per field |
+| `controller.submit()` | Aksi | ✅ | Tombol Daftar + navigasi /cek-email |
+| `controller.clearError()` + `signIn()` | Aksi | ✅ | Google (disetujui pengguna) |
+| `context.go('/masuk')` | Nav | ✅ | Tombol kembali di hero + link Masuk |
+| `context.go('/cek-email')` | Nav | ✅ | Setelah submit sukses |
+| Keadaan normal (form kosong) | State | ✅ | golden r10_signup |
+| Keadaan busy/loading | State | ✅ | Daftar disabled + status Google |
+| Keadaan error validasi | State | ✅ | Error di bawah field |
+| Keadaan error operasi | State | ✅ | BannerMessage di kartu |
+| Keadaan Cek email (setelah submit) | State | ✅ | Halaman /cek-email tidak diubah |
 
-## Komposisi (desain lama)
-- AppBarSub Daftar, kembali ke Masuk.
-- AuthIdentitySection: LabeledField Nama/Email, AppTextField.
-- AuthPasswordsSection: AuthSecretFieldSection Password/Konfirmasi password,
-  AppTextField obscure default, AppButton Tampilkan/Sembunyikan password.
-- Footer AppButton Daftar; BannerMessage error operasi pada summary footer.
-- Cek email: AppText instruksi generik, AppButton Lanjut, Kembali ke Masuk,
-  BannerMessage gagal/rate limit. Tidak menampilkan informasi email sudah terdaftar.
+## Komposisi baru (Figma → tata letak, SUDAH KODE)
+Nilai dari FigCraft (Hero 4294968749, Kartu Daftar 4294968764, Trust 4294968803),
+dengan skala font dinaikkan (revisi UX 9 Nov 2026).
 
-## Komposisi baru (Figma → tata letak, belum kode)
-Frame `LAURUM · Daftar` (390x844 dp) memiliki dua zona utama:
+**Hero (390x230, sudut bawah radius 32):**
+- Gradient `#2E7FD8 → #1B5FA3`, ornamen ellipse putih 210 (10%) di (250,-90) dan
+  110 (8%) di (320,120).
+- Tombol kembali 36x36 lingkaran `#4A90DA` border `#8FBCEB` di (24,56), ikon panah
+  putih 20 (`AppSvg` cursor-back di-`ColorFiltered` putih).
+- "Daftar" Inter 28/700 putih di (24,110); sub 13/400 #DCEBF9 di (24,148).
+- Tidak ada logo merek dan ilustrasi baju (sesuai frame).
 
-**Hero (atas, 390xhug, sudut bawah radius 32):**
-- Latar: gradient biru sama dengan layar Masuk (token belum ada).
-- Ornamen dekoratif: 2 ellipsis putih opacity (sama dengan Masuk).
-- Tombol kembali: ikon panah kiri (putih, 24x24) di kiri atas.
-- Judul "Daftar" (Inter, putih, besar).
-- Sub "Buat akun untuk mulai mengelola usaha" (Inter, #DCEBF9).
-- (Tidak ada logo Laurum di hero Daftar, tidak ada ilustrasi baju).
+**Kartu Daftar (342, x=24, y=200, radius 24, padding 18, gap 12, shadow auth):**
+- Field Nama (ikon user, placeholder "Nama lengkap kamu").
+- Field Email (ikon mail, placeholder "nama@email.com").
+- Field Password (ikon gembok, hint "Minimal 8 karakter", ikon mata).
+- Field Konfirmasi password (ikon gembok, hint "Ulangi password", ikon mata).
+- Tombol Daftar 50 radius 14 `#2675C9` + ikon centang.
+- Pemisah "atau", tombol Google (aset SVG Google), "Sudah punya akun? Masuk".
+- **Persetujuan Syarat & Ketentuan**: TIDAK dibuat (proposal 004, pengingat 95%).
 
-**Kartu Daftar (342xhug, x=24, radius 24, bayangan biru tipis):**
-- Padding: 18 dp semua sisi, gap antar elemen 12 dp.
-- Field Nama: label "Nama" (#7C8DA3) + input box (radius 12, border #DDE3E8, h=48,
-  ikon user kiri 16x16, placeholder "Nama lengkap kamu" Inter 10.5 #B7C2CF).
-- Field Email: label "Email" + input box (sama dengan Masuk).
-- Field Password: label "Password" + input box (ikon gembok kiri, tombol mata kanan
-  28x28, placeholder "Minimal 8 karakter").
-- Field Konfirmasi password: label "Konfirmasi password" + input box (ikon gembok kiri,
-  tombol mata kanan 28x28, placeholder "Ulangi password").
-- **Persetujuan Syarat & Ketentuan**: Checkbox + "Saya setuju dengan" + "Syarat & Ketentuan"
-  (link, #2675C9). [BARU di Figma — tidak ada di PRD/state. Jangan dibuat. Dicatat UI-9]
-- Tombol Daftar: lebar penuh, h~50, radius 14, fill #2675C9, teks "Daftar" + ikon panah.
-- Pemisah "atau" + Tombol Google: sama persis dengan layar Masuk.
-- Ke Masuk: "Sudah punya akun?" + "Masuk" (#2675C9) centered.
+**Bawah kartu:** trust statis "Data kamu aman & terenkripsi".
 
-**Bawah kartu:**
-- Trust bar: "Data kamu aman & terenkripsi" #7C8DA3. [JANGAN dibuat — UI-9]
-- Home indicator. [Bagian OS]
-
-## Selisih desain
-1. **Hero baru** — Sama dengan layar Masuk: zona hero gradient biru besar.
-   Tidak ada AppBarSub. Tombol kembali menyatu di dalam hero.
-   **BERHENTI dan tanya sebelum implementasi** (UI-20).
-2. **Kartu putih mengambang** — Sama pola dengan layar Masuk.
-3. **Tombol mata di dalam field** — Tombol 28x28 di ujung kanan input, bukan AppButton
-   terpisah di bawah field. Perubahan tata letak AuthPasswordsSection (1 baris per field).
-4. **Persetujuan Syarat & Ketentuan** (Checkbox + link) — BARU di Figma, tidak ada di
-   PRD/state/router. Jangan dibuat (UI-9).
-5. **Tombol Google di halaman Daftar** — Figma menyertakan tombol Google juga di Daftar.
-   Saat ini SignUpPage tidak memiliki Google sign-in. Butuh PRD sebelum menambahkan.
-   Dicatat (UI-9).
-6. **Trust bar** — BARU di Figma, tidak ada di PRD (UI-9).
-
-## Token/ikon/font yang belum punya padanan
-| Elemen Figma | Nilai | Status |
-|---|---|---|
-| Latar hero (gradient) | biru diagonal | ❌ Sama dengan Masuk. Proposal diperlukan. |
-| Warna tagline hero | #DCEBF9 | ❌ Belum ada token. |
-| Shadow kartu | rgba(biru, 12.5%) | ❌ Belum ada token shadow auth card. |
-| Font hero | Inter | ❌ Proposal font baru wajib (aturan 10, UI-14). |
-| Ikon user (Nama) | VECTOR (outline) | ⚠️ Periksa padanan di AppIcons (Ionicons). |
-| Tombol mata dalam field | VECTOR (eye outline) | ⚠️ AppIcons.visible sudah ada — cocok. |
+## Selisih desain (status akhir)
+1. Hero 230 + kartu mengambang diterapkan; tombol kembali menyatu di hero.
+2. Persetujuan Syarat & Ketentuan ditunda sampai aplikasi 95% (proposal 004).
+3. Tombol Google ditambahkan ke Daftar atas izin pengguna; aksinya `signIn()` yang
+   sudah ada (tanpa state baru). Bila Google dipakai, akun langsung masuk.
+4. Ikon mata tanpa kotak (revisi UX): eye = tersembunyi, eye-off = terlihat.
+5. Trust bar dibuat sebagai teks statis (izin pengguna).
+6. Ukuran font dinaikkan dari frame (label 12, input 14, tombol 15, body 12).
 
 ## Data dan provider
 AuthService, authSessionProvider, authFormProvider(signUp). Nama/email adalah state
@@ -96,7 +66,7 @@ Data baru berasal dari input pengguna; tidak menambah atau mengganti fixture DAT
 
 ## Interaksi
 Nama wajib, email valid, password minimal 8 karakter, konfirmasi harus sama.
-Kesalahan Indonesia di bawah field; error service aman di footer. Daftar dinonaktifkan
+Kesalahan Indonesia di bawah field; error service aman di kartu. Daftar dinonaktifkan
 selama menyimpan; klik ganda ditolak. Sukses maupun email duplikat membuka Cek email
 dengan instruksi sama. Pendaftaran tidak langsung mengautentikasi.
 Lanjut pada dummy menandai akun baru terverifikasi dan membuka onboarding Info Usaha,
@@ -108,12 +78,14 @@ Kembali meninggalkan form dan membuang input password serta visibilitasnya.
 Kosong, validasi nama/email/password/konfirmasi, busy, error, Cek email, onboarding.
 Tidak memformat ulang password. Email dinormalisasi hanya saat service dipanggil.
 Tes daftar sampai Antrean, duplikat tidak mengambil alih akun, field reset setelah
-navigasi, semua field/tombol di atas keyboard 300 dp, 320 px/teks 2x dan golden.
-Selisih .pen: layar baru sesuai R10, hanya memakai registry dan Section sefitur.
-Tombol Lanjut hanya simulasi; produksi harus memverifikasi tautan/email dari server.
+navigasi, semua field/tombol di atas keyboard 300 dp (scrollPadding dense 330),
+320 px/teks 2x dan golden. Tombol Lanjut hanya simulasi.
 Android/iOS perangkat dan pengiriman email nyata belum diuji.
 
-## Audit penyelesaian UI - prompt 100
-Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
-State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
-APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
+## Tes yang diubah (UI-18)
+- `test/r10_registration_flow_test.dart` — tombol Tampilkan/Sembunyikan diganti ketukan
+  ikon mata (`Ionicons.eyeOutline`/`eyeOffOutline`); assertion obscureText tetap.
+- `test/r10_signup_validation_test.dart` — sama, ketukan ikon mata.
+- `test/r10_auth_keyboard_test.dart` — finder simpan `/daftar` memakai `AuthSubmitSection`.
+- `test/r10_signup_sections_test.dart` — tes widget baru untuk Section daftar.
+- Golden `r10_signup` (390/320/2x) diperbarui.

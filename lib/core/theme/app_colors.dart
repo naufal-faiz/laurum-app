@@ -48,6 +48,7 @@ abstract final class AppColors {
   static const authDivider = Color(0xFFE7EDF4);
   static const authChipBg = Color(0xFFF4F6F8);
   static const authEyeBorder = Color(0xFFE9EEF4);
+  static const authBackBorder = Color(0xFF8FBCEB);
   static const authGoogleBlue = Color(0xFF4285F4);
   static const authGoogleBorder = Color(0xFFE3E9F0);
 }

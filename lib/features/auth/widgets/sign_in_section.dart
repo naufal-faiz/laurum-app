@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:laurum/core/icons/app_svgs.dart';
 import 'package:laurum/core/theme/app_auth_text_styles.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_shadows.dart';
+import 'package:laurum/shared/widgets/atoms/app_svg.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 
-/// Google action of frame `LAURUM · Masuk`: white 48 dp button with G mark,
-/// plus the process/restoring status text and the safe error banner.
+/// Google action of frame `LAURUM · Masuk`: white 48 dp button with the Google
+/// brand SVG, plus the process/restoring status text and the safe error banner.
 class SignInSection extends StatelessWidget {
   const SignInSection({
     required this.busy,
@@ -55,26 +57,8 @@ class SignInSection extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: AppColors.surface,
-                          borderRadius: AppRadius.authLogo,
-                          border: Border.all(color: AppColors.authGoogleBorder),
-                        ),
-                        child: SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: Center(
-                            child: Text(
-                              'G',
-                              style: AppAuthTextStyles.googleMark.copyWith(
-                                color: AppColors.authGoogleBlue,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 9),
+                      const AppSvg(AppSvgs.google, size: 20),
+                      const SizedBox(width: 10),
                       Flexible(
                         child: Text(
                           'Lanjutkan dengan Google',

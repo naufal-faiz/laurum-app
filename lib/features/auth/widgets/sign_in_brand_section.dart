@@ -58,7 +58,7 @@ class SignInBrandSection extends StatelessWidget {
         ),
         Positioned(
           left: 24,
-          top: 174,
+          top: 178,
           child: Text(
             'Kasir laundry untuk usaha rumahan',
             style: AppAuthTextStyles.heroSub.copyWith(color: AppColors.authHeroTagline),

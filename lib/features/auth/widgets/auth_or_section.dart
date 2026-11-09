@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_auth_text_styles.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 
-/// "atau" separator of frame `LAURUM · Masuk`: line, label, line.
-class SignInOrSection extends StatelessWidget {
-  const SignInOrSection({super.key});
+/// "atau" separator of the auth frames: line, label, line.
+class AuthOrSection extends StatelessWidget {
+  const AuthOrSection({super.key});
 
   @override
   Widget build(BuildContext context) {

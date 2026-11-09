@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:ionicons/ionicons.dart';
 
 import 'antrean_test_host.dart';
 import 'r10_test_host.dart';
@@ -24,7 +25,8 @@ void main() {
   testWidgets('leaving a password form discards secret fields and visibility', (tester) async {
     final host = await pumpAntrean(tester, container: r10Scope(), location: '/daftar');
     await fillAuthField(tester, 'Password', 'Temporary123!');
-    await tapAuthButton(tester, 'Tampilkan password');
+    await tester.tap(find.byIcon(Ionicons.eyeOutline).first);
+    await tester.pumpAndSettle();
     host.router.go('/masuk');
     await tester.pumpAndSettle();
     host.router.go('/daftar');

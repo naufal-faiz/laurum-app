@@ -5,11 +5,19 @@ import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 
-/// Blue "Masuk" button of frame `LAURUM · Masuk` (50 dp, radius 14, arrow).
-class SignInSubmitSection extends StatelessWidget {
-  const SignInSubmitSection({required this.busy, required this.onSubmit, super.key});
+/// Blue primary button of the auth frames (50 dp, radius 14, trailing icon).
+class AuthSubmitSection extends StatelessWidget {
+  const AuthSubmitSection({
+    required this.busy,
+    required this.onSubmit,
+    this.label = 'Masuk',
+    this.icon = AppIcons.arrowForward,
+    super.key,
+  });
 
   final bool busy;
+  final String label;
+  final AppIcons icon;
   final VoidCallback onSubmit;
 
   @override
@@ -27,12 +35,9 @@ class SignInSubmitSection extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Masuk',
-                  style: AppAuthTextStyles.button.copyWith(color: foreground),
-                ),
+                Text(label, style: AppAuthTextStyles.button.copyWith(color: foreground)),
                 const SizedBox(width: 8),
-                AppIcon(AppIcons.arrowForward, size: 14, color: foreground),
+                AppIcon(icon, size: 16, color: foreground),
               ],
             ),
           ),

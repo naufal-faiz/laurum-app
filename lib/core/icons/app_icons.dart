@@ -40,6 +40,7 @@ enum AppIcons {
   arrowForward(Ionicons.arrowForwardOutline),
   more(Ionicons.ellipsisVertical),
   visible(Ionicons.eyeOutline),
+  visibleOff(Ionicons.eyeOffOutline),
   mail(Ionicons.mailOutline),
   qrCode(Ionicons.qrCodeOutline),
   offline(Ionicons.cloudOfflineOutline),

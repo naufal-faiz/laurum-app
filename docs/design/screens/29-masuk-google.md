@@ -76,6 +76,14 @@ Frame `LAURUM · Masuk` (390x844 dp, latar putih). Nilai diambil 1:1 dari FigCra
   Inter 8.5 #7C8DA3. Teks statis.
 - Home indicator: bagian OS.
 
+## Revisi UX (9 Nov 2026, izin pengguna)
+- Ukuran font dinaikkan: hero 28/16/13, label 12, input 14, tombol 15, body 12,
+  meta 11, chip 10.5 (nilai frame 26/15/10, 8.5, 10.5, 11, 9, 8.5, 8 terlalu kecil).
+  Hierarki dan tata letak frame tetap; hanya skala baca yang naik.
+- Kotak tombol mata dihapus; kini ikon mata polos 22 dengan area sentuh 32.
+  Ikon berubah keadaan: `eye` saat password tersembunyi, `eye-off` saat terlihat.
+- Huruf "G" diganti `AppSvg(AppSvgs.google)` (aset `assets/icons/google.svg`).
+
 ## Selisih desain (status akhir)
 1. **Tombol kembali dihapus** — frame `LAURUM · Masuk` tidak punya back button.
    AppBarSub lama diganti hero; tidak ada elemen yang menabrak logo.

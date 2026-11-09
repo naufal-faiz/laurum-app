@@ -35,7 +35,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `28-hubungkan-whatsapp.md` (28 - Hubungkan WhatsApp) | | Menunggu | |
 | `29-masuk-google.md` (29 - Masuk email/password dan Google) | `LAURUM · Masuk` (ID: 4294968692) | Selesai (kode) | Hero + kartu + fitur bar statis; back button dihapus; T&C ditunda |
 | `30-sinkronisasi.md` (30 - Sinkronisasi) | | Menunggu | |
-| `31-daftar.md` (31 - Daftar dan Cek email) | `LAURUM · Daftar` (ID: 4294968748) | Pemetaan selesai | Lihat selisih di spec layar |
+| `31-daftar.md` (31 - Daftar dan Cek email) | `LAURUM · Daftar` (ID: 4294968748) | Selesai (kode) | Hero 230 + kartu; Google ditambahkan; T&C ditunda |
 | `32-lupa-password.md` (32 - Lupa password) | | Menunggu | |
 | `33-kelola-akun.md` (33 - Kelola akun) | | Menunggu | |
 
