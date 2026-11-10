@@ -9,6 +9,7 @@ import 'package:laurum/features/auth/state/auth_session.dart';
 import 'package:laurum/features/auth/widgets/auth_trust_section.dart';
 import 'package:laurum/features/auth/widgets/sign_up_form_card_section.dart';
 import 'package:laurum/features/auth/widgets/sign_up_hero_section.dart';
+import 'package:laurum/shared/widgets/templates/auth_scaffold.dart';
 
 class SignUpPage extends ConsumerWidget {
   const SignUpPage({super.key});
@@ -19,49 +20,43 @@ class SignUpPage extends ConsumerWidget {
     final form = ref.watch(authFormProvider(AuthFormKind.signUp));
     final controller = ref.read(authFormProvider(AuthFormKind.signUp).notifier);
 
-    return Scaffold(
-      backgroundColor: AppColors.surface,
-      body: Stack(
+    return AuthScaffold(
+      hero: SignUpHeroSection(onBack: () => context.go('/masuk')),
+      contentTop: 200,
+      background: AppColors.surface,
+      child: Column(
         children: [
-          SignUpHeroSection(onBack: () => context.go('/masuk')),
-          SingleChildScrollView(
-            padding: const EdgeInsets.only(top: 200, bottom: 24),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
-                  child: SignUpFormCardSection(
-                    name: form.name,
-                    email: form.email,
-                    visible: form.visible,
-                    busy: form.busy || session.busy,
-                    restoring: session.signedIn,
-                    errors: form.errors,
-                    error: form.error ?? session.error,
-                    onName: controller.name,
-                    onEmail: controller.email,
-                    onPassword: (value) => controller.secret(AuthSecret.password, value),
-                    onConfirmation: (value) => controller.secret(AuthSecret.confirmation, value),
-                    onToggle: controller.toggleVisible,
-                    onSubmit: () async {
-                      if (await controller.submit() && context.mounted) {
-                        context.go('/cek-email');
-                      }
-                    },
-                    onGoogle: () {
-                      controller.clearError();
-                      ref.read(authSessionProvider.notifier).signIn();
-                    },
-                    onSignIn: () => context.go('/masuk'),
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.xxlarge),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
-                  child: AuthTrustSection(text: 'Data kamu aman & terenkripsi'),
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
+            child: SignUpFormCardSection(
+              name: form.name,
+              email: form.email,
+              visible: form.visible,
+              busy: form.busy || session.busy,
+              restoring: session.signedIn,
+              errors: form.errors,
+              error: form.error ?? session.error,
+              onName: controller.name,
+              onEmail: controller.email,
+              onPassword: (value) => controller.secret(AuthSecret.password, value),
+              onConfirmation: (value) => controller.secret(AuthSecret.confirmation, value),
+              onToggle: controller.toggleVisible,
+              onSubmit: () async {
+                if (await controller.submit() && context.mounted) {
+                  context.go('/cek-email');
+                }
+              },
+              onGoogle: () {
+                controller.clearError();
+                ref.read(authSessionProvider.notifier).signIn();
+              },
+              onSignIn: () => context.go('/masuk'),
             ),
+          ),
+          const SizedBox(height: AppSpacing.xxlarge),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
+            child: AuthTrustSection(text: 'Data kamu aman & terenkripsi'),
           ),
         ],
       ),

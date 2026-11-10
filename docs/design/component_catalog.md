@@ -744,12 +744,19 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ## AuthScaffold
 - Berkas: lib/shared/widgets/templates/auth_scaffold.dart.
-- API wajib: child. Tanpa app bar, nav, atau provider.
-- Varian: satu (konten auth bebas).
-- Contoh: AuthScaffold(child: Column(children: [brand, fields, AppButton('Masuk')])).
-- Galeri: auth_scaffold_use_case.dart; tes tanpa AppBar, golden, 320 px + teks 2x.
-- Referensi Auth - Masuk: latar bg, konten selebar layar dikurangi 32, mulai 96 px dari
-  atas layar (SafeArea bawah tetap aktif), dapat digulir saat keyboard muncul.
+- API wajib: child. Opsional: hero, contentTop (default 0), background (default bg).
+  Tanpa app bar, nav, atau provider.
+- `hero` null = varian lama: padding 16/96/16/16, latar bg. `hero` non-null =
+  Stack hero di belakang isi; isi mulai di `contentTop`, padding bawah 24, latar
+  dari `background` (layar auth memakai surface).
+- Varian: form polos, dan hero + kartu (layar Masuk/Daftar).
+- Contoh: AuthScaffold(hero: SignInHeroSection(), contentTop: 320,
+  background: AppColors.surface, child: Column(children: [kartu, trust])).
+- Galeri: auth_scaffold_use_case.dart, auth_scaffold_hero_use_case.dart; tes tanpa
+  AppBar, offset `contentTop`, golden `auth_scaffold` dan `auth_scaffold_hero`,
+  320 px + teks 2x.
+- Referensi Auth - Masuk: hero 340, kartu mulai 320; Auth - Daftar: hero 230,
+  kartu mulai 200. SafeArea bawah aktif, dapat digulir saat keyboard muncul.
 
 ## Layar dan navigasi Fase 2
 

@@ -45,7 +45,7 @@ AuthScaffold({
 - `hero == null` dan `contentTop == 0` → perilaku lama persis (padding 16/96/16/16,
   background `AppColors.bg`), tes dan golden `auth_scaffold` tidak berubah.
 - `hero != null` → `Scaffold(background)` + `Stack[hero, scroll]`; scroll memakai
-  `EdgeInsets.only(top: contentTop, bottom: AppSpacing.xxlarge)`, tanpa padding
+  `EdgeInsets.only(top: contentTop, bottom: AppSpacing.xlarge)`, tanpa padding
   kiri/kanan (Page yang menaruh padding 24 pada kartu/footer, seperti sekarang).
 - Isi scroll dibungkus `SafeArea(top: false)` agar home indicator iOS tidak
   menutup tombol; inset perangkat uji nol sehingga golden tidak bergeser.
@@ -111,3 +111,19 @@ Stack, dan ScrollView yang pindah ke template.
 - Pembersihan primitif Section auth (kotak logo, strip fitur, lingkaran
   ilustrasi) → lapisan 6 / UI-29.
 - Template layar tab dan form lain menunggu frame per layar (UI-4).
+
+## Hasil penerapan (10 Nov 2026)
+
+- `AuthScaffold` diperluas aditif: `hero`, `contentTop`, `background`; varian
+  lama (tanpa hero) tetap padding 16/96/16/16 dengan latar `bg`.
+- `SignInPage` dan `SignUpPage` kini hanya membaca provider dan menyusun Section
+  di dalam template; `Scaffold`, `Stack`, dan `SingleChildScrollView` tidak lagi
+  ada di Page auth (UI-27). Argumen callback, urutan pemanggilan, `Key`, dan teks
+  tidak berubah.
+- Offset dipertahankan: Masuk `contentTop: 320` (hero 340), Daftar 200 (hero 230).
+- **Tidak ada golden lama yang bergeser**; tambahan baru `auth_scaffold_hero`
+  (galeri varian hero + kartu).
+- Tes baru: offset isi = `contentTop` dan hero tampil di belakang isi pada
+  `test/auth_scaffold_test.dart`. Tes perilaku auth (keyboard, aksesibilitas,
+  `r10_*`) tidak diubah; seluruh suite 988 lulus (1 skip).
+- `dart analyze` bersih, `check_arch` OK, `check_all` hijau.

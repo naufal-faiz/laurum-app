@@ -229,8 +229,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - check_email_page.dart (43): CheckEmailPage
 - manage_account_page.dart (53): ManageAccountPage
 - password_reset_page.dart (26): PasswordResetPage
-- sign_in_page.dart (72): SignInPage
-- sign_up_page.dart (70): SignUpPage
+- sign_in_page.dart (67): SignInPage
+- sign_up_page.dart (65): SignUpPage
 
 ### lib/features/auth/state/
 - account_edit.dart (52): AccountField, AccountEditView, AccountEdit, accountEditProvider
@@ -686,7 +686,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - weekly_bar_chart.dart (110): WeeklyBarChart
 
 ### lib/shared/widgets/templates/
-- auth_scaffold.dart (20): AuthScaffold
+- auth_scaffold.dart (42): AuthScaffold
 - form_scaffold.dart (44): FormScaffold
 - root_scaffold.dart (66): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
@@ -743,7 +743,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_onboarding_keyboard_test.dart (33):
 - auth_restore_test.dart (53): DeferredRestore
 - auth_routes_test.dart (60):
-- auth_scaffold_test.dart (22):
+- auth_scaffold_test.dart (38):
 - auth_session_test.dart (64):
 - auth_sync_golden_test.dart (84):
 - auth_sync_sections_test.dart (100):
@@ -1172,9 +1172,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - weekly_bar_chart_use_case.dart (17):
 
 ### widgetbook/templates/
+- auth_scaffold_hero_use_case.dart (37):
 - auth_scaffold_use_case.dart (45):
 - form_scaffold_use_case.dart (51):
 - root_scaffold_use_case.dart (47):
 - sheet_scaffold_use_case.dart (59):
 - sub_scaffold_use_case.dart (55):
-- templates.dart (15):
+- templates.dart (19):
