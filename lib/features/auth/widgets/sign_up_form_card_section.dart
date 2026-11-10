@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/features/auth/widgets/auth_email_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_name_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_password_field_section.dart';
@@ -75,7 +74,6 @@ class SignUpFormCardSection extends StatelessWidget {
         ),
         AuthSubmitSection(
           label: 'Daftar',
-          icon: AppIcons.check,
           busy: busy,
           onSubmit: onSubmit,
         ),

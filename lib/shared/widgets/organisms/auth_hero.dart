@@ -30,7 +30,7 @@ class AuthHero extends StatelessWidget {
     final tall = brand != null;
     final back = onBack;
     final titleStyle = AppTextStyles.hero.copyWith(color: AppColors.surface);
-    final subStyle = AppTextStyles.body.copyWith(color: AppColors.heroTagline);
+    final subStyle = AppTextStyles.label.copyWith(color: AppColors.heroTagline);
     return Container(
       height: height,
       clipBehavior: Clip.antiAlias,

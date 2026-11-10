@@ -162,3 +162,7 @@ Android/iOS dan integrasi autentikasi nyata belum diuji manual.
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
+
+## Penyesuaian final pengguna, 10 Nov 2026
+- Tagline hero memakai skala label; tombol submit tanpa ikon trailing.
+- Perubahan sumber sudah ada sebelum sesi 016, kemudian dinyatakan final oleh pengguna; golden auth diperbarui atas izin eksplisit. Perilaku, callback dan validasi tetap.

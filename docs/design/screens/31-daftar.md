@@ -92,3 +92,7 @@ Android/iOS perangkat dan pengiriman email nyata belum diuji.
 - `test/r10_auth_keyboard_test.dart` — finder simpan `/daftar` memakai `AuthSubmitSection`.
 - `test/r10_signup_sections_test.dart` — tes widget baru untuk Section daftar.
 - Golden `r10_signup` (390/320/2x) diperbarui.
+
+## Penyesuaian final pengguna, 10 Nov 2026
+- Tagline hero memakai skala label; tombol Daftar tanpa ikon trailing.
+- Perubahan sumber sudah ada sebelum sesi 016, kemudian dinyatakan final oleh pengguna; golden auth diperbarui atas izin eksplisit. Perilaku, callback dan validasi tetap.
