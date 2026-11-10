@@ -1,57 +1,58 @@
-﻿# STATE Laurum
+# STATE Laurum
 Diperbarui: 2026-11-10 | Cabang `newdesign`
 
 ## Posisi dan sesi aktif
-- Dasar implementasi: `1a4d9e7` (Beranda/nav); audit sebelumnya `35d1b6e`.
-- Redesign token, atoms, molecules, organisms, templates, dan auth lapisan 6
-  selesai. Sesi ini: koreksi Beranda/nav sesuai arahan pengguna, proposal 013.
-- Header manual pengguna (`LAURUM` / `Laundry Management`) dipertahankan dan
-  ditempatkan tetap di AppBar bersama ikon notifikasi; tidak ada toolbar kosong.
-- Padding Beranda 16 dp; nav margin 8, lima slot fleksibel, tanpa kotak aktif
-  atau label ellipsis; konten tampil di sisi tombol Transaksi yang menonjol.
-- Antrean aktif menampilkan maksimal tiga layanan berdasarkan jumlah nota aktif
-  unik per layanan; label satu baris ellipsis, badge total rata kanan, empty state
-  tanpa tile/progress palsu. Repository, fixture, dan penyimpanan tetap.
-- Banner minimum 168 dp dan tumbuh mengikuti isi; judul 18, gap teks 4, gap
-  tombol 16, padding 18. Tombol small berlabel 13 memakai cursor-back SVG ke kanan.
-- Font global: body/input 16/24, label/caption 13/18, meta 12/16, CTA 16/22.
-- Awal aplikasi, selesai login, dan selesai onboarding menuju `/beranda`.
-- Zona beku yang disentuh atas permintaan pengguna: token, pemetaan Beranda,
-  rute awal/auth, dan tes terkait. Tidak mengubah dependensi, lint, PRD, atau tool.
+- Dasar sesi `e34fc26`: koreksi Beranda/nav selesai (1020 tes, 1 skip, Android diperiksa).
+- Sesi ini: Antrean frame 408 + pencarian dan transisi tab, proposal 015.
+- Pengguna menegaskan desain harus cukup akurat terhadap FigCraft dengan adaptasi
+  kebutuhan aplikasi; semua data dan aksi lama dipertahankan.
+- AppBar LAURUM / Antrean (judul 24) / cari, tinggi 72 mengikuti skala teks.
+  LAURUM sejajar vertikal dengan Beranda. Nama usaha dan ikon akun dihapus.
+- Jumlah order aktif/perlu dicek sejajar sync di body; teks besar disusun vertikal.
+  Akses akun tetap melalui tab Lainnya sesuai koreksi terakhir pengguna.
+- Dua tab Semua/Perlu dicek seperti frame; status lama 0..4 ada di ikon filter
+  melalui AntreanFilterSheet dan AppBottomSheet. Mode sederhana tetap 0/4.
+- Dua rekomendasi preview; Lihat semua memakai select(4) lama dan menampilkan
+  seluruh usulan. Pesan dalam bubble lembut, preview dua baris, lengkap di Periksa.
+- OrderCard mengikuti posisi frame: pelanggan/badge, layanan, metadata/nominal,
+  tambahan CTA status biru dan detail. API/aturan pending, status, COD tetap.
+- Pencarian lokal nama/nota/layanan/teks usulan; query layar saja, tanpa persistensi.
+- Fade tab 220 ms easeOutCubic tanpa melepas navigator; reduced motion langsung.
+- Pengguna meminta akurasi contoh: fixture terpisah hanya pada scope main_dummy,
+  badge bertanda contoh. Provider scope data nyata kosong; fixture lama tidak diubah.
+- Tombol small visual 40 dp, hit target 48 dp agar aksesibilitas >=44 tetap lulus.
 
 ## Verifikasi dan bukti
-- Build dummy Android berhasil dipasang/diperiksa pada SM-N975F (wireless).
-  Awal Beranda, banner, header, badge, nav, dan perpindahan Antrean diperiksa;
-  perangkat dikembalikan ke Beranda. iOS belum diuji.
-- 320 dp/teks 2x: tes header tetap, perpindahan tab, dan jarak deskripsi/tombol.
-- `check_all: SEMUA HIJAU` (exit 0): 1020 tes lulus, 1 skip; format, kedua analyzer,
-  check_arch OK; REPO_MAP 1039. Bukti: TEMP/laurum-beranda-check-all-final.log.
-- 115 golden lama berubah karena font global/nav; daftar lengkap dan alasan:
-  `docs/design/proposals/013-golden-impact.md`. Menunggu tinjauan visual pengguna.
-- Daftar tes yang diubah beserta alasan, paritas, dan bukti Android:
-  `docs/design/proposals/013-koreksi-beranda-nav.md`, `docs/design/screens/01-beranda.md`.
-- Screenshot lokal: TEMP/laurum-beranda-android.png dan TEMP/laurum-nav-check.png.
+- Tes terarah aksi/filter/usulan/pencarian/keyboard/motion lulus. Mode sederhana
+  dan COD tetap diuji pada 320dp/teks 2x; tes aksesibilitas lama tetap utuh.
+- Golden 14 berkas bergeser; daftar + alasan: proposals/015-golden-impact.md.
+  Ini termasuk galeri komponen dan tombol banner Beranda (hit target small).
+- check_all HIJAU: format 974 (0 berubah), analyze + Riverpod bersih, check_arch OK,
+  1036 tes lulus / 1 skip, REPO_MAP 1052 berkas; exit 0 (10 Nov 2026).
+  Log lokal: TEMP/laurum-antrean-check-all-green.log.
+- Visual Android SM-N975F diverifikasi: header/ringkasan, kartu, sheet filter,
+  pencarian dengan keyboard terbuka. Teks LAURUM sejajar Beranda juga diuji 1x/2x.
+- Detail izin, selisih, API dan tes: docs/design/proposals/015-antrean-dan-transisi.md.
 
 ## Langkah berikutnya
-1. Tinjauan pengguna atas koreksi Beranda/nav dan pergeseran golden.
-2. Redesign Antrean frame 408 pada sesi terpisah (isi daftar belum diredesign).
-3. Setelah Beranda DAN Antrean selesai/ditinjau, bahas proposal 014 loader.
-   Referensi JSON dan `laurum_loader.dart.txt` ada di docs/design; Lottie belum
-   dipasang dan varian animasi/dependensi menunggu keputusan pengguna.
+1. Tinjauan pengguna atas Antrean dan 14 golden terdampak.
+2. Setelah Beranda DAN Antrean selesai/ditinjau, bahas proposal 014 loader.
+   Lottie belum dipasang; referensi JSON dan laurum_loader.dart.txt tetap di docs/design.
 
-## Backend dan batas
+## Batas dan backend
+- Token sampai template + auth lapisan 6 selesai. Beranda tetap sesuai e34fc26,
+  kecuali perubahan hit target small. Jangan menimpa header manual pengguna.
 - UI100/R0-R10, BP0, B1a-f, B0, B2a-d, B3a, B3c selesai; B3b dan B2e+ menunggu.
-- Berikutnya backend: uji cloud ujung-ke-ujung/workmanager Android, Google login,
-  lalu B3b (akun uji/peti surat); rencana `docs/plans/B3-auth.md`.
-- Drift v5, wire schema 5; migrasi cloud 5/5 sudah diterapkan pemilik.
-  PayStatus turunan, COD bersisa ditahan, multi-repository lewat TransactionRunner.
-- Keputusan global pengguna: primer #2675C9, hijau success, Inter, tombol 50/44/40;
-  koreksi tipografi terbaru pada proposal 013. Utang token auth nol.
+- Berikutnya backend: uji cloud/workmanager Android, Google login, lalu B3b;
+  lihat docs/plans/B3-auth.md. Drift v5, wire 5, migrasi cloud 5/5 oleh pemilik.
+- PayStatus turunan, COD bersisa ditahan, multi-repo lewat TransactionRunner.
+- Zona beku yang diizinkan sesi ini: query UI, contoh akurasi dummy, main_dummy,
+  ikon/motion/button style terkait. Domain/repository/transaksi/rute/lint/PRD utuh.
 
 ## Lingkungan dan Git
 - Sebelum Dart/Flutter: `. ./tool/windows_native_sdk.ps1`.
-- Alias Flutter TEMP sudah dipulihkan ke E:/flutter/flutter; alias lama dibackup
-  sebagai laurum-flutter-sdk-before-beranda-20261110. SDK asli/tool tidak diubah.
-- `docs/design/new-design-laurum.figcraft` sudah berubah sebelum sesi; dipertahankan
-  dan tidak dimasukkan ke commit koreksi. Jangan push/merge tanpa izin.
-- Riwayat rinci sebelum ringkasan ini: `docs/progress/state-history-2026-11-10.md`.
+- Alias Flutter TEMP mengarah E:/flutter/flutter; SDK asli/tool tidak diubah.
+- Perubahan docs/design/new-design-laurum.figcraft sudah ada sebelum sesi dan
+  dipertahankan di luar commit koreksi. Jangan push/merge tanpa izin.
+- Riwayat lama: docs/progress/state-history-2026-11-10.md; spec layar dan proposal
+  menyimpan rincian visual/perilaku. iOS belum diuji.

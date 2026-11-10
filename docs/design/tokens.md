@@ -8,6 +8,10 @@ Widget tidak boleh menulis hex, ukuran font, radius, atau bayangan sendiri.
 Lapisan token global disetujui 10 Nov 2026 (`docs/design/proposals/006-lapisan-token.md`).
 Token global; tidak ada namespace per layar (UI-12).
 
+Motion global (proposal 015): AppMotion.tabDuration = 220 ms,
+AppMotion.tabCurve = easeOutCubic; RootScaffold memakai fade tab tanpa melepas
+navigator. disableAnimations menghilangkan durasi transisi.
+
 Koreksi Android (proposal 013): `AppDimensions.navCreateLift` 23 dp dan
 `navBarHeight` 64 dp; inset template dan posisi tombol memakai token yang sama.
 

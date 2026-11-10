@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:laurum/features/orders/pages/antrean_filter_sheet.dart';
 import 'package:laurum/features/orders/state/antrean_controller.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
@@ -14,17 +15,27 @@ void main() {
     tester,
   ) async {
     final host = await pumpAntrean(tester);
-    expect(find.text('Berkah Laundry'), findsOneWidget);
+    expect(find.text('LAURUM'), findsOneWidget);
+    expect(find.byTooltip('Usaha dan akun'), findsNothing);
     expect(find.text('Semua 12'), findsOneWidget);
     expect(find.text('12 order aktif'), findsOneWidget);
     expect(tester.widget<ChipBar>(find.byType(ChipBar)).labels.last, 'Perlu dicek 3');
+    await tester.tap(find.byTooltip('Filter status'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Proses 5'));
     await tester.pumpAndSettle();
     final dedi = find.byKey(const ValueKey('ord-0142'));
     await tester.tap(find.descendant(of: dedi, matching: find.text('Tandai siap')));
     await tester.pumpAndSettle();
     expect(find.text('Proses 4'), findsOneWidget);
-    expect(tester.widget<ChipBar>(find.byType(ChipBar)).labels[3], 'Siap 5');
+    await tester.tap(find.byTooltip('Filter status'));
+    await tester.pumpAndSettle();
+    expect(
+      find.descendant(of: find.byType(AntreanFilterSheet), matching: find.text('Siap 5')),
+      findsOneWidget,
+    );
+    await tester.tap(find.byTooltip('Tutup'));
+    await tester.pumpAndSettle();
     final nav = find.byType(BottomNavBar);
     await tester.tap(find.descendant(of: nav, matching: find.text('Pelanggan')));
     await tester.pumpAndSettle();
@@ -32,7 +43,8 @@ void main() {
     await tester.tap(find.descendant(of: nav, matching: find.text('Antrean')));
     await tester.pumpAndSettle();
     expect(host.container.read(antreanFilterProvider), 2);
-    expect(tester.widget<ChipBar>(find.byType(ChipBar)).selectedIndex, 2);
+    expect(tester.widget<ChipBar>(find.byType(ChipBar)).selectedIndex, 0);
+    expect(tester.widget<ChipBar>(find.byType(ChipBar)).labels.first, 'Proses 4');
     await tester.tap(find.descendant(of: nav, matching: find.text('Transaksi')));
     await tester.pumpAndSettle();
     expect(host.router.canPop(), isTrue);

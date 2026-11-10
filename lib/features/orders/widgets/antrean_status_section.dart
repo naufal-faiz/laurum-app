@@ -15,8 +15,9 @@ class AntreanStatusSection extends StatelessWidget {
     this.reviewOnly = false,
     this.onRetry,
     this.onCreate,
+    this.searching = false,
   });
-  final bool loading, error, filtered, reviewOnly;
+  final bool loading, error, filtered, reviewOnly, searching;
   final VoidCallback? onRetry, onCreate;
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,8 @@ class AntreanStatusSection extends StatelessWidget {
     return EmptyState(
       title: error
           ? 'Gagal memuat data'
+          : searching
+          ? 'Tidak ada hasil pencarian'
           : reviewOnly
           ? 'Belum ada usulan yang perlu dicek'
           : filtered
@@ -54,6 +57,8 @@ class AntreanStatusSection extends StatelessWidget {
       icon: error ? AppIcons.alert : AppIcons.queue,
       description: error
           ? 'Periksa koneksi dan coba lagi.'
+          : searching
+          ? 'Coba nama pelanggan, nomor nota, atau layanan lain.'
           : reviewOnly
           ? 'Usulan WhatsApp yang menunggu pemeriksaan akan muncul di sini.'
           : filtered
@@ -61,12 +66,12 @@ class AntreanStatusSection extends StatelessWidget {
           : 'Order dari kasir atau usulan WhatsApp akan muncul di sini.',
       actionLabel: error
           ? 'Coba lagi'
-          : filtered || reviewOnly
+          : filtered || reviewOnly || searching
           ? null
           : 'Transaksi baru',
       onAction: error
           ? onRetry
-          : filtered || reviewOnly
+          : filtered || reviewOnly || searching
           ? null
           : onCreate,
     );

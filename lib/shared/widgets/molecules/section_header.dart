@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
 class SectionHeader extends StatelessWidget {
@@ -9,13 +12,19 @@ class SectionHeader extends StatelessWidget {
     this.subtitle,
     this.actionLabel,
     this.onAction,
+    this.icon,
   }) : assert(onAction == null || actionLabel != null);
   final String title;
   final String? subtitle, actionLabel;
   final VoidCallback? onAction;
+  final AppIcons? icon;
   @override
   Widget build(BuildContext context) => Row(
     children: [
+      if (icon != null) ...[
+        AppIcon(icon!, color: AppColors.primary),
+        const SizedBox(width: AppSpacing.small),
+      ],
       Expanded(
         child: Column(
           mainAxisSize: MainAxisSize.min,

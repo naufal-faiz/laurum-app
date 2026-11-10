@@ -5,10 +5,10 @@ import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_shadows.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 
-enum AppCardRail { none, warning, error }
+enum AppCardRail { none, warning, error, info, success }
 
 /// `outlined` = border tipis tanpa bayangan; `elevated` = radius 24 + shadow.
-enum AppCardStyle { outlined, elevated }
+enum AppCardStyle { outlined, elevated, muted }
 
 class AppCard extends StatelessWidget {
   const AppCard({
@@ -27,11 +27,16 @@ class AppCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final elevated = style == AppCardStyle.elevated;
-    final radius = elevated ? AppRadius.cardLarge : AppRadius.card;
+    final muted = style == AppCardStyle.muted;
+    final radius = elevated
+        ? AppRadius.cardLarge
+        : muted
+        ? AppRadius.action
+        : AppRadius.card;
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: elevated ? null : AppBorders.card,
+        color: muted ? AppColors.surfaceLow : AppColors.surface,
+        border: elevated || muted ? null : AppBorders.card,
         borderRadius: radius,
         boxShadow: elevated ? AppShadows.cardElevated : null,
       ),
@@ -47,7 +52,12 @@ class AppCard extends StatelessWidget {
                 bottom: 0,
                 width: AppSpacing.railWidth,
                 child: ColoredBox(
-                  color: rail == AppCardRail.warning ? AppColors.warningBorder : AppColors.error,
+                  color: switch (rail) {
+                    AppCardRail.warning => AppColors.warningBorder,
+                    AppCardRail.error => AppColors.error,
+                    AppCardRail.success => AppColors.success,
+                    _ => AppColors.primary,
+                  },
                 ),
               ),
           ],

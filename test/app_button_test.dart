@@ -95,8 +95,12 @@ void main() {
       expect(tester.getSize(button).height, switch (size) {
         AppButtonSize.large => 50,
         AppButtonSize.medium => 44,
-        AppButtonSize.small => 40,
+        AppButtonSize.small => 48,
       });
+      if (size == AppButtonSize.small) {
+        final material = find.descendant(of: button, matching: find.byType(Material)).first;
+        expect(tester.getSize(material).height, 40); // Visual 40, hit target 48.
+      }
       final iconCenter = tester.getCenter(
         find.descendant(of: button, matching: find.byType(AppIcon)),
       );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_dimensions.dart';
+import 'package:laurum/core/theme/app_motion.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_root.dart';
 import 'package:laurum/shared/widgets/molecules/sync_indicator.dart';
@@ -16,6 +17,7 @@ class RootScaffold extends StatelessWidget {
     this.syncState = SyncState.tersimpan,
     this.showAppBar = true,
     this.header,
+    this.headerHeight = AppSpacing.appBarHeight,
     this.onAccount,
     this.onTabSelected,
     this.onCreate,
@@ -26,6 +28,7 @@ class RootScaffold extends StatelessWidget {
   final SyncState syncState;
   final bool showAppBar;
   final Widget? header;
+  final double headerHeight;
   final VoidCallback? onAccount, onCreate;
   final ValueChanged<int>? onTabSelected;
 
@@ -35,14 +38,13 @@ class RootScaffold extends StatelessWidget {
     appBar: showAppBar || header != null
         ? PreferredSize(
             preferredSize: Size.fromHeight(
-              AppSpacing.appBarHeight *
-                  (header == null ? 1 : MediaQuery.textScalerOf(context).scale(1)),
+              headerHeight * (header == null ? 1 : MediaQuery.textScalerOf(context).scale(1)),
             ),
             child: header != null
                 ? SafeArea(
                     bottom: false,
                     child: SizedBox(
-                      height: AppSpacing.appBarHeight * MediaQuery.textScalerOf(context).scale(1),
+                      height: headerHeight * MediaQuery.textScalerOf(context).scale(1),
                       child: header,
                     ),
                   )
@@ -67,7 +69,28 @@ class RootScaffold extends StatelessWidget {
               ),
             ),
           ),
-          child: body,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              body,
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: TweenAnimationBuilder<double>(
+                    key: ValueKey('tab-fade-$activeIndex'),
+                    tween: Tween(begin: 1, end: 0),
+                    duration: MediaQuery.disableAnimationsOf(context)
+                        ? Duration.zero
+                        : AppMotion.tabDuration,
+                    curve: AppMotion.tabCurve,
+                    builder: (context, opacity, _) => Opacity(
+                      opacity: opacity,
+                      child: const ColoredBox(color: AppColors.bg),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
       },
     ),

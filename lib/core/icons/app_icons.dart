@@ -8,6 +8,8 @@ enum AppIcons {
   person(Ionicons.personOutline),
   avatar(Ionicons.personCircleOutline),
   search(Ionicons.searchOutline),
+  filter(Ionicons.optionsOutline),
+  sparkles(Ionicons.sparklesOutline),
   receipt(Ionicons.receiptOutline),
   receiptActive(Ionicons.receipt),
   customers(Ionicons.peopleOutline),

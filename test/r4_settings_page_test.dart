@@ -6,6 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/business/data/in_memory_business_repository.dart';
+import 'package:laurum/features/orders/pages/antrean_filter_sheet.dart';
+import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/settings/widgets/settings_menu_section.dart';
 import 'package:laurum/features/settings/widgets/settings_operational_section.dart';
 import 'package:laurum/main_dummy.dart';
@@ -54,7 +56,16 @@ void main() {
       expect((await scope.read(businessRepositoryProvider).getProfile()).useOrderStatus, isTrue);
       host.router.go('/antrean');
       await tester.pumpAndSettle();
-      expect(tester.widget<ChipBar>(find.byType(ChipBar)).labels.length, 5);
+      await tester.tap(find.byTooltip('Filter status'));
+      await tester.pumpAndSettle();
+      final labels = (await scope.read(antreanDataProvider.future)).chips;
+      expect(labels, hasLength(5));
+      for (final label in labels) {
+        expect(
+          find.descendant(of: find.byType(AntreanFilterSheet), matching: find.text(label)),
+          findsOneWidget,
+        );
+      }
       expect(tester.takeException(), isNull);
     },
   );

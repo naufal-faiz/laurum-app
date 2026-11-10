@@ -16,11 +16,12 @@ class AppSearchField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.enabled = true,
+    this.autofocus = false,
   });
   final String label, clearLabel, value;
   final String? hint;
   final ValueChanged<String>? onChanged, onSubmitted;
-  final bool enabled;
+  final bool enabled, autofocus;
   @override
   State<AppSearchField> createState() => _AppSearchFieldState();
 }
@@ -58,6 +59,7 @@ class _AppSearchFieldState extends State<AppSearchField> {
       builder: (context, value, child) => TextField(
         controller: _controller,
         enabled: widget.enabled,
+        autofocus: widget.autofocus,
         textInputAction: TextInputAction.search,
         onChanged: widget.onChanged,
         onSubmitted: widget.onSubmitted,

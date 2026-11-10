@@ -58,7 +58,8 @@ void main() {
     await business.saveProfile(profile);
     scope.invalidate(businessProfileProvider);
     await tester.pumpAndSettle();
-    expect(tester.widget<ChipBar>(find.byType(ChipBar)).selectedIndex, 2);
+    expect(tester.widget<ChipBar>(find.byType(ChipBar)).selectedIndex, 0);
+    expect(tester.widget<ChipBar>(find.byType(ChipBar)).labels.first, 'Proses 5');
     scope.read(antreanFilterProvider.notifier).select(4);
     await business.saveProfile(profile.withOrderStatus(enabled: false));
     scope.invalidate(businessProfileProvider);

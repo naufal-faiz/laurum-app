@@ -313,7 +313,7 @@ Parameter warna/ukuran pada pemakaian harus berasal dari `core/theme`.
 - Berkas: `lib/shared/widgets/atoms/app_card.dart`.
 - Parameter: `child` wajib; `style = AppCardStyle.outlined`,
   `rail = AppCardRail.none`, `padding = EdgeInsets.all(AppSpacing.cardPadding)`, `key`.
-- Varian: `outlined` (none/warning/error rail) dan `elevated` (rail tetap boleh).
+- Varian: outlined, elevated, muted (bubble pesan); rail info/primary dan success baru pada 015.
 - `outlined`: surface, border `AppColors.border` selebar `AppDimensions.line`,
   radius `AppRadius.card` (16), padding 16, rail kiri 4, tanpa bayangan.
 - `elevated`: radius `AppRadius.cardLarge` (24), tanpa border, shadow
@@ -477,7 +477,8 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ## AppSearchField
 - Berkas: lib/shared/widgets/atoms/app_search_field.dart (88 baris).
-- Parameter: label dan clearLabel wajib; value = ''; hint; onChanged/onSubmitted; enabled = true; key.
+- Parameter: label dan clearLabel wajib; value = ''; hint; onChanged/onSubmitted;
+  enabled = true; autofocus = false; key. Autofocus dipakai pencarian Antrean (015).
 - Contoh: AppSearchField(label: label, clearLabel: clearLabel, value: query, onChanged: onQuery).
 - Varian galeri: kosong, terisi dengan clear, disabled terisi. Tidak ada debounce internal.
 - Controller internal, sinkronisasi value eksternal dan dispose seperti AppTextField.
@@ -612,6 +613,10 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   callback null (disabled). statusLabel opsional default null memakai label enum;
   Antrean meneruskan label core policy 'Sedang dikerjakan' saat mode sederhana.
   Izin statusLabel: pengguna 31 Oktober 2026, proposals/001-order-card-label-r4.md.
+- Redesign 015: susunan bersama mengikuti frame untuk Antrean dan Laporan:
+  pelanggan+badge di atas, layanan, metadata+nominal primary, rail info/success,
+  tanpa divider, tombol status action biru yang ringkas.
+  Seluruh status, pembayaran, detail, jam, dan callback tetap.
 - Varian: semua lima status dan tiga status bayar; rail normal/amber/merah; aksi/ringkas.
   Rail merah diprioritaskan atas amber. Status final tidak menampilkan aksi progres.
 - Contoh: OrderCard(orderNo: number, customerName: name, summary: items, total: total,
@@ -637,6 +642,10 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   DATA MASTER. Header membungkus bila ruang sempit, tinggi mengikuti isi.
 
 ## ProposalCard
+- Redesign 015: compact default false; accuracyLabel String? default null.
+  Compact memakai padding 12, gap 4, rail info dan tombol small. Pesan dua baris
+  dalam AppCard.muted; isi lengkap tersedia melalui Periksa.
+  Akurasi contoh hanya dipasok main_dummy; build dengan data nyata tidak mengarang skor.
 - Berkas: lib/shared/widgets/organisms/proposal_card.dart.
 - API wajib: customerName, summary. Opsi: timeLabel/reviewText kosong,
   needsReview false, onApprove/onReject. onApprove membuka pemeriksaan saat needsReview.
@@ -771,7 +780,10 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 ## RootScaffold
 - Berkas: lib/shared/widgets/templates/root_scaffold.dart.
 - API wajib: title, accountLabel, activeIndex 0..3, body. Opsi: syncState,
-  showAppBar (default true), header (Widget? default null), onAccount, onTabSelected, onCreate.
+  showAppBar (default true), header (Widget? default null), headerHeight (default 64),
+  onAccount, onTabSelected, onCreate. Header Antrean 72 mengikuti skala teks; judul 24.
+- Fade tab 220 ms di overlay IgnorePointer; navigator tetap di pohon dan state/scroll
+  terpelihara. disableAnimations langsung menampilkan konten tanpa animasi.
 - AppBarRoot + SyncIndicator (kecuali `showAppBar: false`, dipakai Beranda yang
   punya header merek sendiri), body, BottomNavBar dengan aksi tengah.
 - Koreksi 10 Nov (013): Beranda memakai `showAppBar: false` + slot `header`
@@ -838,6 +850,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 ## Layar dan navigasi Fase 2
 
 ### AntreanPage
+- Revisi 015: header LAURUM/Antrean/cari; dua tab + sheet filter status; dua rekomendasi preview, Lihat semua menampilkan seluruh usulan; OrderCard dan bubble usulan mengikuti frame.
 - Berkas: lib/features/orders/pages/antrean_page.dart (95 baris),
   state/antrean_controller.dart, state/antrean_data.dart,
   widgets/antrean_status_section.dart, widgets/antrean_orders_section.dart,

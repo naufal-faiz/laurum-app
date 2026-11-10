@@ -70,7 +70,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - formatters.dart (55): Formatters
 
 ### lib/core/icons/
-- app_icons.dart (56): AppIcons
+- app_icons.dart (58): AppIcons
 - app_svgs.dart (9): AppSvgs
 
 ### lib/core/persistence/
@@ -189,7 +189,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/core/theme/
 - app_borders.dart (7): AppBorders
-- app_button_styles.dart (69): AppButtonVariant, AppButtonSize, AppButtonStyles
+- app_button_styles.dart (71): AppButtonVariant, AppButtonSize, AppButtonStyles
 - app_colors.dart (64): AppColors
 - app_control_tokens.dart (19): AppControlTokens
 - app_dimensions.dart (15): AppDimensions
@@ -198,6 +198,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_molecule_styles.dart (32): AppMoleculeStyles
 - app_molecule_tokens.dart (15): AppMoleculeTokens
 - app_mono_text_styles.dart (19): AppMonoTextStyles
+- app_motion.dart (6): AppMotion
 - app_radius.dart (20): AppRadius
 - app_shadows.dart (22): AppShadows
 - app_spacing.dart (22): AppSpacing
@@ -408,7 +409,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_storage.dart (49):
 
 ### lib/features/orders/pages/
-- antrean_page.dart (101): AntreanPage
+- antrean_filter_sheet.dart (53): AntreanFilterSheet
+- antrean_page.dart (100): AntreanPage
 - order_cancel_flow.dart (24):
 - order_completion_flow.dart (19):
 - order_detail_menu_flow.dart (22):
@@ -423,6 +425,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_controller.dart (91): AntreanFilter, AntreanActionState, AntreanActions, antreanFilterProvider, antreanActionsProvider
 - antrean_data.dart (65): AntreanData, antreanDataProvider
 - antrean_filter_view.dart (9): AntreanFilterView
+- antrean_search.dart (44): AntreanSearchState, AntreanSearch, antreanSearchProvider
 - order_completion_controller.dart (47): OrderCompletionState, OrderCompletion, orderCompletionProvider
 - order_completion_save.dart (54):
 - order_detail_controller.dart (97): OrderActionState, OrderActions, orderActionsProvider
@@ -436,8 +439,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_label.dart (10):
 
 ### lib/features/orders/widgets/
+- antrean_header_section.dart (37): AntreanHeaderSection
 - antrean_orders_section.dart (54): AntreanOrdersSection
-- antrean_status_section.dart (74): AntreanStatusSection
+- antrean_proposals_section.dart (59): AntreanProposalsSection
+- antrean_status_section.dart (79): AntreanStatusSection
+- antrean_summary_section.dart (50): AntreanSummarySection
+- antrean_toolbar_section.dart (33): AntreanToolbarSection
 - order_customer_section.dart (56): OrderCustomerSection
 - order_detail_body_section.dart (35): OrderDetailBodySection
 - order_detail_content_section.dart (70): OrderDetailContentSection
@@ -475,6 +482,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/proposals/data/
 - account_proposal_fixtures.dart (23):
 - in_memory_proposal_repository.dart (58): InMemoryProposalRepository, proposalSeedProvider, inMemoryProposalRepositoryProvider
+- proposal_demo_accuracy_fixture.dart (2):
 - proposal_fixtures.dart (47):
 
 ### lib/features/proposals/pages/
@@ -489,6 +497,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - ai_settings.dart (25): AiPreferences, AiSettings, aiSettingsProvider
 - proposal_accept.dart (62):
 - proposal_actions.dart (73): ProposalActions, proposalActionsProvider
+- proposal_demo_accuracy.dart (4): proposalDemoAccuracyProvider
 - proposal_history.dart (46): ProposalHistory, ProposalHistoryFilter, proposalHistoryProvider, proposalHistoryFilterProvider
 - proposal_order.dart (68):
 - proposal_review.dart (92): ProposalReview, ProposalDraft, ProposalDraftController, proposalReviewProvider, proposalDraftProvider
@@ -569,7 +578,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (7):
-- root_shell_page.dart (67): RootShellPage
+- root_shell_page.dart (92): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (27): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, shellSyncStatusProvider, whatsappConnectionProvider
@@ -631,20 +640,20 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/
 - main.dart (48):
-- main_dummy.dart (101):
+- main_dummy.dart (104):
 
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
 - app_badge.dart (31): AppBadgeVariant, AppBadge
 - app_button.dart (85): AppButtonIconPlacement, AppButton
-- app_card.dart (58): AppCardRail, AppCardStyle, AppCard
+- app_card.dart (68): AppCardRail, AppCardStyle, AppCard
 - app_chip.dart (40): AppChip
 - app_divider.dart (16): AppDivider
 - app_gap.dart (19): AppGap
 - app_icon.dart (27): AppIcon
 - app_icon_button.dart (81): AppIconButtonVariant, AppIconButton
 - app_numpad_key.dart (54): AppNumpadKeyValue, AppNumpadKey
-- app_search_field.dart (88): AppSearchField, _AppSearchFieldState
+- app_search_field.dart (90): AppSearchField, _AppSearchFieldState
 - app_skeleton.dart (25): AppSkeleton
 - app_status_text.dart (22): AppStatusTextVariant, AppStatusText
 - app_svg.dart (29): AppSvg
@@ -681,7 +690,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - period_tabs.dart (29): PeriodTabs
 - progress_row.dart (38): ProgressRow
 - rank_row.dart (71): RankRow
-- section_header.dart (37): SectionHeader
+- section_header.dart (46): SectionHeader
 - segmented_progress.dart (36): SegmentedProgress
 - stat_tile.dart (35): StatTile
 - stepper_field.dart (61): StepperField
@@ -699,9 +708,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_row.dart (57): ExpenseRow
 - nota_card.dart (75): NotaCard
 - numpad.dart (62): NumpadVariant, Numpad
-- order_card.dart (100): OrderCard
+- order_card.dart (110): OrderCard
 - piutang_card.dart (83): PiutangCard
-- proposal_card.dart (63): ProposalCard
+- proposal_card.dart (106): ProposalCard
 - receipt_preview.dart (44): ReceiptPreview
 - receipt_toggle_list.dart (65): ReceiptToggleList
 - report_summary.dart (109): ReportSummary
@@ -714,7 +723,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/templates/
 - auth_scaffold.dart (42): AuthScaffold
 - form_scaffold.dart (44): FormScaffold
-- root_scaffold.dart (80): RootScaffold
+- root_scaffold.dart (103): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
 - sub_scaffold.dart (62): SubScaffold
 
@@ -728,8 +737,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - ai_settings_state_test.dart (41):
 - antrean_controller_test.dart (67):
 - antrean_golden_test.dart (52):
-- antrean_page_test.dart (61):
-- antrean_states_test.dart (82):
+- antrean_page_test.dart (73):
+- antrean_redesign_sections_test.dart (110):
+- antrean_search_page_test.dart (101):
+- antrean_search_test.dart (47):
+- antrean_states_test.dart (84):
 - antrean_test_host.dart (45):
 - antrean_test_host_test.dart (22):
 - app_avatar_test.dart (28):
@@ -737,8 +749,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_bar_root_test.dart (32):
 - app_bar_sub_test.dart (26):
 - app_bottom_sheet_test.dart (45):
-- app_button_test.dart (115):
-- app_card_test.dart (75):
+- app_button_test.dart (119):
+- app_card_test.dart (91):
 - app_chip_test.dart (41):
 - app_divider_test.dart (41):
 - app_gap_test.dart (33):
@@ -839,7 +851,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - domain_schedule_test.dart (35):
 - domain_top_services_test.dart (34):
 - drift_app_harness.dart (57):
-- drift_app_test.dart (65):
+- drift_app_test.dart (66):
 - drift_empty_test.dart (35):
 - drift_payment_flow_test.dart (94):
 - drift_widget_step.dart (10):
@@ -1001,7 +1013,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r4_antrean_filter_test.dart (30):
 - r4_antrean_flow_test.dart (72):
 - r4_antrean_orders_section_test.dart (60):
-- r4_antrean_page_test.dart (70):
+- r4_antrean_page_test.dart (71):
 - r4_business_profile_test.dart (57):
 - r4_completion_guards_test.dart (72):
 - r4_completion_test_host.dart (38): CompletionPrinter
@@ -1016,7 +1028,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r4_profile_persistence_test.dart (50):
 - r4_setting_controller_test.dart (61):
 - r4_settings_operational_section_test.dart (43):
-- r4_settings_page_test.dart (86):
+- r4_settings_page_test.dart (97):
 - r4_settings_test_support.dart (23): BusinessSaveControl, ControlledBusiness
 - r5_custom_report_test.dart (65):
 - r5_picker_test.dart (66):
@@ -1093,6 +1105,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_changes_test.dart (25):
 - sync_indicator_test.dart (23):
 - sync_page_test.dart (68):
+- tab_motion_test.dart (55):
 - template_gallery.dart (49):
 - test_fonts.dart (22):
 - toggle_row_test.dart (25):
@@ -1135,7 +1148,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_avatar_use_case.dart (19):
 - app_badge_use_case.dart (22):
 - app_button_use_case.dart (40):
-- app_card_use_case.dart (29):
+- app_card_use_case.dart (30):
 - app_chip_use_case.dart (21):
 - app_divider_use_case.dart (34):
 - app_gap_use_case.dart (28):

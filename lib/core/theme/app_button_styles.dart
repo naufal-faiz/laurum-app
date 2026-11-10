@@ -57,7 +57,9 @@ abstract final class AppButtonStyles {
       shape: RoundedRectangleBorder(borderRadius: rounded ? AppRadius.cta : AppRadius.action),
       elevation: variant == AppButtonVariant.neutralOutline ? 3 : 0,
       shadowColor: AppShadows.raised.first.color,
-      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      tapTargetSize: size == AppButtonSize.small
+          ? MaterialTapTargetSize.padded
+          : MaterialTapTargetSize.shrinkWrap,
     ).copyWith(
       side: WidgetStateProperty.resolveWith(
         (states) => BorderSide(

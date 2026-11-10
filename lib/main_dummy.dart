@@ -18,6 +18,8 @@ import 'package:laurum/features/expenses/data/in_memory_expense_repository.dart'
 import 'package:laurum/features/orders/data/in_memory_order_repository.dart';
 import 'package:laurum/features/printer/data/in_memory_receipt_settings_repository.dart';
 import 'package:laurum/features/proposals/data/in_memory_proposal_repository.dart';
+import 'package:laurum/features/proposals/data/proposal_demo_accuracy_fixture.dart';
+import 'package:laurum/features/proposals/state/proposal_demo_accuracy.dart';
 import 'package:laurum/features/reports/data/in_memory_report_repository.dart';
 import 'package:laurum/features/reports/data/report_repository_view.dart';
 import 'package:laurum/features/services/data/in_memory_service_repository.dart';
@@ -30,6 +32,7 @@ List<Override> dummyOverrides({
   SyncService? syncService,
   DateTime Function()? clock,
 }) => [
+  proposalDemoAccuracyProvider.overrideWithValue(proposalDemoAccuracyFixture),
   businessClockProvider.overrideWithValue(clock ?? () => DateTime(2026, 10, 16, 10, 45)),
   contactSourceProvider.overrideWith(
     (ref) => contactSource ?? FakeContactSource(contacts: contactFixtures),

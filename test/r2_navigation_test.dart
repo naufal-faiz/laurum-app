@@ -48,7 +48,7 @@ void main() {
     });
   }
   testWidgets('Account opens Lainnya', (tester) async {
-    final host = await pumpAntrean(tester);
+    final host = await pumpAntrean(tester, location: '/pelanggan');
     await tester.tap(find.byTooltip('Usaha dan akun'));
     await tester.pumpAndSettle();
     expect(host.router.routeInformationProvider.value.uri.path, '/lainnya');

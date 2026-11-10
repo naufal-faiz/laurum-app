@@ -1,13 +1,49 @@
 # 01 — Antrean - Beranda
-Rute: /antrean. Fase: 2. Frame: zb8jN; state akEX1, zqBHI, MrWTS, P1axJ.
+Rute: /antrean. Redesign: frame FigCraft 408 (10 Nov 2026), proposal 015.
 Template: RootScaffold pada RootShellPage, empat cabang StatefulShellRoute.
 
+## Paritas redesign (proposal 015, tes perilaku dan widget)
+
+| Butir | Jenis | Status | Sumber/aksi yang dipertahankan |
+|---|---|---|---|
+| Order aktif, pelanggan, item/layanan, total, waktu | Data | ✅ | antreanDataProvider, Formatters |
+| Status order, status pembayaran, sisa COD | Data | ✅ | pemetaan lama di AntreanOrdersSection |
+| Usulan, teks lengkap, nama, waktu | Data | ✅ | antreanDataProvider.proposals |
+| Filter 0..4 dan mode status nonaktif | Aksi/data | ✅ | antreanFilterProvider, AntreanFilterView |
+| Buka order/usulan, Tolak, majukan status/pelunasan | Aksi | ✅ | callback dan argumen lama tetap |
+| Pending/klik ganda, galat aksi | Keadaan | ✅ | antreanActionsProvider |
+| Memuat, gagal+Coba lagi, kosong, filter kosong, review kosong | Keadaan | ✅ | AntreanStatusSection |
+| Notice nota, offline, sync gagal, WhatsApp terputus+Hubungkan | Keadaan/aksi | ✅ | provider dan callback lama |
+| Akun, status sinkronisasi | Aksi/data | ✅ | akun melalui Lainnya; sync di body sesuai koreksi pengguna |
+| ord-*/ValueKey(order.id), antrean-golden | Key tes | ✅ | tidak diubah |
+| Query nama/nota/layanan/teks usulan, kosong, tutup, keyboard | Baru diminta pengguna | ✅ | state layar saja, tanpa persistensi |
+| Pindah tab, filter/scroll bertahan, reduced motion | Animasi | ✅ | navigator tetap di pohon |
+
+## Selisih desain frame 408
+- Pengguna meminta contoh akurasi: badge bertanda `contoh` hanya di main_dummy
+  melalui fixture terpisah; build utama tidak menampilkan akurasi buatan.
+- Dua tab seperti frame; filter status lama ada di ikon Filter status. Daftar utama
+  menampilkan dua usulan, Lihat semua menampilkan seluruhnya. Pesan dua baris
+  sebagai preview; teks lengkap di Periksa. Semua CTA pembayaran/status tetap ada.
+- Jumlah order aktif/perlu dicek sejajar dengan sync di body. Nama usaha dan ikon
+  akun dihapus sesuai permintaan terakhir pengguna; akun tetap melalui Lainnya.
+- Header LAURUM/Antrean/ikon cari tetap di slot AppBar, bukan di ListView.
+- Ukuran font global 16/13 dipertahankan; tinggi kartu mengikuti isi, bukan 74/124
+  dp seperti teks contoh Figma. Teks dan nominal memakai data aplikasi.
+
 ## Komposisi
-- AppBarRoot: nama BusinessRepository, status SyncService, akun ke /lainnya.
-- SectionHeader: Antrean aktif, jumlah order aktif tanpa tanggal atau 'hari ini'.
-- ChipBar: Semua, Jemput, Proses, Siap, Perlu dicek; jumlah dari repository.
-- SectionHeader Perlu dicek dan ProposalCard untuk usulan menunggu.
-- SectionHeader Sedang berjalan dan OrderCard untuk order aktif, terbaru dahulu.
+- AppBar tetap: LAURUM, Antrean, ikon Cari/Tutup. Posisi vertikal LAURUM sama
+  dengan Beranda pada teks 1x/2x. Ringkasan jumlah dan SyncService berada di body;
+  pada teks besar ringkasan dan sync tersusun vertikal agar terbaca.
+- Pencarian dibuka dari ikon, fokus otomatis; query menyaring nama/nota/layanan
+  dan teks usulan di data aktif. Tutup membersihkan query; tidak disimpan.
+- ChipBar utama: Semua (atau status terpilih) dan Perlu dicek. Ikon filter membuka
+  AntreanFilterSheet berisi Semua/Jemput/Proses/Siap/Perlu dicek dari data yang sama.
+- SectionHeader Rekomendasi AI dan ProposalCard.compact untuk semua usulan menunggu.
+- SectionHeader Antrean berjalan dan OrderCard untuk order aktif,
+  terbaru dahulu. Tombol status biru mempertahankan semua aturan pending/COD.
+- Fade tab 220 ms easeOutCubic, reduced motion langsung; navigator/scroll/filter
+  tetap terpasang. Animasi push transaksi 280 ms yang lama tetap.
 - Tanpa FAB. BottomNavBar empat tab: Beranda, Antrean, Pelanggan, Lainnya
   (sejak redesign 10 Nov 2026; Laporan tidak lagi punya slot).
   Empat tab berindeks 0..3; Transaksi adalah aksi push /transaksi/baru dan tidak aktif.

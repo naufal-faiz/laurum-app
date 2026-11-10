@@ -44,6 +44,8 @@ void main() {
     scope.read(antreanFilterProvider.notifier).select(2);
     await pumpAntrean(tester, container: scope);
     expect(find.text('Tidak ada order di status ini'), findsOneWidget);
+    await tester.tap(find.byTooltip('Filter status'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Semua 0'));
     await tester.pumpAndSettle();
     expect(find.text('Belum ada order aktif'), findsOneWidget);

@@ -7,6 +7,17 @@ import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
 void main() {
+  testWidgets('muted card uses low surface without a border', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: AppCard(style: AppCardStyle.muted, child: AppText('Pesan')),
+      ),
+    );
+    final box = tester.widget<DecoratedBox>(find.byType(DecoratedBox).last);
+    final decoration = box.decoration as BoxDecoration;
+    expect(decoration.color, AppColors.surfaceLow);
+    expect(decoration.border, isNull);
+  });
   testWidgets('AppCard renders all rails with token padding, clipping and no shadow', (
     tester,
   ) async {
@@ -42,7 +53,12 @@ void main() {
           tester
               .widget<ColoredBox>(find.descendant(of: rails, matching: find.byType(ColoredBox)))
               .color,
-          rail == AppCardRail.warning ? AppColors.warningBorder : AppColors.error,
+          switch (rail) {
+            AppCardRail.warning => AppColors.warningBorder,
+            AppCardRail.error => AppColors.error,
+            AppCardRail.success => AppColors.success,
+            _ => AppColors.primary,
+          },
         );
       }
     }

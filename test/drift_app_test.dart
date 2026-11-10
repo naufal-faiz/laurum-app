@@ -6,6 +6,7 @@ import 'package:laurum/core/persistence/demo_fixture_id.dart';
 import 'package:laurum/core/persistence/storage_providers.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
+import 'package:laurum/features/orders/widgets/antrean_header_section.dart';
 import 'package:laurum/features/shell/pages/app_router.dart';
 import 'package:laurum/features/transactions/state/checkout_state.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
@@ -34,7 +35,7 @@ void main() {
     );
     await tester.runAsync(() => container.read(antreanDataProvider.future));
     await tester.pumpAndSettle();
-    expect(find.text('Antrean aktif'), findsOneWidget);
+    expect(find.byType(AntreanHeaderSection), findsOneWidget);
     expect(find.text('12 order aktif'), findsOneWidget);
     await tester.runAsync(() async {
       final service = (await store.services.getServices()).firstWhere(
