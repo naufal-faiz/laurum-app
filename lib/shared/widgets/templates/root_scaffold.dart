@@ -15,63 +15,59 @@ class RootScaffold extends StatelessWidget {
     super.key,
     this.syncState = SyncState.tersimpan,
     this.showAppBar = true,
-
+    this.header,
     this.onAccount,
     this.onTabSelected,
     this.onCreate,
   });
-
   final String title, accountLabel;
   final int activeIndex;
   final Widget body;
   final SyncState syncState;
-
-  /// Hidden on Beranda, which draws its own brand header (frame 281).
   final bool showAppBar;
-
+  final Widget? header;
   final VoidCallback? onAccount, onCreate;
   final ValueChanged<int>? onTabSelected;
 
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: AppColors.bg,
-    appBar: PreferredSize(
-      preferredSize: const Size.fromHeight(AppSpacing.appBarHeight),
-      child: IgnorePointer(
-        ignoring: !showAppBar,
-        child: ExcludeSemantics(
-          excluding: !showAppBar,
-          child: Opacity(
-            opacity: showAppBar ? 1 : 0,
-            child: AppBarRoot(
-              title: title,
-              accountLabel: accountLabel,
-              syncIndicator: SyncIndicator(state: syncState),
-              onAccount: onAccount,
+    appBar: showAppBar || header != null
+        ? PreferredSize(
+            preferredSize: Size.fromHeight(
+              AppSpacing.appBarHeight *
+                  (header == null ? 1 : MediaQuery.textScalerOf(context).scale(1)),
             ),
-          ),
-        ),
-      ),
-    ),
-    extendBodyBehindAppBar: true,
+            child: header != null
+                ? SafeArea(
+                    bottom: false,
+                    child: SizedBox(
+                      height: AppSpacing.appBarHeight * MediaQuery.textScalerOf(context).scale(1),
+                      child: header,
+                    ),
+                  )
+                : AppBarRoot(
+                    title: title,
+                    accountLabel: accountLabel,
+                    syncIndicator: SyncIndicator(state: syncState),
+                    onAccount: onAccount,
+                  ),
+          )
+        : null,
+    extendBody: true,
     body: Builder(
       builder: (context) {
         final media = MediaQuery.of(context);
         return MediaQuery(
           data: media.copyWith(
             padding: media.padding.copyWith(
-              bottom: (media.padding.bottom - AppDimensions.navCreateSize / 2).clamp(
+              bottom: (media.padding.bottom - AppDimensions.navCreateLift).clamp(
                 0,
                 double.infinity,
               ),
             ),
           ),
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: showAppBar ? AppSpacing.appBarHeight : 0,
-            ),
-            child: body,
-          ),
+          child: body,
         );
       },
     ),

@@ -8,6 +8,9 @@ Widget tidak boleh menulis hex, ukuran font, radius, atau bayangan sendiri.
 Lapisan token global disetujui 10 Nov 2026 (`docs/design/proposals/006-lapisan-token.md`).
 Token global; tidak ada namespace per layar (UI-12).
 
+Koreksi Android (proposal 013): `AppDimensions.navCreateLift` 23 dp dan
+`navBarHeight` 64 dp; inset template dan posisi tombol memakai token yang sama.
+
 ## Warna (`AppColors`)
 
 | Nama | Hex | Pemakaian |
@@ -72,22 +75,22 @@ Nilai `height` Flutter = tinggi baris / ukuran font.
 | --- | --- | --- | --- |
 | `hero` | 28/34 | 700 | judul hero auth |
 | `brand` | 16/20 | 700 | merek di hero |
-| `brandSub` | 11/14 | 600 | tagline merek |
+| `brandSub` | 12/16 | 600 | tagline merek |
 | `titleRoot` | 24/32 | 700 | judul layar, letter-spacing -0.6 |
 | `titleSub` | 18/24 | 600 | judul app bar sub |
 | `section` | 16/22 | 600 | judul section |
 | `figure` | 24/32 | 700 | angka ringkasan besar |
-| `body` | 14/20 | 400 | |
-| `bodyStrong` | 14/20 | 600 | |
-| `input` | 14/20 | 400 | nilai input |
-| `label` | 12/16 | 600 | label, link, badge |
-| `caption` | 12/16 | 400 | |
-| `meta` | 11/15 | 400 | “atau”, trust, teks bantu |
-| `micro` | 11/15 | 600 | chip fitur |
-| `cta` | 15/20 | 600 | teks tombol utama |
+| `body` | 16/24 | 400 | koreksi keterbacaan Android, proposal 013 |
+| `bodyStrong` | 16/24 | 600 | |
+| `input` | 16/24 | 400 | nilai input |
+| `label` | 13/18 | 600 | label, link, badge |
+| `caption` | 13/18 | 400 | |
+| `meta` | 12/16 | 400 | “atau”, trust, teks bantu |
+| `micro` | 12/16 | 600 | chip fitur |
+| `cta` | 16/22 | 600 | teks tombol utama |
 | `numpad` | 18/24 | 700 | |
 
-Ukuran minimum teks 11. **IBM Plex Mono** (`AppMonoTextStyles.label` 12/16,
+Ukuran minimum teks proporsional 12 (proposal 013). **IBM Plex Mono** (`AppMonoTextStyles.label` 12/16,
 `.receipt` 11/16) HANYA untuk nomor nota (`A-0143`), jam di kartu order, label sumbu
 grafik, dan struk.
 

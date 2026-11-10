@@ -35,7 +35,8 @@ void main() {
       find.descendant(of: find.byType(BottomNavBar), matching: find.byType(InkWell)),
     );
     final page = tester.getRect(find.byType(ListView));
-    expect(page.bottom, lessThanOrEqualTo(nav.top));
+    expect(page.bottom, greaterThan(nav.top));
+    expect(page.bottom, lessThan(circle.bottom));
     for (final point in [
       Offset(20, page.bottom - 5),
       Offset(780, page.bottom - 5),

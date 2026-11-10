@@ -16,8 +16,8 @@ abstract final class AppTextStyles {
   );
   static const brandSub = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 11,
-    height: 14 / 11,
+    fontSize: 12,
+    height: 16 / 12,
     fontWeight: FontWeight.w600,
   );
   static const titleRoot = TextStyle(
@@ -47,50 +47,50 @@ abstract final class AppTextStyles {
   );
   static const body = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 14,
-    height: 20 / 14,
+    fontSize: 16,
+    height: 24 / 16,
     fontWeight: FontWeight.w400,
   );
   static const bodyStrong = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 14,
-    height: 20 / 14,
+    fontSize: 16,
+    height: 24 / 16,
     fontWeight: FontWeight.w600,
   );
   static const input = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 14,
-    height: 20 / 14,
+    fontSize: 16,
+    height: 24 / 16,
     fontWeight: FontWeight.w400,
   );
   static const label = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 12,
-    height: 16 / 12,
+    fontSize: 13,
+    height: 18 / 13,
     fontWeight: FontWeight.w600,
   );
   static const caption = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 12,
-    height: 16 / 12,
+    fontSize: 13,
+    height: 18 / 13,
     fontWeight: FontWeight.w400,
   );
   static const meta = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 11,
-    height: 15 / 11,
+    fontSize: 12,
+    height: 16 / 12,
     fontWeight: FontWeight.w400,
   );
   static const micro = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 11,
-    height: 15 / 11,
+    fontSize: 12,
+    height: 16 / 12,
     fontWeight: FontWeight.w600,
   );
   static const cta = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 15,
-    height: 20 / 15,
+    fontSize: 16,
+    height: 22 / 16,
     fontWeight: FontWeight.w600,
   );
   static const numpad = TextStyle(

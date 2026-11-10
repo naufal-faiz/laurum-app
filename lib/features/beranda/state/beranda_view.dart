@@ -1,10 +1,10 @@
-import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/order.dart';
+import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/core/formatters/formatters.dart';
+import 'package:laurum/features/beranda/state/beranda_services.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
 
-/// Colour role of a queue stage; the Section maps it to a theme colour.
-enum BerandaStageTone { primary, illustration, success }
+export 'beranda_services.dart' show BerandaStageTone;
 
 /// View data of `LAURUM · Beranda`, derived only from existing providers.
 class BerandaView {
@@ -28,6 +28,7 @@ class BerandaView {
     required int revenue,
     required List<int?> daily,
     required DateTime now,
+    Map<String, List<OrderItem>> items = const {},
   }) {
     final latest = orders.isEmpty
         ? null
@@ -44,23 +45,7 @@ class BerandaView {
       businessName: businessName,
       total: orders.length,
       updatedLabel: latest == null ? 'Belum ada antrean' : 'Diperbarui ${Formatters.jam(latest)}',
-      stages: [
-        (
-          label: 'Jemput',
-          value: orders.where((o) => o.status == OrderStatus.menungguJemput).length,
-          tone: BerandaStageTone.primary,
-        ),
-        (
-          label: 'Proses',
-          value: orders.where((o) => o.status == OrderStatus.diproses).length,
-          tone: BerandaStageTone.illustration,
-        ),
-        (
-          label: 'Siap',
-          value: orders.where((o) => o.status == OrderStatus.siap).length,
-          tone: BerandaStageTone.success,
-        ),
-      ],
+      stages: berandaServices(orders, items),
       savedCustomers: customers.length,
       newCustomers: customers
           .where(

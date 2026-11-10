@@ -12,7 +12,7 @@ import 'antrean_test_host.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
-  testWidgets('signed-out deep link redirects; Google sign in opens queue', (tester) async {
+  testWidgets('signed-out deep link redirects; Google sign in opens Beranda', (tester) async {
     final scope = ProviderContainer(
       overrides: dummyOverrides(authService: FakeAuthService(isSignedIn: false)),
     );
@@ -26,6 +26,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Antrean aktif'), findsOneWidget);
     expect(scope.read(authSessionProvider).signedIn, isTrue);
+    expect(host.router.routeInformationProvider.value.uri.path, '/beranda');
   });
   testWidgets('new account must finish blank business info before queue', (tester) async {
     final scope = ProviderContainer(
@@ -54,6 +55,7 @@ void main() {
     await tester.tap(find.widgetWithText(AppButton, 'Simpan'));
     await tester.pumpAndSettle();
     expect(scope.read(authSessionProvider).needsSetup, isFalse);
+    expect(host.router.routeInformationProvider.value.uri.path, '/beranda');
     expect(find.text('Antrean aktif'), findsOneWidget);
     expect(find.text('Laundry Baru'), findsOneWidget);
   });

@@ -54,15 +54,28 @@ void main() {
       find.descendant(of: find.byType(BottomNavBar), matching: find.text('Beranda')),
       findsOneWidget,
     );
-    final account = find.byTooltip('Akun');
-    expect(
-      tester
-          .widget<ExcludeSemantics>(
-            find.ancestor(of: account, matching: find.byType(ExcludeSemantics)).first,
-          )
-          .excluding,
-      isTrue,
-    );
+    expect(find.byTooltip('Akun'), findsNothing);
+    expect(tester.widget<Scaffold>(find.byType(Scaffold)).appBar, isNull);
   });
   registerTemplateGallery('root_scaffold', rootScaffoldUseCases.first.builder);
+
+  testWidgets('brand header replaces the account bar without a blank toolbar', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: const RootScaffold(
+          title: 'Beranda',
+          accountLabel: 'Akun',
+          activeIndex: 0,
+          showAppBar: false,
+          header: AppText('Merek'),
+          body: AppText('Konten'),
+        ),
+      ),
+    );
+    expect(find.byTooltip('Akun'), findsNothing);
+    final header = tester.getRect(find.text('Merek'));
+    final content = tester.getRect(find.text('Konten'));
+    expect(content.top, header.bottom);
+  });
 }

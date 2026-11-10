@@ -24,7 +24,7 @@ void main() {
       await store.dispose();
       await store.db.close();
     });
-    final router = createAppRouter(container: container);
+    final router = createAppRouter(container: container, initialLocation: '/antrean');
     addTearDown(router.dispose);
     await tester.pumpWidget(
       UncontrolledProviderScope(

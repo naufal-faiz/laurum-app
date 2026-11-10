@@ -26,7 +26,7 @@ import 'package:laurum/features/transactions/pages/transaction_routes.dart';
 
 GoRouter createAppRouter({
   required ProviderContainer container,
-  String initialLocation = '/antrean',
+  String initialLocation = '/beranda',
 }) => GoRouter(
   initialLocation: initialLocation,
   redirect: (context, state) => authRedirect(container.read(authSessionProvider), state),

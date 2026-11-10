@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/services/sync_service.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/beranda/widgets/beranda_header_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
@@ -20,6 +22,12 @@ class RootShellPage extends ConsumerWidget {
       accountLabel: 'Usaha dan akun',
       activeIndex: navigationShell.currentIndex,
       showAppBar: navigationShell.currentIndex != 0,
+      header: navigationShell.currentIndex == 0
+          ? const Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
+              child: BerandaHeaderSection(),
+            )
+          : null,
       syncState: sync.hasError
           ? SyncState.gagal
           : SyncState.values.byName(sync.value?.name ?? 'menyimpan'),
@@ -27,7 +35,7 @@ class RootShellPage extends ConsumerWidget {
       onTabSelected: navigationShell.goBranch,
       onCreate: () => context.push('/transaksi/baru'),
       body: SafeArea(
-        top: navigationShell.currentIndex == 0,
+        top: false,
         child: Column(
           children: [
             if (sync.value == SyncServiceStatus.offline)

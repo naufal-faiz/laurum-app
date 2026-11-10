@@ -15,7 +15,7 @@ void main() {
         ),
       );
       expect(find.text(variant.name), findsOneWidget);
-      expect(tester.getSize(find.byType(AppBadge)).height, 20);
+      expect(tester.getSize(find.byType(AppBadge)).height, 22);
       final text = tester.widget<AppText>(find.byType(AppText));
       expect(text.variant, AppTextVariant.label);
       expect(text.color, switch (variant) {

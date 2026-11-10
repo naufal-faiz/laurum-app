@@ -49,7 +49,7 @@ class RankRow extends StatelessWidget {
               children: [
                 AppText(
                   name,
-                  variant: AppTextVariant.label,
+                  variant: AppTextVariant.bodyStrong,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

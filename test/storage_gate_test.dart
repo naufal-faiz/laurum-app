@@ -29,7 +29,7 @@ void main() {
         ),
       ],
     );
-    final router = createAppRouter(container: c);
+    final router = createAppRouter(container: c, initialLocation: '/antrean');
     addTearDown(() async {
       router.dispose();
       c.dispose();

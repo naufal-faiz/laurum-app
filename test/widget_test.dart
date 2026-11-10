@@ -5,12 +5,14 @@ import 'package:laurum/core/theme/app_text_styles.dart';
 import 'package:laurum/main_dummy.dart' as dummy;
 
 void main() {
-  testWidgets('Dummy entry point opens the themed queue', (tester) async {
+  testWidgets('Dummy entry point opens the themed Beranda', (tester) async {
     await dummy.main();
     await tester.pumpAndSettle();
     final scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
     final theme = Theme.of(tester.element(find.byType(Scaffold)));
     expect(find.text('Antrean aktif'), findsOneWidget);
+    expect(find.text('LAURUM'), findsOneWidget);
+    expect(find.text('Selamat datang kembali,'), findsOneWidget);
     expect(scaffold.appBar, isNotNull);
     expect(scaffold.floatingActionButton, isNull);
     expect(find.text('Transaksi'), findsOneWidget);

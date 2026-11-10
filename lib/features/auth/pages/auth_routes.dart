@@ -21,9 +21,9 @@ String? authRedirect(AuthState auth, GoRouterState state) {
         : '/lainnya/info-usaha?onboarding=1';
   }
   if (path == '/lainnya/info-usaha' && state.uri.queryParameters['onboarding'] == '1') {
-    return '/antrean';
+    return '/beranda';
   }
-  return public ? '/antrean' : null;
+  return public ? '/beranda' : null;
 }
 
 final authRoutes = <RouteBase>[

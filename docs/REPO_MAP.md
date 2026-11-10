@@ -192,7 +192,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_button_styles.dart (69): AppButtonVariant, AppButtonSize, AppButtonStyles
 - app_colors.dart (64): AppColors
 - app_control_tokens.dart (19): AppControlTokens
-- app_dimensions.dart (14): AppDimensions
+- app_dimensions.dart (15): AppDimensions
 - app_field_decoration.dart (34): AppFieldDecoration
 - app_input_styles.dart (104): AppInputStyles
 - app_molecule_styles.dart (32): AppMoleculeStyles
@@ -269,16 +269,17 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sign_up_hero_section.dart (17): SignUpHeroSection
 
 ### lib/features/beranda/pages/
-- beranda_page.dart (97): BerandaPage
+- beranda_page.dart (95): BerandaPage
 
 ### lib/features/beranda/state/
-- beranda_view.dart (106): BerandaStageTone, BerandaView
+- beranda_services.dart (29): BerandaStageTone
+- beranda_view.dart (91): BerandaView
 
 ### lib/features/beranda/widgets/
-- beranda_frequent_section.dart (64): BerandaFrequentSection
-- beranda_header_section.dart (54): BerandaHeaderSection
-- beranda_queue_section.dart (97): BerandaQueueSection
-- beranda_stats_section.dart (105): BerandaStatsSection
+- beranda_frequent_section.dart (63): BerandaFrequentSection
+- beranda_header_section.dart (55): BerandaHeaderSection
+- beranda_queue_section.dart (101): BerandaQueueSection
+- beranda_stats_section.dart (99): BerandaStatsSection
 - beranda_welcome_section.dart (23): BerandaWelcomeSection
 
 ### lib/features/business/data/
@@ -568,7 +569,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (7):
-- root_shell_page.dart (59): RootShellPage
+- root_shell_page.dart (67): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (27): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, shellSyncStatusProvider, whatsappConnectionProvider
@@ -635,7 +636,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
 - app_badge.dart (31): AppBadgeVariant, AppBadge
-- app_button.dart (80): AppButtonIconPlacement, AppButton
+- app_button.dart (85): AppButtonIconPlacement, AppButton
 - app_card.dart (58): AppCardRail, AppCardStyle, AppCard
 - app_chip.dart (40): AppChip
 - app_divider.dart (16): AppDivider
@@ -674,7 +675,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - menu_row.dart (45): MenuRow
 - metric_tile.dart (47): MetricTile
 - mini_bar_chart.dart (40): MiniBarChart
-- nav_item.dart (65): NavItem
+- nav_item.dart (56): NavItem
 - nominal_chips.dart (31): NominalChips
 - notice_ai.dart (17): NoticeAi
 - period_tabs.dart (29): PeriodTabs
@@ -692,7 +693,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_bottom_sheet.dart (93): AppBottomSheet
 - auth_card.dart (21): AuthCard
 - auth_hero.dart (110): AuthHero
-- bottom_nav_bar.dart (101): BottomNavBar
+- bottom_nav_bar.dart (102): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
 - customer_row.dart (102): CustomerRow
 - expense_row.dart (57): ExpenseRow
@@ -708,12 +709,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_row.dart (84): ServiceRow
 - top_services.dart (106): TopServices
 - weekly_bar_chart.dart (110): WeeklyBarChart
-- welcome_banner.dart (109): WelcomeBanner
+- welcome_banner.dart (110): WelcomeBanner
 
 ### lib/shared/widgets/templates/
 - auth_scaffold.dart (42): AuthScaffold
 - form_scaffold.dart (44): FormScaffold
-- root_scaffold.dart (84): RootScaffold
+- root_scaffold.dart (80): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
 - sub_scaffold.dart (62): SubScaffold
 
@@ -767,16 +768,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_hero_test.dart (51):
 - auth_onboarding_keyboard_test.dart (33):
 - auth_restore_test.dart (53): DeferredRestore
-- auth_routes_test.dart (60):
+- auth_routes_test.dart (62):
 - auth_scaffold_test.dart (38):
 - auth_session_test.dart (64):
 - auth_sync_golden_test.dart (84):
 - auth_sync_sections_test.dart (100):
 - banner_message_test.dart (23):
 - beranda_molecules_test.dart (113):
-- beranda_page_test.dart (44):
-- beranda_sections_test.dart (137):
-- beranda_view_test.dart (80):
+- beranda_page_test.dart (58):
+- beranda_sections_test.dart (183):
+- beranda_view_test.dart (136):
 - bottom_nav_bar_test.dart (104):
 - bp0_id_flow_test.dart (61):
 - brand_lockup_test.dart (25):
@@ -1040,7 +1041,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r9_receipt_sections_test.dart (84):
 - r9_section_host.dart (10):
 - r9_validation_flow_test.dart (39):
-- raised_navigation_test.dart (53):
+- raised_navigation_test.dart (54):
 - receipt_actions_layout_test.dart (74):
 - receipt_cod_visual_test.dart (36):
 - receipt_fixtures.dart (86):
@@ -1057,7 +1058,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_states_test.dart (61):
 - report_summary_test.dart (36):
 - report_view_test.dart (81):
-- root_scaffold_test.dart (68):
+- root_scaffold_test.dart (81):
 - root_scroll_clearance_test.dart (44):
 - savings_row_test.dart (33):
 - section_header_test.dart (26):
@@ -1117,7 +1118,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - weekly_bar_chart_test.dart (30):
 - weight_edit_test.dart (184):
 - weight_input_display_test.dart (38):
-- widget_test.dart (23):
+- widget_test.dart (25):
 
 ### tool/
 - backend_rules.dart (52):

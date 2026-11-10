@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:laurum/features/beranda/widgets/beranda_header_section.dart';
 import 'package:laurum/shared/widgets/organisms/bottom_nav_bar.dart';
 
 import 'antrean_test_host.dart';
@@ -20,6 +21,9 @@ void main() {
     expect(find.text('Pendapatan minggu ini'), findsOneWidget);
     expect(find.text('Pelanggan paling sering'), findsOneWidget);
     expect(tester.widget<BottomNavBar>(find.byType(BottomNavBar)).activeIndex, 0);
+    final header = tester.getRect(find.byType(BerandaHeaderSection));
+    final welcome = tester.getRect(find.text('Selamat datang kembali,'));
+    expect(welcome.top - header.bottom, lessThan(40));
     expect(tester.takeException(), isNull);
     await expectLater(
       find.byKey(const ValueKey('antrean-golden')),
@@ -39,6 +43,16 @@ void main() {
     await tester.pumpAndSettle();
     expect(host.router.routeInformationProvider.value.uri.path, '/beranda');
     expect(find.text('Antrean aktif'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    final headerTop = tester.getTopLeft(find.byType(BerandaHeaderSection));
+    await tester.drag(find.byType(ListView).first, const Offset(0, -350));
+    await tester.pumpAndSettle();
+    expect(tester.getTopLeft(find.byType(BerandaHeaderSection)), headerTop);
+    await tester.tap(
+      find.descendant(of: find.byType(BottomNavBar), matching: find.text('Antrean')),
+    );
+    await tester.pumpAndSettle();
+    expect(host.router.routeInformationProvider.value.uri.path, '/antrean');
     expect(tester.takeException(), isNull);
   });
 }

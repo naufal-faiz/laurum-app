@@ -20,6 +20,7 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.iconAsset,
     this.iconPlacement = AppButtonIconPlacement.leading,
+    this.iconQuarterTurns = 0,
     this.iconSize = AppDimensions.iconSmall,
     this.busy = false,
     this.onPressed,
@@ -33,6 +34,7 @@ class AppButton extends StatelessWidget {
   final AppIcons? icon;
   final String? iconAsset;
   final AppButtonIconPlacement iconPlacement;
+  final int iconQuarterTurns;
   final double iconSize;
   final bool busy;
   final VoidCallback? onPressed;
@@ -43,11 +45,12 @@ class AppButton extends StatelessWidget {
     final foreground = disabled
         ? AppControlTokens.disabledForeground
         : AppButtonStyles.foreground(variant);
-    final leading = iconAsset != null
+    final glyph = iconAsset != null
         ? AppSvg(iconAsset!, size: iconSize, color: foreground)
         : icon == null
         ? null
         : AppIcon(icon!, size: iconSize, color: foreground);
+    final leading = glyph == null ? null : RotatedBox(quarterTurns: iconQuarterTurns, child: glyph);
     return TextButton(
       onPressed: disabled ? null : onPressed,
       style: AppButtonStyles.of(variant, size: size),
@@ -63,7 +66,9 @@ class AppButton extends StatelessWidget {
             child: AppText(
               label,
               textAlign: TextAlign.center,
-              variant: variant == AppButtonVariant.cta || variant == AppButtonVariant.secondary
+              variant: size == AppButtonSize.small
+                  ? AppTextVariant.label
+                  : variant == AppButtonVariant.cta || variant == AppButtonVariant.secondary
                   ? AppTextVariant.cta
                   : AppTextVariant.bodyStrong,
               color: foreground,

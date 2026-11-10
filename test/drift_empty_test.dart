@@ -11,7 +11,7 @@ void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
   testWidgets('empty Drift business displays empty state and create action', (tester) async {
     final app = (await tester.runAsync(() => driftAppHarness(seed: false)))!;
-    final router = createAppRouter(container: app.container);
+    final router = createAppRouter(container: app.container, initialLocation: '/antrean');
     addTearDown(() async {
       router.dispose();
       app.container.dispose();

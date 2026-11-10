@@ -34,11 +34,10 @@ class BerandaFrequentSection extends StatelessWidget {
                 'Pelanggan paling sering',
                 variant: AppTextVariant.bodyStrong,
                 color: AppColors.primaryInk,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
               ),
             ),
-            Flexible(child: InlineLink('Lihat semua', onTap: onSeeAll)),
+            const SizedBox(width: AppSpacing.small),
+            InlineLink('Lihat semua', onTap: onSeeAll),
           ],
         ),
         if (rows.isEmpty)

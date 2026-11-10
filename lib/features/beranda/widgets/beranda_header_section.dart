@@ -24,16 +24,17 @@ class BerandaHeaderSection extends StatelessWidget {
       ),
       Expanded(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AppText(
               'LAURUM',
-              variant: AppTextVariant.titleSub,
+              variant: AppTextVariant.section,
               color: AppColors.primaryInk,
             ),
             AppText(
-              'LAUNDRY MANAGEMENT',
-              variant: AppTextVariant.label,
+              'Laundry Management',
+              variant: AppTextVariant.caption,
               color: AppColors.ink3,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

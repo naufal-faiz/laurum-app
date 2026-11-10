@@ -48,6 +48,8 @@ class BerandaQueueSection extends StatelessWidget {
                     'Antrean aktif',
                     variant: AppTextVariant.label,
                     color: AppColors.primaryInk,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   AppText(
                     updatedLabel,
@@ -59,32 +61,34 @@ class BerandaQueueSection extends StatelessWidget {
                 ],
               ),
             ),
-            Flexible(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: AppBadge('$total pesanan', variant: AppBadgeVariant.siap),
-              ),
-            ),
+            AppBadge('$total pesanan', variant: AppBadgeVariant.siap),
           ],
         ),
-        Row(
-          spacing: AppSpacing.small,
-          children: [
-            for (final stage in stages)
-              Expanded(
-                child: MetricTile(
-                  label: stage.label,
-                  value: '${stage.value}',
-                  color: _toneColor(stage.tone),
+        if (stages.isEmpty)
+          AppText(
+            total == 0 ? 'Belum ada pesanan masuk.' : 'Rincian layanan belum tersedia.',
+            color: AppColors.ink3,
+          )
+        else
+          Row(
+            spacing: AppSpacing.small,
+            children: [
+              for (final stage in stages)
+                Expanded(
+                  child: MetricTile(
+                    label: stage.label,
+                    value: '${stage.value}',
+                    color: _toneColor(stage.tone),
+                  ),
                 ),
-              ),
-          ],
-        ),
-        SegmentedProgress(
-          segments: [
-            for (final stage in stages) (value: stage.value, color: _toneColor(stage.tone)),
-          ],
-        ),
+            ],
+          ),
+        if (stages.isNotEmpty)
+          SegmentedProgress(
+            segments: [
+              for (final stage in stages) (value: stage.value, color: _toneColor(stage.tone)),
+            ],
+          ),
       ],
     ),
   );

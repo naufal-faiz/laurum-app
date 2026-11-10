@@ -7,7 +7,8 @@ abstract final class AppDimensions {
   static const iconLarge = 44.0;
   static const line = 1.0;
   static const navCreateSize = 56.0;
-  static const navCreateLift = navCreateSize / 3;
+  static const navCreateLift = 23.0;
+  static const navBarHeight = 64.0;
   static const fieldHeight = 48.0;
   static const barHeight = 46.0;
   static const backButton = 36.0;

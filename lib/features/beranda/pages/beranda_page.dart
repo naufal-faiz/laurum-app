@@ -6,7 +6,6 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/beranda/state/beranda_view.dart';
 import 'package:laurum/features/beranda/widgets/beranda_frequent_section.dart';
-import 'package:laurum/features/beranda/widgets/beranda_header_section.dart';
 import 'package:laurum/features/beranda/widgets/beranda_queue_section.dart';
 import 'package:laurum/features/beranda/widgets/beranda_stats_section.dart';
 import 'package:laurum/features/beranda/widgets/beranda_welcome_section.dart';
@@ -30,6 +29,7 @@ class BerandaPage extends ConsumerWidget {
     final view = BerandaView.from(
       businessName: profile.value?.name ?? 'Laurum',
       orders: antrean.value?.orders ?? const [],
+      items: antrean.value?.items ?? const {},
       customers: customers.value ?? const [],
       revenue: report.value?.totals.revenue ?? 0,
       daily: report.value?.daily ?? const [],
@@ -39,14 +39,12 @@ class BerandaPage extends ConsumerWidget {
     final error = antrean.hasError || customers.hasError || report.hasError;
     return ListView(
       padding: const EdgeInsets.fromLTRB(
-        AppSpacing.xlarge,
+        AppSpacing.large,
         AppSpacing.medium,
-        AppSpacing.xlarge,
+        AppSpacing.large,
         AppSpacing.xxlarge * 3,
       ),
       children: [
-        const BerandaHeaderSection(),
-        const SizedBox(height: AppSpacing.large),
         if (loading)
           for (var i = 0; i < 3; i++)
             const Padding(

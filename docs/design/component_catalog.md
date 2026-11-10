@@ -133,12 +133,13 @@
 ## RankRow
 - Berkas: lib/shared/widgets/molecules/rank_row.dart.
 - API: initials, name, detail, trailing wajib; onTap opsional.
-- Avatar 34, nama 12/600 `ink`, detail 12 `ink3`, trailing 12 `primary`.
+- Avatar 34, nama bodyStrong 16/600 `ink`, detail caption 13 `ink3`, trailing label 13 `primary`.
 
 ## NavItem
 - Berkas: lib/shared/widgets/molecules/nav_item.dart.
 - API: label, icon, selected wajib; activeIcon dan onTap opsional.
-- Slot 60x46 radius 14; aktif `primaryTint` + `primary`, nonaktif `ink3`.
+- Slot fleksibel (minimum 60x48), label utuh dan bisa membungkus pada layar sempit.
+  Aktif hanya ikon/teks `primary` tanpa kotak latar; nonaktif `ink3` (proposal 013).
 
 ## CreateAction
 - Berkas: lib/shared/widgets/molecules/create_action.dart.
@@ -368,7 +369,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Berkas: lib/shared/widgets/atoms/app_button.dart.
 - Parameter: label wajib; variant = cta; size (AppButtonSize) opsional;
   icon (AppIcons) atau iconAsset (String SVG) opsional dan saling eksklusif;
-  iconPlacement = leading; iconSize = 16; busy = false; onPressed opsional; key.
+  iconPlacement = leading; iconQuarterTurns = 0; iconSize = 16; busy = false; onPressed opsional; key.
 - Varian: cta, secondary, action, actionOutline, neutralOutline,
   destructiveOutline, destructiveFilled.
 - Ukuran: large 50, medium 44, small 40 (`AppControlTokens.button*`). Default:
@@ -381,6 +382,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Contoh: AppButton(label, variant: AppButtonVariant.action, icon: AppIcons.check, onPressed: onTap).
 - Ikon merek: AppButton('Lanjutkan dengan Google', variant: AppButtonVariant.neutralOutline, iconAsset: AppSvgs.google, iconSize: AppDimensions.icon, onPressed: onGoogle).
 - Ikon di belakang label: `iconPlacement: AppButtonIconPlacement.trailing`.
+  `iconQuarterTurns: 2` membalik cursorBack ke kanan; ukuran small memakai label 13.
 - Widgetbook: tujuh varian, tiga ukuran dengan ikon di belakang, busy, dan disabled.
 - Referensi Figma: `4294968730` (Masuk, 50/radius 14), `4294968737` (Google, 48).
 - Selisih: tinggi Google 48 Figma -> 50 (skala 50/44/40); shadow tombol netral
@@ -548,9 +550,10 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   onCreate opsional, createLabel default Transaksi. Tanpa state/navigasi internal.
 - Empat `NavItem` + aksi tengah `CreateAction`, bukan tab. Semantics Transaksi
   baru, selalu tidak aktif. Ikon: droplet/queue/customers/menu (ikon lama).
-- Pil mengambang 342x64 putih border `borderStrong` radius 24, jarak samping 24
-  dan bawah 8 (frame 388/494); item 60x46 radius 14, aktif `primaryTint` +
-  `primary`, nonaktif `ink3`; cincin 58 `primaryTint` + lingkaran 52 `primary`.
+- Pil mengambang selebar layar dikurangi margin 8 dp per sisi, tinggi dasar 64
+  mengikuti skala teks nav (maksimal 1,3), putih border `borderStrong` radius 24
+  dan bawah 8 (frame 388/494); item fleksibel, aktif hanya ikon/teks `primary`
+  tanpa kotak latar, nonaktif `ink3`; cincin 58 `primaryTint` + lingkaran 52 `primary`.
 - Ketuk tombol tengah memberi umpan Material ink (satu InkWell); label Transaksi
   di bawah lingkaran juga memicu aksi yang sama.
 - Contoh: BottomNavBar(activeIndex: tab, onSelected: pilih, onCreate: buat).
@@ -768,11 +771,12 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 ## RootScaffold
 - Berkas: lib/shared/widgets/templates/root_scaffold.dart.
 - API wajib: title, accountLabel, activeIndex 0..3, body. Opsi: syncState,
-  showAppBar (default true), onAccount, onTabSelected, onCreate.
+  showAppBar (default true), header (Widget? default null), onAccount, onTabSelected, onCreate.
 - AppBarRoot + SyncIndicator (kecuali `showAppBar: false`, dipakai Beranda yang
   punya header merek sendiri), body, BottomNavBar dengan aksi tengah.
-- Revisi 10 Nov: nav mengambang (lihat BottomNavBar); Beranda memakai
-  `showAppBar: false` dan `SafeArea` atas dari RootShellPage.
+- Koreksi 10 Nov (013): Beranda memakai `showAppBar: false` + slot `header`
+  merek/notifikasi menggantikan AppBarRoot, tetap di atas body tanpa toolbar kosong.
+  extendBody menampilkan konten di sisi tombol Transaksi yang menonjol.
 - Contoh: RootScaffold(title: nama, accountLabel: akun, activeIndex: tab,
   onTabSelected: pilih, onCreate: buat, body: content).
 - Widgetbook: navigasi dan Transaksi, offline. Tes tanpa FAB, callback,

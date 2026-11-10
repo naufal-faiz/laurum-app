@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/molecules/create_action.dart';
@@ -35,6 +36,8 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
+    final scale = media.textScaler.clamp(maxScaleFactor: 1.3).scale(1);
+    final barHeight = AppDimensions.navBarHeight * scale;
     final items = [
       for (final (index, tab) in _tabs.indexed)
         NavItem(
@@ -51,16 +54,16 @@ class BottomNavBar extends StatelessWidget {
         top: false,
         minimum: const EdgeInsets.only(bottom: AppSpacing.small),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.small),
           child: SizedBox(
-            height: 87,
+            height: barHeight + AppDimensions.navCreateLift,
             child: Stack(
               children: [
                 Positioned(
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  height: 64,
+                  height: barHeight,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       color: AppColors.surface,
@@ -71,13 +74,11 @@ class BottomNavBar extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxsmall),
                       child: Row(
                         children: [
-                          items[0],
-                          const SizedBox(width: AppSpacing.small),
-                          items[1],
-                          const Spacer(),
-                          items[2],
-                          const SizedBox(width: AppSpacing.small),
-                          items[3],
+                          Expanded(child: items[0]),
+                          Expanded(child: items[1]),
+                          const Expanded(child: SizedBox()),
+                          Expanded(child: items[2]),
+                          Expanded(child: items[3]),
                         ],
                       ),
                     ),

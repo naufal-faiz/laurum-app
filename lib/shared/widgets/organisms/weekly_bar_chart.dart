@@ -48,7 +48,7 @@ class WeeklyBarChart extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 128 + 160 * (textScale - 1).clamp(0, 4).toDouble(),
+            height: 128 + 192 * (textScale - 1).clamp(0, 4).toDouble(),
             child: Row(
               spacing: 10,
               children: [
