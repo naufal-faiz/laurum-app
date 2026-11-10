@@ -117,7 +117,7 @@ void main() {
   testWidgets('SignUpHeroSection: back callback', (tester) async {
     var back = 0;
     await tester.pumpWidget(_host(SignUpHeroSection(onBack: () => back++)));
-    await tester.tap(find.byType(ColorFiltered));
+    await tester.tap(find.byTooltip('Kembali'));
     expect(back, 1);
   });
 }

@@ -48,4 +48,28 @@ void main() {
     }
     expect(tester.takeException(), isNull);
   });
+  testWidgets('elevated style uses radius 24 and the elevated shadow without a border', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: AppCard(style: AppCardStyle.elevated, child: AppText('Elevated')),
+        ),
+      ),
+    );
+    final card = find.widgetWithText(AppCard, 'Elevated');
+    final decoration =
+        tester
+                .widget<DecoratedBox>(
+                  find.descendant(of: card, matching: find.byType(DecoratedBox)),
+                )
+                .decoration
+            as BoxDecoration;
+    expect(decoration.color, AppColors.surface);
+    expect(decoration.borderRadius, AppRadius.cardLarge);
+    expect(decoration.border, isNull);
+    expect(decoration.boxShadow, isNotNull);
+    expect(tester.takeException(), isNull);
+  });
 }

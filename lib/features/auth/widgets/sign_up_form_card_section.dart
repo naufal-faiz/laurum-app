@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
-import 'package:laurum/core/theme/app_colors.dart';
-import 'package:laurum/core/theme/app_radius.dart';
-import 'package:laurum/core/theme/app_shadows.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/auth/widgets/auth_email_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_name_field_section.dart';
@@ -11,6 +8,7 @@ import 'package:laurum/features/auth/widgets/auth_password_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_submit_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_section.dart';
 import 'package:laurum/features/auth/widgets/sign_up_signin_link_section.dart';
+import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 
 /// White card of frame `LAURUM · Daftar` (342 wide, radius 24, padding 18,
@@ -44,12 +42,8 @@ class SignUpFormCardSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppRadius.cardLarge,
-        boxShadow: AppShadows.cardElevated,
-      ),
+    return AppCard(
+      style: AppCardStyle.elevated,
       padding: const EdgeInsets.all(AppSpacing.largeX),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

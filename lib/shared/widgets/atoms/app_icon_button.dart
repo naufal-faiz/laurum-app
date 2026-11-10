@@ -8,10 +8,14 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_svg.dart';
 
+/// `plain` = ikon polos 48 dp; `hero` = lingkaran 36 dp di atas hero auth.
+enum AppIconButtonVariant { plain, hero }
+
 class AppIconButton extends StatelessWidget {
   const AppIconButton({
     required this.label,
     super.key,
+    this.variant = AppIconButtonVariant.plain,
     this.icon,
     this.iconAsset,
     this.onPressed,
@@ -23,24 +27,52 @@ class AppIconButton extends StatelessWidget {
   final AppIcons? icon;
   final String? iconAsset;
   final String label;
+  final AppIconButtonVariant variant;
   final VoidCallback? onPressed;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
-    final tint = onPressed == null ? AppControlTokens.disabledForeground : color;
+    final hero = variant == AppIconButtonVariant.hero;
+    final tint = hero
+        ? AppColors.onPrimary
+        : onPressed == null
+        ? AppControlTokens.disabledForeground
+        : color;
+    final glyphSize = hero ? AppDimensions.iconBack : AppDimensions.iconAction;
+    final glyph = iconAsset != null
+        ? AppSvg(iconAsset!, size: glyphSize, color: tint)
+        : AppIcon(icon!, size: glyphSize, color: tint);
+    final heroStyle = IconButton.styleFrom(
+      minimumSize: const Size.square(AppControlTokens.buttonMedium),
+      maximumSize: const Size.square(AppControlTokens.buttonMedium),
+      padding: EdgeInsets.zero,
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      shape: const CircleBorder(),
+    );
+    final plainStyle = IconButton.styleFrom(
+      minimumSize: const Size.square(AppSpacing.touchTarget),
+      maximumSize: const Size.square(AppSpacing.touchTarget),
+      padding: EdgeInsets.zero,
+      shape: const RoundedRectangleBorder(borderRadius: AppRadius.action),
+    );
     return IconButton(
       tooltip: label,
       onPressed: onPressed,
-      style: IconButton.styleFrom(
-        minimumSize: const Size.square(AppSpacing.touchTarget),
-        maximumSize: const Size.square(AppSpacing.touchTarget),
-        padding: EdgeInsets.zero,
-        shape: const RoundedRectangleBorder(borderRadius: AppRadius.action),
-      ),
-      icon: iconAsset != null
-          ? AppSvg(iconAsset!, size: AppDimensions.iconAction, color: tint)
-          : AppIcon(icon!, size: AppDimensions.iconAction, color: tint),
+      style: hero ? heroStyle : plainStyle,
+      icon: hero
+          ? SizedBox.square(
+              dimension: AppDimensions.backButton,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: AppColors.illustration,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.backBorder),
+                ),
+                child: Center(child: glyph),
+              ),
+            )
+          : glyph,
     );
   }
 }

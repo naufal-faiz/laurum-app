@@ -125,18 +125,28 @@ grafik, dan struk.
 Alias lama: `screenPadding`=16, `cardGap`=12, `cardPadding`=16, `appBarHeight`=64,
 `minTouchTarget`=44, `touchTarget`=48, `railWidth`=4.
 
-`AppDimensions`: `iconTiny` 12, `iconSmall` 16, `iconAction` 20, `icon` 24,
-`iconLarge` 44, `line` 1, `fieldHeight` 48, `barHeight` 46, `backButton` 36,
-`navCreateSize` 56.
+`AppDimensions`: `iconTiny` 12, `iconSmall` 16, `iconBack` 18, `iconAction` 20,
+`icon` 24, `iconLarge` 44, `line` 1, `fieldHeight` 48, `barHeight` 46,
+`backButton` 36, `navCreateSize` 56.
 
 `AppControlTokens`: `buttonLarge` 50 (`ctaHeight`), `buttonMedium` 44,
 `buttonSmall` 40, `iconGap` 8, `avatarSize` 40, switch 28/24/2, disabled opacity 0.5.
+
+Tombol (`AppButton`): ukuran 50/44/40; default `cta` 50, varian lain 44. Radius 14
+untuk `cta`/`secondary`/`neutralOutline`, 12 untuk varian lain. Ikon dalam tombol 16
+(Google 24). `neutralOutline` = putih, border `borderStrong`, teks `ink`, shadow
+`raised`.
+
+Tombol ikon (`AppIconButton`): `plain` 48 polos; `hero` area 44 dengan lingkaran 36
+`illustration` + border `backBorder`, ikon putih 18.
 
 Field form (`AppFieldDecoration` + `AppInputStyles.field`): tinggi 48, radius 12,
 padding kiri 0/kanan 10/atas-bawah 13, ikon kiri 41, slot kanan 38, border
 `borderStrong`, fokus `primary`, error `error` + `errorTint`.
 
 Kartu memakai border `border`, bukan bayangan (kecuali kartu auth `cardElevated`).
+`AppCard(style: AppCardStyle.elevated)` = radius 24, tanpa border, shadow
+`cardElevated`.
 
 ## Format penulisan (`Formatters`)
 

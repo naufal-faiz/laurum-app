@@ -22,8 +22,19 @@ final appButtonUseCase = WidgetbookUseCase(
               onPressed: () {},
             ),
           ),
+        for (final size in AppButtonSize.values)
+          AppButton(
+            'Ukuran ${size.name}',
+            size: size,
+            icon: AppIcons.arrowForward,
+            iconPlacement: AppButtonIconPlacement.trailing,
+            onPressed: () {},
+          ),
+        const AppButton('Sibuk', busy: true, onPressed: _noop),
         const AppButton('Disabled', icon: AppIcons.check),
       ],
     ),
   ),
 );
+
+void _noop() {}

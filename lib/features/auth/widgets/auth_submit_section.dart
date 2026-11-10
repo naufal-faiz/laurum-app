@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
-import 'package:laurum/core/theme/app_colors.dart';
-import 'package:laurum/core/theme/app_radius.dart';
-import 'package:laurum/core/theme/app_text_styles.dart';
-import 'package:laurum/shared/widgets/atoms/app_icon.dart';
+import 'package:laurum/shared/widgets/atoms/app_button.dart';
 
 /// Blue primary button of the auth frames (50 dp, radius 14, trailing icon).
 class AuthSubmitSection extends StatelessWidget {
@@ -21,28 +18,11 @@ class AuthSubmitSection extends StatelessWidget {
   final VoidCallback onSubmit;
 
   @override
-  Widget build(BuildContext context) {
-    final foreground = busy ? AppColors.ink3 : AppColors.onPrimary;
-    return SizedBox(
-      height: 50,
-      child: Material(
-        color: busy ? AppColors.chipIdle : AppColors.primary,
-        borderRadius: AppRadius.cta,
-        child: InkWell(
-          borderRadius: AppRadius.cta,
-          onTap: busy ? null : onSubmit,
-          child: Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(label, style: AppTextStyles.cta.copyWith(color: foreground)),
-                const SizedBox(width: 8),
-                AppIcon(icon, size: 16, color: foreground),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => AppButton(
+    label,
+    icon: icon,
+    iconPlacement: AppButtonIconPlacement.trailing,
+    busy: busy,
+    onPressed: onSubmit,
+  );
 }

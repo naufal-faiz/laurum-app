@@ -217,17 +217,19 @@ Parameter warna/ukuran pada pemakaian harus berasal dari `core/theme`.
 ## AppCard
 
 - Berkas: `lib/shared/widgets/atoms/app_card.dart`.
-- Parameter: `child` wajib; `rail = AppCardRail.none`,
-  `padding = EdgeInsets.all(AppSpacing.cardPadding)`, `key`.
-- Varian: none, warning (amber), error (merah).
-- Warna surface, border AppColors.border selebar AppDimensions.line,
-  radius AppRadius.card (16), padding 16, rail kiri 4, tanpa bayangan.
-  Isi dan rail dipotong mengikuti radius kartu; rail berada di kiri fisik.
-- Contoh: `AppCard(rail: AppCardRail.warning, child: content)`.
-- Widgetbook: semua rail; tes memeriksa padding, border, radius, warna, lebar rail.
-- Acuan: kartu Antrean - Beranda dan usulan AI. Galeri Flutter dibandingkan dengan i1jkP (amber), Xa0qs (merah), dan JrA3v
-  (normal): warna, radius/padding 16, border 1, rail 4, tanpa bayangan cocok.
-  Tinggi kartu mengikuti child, bukan tinggi tetap frame order; konten bisnis milik organism.
+- Parameter: `child` wajib; `style = AppCardStyle.outlined`,
+  `rail = AppCardRail.none`, `padding = EdgeInsets.all(AppSpacing.cardPadding)`, `key`.
+- Varian: `outlined` (none/warning/error rail) dan `elevated` (rail tetap boleh).
+- `outlined`: surface, border `AppColors.border` selebar `AppDimensions.line`,
+  radius `AppRadius.card` (16), padding 16, rail kiri 4, tanpa bayangan.
+- `elevated`: radius `AppRadius.cardLarge` (24), tanpa border, shadow
+  `AppShadows.cardElevated`, dipakai kartu form auth. Padding default tetap 16;
+  kartu auth mengirim 18.
+- Isi dan rail dipotong mengikuti radius kartu; rail berada di kiri fisik.
+- Contoh: `AppCard(style: AppCardStyle.elevated, child: content)`.
+- Widgetbook: semua rail + elevated; tes memeriksa padding, border, radius, warna,
+  lebar rail, dan shadow elevated.
+
 
 ## AppSvg
 
@@ -241,8 +243,9 @@ Parameter warna/ukuran pada pemakaian harus berasal dari `core/theme`.
 - Aset produksi saat ini: `app_svgs.dart` mendaftarkan `google`, `facebook`,
   `whatsapp`, dan `cursorBack` dari `assets/icons/` (didaftarkan di pubspec).
   Ikon merek memakai warna tetap resmi, jadi `AppSvg.color` tidak mengubahnya;
-  aturan currentColor hanya berlaku untuk ikon monokrom. `facebook` dan
-  `cursorBack` belum dipakai UI karena PRD A hanya menetapkan login Google.
+  aturan currentColor hanya berlaku untuk ikon monokrom. `facebook` belum dipakai UI
+  karena PRD A hanya menetapkan login Google; `cursorBack` dipakai tombol kembali hero
+  Daftar dan sudah memakai `currentColor` sehingga diwarnai putih lewat `AppSvg`.
 - Tes memuat `test/fixtures/test_icon.svg` lewat bundle khusus tes,
   memeriksa currentColor dan label, serta memastikan setiap path `AppSvgs.paths`
   ada di disk. Fixture ini bukan ikon produksi.
@@ -270,27 +273,38 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ## AppButton
 - Berkas: lib/shared/widgets/atoms/app_button.dart.
-- Parameter: label wajib; variant = cta; icon (AppIcons) atau iconAsset (String SVG)
-  opsional dan saling eksklusif; onPressed opsional; key.
-- Varian: cta, secondary, action, actionOutline, destructiveOutline, destructiveFilled.
-- onPressed null menonaktifkan aksi. Label dapat membungkus; tinggi minimum 56 untuk CTA,
-  48 untuk lainnya. Lebar mengikuti konten; parent boleh memberi lebar penuh.
+- Parameter: label wajib; variant = cta; size (AppButtonSize) opsional;
+  icon (AppIcons) atau iconAsset (String SVG) opsional dan saling eksklusif;
+  iconPlacement = leading; iconSize = 16; busy = false; onPressed opsional; key.
+- Varian: cta, secondary, action, actionOutline, neutralOutline,
+  destructiveOutline, destructiveFilled.
+- Ukuran: large 50, medium 44, small 40 (`AppControlTokens.button*`). Default:
+  cta -> large, lainnya -> medium. Radius: cta/secondary/neutralOutline 14,
+  varian lain 12.
+- `neutralOutline` = tombol putih bergaris `borderStrong`, teks `ink`, shadow
+  `AppShadows.raised` (dipakai tombol Google).
+- onPressed null atau `busy: true` menonaktifkan aksi. Label dapat membungkus.
+  Lebar mengikuti konten; parent boleh memberi lebar penuh.
 - Contoh: AppButton(label, variant: AppButtonVariant.action, icon: AppIcons.check, onPressed: onTap).
-- Ikon merek: AppButton('Lanjutkan dengan Google', iconAsset: AppSvgs.google, onPressed: onGoogle).
-- Widgetbook: semua enam varian dengan ikon + CTA disabled; tes render, tinggi dan callback.
-- Referensi: B4bt3y, Ax5fO, h8n1Hk, azFlV, xpKx9, e32I1Q.
-- Selisih: CTA/secondary memakai token cta 16/22 w700; desain w600. Aksi memakai bodyStrong 14/20 w600.
+- Ikon merek: AppButton('Lanjutkan dengan Google', variant: AppButtonVariant.neutralOutline, iconAsset: AppSvgs.google, iconSize: AppDimensions.icon, onPressed: onGoogle).
+- Ikon di belakang label: `iconPlacement: AppButtonIconPlacement.trailing`.
+- Widgetbook: tujuh varian, tiga ukuran dengan ikon di belakang, busy, dan disabled.
+- Referensi Figma: `4294968730` (Masuk, 50/radius 14), `4294968737` (Google, 48).
+- Selisih: tinggi Google 48 Figma -> 50 (skala 50/44/40); shadow tombol netral
+  memakai token `raised`; ukuran teks mengikuti keputusan 3 (minimum 11).
 
 ## AppIconButton
 - Berkas: lib/shared/widgets/atoms/app_icon_button.dart.
-- Parameter: label wajib; tepat satu dari icon (AppIcons) atau iconAsset (String SVG);
-  onPressed opsional; color = primary; key.
-- label menjadi tooltip/nama aksesibel. Ukuran sentuh 48, ikon 20, radius action 8,
-  tanpa latar (transparan) agar tidak tampak kotak putih di app bar.
+- Parameter: label wajib; variant = plain; tepat satu dari icon (AppIcons) atau
+  iconAsset (String SVG); onPressed opsional; color = primary; key.
+- Varian `plain`: ukuran sentuh 48, ikon 20, radius action 12, latar transparan.
+- Varian `hero`: area sentuh 44, lingkaran 36 `illustration` + border `backBorder`,
+  ikon putih 18 (tombol kembali di hero auth). `color` diabaikan pada varian ini.
+- label menjadi tooltip/nama aksesibel.
 - Contoh: AppIconButton(icon: AppIcons.person, label: label, onPressed: onTap).
-- Ikon merek: AppIconButton(iconAsset: AppSvgs.whatsapp, label: 'Hubungi', onPressed: onContact).
-- Widgetbook: enabled/disabled. Tes tooltip, AppIcon, ukuran, callback dan disabled.
-- Referensi jo0oP; glyph Ionicons menggantikan Lucide sesuai PRD.
+- Widgetbook: plain enabled/disabled + hero. Tes tooltip, AppIcon, ukuran,
+  callback, disabled, dan geometri hero.
+- Referensi Figma: `4294968760` (Kembali Daftar).
 
 ## AppChip
 - Berkas: lib/shared/widgets/atoms/app_chip.dart (40 baris).

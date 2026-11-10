@@ -1,5 +1,5 @@
-<svg fill="#174B83" width="800px" height="800px" viewBox="0 0 24 24" id="cursor-left-transformed" xmlns="http://www.w3.org/2000/svg">
+<svg fill="currentColor" width="800px" height="800px" viewBox="0 0 24 24" id="cursor-left-transformed" xmlns="http://www.w3.org/2000/svg">
   <g transform="translate(12,12) rotate(90) scale(1, 0.75) translate(-12,-12)">
-    <path id="primary" d="M19.22,2.49a2.22,2.22,0,0,0-2.62-.12L12,5.43,7.4,2.37a2.22,2.22,0,0,0-2.62.12,2,2,0,0,0-.65,2.3l6,15.92a2,2,0,0,0,3.74,0l6-15.92A2,2,0,0,0,19.22,2.49Z" style="fill: #174b83; stroke: #174b83; stroke-width: 1.5; stroke-linejoin: round;" />
+    <path id="primary" d="M19.22,2.49a2.22,2.22,0,0,0-2.62-.12L12,5.43,7.4,2.37a2.22,2.22,0,0,0-2.62.12,2,2,0,0,0-.65,2.3l6,15.92a2,2,0,0,0,3.74,0l6-15.92A2,2,0,0,0,19.22,2.49Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
   </g>
 </svg>

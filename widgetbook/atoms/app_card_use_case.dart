@@ -5,7 +5,7 @@ import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 final appCardUseCase = WidgetbookUseCase(
-  name: 'Tanpa rail, amber, merah',
+  name: 'Tanpa rail, amber, merah, elevated',
   builder: (context) => SingleChildScrollView(
     padding: const EdgeInsets.all(AppSpacing.screenPadding),
     child: Column(
@@ -19,6 +19,10 @@ final appCardUseCase = WidgetbookUseCase(
               child: AppText(rail.name, variant: AppTextVariant.bodyStrong),
             ),
           ),
+        const AppCard(
+          style: AppCardStyle.elevated,
+          child: AppText('elevated', variant: AppTextVariant.bodyStrong),
+        ),
       ],
     ),
   ),

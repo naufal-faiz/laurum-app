@@ -1,6 +1,7 @@
 abstract final class AppDimensions {
   static const iconTiny = 12.0;
   static const iconSmall = 16.0;
+  static const iconBack = 18.0;
   static const iconAction = 20.0;
   static const icon = 24.0;
   static const iconLarge = 44.0;

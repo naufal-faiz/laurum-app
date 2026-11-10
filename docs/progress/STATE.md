@@ -2,9 +2,24 @@
 Diperbarui: 2026-11-10 | Cabang newdesign
 
 ## Mode Redesign UI (Aktif di cabang newdesign)
-- **Lapisan 1 (token): SELESAI 10 Nov 2026** — proposal
-  `docs/design/proposals/006-lapisan-token.md` disetujui dan diterapkan.
-  Berikutnya: proposal `007-lapisan-atoms` (gerbang UI-21).
+- **Lapisan 1 (token): SELESAI** — `docs/design/proposals/006-lapisan-token.md`
+  (commit `b7a9292`).
+- **Lapisan 2 (atoms): SELESAI 10 Nov 2026** — `docs/design/proposals/007-lapisan-atoms.md`.
+  Berikutnya: proposal `008-lapisan-molecules` (gerbang UI-21).
+- Perubahan atom lapisan 2:
+  - `AppButton`: ukuran `large` 50 / `medium` 44 / `small` 40 (default cta 50,
+    lainnya 44), `iconPlacement` leading/trailing, `iconSize`, `busy`, dan varian
+    baru `neutralOutline` (putih, border `borderStrong`, teks `ink`, shadow `raised`).
+    Ikon tombol 20 → 16.
+  - `AppIconButton`: varian `hero` (area 44, lingkaran 36 `illustration` + border
+    `backBorder`, ikon putih 18) untuk tombol kembali hero Daftar.
+  - `AppCard`: varian `elevated` (radius 24, tanpa border, `cardElevated`).
+  - `assets/icons/cursor-back.svg` → `currentColor` (ColorFiltered di Section dihapus).
+  - Auth: `AuthSubmitSection` memakai `AppButton`; tombol Google memakai
+    `AppButton.neutralOutline` + `AppSvgs.google`; dua kartu auth memakai
+    `AppCard.elevated`; tombol kembali memakai `AppIconButton.hero`.
+- Sisa primitif Section auth (dijadwalkan lapisan 3): `GestureDetector` tombol mata
+  password dan dua tautan "Belum/Sudah punya akun" (`InlineLinkRow`).
 - Keputusan global terisi (5 butir, pengguna 10 Nov 2026): primer `#2675C9`, hijau
   menjadi `success`, Inter global, skala auth + minimum 11, tombol 50/44/40,
   variabel & komponen FigCraft.
@@ -19,13 +34,24 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   asetnya dihapus.
 - Alias sementara: `AppColors.blue/blueTint/blueInk` masih ada untuk badge "Diproses"
   sampai lapisan molecules/organisms membersihkan pemakai.
-- Layar 29 & 31 masih memakai primitif Section (Material/InkWell/Container) dan
-  template `Scaffold+Stack`; perapian murni dilakukan di lapisan 6 (UI-29).
-- **Golden bergeser (UI-28): 112 dari 113.** Semua kecuali `receipt_preview`
-  (struk memakai `receiptInk` + IBM Plex Mono yang tidak berubah). Alasan: font global
-  Inter, primer/ink/border baru, input 16→14, CTA 56→50, radius input/aksi 8→12,
-  skala teks. Golden sudah diperbarui dalam sesi ini setelah persetujuan proposal.
-- Tes yang diubah: `test/app_button_test.dart` (tinggi CTA 56 → 50 sesuai keputusan 4);
+- Layar 29 & 31 masih memakai `Container` dekoratif di hero, `GestureDetector`
+  (mata password, tautan) dan template `Scaffold+Stack`; perapian murni di lapisan 6
+  (UI-29). Material/InkWell buatan sendiri sudah tidak ada di Section auth.
+- **Golden lapisan 2 (UI-28): 73 dari 113 bergeser.** Yang berubah: atom
+  `app_button`, `app_card`, `app_icon_button`; seluruh layar yang memuat tombol/kartu
+  (antrean, order, pelanggan, laporan, pembayaran, struk COD, pengaturan, AI,
+  transaksi, auth 29/31, sub/root/form/sheet scaffold, footer, sync, dsb). Yang tidak
+  berubah antara lain `app_text`, `app_divider`, `app_avatar`, `app_chip`,
+  `app_text_field`, `receipt_preview`, `bottom_nav_bar`, `menu_row`, `toggle_row`,
+  `stepper_field`. Alasan: tinggi tombol non-CTA 48 → 44, ikon tombol 20 → 16,
+  tombol Google 48 → 50, kartu auth lewat `AppCard.elevated`.
+- **Golden lapisan 1:** 112 dari 113 bergeser (semua kecuali `receipt_preview`).
+- Tes yang diubah lapisan 2: `test/app_button_test.dart` (tinggi non-CTA 44, tes
+  ukuran/trailing/busy), `test/app_icon_button_test.dart` (tes varian hero),
+  `test/app_card_test.dart` (tes elevated), `test/r10_signup_sections_test.dart`
+  (finder kembali: `byTooltip('Kembali')` menggantikan `ColorFiltered`). Tidak ada
+  assertion perilaku yang dilemahkan.
+- Tes yang diubah lapisan 1: `test/app_button_test.dart` (tinggi CTA 56 → 50 sesuai keputusan 4);
   `test/atom_gallery_test.dart`, `molecule_gallery.dart`, `organism_gallery.dart`,
   `template_gallery.dart`, `antrean_test_host.dart` (loader font → Inter lewat
   `test/test_fonts.dart`). Tidak ada assertion perilaku yang dilemahkan.

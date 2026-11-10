@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:laurum/core/theme/app_colors.dart';
-import 'package:laurum/core/theme/app_radius.dart';
-import 'package:laurum/core/theme/app_shadows.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/auth/widgets/auth_email_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_or_section.dart';
@@ -9,6 +6,7 @@ import 'package:laurum/features/auth/widgets/auth_password_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_submit_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_signup_link_section.dart';
+import 'package:laurum/shared/widgets/atoms/app_card.dart';
 
 /// White 342x348 card that overlaps the hero of frame `LAURUM · Masuk`.
 class SignInFormCardSection extends StatelessWidget {
@@ -38,12 +36,8 @@ class SignInFormCardSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: AppRadius.cardLarge,
-        boxShadow: AppShadows.cardElevated,
-      ),
+    return AppCard(
+      style: AppCardStyle.elevated,
       padding: const EdgeInsets.all(AppSpacing.largeX),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -53,7 +53,7 @@ void main() {
       expect(find.byType(AppIcon), findsOneWidget);
       expect(
         tester.getSize(find.byType(TextButton)).height,
-        variant == AppButtonVariant.cta ? 50 : 48,
+        variant == AppButtonVariant.cta ? 50 : 44,
       );
       await tester.tap(find.byType(TextButton));
     }
@@ -67,5 +67,49 @@ void main() {
     await tester.tap(find.byType(TextButton));
     expect(taps, AppButtonVariant.values.length);
     expect(tester.widget<TextButton>(find.byType(TextButton)).onPressed, isNull);
+  });
+  testWidgets('button sizes, trailing icon and busy state', (tester) async {
+    var taps = 0;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: Scaffold(
+          body: Column(
+            children: [
+              for (final size in AppButtonSize.values)
+                AppButton(
+                  size.name,
+                  size: size,
+                  icon: AppIcons.arrowForward,
+                  iconPlacement: AppButtonIconPlacement.trailing,
+                  onPressed: () => taps++,
+                ),
+              AppButton('Sibuk', busy: true, onPressed: () => taps++),
+            ],
+          ),
+        ),
+      ),
+    );
+    for (final size in AppButtonSize.values) {
+      final button = find.widgetWithText(TextButton, size.name);
+      expect(tester.getSize(button).height, switch (size) {
+        AppButtonSize.large => 50,
+        AppButtonSize.medium => 44,
+        AppButtonSize.small => 40,
+      });
+      final iconCenter = tester.getCenter(
+        find.descendant(of: button, matching: find.byType(AppIcon)),
+      );
+      final labelCenter = tester.getCenter(
+        find.descendant(of: button, matching: find.text(size.name)),
+      );
+      expect(iconCenter.dx, greaterThan(labelCenter.dx));
+    }
+    await tester.tap(find.widgetWithText(TextButton, AppButtonSize.small.name));
+    expect(taps, 1);
+    final busy = find.widgetWithText(TextButton, 'Sibuk');
+    await tester.tap(busy);
+    expect(taps, 1);
+    expect(tester.widget<TextButton>(busy).onPressed, isNull);
   });
 }

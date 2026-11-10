@@ -189,10 +189,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/core/theme/
 - app_borders.dart (7): AppBorders
-- app_button_styles.dart (53): AppButtonVariant, AppButtonStyles
+- app_button_styles.dart (69): AppButtonVariant, AppButtonSize, AppButtonStyles
 - app_colors.dart (64): AppColors
 - app_control_tokens.dart (19): AppControlTokens
-- app_dimensions.dart (13): AppDimensions
+- app_dimensions.dart (14): AppDimensions
 - app_field_decoration.dart (34): AppFieldDecoration
 - app_input_styles.dart (104): AppInputStyles
 - app_molecule_styles.dart (32): AppMoleculeStyles
@@ -257,18 +257,18 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_password_field_section.dart (97): AuthPasswordFieldSection
 - auth_passwords_section.dart (59): AuthPasswordsSection
 - auth_secret_field_section.dart (31): AuthSecretFieldSection
-- auth_submit_section.dart (48): AuthSubmitSection
+- auth_submit_section.dart (28): AuthSubmitSection
 - auth_trust_section.dart (32): AuthTrustSection
 - password_reset_section.dart (36): PasswordResetSection
 - sign_in_brand_section.dart (70): SignInBrandSection
 - sign_in_feature_bar_section.dart (77): SignInFeatureBarSection
-- sign_in_form_card_section.dart (83): SignInFormCardSection
+- sign_in_form_card_section.dart (77): SignInFormCardSection
 - sign_in_hero_section.dart (72): SignInHeroSection
 - sign_in_illustration_section.dart (27): SignInIllustrationSection
-- sign_in_section.dart (81): SignInSection
+- sign_in_section.dart (51): SignInSection
 - sign_in_signup_link_section.dart (40): SignInSignupLinkSection
-- sign_up_form_card_section.dart (105): SignUpFormCardSection
-- sign_up_hero_section.dart (94): SignUpHeroSection
+- sign_up_form_card_section.dart (99): SignUpFormCardSection
+- sign_up_hero_section.dart (82): SignUpHeroSection
 - sign_up_signin_link_section.dart (40): SignUpSignInLinkSection
 
 ### lib/features/business/data/
@@ -625,13 +625,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
 - app_badge.dart (31): AppBadgeVariant, AppBadge
-- app_button.dart (65): AppButton
-- app_card.dart (47): AppCardRail, AppCard
+- app_button.dart (80): AppButtonIconPlacement, AppButton
+- app_card.dart (58): AppCardRail, AppCardStyle, AppCard
 - app_chip.dart (40): AppChip
 - app_divider.dart (16): AppDivider
 - app_gap.dart (19): AppGap
 - app_icon.dart (27): AppIcon
-- app_icon_button.dart (46): AppIconButton
+- app_icon_button.dart (78): AppIconButtonVariant, AppIconButton
 - app_numpad_key.dart (54): AppNumpadKeyValue, AppNumpadKey
 - app_search_field.dart (88): AppSearchField, _AppSearchFieldState
 - app_skeleton.dart (25): AppSkeleton
@@ -709,12 +709,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_bar_root_test.dart (32):
 - app_bar_sub_test.dart (26):
 - app_bottom_sheet_test.dart (45):
-- app_button_test.dart (71):
-- app_card_test.dart (51):
+- app_button_test.dart (115):
+- app_card_test.dart (75):
 - app_chip_test.dart (41):
 - app_divider_test.dart (41):
 - app_gap_test.dart (33):
-- app_icon_button_test.dart (51):
+- app_icon_button_test.dart (84):
 - app_icon_test.dart (29):
 - app_numpad_key_test.dart (43):
 - app_router_test.dart (64):
@@ -1094,12 +1094,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### widgetbook/atoms/
 - app_avatar_use_case.dart (19):
 - app_badge_use_case.dart (22):
-- app_button_use_case.dart (29):
-- app_card_use_case.dart (25):
+- app_button_use_case.dart (40):
+- app_card_use_case.dart (29):
 - app_chip_use_case.dart (21):
 - app_divider_use_case.dart (34):
 - app_gap_use_case.dart (28):
-- app_icon_button_use_case.dart (20):
+- app_icon_button_use_case.dart (27):
 - app_icon_use_case.dart (31):
 - app_numpad_key_use_case.dart (37):
 - app_search_field_use_case.dart (25):
