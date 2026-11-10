@@ -80,7 +80,8 @@ Frame `LAURUM · Masuk` (390x844 dp, latar putih). Nilai diambil 1:1 dari FigCra
 - Ukuran font dinaikkan: hero 28/16/13, label 12, input 14, tombol 15, body 12,
   meta 11, chip 10.5 (nilai frame 26/15/10, 8.5, 10.5, 11, 9, 8.5, 8 terlalu kecil).
   Hierarki dan tata letak frame tetap; hanya skala baca yang naik.
-- Kotak tombol mata dihapus; kini ikon mata polos 22 dengan area sentuh 32.
+- Kotak tombol mata dihapus; kini ikon mata polos 20 dengan area sentuh 40
+  (`AppIconButton` varian `compact`, lapisan 3).
   Ikon berubah keadaan: `eye` saat password tersembunyi, `eye-off` saat terlihat.
 - Huruf "G" diganti `AppSvg(AppSvgs.google)` (aset `assets/icons/google.svg`).
 
@@ -96,8 +97,9 @@ Frame `LAURUM · Masuk` (390x844 dp, latar putih). Nilai diambil 1:1 dari FigCra
 6. **Trust bar** — teks statis (izin pengguna).
 7. **Ilustrasi lingkaran + ikon baju** — dibuat; ikon memakai `AppIcons.service`
    (Ionicons shirt), bukan SVG custom.
-8. **Tombol mata dalam field** — 28x28 radius 9 di dalam field; menyembunyikan/
-   menampilkan password lewat `controller.toggleVisible()` yang sama.
+8. **Tombol mata dalam field** — kotak 28x28 dihapus (revisi UX); ikon polos 20
+   dengan area sentuh 40 (`AppIconButton.compact`). Aksi tetap
+   `controller.toggleVisible()`.
 
 ## Token/ikon/font yang dipakai
 | Elemen | Token |

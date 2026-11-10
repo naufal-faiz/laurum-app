@@ -38,6 +38,9 @@ molecules:
   - AppBarSub
   - FooterBar
   - DateGroupHeader
+  - LabeledDivider
+  - InlineLink
+  - InlineLinkRow
 organisms:
   - BottomNavBar
   - OrderCard

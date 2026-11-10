@@ -21,6 +21,22 @@ final appIconButtonUseCase = WidgetbookUseCase(
           label: 'Kembali',
           onPressed: () {},
         ),
+        Row(
+          children: [
+            AppIconButton(
+              variant: AppIconButtonVariant.compact,
+              icon: AppIcons.visible,
+              label: 'Tampilkan password',
+              onPressed: () {},
+            ),
+            const SizedBox(width: AppSpacing.small),
+            const AppIconButton(
+              variant: AppIconButtonVariant.compact,
+              icon: AppIcons.visibleOff,
+              label: 'Sembunyikan password',
+            ),
+          ],
+        ),
       ],
     ),
   ),

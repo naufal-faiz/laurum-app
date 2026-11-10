@@ -4,6 +4,8 @@ import 'app_bar_root_use_case.dart';
 import 'app_bar_sub_use_case.dart';
 import 'chip_bar_use_case.dart';
 import 'footer_bar_use_case.dart';
+import 'inline_link_row_use_case.dart';
+import 'labeled_divider_use_case.dart';
 import 'nominal_chips_use_case.dart';
 import 'period_tabs_use_case.dart';
 import 'stepper_field_use_case.dart';
@@ -16,4 +18,6 @@ final m3Components = <WidgetbookComponent>[
   WidgetbookComponent(name: 'AppBarSub', useCases: [appBarSubUseCase]),
   WidgetbookComponent(name: 'AppBarRoot', useCases: [appBarRootUseCase]),
   WidgetbookComponent(name: 'FooterBar', useCases: [footerBarUseCase]),
+  WidgetbookComponent(name: 'LabeledDivider', useCases: [labeledDividerUseCase]),
+  WidgetbookComponent(name: 'InlineLinkRow', useCases: [inlineLinkRowUseCase]),
 ];

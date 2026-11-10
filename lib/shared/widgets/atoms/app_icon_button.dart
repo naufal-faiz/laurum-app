@@ -8,8 +8,9 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_svg.dart';
 
-/// `plain` = ikon polos 48 dp; `hero` = lingkaran 36 dp di atas hero auth.
-enum AppIconButtonVariant { plain, hero }
+/// `plain` = ikon polos 48 dp; `hero` = lingkaran 36 dp di atas hero auth;
+/// `compact` = ikon 40 dp untuk slot sempit (tombol mata di dalam field).
+enum AppIconButtonVariant { plain, hero, compact }
 
 class AppIconButton extends StatelessWidget {
   const AppIconButton({
@@ -34,6 +35,7 @@ class AppIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hero = variant == AppIconButtonVariant.hero;
+    final compact = variant == AppIconButtonVariant.compact;
     final tint = hero
         ? AppColors.onPrimary
         : onPressed == null
@@ -51,10 +53,11 @@ class AppIconButton extends StatelessWidget {
       shape: const CircleBorder(),
     );
     final plainStyle = IconButton.styleFrom(
-      minimumSize: const Size.square(AppSpacing.touchTarget),
-      maximumSize: const Size.square(AppSpacing.touchTarget),
+      minimumSize: Size.square(compact ? AppControlTokens.buttonSmall : AppSpacing.touchTarget),
+      maximumSize: Size.square(compact ? AppControlTokens.buttonSmall : AppSpacing.touchTarget),
       padding: EdgeInsets.zero,
       shape: const RoundedRectangleBorder(borderRadius: AppRadius.action),
+      tapTargetSize: compact ? MaterialTapTargetSize.shrinkWrap : null,
     );
     return IconButton(
       tooltip: label,

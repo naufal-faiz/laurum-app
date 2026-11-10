@@ -19,7 +19,7 @@ class LabeledField extends StatelessWidget {
     mainAxisSize: MainAxisSize.min,
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      AppText(label, variant: AppTextVariant.bodyStrong),
+      AppText(label, variant: AppTextVariant.label, color: AppColors.primaryInk),
       const SizedBox(height: AppMoleculeTokens.labelGap),
       child,
       if (errorText != null || helperText != null) ...[

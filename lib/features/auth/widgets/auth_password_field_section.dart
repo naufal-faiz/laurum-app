@@ -3,11 +3,12 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/core/theme/app_text_styles.dart';
-import 'package:laurum/shared/widgets/atoms/app_icon.dart';
+import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
+import 'package:laurum/shared/widgets/molecules/inline_link.dart';
 
 /// Password row of the auth frames: label (+ optional "Lupa password?") over a
-/// field with lock icon and a plain eye toggle. The eye icon changes state:
+/// field with lock icon and an eye toggle. The eye icon changes state:
 /// eye = tersembunyi (ketuk untuk lihat), eye-off = terlihat (ketuk sembunyikan).
 class AuthPasswordFieldSection extends StatelessWidget {
   const AuthPasswordFieldSection({
@@ -48,15 +49,7 @@ class AuthPasswordFieldSection extends StatelessWidget {
             ),
             if (onForgot != null)
               Flexible(
-                child: GestureDetector(
-                  onTap: busy ? null : onForgot,
-                  child: Text(
-                    'Lupa password?',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.label.copyWith(color: AppColors.primary),
-                  ),
-                ),
+                child: InlineLink('Lupa password?', onTap: busy ? null : onForgot),
               ),
           ],
         ),
@@ -74,20 +67,12 @@ class AuthPasswordFieldSection extends StatelessWidget {
           onChanged: onPassword,
           trailing: Padding(
             padding: const EdgeInsets.only(right: AppSpacing.smallMedium),
-            child: SizedBox(
-              width: 32,
-              height: 32,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: busy ? null : onToggle,
-                child: Center(
-                  child: AppIcon(
-                    visible ? AppIcons.visibleOff : AppIcons.visible,
-                    size: 22,
-                    color: busy ? AppColors.ink3 : AppColors.primaryInk,
-                  ),
-                ),
-              ),
+            child: AppIconButton(
+              variant: AppIconButtonVariant.compact,
+              icon: visible ? AppIcons.visibleOff : AppIcons.visible,
+              label: visible ? 'Sembunyikan password' : 'Tampilkan password',
+              color: AppColors.primaryInk,
+              onPressed: busy ? null : onToggle,
             ),
           ),
         ),

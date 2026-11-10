@@ -3,13 +3,13 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/auth/widgets/auth_email_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_name_field_section.dart';
-import 'package:laurum/features/auth/widgets/auth_or_section.dart';
 import 'package:laurum/features/auth/widgets/auth_password_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_submit_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_section.dart';
-import 'package:laurum/features/auth/widgets/sign_up_signin_link_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
+import 'package:laurum/shared/widgets/molecules/inline_link_row.dart';
+import 'package:laurum/shared/widgets/molecules/labeled_divider.dart';
 
 /// White card of frame `LAURUM · Daftar` (342 wide, radius 24, padding 18,
 /// gap 12). Persetujuan Syarat & Ketentuan sengaja belum dibuat (proposal 004).
@@ -85,13 +85,17 @@ class SignUpFormCardSection extends StatelessWidget {
             busy: busy,
             onSubmit: onSubmit,
           ),
-          const AuthOrSection(),
+          const LabeledDivider('atau'),
           SignInSection(
             busy: busy,
             restoring: restoring,
             onGoogle: onGoogle,
           ),
-          SignUpSignInLinkSection(busy: busy, onSignIn: onSignIn),
+          InlineLinkRow(
+            question: 'Sudah punya akun?',
+            action: 'Masuk',
+            onTap: busy ? null : onSignIn,
+          ),
         ],
       ),
     );

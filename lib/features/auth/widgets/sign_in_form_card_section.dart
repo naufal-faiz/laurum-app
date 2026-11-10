@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/auth/widgets/auth_email_field_section.dart';
-import 'package:laurum/features/auth/widgets/auth_or_section.dart';
 import 'package:laurum/features/auth/widgets/auth_password_field_section.dart';
 import 'package:laurum/features/auth/widgets/auth_submit_section.dart';
 import 'package:laurum/features/auth/widgets/sign_in_section.dart';
-import 'package:laurum/features/auth/widgets/sign_in_signup_link_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
+import 'package:laurum/shared/widgets/molecules/inline_link_row.dart';
+import 'package:laurum/shared/widgets/molecules/labeled_divider.dart';
 
 /// White 342x348 card that overlaps the hero of frame `LAURUM · Masuk`.
 class SignInFormCardSection extends StatelessWidget {
@@ -60,7 +60,7 @@ class SignInFormCardSection extends StatelessWidget {
           const SizedBox(height: AppSpacing.medium),
           AuthSubmitSection(busy: busy, onSubmit: onSubmit),
           const SizedBox(height: AppSpacing.medium),
-          const AuthOrSection(),
+          const LabeledDivider('atau'),
           const SizedBox(height: AppSpacing.medium),
           SignInSection(
             busy: busy,
@@ -69,7 +69,11 @@ class SignInFormCardSection extends StatelessWidget {
             onGoogle: onGoogle,
           ),
           const SizedBox(height: AppSpacing.medium),
-          SignInSignupLinkSection(busy: busy, onSignUp: onSignUp),
+          InlineLinkRow(
+            question: 'Belum punya akun?',
+            action: 'Daftar',
+            onTap: busy ? null : onSignUp,
+          ),
         ],
       ),
     );

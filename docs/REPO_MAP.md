@@ -3,7 +3,7 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 60/60 dibuat
+## Registry widget: 63/63 dibuat
 
 Semua widget sudah dibuat.
 
@@ -253,8 +253,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_email_field_section.dart (46): AuthEmailFieldSection
 - auth_identity_section.dart (55): AuthIdentitySection
 - auth_name_field_section.dart (45): AuthNameFieldSection
-- auth_or_section.dart (23): AuthOrSection
-- auth_password_field_section.dart (97): AuthPasswordFieldSection
+- auth_password_field_section.dart (82): AuthPasswordFieldSection
 - auth_passwords_section.dart (59): AuthPasswordsSection
 - auth_secret_field_section.dart (31): AuthSecretFieldSection
 - auth_submit_section.dart (28): AuthSubmitSection
@@ -262,14 +261,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - password_reset_section.dart (36): PasswordResetSection
 - sign_in_brand_section.dart (70): SignInBrandSection
 - sign_in_feature_bar_section.dart (77): SignInFeatureBarSection
-- sign_in_form_card_section.dart (77): SignInFormCardSection
+- sign_in_form_card_section.dart (81): SignInFormCardSection
 - sign_in_hero_section.dart (72): SignInHeroSection
 - sign_in_illustration_section.dart (27): SignInIllustrationSection
 - sign_in_section.dart (51): SignInSection
-- sign_in_signup_link_section.dart (40): SignInSignupLinkSection
-- sign_up_form_card_section.dart (99): SignUpFormCardSection
+- sign_up_form_card_section.dart (103): SignUpFormCardSection
 - sign_up_hero_section.dart (82): SignUpHeroSection
-- sign_up_signin_link_section.dart (40): SignUpSignInLinkSection
 
 ### lib/features/business/data/
 - business_fixtures.dart (21):
@@ -631,7 +628,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_divider.dart (16): AppDivider
 - app_gap.dart (19): AppGap
 - app_icon.dart (27): AppIcon
-- app_icon_button.dart (78): AppIconButtonVariant, AppIconButton
+- app_icon_button.dart (81): AppIconButtonVariant, AppIconButton
 - app_numpad_key.dart (54): AppNumpadKeyValue, AppNumpadKey
 - app_search_field.dart (88): AppSearchField, _AppSearchFieldState
 - app_skeleton.dart (25): AppSkeleton
@@ -651,6 +648,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - empty_state.dart (48): EmptyState
 - footer_bar.dart (28): FooterBar
 - info_row.dart (28): InfoRow
+- inline_link.dart (32): InlineLink
+- inline_link_row.dart (36): InlineLinkRow
+- labeled_divider.dart (24): LabeledDivider
 - labeled_field.dart (35): LabeledField
 - locked_row.dart (47): LockedRow
 - menu_row.dart (45): MenuRow
@@ -714,7 +714,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_chip_test.dart (41):
 - app_divider_test.dart (41):
 - app_gap_test.dart (33):
-- app_icon_button_test.dart (84):
+- app_icon_button_test.dart (120):
 - app_icon_test.dart (29):
 - app_numpad_key_test.dart (43):
 - app_router_test.dart (64):
@@ -834,9 +834,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - formatters_test.dart (40):
 - id_generator_test.dart (39):
 - info_row_test.dart (25):
+- inline_link_row_test.dart (38):
 - input_templates_keyboard_test.dart (72):
 - keyboard_audit_test.dart (150):
 - keyboard_test_helper.dart (52):
+- labeled_divider_test.dart (18):
 - labeled_field_test.dart (29):
 - local_auth_service_test.dart (18):
 - local_settings_test.dart (35):
@@ -1099,7 +1101,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_chip_use_case.dart (21):
 - app_divider_use_case.dart (34):
 - app_gap_use_case.dart (28):
-- app_icon_button_use_case.dart (27):
+- app_icon_button_use_case.dart (43):
 - app_icon_use_case.dart (31):
 - app_numpad_key_use_case.dart (37):
 - app_search_field_use_case.dart (25):
@@ -1122,11 +1124,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - empty_state_use_case.dart (26):
 - footer_bar_use_case.dart (35):
 - info_row_use_case.dart (20):
+- inline_link_row_use_case.dart (28):
+- labeled_divider_use_case.dart (19):
 - labeled_field_use_case.dart (40):
 - locked_row_use_case.dart (25):
 - m1.dart (21):
 - m2.dart (17):
-- m3.dart (19):
+- m3.dart (23):
 - menu_row_use_case.dart (26):
 - nominal_chips_use_case.dart (25):
 - notice_ai_use_case.dart (18):

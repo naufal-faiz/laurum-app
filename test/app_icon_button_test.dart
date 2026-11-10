@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/icons/app_svgs.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_control_tokens.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
@@ -48,6 +49,41 @@ void main() {
     expect(find.byType(AppSvg), findsOneWidget);
     expect(find.byType(AppIcon), findsNothing);
     expect(tester.takeException(), isNull);
+  });
+  testWidgets('compact variant fits a 40 dp target with a 20 dp glyph', (tester) async {
+    var taps = 0;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: Scaffold(
+          body: AppIconButton(
+            variant: AppIconButtonVariant.compact,
+            icon: AppIcons.visible,
+            label: 'Tampilkan password',
+            color: AppColors.primaryInk,
+            onPressed: () => taps++,
+          ),
+        ),
+      ),
+    );
+    expect(tester.getSize(find.byType(IconButton)), const Size.square(40));
+    expect(tester.getSize(find.byType(AppIcon)), const Size.square(20));
+    expect(tester.widget<AppIcon>(find.byType(AppIcon)).color, AppColors.primaryInk);
+    await tester.tap(find.byType(IconButton));
+    expect(taps, 1);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: const Scaffold(
+          body: AppIconButton(
+            variant: AppIconButtonVariant.compact,
+            icon: AppIcons.visible,
+            label: 'Tampilkan password',
+          ),
+        ),
+      ),
+    );
+    expect(tester.widget<AppIcon>(find.byType(AppIcon)).color, AppControlTokens.disabledForeground);
   });
   testWidgets('hero variant draws a 36 dp circle inside a 44 dp target', (tester) async {
     var taps = 0;

@@ -4,8 +4,23 @@ Diperbarui: 2026-11-10 | Cabang newdesign
 ## Mode Redesign UI (Aktif di cabang newdesign)
 - **Lapisan 1 (token): SELESAI** — `docs/design/proposals/006-lapisan-token.md`
   (commit `b7a9292`).
-- **Lapisan 2 (atoms): SELESAI 10 Nov 2026** — `docs/design/proposals/007-lapisan-atoms.md`.
-  Berikutnya: proposal `008-lapisan-molecules` (gerbang UI-21).
+- **Lapisan 2 (atoms): SELESAI 10 Nov 2026** — `docs/design/proposals/007-lapisan-atoms.md`
+  (commit `9b3905e`).
+- **Lapisan 3 (molecules): SELESAI 10 Nov 2026** — `docs/design/proposals/008-lapisan-molecules.md`.
+  Berikutnya: proposal `009-lapisan-organisms` (gerbang UI-21).
+- Perubahan molekul lapisan 3:
+  - Molekul baru: `LabeledDivider` (garis + label + garis, gap 10),
+    `InlineLink` (tautan `label` `primary`/`ink3`), `InlineLinkRow` (pertanyaan
+    `caption` `ink3` + tautan, gap 4). Registry diperbarui.
+  - `AppIconButtonVariant.compact` (area 40 `buttonSmall`, ikon 20 `iconAction`,
+    tanpa latar) dipakai tombol mata password.
+  - `LabeledField` label: `bodyStrong` 14/600 `ink` → `label` 12/600 `primaryInk`
+    (mengikuti label form Figma 9.5/600 `#174B83`, minimum baca 11).
+  - Section auth yang dihapus: `auth_or_section.dart`,
+    `sign_in_signup_link_section.dart`, `sign_up_signin_link_section.dart`;
+    kedua kartu auth memakai `LabeledDivider('atau')` + `InlineLinkRow`.
+  - `BannerMessage` dan `ChipBar` diperiksa: tidak berubah (tidak ada banner
+    error di frame baru).
 - Perubahan atom lapisan 2:
   - `AppButton`: ukuran `large` 50 / `medium` 44 / `small` 40 (default cta 50,
     lainnya 44), `iconPlacement` leading/trailing, `iconSize`, `busy`, dan varian
@@ -18,8 +33,9 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   - Auth: `AuthSubmitSection` memakai `AppButton`; tombol Google memakai
     `AppButton.neutralOutline` + `AppSvgs.google`; dua kartu auth memakai
     `AppCard.elevated`; tombol kembali memakai `AppIconButton.hero`.
-- Sisa primitif Section auth (dijadwalkan lapisan 3): `GestureDetector` tombol mata
-  password dan dua tautan "Belum/Sudah punya akun" (`InlineLinkRow`).
+- Sisa primitif Section auth (lapisan 4/6): `Container`/`DecoratedBox` dekoratif
+  di hero, brand, feature bar, dan ilustrasi, serta template `Scaffold+Stack`.
+  `GestureDetector` mata password dan tautan sudah hilang (lapisan 3).
 - Keputusan global terisi (5 butir, pengguna 10 Nov 2026): primer `#2675C9`, hijau
   menjadi `success`, Inter global, skala auth + minimum 11, tombol 50/44/40,
   variabel & komponen FigCraft.
@@ -34,9 +50,19 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   asetnya dihapus.
 - Alias sementara: `AppColors.blue/blueTint/blueInk` masih ada untuk badge "Diproses"
   sampai lapisan molecules/organisms membersihkan pemakai.
-- Layar 29 & 31 masih memakai `Container` dekoratif di hero, `GestureDetector`
-  (mata password, tautan) dan template `Scaffold+Stack`; perapian murni di lapisan 6
-  (UI-29). Material/InkWell buatan sendiri sudah tidak ada di Section auth.
+- Layar 29 & 31 masih memakai `Container`/`DecoratedBox` dekoratif di hero, brand,
+  feature bar, dan ilustrasi serta template `Scaffold+Stack`; perapian murni di
+  lapisan 4 (organisme) dan 6 (UI-29). Material/InkWell/GestureDetector buatan
+  sendiri sudah tidak ada di Section auth.
+- **Golden lapisan 3 (UI-28): 21 golden lama bergeser + 2 baru.** Lama:
+  `app_icon_button`, `labeled_field`, `add_customer_sheet`, `expense_form`,
+  `printer_page`, `proposal_new_customer`, `proposal_rina`, `transaction_page`,
+  `auth_scaffold`, `auth_signin`, `auth_signin_error`, `r10_name`, `r10_password`,
+  `r10_password_320_2x`, `r10_phone`, `r10_reset`, `r10_signin`,
+  `r10_signin_error`, `r10_signin_error_320_2x`, `r10_signup`,
+  `r10_signup_320_2x`. Baru: `labeled_divider`, `inline_link_row`. Alasan: label
+  `LabeledField` 14/600 `ink` → 12/600 `primaryInk`; tombol mata 32/22 → 40/20;
+  pemisah "atau" 11 → 12; tautan memakai `InlineLink` (warna/ukuran sama).
 - **Golden lapisan 2 (UI-28): 73 dari 113 bergeser.** Yang berubah: atom
   `app_button`, `app_card`, `app_icon_button`; seluruh layar yang memuat tombol/kartu
   (antrean, order, pelanggan, laporan, pembayaran, struk COD, pengaturan, AI,
@@ -46,6 +72,9 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   `stepper_field`. Alasan: tinggi tombol non-CTA 48 → 44, ikon tombol 20 → 16,
   tombol Google 48 → 50, kartu auth lewat `AppCard.elevated`.
 - **Golden lapisan 1:** 112 dari 113 bergeser (semua kecuali `receipt_preview`).
+- Tes yang diubah lapisan 3: `test/app_icon_button_test.dart` (tambah tes varian
+  `compact`). Tes baru: `test/labeled_divider_test.dart`,
+  `test/inline_link_row_test.dart`. Tes perilaku lama tidak diubah.
 - Tes yang diubah lapisan 2: `test/app_button_test.dart` (tinggi non-CTA 44, tes
   ukuran/trailing/busy), `test/app_icon_button_test.dart` (tes varian hero),
   `test/app_card_test.dart` (tes elevated), `test/r10_signup_sections_test.dart`

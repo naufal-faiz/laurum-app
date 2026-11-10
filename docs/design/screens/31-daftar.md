@@ -55,7 +55,8 @@ dengan skala font dinaikkan (revisi UX 9 Nov 2026).
 2. Persetujuan Syarat & Ketentuan ditunda sampai aplikasi 95% (proposal 004).
 3. Tombol Google ditambahkan ke Daftar atas izin pengguna; aksinya `signIn()` yang
    sudah ada (tanpa state baru). Bila Google dipakai, akun langsung masuk.
-4. Ikon mata tanpa kotak (revisi UX): eye = tersembunyi, eye-off = terlihat.
+4. Ikon mata tanpa kotak (revisi UX): eye = tersembunyi, eye-off = terlihat,
+   area sentuh 40 (`AppIconButton.compact`, lapisan 3).
 5. Trust bar dibuat sebagai teks statis (izin pengguna).
 6. Ukuran font dinaikkan dari frame (label 12, input 14, tombol 15, body 12).
 

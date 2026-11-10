@@ -56,8 +56,30 @@
 - Berkas: lib/shared/widgets/molecules/labeled_field.dart.
 - API dan contoh: label dan child wajib; helperText/errorText opsional. LabeledField(label: label, child: AppTextField(label: label)). Error menggantikan helper.
 - Varian: utama/helper/error/disabled child.
+- Gaya label (redesign lapisan 3): `AppTextVariant.label` 12/600 `AppColors.primaryInk`, mengikuti label form Figma 9.5/600 `#174B83`.
 - Galeri: widgetbook/molecules/labeled_field_use_case.dart; tes: test/labeled_field_test.dart.
 - Acuan Pencil: jbLdH. Lihat catatan visual di docs/progress/fase-1.md.
+
+## LabeledDivider
+- Berkas: lib/shared/widgets/molecules/labeled_divider.dart.
+- API dan contoh: label wajib. LabeledDivider('atau'). Garis `AppDivider` kiri-kanan, teks `caption` 12/400 `ink3` dengan padding horizontal 10.
+- Varian: label bebas; tanpa state internal.
+- Galeri: widgetbook/molecules/labeled_divider_use_case.dart; tes: test/labeled_divider_test.dart.
+- Acuan Figma: node `4294968733` (frame `LAURUM · Masuk`).
+
+## InlineLink
+- Berkas: lib/shared/widgets/molecules/inline_link.dart.
+- API dan contoh: label wajib; onTap dan semanticsLabel opsional. InlineLink('Daftar', onTap: openSignUp). Warna `primary` saat aktif, `ink3` saat onTap null.
+- Varian: aktif/nonaktif.
+- Galeri: widgetbook/molecules/inline_link_row_use_case.dart; tes: test/inline_link_row_test.dart.
+- Acuan Figma: node `4294968743` (frame `LAURUM · Masuk`).
+
+## InlineLinkRow
+- Berkas: lib/shared/widgets/molecules/inline_link_row.dart.
+- API dan contoh: question dan action wajib; onTap opsional. InlineLinkRow(question: 'Belum punya akun?', action: 'Daftar', onTap: openSignUp). Baris tengah, gap 4.
+- Varian: pertanyaan/aksi bebas; satu komponen untuk Masuk dan Daftar.
+- Galeri: widgetbook/molecules/inline_link_row_use_case.dart; tes: test/inline_link_row_test.dart.
+- Acuan Figma: node `4294968742`/`4294968743` dan `4294968801`/`4294968802`.
 
 ## BannerMessage
 - Berkas: lib/shared/widgets/molecules/banner_message.dart.
