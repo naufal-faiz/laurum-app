@@ -32,9 +32,6 @@ class RootShellPage extends ConsumerWidget {
       accountLabel: 'Usaha dan akun',
       activeIndex: navigationShell.currentIndex,
       showAppBar: index > 1,
-      headerHeight: index == 1
-          ? AppSpacing.appBarHeight + AppSpacing.small
-          : AppSpacing.appBarHeight,
       header: index < 2
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),

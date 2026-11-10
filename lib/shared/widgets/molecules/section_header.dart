@@ -13,11 +13,13 @@ class SectionHeader extends StatelessWidget {
     this.actionLabel,
     this.onAction,
     this.icon,
+    this.titleColor = AppColors.ink,
   }) : assert(onAction == null || actionLabel != null);
   final String title;
   final String? subtitle, actionLabel;
   final VoidCallback? onAction;
   final AppIcons? icon;
+  final Color titleColor;
   @override
   Widget build(BuildContext context) => Row(
     children: [
@@ -30,7 +32,7 @@ class SectionHeader extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppText(title, variant: AppTextVariant.section),
+            AppText(title, variant: AppTextVariant.section, color: titleColor),
             if (subtitle != null)
               AppText(subtitle!, variant: AppTextVariant.caption, color: AppColors.ink3),
           ],

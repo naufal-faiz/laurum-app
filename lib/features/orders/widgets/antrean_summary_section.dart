@@ -30,7 +30,6 @@ class AntreanSummarySection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.screenPadding,
-        vertical: AppSpacing.small,
       ),
       child: MediaQuery.textScalerOf(context).scale(1) > 1.3
           ? Column(

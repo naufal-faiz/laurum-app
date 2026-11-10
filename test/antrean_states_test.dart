@@ -7,7 +7,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/features/orders/state/antrean_controller.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/main_dummy.dart';
-import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
+import 'package:laurum/shared/widgets/atoms/app_loader.dart';
 
 import 'antrean_test_host.dart';
 
@@ -25,7 +25,7 @@ void main() {
     );
     final host = await pumpAntrean(tester, container: scope, settle: false);
     await tester.pump();
-    expect(find.byType(AppSkeleton), findsWidgets);
+    expect(find.byType(AppLoader), findsOneWidget);
     pending.complete(emptyQueue);
     await tester.pumpAndSettle();
     expect(find.text('Belum ada order aktif'), findsOneWidget);

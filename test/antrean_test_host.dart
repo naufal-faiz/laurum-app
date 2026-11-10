@@ -14,6 +14,7 @@ Future<({ProviderContainer container, GoRouter router})> pumpAntrean(
   String location = '/antrean',
   bool settle = true,
   double textScale = 1,
+  bool disableAnimations = false,
 }) async {
   await loadTestFonts();
   final scope = container ?? ProviderContainer(overrides: dummyRepositoryOverrides);
@@ -30,7 +31,10 @@ Future<({ProviderContainer container, GoRouter router})> pumpAntrean(
         view: tester.view,
         child: Builder(
           builder: (context) => MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(textScale)),
+            data: MediaQuery.of(context).copyWith(
+              textScaler: TextScaler.linear(textScale),
+              disableAnimations: disableAnimations,
+            ),
             child: RepaintBoundary(
               key: const ValueKey('antrean-golden'),
               child: LaurumApp(router: router),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/pages/antrean_filter_sheet.dart';
 import 'package:laurum/features/orders/pages/payment_record_flow.dart';
@@ -77,7 +78,8 @@ class AntreanPage extends ConsumerWidget {
             onOpen: (proposal) => context.push('/antrean/usulan/${proposal.id}'),
             onReject: (proposal) => controller.reject(proposal.id),
           ),
-        if (orders.isNotEmpty) const SectionHeader(title: 'Antrean berjalan'),
+        if (orders.isNotEmpty)
+          const SectionHeader(title: 'Antrean berjalan', titleColor: AppColors.primary),
         if (orders.isEmpty && (!showProposals || proposals.isEmpty))
           AntreanStatusSection(
             filtered: filter != 0,

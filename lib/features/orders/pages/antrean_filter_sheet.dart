@@ -16,6 +16,7 @@ class AntreanFilterSheet extends ConsumerWidget {
     return AppBottomSheet.show<void>(
       context: context,
       title: 'Filter status',
+      useRootNavigator: true,
       child: const AntreanFilterSheet(),
     );
   }

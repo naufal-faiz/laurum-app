@@ -3,13 +3,13 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 77/77 dibuat
+## Registry widget: 78/78 dibuat
 
 Semua widget sudah dibuat.
 
 ## Dependensi
 
-flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, supabase_flutter, connectivity_plus, flutter_secure_storage, google_sign_in, workmanager, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner, fake_async
+flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, supabase_flutter, connectivity_plus, flutter_secure_storage, google_sign_in, workmanager, lottie, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner, fake_async
 
 ## Berkas (jumlah baris): nama deklarasi
 
@@ -192,7 +192,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_button_styles.dart (71): AppButtonVariant, AppButtonSize, AppButtonStyles
 - app_colors.dart (64): AppColors
 - app_control_tokens.dart (19): AppControlTokens
-- app_dimensions.dart (15): AppDimensions
+- app_dimensions.dart (16): AppDimensions
 - app_field_decoration.dart (34): AppFieldDecoration
 - app_input_styles.dart (104): AppInputStyles
 - app_molecule_styles.dart (32): AppMoleculeStyles
@@ -257,7 +257,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_password_field_section.dart (82): AuthPasswordFieldSection
 - auth_passwords_section.dart (59): AuthPasswordsSection
 - auth_secret_field_section.dart (31): AuthSecretFieldSection
-- auth_submit_section.dart (28): AuthSubmitSection
+- auth_submit_section.dart (23): AuthSubmitSection
 - auth_trust_section.dart (12): AuthTrustSection
 - password_reset_section.dart (36): PasswordResetSection
 - sign_in_brand_section.dart (11): SignInBrandSection
@@ -266,11 +266,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sign_in_hero_section.dart (18): SignInHeroSection
 - sign_in_illustration_section.dart (10): SignInIllustrationSection
 - sign_in_section.dart (51): SignInSection
-- sign_up_form_card_section.dart (96): SignUpFormCardSection
+- sign_up_form_card_section.dart (94): SignUpFormCardSection
 - sign_up_hero_section.dart (17): SignUpHeroSection
 
 ### lib/features/beranda/pages/
-- beranda_page.dart (95): BerandaPage
+- beranda_page.dart (91): BerandaPage
 
 ### lib/features/beranda/state/
 - beranda_services.dart (29): BerandaStageTone
@@ -409,8 +409,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_storage.dart (49):
 
 ### lib/features/orders/pages/
-- antrean_filter_sheet.dart (53): AntreanFilterSheet
-- antrean_page.dart (100): AntreanPage
+- antrean_filter_sheet.dart (54): AntreanFilterSheet
+- antrean_page.dart (102): AntreanPage
 - order_cancel_flow.dart (24):
 - order_completion_flow.dart (19):
 - order_detail_menu_flow.dart (22):
@@ -441,9 +441,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/orders/widgets/
 - antrean_header_section.dart (37): AntreanHeaderSection
 - antrean_orders_section.dart (54): AntreanOrdersSection
-- antrean_proposals_section.dart (59): AntreanProposalsSection
-- antrean_status_section.dart (79): AntreanStatusSection
-- antrean_summary_section.dart (50): AntreanSummarySection
+- antrean_proposals_section.dart (61): AntreanProposalsSection
+- antrean_status_section.dart (62): AntreanStatusSection
+- antrean_summary_section.dart (49): AntreanSummarySection
 - antrean_toolbar_section.dart (33): AntreanToolbarSection
 - order_customer_section.dart (56): OrderCustomerSection
 - order_detail_body_section.dart (35): OrderDetailBodySection
@@ -578,7 +578,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (7):
-- root_shell_page.dart (92): RootShellPage
+- root_shell_page.dart (89): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (27): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, shellSyncStatusProvider, whatsappConnectionProvider
@@ -652,6 +652,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_gap.dart (19): AppGap
 - app_icon.dart (27): AppIcon
 - app_icon_button.dart (81): AppIconButtonVariant, AppIconButton
+- app_loader.dart (38): AppLoader
 - app_numpad_key.dart (54): AppNumpadKeyValue, AppNumpadKey
 - app_search_field.dart (90): AppSearchField, _AppSearchFieldState
 - app_skeleton.dart (25): AppSkeleton
@@ -690,7 +691,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - period_tabs.dart (29): PeriodTabs
 - progress_row.dart (38): ProgressRow
 - rank_row.dart (71): RankRow
-- section_header.dart (46): SectionHeader
+- section_header.dart (48): SectionHeader
 - segmented_progress.dart (36): SegmentedProgress
 - stat_tile.dart (35): StatTile
 - stepper_field.dart (61): StepperField
@@ -699,7 +700,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - trust_note.dart (30): TrustNote
 
 ### lib/shared/widgets/organisms/
-- app_bottom_sheet.dart (93): AppBottomSheet
+- app_bottom_sheet.dart (95): AppBottomSheet
 - auth_card.dart (21): AuthCard
 - auth_hero.dart (110): AuthHero
 - bottom_nav_bar.dart (102): BottomNavBar
@@ -736,13 +737,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - ai_settings_pages_test.dart (54):
 - ai_settings_state_test.dart (41):
 - antrean_controller_test.dart (67):
-- antrean_golden_test.dart (52):
+- antrean_golden_test.dart (56):
 - antrean_page_test.dart (73):
 - antrean_redesign_sections_test.dart (110):
 - antrean_search_page_test.dart (101):
 - antrean_search_test.dart (47):
+- antrean_spacing_modal_test.dart (46):
 - antrean_states_test.dart (84):
-- antrean_test_host.dart (45):
+- antrean_test_host.dart (49):
 - antrean_test_host_test.dart (22):
 - app_avatar_test.dart (28):
 - app_badge_test.dart (29):
@@ -756,6 +758,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_gap_test.dart (33):
 - app_icon_button_test.dart (120):
 - app_icon_test.dart (29):
+- app_loader_test.dart (38):
 - app_numpad_key_test.dart (43):
 - app_router_test.dart (64):
 - app_search_field_test.dart (66):
@@ -1001,7 +1004,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r10_registration_flow_test.dart (58):
 - r10_reset_state_test.dart (31):
 - r10_signin_reset_flow_test.dart (55):
-- r10_signup_sections_test.dart (123):
+- r10_signup_sections_test.dart (110):
 - r10_signup_validation_test.dart (37):
 - r10_test_host.dart (66):
 - r10_visual_test.dart (70):

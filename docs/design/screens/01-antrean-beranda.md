@@ -130,3 +130,10 @@ Filter/query Antrean dan fixture master tidak diubah. Tes COD 320 px/teks 2x dit
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
+
+## Koreksi 016 (10 Nov 2026)
+- Paritas tabel di atas tetap lengkap. Header mempertahankan LAURUM label hasil suntingan pengguna; tinggi slot 64, ringkasan tanpa padding vertikal. Padding daftar menjadi satu jarak sebelum chip.
+- Rekomendasi AI dan Antrean berjalan memakai warna primary atas permintaan pengguna (frame memakai primaryInk).
+- Modal filter pada navigator utama, menutupi nav bawah dan tombol Transaksi; opsi/data/callback tetap sama.
+- Keadaan loading memakai AppLoader dari aset refined pengguna; kosong/error/retry tidak berubah.
+- Tes lama antrean_states hanya mengganti finder AppSkeleton menjadi AppLoader. Golden loading memakai reduced motion agar deterministik; assertion perilaku tetap.

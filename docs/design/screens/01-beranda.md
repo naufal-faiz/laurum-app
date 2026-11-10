@@ -20,7 +20,7 @@ Nav bawah mengambang memakai frame 388/494 dengan koreksi proposal 013.
 | `Kelola antrean` | Aksi | ✅ | `go('/antrean')` |
 | `Lihat semua` | Aksi | ✅ | `go('/pelanggan')` |
 | Baris pelanggan | Aksi | ✅ | `push('/pelanggan/:id')` |
-| Muat / gagal | Keadaan | ✅ | skeleton 3 kartu; `EmptyState` + Coba lagi |
+| Muat / gagal | Keadaan | ✅ | AppLoader Lottie (014/016); `EmptyState` + Coba lagi |
 | Kosong | Keadaan | ✅ | angka 0, `Belum ada antrean`, teks kosong pelanggan |
 | Label nav Beranda/Antrean/Pelanggan/Lainnya | Navigasi | ✅ | aktif mengikuti indeks 0..3 |
 | Semantics `Transaksi baru` | Navigasi | ✅ | `CreateAction`, satu `InkWell` |

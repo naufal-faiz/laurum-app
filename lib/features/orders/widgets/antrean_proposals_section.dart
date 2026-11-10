@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/proposal.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
@@ -30,6 +31,7 @@ class AntreanProposalsSection extends StatelessWidget {
     children: [
       SectionHeader(
         title: 'Rekomendasi AI',
+        titleColor: AppColors.primary,
         icon: AppIcons.sparkles,
         subtitle: 'Usulan dari WhatsApp',
         actionLabel: 'Lihat semua (${data.proposals.length})',

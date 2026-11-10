@@ -781,7 +781,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Berkas: lib/shared/widgets/templates/root_scaffold.dart.
 - API wajib: title, accountLabel, activeIndex 0..3, body. Opsi: syncState,
   showAppBar (default true), header (Widget? default null), headerHeight (default 64),
-  onAccount, onTabSelected, onCreate. Header Antrean 72 mengikuti skala teks; judul 24.
+  onAccount, onTabSelected, onCreate. Header Antrean 64 mengikuti skala teks (koreksi 016); judul 24.
 - Fade tab 220 ms di overlay IgnorePointer; navigator tetap di pohon dan state/scroll
   terpelihara. disableAnimations langsung menampilkan konten tanpa animasi.
 - AppBarRoot + SyncIndicator (kecuali `showAppBar: false`, dipakai Beranda yang
@@ -1107,3 +1107,13 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   tabungan + tunai/receipt/Antrean/siap/serahkan/Laporan; tidak memerlukan printer nyata.
 - Perbandingan frame dan state .pen serta batas Android/iOS/integrasi dicatat di
   progress/fase-ui.md. Audit tidak mengubah desain/token atau aturan checker/lint.
+
+## Koreksi 016 dan loader 014
+- AppLoader({size = AppDimensions.loader, label = 'Sedang memuat'}): atom Stateless, aset Lottie lokal refined, semantics dan reduced motion/TickerMode; loading Beranda/Antrean.
+- SectionHeader.titleColor default AppColors.ink; subjudul Antrean memakai AppColors.primary sesuai permintaan pengguna.
+- AppBottomSheet.show.useRootNavigator default false; filter Antrean true agar di atas nav/Transaksi.
+- Header Antrean 64 mengikuti skala teks; ringkasan tanpa padding vertikal ganda, jarak sebelum chip dari padding daftar.
+
+Penyesuaian auth final pengguna (10 Nov, golden disetujui pada sesi 016):
+AuthSubmitSection memakai busy/onSubmit/label tanpa ikon trailing; AuthHero tagline
+memakai AppTextStyles.label. Data, callback submit, validasi dan busy tetap.

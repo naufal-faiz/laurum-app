@@ -21,7 +21,7 @@ class AntreanHeaderSection extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText('LAURUM', variant: AppTextVariant.bodyStrong, color: AppColors.primary),
+              AppText('LAURUM', variant: AppTextVariant.label, color: AppColors.primary),
               AppText('Antrean', variant: AppTextVariant.titleRoot, color: AppColors.primaryInk),
             ],
           ),

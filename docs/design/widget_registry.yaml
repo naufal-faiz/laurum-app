@@ -15,6 +15,7 @@ atoms:
   - AppTextField   # stateful
   - AppSearchField # stateful
   - AppSkeleton
+  - AppLoader
   - AppNumpadKey
 molecules:
   - LabeledField

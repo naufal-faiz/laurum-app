@@ -181,3 +181,5 @@ Uang disimpan `int` rupiah dan berat `int` gram. Tidak ada `double` untuk uang.
   `AppRadius.auth*`, `AppShadows.auth*`) dimigrasikan ke token global dan dihapus.
 - Golden seluruh komponen/layar bergeser karena perubahan global; daftar lengkap di
   proposal 006 bagian (c) dan laporan lapisan 1.
+
+Loader (014/016): AppDimensions.loader = 96 dp, mengikuti wrapper aset pengguna.

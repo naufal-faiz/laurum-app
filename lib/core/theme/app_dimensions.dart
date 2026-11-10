@@ -1,4 +1,5 @@
 abstract final class AppDimensions {
+  static const loader = 96.0;
   static const iconTiny = 12.0;
   static const iconSmall = 16.0;
   static const iconBack = 18.0;

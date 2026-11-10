@@ -6,11 +6,15 @@ import 'package:laurum/features/orders/state/antrean_controller.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/main_dummy.dart';
+import 'package:lottie/lottie.dart';
 
 import 'antrean_test_host.dart';
 
 void main() {
-  setUpAll(() => initializeDateFormatting('id_ID'));
+  setUpAll(() async {
+    await initializeDateFormatting('id_ID');
+    await AssetLottie('assets/animations/laurum-loader.json').load();
+  });
   for (final variant in [
     'normal',
     'proses',
@@ -41,7 +45,7 @@ void main() {
       if (variant == 'whatsapp') {
         scope.read(whatsappConnectionProvider.notifier).setConnected(connected: false);
       }
-      await pumpAntrean(tester, container: scope);
+      await pumpAntrean(tester, container: scope, disableAnimations: variant == 'loading');
       expect(tester.takeException(), isNull);
       await expectLater(
         find.byKey(const ValueKey('antrean-golden')),

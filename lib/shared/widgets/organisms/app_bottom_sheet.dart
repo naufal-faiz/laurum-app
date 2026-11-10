@@ -23,8 +23,10 @@ class AppBottomSheet extends StatelessWidget {
     required String title,
     required Widget child,
     String? subtitle,
+    bool useRootNavigator = false,
   }) => showModalBottomSheet<T>(
     context: context,
+    useRootNavigator: useRootNavigator,
     isScrollControlled: true,
     useSafeArea: true,
     backgroundColor: AppColors.surface,

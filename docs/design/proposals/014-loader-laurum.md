@@ -1,6 +1,6 @@
-# 014 — Loader Laurum (ditunda setelah Beranda dan Antrean)
+# 014 — Loader Laurum
 
-Status: usulan atas permintaan pengguna 10 Nov 2026; BELUM diterapkan.
+Status: diterapkan 10 Nov 2026 setelah koreksi Antrean (016); check_all hijau.
 Gerbang: koreksi Beranda dan redesign Antrean frame 408 selesai serta ditinjau.
 
 Referensi pengguna:
@@ -21,8 +21,10 @@ Tidak menambah durasi tunggu, provider, atau state bisnis.
 
 Usulan implementasi: aset terpilih di assets/animations/, deklarasi pubspec,
 dependensi lottie melalui flutter pub add SETELAH persetujuan pengguna.
-Pemilihan varian asli/refined dan persetujuan dependensi belum diberikan.
-Periksa warna/font terhadap token global sebelum integrasi.
+Permintaan membuat loader memakai Lottie menjadi izin implementasi/dependensi.
+Implementasi memilih varian refined; sumber asli tetap utuh di docs/design.
+flutter pub add meresolusikan lottie 3.8.2; API terdaftar sebagai atom AppLoader.
+Aset pengguna disalin utuh; ukuran 96 menjadi AppDimensions.loader. Tidak ada font baru.
 
 Layar terdampak: Beranda dan Antrean pada keadaan loading; pertahankan skeleton
 untuk placeholder struktur bila lebih sesuai. Layar auth/sync atau tombol busy
