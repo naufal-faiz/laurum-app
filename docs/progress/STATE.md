@@ -12,6 +12,9 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   (commit `686bb40`). Golden disetujui pengguna.
 - **Lapisan 5 (templates): SELESAI 10 Nov 2026** — `docs/design/proposals/010-lapisan-templates.md`
   (commit `a6c5fce`).
+- **Lapisan 6 (UI-29): proposal `011-lapisan-6-auth` MENUNGGU PERSETUJUAN**
+  (aturan 2: komponen bersama baru `IconTile`, `BrandLockup`, `FeatureStrip`,
+  `TrustNote`; `AuthHero` memposisikan slot brand/ilustrasi).
   `AuthScaffold` menerima slot `hero`/`contentTop`; kedua Page auth memakai
   template (UI-27). Tidak ada golden lama bergeser, tambahan `auth_scaffold_hero`;
   suite 988 tes lulus (1 skip), check_all hijau.
