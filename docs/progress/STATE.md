@@ -11,16 +11,13 @@ Diperbarui: 2026-11-10 | Cabang newdesign
 - **Lapisan 4 (organisms): SELESAI 10 Nov 2026** — `docs/design/proposals/009-lapisan-organisms.md`
   (commit `686bb40`). Golden disetujui pengguna.
 - **Lapisan 5 (templates): SELESAI 10 Nov 2026** — `docs/design/proposals/010-lapisan-templates.md`
-  (commit `a6c5fce`).
+  (commit `a6c5fce`). `AuthScaffold` menerima slot `hero`/`contentTop`; kedua Page
+  auth memakai template (UI-27). Tidak ada golden lama bergeser, tambahan
+  `auth_scaffold_hero`; suite 988 tes lulus (1 skip), check_all hijau.
 - **Lapisan 6 (UI-29): proposal `011-lapisan-6-auth` MENUNGGU PERSETUJUAN**
   (aturan 2: komponen bersama baru `IconTile`, `BrandLockup`, `FeatureStrip`,
-  `TrustNote`; `AuthHero` memposisikan slot brand/ilustrasi).
-  `AuthScaffold` menerima slot `hero`/`contentTop`; kedua Page auth memakai
-  template (UI-27). Tidak ada golden lama bergeser, tambahan `auth_scaffold_hero`;
-  suite 988 tes lulus (1 skip), check_all hijau.
-  Berikutnya: lapisan 6 (UI-29, Page/Section auth) — gerbang proposal lapisan
-  berikutnya tidak berlaku karena lapisan 1-5 sudah selesai; layar lain sesuai
-  penugasan pengguna.
+  `TrustNote`; `AuthHero` memposisikan slot brand/ilustrasi). Berikutnya setelah
+  disetujui: perapian Section layar 29/31; layar lain sesuai penugasan pengguna.
 - Perubahan organisme lapisan 4:
   - `AuthHero` (gradient, ornamen, judul/sub, slot `brand` yang memuat logo +
     ilustrasi, tombol kembali `AppIconButton.hero` di y=56). Dua varian dari ada
