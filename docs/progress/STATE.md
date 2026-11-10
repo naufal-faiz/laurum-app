@@ -8,8 +8,8 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   (commit `9b3905e`).
 - **Lapisan 3 (molecules): SELESAI 10 Nov 2026** — `docs/design/proposals/008-lapisan-molecules.md`
   (commit `3159e7f`).
-- **Lapisan 4 (organisms): SELESAI 10 Nov 2026** — `docs/design/proposals/009-lapisan-organisms.md`.
-  Berikutnya: proposal `010-lapisan-templates` (gerbang UI-21).
+- **Lapisan 4 (organisms): SELESAI 10 Nov 2026** — `docs/design/proposals/009-lapisan-organisms.md`
+  (commit `686bb40`). Berikutnya: proposal `010-lapisan-templates` (gerbang UI-21).
 - Perubahan organisme lapisan 4:
   - `AuthHero` (gradient, ornamen, judul/sub, slot `brand` yang memuat logo +
     ilustrasi, tombol kembali `AppIconButton.hero` di y=56). Dua varian dari ada
