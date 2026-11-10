@@ -1,6 +1,23 @@
 # STATE Laurum
 Diperbarui: 2026-11-10 | Cabang newdesign
 
+## Audit status (10 Nov 2026)
+- Git: `newdesign`, implementasi terbaru `1a4d9e7` (Beranda + nav bawah).
+- Working tree saat audit: `docs/design/new-design-laurum.figcraft` berubah,
+  belum di-commit; perubahan pengguna dipertahankan.
+- Posisi UI: lapisan 1–6 auth selesai secara kode; Beranda + nav sudah diterapkan.
+  Visual Android belum diverifikasi. Berikutnya audit visual Beranda oleh pengguna,
+  lalu Antrean frame 408 pada sesi terpisah.
+- Bukti terakhir tercatat: check_all hijau, 1015 tes lulus, 1 skip, REPO_MAP 1038.
+  Audit ini belum mengonfirmasi ulang: prasyarat `windows_native_sdk.ps1` berhenti
+  dengan `Existing TEMP Flutter alias has an unexpected target`; check_all belum
+  berjalan. Perlu menyelaraskan alias SDK sebelum pemeriksaan ulang.
+- Backend: B3b dan B2e+ menunggu; uji cloud ujung-ke-ujung, Google login,
+  workmanager Android, dan iOS belum terverifikasi (lihat hasil B3c).
+- Bagian hasil fase di bawah adalah riwayat; instruksi langkah berikutnya di fase
+  lama tidak mengalahkan posisi terbaru ini. Registry saat ini 77/77 (REPO_MAP),
+  sedangkan angka 60/60 di hasil B1f adalah historis.
+
 ## Mode Redesign UI (Aktif di cabang newdesign)
 - **Lapisan 1 (token): SELESAI** — `docs/design/proposals/006-lapisan-token.md`
   (commit `b7a9292`).
@@ -73,10 +90,8 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   - Auth: `AuthSubmitSection` memakai `AppButton`; tombol Google memakai
     `AppButton.neutralOutline` + `AppSvgs.google`; dua kartu auth memakai
     `AppCard.elevated`; tombol kembali memakai `AppIconButton.hero`.
-- Sisa primitif Section auth (lapisan 6): kotak logo dan lingkaran ilustrasi
-  (`DecoratedBox`), strip fitur (`Container` + `BoxDecoration`). Hero sudah pindah
-  ke organisme `AuthHero`; `GestureDetector` mata password dan tautan sudah hilang
-  (lapisan 3).
+- Primitif dekoratif Section auth sudah dipindahkan ke komponen bersama pada
+  lapisan 6 (`5c0efcf`); catatan utang sebelum lapisan 6 sudah tidak berlaku.
 - Keputusan global terisi (5 butir, pengguna 10 Nov 2026): primer `#2675C9`, hijau
   menjadi `success`, Inter global, skala auth + minimum 11, tombol 50/44/40,
   variabel & komponen FigCraft.
@@ -91,10 +106,8 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   asetnya dihapus.
 - Alias sementara: `AppColors.blue/blueTint/blueInk` masih ada untuk badge "Diproses"
   sampai lapisan molecules/organisms membersihkan pemakai.
-- Layar 29 & 31 masih memakai `DecoratedBox` dekoratif untuk kotak logo dan
-  lingkaran ilustrasi serta `Container` strip fitur, dan template
-  `Scaffold+Stack`; perapian murni di lapisan 5 (template) dan 6 (UI-29).
-  Material/InkWell/GestureDetector buatan sendiri sudah tidak ada di Section auth.
+- Layar 29 & 31 sudah memakai `AuthScaffold` dan komposisi komponen bersama
+  setelah lapisan 5–6; verifikasi visual perangkat tetap menunggu.
 - **Golden lapisan 4 (UI-28): 7 golden lama bergeser + 2 baru.** Lama:
   `auth_signin`, `auth_signin_error`, `r10_signin`, `r10_signin_error`,
   `r10_signin_error_320_2x`, `r10_signup`, `r10_signup_320_2x`. Baru: `auth_hero`,
