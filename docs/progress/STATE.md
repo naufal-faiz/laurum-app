@@ -14,7 +14,8 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   (commit `a6c5fce`). `AuthScaffold` menerima slot `hero`/`contentTop`; kedua Page
   auth memakai template (UI-27). Tidak ada golden lama bergeser, tambahan
   `auth_scaffold_hero`; suite 988 tes lulus (1 skip), check_all hijau.
-- **Lapisan 6 (UI-29): SELESAI 10 Nov 2026** — `docs/design/proposals/011-lapisan-6-auth.md`.
+- **Lapisan 6 (UI-29): SELESAI 10 Nov 2026** — `docs/design/proposals/011-lapisan-6-auth.md`
+  (commit `5c0efcf`).
   Molekul `IconTile`, `BrandLockup`, `FeatureStrip`, `TrustNote`; Section layar
   29/31 bersih dari `Container`/`DecoratedBox`/`Stack`. Golden
   `r10_signin_error_320_2x` bergeser (teks 2x tidak lagi bertumpuk), 4 golden
