@@ -9,7 +9,10 @@ Diperbarui: 2026-11-10 | Cabang newdesign
 - **Lapisan 3 (molecules): SELESAI 10 Nov 2026** — `docs/design/proposals/008-lapisan-molecules.md`
   (commit `3159e7f`).
 - **Lapisan 4 (organisms): SELESAI 10 Nov 2026** — `docs/design/proposals/009-lapisan-organisms.md`
-  (commit `686bb40`). Berikutnya: proposal `010-lapisan-templates` (gerbang UI-21).
+  (commit `686bb40`). Golden disetujui pengguna.
+- **Lapisan 5 (templates): proposal `010-lapisan-templates` MENUNGGU PERSETUJUAN**
+  (gerbang UI-21). Lingkup: slot `hero`/`contentTop` pada `AuthScaffold`, kedua
+  Page auth memakai template (UI-27). Template lain tidak diubah.
 - Perubahan organisme lapisan 4:
   - `AuthHero` (gradient, ornamen, judul/sub, slot `brand` yang memuat logo +
     ilustrasi, tombol kembali `AppIconButton.hero` di y=56). Dua varian dari ada
@@ -72,6 +75,7 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   `r10_signin_error_320_2x`, `r10_signup`, `r10_signup_320_2x`. Baru: `auth_hero`,
   `auth_card`. Alasan: posisi ornamen/judul/sub sesuai Figma (sub 178→174 dan
   148→144), lingkaran kembali 4 px lebih tinggi, kartu auth lewat `AuthCard`.
+  Pergeseran **disetujui pengguna 10 Nov 2026**.
 - **Golden lapisan 3 (UI-28): 21 golden lama bergeser + 2 baru.** Lama:
   `app_icon_button`, `labeled_field`, `add_customer_sheet`, `expense_form`,
   `printer_page`, `proposal_new_customer`, `proposal_rina`, `transaction_page`,

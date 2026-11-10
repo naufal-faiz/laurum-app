@@ -105,7 +105,8 @@ AuthCard({required List<Widget> children})
   `r10_signin_error`, `r10_signin_error_320_2x`, `r10_signup`,
   `r10_signup_320_2x`) + 2 baru (`auth_hero`, `auth_card`). Alasan: posisi
   ornamen/judul/sub sesuai Figma, kotak sentuh kembali 4 px lebih tinggi, kartu
-  auth lewat satu komponen.
+  auth lewat satu komponen. **Pergeseran disetujui pengguna 10 Nov 2026**
+  ("lakukan pergeseran goldennya").
 - Tes baru: `test/auth_hero_test.dart`, `test/auth_card_test.dart`. Tes perilaku
   lama tidak diubah.
 - Verifikasi: `dart analyze` bersih, `check_arch` OK, 985 tes lulus (1 skip),
