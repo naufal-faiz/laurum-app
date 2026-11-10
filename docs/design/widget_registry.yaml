@@ -41,6 +41,10 @@ molecules:
   - LabeledDivider
   - InlineLink
   - InlineLinkRow
+  - IconTile
+  - BrandLockup
+  - FeatureStrip
+  - TrustNote
 organisms:
   - BottomNavBar
   - AuthHero

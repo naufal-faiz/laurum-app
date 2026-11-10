@@ -14,10 +14,13 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   (commit `a6c5fce`). `AuthScaffold` menerima slot `hero`/`contentTop`; kedua Page
   auth memakai template (UI-27). Tidak ada golden lama bergeser, tambahan
   `auth_scaffold_hero`; suite 988 tes lulus (1 skip), check_all hijau.
-- **Lapisan 6 (UI-29): proposal `011-lapisan-6-auth` MENUNGGU PERSETUJUAN**
-  (aturan 2: komponen bersama baru `IconTile`, `BrandLockup`, `FeatureStrip`,
-  `TrustNote`; `AuthHero` memposisikan slot brand/ilustrasi). Berikutnya setelah
-  disetujui: perapian Section layar 29/31; layar lain sesuai penugasan pengguna.
+- **Lapisan 6 (UI-29): SELESAI 10 Nov 2026** — `docs/design/proposals/011-lapisan-6-auth.md`.
+  Molekul `IconTile`, `BrandLockup`, `FeatureStrip`, `TrustNote`; Section layar
+  29/31 bersih dari `Container`/`DecoratedBox`/`Stack`. Golden
+  `r10_signin_error_320_2x` bergeser (teks 2x tidak lagi bertumpuk), 4 golden
+  molekul baru; golden layar auth lain tetap. Verifikasi: 996 tes lulus
+  (1 skip), `check_all: SEMUA HIJAU`. Berikutnya: layar lain sesuai penugasan
+  pengguna (frame per sesi, UI-4).
 - Perubahan organisme lapisan 4:
   - `AuthHero` (gradient, ornamen, judul/sub, slot `brand` yang memuat logo +
     ilustrasi, tombol kembali `AppIconButton.hero` di y=56). Dua varian dari ada
@@ -84,6 +87,10 @@ Diperbarui: 2026-11-10 | Cabang newdesign
 - **Golden lapisan 5: tidak ada golden lama bergeser**, tambahan baru
   `auth_scaffold_hero`. Alasan: geometri Stack dan offset 320/200 dipertahankan,
   hanya pembungkus template yang berpindah.
+- **Golden lapisan 6: 1 golden layar bergeser** (`r10_signin_error_320_2x`,
+  lebar 320 teks 2x) + 4 baru (`icon_tile`, `brand_lockup`, `feature_strip`,
+  `trust_note`). Alasan: nama/tagline brand tidak lagi saling menimpa pada teks
+  2x; golden layar auth lain identik.
 - **Golden lapisan 3 (UI-28): 21 golden lama bergeser + 2 baru.** Lama:
   `app_icon_button`, `labeled_field`, `add_customer_sheet`, `expense_form`,
   `printer_page`, `proposal_new_customer`, `proposal_rina`, `transaction_page`,

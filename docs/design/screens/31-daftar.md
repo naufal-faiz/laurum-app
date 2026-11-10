@@ -1,6 +1,7 @@
 # 31 - Daftar dan Cek email
 Rute: /daftar, /cek-email. Fase: R10. Frame Figma: `LAURUM · Daftar` (ID: 4294968748).
-Template: hero gradient 230 + kartu putih mengambang (Stack + SingleChildScrollView).
+Template: hero gradient 230 + kartu putih mengambang (`AuthScaffold` slot hero,
+contentTop 200).
 
 ## Paritas redesign (UI-7)
 
@@ -35,11 +36,11 @@ dengan skala font dinaikkan (revisi UX 9 Nov 2026).
 - Gradient `#2E7FD8 → #1B5FA3`, ornamen ellipse putih 210 (10%) di (250,-90) dan
   110 (8%) di (320,120).
 - Tombol kembali 36x36 lingkaran `#4A90DA` border `#8FBCEB` di (24,56), ikon panah
-  putih 20 (`AppSvg` cursor-back di-`ColorFiltered` putih).
+  putih 20 (`AppIconButton.hero` + `AppSvg` cursor-back, tanpa `ColorFiltered`).
 - "Daftar" Inter 28/700 putih di (24,110); sub 13/400 #DCEBF9 di (24,148).
 - Tidak ada logo merek dan ilustrasi baju (sesuai frame).
 
-**Kartu Daftar (342, x=24, y=200, radius 24, padding 18, gap 12, shadow auth):**
+**Kartu Daftar (342, x=24, y=200, radius 24, padding 18, gap 12, shadow `cardElevated`):**
 - Field Nama (ikon user, placeholder "Nama lengkap kamu").
 - Field Email (ikon mail, placeholder "nama@email.com").
 - Field Password (ikon gembok, hint "Minimal 8 karakter", ikon mata).
@@ -51,7 +52,8 @@ dengan skala font dinaikkan (revisi UX 9 Nov 2026).
 **Bawah kartu:** trust statis "Data kamu aman & terenkripsi".
 
 ## Selisih desain (status akhir)
-1. Hero 230 + kartu mengambang diterapkan; tombol kembali menyatu di hero.
+1. Hero 230 + kartu mengambang diterapkan template `AuthScaffold` (contentTop 200);
+   tombol kembali menyatu di hero.
 2. Persetujuan Syarat & Ketentuan ditunda sampai aplikasi 95% (proposal 004).
 3. Tombol Google ditambahkan ke Daftar atas izin pengguna; aksinya `signIn()` yang
    sudah ada (tanpa state baru). Bila Google dipakai, akun langsung masuk.

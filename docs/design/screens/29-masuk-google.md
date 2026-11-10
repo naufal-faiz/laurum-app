@@ -46,7 +46,7 @@ Frame `LAURUM · Masuk` (390x844 dp, latar putih). Nilai diambil 1:1 dari FigCra
 (node Hero 4294968693, Kartu Masuk 4294968715, Fitur 4294968807, Trust 4294968744).
 
 **Hero (390x340, sudut bawah radius 32):**
-- Gradient top-left → bottom-right `#2E7FD8` → `#1B5FA3` (`AppColors.authHeroGradient*`).
+- Gradient top-left → bottom-right `#2E7FD8` → `#1B5FA3` (`AppColors.heroGradientStart/End`).
 - Ornamen: ellipse putih 210 di (236,-80) 10%; 120 di (300,120) 8%; 3 dot 4x4 di
   (250,96), (266,112), (284,130) 50%.
 - Logo 38x38 radius 12 putih di (24,58) + ikon tetes #2675C9 18.
@@ -56,7 +56,7 @@ Frame `LAURUM · Masuk` (390x844 dp, latar putih). Nilai diambil 1:1 dari FigCra
 - TIDAK ada tombol kembali (frame tidak memilikinya).
 
 **Kartu Masuk (342x348, x=24, y=320, radius 24, padding 18, gap 12):**
-- Shadow `0 14 32 #174B83@12.5%` (`AppShadows.authCard`).
+- Shadow `0 14 32 #174B83@12.5%` (`AppShadows.cardElevated`).
 - Field Email: label Inter 8.5/600 #7C8DA3 + gap 4 + field 48 radius 12 border
   #DDE3E8, ikon envelope 16 #7C8DA3, placeholder Inter 10.5 #B7C2CF.
 - Field Password: baris label (Password + "Lupa password?" #2675C9) + field yang
@@ -88,8 +88,8 @@ Frame `LAURUM · Masuk` (390x844 dp, latar putih). Nilai diambil 1:1 dari FigCra
 ## Selisih desain (status akhir)
 1. **Tombol kembali dihapus** — frame `LAURUM · Masuk` tidak punya back button.
    AppBarSub lama diganti hero; tidak ada elemen yang menabrak logo.
-2. **Hero + kartu mengambang** — diterapkan `Stack` (hero tetap) +
-   `SingleChildScrollView` (padding atas 320). Bukan FormScaffold lagi.
+2. **Hero + kartu mengambang** — diterapkan template `AuthScaffold` (slot `hero`,
+   isi mulai `contentTop` 320). Bukan FormScaffold lagi.
 3. **"Lupa password?"** pindah ke baris label Password (kiri label, kanan link).
 4. **Tombol Masuk di dalam kartu** — footer FormScaffold tidak dipakai; keyboard
    ditangani `scrollPadding` 240 pada field dense (tes 16e tetap lulus).
@@ -100,17 +100,21 @@ Frame `LAURUM · Masuk` (390x844 dp, latar putih). Nilai diambil 1:1 dari FigCra
 8. **Tombol mata dalam field** — kotak 28x28 dihapus (revisi UX); ikon polos 20
    dengan area sentuh 40 (`AppIconButton.compact`). Aksi tetap
    `controller.toggleVisible()`.
+9. **Komposisi murni (lapisan 6)** — hero `AuthHero`, kartu `AuthCard`, halaman
+   `AuthScaffold`; brand `BrandLockup`, logo/ilustrasi `IconTile`, strip
+   `FeatureStrip`, trust `TrustNote`. Tidak ada lagi `Container`/`DecoratedBox`/
+   `Stack` buatan Section.
 
 ## Token/ikon/font yang dipakai
 | Elemen | Token |
 |---|---|
-| Gradient hero | `AppColors.authHeroGradientStart/End`, blob/dot tokens |
-| Tagline hero | `AppColors.authHeroTagline` (#DCEBF9) |
-| Shadow kartu/Google | `AppShadows.authCard`, `AppShadows.authGoogle` |
-| Warna link/label/placeholder/border | `authPrimary` #2675C9, `authLabel` #7C8DA3, `authPlaceholder` #B7C2CF, `authFieldBorder` #DDE3E8 |
-| Font hero & kartu | Inter 400/600/700 (`assets/fonts/Inter-*.otf`) via `AppAuthTextStyles` |
+| Gradient hero | `AppColors.heroGradientStart/End`, `heroBlob`, `heroBlobSoft`, `heroDot` |
+| Tagline hero | `AppColors.heroTagline` (#DCEBF9) |
+| Shadow kartu | `AppShadows.cardElevated` |
+| Warna label/link/placeholder | `AppColors.primaryInk`, `primary`, `ink3`, `illustration`, `surfaceLow` |
+| Font | Inter 400/600/700 global via `AppTextStyles` (hero, brand, brandSub, body, meta, micro, label) |
 | Ikon | `AppIcons.droplet`, `service`, `mail`, `lock`, `visible`, `arrowForward`, `queue`, `receipt`, `reports`, `privacy` |
-| Field | `AppFieldStyles` (radius 12, 48 dp) |
+| Field | `AppTextField` dense + `AppFieldDecoration` (radius 12, 48 dp) |
 
 
 ## Data dan provider

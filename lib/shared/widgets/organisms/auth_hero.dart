@@ -15,12 +15,13 @@ class AuthHero extends StatelessWidget {
     required this.subtitle,
     super.key,
     this.brand,
+    this.illustration,
     this.onBack,
   });
 
   final double height;
   final String title, subtitle;
-  final Widget? brand;
+  final Widget? brand, illustration;
   final VoidCallback? onBack;
   static const _dots = [(136.0, 96.0), (120.0, 112.0), (102.0, 130.0)];
 
@@ -78,7 +79,8 @@ class AuthHero extends StatelessWidget {
                   child: SizedBox.square(dimension: 4),
                 ),
               ),
-          if (brand != null) Positioned.fill(child: brand!),
+          if (brand != null) Positioned(left: AppSpacing.xlarge, top: 58, child: brand!),
+          if (illustration != null) Positioned(right: 28, top: 150, child: illustration!),
           if (back != null)
             Positioned(
               left: AppSpacing.xlarge,

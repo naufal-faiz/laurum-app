@@ -3,7 +3,7 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 65/65 dibuat
+## Registry widget: 69/69 dibuat
 
 Semua widget sudah dibuat.
 
@@ -257,13 +257,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_passwords_section.dart (59): AuthPasswordsSection
 - auth_secret_field_section.dart (31): AuthSecretFieldSection
 - auth_submit_section.dart (28): AuthSubmitSection
-- auth_trust_section.dart (32): AuthTrustSection
+- auth_trust_section.dart (12): AuthTrustSection
 - password_reset_section.dart (36): PasswordResetSection
-- sign_in_brand_section.dart (61): SignInBrandSection
-- sign_in_feature_bar_section.dart (77): SignInFeatureBarSection
+- sign_in_brand_section.dart (11): SignInBrandSection
+- sign_in_feature_bar_section.dart (17): SignInFeatureBarSection
 - sign_in_form_card_section.dart (70): SignInFormCardSection
-- sign_in_hero_section.dart (16): SignInHeroSection
-- sign_in_illustration_section.dart (27): SignInIllustrationSection
+- sign_in_hero_section.dart (18): SignInHeroSection
+- sign_in_illustration_section.dart (10): SignInIllustrationSection
 - sign_in_section.dart (51): SignInSection
 - sign_up_form_card_section.dart (96): SignUpFormCardSection
 - sign_up_hero_section.dart (17): SignUpHeroSection
@@ -642,11 +642,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_bar_root.dart (48): AppBarRoot
 - app_bar_sub.dart (54): AppBarSub
 - banner_message.dart (41): BannerMessageVariant, BannerMessage
+- brand_lockup.dart (32): BrandLockup
 - callout_ai.dart (36): CalloutAi
 - chip_bar.dart (29): ChipBar
 - date_group_header.dart (41): DateGroupHeader
 - empty_state.dart (48): EmptyState
+- feature_strip.dart (46): FeatureStrip
 - footer_bar.dart (28): FooterBar
+- icon_tile.dart (52): IconTile
 - info_row.dart (28): InfoRow
 - inline_link.dart (32): InlineLink
 - inline_link_row.dart (36): InlineLinkRow
@@ -663,11 +666,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - stepper_field.dart (61): StepperField
 - sync_indicator.dart (46): SyncState, SyncIndicator
 - toggle_row.dart (49): ToggleRow
+- trust_note.dart (30): TrustNote
 
 ### lib/shared/widgets/organisms/
 - app_bottom_sheet.dart (93): AppBottomSheet
 - auth_card.dart (21): AuthCard
-- auth_hero.dart (108): AuthHero
+- auth_hero.dart (110): AuthHero
 - bottom_nav_bar.dart (110): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
 - customer_row.dart (102): CustomerRow
@@ -750,6 +754,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - banner_message_test.dart (23):
 - bottom_nav_bar_test.dart (104):
 - bp0_id_flow_test.dart (61):
+- brand_lockup_test.dart (25):
 - business_info_page_test.dart (50):
 - callout_ai_test.dart (20):
 - checkout_controller_test.dart (90):
@@ -833,9 +838,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_row_test.dart (34):
 - expense_sections_test.dart (87):
 - fake_id_generator.dart (20): FakeIdGenerator
+- feature_strip_test.dart (29):
 - footer_bar_test.dart (30):
 - form_scaffold_test.dart (33):
 - formatters_test.dart (40):
+- icon_tile_test.dart (26):
 - id_generator_test.dart (39):
 - info_row_test.dart (25):
 - inline_link_row_test.dart (38):
@@ -1076,6 +1083,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_golden_test.dart (70):
 - transaction_page_test.dart (136):
 - transaction_runner_test.dart (91): TransactionValue
+- trust_note_test.dart (24):
 - ui_final_accessibility_test.dart (52):
 - ui_final_flow_host.dart (53):
 - ui_final_flow_test.dart (83):
@@ -1122,18 +1130,21 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_bar_root_use_case.dart (25):
 - app_bar_sub_use_case.dart (26):
 - banner_message_use_case.dart (19):
+- brand_lockup_use_case.dart (16):
 - callout_ai_use_case.dart (20):
 - chip_bar_use_case.dart (23):
 - date_group_header_use_case.dart (20):
 - empty_state_use_case.dart (26):
+- feature_strip_use_case.dart (19):
 - footer_bar_use_case.dart (35):
+- icon_tile_use_case.dart (16):
 - info_row_use_case.dart (20):
 - inline_link_row_use_case.dart (28):
 - labeled_divider_use_case.dart (19):
 - labeled_field_use_case.dart (40):
 - locked_row_use_case.dart (25):
 - m1.dart (21):
-- m2.dart (17):
+- m2.dart (25):
 - m3.dart (23):
 - menu_row_use_case.dart (26):
 - nominal_chips_use_case.dart (25):
@@ -1145,12 +1156,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - stepper_field_use_case.dart (39):
 - sync_indicator_use_case.dart (18):
 - toggle_row_use_case.dart (27):
+- trust_note_use_case.dart (12):
 
 ### widgetbook/organisms/
 - app_bottom_sheet_keyboard_use_case.dart (23):
 - app_bottom_sheet_use_case.dart (36):
 - auth_card_use_case.dart (21):
-- auth_hero_use_case.dart (25):
+- auth_hero_use_case.dart (27):
 - bottom_nav_bar_use_case.dart (18):
 - confirm_modal_use_case.dart (35):
 - customer_row_use_case.dart (44):

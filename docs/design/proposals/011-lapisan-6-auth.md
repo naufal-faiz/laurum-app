@@ -107,3 +107,24 @@ Tidak berubah: label/teks, urutan, `Key`, callback, jumlah widget yang dicari te
   Password Baru) menunggu frame per layar; komponen di atas dipakai ulang saat itu.
 - Aturan mesin UI-24/UI-26 di `tool/check_arch.dart` (tool beku) menyusul setelah
   seluruh auth bersih.
+
+## Hasil penerapan (10 Nov 2026)
+
+- Molekul baru: `IconTile` (+ preset `.logo()`/`.illustration()`),
+  `BrandLockup`, `FeatureStrip`, `TrustNote`; semuanya tanpa state dan hanya
+  memakai token global.
+- `AuthHero` kembali menerima slot `illustration`; slot `brand` di x=24 y=58 dan
+  `illustration` di kanan 28 y=150, jadi Section tidak lagi memakai `Stack`.
+- `SignInBrandSection` → `BrandLockup`; `SignInIllustrationSection` →
+  `IconTile.illustration()`; `SignInFeatureBarSection` → `FeatureStrip`;
+  `AuthTrustSection` → `TrustNote`. Tidak ada lagi `Container`, `DecoratedBox`,
+  `Stack`, `Material`, `InkWell`, atau `GestureDetector` di Section layar 29/31.
+- Registry, katalog, galeri widgetbook, dan 4 tes molekul ditambahkan.
+- Golden: **tidak ada golden layar auth yang bergeser** kecuali
+  `r10_signin_error_320_2x` (lebar 320, teks 2x). Alasan: teks brand lama saling
+  menimpa (nama 60 dan tagline 80 dengan tinggi baris 2x); `BrandLockup` menumpuk
+  nama/tagline sehingga tidak tumpang tindih. Golden baru: `icon_tile`,
+  `brand_lockup`, `feature_strip`, `trust_note`.
+- Tes perilaku auth (keyboard, aksesibilitas, navigasi) tidak diubah.
+- Verifikasi: `dart analyze` bersih, `check_arch` OK, 996 tes lulus (1 skip),
+  `check_all: SEMUA HIJAU` (REPO_MAP 1017 berkas).

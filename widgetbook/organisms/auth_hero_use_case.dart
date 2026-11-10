@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/features/auth/widgets/sign_in_brand_section.dart';
+import 'package:laurum/features/auth/widgets/sign_in_illustration_section.dart';
 import 'package:laurum/shared/widgets/organisms/auth_hero.dart';
 import 'package:widgetbook/widgetbook.dart';
 
@@ -13,6 +14,7 @@ final authHeroUseCase = WidgetbookUseCase(
         title: 'Masuk',
         subtitle: 'Kasir laundry untuk usaha rumahan',
         brand: SignInBrandSection(),
+        illustration: SignInIllustrationSection(),
       ),
       AuthHero(
         height: 230,

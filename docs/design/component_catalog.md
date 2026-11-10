@@ -81,6 +81,35 @@
 - Galeri: widgetbook/molecules/inline_link_row_use_case.dart; tes: test/inline_link_row_test.dart.
 - Acuan Figma: node `4294968742`/`4294968743` dan `4294968801`/`4294968802`.
 
+## IconTile
+- Berkas: lib/shared/widgets/molecules/icon_tile.dart.
+- API: icon, size, iconSize wajib; background, foreground, radius opsional.
+  Preset `IconTile.logo()` (38, ikon 18, radius logo, putih + primary) dan
+  `IconTile.illustration()` (118, ikon 44, lingkaran, `illustration` + surface).
+- Kotak/lingkaran ikon dekoratif tanpa state. Angka preset tinggal di molekul,
+  bukan di Section (UI-26).
+- Galeri: widgetbook/molecules/icon_tile_use_case.dart; tes ukuran preset.
+  Acuan Figma: logo Masuk `4294968699`, ilustrasi `4294968706`.
+
+## BrandLockup
+- Berkas: lib/shared/widgets/molecules/brand_lockup.dart.
+- API: name, tagline wajib. BrandLockup(name: 'LAURUM', tagline: 'LAUNDRY MANAGEMENT').
+- Row logo 38 + gap 10 + nama `brand` + tagline `brandSub`; warna dari token hero.
+- Galeri: widgetbook/molecules/brand_lockup_use_case.dart; tes tiga bagian tampil.
+
+## FeatureStrip
+- Berkas: lib/shared/widgets/molecules/feature_strip.dart.
+- API: items (List record `icon`, `label`) wajib. FeatureStrip(items: [(icon: AppIcons.queue, label: 'Antrean rapi'), …]).
+- Strip tinggi `barHeight`, latar `surfaceLow`, radius `bar`, ikon 13 + label
+  11/600, ellipsis; tanpa aksi/state.
+- Galeri: widgetbook/molecules/feature_strip_use_case.dart; tes label tampil.
+
+## TrustNote
+- Berkas: lib/shared/widgets/molecules/trust_note.dart.
+- API: text wajib. TrustNote(text: 'Data usaha kamu aman & terenkripsi').
+- Baris tengah ikon privacy 14 `ink3` + teks `meta` `ink3`.
+- Galeri: widgetbook/molecules/trust_note_use_case.dart; tes ikon + teks.
+
 ## BannerMessage
 - Berkas: lib/shared/widgets/molecules/banner_message.dart.
 - API dan contoh: message wajib; variant info (default), warning, error. BannerMessage(message: message, variant: BannerMessageVariant.warning).
@@ -450,10 +479,13 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ## AuthHero
 - Berkas: lib/shared/widgets/organisms/auth_hero.dart.
-- API: height, title, subtitle wajib; brand, onBack opsional. `brand` non-null =
-  layout tinggi (slot logo/brand/tagline + ilustrasi, judul di y=140); null =
-  layout ringkas dengan tombol kembali berlabel 'Kembali' (judul di y=110).
-- AuthHero(height: 340, title: t, subtitle: s, brand: SignInBrandSection()).
+- API: height, title, subtitle wajib; brand, illustration, onBack opsional.
+  `brand` non-null = layout tinggi (judul di y=140); null = layout ringkas dengan
+  tombol kembali berlabel 'Kembali' (judul di y=110).
+- AuthHero(height: 340, title: t, subtitle: s, brand: SignInBrandSection(),
+  illustration: SignInIllustrationSection()).
+- Slot `brand` di x=24 y=58 dan `illustration` di kanan 28 y=150; geometri hero
+  tetap milik organisme sehingga Section tidak perlu Stack.
 - Ornamen gradient + blob dari token hero; tanpa state. Tombol kembali memakai
   AppIconButton.hero (lingkaran 36) di x=24, lingkaran y=56.
 - Galeri dua varian; tes callback kembali dan slot; golden + 320 px/teks 2x.

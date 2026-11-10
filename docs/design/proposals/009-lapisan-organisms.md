@@ -111,3 +111,6 @@ AuthCard({required List<Widget> children})
   lama tidak diubah.
 - Verifikasi: `dart analyze` bersih, `check_arch` OK, 985 tes lulus (1 skip),
   `check_all` hijau.
+
+> Catatan 10 Nov 2026: slot ilustrasi dipindah dari `SignInBrandSection` ke
+> `AuthHero` dan Section dirapikan pada proposal 011 (UI-29).

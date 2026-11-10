@@ -1,27 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:laurum/core/icons/app_icons.dart';
-import 'package:laurum/core/theme/app_colors.dart';
-import 'package:laurum/core/theme/app_radius.dart';
-import 'package:laurum/shared/widgets/atoms/app_icon.dart';
+import 'package:laurum/shared/widgets/molecules/icon_tile.dart';
 
-/// Blue circle + white shirt outline of frame `LAURUM · Masuk` (118x118).
+/// Shirt illustration of frame `LAURUM · Masuk` (118 circle); the hero positions it.
 class SignInIllustrationSection extends StatelessWidget {
   const SignInIllustrationSection({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.illustration,
-        borderRadius: AppRadius.chip,
-      ),
-      child: SizedBox(
-        width: 118,
-        height: 118,
-        child: Center(
-          child: AppIcon(AppIcons.service, size: 44, color: AppColors.surface),
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => const IconTile.illustration();
 }

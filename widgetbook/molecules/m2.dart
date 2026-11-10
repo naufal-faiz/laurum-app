@@ -1,11 +1,15 @@
 import 'package:widgetbook/widgetbook.dart';
 
 import 'banner_message_use_case.dart';
+import 'brand_lockup_use_case.dart';
 import 'callout_ai_use_case.dart';
 import 'empty_state_use_case.dart';
+import 'feature_strip_use_case.dart';
+import 'icon_tile_use_case.dart';
 import 'labeled_field_use_case.dart';
 import 'notice_ai_use_case.dart';
 import 'sync_indicator_use_case.dart';
+import 'trust_note_use_case.dart';
 
 final m2Components = <WidgetbookComponent>[
   WidgetbookComponent(name: 'LabeledField', useCases: [labeledFieldUseCase]),
@@ -14,4 +18,8 @@ final m2Components = <WidgetbookComponent>[
   WidgetbookComponent(name: 'CalloutAi', useCases: [calloutAiUseCase]),
   WidgetbookComponent(name: 'EmptyState', useCases: [emptyStateUseCase]),
   WidgetbookComponent(name: 'SyncIndicator', useCases: [syncIndicatorUseCase]),
+  WidgetbookComponent(name: 'IconTile', useCases: [iconTileUseCase]),
+  WidgetbookComponent(name: 'BrandLockup', useCases: [brandLockupUseCase]),
+  WidgetbookComponent(name: 'FeatureStrip', useCases: [featureStripUseCase]),
+  WidgetbookComponent(name: 'TrustNote', useCases: [trustNoteUseCase]),
 ];
