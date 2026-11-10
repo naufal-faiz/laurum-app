@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/features/proposals/state/proposal_history.dart';
 import 'package:laurum/features/proposals/widgets/proposal_history_section.dart';
+import 'package:laurum/features/shell/pages/placeholder_routes.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -22,7 +23,7 @@ class ProposalHistoryPage extends ConsumerWidget {
       activeIndex: 3,
       syncState: SyncState.values.byName(ref.watch(shellSyncStatusProvider).name),
       onAccount: () => context.go('/lainnya'),
-      onTabSelected: (i) => context.go(['/antrean', '/pelanggan', '/laporan', '/lainnya'][i]),
+      onTabSelected: (i) => context.go(tabRoutes.keys.elementAt(i)),
       onCreate: () => context.push('/transaksi/baru'),
       body: SafeArea(
         top: false,

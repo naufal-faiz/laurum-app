@@ -13,6 +13,7 @@ void main() {
       final host = await pumpAntrean(tester, location: path);
       expect(tabRoutes, hasLength(4));
       expect(tabRoutes.containsKey('/transaksi'), isFalse);
+      expect(tabRoutes.containsKey('/laporan'), isFalse);
       expect(find.byType(FloatingActionButton), findsNothing);
       final nav = find.byType(BottomNavBar);
       expect(tester.widget<BottomNavBar>(nav).activeIndex, index);
@@ -29,7 +30,7 @@ void main() {
     testWidgets('Piutang navigates to $path and supports create', (tester) async {
       final host = await pumpAntrean(tester, location: '/laporan/piutang');
       final nav = find.byType(BottomNavBar);
-      expect(tester.widget<BottomNavBar>(nav).activeIndex, 2);
+      expect(tester.widget<BottomNavBar>(nav).activeIndex, 0);
       await tester.tap(find.descendant(of: nav, matching: find.text('Transaksi')));
       await tester.pumpAndSettle();
       expect(host.router.canPop(), isTrue);
@@ -38,7 +39,7 @@ void main() {
       await tester.tap(
         find.descendant(
           of: nav,
-          matching: find.text(['Antrean', 'Pelanggan', 'Laporan', 'Lainnya'][index]),
+          matching: find.text(['Beranda', 'Antrean', 'Pelanggan', 'Lainnya'][index]),
         ),
       );
       await tester.pumpAndSettle();

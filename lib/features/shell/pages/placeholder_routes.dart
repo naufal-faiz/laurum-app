@@ -1,8 +1,7 @@
 const placeholderRoutes = <String, String>{};
 const tabRoutes = <String, String>{
+  '/beranda': 'Beranda',
   '/antrean': 'Antrean',
   '/pelanggan': 'Pelanggan',
-
-  '/laporan': 'Laporan',
   '/lainnya': 'Lainnya',
 };

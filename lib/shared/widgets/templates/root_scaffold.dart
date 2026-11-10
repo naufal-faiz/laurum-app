@@ -14,6 +14,7 @@ class RootScaffold extends StatelessWidget {
     required this.body,
     super.key,
     this.syncState = SyncState.tersimpan,
+    this.showAppBar = true,
 
     this.onAccount,
     this.onTabSelected,
@@ -25,6 +26,9 @@ class RootScaffold extends StatelessWidget {
   final Widget body;
   final SyncState syncState;
 
+  /// Hidden on Beranda, which draws its own brand header (frame 281).
+  final bool showAppBar;
+
   final VoidCallback? onAccount, onCreate;
   final ValueChanged<int>? onTabSelected;
 
@@ -33,14 +37,23 @@ class RootScaffold extends StatelessWidget {
     backgroundColor: AppColors.bg,
     appBar: PreferredSize(
       preferredSize: const Size.fromHeight(AppSpacing.appBarHeight),
-      child: AppBarRoot(
-        title: title,
-        accountLabel: accountLabel,
-        syncIndicator: SyncIndicator(state: syncState),
-        onAccount: onAccount,
+      child: IgnorePointer(
+        ignoring: !showAppBar,
+        child: ExcludeSemantics(
+          excluding: !showAppBar,
+          child: Opacity(
+            opacity: showAppBar ? 1 : 0,
+            child: AppBarRoot(
+              title: title,
+              accountLabel: accountLabel,
+              syncIndicator: SyncIndicator(state: syncState),
+              onAccount: onAccount,
+            ),
+          ),
+        ),
       ),
     ),
-    extendBody: true,
+    extendBodyBehindAppBar: true,
     body: Builder(
       builder: (context) {
         final media = MediaQuery.of(context);
@@ -53,7 +66,12 @@ class RootScaffold extends StatelessWidget {
               ),
             ),
           ),
-          child: body,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: showAppBar ? AppSpacing.appBarHeight : 0,
+            ),
+            child: body,
+          ),
         );
       },
     ),

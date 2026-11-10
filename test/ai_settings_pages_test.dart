@@ -15,6 +15,8 @@ void main() {
     final host = await pumpAntrean(tester, location: '/lainnya/ai');
     final toggle = find.widgetWithText(ToggleRow, 'Baca pesan WhatsApp');
     await tester.scrollUntilVisible(toggle, 180, scrollable: find.byType(Scrollable).first);
+    await tester.ensureVisible(toggle);
+    await tester.pumpAndSettle();
     await tester.tap(find.descendant(of: toggle, matching: find.byType(AppSwitch)));
     await tester.pumpAndSettle();
     expect(host.container.read(aiSettingsProvider).readMessages, isFalse);

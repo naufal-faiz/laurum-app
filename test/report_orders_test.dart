@@ -89,12 +89,14 @@ void main() {
 
   testWidgets('empty filter shows a hint and cancelling updates the report list', (tester) async {
     final host = await pumpAntrean(tester, location: '/laporan');
-    await tester.scrollUntilVisible(
-      find.descendant(of: find.byType(ChipBar), matching: find.text('Dibatalkan')),
-      400,
-      scrollable: vertical,
+    final chip = find.descendant(
+      of: find.byType(ChipBar),
+      matching: find.text('Dibatalkan'),
     );
-    await tester.tap(find.descendant(of: find.byType(ChipBar), matching: find.text('Dibatalkan')));
+    await tester.scrollUntilVisible(chip, 400, scrollable: vertical);
+    await tester.ensureVisible(chip);
+    await tester.pumpAndSettle();
+    await tester.tap(chip);
     await tester.pumpAndSettle();
     expect(find.text('Nota tidak ditemukan'), findsOneWidget);
     expect(find.text('Coba kata kunci atau filter lain.'), findsOneWidget);

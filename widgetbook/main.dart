@@ -23,6 +23,7 @@ import 'atoms/app_text_use_case.dart';
 import 'molecules/m1.dart';
 import 'molecules/m2.dart';
 import 'molecules/m3.dart';
+import 'molecules/m4.dart';
 import 'organisms/o1.dart';
 import 'organisms/o2.dart';
 import 'templates/templates.dart';
@@ -38,7 +39,7 @@ Future<void> main() async {
           WidgetbookFolder(name: 'Organisms', children: [...o1Components, ...o2Components]),
           WidgetbookFolder(
             name: 'Molecules',
-            children: [...m1Components, ...m2Components, ...m3Components],
+            children: [...m1Components, ...m2Components, ...m3Components, ...m4Components],
           ),
           WidgetbookFolder(
             name: 'Atoms',

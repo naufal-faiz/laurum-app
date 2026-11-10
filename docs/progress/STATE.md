@@ -14,6 +14,22 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   (commit `a6c5fce`). `AuthScaffold` menerima slot `hero`/`contentTop`; kedua Page
   auth memakai template (UI-27). Tidak ada golden lama bergeser, tambahan
   `auth_scaffold_hero`; suite 988 tes lulus (1 skip), check_all hijau.
+- **Layar Beranda + nav bawah (dikerjakan 10 Nov 2026)** —
+  `docs/design/proposals/012-lapisan-beranda.md` (disetujui pengguna).
+  Frame `LAURUM · Beranda` (281) + nav 388/494. Tab menjadi Beranda/Antrean/
+  Pelanggan/Lainnya dengan aksi Transaksi di tengah; `/laporan` tidak lagi punya
+  slot nav (tetap deep link di cabang Lainnya). Beranda memakai
+  `RootScaffold(showAppBar: false)` + header merek sendiri. Turunan data di
+  `features/beranda/state/beranda_view.dart` (tanpa provider baru). Komponen baru:
+  `MetricTile`, `SegmentedProgress`, `MiniBarChart`, `AvatarStack`, `RankRow`,
+  `NavItem`, `CreateAction`, `WelcomeBanner`; `IconTile.dot`.
+  Selisih: chip pertumbuhan dan berat kg tidak ada; lonceng visual tanpa aksi;
+  ikon Beranda `droplet`; app bar global tidak tampil di Beranda.
+  Golden: 19 lama bergeser + `beranda.png` baru (daftar di proposal 012).
+  Verifikasi: `dart analyze` bersih, `check_arch: OK`, 1015 tes lulus (1 skip),
+  `check_all: SEMUA HIJAU` (REPO_MAP 1038 berkas). Visual perangkat belum
+  dijalankan. Berikutnya: layar Antrean frame 408 (sesi terpisah) setelah audit
+  visual Beranda oleh pengguna.
 - **Lapisan 6 (UI-29): SELESAI 10 Nov 2026** — `docs/design/proposals/011-lapisan-6-auth.md`
   (commit `5c0efcf`).
   Molekul `IconTile`, `BrandLockup`, `FeatureStrip`, `TrustNote`; Section layar

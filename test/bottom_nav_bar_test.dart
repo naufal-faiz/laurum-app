@@ -28,18 +28,18 @@ void main() {
     expect(find.text('Lainnya'), findsOneWidget);
     expect(
       tester.widgetList<AppIcon>(find.byType(AppIcon)).map((i) => i.icon),
-      contains(AppIcons.customersActive),
+      contains(AppIcons.queueActive),
     );
     await tester.tap(find.text('Transaksi'));
     expect(creates, 1);
     expect(selected, -1);
-    for (final (index, label) in ['Antrean', 'Pelanggan', 'Laporan', 'Lainnya'].indexed) {
+    for (final (index, label) in ['Beranda', 'Antrean', 'Pelanggan', 'Lainnya'].indexed) {
       await tester.tap(find.text(label));
       expect(selected, index);
     }
     expect(
       tester.widgetList<AppIcon>(find.byType(AppIcon)).map((i) => i.icon),
-      contains(AppIcons.customersActive),
+      contains(AppIcons.queueActive),
     );
   });
   registerMoleculeGolden('bottom_nav_bar', bottomNavBarUseCase.builder);

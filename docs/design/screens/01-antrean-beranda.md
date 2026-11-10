@@ -8,11 +8,12 @@ Template: RootScaffold pada RootShellPage, empat cabang StatefulShellRoute.
 - ChipBar: Semua, Jemput, Proses, Siap, Perlu dicek; jumlah dari repository.
 - SectionHeader Perlu dicek dan ProposalCard untuk usulan menunggu.
 - SectionHeader Sedang berjalan dan OrderCard untuk order aktif, terbaru dahulu.
-- Tanpa FAB. BottomNavBar lima slot: Antrean, Pelanggan, Transaksi, Laporan, Lainnya.
+- Tanpa FAB. BottomNavBar empat tab: Beranda, Antrean, Pelanggan, Lainnya
+  (sejak redesign 10 Nov 2026; Laporan tidak lagi punya slot).
   Empat tab berindeks 0..3; Transaksi adalah aksi push /transaksi/baru dan tidak aktif.
-  Tombol primary 56 dp menempel garis atas nav (tanpa cincin dan tanpa celah),
-  ikon AppIcons.add; permukaan putih mengisi penuh sampai garis.
-  label Transaksi, semantics 'Transaksi baru'. Akun menuju Lainnya (3).
+  Tombol primary 52 dp di dalam cincin 58 dp, menonjol di atas pil nav mengambang;
+  ikon AppIcons.add; label Transaksi di bawah lingkaran.
+  semantics 'Transaksi baru'. Akun menuju Lainnya (3).
   Ketuk memberi ripple Material; /transaksi/baru masuk dengan fade + lift singkat
   (280 ms, easeOutCubic; balik 200 ms) dari transaction_routes.dart.
 - BannerMessage dan AppButton Hubungkan hanya saat koneksi WhatsApp palsu terputus.

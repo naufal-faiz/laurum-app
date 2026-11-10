@@ -9,6 +9,7 @@ import 'package:laurum/features/proposals/state/ai_settings.dart';
 import 'package:laurum/features/proposals/state/proposal_history.dart';
 import 'package:laurum/features/proposals/widgets/ai_connection_section.dart';
 import 'package:laurum/features/proposals/widgets/ai_preferences_section.dart';
+import 'package:laurum/features/shell/pages/placeholder_routes.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/notice_ai.dart';
@@ -32,7 +33,7 @@ class AiSettingsPage extends ConsumerWidget {
       activeIndex: 3,
       syncState: SyncState.values.byName(ref.watch(shellSyncStatusProvider).name),
       onAccount: () => context.go('/lainnya'),
-      onTabSelected: (i) => context.go(['/antrean', '/pelanggan', '/laporan', '/lainnya'][i]),
+      onTabSelected: (i) => context.go(tabRoutes.keys.elementAt(i)),
       onCreate: () => context.push('/transaksi/baru'),
       body: SafeArea(
         top: false,

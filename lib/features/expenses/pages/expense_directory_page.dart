@@ -7,6 +7,7 @@ import 'package:laurum/features/expenses/pages/expense_detail_sheet.dart';
 import 'package:laurum/features/expenses/state/expense_directory.dart';
 import 'package:laurum/features/expenses/state/expense_form_controller.dart';
 import 'package:laurum/features/expenses/widgets/expense_list_section.dart';
+import 'package:laurum/features/shell/pages/placeholder_routes.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
@@ -28,7 +29,7 @@ class ExpenseDirectoryPage extends ConsumerWidget {
       activeIndex: 3,
       syncState: SyncState.values.byName(ref.watch(shellSyncStatusProvider).name),
       onAccount: () => context.go('/lainnya'),
-      onTabSelected: (i) => context.go(['/antrean', '/pelanggan', '/laporan', '/lainnya'][i]),
+      onTabSelected: (i) => context.go(tabRoutes.keys.elementAt(i)),
       onCreate: () => context.push('/transaksi/baru'),
       body: SafeArea(
         top: false,

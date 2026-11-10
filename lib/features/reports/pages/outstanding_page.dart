@@ -26,7 +26,7 @@ class OutstandingPage extends ConsumerWidget {
         child: AppBarSub(
           title: 'Daftar piutang',
           backLabel: 'Kembali',
-          onBack: () => context.canPop() ? context.pop() : context.go('/laporan'),
+          onBack: () => context.canPop() ? context.pop() : context.go('/beranda'),
         ),
       ),
       body: outstanding.when(
@@ -64,7 +64,7 @@ class OutstandingPage extends ConsumerWidget {
               ),
       ),
       bottomNavigationBar: BottomNavBar(
-        activeIndex: 2,
+        activeIndex: 0,
         onSelected: (index) => context.go(tabRoutes.keys.elementAt(index)),
         onCreate: () => context.push('/transaksi/baru'),
       ),

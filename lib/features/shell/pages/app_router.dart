@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:laurum/features/auth/pages/auth_routes.dart';
 import 'package:laurum/features/auth/state/auth_router_refresh.dart';
 import 'package:laurum/features/auth/state/auth_session.dart';
+import 'package:laurum/features/beranda/pages/beranda_page.dart';
 import 'package:laurum/features/customers/pages/customer_deposit_page.dart';
 import 'package:laurum/features/customers/pages/customer_detail_page.dart';
 import 'package:laurum/features/customers/pages/customer_directory_page.dart';
@@ -81,7 +82,12 @@ GoRouter createAppRouter({
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) => RootShellPage(navigationShell: shell),
       branches: [
-        for (final route in tabRoutes.entries)
+        StatefulShellBranch(
+          routes: [
+            GoRoute(path: '/beranda', builder: (context, state) => const BerandaPage()),
+          ],
+        ),
+        for (final route in tabRoutes.entries.skip(1))
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -89,12 +95,13 @@ GoRouter createAppRouter({
                 builder: (context, state) => switch (route.key) {
                   '/antrean' => const AntreanPage(),
                   '/pelanggan' => const CustomerDirectoryPage(),
-
-                  '/laporan' => const ReportPage(),
                   '/lainnya' => const SettingsPage(),
                   _ => PlaceholderPage(title: route.value, isTab: true),
                 },
               ),
+              if (route.key == '/lainnya')
+                // Legacy deep link: Laporan has no nav slot since 10 Nov 2026.
+                GoRoute(path: '/laporan', builder: (context, state) => const ReportPage()),
             ],
           ),
       ],

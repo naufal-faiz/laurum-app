@@ -11,6 +11,7 @@ import 'receipt_toggle_list_use_case.dart';
 import 'report_summary_use_case.dart';
 import 'top_services_use_case.dart';
 import 'weekly_bar_chart_use_case.dart';
+import 'welcome_banner_use_case.dart';
 
 final o2Components = <WidgetbookComponent>[
   WidgetbookComponent(name: 'AuthHero', useCases: [authHeroUseCase]),
@@ -26,4 +27,5 @@ final o2Components = <WidgetbookComponent>[
   WidgetbookComponent(name: 'ReportSummary', useCases: [reportSummaryUseCase]),
   WidgetbookComponent(name: 'TopServices', useCases: [topServicesUseCase]),
   WidgetbookComponent(name: 'WeeklyBarChart', useCases: [weeklyBarChartUseCase]),
+  WidgetbookComponent(name: 'WelcomeBanner', useCases: [welcomeBannerUseCase]),
 ];

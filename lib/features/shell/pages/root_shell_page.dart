@@ -19,6 +19,7 @@ class RootShellPage extends ConsumerWidget {
       title: profile.value?.name ?? 'Laurum',
       accountLabel: 'Usaha dan akun',
       activeIndex: navigationShell.currentIndex,
+      showAppBar: navigationShell.currentIndex != 0,
       syncState: sync.hasError
           ? SyncState.gagal
           : SyncState.values.byName(sync.value?.name ?? 'menyimpan'),
@@ -26,7 +27,7 @@ class RootShellPage extends ConsumerWidget {
       onTabSelected: navigationShell.goBranch,
       onCreate: () => context.push('/transaksi/baru'),
       body: SafeArea(
-        top: false,
+        top: navigationShell.currentIndex == 0,
         child: Column(
           children: [
             if (sync.value == SyncServiceStatus.offline)
@@ -38,7 +39,7 @@ class RootShellPage extends ConsumerWidget {
                 message: 'Sinkronisasi gagal. Data di HP tetap tersimpan.',
                 variant: BannerMessageVariant.error,
               ),
-            if (navigationShell.currentIndex == 0 && !ref.watch(whatsappConnectionProvider)) ...[
+            if (navigationShell.currentIndex == 1 && !ref.watch(whatsappConnectionProvider)) ...[
               const BannerMessage(
                 message: 'WhatsApp terputus. AI berhenti membaca pesan.',
                 variant: BannerMessageVariant.warning,

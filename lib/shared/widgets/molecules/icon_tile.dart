@@ -14,6 +14,7 @@ class IconTile extends StatelessWidget {
     this.background = AppColors.surface,
     this.foreground = AppColors.primary,
     this.radius = AppRadius.chip,
+    this.dot = false,
   });
 
   /// White 38 logo tile of the auth hero (icon 18, radius 12).
@@ -23,7 +24,8 @@ class IconTile extends StatelessWidget {
       iconSize = 18,
       background = AppColors.surface,
       foreground = AppColors.primary,
-      radius = AppRadius.logo;
+      radius = AppRadius.logo,
+      dot = false;
 
   /// Blue 118 circle with the shirt illustration of `LAURUM · Masuk`.
   const IconTile.illustration({super.key})
@@ -32,21 +34,45 @@ class IconTile extends StatelessWidget {
       iconSize = 44,
       background = AppColors.illustration,
       foreground = AppColors.surface,
-      radius = AppRadius.chip;
+      radius = AppRadius.chip,
+      dot = false;
 
   final AppIcons icon;
   final double size, iconSize;
   final Color background, foreground;
   final BorderRadius radius;
 
+  /// Small notification dot in the top-right corner (frame `LAURUM · Beranda`).
+  final bool dot;
+
   @override
-  Widget build(BuildContext context) => DecoratedBox(
-    decoration: BoxDecoration(color: background, borderRadius: radius),
-    child: SizedBox.square(
-      dimension: size,
-      child: Center(
-        child: AppIcon(icon, size: iconSize, color: foreground),
+  Widget build(BuildContext context) {
+    final tile = DecoratedBox(
+      decoration: BoxDecoration(color: background, borderRadius: radius),
+      child: SizedBox.square(
+        dimension: size,
+        child: Center(
+          child: AppIcon(icon, size: iconSize, color: foreground),
+        ),
       ),
-    ),
-  );
+    );
+    if (!dot) return tile;
+    return Stack(
+      children: [
+        tile,
+        Positioned(
+          right: 2,
+          top: 2,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: AppColors.illustration,
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColors.surface, width: 1.5),
+            ),
+            child: const SizedBox.square(dimension: 7),
+          ),
+        ),
+      ],
+    );
+  }
 }

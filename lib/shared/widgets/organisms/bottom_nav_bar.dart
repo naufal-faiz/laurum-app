@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
-import 'package:laurum/core/theme/app_dimensions.dart';
-import 'package:laurum/core/theme/app_molecule_tokens.dart';
-import 'package:laurum/shared/widgets/atoms/app_divider.dart';
-import 'package:laurum/shared/widgets/atoms/app_icon.dart';
-import 'package:laurum/shared/widgets/atoms/app_text.dart';
+import 'package:laurum/core/theme/app_radius.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/shared/widgets/molecules/create_action.dart';
+import 'package:laurum/shared/widgets/molecules/nav_item.dart';
 
+/// Floating navigation pill of frames `LAURUM · Beranda`/`Antrean` (342x64).
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
     required this.activeIndex,
@@ -20,12 +20,12 @@ class BottomNavBar extends StatelessWidget {
   final VoidCallback? onCreate;
   final String createLabel;
   static const _tabs = [
+    ('Beranda', AppIcons.home, AppIcons.homeActive),
     ('Antrean', AppIcons.queue, AppIcons.queueActive),
     ('Pelanggan', AppIcons.customers, AppIcons.customersActive),
-    ('Transaksi', AppIcons.add, AppIcons.add),
-    ('Laporan', AppIcons.reports, AppIcons.reportsActive),
     ('Lainnya', AppIcons.menu, AppIcons.menuActive),
   ];
+  int slotOf(int index) => index < 2 ? index : index + 1;
   bool selected(int slot) => slot != 2 && activeIndex == (slot > 2 ? slot - 1 : slot);
   VoidCallback? action(int slot) {
     if (slot == 2) return onCreate;
@@ -33,78 +33,69 @@ class BottomNavBar extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => Stack(
-    children: [
-      const Positioned.fill(
-        top: AppDimensions.navCreateSize / 2,
-        child: ColoredBox(
-          color: AppColors.surface,
-          child: Align(alignment: Alignment.topCenter, child: AppDivider()),
+  Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
+    final items = [
+      for (final (index, tab) in _tabs.indexed)
+        NavItem(
+          label: tab.$1,
+          icon: tab.$2,
+          activeIcon: tab.$3,
+          selected: selected(slotOf(index)),
+          onTap: action(slotOf(index)),
         ),
-      ),
-      SafeArea(
+    ];
+    return MediaQuery(
+      data: media.copyWith(textScaler: media.textScaler.clamp(maxScaleFactor: 1.3)),
+      child: SafeArea(
         top: false,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            for (var slot = 0; slot < _tabs.length; slot++)
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    top: slot == 2 ? 0 : AppDimensions.navCreateSize / 2 + AppMoleculeTokens.gap,
-                    bottom: AppMoleculeTokens.gap,
-                  ),
-                  child: Semantics(
-                    label: slot == 2 ? 'Transaksi baru' : _tabs[slot].$1,
-                    button: true,
-                    selected: selected(slot),
-                    excludeSemantics: true,
-                    onTap: action(slot),
-                    child: GestureDetector(
-                      behavior: slot == 2 ? HitTestBehavior.deferToChild : HitTestBehavior.opaque,
-                      onTap: action(slot),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        spacing: AppMoleculeTokens.smallGap,
+        minimum: const EdgeInsets.only(bottom: AppSpacing.small),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xlarge),
+          child: SizedBox(
+            height: 87,
+            child: Stack(
+              children: [
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  height: 64,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      border: Border.all(color: AppColors.borderStrong),
+                      borderRadius: AppRadius.cardLarge,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xxsmall),
+                      child: Row(
                         children: [
-                          if (slot == 2)
-                            SizedBox.square(
-                              dimension: AppDimensions.navCreateSize,
-                              child: Material(
-                                color: AppColors.primary,
-                                shape: const CircleBorder(
-                                  side: BorderSide(
-                                    color: AppColors.surface,
-                                    width: AppMoleculeTokens.smallGap,
-                                  ),
-                                ),
-                                clipBehavior: Clip.antiAlias,
-                                child: InkWell(
-                                  onTap: action(slot),
-                                  child: const AppIcon(AppIcons.add, color: AppColors.onPrimary),
-                                ),
-                              ),
-                            )
-                          else
-                            AppIcon(
-                              selected(slot) ? _tabs[slot].$3 : _tabs[slot].$2,
-                              color: selected(slot) ? AppColors.primary : AppColors.ink2,
-                            ),
-                          AppText(
-                            slot == 2 ? createLabel : _tabs[slot].$1,
-                            textAlign: TextAlign.center,
-                            variant: selected(slot) ? AppTextVariant.label : AppTextVariant.caption,
-                            color: selected(slot) ? AppColors.primary : AppColors.ink2,
-                          ),
+                          items[0],
+                          const SizedBox(width: AppSpacing.small),
+                          items[1],
+                          const Spacer(),
+                          items[2],
+                          const SizedBox(width: AppSpacing.small),
+                          items[3],
                         ],
                       ),
                     ),
                   ),
                 ),
-              ),
-          ],
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: CreateAction(label: createLabel, onPressed: onCreate),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
-    ],
-  );
+    );
+  }
 }

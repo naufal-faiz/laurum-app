@@ -5,7 +5,9 @@ import 'package:laurum/shared/widgets/organisms/bottom_nav_bar.dart';
 import 'package:laurum/shared/widgets/templates/root_scaffold.dart';
 
 void main() {
-  testWidgets('raised circle preserves page taps and scroll around its upper half', (tester) async {
+  testWidgets('floating nav leaves page taps and scroll clear of the create action', (
+    tester,
+  ) async {
     var taps = 0;
     var creates = 0;
     final scroll = ScrollController();
@@ -28,25 +30,24 @@ void main() {
         ),
       ),
     );
+    final nav = tester.getRect(find.byType(BottomNavBar));
     final circle = tester.getRect(
       find.descendant(of: find.byType(BottomNavBar), matching: find.byType(InkWell)),
     );
     final page = tester.getRect(find.byType(ListView));
-    expect(page.bottom, closeTo(circle.center.dy, 0.01));
+    expect(page.bottom, lessThanOrEqualTo(nav.top));
     for (final point in [
-      Offset(20, circle.top + 5),
-      Offset(780, circle.top + 5),
-      circle.topLeft + const Offset(1, 1),
-      circle.topRight + const Offset(-1, 1),
+      Offset(20, page.bottom - 5),
+      Offset(780, page.bottom - 5),
     ]) {
       await tester.tapAt(point);
     }
-    expect(taps, 4);
+    expect(taps, 2);
     expect(creates, 0);
-    await tester.dragFrom(Offset(20, circle.top + 5), const Offset(0, -100));
+    await tester.dragFrom(Offset(20, page.bottom - 5), const Offset(0, -100));
     await tester.pumpAndSettle();
     expect(scroll.offset, greaterThan(0));
-    await tester.tapAt(Offset(circle.center.dx, circle.top + 4));
+    await tester.tapAt(circle.center);
     expect(creates, 1);
   });
 }

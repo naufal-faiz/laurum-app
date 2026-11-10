@@ -45,8 +45,16 @@ molecules:
   - BrandLockup
   - FeatureStrip
   - TrustNote
+  - MetricTile
+  - SegmentedProgress
+  - MiniBarChart
+  - AvatarStack
+  - RankRow
+  - NavItem
+  - CreateAction
 organisms:
   - BottomNavBar
+  - WelcomeBanner
   - AuthHero
   - AuthCard
   - OrderCard

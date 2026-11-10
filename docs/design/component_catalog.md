@@ -110,6 +110,48 @@
 - Baris tengah ikon privacy 14 `ink3` + teks `meta` `ink3`.
 - Galeri: widgetbook/molecules/trust_note_use_case.dart; tes ikon + teks.
 
+## MetricTile
+- Berkas: lib/shared/widgets/molecules/metric_tile.dart.
+- API: label, value, color wajib. MetricTile(label: 'Proses', value: '5', color: AppColors.illustration).
+- Kotak `surfaceLow` radius 12, angka 18/700 berwarna, label 12 `ink3`.
+
+## SegmentedProgress
+- Berkas: lib/shared/widgets/molecules/segmented_progress.dart.
+- API: segments (record `value`, `color`) wajib. Nilai 0 tidak digambar.
+- Bar 6 px radius penuh, lebar proporsional terhadap total.
+
+## MiniBarChart
+- Berkas: lib/shared/widgets/molecules/mini_bar_chart.dart.
+- API: amounts (`List<int?>`) wajib; height opsional 32. Hari mendatang (`null`) kosong.
+- Batang 13 px radius penuh; batang terakhir `primary`, lainnya `primaryTint`.
+
+## AvatarStack
+- Berkas: lib/shared/widgets/molecules/avatar_stack.dart.
+- API: initials wajib (maksimal 3 dipakai); size opsional 22.
+- Lingkaran tumpang 6 px dengan border `surface`, latar bergilir token.
+
+## RankRow
+- Berkas: lib/shared/widgets/molecules/rank_row.dart.
+- API: initials, name, detail, trailing wajib; onTap opsional.
+- Avatar 34, nama 12/600 `ink`, detail 12 `ink3`, trailing 12 `primary`.
+
+## NavItem
+- Berkas: lib/shared/widgets/molecules/nav_item.dart.
+- API: label, icon, selected wajib; activeIcon dan onTap opsional.
+- Slot 60x46 radius 14; aktif `primaryTint` + `primary`, nonaktif `ink3`.
+
+## CreateAction
+- Berkas: lib/shared/widgets/molecules/create_action.dart.
+- API: label wajib; onPressed opsional. Semantics `<label> baru`.
+- Cincin 58 `primaryTint` + lingkaran 52 `primary` + label 12 `primary`; satu InkWell.
+
+## WelcomeBanner
+- Berkas: lib/shared/widgets/organisms/welcome_banner.dart.
+- API: greeting, businessName, subtitle, actionLabel wajib; onAction opsional.
+- Kartu gradient `primary` → `primaryInk` 148 radius 24, dekor lingkaran hero,
+  ilustrasi tetes 64, CTA `AppButton.secondary` kecil + panah.
+- Acuan Figma: `Kartu Sambutan` node 299 frame `LAURUM · Beranda`.
+
 ## BannerMessage
 - Berkas: lib/shared/widgets/molecules/banner_message.dart.
 - API dan contoh: message wajib; variant info (default), warning, error. BannerMessage(message: message, variant: BannerMessageVariant.warning).
@@ -502,17 +544,17 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 
 ## BottomNavBar
 - Berkas: lib/shared/widgets/organisms/bottom_nav_bar.dart.
-- API: activeIndex 0..3 (Antrean/Pelanggan/Laporan/Lainnya), onSelected(int),
+- API: activeIndex 0..3 (Beranda/Antrean/Pelanggan/Lainnya), onSelected(int),
   onCreate opsional, createLabel default Transaksi. Tanpa state/navigasi internal.
-- Lima slot; tengah aksi, bukan tab. Semantics Transaksi baru, selalu tidak aktif.
-- Tombol primary 56 dp menempel garis atas, tanpa cincin surface; permukaan putih
-  nav mengisi seluruh tinggi sampai garis, jadi tidak ada celah di kiri/kanan.
-  Ikon AppIcons.add. Dua token baru di AppDimensions; tanpa warna baru atau gradien.
-- Ketuk tombol tengah memberi umpan Material ink (InkWell di dalam Material
-  berbentuk lingkaran); tanpa state internal tambahan dan tanpa warna baru.
+- Empat `NavItem` + aksi tengah `CreateAction`, bukan tab. Semantics Transaksi
+  baru, selalu tidak aktif. Ikon: droplet/queue/customers/menu (ikon lama).
+- Pil mengambang 342x64 putih border `borderStrong` radius 24, jarak samping 24
+  dan bawah 8 (frame 388/494); item 60x46 radius 14, aktif `primaryTint` +
+  `primary`, nonaktif `ink3`; cincin 58 `primaryTint` + lingkaran 52 `primary`.
+- Ketuk tombol tengah memberi umpan Material ink (satu InkWell); label Transaksi
+  di bawah lingkaran juga memicu aksi yang sama.
 - Contoh: BottomNavBar(activeIndex: tab, onSelected: pilih, onCreate: buat).
-- Galeri empat tab aktif dan disabled; tes callback, semantics, garis atas dan
-  tombol menempel, 320 px/teks 2x dan golden. Acuan R2 nav-referensi.png.
+- Galeri empat tab aktif; tes callback, semantics, 320 px/teks 2x dan golden.
 ## ServiceRow
 - Berkas: lib/shared/widgets/organisms/service_row.dart.
 - API wajib: name, kind (ServiceKind), price int rupiah, durationDays int.
@@ -726,12 +768,11 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 ## RootScaffold
 - Berkas: lib/shared/widgets/templates/root_scaffold.dart.
 - API wajib: title, accountLabel, activeIndex 0..3, body. Opsi: syncState,
-  onAccount, onTabSelected, onCreate. Tanpa fabLabel/onFab atau FAB.
-- AppBarRoot + SyncIndicator, body, BottomNavBar dengan aksi tengah.
-- Revisi 31 Okt: separuh atas tombol Transaksi menonjol; extendBody dan padding
-  halaman menyisakan hanya bar bawah, area samping tonjolan menerima scroll/tap.
-- Revisi lanjutan: cincin surface 4 dp di lingkaran; daftar tab menyisakan ruang
-  scroll akhir 28 dp tambahan agar konten terakhir bebas dari tombol.
+  showAppBar (default true), onAccount, onTabSelected, onCreate.
+- AppBarRoot + SyncIndicator (kecuali `showAppBar: false`, dipakai Beranda yang
+  punya header merek sendiri), body, BottomNavBar dengan aksi tengah.
+- Revisi 10 Nov: nav mengambang (lihat BottomNavBar); Beranda memakai
+  `showAppBar: false` dan `SafeArea` atas dari RootShellPage.
 - Contoh: RootScaffold(title: nama, accountLabel: akun, activeIndex: tab,
   onTabSelected: pilih, onCreate: buat, body: content).
 - Widgetbook: navigasi dan Transaksi, offline. Tes tanpa FAB, callback,
