@@ -448,6 +448,26 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 - Contoh galeri adalah label teknis, bukan data bisnis. Keyboard/IME dan pembaca layar
   Android/iOS belum diuji pada perangkat; tes widget dijalankan di Windows.
 
+## AuthHero
+- Berkas: lib/shared/widgets/organisms/auth_hero.dart.
+- API: height, title, subtitle wajib; brand, onBack opsional. `brand` non-null =
+  layout tinggi (slot logo/brand/tagline + ilustrasi, judul di y=140); null =
+  layout ringkas dengan tombol kembali berlabel 'Kembali' (judul di y=110).
+- AuthHero(height: 340, title: t, subtitle: s, brand: SignInBrandSection()).
+- Ornamen gradient + blob dari token hero; tanpa state. Tombol kembali memakai
+  AppIconButton.hero (lingkaran 36) di x=24, lingkaran y=56.
+- Galeri dua varian; tes callback kembali dan slot; golden + 320 px/teks 2x.
+- Acuan Figma: Masuk `4294968693`, Daftar `4294968749`.
+
+## AuthCard
+- Berkas: lib/shared/widgets/organisms/auth_card.dart.
+- API: children (List<Widget>) wajib. AuthCard(children: [field, tombol, …]).
+- Membungkus AppCard.elevated: radius 24, shadow cardElevated, padding 18,
+  jarak antar anak 12. Tanpa state; urutan anak ditentukan pemanggil.
+- Galeri contoh form; tes jarak 12 dan padding 18; golden.
+- Acuan Figma: kartu Masuk `4294968715`, Daftar `4294968764`, Lupa `4294968995`,
+  OTP `4294969062`, Password Baru `4294969124`.
+
 ## BottomNavBar
 - Berkas: lib/shared/widgets/organisms/bottom_nav_bar.dart.
 - API: activeIndex 0..3 (Antrean/Pelanggan/Laporan/Lainnya), onSelected(int),

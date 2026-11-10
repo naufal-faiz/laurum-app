@@ -3,9 +3,11 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_text_styles.dart';
+import 'package:laurum/features/auth/widgets/sign_in_illustration_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 
-/// Logo, brand, title and subtitle of frame `LAURUM · Masuk`.
+/// Logo, brand name, tagline and shirt illustration of frame `LAURUM · Masuk`.
+/// Title and subtitle live in the hero organism.
 class SignInBrandSection extends StatelessWidget {
   const SignInBrandSection({super.key});
 
@@ -48,21 +50,10 @@ class SignInBrandSection extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          left: 24,
-          top: 140,
-          child: Text(
-            'Masuk',
-            style: AppTextStyles.hero.copyWith(color: AppColors.surface),
-          ),
-        ),
-        Positioned(
-          left: 24,
-          top: 178,
-          child: Text(
-            'Kasir laundry untuk usaha rumahan',
-            style: AppTextStyles.body.copyWith(color: AppColors.heroTagline),
-          ),
+        const Positioned(
+          right: 28,
+          top: 150,
+          child: SignInIllustrationSection(),
         ),
       ],
     );

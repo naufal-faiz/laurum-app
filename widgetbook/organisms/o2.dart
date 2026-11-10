@@ -2,6 +2,8 @@ import 'package:widgetbook/widgetbook.dart';
 
 import 'app_bottom_sheet_keyboard_use_case.dart';
 import 'app_bottom_sheet_use_case.dart';
+import 'auth_card_use_case.dart';
+import 'auth_hero_use_case.dart';
 import 'confirm_modal_use_case.dart';
 import 'numpad_use_case.dart';
 import 'receipt_preview_use_case.dart';
@@ -11,6 +13,8 @@ import 'top_services_use_case.dart';
 import 'weekly_bar_chart_use_case.dart';
 
 final o2Components = <WidgetbookComponent>[
+  WidgetbookComponent(name: 'AuthHero', useCases: [authHeroUseCase]),
+  WidgetbookComponent(name: 'AuthCard', useCases: [authCardUseCase]),
   WidgetbookComponent(name: 'ReceiptPreview', useCases: [receiptPreviewUseCase]),
   WidgetbookComponent(name: 'ReceiptToggleList', useCases: [receiptToggleListUseCase]),
   WidgetbookComponent(name: 'Numpad', useCases: [numpadUseCase]),

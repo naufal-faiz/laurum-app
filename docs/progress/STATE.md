@@ -6,8 +6,20 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   (commit `b7a9292`).
 - **Lapisan 2 (atoms): SELESAI 10 Nov 2026** — `docs/design/proposals/007-lapisan-atoms.md`
   (commit `9b3905e`).
-- **Lapisan 3 (molecules): SELESAI 10 Nov 2026** — `docs/design/proposals/008-lapisan-molecules.md`.
-  Berikutnya: proposal `009-lapisan-organisms` (gerbang UI-21).
+- **Lapisan 3 (molecules): SELESAI 10 Nov 2026** — `docs/design/proposals/008-lapisan-molecules.md`
+  (commit `3159e7f`).
+- **Lapisan 4 (organisms): SELESAI 10 Nov 2026** — `docs/design/proposals/009-lapisan-organisms.md`.
+  Berikutnya: proposal `010-lapisan-templates` (gerbang UI-21).
+- Perubahan organisme lapisan 4:
+  - `AuthHero` (gradient, ornamen, judul/sub, slot `brand` yang memuat logo +
+    ilustrasi, tombol kembali `AppIconButton.hero` di y=56). Dua varian dari ada
+    tidaknya `brand`; tinggi parameter (340 / 230).
+  - `AuthCard` (`AppCard.elevated` + padding 18 + jarak anak 12) dipakai kedua
+    kartu form auth.
+  - `SignInHeroSection`/`SignUpHeroSection` hanya menyusun `AuthHero`;
+    `SignInBrandSection` memegang logo, brand, tagline, dan ilustrasi.
+  - Organisme lain (BottomNavBar, CustomerRow, NotaCard, OrderCard, dst.) DITUNDA
+    sampai pengguna memberi frame layar pemakainya (UI-4).
 - Perubahan molekul lapisan 3:
   - Molekul baru: `LabeledDivider` (garis + label + garis, gap 10),
     `InlineLink` (tautan `label` `primary`/`ink3`), `InlineLinkRow` (pertanyaan
@@ -33,9 +45,10 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   - Auth: `AuthSubmitSection` memakai `AppButton`; tombol Google memakai
     `AppButton.neutralOutline` + `AppSvgs.google`; dua kartu auth memakai
     `AppCard.elevated`; tombol kembali memakai `AppIconButton.hero`.
-- Sisa primitif Section auth (lapisan 4/6): `Container`/`DecoratedBox` dekoratif
-  di hero, brand, feature bar, dan ilustrasi, serta template `Scaffold+Stack`.
-  `GestureDetector` mata password dan tautan sudah hilang (lapisan 3).
+- Sisa primitif Section auth (lapisan 6): kotak logo dan lingkaran ilustrasi
+  (`DecoratedBox`), strip fitur (`Container` + `BoxDecoration`). Hero sudah pindah
+  ke organisme `AuthHero`; `GestureDetector` mata password dan tautan sudah hilang
+  (lapisan 3).
 - Keputusan global terisi (5 butir, pengguna 10 Nov 2026): primer `#2675C9`, hijau
   menjadi `success`, Inter global, skala auth + minimum 11, tombol 50/44/40,
   variabel & komponen FigCraft.
@@ -50,10 +63,15 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   asetnya dihapus.
 - Alias sementara: `AppColors.blue/blueTint/blueInk` masih ada untuk badge "Diproses"
   sampai lapisan molecules/organisms membersihkan pemakai.
-- Layar 29 & 31 masih memakai `Container`/`DecoratedBox` dekoratif di hero, brand,
-  feature bar, dan ilustrasi serta template `Scaffold+Stack`; perapian murni di
-  lapisan 4 (organisme) dan 6 (UI-29). Material/InkWell/GestureDetector buatan
-  sendiri sudah tidak ada di Section auth.
+- Layar 29 & 31 masih memakai `DecoratedBox` dekoratif untuk kotak logo dan
+  lingkaran ilustrasi serta `Container` strip fitur, dan template
+  `Scaffold+Stack`; perapian murni di lapisan 5 (template) dan 6 (UI-29).
+  Material/InkWell/GestureDetector buatan sendiri sudah tidak ada di Section auth.
+- **Golden lapisan 4 (UI-28): 7 golden lama bergeser + 2 baru.** Lama:
+  `auth_signin`, `auth_signin_error`, `r10_signin`, `r10_signin_error`,
+  `r10_signin_error_320_2x`, `r10_signup`, `r10_signup_320_2x`. Baru: `auth_hero`,
+  `auth_card`. Alasan: posisi ornamen/judul/sub sesuai Figma (sub 178→174 dan
+  148→144), lingkaran kembali 4 px lebih tinggi, kartu auth lewat `AuthCard`.
 - **Golden lapisan 3 (UI-28): 21 golden lama bergeser + 2 baru.** Lama:
   `app_icon_button`, `labeled_field`, `add_customer_sheet`, `expense_form`,
   `printer_page`, `proposal_new_customer`, `proposal_rina`, `transaction_page`,
@@ -72,6 +90,8 @@ Diperbarui: 2026-11-10 | Cabang newdesign
   `stepper_field`. Alasan: tinggi tombol non-CTA 48 → 44, ikon tombol 20 → 16,
   tombol Google 48 → 50, kartu auth lewat `AppCard.elevated`.
 - **Golden lapisan 1:** 112 dari 113 bergeser (semua kecuali `receipt_preview`).
+- Tes baru lapisan 4: `test/auth_hero_test.dart`, `test/auth_card_test.dart`.
+  Tes perilaku lama tidak diubah.
 - Tes yang diubah lapisan 3: `test/app_icon_button_test.dart` (tambah tes varian
   `compact`). Tes baru: `test/labeled_divider_test.dart`,
   `test/inline_link_row_test.dart`. Tes perilaku lama tidak diubah.

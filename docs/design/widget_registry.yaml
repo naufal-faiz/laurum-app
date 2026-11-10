@@ -43,6 +43,8 @@ molecules:
   - InlineLinkRow
 organisms:
   - BottomNavBar
+  - AuthHero
+  - AuthCard
   - OrderCard
   - NotaCard
   - ProposalCard

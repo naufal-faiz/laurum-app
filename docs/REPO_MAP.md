@@ -3,7 +3,7 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 63/63 dibuat
+## Registry widget: 65/65 dibuat
 
 Semua widget sudah dibuat.
 
@@ -259,14 +259,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_submit_section.dart (28): AuthSubmitSection
 - auth_trust_section.dart (32): AuthTrustSection
 - password_reset_section.dart (36): PasswordResetSection
-- sign_in_brand_section.dart (70): SignInBrandSection
+- sign_in_brand_section.dart (61): SignInBrandSection
 - sign_in_feature_bar_section.dart (77): SignInFeatureBarSection
-- sign_in_form_card_section.dart (81): SignInFormCardSection
-- sign_in_hero_section.dart (72): SignInHeroSection
+- sign_in_form_card_section.dart (70): SignInFormCardSection
+- sign_in_hero_section.dart (16): SignInHeroSection
 - sign_in_illustration_section.dart (27): SignInIllustrationSection
 - sign_in_section.dart (51): SignInSection
-- sign_up_form_card_section.dart (103): SignUpFormCardSection
-- sign_up_hero_section.dart (82): SignUpHeroSection
+- sign_up_form_card_section.dart (96): SignUpFormCardSection
+- sign_up_hero_section.dart (17): SignUpHeroSection
 
 ### lib/features/business/data/
 - business_fixtures.dart (21):
@@ -666,6 +666,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/organisms/
 - app_bottom_sheet.dart (93): AppBottomSheet
+- auth_card.dart (21): AuthCard
+- auth_hero.dart (108): AuthHero
 - bottom_nav_bar.dart (110): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
 - customer_row.dart (102): CustomerRow
@@ -736,6 +738,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - supabase_auth_service_test.dart (163):
 
 ### test/
+- auth_card_test.dart (24):
+- auth_hero_test.dart (51):
 - auth_onboarding_keyboard_test.dart (33):
 - auth_restore_test.dart (53): DeferredRestore
 - auth_routes_test.dart (60):
@@ -1145,6 +1149,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### widgetbook/organisms/
 - app_bottom_sheet_keyboard_use_case.dart (23):
 - app_bottom_sheet_use_case.dart (36):
+- auth_card_use_case.dart (21):
+- auth_hero_use_case.dart (25):
 - bottom_nav_bar_use_case.dart (18):
 - confirm_modal_use_case.dart (35):
 - customer_row_use_case.dart (44):
@@ -1153,7 +1159,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - nota_card_use_case.dart (54):
 - numpad_use_case.dart (23):
 - o1.dart (23):
-- o2.dart (25):
+- o2.dart (29):
 - order_card_use_case.dart (68):
 - piutang_card_use_case.dart (40):
 - proposal_card_use_case.dart (33):
