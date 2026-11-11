@@ -1,60 +1,53 @@
 # STATE Laurum
 Diperbarui: 2026-11-11 | Cabang `newdesign`
 
-## Sesi aktif dan keputusan
-- Koreksi terbaru pengguna: loader ditujukan untuk gate Membuka data lokal di
-  lib/app.dart, terpusat di layar dengan deskripsi tetap; hilangkan loading berulang.
-- Belum diterapkan: MCP FigCraft tidak tersedia (prasyarat redesign gagal).
-  Git dasar 2c96aa1, hanya FigCraft sudah berubah sebelum tugas; kode belum diubah.
-- Dasar sesi 948f5ef: Antrean 015 selesai, check_all 1036 lulus/1 skip.
-- Sesi 016: koreksi Antrean dan implementasi loader 014 diminta pengguna.
-- Prasyarat: branch newdesign, frame FigCraft 408 berhasil dibaca ulang via MCP.
-- Header LAURUM label hasil perubahan pengguna dipertahankan; slot tinggi 64
-  mengikuti skala teks. Ringkasan tanpa padding vertikal; jarak sebelum chip
-  hanya dari padding daftar. Jumlah dan sync tetap di body.
-- Subjudul Rekomendasi AI / Antrean berjalan warna primary sesuai permintaan.
-  Selisih frame (primaryInk) dicatat pada spec Antrean.
-- Filter memakai AppBottomSheet pada navigator utama agar menutupi nav/Transaksi;
-  lima opsi, provider, callback, COD, query, seluruh data/aksi lama tetap.
-- Loader: permintaan pengguna menjadi izin implementasi proposal 014, paket
-  Lottie dan registrasi AppLoader. flutter pub add meresolusikan lottie 3.8.2.
-- Implementasi memilih aset refined, disalin utuh ke assets/animations/.
-  Ukuran token global 96; semantics; reduced motion/TickerMode memakai frame 50%
-  yang terlihat (frame awal aset kosong). Tidak menambah penundaan/data/state.
-- Loading Beranda dan Antrean memakai AppLoader. Kosong/error/retry tetap.
-- Lapisan token/atom/molekul/organisme/template dan komposisi mengikuti lingkup
-  koreksi 016 + proposal 014; tidak ada perubahan state/domain/repository/rute.
+## Sesi aktif
+- Dasar e6d138f (catatan koreksi), implementasi sebelumnya 2c96aa1.
+- Koreksi 017 selesai: pengguna menegaskan sasaran loader adalah Membuka data lokal
+  di lib/app.dart, bukan indikator tambahan di Beranda/Antrean.
+- Prasyarat branch newdesign + baca FigCraft frame 408 berhasil.
+- Codebase-memory transport closed; penelusuran memakai sumber langsung.
+- Ikon gate lokal diganti AppLoader; judul/deskripsi asli dipertahankan dalam
+  grup Center layar penuh. Error penyimpanan dan retry sama persis.
+- Gate menggabungkan pembukaan store dan pembacaan awal provider antrean,
+  pelanggan dan laporan yang sudah ada. Tidak ada provider/data/state baru.
+- Hanya pembacaan tanpa nilai awal menahan gate. Refresh yang mempunyai data
+  tidak melepas navigator; error query diteruskan ke error/retry halaman.
+- AppLoader sekunder Beranda/Antrean dilepas; skeleton halaman lama dipulihkan.
+  Pada startup lokal nyata, halaman tampil setelah data awal siap.
+- Padding kecil AntreanPage yang sudah ditambahkan pengguna dipertahankan.
+- Tidak ada perubahan token, registry, dependensi, repository, rute atau PRD.
 
-## Verifikasi
-- Tes terarah 14 lulus (loader/aset/semantics, jarak/warna, modal root,
-  perubahan status, loading->kosong, keyboard 300 dp, pencarian/nav).
-- Tes golden terkait 13 lulus; sembilan berkas terdampak tercantum di proposal 016.
-- Golden loading statis sudah diperiksa: logo rumah/mesin tampil, bukan kosong.
-- check_all HIJAU, exit 0: format 977 (0 berubah), analyze/Riverpod bersih,
-  check_arch OK, 1040 tes lulus/1 skip, REPO_MAP 1055 berkas.
-  Bukti lokal: TEMP/laurum-loader-check-all-complete.log (10 Nov 2026).
-- Android SM-N975F: jarak ringkasan, warna, modal di atas nav/Transaksi dan
-  pencarian dengan keyboard terbuka diverifikasi. Pengguna mengaktifkan mode status.
-  Loader visual via golden; gerakan/berhenti via tes. iOS belum diuji.
-- Tes lama: finder loading AppSkeleton->AppLoader, host disableAnimations default
-  false; golden loading reduced motion. Signup menguji tanpa ikon, callback/busy
-  tetap utuh; berkas dirapikan dari 121 ke 110 baris, tidak ada tes yang dibuang.
-- Rincian paritas: docs/design/screens/01-antrean-beranda.md dan proposals/016.
+## Bukti dan verifikasi
+- Tes terarah awal 9 lulus: storage/error/retry, pembacaan bertahap satu loader,
+  navigator tetap saat refresh, Drift create/payment/empty dan state Antrean.
+- Suite golden + regresi query error/retry 15 lulus.
+- Golden 5 berkas: local_storage_loading baru; antrean_loading kembali skeleton;
+  antrean_normal/proses/whatsapp mengikuti padding manual pengguna.
+- Android SM-N975F: gate produksi dipratinjau dengan entry diagnostik TEMP
+  (store sengaja pending, tanpa perubahan data); loader/judul/deskripsi terpusat.
+  Perangkat dikembalikan ke lib/main.dart normal; Beranda tampil dengan data lokal
+  tersimpan, tanpa entry diagnostik. Tidak ada aksi perubahan data dilakukan.
+- check_all HIJAU, exit 0: format 979 (0 berubah), analyze/Riverpod bersih,
+  check_arch OK, 1042 tes lulus/1 skip, REPO_MAP 1057 berkas.
+  Bukti lokal: TEMP/laurum-local-loader-check-all-complete.log.
+- iOS belum diuji. Detail paritas dan golden: proposals/017-loader-data-lokal.md.
 
 ## Langkah berikutnya
-1. Setelah FigCraft tersedia, koreksi sasaran loader lokal dan loading sekunder;
-   pertahankan deskripsi, error/retry dan perilaku data. Uji gate + perpindahan state.
-2. Auth final + sembilan golden sudah disimpan dalam commit 5860dd7.
-   Total sembilan golden Antrean + sembilan auth; daftar/alasan pada proposal 016.
+1. Tinjauan pengguna atas loader pembukaan lokal dan transisi ke halaman siap.
+2. Lanjutkan hanya sesuai umpan balik; jangan mulai layar lain pada sesi ini.
 
-## Batas dan backend
-- UI100/R0-R10, BP0, B1a-f, B0, B2a-d, B3a, B3c selesai; B3b dan B2e+ menunggu.
+## Sebelumnya dan backend
+- 015 Antrean/nav selesai; 016 jarak, warna dan modal filter selesai.
+- 014 AppLoader/aset refined 96 dp, semantics dan reduced motion (frame 50%) tetap.
+- Auth final + sembilan golden disetujui pengguna dan disimpan di 5860dd7.
+- Bukti terakhir sebelum sesi ini: 1040 tes lulus/1 skip, REPO_MAP 1055.
+- UI100/R0-R10, BP0, B1a-f, B0, B2a-d, B3a, B3c selesai; B3b/B2e+ menunggu.
 - Backend berikut: cloud/workmanager Android, Google login, lalu B3b;
   docs/plans/B3-auth.md. Drift/wire v5, cloud 5/5 oleh pemilik.
 - PayStatus turunan, COD bersisa ditahan, multi-repo TransactionRunner.
 
 ## Lingkungan dan Git
 - Sebelum Dart/Flutter: . ./tool/windows_native_sdk.ps1; BOT=true.
-- FigCraft tidak disertakan commit; perubahan auth final + golden diizinkan pengguna.
-  Header Antrean label pengguna dipertahankan sebagai bagian tata letak 016.
+- FigCraft sudah berubah sebelum sesi, tidak disertakan commit koreksi.
 - Jangan push/merge. Riwayat lama: docs/progress/state-history-2026-11-10.md.

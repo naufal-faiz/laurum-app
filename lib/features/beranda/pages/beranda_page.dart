@@ -13,7 +13,7 @@ import 'package:laurum/features/customers/state/customer_directory_data.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
-import 'package:laurum/shared/widgets/atoms/app_loader.dart';
+import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 
 /// Home dashboard of frame `LAURUM · Beranda`; data comes from existing providers.
@@ -46,7 +46,11 @@ class BerandaPage extends ConsumerWidget {
       ),
       children: [
         if (loading)
-          const Center(child: AppLoader())
+          for (var i = 0; i < 3; i++)
+            const Padding(
+              padding: EdgeInsets.only(bottom: AppSpacing.cardGap),
+              child: AppSkeleton(height: AppSpacing.appBarHeight + AppSpacing.touchTarget),
+            )
         else if (error)
           EmptyState(
             title: 'Gagal memuat beranda',

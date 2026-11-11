@@ -87,6 +87,7 @@ class AntreanPage extends ConsumerWidget {
             searching: search.query.trim().isNotEmpty,
             onCreate: () => context.push('/transaksi/baru'),
           ),
+        const SizedBox(height: AppSpacing.small),
         AntreanOrdersSection(
           data: data,
           orders: orders,

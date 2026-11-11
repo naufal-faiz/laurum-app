@@ -1,6 +1,6 @@
 # 014 — Loader Laurum
 
-Status: diterapkan 10 Nov 2026 setelah koreksi Antrean (016); check_all hijau.
+Status: diterapkan 10 Nov; sasaran dikoreksi 11 Nov melalui 017 menjadi gate data lokal; check_all hijau.
 Gerbang: koreksi Beranda dan redesign Antrean frame 408 selesai serta ditinjau.
 
 Referensi pengguna:
@@ -26,8 +26,9 @@ Implementasi memilih varian refined; sumber asli tetap utuh di docs/design.
 flutter pub add meresolusikan lottie 3.8.2; API terdaftar sebagai atom AppLoader.
 Aset pengguna disalin utuh; ukuran 96 menjadi AppDimensions.loader. Tidak ada font baru.
 
-Layar terdampak: Beranda dan Antrean pada keadaan loading; pertahankan skeleton
-untuk placeholder struktur bila lebih sesuai. Layar auth/sync atau tombol busy
+Koreksi 017: AppLoader mengganti ikon gate Membuka data lokal, terpusat dengan
+judul/deskripsi tetap. Skeleton halaman dipulihkan; gate menahan pembacaan awal
+agar tidak menampilkan loader kedua. Layar auth/sync atau tombol busy
 dibahas terpisah sebelum mengganti indikator global.
 Tes: aset termuat, semantics, reduce motion, ukuran, tidak menghalangi aksi,
 golden loading terkait; check_all dan pemeriksaan Android. iOS belum diuji.

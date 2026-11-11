@@ -7,7 +7,9 @@ import 'package:laurum/app.dart';
 import 'package:laurum/core/persistence/account_store.dart';
 import 'package:laurum/core/persistence/drift_repository_overrides.dart';
 import 'package:laurum/core/persistence/storage_providers.dart';
+import 'package:laurum/features/customers/state/customer_directory_data.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
+import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/shell/pages/app_router.dart';
 
 import 'drift_app_harness.dart';
@@ -48,8 +50,15 @@ void main() {
     expect(find.text('Penyimpanan belum dapat dibuka'), findsOneWidget);
     expect(find.textContaining('private/file'), findsNothing);
     await tester.tap(find.text('Coba lagi'));
-    await tester.pumpAndSettle();
-    await tester.runAsync(() => c.read(antreanDataProvider.future));
+    await tester.pump();
+    await tester.runAsync(() async {
+      await c.read(accountStoreProvider.future);
+      await Future.wait([
+        c.read(antreanDataProvider.future),
+        c.read(customerDirectoryProvider.future),
+        c.read(reportViewProvider.future),
+      ]);
+    });
     await tester.pumpAndSettle();
     expect(find.text('12 order aktif'), findsOneWidget);
     expect(attempt, 2);

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/theme/app_input_styles.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/shared/widgets/atoms/app_loader.dart';
+import 'package:laurum/shared/widgets/atoms/app_card.dart';
+import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 
 class AntreanStatusSection extends StatelessWidget {
@@ -22,8 +24,23 @@ class AntreanStatusSection extends StatelessWidget {
     if (loading) {
       return ListView(
         padding: const EdgeInsets.all(AppSpacing.screenPadding),
-        children: const [
-          Center(child: AppLoader()),
+        children: [
+          for (var i = 0; i < 3; i++)
+            const Padding(
+              padding: EdgeInsets.only(bottom: AppSpacing.cardGap),
+              child: AppCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: AppSpacing.cardGap,
+                  children: [
+                    AppSkeleton(width: AppInputStyles.skeletonShort),
+                    AppSkeleton(width: AppInputStyles.skeletonMedium),
+                    AppSkeleton(),
+                    AppSkeleton(height: AppSpacing.touchTarget),
+                  ],
+                ),
+              ),
+            ),
         ],
       );
     }

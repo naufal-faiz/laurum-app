@@ -14,7 +14,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ## Berkas (jumlah baris): nama deklarasi
 
 ### lib/
-- app.dart (51): LaurumApp
+- app.dart (88): LaurumApp
 
 ### lib/core/domain/
 - business_profile.dart (50): BusinessProfile
@@ -270,7 +270,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sign_up_hero_section.dart (17): SignUpHeroSection
 
 ### lib/features/beranda/pages/
-- beranda_page.dart (91): BerandaPage
+- beranda_page.dart (95): BerandaPage
 
 ### lib/features/beranda/state/
 - beranda_services.dart (29): BerandaStageTone
@@ -410,7 +410,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/orders/pages/
 - antrean_filter_sheet.dart (54): AntreanFilterSheet
-- antrean_page.dart (102): AntreanPage
+- antrean_page.dart (103): AntreanPage
 - order_cancel_flow.dart (24):
 - order_completion_flow.dart (19):
 - order_detail_menu_flow.dart (22):
@@ -442,7 +442,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_header_section.dart (37): AntreanHeaderSection
 - antrean_orders_section.dart (54): AntreanOrdersSection
 - antrean_proposals_section.dart (61): AntreanProposalsSection
-- antrean_status_section.dart (62): AntreanStatusSection
+- antrean_status_section.dart (79): AntreanStatusSection
 - antrean_summary_section.dart (49): AntreanSummarySection
 - antrean_toolbar_section.dart (33): AntreanToolbarSection
 - order_customer_section.dart (56): OrderCustomerSection
@@ -1085,7 +1085,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sheet_scaffold_test.dart (37):
 - stat_tile_test.dart (24):
 - stepper_field_test.dart (33):
-- storage_gate_test.dart (58):
+- storage_gate_query_error_test.dart (71):
+- storage_gate_test.dart (67):
+- storage_loading_presentation_test.dart (107):
 - store_configuration_test.dart (11):
 - sub_scaffold_fab_test.dart (37):
 - sub_scaffold_test.dart (32):

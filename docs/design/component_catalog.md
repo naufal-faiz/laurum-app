@@ -1109,7 +1109,7 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
   progress/fase-ui.md. Audit tidak mengubah desain/token atau aturan checker/lint.
 
 ## Koreksi 016 dan loader 014
-- AppLoader({size = AppDimensions.loader, label = 'Sedang memuat'}): atom Stateless, aset Lottie lokal refined, semantics dan reduced motion/TickerMode; loading Beranda/Antrean.
+- AppLoader({size = AppDimensions.loader, label = 'Sedang memuat'}): atom Stateless, aset Lottie lokal refined, semantics dan reduced motion/TickerMode; gate Membuka data lokal (koreksi 017); halaman memakai skeleton.
 - SectionHeader.titleColor default AppColors.ink; subjudul Antrean memakai AppColors.primary sesuai permintaan pengguna.
 - AppBottomSheet.show.useRootNavigator default false; filter Antrean true agar di atas nav/Transaksi.
 - Header Antrean 64 mengikuti skala teks; ringkasan tanpa padding vertikal ganda, jarak sebelum chip dari padding daftar.

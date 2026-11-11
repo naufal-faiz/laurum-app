@@ -137,3 +137,10 @@ APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diu
 - Modal filter pada navigator utama, menutupi nav bawah dan tombol Transaksi; opsi/data/callback tetap sama.
 - Keadaan loading memakai AppLoader dari aset refined pengguna; kosong/error/retry tidak berubah.
 - Tes lama antrean_states hanya mengganti finder AppSkeleton menjadi AppLoader. Golden loading memakai reduced motion agar deterministik; assertion perilaku tetap.
+
+## Koreksi loader 017 (11 Nov 2026)
+AppLoader dipusatkan pada gate Membuka data lokal bersama judul/deskripsi. Gate
+menunggu pembacaan awal antrean/pelanggan/laporan tanpa mengganti sumber datanya.
+Loading halaman kembali memakai skeleton, sehingga startup lokal tidak melewati
+loader tambahan di daftar. Error dan retry tetap. Padding kecil AntreanPage yang
+ditambahkan pengguna sebelum sesi dipertahankan.

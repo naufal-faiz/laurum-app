@@ -6,7 +6,8 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | Layar | Frame Figma | Status | Selisih |
 |---|---|---|---|
 | `01-beranda.md` (01 — Beranda) | `LAURUM · Beranda` (ID: 281) | Koreksi 013 selesai; check_all hijau; Android diperiksa | Header tetap di AppBar, padding 16, layanan teratas, font lebih besar, banner lebih renggang; lihat spec |
-| `01-antrean-beranda.md` (01 — Antrean) | `LAURUM · Antrean` (ID: 408) | 015/016 selesai; check_all hijau; Android diperiksa | Ringkasan dirapatkan, subjudul primary, modal di atas nav; loader Lottie (014); dua preview AI dan seluruh aksi lama tetap |
+| `01-antrean-beranda.md` (01 — Antrean) | `LAURUM · Antrean` (ID: 408) | 015/016 selesai; check_all hijau; Android diperiksa | Ringkasan dirapatkan, subjudul primary, modal di atas nav; loader pada gate lokal (014/017); dua preview AI dan seluruh aksi lama tetap |
+| Gate Membuka data lokal (lib/app.dart) | Tanpa frame khusus; aset loader dan instruksi eksplisit pengguna 11 Nov, proposal 017 | 017 selesai; check_all hijau; Android diperiksa | Loader terpusat + judul/deskripsi; satu tahap sampai data awal siap |
 | Nav bawah global (semua tab) | `LAURUM · Beranda` Nav Bawah (ID: 388) dan `LAURUM · Antrean` Nav Bawah (ID: 494) | Selesai (kode) | Laporan diganti Beranda; ikon lama dipertahankan |
 | `02-buat-transaksi.md` (02 - Buat Transaksi) | | Menunggu | |
 | `03-pilih-layanan.md` (03 - Pilih Layanan) | | Menunggu | |
