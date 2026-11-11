@@ -1,7 +1,11 @@
 # STATE Laurum
-Diperbarui: 2026-11-10 | Cabang `newdesign`
+Diperbarui: 2026-11-11 | Cabang `newdesign`
 
 ## Sesi aktif dan keputusan
+- Koreksi terbaru pengguna: loader ditujukan untuk gate Membuka data lokal di
+  lib/app.dart, terpusat di layar dengan deskripsi tetap; hilangkan loading berulang.
+- Belum diterapkan: MCP FigCraft tidak tersedia (prasyarat redesign gagal).
+  Git dasar 2c96aa1, hanya FigCraft sudah berubah sebelum tugas; kode belum diubah.
 - Dasar sesi 948f5ef: Antrean 015 selesai, check_all 1036 lulus/1 skip.
 - Sesi 016: koreksi Antrean dan implementasi loader 014 diminta pengguna.
 - Prasyarat: branch newdesign, frame FigCraft 408 berhasil dibaca ulang via MCP.
@@ -38,7 +42,8 @@ Diperbarui: 2026-11-10 | Cabang `newdesign`
 - Rincian paritas: docs/design/screens/01-antrean-beranda.md dan proposals/016.
 
 ## Langkah berikutnya
-1. Tinjauan pengguna: jarak ringkasan, warna subjudul, modal filter dan loader.
+1. Setelah FigCraft tersedia, koreksi sasaran loader lokal dan loading sekunder;
+   pertahankan deskripsi, error/retry dan perilaku data. Uji gate + perpindahan state.
 2. Auth final + sembilan golden sudah disimpan dalam commit 5860dd7.
    Total sembilan golden Antrean + sembilan auth; daftar/alasan pada proposal 016.
 
