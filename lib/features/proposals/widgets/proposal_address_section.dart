@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 import 'package:laurum/shared/widgets/molecules/callout_ai.dart';
-import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
 class ProposalAddressSection extends StatelessWidget {
@@ -26,19 +26,24 @@ class ProposalAddressSection extends StatelessWidget {
     children: [
       const SectionHeader(title: 'Alamat penjemputan', titleColor: AppColors.primaryInk),
       AppCard(
-        child: LabeledField(
-          label: 'Alamat penjemputan (opsional)',
-          child: AppTextField(
-            label: 'Alamat penjemputan',
-            value: draft.address,
-            enabled: enabled,
-            selectAllOnFocus: true,
-            maxLines: 3,
-            onChanged: onAddress,
-          ),
+        padding: const EdgeInsets.all(AppSpacing.small),
+        child: AppTextField(
+          label: 'Alamat penjemputan',
+          hint: 'Alamat penjemputan (opsional)',
+          dense: true,
+          leadingIcon: AppIcons.location,
+          value: draft.address,
+          enabled: enabled,
+          selectAllOnFocus: true,
+          maxLines: 3,
+          onChanged: onAddress,
         ),
       ),
-      if (uncertain) const CalloutAi(message: 'AI kurang yakin dengan nomor rumah/patokan detail.'),
+      if (uncertain)
+        const CalloutAi(
+          message: 'AI kurang yakin dengan nomor rumah/patokan detail.',
+          compact: true,
+        ),
     ],
   );
 }

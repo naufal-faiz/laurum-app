@@ -9,6 +9,7 @@ import 'package:laurum/features/proposals/widgets/proposal_privacy_section.dart'
 import 'package:laurum/features/proposals/widgets/proposal_service_section.dart';
 import 'package:laurum/features/services/data/service_fixtures.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
+import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/notice_ai.dart';
 
 void main() {
@@ -87,7 +88,10 @@ void main() {
       ),
     );
     for (final service in serviceFixtures) {
-      expect(find.text(service.name), findsOneWidget);
+      expect(
+        find.descendant(of: find.byType(ChipBar), matching: find.text(service.name)),
+        findsOneWidget,
+      );
     }
     await tester.tap(find.text(serviceFixtures.first.name));
     expect(edits, 0);

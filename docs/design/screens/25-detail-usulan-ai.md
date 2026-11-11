@@ -43,7 +43,7 @@ Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
 
-## Redesign 018–020 — Paritas sebelum implementasi (11 Nov 2026)
+## Redesign 018ï¿½020 ï¿½ Paritas sebelum implementasi (11 Nov 2026)
 Frame FigCraft 512 dibaca; pengguna menyetujui ketiga proposal komponen bersama.
 | Butir | Sumber / aksi lama | Status implementasi |
 |---|---|---|
@@ -83,3 +83,19 @@ retry; enam tes baru untuk lima Section baru. Golden rina/new_customer diperbaru
 header/kartu/pesan/layanan/alamat/privasi dan footer diperiksa; field alamat
 select-all serta tombol Tolak/Setujui tetap terlihat di atas keyboard.
 Ukuran teks/tap global lebih besar daripada frame. iOS belum diuji.
+### Koreksi 021 berdasarkan tinjauan pengguna (11 Nov 2026)
+Judul/subtitle header rapat; badge Perlu dicek center terhadap kelompok teks.
+Metadata diringkas menjadi Pesan WhatsApp + waktu Formatters agar tidak orphan WIB.
+Sumber pesan dan contoh akurasi satu Row spaceBetween; teks sumber boleh membungkus
+pada lebar kecil, badge tetap di kanan. Kartu layanan berupa baris layanan, berat
+belum diketahui (hanya kiloan), dan tarif asli. ChipBar tetap inline di bawah kartu;
+tidak menambah alur picker/aksi berat/jadwal jemput atau total buatan.
+Alamat tanpa label berulang di dalam kartu; padding kecil/field dense, ikon lokasi.
+MaxLines3/selectAll/validasi/fokus/callback tetap. CalloutAi compact memakai caption
+dan badge Periksa bagian ini; ikon informasi dan perisai center secara vertikal.
+BannerMessage ringkas berlaku global sesuai jawaban pengguna, dengan warna tegas;
+sepuluh golden layar lain ikut bergeser hanya pada banner (daftar di proposal 021).
+Tes posisi/paritas/keyboard akhir 17 lulus; golden/layout 6 lulus; check_all hijau
+1063 lulus/1 skip. Android SM-N975F dibandingkan ulang frame 512 termasuk
+keyboard/selectAll/footer: lulus.
+Detail Order ditunda sesuai arahan; perubahan tersimpan di stash@{0}, bukan diterapkan.

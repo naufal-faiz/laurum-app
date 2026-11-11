@@ -24,14 +24,14 @@ class BannerMessage extends StatelessWidget {
       padding: AppMoleculeTokens.noticePadding,
       decoration: BoxDecoration(color: background, borderRadius: AppRadius.numpad),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppIcon(icon, size: AppDimensions.iconAction, color: foreground),
           const SizedBox(width: AppMoleculeTokens.gap),
           Expanded(
             child: AppText(
               message,
-              color: variant == BannerMessageVariant.info ? AppColors.ink2 : foreground,
+              color: variant == BannerMessageVariant.info ? AppColors.primaryInk : foreground,
+              variant: AppTextVariant.caption,
             ),
           ),
         ],

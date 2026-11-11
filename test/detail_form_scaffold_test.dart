@@ -48,13 +48,13 @@ void main() {
           ),
         ),
       );
-      final headingTop = tester.getTopLeft(find.text('Periksa Usulan AI'));
+      final headingTop = tester.getTopLeft(find.byType(AppBarSub));
       await expectKeyboardVisible(
         tester,
         field: find.byType(TextField),
         save: find.widgetWithText(AppButton, 'Setujui jadi order'),
       );
-      expect(tester.getTopLeft(find.text('Periksa Usulan AI')), headingTop);
+      expect(tester.getTopLeft(find.byType(AppBarSub)), headingTop);
       expect(find.text('Dari pesan WhatsApp'), findsNothing);
       await tester.tap(find.text('Setujui jadi order'));
       await tester.tap(find.byTooltip('Kembali'));

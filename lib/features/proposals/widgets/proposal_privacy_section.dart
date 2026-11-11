@@ -13,7 +13,6 @@ class ProposalPrivacySection extends StatelessWidget {
   Widget build(BuildContext context) => const AppCard(
     style: AppCardStyle.muted,
     child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
       spacing: AppSpacing.small,
       children: [
         AppIcon(AppIcons.privacy, color: AppColors.primary),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
 import 'package:laurum/shared/widgets/atoms/app_badge.dart';
@@ -41,28 +42,36 @@ class ProposalMessageSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: AppSpacing.small,
           children: [
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              alignment: WrapAlignment.spaceBetween,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               spacing: AppSpacing.small,
-              runSpacing: AppSpacing.small,
               children: [
-                const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: AppSpacing.xxsmall,
-                  children: [
-                    AppIcon(AppIcons.sparkles, color: AppColors.primary),
-                    Flexible(
-                      child: AppText(
-                        'Dibaca dari pesan WhatsApp',
-                        variant: AppTextVariant.label,
-                        color: AppColors.primaryInk,
+                const Expanded(
+                  child: Row(
+                    spacing: AppSpacing.xxsmall,
+                    children: [
+                      AppIcon(
+                        AppIcons.sparkles,
+                        size: AppDimensions.iconSmall,
+                        color: AppColors.primary,
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: AppText(
+                          'Dibaca dari pesan WhatsApp',
+                          variant: AppTextVariant.caption,
+                          color: AppColors.primaryInk,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 if (demoAccuracy != null)
-                  AppBadge('Contoh akurasi $demoAccuracy%', variant: AppBadgeVariant.diproses),
+                  Flexible(
+                    child: AppBadge(
+                      'Contoh akurasi $demoAccuracy%',
+                      variant: AppBadgeVariant.diproses,
+                    ),
+                  ),
               ],
             ),
             AppCard(

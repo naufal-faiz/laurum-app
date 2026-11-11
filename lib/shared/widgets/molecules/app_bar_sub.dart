@@ -54,7 +54,6 @@ class AppBarSub extends StatelessWidget {
                   vertical: AppSpacing.small,
                 ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: AppMoleculeTokens.gap,
                   children: [
                     AppCard(style: AppCardStyle.muted, padding: EdgeInsets.zero, child: back),
@@ -62,15 +61,8 @@ class AppBarSub extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        spacing: AppSpacing.xxsmall,
                         children: [
-                          Wrap(
-                            alignment: WrapAlignment.spaceBetween,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            spacing: AppSpacing.small,
-                            runSpacing: AppSpacing.xxsmall,
-                            children: [heading, ?trailing],
-                          ),
+                          heading,
                           if (subtitle != null)
                             AppText(
                               subtitle!,
@@ -80,6 +72,7 @@ class AppBarSub extends StatelessWidget {
                         ],
                       ),
                     ),
+                    ?trailing,
                   ],
                 ),
               )

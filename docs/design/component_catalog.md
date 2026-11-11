@@ -1132,6 +1132,14 @@ memakai AppTextStyles.label. Data, callback submit, validasi dan busy tetap.
 - Detail: header intrinsik tetap di atas area gulir. Metadata diringkas saat
   keyboard terbuka; footer lama tetap di atas keyboard.
 - Varian standard mempertahankan appbar dan galeri lama; golden detail_form baru.
+
+## Koreksi informasi dan header (021, arahan pengguna 11 Nov)
+- AppBarSub.detail: judul/subtitle tanpa gap tambahan; trailing center terhadap
+  kelompok teks. Standard tetap.
+- BannerMessage seluruh varian: caption 13 sp, ikon center, info primaryInk;
+  pesan/API/varian tetap. Perubahan global diminta eksplisit oleh pengguna.
+- CalloutAi.compact=false; true memberi caption + AppBadge pada label dan ikon
+  center. Default ProposalCard dan pemanggil lain tetap.
 - SectionHeader.trailing Widget? null untuk metadata tanpa aksi.
 - PaymentBadge(label, status PayStatus): label yang sudah dihitung, warna semantik lunas/DP/belum bayar; tidak menghitung tagihan.
 - AppIcons.edit/dot memakai Ionicons pencilOutline/ellipse terpasang 0.2.3. Golden baru detail_molecules dan pembaruan app_icon.

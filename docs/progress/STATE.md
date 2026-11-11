@@ -1,60 +1,56 @@
 # STATE Laurum
 Diperbarui: 2026-11-11 | Cabang `newdesign`
 
-## Sesi aktif: Periksa Usulan AI + Detail Order
-- Dasar 49dd172. Pengguna meminta dua layar berurutan dalam sesi ini.
-- Frame FigCraft dibaca read-only: Detail Usulan AI 512, Detail Order 612.
-- Codebase-memory transport closed; REPO_MAP + sumber langsung menjadi bukti.
-- Proposal 018 molecules, 019 organisms, 020 templates DISETUJUI pengguna
-  ("Setuju, terapkan ketiganya"). Jalankan berurutan dengan gerbang check_all.
-- Pengguna menyetujui adaptasi: tidak menambah input berat/jadwal jemput baru
-  pada usulan. Field/draf/validasi/aksi lama tetap; berat melalui Edit order
-  sesudah persetujuan. Skor AI hanya contoh berlabel pada scope dummy yang ada.
-- Paritas 25 selesai; paritas 09 menunggu penerapan.
+## Fokus terakhir pengguna: koreksi Periksa Usulan AI, lalu hentikan sesi
+- Dasar sesi 49dd172; commit terakhir f08cdcb (penerapan awal layar 25).
+- Pengguna membatasi fokus ke layar 25. Detail Order DITUNDA; perubahan lokal
+  disimpan dapat dipulihkan di stash@{0}: wip: Detail Order ditunda, fokus koreksi usulan AI.
+  Jangan terapkan stash atau lanjutkan Order sebelum diminta.
+- FigCraft live dibaca read-only: 512; rincian 537/586 dibaca ulang saat koreksi.
+- Graph codebase transport closed; REPO_MAP/sumber langsung menjadi bukti.
 
-## Lapisan aktif UI-21
-- Lapisan 3 (018) diterapkan: AppBarSub subtitle + variant detail intrinsik,
-  SectionHeader trailing informatif, PaymentBadge; default lama tetap.
-- AppIcons.edit/dot: Ionicons pencilOutline/ellipse terverifikasi pada paket
-  terpasang 0.2.3. Tidak menambah dependensi atau token.
-- Tes terarah komponen 10 lulus; palet ikon 1 lulus; golden baru detail_molecules.
-  Header 320 dp/teks 2x tidak overflow, kembali/menu dan badge diuji.
-- Lapisan 3 HIJAU: check_all exit 0, 1047 tes lulus/1 skip, REPO_MAP 1060.
-  Bukti: TEMP/laurum-detail-layer3-check.log; lapisan aktif berikutnya 4 (019).
-- Lapisan 3 disimpan di 9307a5c. Lapisan 4 (019) diterapkan: CustomerContactCard.
-  Tes komponen 4 lulus; check_all HIJAU: 1051 lulus/1 skip, REPO_MAP 1063.
-  Bukti: TEMP/laurum-detail-layer4-complete-check.log (exit 0).
-- 019 disimpan di 4325a7c. Lapisan 5 (020) diterapkan: FormScaffold detail.
-  Enam tes terarah lulus termasuk default, 320 dp/2x dan keyboard 300 dp.
-  Golden baru detail_form; check_all HIJAU: 1054 lulus/1 skip, REPO_MAP 1064.
-  Bukti: TEMP/laurum-detail-layer5-check.log, exit 0; default golden tetap.
-- 020 disimpan di 333fadf. Lapisan aktif 6: layar 25 diterapkan.
-  Header/kontak/pesan/layanan/alamat/privasi/footer; data/aksi lama tetap.
-  Tes lama 11 + baru 6 lulus, golden rina/new_customer diperbarui (4 tes lulus).
-  Android SM-N975F: dibandingkan frame 512, alamat + footer di atas keyboard.
-  check_all HIJAU: 1060 lulus/1 skip, REPO_MAP 1071, exit 0.
-  Bukti TEMP/laurum-detail-ai-final-check.log. Detail Order belum disentuh.
+## Gerbang komponen yang selesai
+- 018 molecules: 9307a5c, check_all 1047 lulus/1 skip, REPO_MAP 1060.
+- 019 CustomerContactCard: 4325a7c, 1051 lulus/1 skip, REPO_MAP 1063.
+- 020 FormScaffold detail: 333fadf, 1054 lulus/1 skip, REPO_MAP 1064.
+- Layar 25 awal: f08cdcb, check_all 1060 lulus/1 skip, REPO_MAP 1071.
+  Android SM-N975F + keyboard alamat diperiksa; semua data/aksi lama tetap.
 
-## Langkah berikutnya
-1. Simpan layar 25 yang sudah hijau, lalu terapkan layar 09.
-2. Detail Order: nota/status/kontak/rincian/pembayaran/timeline/footer sesuai mode.
-3. Golden dampak sudah dicatat; Android, check_all akhir, STATE dan commit.
-   Jangan push/merge.
+## Selesai: koreksi 021 (lapisan molecules + komposisi layar 25)
+- Header judul/sub tanpa gap tambahan, badge ditengah tinggi kelompok teks.
+- Sumber dan akurasi satu Row spaceBetween, tidak membungkus ke baris terpisah.
+- Kartu layanan: nama, berat belum diketahui, tarif, pemisah; pilihan layanan
+  tetap inline sesuai adaptasi 020, tidak menambah aksi berat/jadwal jemput.
+- Alamat: hilangkan label berulang, padding ringkas dan field dense; maxLines3,
+  selectAll, callback tetap. Ikon perisai center.
+- CalloutAi.compact opt-in: caption + badge Periksa bagian ini, ikon center;
+  ProposalCard dan pemanggil default tetap.
+- Pengguna mengubah BannerMessage ke caption lalu menegaskan berlaku GLOBAL.
+  Semua banner caption13, ikon center, info primaryInk agar tetap tegas.
+- Proposal 021 mencatat otorisasi dari instruksi koreksi pengguna.
+- Tes posisi/perilaku akhir 17 lulus, golden/layout usulan akhir 6 lulus.
+  Golden komponen 12 lulus. Header/320dp/2x/keyboard diuji.
+- Golden total yang berubah 16: 6 lingkup layar 25 dan 10 dampak banner global
+  (add_customer_sheet, ai_settings_disconnected, antrean_whatsapp,
+  auth_signin_error, printer_page, r10_signin_error, r10_signin_error_320_2x,
+  sync_offline, whatsapp_connected, whatsapp_waiting); daftar resmi di proposal 021
+  untuk persetujuan UI-28.
+- Android akhir diperiksa: header/pesan/akurasi/kartu/alamat/badge/perisai serta
+  keyboard/selectAll/footer lulus; TEMP/laurum-ai-corrected-*.png.
+- check_all akhir: SEMUA HIJAU, 1063 lulus/1 skip, REPO_MAP 1072.
+- Artefak test/failures dikembalikan ke HEAD dan yang tidak terlacak dihapus.
 
-## Batas paritas penting
-- Usulan: pelanggan baru/terdaftar, sumber pesan lengkap, cancel/tolak/approve,
-  alamat kurang pasti, pending/error/final, idempotensi dan tombol WhatsApp tetap.
-- Order: subtotal/diskon/catatan, semua pembayaran/aktivitas, mode status/sederhana,
-  COD held/final, menu, Edit/Hapus/cetak/complete/terima pembayaran tetap.
-- State/data/domain/repository, rute, Formatters, PRD/lint/dependensi tidak diubah.
-- Tidak ada warna/font/ukuran baru; token global dan target sentuh yang ada dipakai.
+## Langkah berikutnya (hanya AI)
+1. HENTIKAN sesi: pengguna meninjau koreksi 021 dan daftar 16 golden.
+2. Setelah disetujui, lanjut layar berikutnya sesuai rencana redesign-atomic.
+3. Detail Order tetap DITUNDA di stash@{0} sampai pengguna meminta.
 
-## Sebelumnya dan lingkungan
-- Loader lokal 017 selesai (49dd172): satu gate terpusat + deskripsi, menunggu
-  data awal; refresh tidak melepas navigator. 1042 tes lulus/1 skip, Android diuji.
-- Auth final 5860dd7; UI 015/016 selesai. iOS belum diuji.
-- Backend: B3b/B2e+ menunggu; Drift/wire v5, cloud 5/5 oleh pemilik.
-- Sebelum Dart/Flutter: . ./tool/windows_native_sdk.ps1; BOT=true.
-- FigCraft sudah berubah sebelum sesi, tidak masuk commit implementasi.
-- Rencana: docs/plans/018-detail-ai-order.md; proposal 018/019/020; spec 25/09.
-- Riwayat lama: docs/progress/state-history-2026-11-10.md.
+## Batas dan lingkungan
+- Provider/draf/validasi/aksi/argumen tetap. Skor AI hanya contoh dari scope dummy.
+- State/data/domain/rute/Formatters/repository/PRD/lint/dependensi tidak diubah.
+- FigCraft pengguna sudah dirty sebelum sesi, tidak ikut commit.
+- Peninjauan otomatis menolak restore massal; alternatif git stash menyimpan
+  seluruh perubahan Order tanpa membuang edit. Tidak ada blokir tersisa.
+- SDK: . ./tool/windows_native_sdk.ps1; BOT=true; SM-N975F wireless tersambung.
+- iOS belum diuji. Loader49dd172/auth5860dd7 tetap; backend menunggu B3b/B2e+.
+- Rencana 018; proposal018-021; spec25/09; riwayat state-history-2026-11-10.md.

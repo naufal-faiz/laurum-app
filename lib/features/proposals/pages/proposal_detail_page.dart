@@ -36,7 +36,7 @@ class ProposalDetailPage extends ConsumerWidget {
       title: 'Periksa Usulan AI',
       subtitle: review == null
           ? null
-          : 'Dari pesan WhatsApp · ${Formatters.jam(review.proposal.createdAt)}',
+          : 'Pesan WhatsApp · ${Formatters.jam(review.proposal.createdAt)}',
       appBarVariant: AppBarSubVariant.detail,
       trailing: pending ? const AppBadge('Perlu dicek', variant: AppBadgeVariant.diproses) : null,
       backLabel: 'Kembali',
