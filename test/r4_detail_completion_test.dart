@@ -30,12 +30,12 @@ void main() {
     expect(find.byTooltip('Menu order'), findsNothing);
     expect(find.text('Cetak struk'), findsNothing);
     expect(find.text('Tandai siap'), findsNothing);
-    expect(find.text('Hapus'), findsOneWidget);
+    expect(find.byTooltip('Hapus'), findsOneWidget);
     await expectLater(
       find.byKey(const ValueKey('antrean-golden')),
       matchesGoldenFile('goldens/r4_order_detail.png'),
     );
-    await tester.tap(find.text('Edit'));
+    await tester.tap(find.byTooltip('Edit'));
     await tester.pumpAndSettle();
     expect(find.text('Simpan perubahan'), findsOneWidget);
     await tester.tap(find.byTooltip('Kembali'));
@@ -62,9 +62,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Selesai'), findsOneWidget);
     expect(find.text('Cetak struk'), findsOneWidget);
-    expect(find.text('Edit'), findsNothing);
+    expect(find.byTooltip('Edit'), findsNothing);
     expect(find.text('Selesaikan'), findsNothing);
-    expect(find.text('Hapus'), findsNothing);
+    expect(find.byTooltip('Hapus'), findsNothing);
     final order = (await scope.read(orderRepositoryProvider).getOrderById('ord-0142'))!;
     expect(order.status, OrderStatus.selesai);
     expect(
@@ -78,7 +78,7 @@ void main() {
   testWidgets('Hapus uses cancellation; final order only offers printing', (tester) async {
     final scope = await completionScope(CompletionPrinter());
     await pumpAntrean(tester, container: scope, location: '/order/ord-0142');
-    await tester.tap(find.text('Hapus'));
+    await tester.tap(find.byTooltip('Hapus'));
     await tester.pumpAndSettle();
     expect(find.text('Hapus nota ini?'), findsOneWidget);
     await tester.tap(find.text('Ya, hapus nota'));
@@ -89,7 +89,7 @@ void main() {
     );
     expect(find.text('Cetak struk'), findsOneWidget);
     expect(find.text('Selesaikan'), findsNothing);
-    expect(find.text('Hapus'), findsNothing);
+    expect(find.byTooltip('Hapus'), findsNothing);
     expect(tester.takeException(), isNull);
   });
 }

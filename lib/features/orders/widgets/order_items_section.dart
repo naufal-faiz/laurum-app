@@ -22,7 +22,12 @@ class OrderItemsSection extends StatelessWidget {
       children: [
         SectionHeader(
           title: 'Rincian cucian',
-          subtitle: '${data.items.length} layanan',
+          titleColor: AppColors.primaryInk,
+          trailing: AppText(
+            '${data.items.length} layanan',
+            variant: AppTextVariant.caption,
+            color: AppColors.ink3,
+          ),
         ),
         AppCard(
           child: Column(
@@ -47,7 +52,11 @@ class OrderItemsSection extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: AppSpacing.cardGap),
-                    AppText(Formatters.rupiah(item.lineTotal), variant: AppTextVariant.bodyStrong),
+                    AppText(
+                      Formatters.rupiah(item.lineTotal),
+                      variant: AppTextVariant.bodyStrong,
+                      color: AppColors.primaryInk,
+                    ),
                   ],
                 ),
                 const AppDivider(),
@@ -55,7 +64,21 @@ class OrderItemsSection extends StatelessWidget {
               InfoRow(label: 'Subtotal', value: Formatters.rupiah(order.subtotal)),
               if (order.discount > 0)
                 InfoRow(label: 'Diskon', value: '-${Formatters.rupiah(order.discount)}'),
-              InfoRow(label: 'Total tagihan', value: Formatters.rupiah(order.total)),
+              Row(
+                spacing: AppSpacing.small,
+                children: [
+                  const Expanded(
+                    child: AppText('Total tagihan', variant: AppTextVariant.bodyStrong),
+                  ),
+                  Flexible(
+                    child: AppText(
+                      Formatters.rupiah(order.total),
+                      variant: AppTextVariant.section,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
