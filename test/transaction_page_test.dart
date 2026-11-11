@@ -6,7 +6,6 @@ import 'package:laurum/features/transactions/pages/customer_picker_sheet.dart';
 import 'package:laurum/features/transactions/pages/discount_sheet.dart';
 import 'package:laurum/features/transactions/pages/transaction_page.dart';
 import 'package:laurum/features/transactions/state/transaction_draft.dart';
-import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_numpad_key.dart';
 import 'package:laurum/shared/widgets/molecules/stepper_field.dart';
 
@@ -28,7 +27,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.textContaining('Saldo Rp50.000'), findsOneWidget);
 
-    await tester.tap(find.widgetWithText(AppButton, 'Pilih layanan'));
+    await tester.tap(find.text('Belum ada layanan'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Cuci setrika').first);
     await tester.pumpAndSettle();
@@ -90,7 +89,7 @@ void main() {
 
   testWidgets('stepper minus nonaktif pada nilai minimum', (tester) async {
     await pumpAntrean(tester, location: '/transaksi/baru');
-    await tester.tap(find.widgetWithText(AppButton, 'Pilih layanan'));
+    await tester.tap(find.text('Belum ada layanan'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Cuci setrika').first);
     await tester.pumpAndSettle();

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/features/transactions/pages/add_customer_sheet.dart';
-import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/organisms/numpad.dart';
 
 Future<void> uiFinalTap(WidgetTester tester, String text) async {
@@ -22,7 +21,7 @@ Future<void> uiFinalCreateCustomer(WidgetTester tester) async {
   await tester.enterText(fields.at(0), 'Pelanggan Uji Akhir');
   await tester.enterText(fields.at(1), '081299991234');
   await uiFinalTap(tester, 'Simpan pelanggan');
-  expect(find.widgetWithText(AppButton, 'Pelanggan baru'), findsNothing);
+  expect(find.byType(AddCustomerSheet), findsNothing);
 }
 
 Future<void> uiFinalDeposit(WidgetTester tester) async {
@@ -38,7 +37,7 @@ Future<void> uiFinalDeposit(WidgetTester tester) async {
 }
 
 Future<void> uiFinalSelectWeight(WidgetTester tester) async {
-  final choose = find.widgetWithText(AppButton, 'Pilih layanan');
+  final choose = find.text('Belum ada layanan');
   await tester.ensureVisible(choose);
   await tester.pumpAndSettle();
   expect(choose.hitTestable(), findsOneWidget);

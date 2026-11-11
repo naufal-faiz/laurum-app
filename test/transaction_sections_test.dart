@@ -62,7 +62,7 @@ void main() {
       );
       if (empty) {
         expect(find.text('Belum ada layanan'), findsOneWidget);
-        await tester.tap(find.text('Pilih layanan'));
+        await tester.tapAt(tester.getTopLeft(find.text('Belum ada layanan')) - const Offset(30, 0));
       } else {
         await tester.tap(find.textContaining('Ubah'));
         await tester.tap(find.byTooltip('Hapus ${line.service.name}'));

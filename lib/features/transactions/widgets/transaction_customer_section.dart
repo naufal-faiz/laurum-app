@@ -37,7 +37,7 @@ class TransactionCustomerSection extends StatelessWidget {
             ? const AppText('Wajib diisi', variant: AppTextVariant.caption, color: AppColors.ink3)
             : null,
       ),
-      if (customer == null) ...[
+      if (customer == null)
         AppCard(
           padding: EdgeInsets.zero,
           child: MenuRow(
@@ -46,27 +46,8 @@ class TransactionCustomerSection extends StatelessWidget {
             icon: AppIcons.person,
             onTap: onChoose,
           ),
-        ),
-        Row(
-          spacing: AppSpacing.cardGap,
-          children: [
-            Expanded(
-              child: AppButton(
-                'Impor kontak',
-                variant: AppButtonVariant.action,
-                onPressed: onImport,
-              ),
-            ),
-            Expanded(
-              child: AppButton(
-                'Pelanggan baru',
-                variant: AppButtonVariant.actionOutline,
-                onPressed: onCreate,
-              ),
-            ),
-          ],
-        ),
-      ] else
+        )
+      else
         CustomerContactCard(
           name: customer!.name,
           phone: customer!.phone,
@@ -77,6 +58,25 @@ class TransactionCustomerSection extends StatelessWidget {
             color: AppColors.primaryInk,
           ),
         ),
+      Row(
+        spacing: AppSpacing.cardGap,
+        children: [
+          Expanded(
+            child: AppButton(
+              'Impor kontak',
+              variant: AppButtonVariant.action,
+              onPressed: onImport,
+            ),
+          ),
+          Expanded(
+            child: AppButton(
+              'Pelanggan baru',
+              variant: AppButtonVariant.actionOutline,
+              onPressed: onCreate,
+            ),
+          ),
+        ],
+      ),
     ],
   );
 }

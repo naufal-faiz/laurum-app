@@ -17,8 +17,8 @@ void main() {
       configureKeyboardTest(tester);
       final host = await pumpAntrean(tester, location: location);
       final before = host.container.read(transactionDraftProvider);
-      final label = before.lines.isEmpty ? 'Pilih layanan' : 'Tambah layanan lain';
-      final open = find.widgetWithText(AppButton, label);
+      final label = before.lines.isEmpty ? 'Belum ada layanan' : 'Tambah layanan lain';
+      final open = find.text(label);
       await tester.ensureVisible(open);
       await tester.tap(open);
       await tester.pumpAndSettle();

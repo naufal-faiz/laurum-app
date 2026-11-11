@@ -6,9 +6,9 @@ import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/features/transactions/widgets/transaction_item_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
-import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/inline_link.dart';
+import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
 class TransactionServicesSection extends StatelessWidget {
@@ -42,31 +42,12 @@ class TransactionServicesSection extends StatelessWidget {
       if (lines.isEmpty)
         AppCard(
           style: AppCardStyle.muted,
-          child: Row(
-            spacing: AppSpacing.medium,
-            children: [
-              const AppIcon(AppIcons.add, color: AppColors.primary),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: AppSpacing.xxsmall,
-                  children: [
-                    const AppText('Belum ada layanan', variant: AppTextVariant.bodyStrong),
-                    const AppText(
-                      'Tambahkan layanan untuk menghitung total',
-                      variant: AppTextVariant.caption,
-                      color: AppColors.ink3,
-                    ),
-                    AppButton(
-                      'Pilih layanan',
-                      size: AppButtonSize.small,
-                      variant: AppButtonVariant.actionOutline,
-                      onPressed: onAdd,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          padding: EdgeInsets.zero,
+          child: MenuRow(
+            label: 'Belum ada layanan',
+            subtitle: 'Tambahkan layanan untuk menghitung total',
+            icon: AppIcons.add,
+            onTap: onAdd,
           ),
         ),
       for (final line in lines)

@@ -35,20 +35,20 @@ void main() {
         ),
       );
       if (selected) {
-        expect(find.text('Pelanggan baru'), findsNothing);
-        expect(find.text('Impor kontak'), findsNothing);
         await tester.tap(find.text('Ganti'));
       } else {
         expect(
           tester.getTopLeft(find.text('Pelanggan baru')).dx,
           greaterThan(tester.getTopLeft(find.text('Impor kontak')).dx),
         );
-        await tester.tap(find.text('Pelanggan baru'));
-        expect(creates, 1);
-        await tester.tap(find.text('Impor kontak'));
-        expect(imports, 1);
-        await tester.tap(find.text('Belum ada pelanggan'));
+        await tester.tapAt(
+          tester.getTopLeft(find.text('Belum ada pelanggan')) - const Offset(30, 0),
+        );
       }
+      await tester.tap(find.text('Pelanggan baru'));
+      expect(creates, 1);
+      await tester.tap(find.text('Impor kontak'));
+      expect(imports, 1);
       expect(chooses, 1);
       expect(tester.takeException(), isNull);
     });

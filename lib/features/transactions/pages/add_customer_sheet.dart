@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/customer.dart';
-import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/transactions/pages/contact_picker_sheet.dart';
 import 'package:laurum/features/transactions/state/add_customer_form.dart';
 import 'package:laurum/features/transactions/widgets/add_customer_form_section.dart';
@@ -38,23 +37,12 @@ class AddCustomerSheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) => SizedBox(
     height: 500,
     child: SheetScaffold(
-      footer: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        spacing: AppSpacing.cardGap,
-        children: [
-          AppButton(
-            'Simpan pelanggan',
-            onPressed: () async {
-              final customer = await ref.read(addCustomerFormProvider.notifier).save();
-              if (customer != null && context.mounted) Navigator.of(context).pop(customer);
-            },
-          ),
-          AppButton(
-            'Ambil dari kontak HP',
-            variant: AppButtonVariant.secondary,
-            onPressed: () => ContactPickerSheet.show(context, ref),
-          ),
-        ],
+      footer: AppButton(
+        'Simpan pelanggan',
+        onPressed: () async {
+          final customer = await ref.read(addCustomerFormProvider.notifier).save();
+          if (customer != null && context.mounted) Navigator.of(context).pop(customer);
+        },
       ),
       child: AddCustomerFormSection(forOrder: forOrder),
     ),

@@ -103,7 +103,7 @@ void main() {
   testWidgets('Buat transaksi: catatan nota dan Bayar di atas keyboard', (tester) async {
     configureKeyboardTest(tester);
     await pumpAntrean(tester, location: '/transaksi/baru');
-    await tester.tap(find.widgetWithText(AppButton, 'Pilih layanan'));
+    await tester.tap(find.text('Belum ada layanan'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Cuci setrika').first);
     await tester.pumpAndSettle();

@@ -16,6 +16,8 @@ void main() {
   ) async {
     configureKeyboardTest(tester);
     final host = await pumpAntrean(tester, location: '/transaksi/baru');
+    host.container.read(transactionDraftProvider.notifier).selectCustomer('cust-001');
+    await tester.pumpAndSettle();
     await tester.tap(find.widgetWithText(AppButton, 'Pelanggan baru'));
     await tester.pumpAndSettle();
     expect(tester.widget<AddCustomerSheet>(find.byType(AddCustomerSheet)).forOrder, isTrue);
@@ -39,7 +41,7 @@ void main() {
     expect(find.byType(AddCustomerSheet), findsNothing);
     expect(host.container.read(transactionDraftProvider).customerId, isNotNull);
     expect(find.text('Pelanggan R3'), findsOneWidget);
-    expect(find.widgetWithText(AppButton, 'Pelanggan baru'), findsNothing);
+    expect(find.byType(AddCustomerSheet), findsNothing);
   });
   testWidgets('closing direct add-customer leaves the draft unchanged', (tester) async {
     configureKeyboardTest(tester);

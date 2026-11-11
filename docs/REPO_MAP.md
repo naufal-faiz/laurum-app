@@ -606,7 +606,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_status_section.dart (61): SyncStatusSection
 
 ### lib/features/transactions/pages/
-- add_customer_sheet.dart (62): AddCustomerSheet
+- add_customer_sheet.dart (50): AddCustomerSheet
 - cash_input_sheet.dart (57): CashInputSheet
 - contact_picker_sheet.dart (58): ContactPickerSheet, contactsProvider
 - customer_picker_sheet.dart (97): CustomerPickerSheet
@@ -650,7 +650,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_details_section.dart (68): TransactionDetailsSection
 - transaction_footer_section.dart (42): TransactionFooterSection
 - transaction_item_section.dart (65): TransactionItemSection
-- transaction_services_section.dart (88): TransactionServicesSection
+- transaction_services_section.dart (69): TransactionServicesSection
 - transaction_summary_section.dart (63): TransactionSummarySection
 
 ### lib/
@@ -748,7 +748,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### test/
 - account_actions_test.dart (60):
 - account_rollback_test.dart (56): FailingClearSync
-- add_customer_test.dart (64):
+- add_customer_test.dart (56):
 - ai_golden_test.dart (52):
 - ai_sections_test.dart (82):
 - ai_settings_pages_test.dart (54):
@@ -1037,7 +1037,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r10_test_host.dart (66):
 - r10_visual_test.dart (70):
 - r2_navigation_test.dart (57):
-- r3_customer_creation_test.dart (55):
+- r3_customer_creation_test.dart (57):
 - r3_service_creation_test.dart (50):
 - r3_service_picker_keyboard_test.dart (36):
 - r4_antrean_action_test.dart (26):
@@ -1107,7 +1107,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - section_header_test.dart (26):
 - service_directory_page_test.dart (110):
 - service_picker_list_section_test.dart (38):
-- service_picker_test.dart (54):
+- service_picker_test.dart (53):
 - service_row_test.dart (41):
 - settings_page_test.dart (82):
 - sheet_scaffold_test.dart (37):
@@ -1155,15 +1155,15 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_flow_rollback_test.dart (85): FailingSavings
 - transaction_footer_section_test.dart (44):
 - transaction_golden_test.dart (70):
-- transaction_import_contact_test.dart (55):
-- transaction_page_test.dart (138):
+- transaction_import_contact_test.dart (57):
+- transaction_page_test.dart (137):
 - transaction_redesign_layout_test.dart (39):
 - transaction_remove_discount_test.dart (39):
 - transaction_runner_test.dart (91): TransactionValue
 - transaction_sections_test.dart (96):
 - trust_note_test.dart (24):
 - ui_final_accessibility_test.dart (52):
-- ui_final_flow_host.dart (53):
+- ui_final_flow_host.dart (52):
 - ui_final_flow_test.dart (83):
 - ui_final_routes.dart (36):
 - ui_final_sync_test.dart (33):

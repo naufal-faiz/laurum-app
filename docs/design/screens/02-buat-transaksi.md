@@ -124,3 +124,12 @@ pelanggan sampai Simpan pelanggan. Pembatalan tidak mengubah draf atau repositor
 Padding atas body 8 dp (sebelumnya 24); sisi tetap 24 dp. Finder pemilihan pada
 add_customer, keyboard_audit, transaction_page/golden mengikuti kartu kosong,
 assertion perilaku tetap. Tes impor mencakup tinjau/simpan/pilih dan pembatalan.
+
+Koreksi tombol setelah tinjauan: Impor kontak dan Pelanggan baru tetap tersedia
+setelah pelanggan dipilih; Ganti tetap memilih pelanggan tersimpan. Form pelanggan
+baru hanya menampilkan Simpan pelanggan, tanpa tombol Ambil dari kontak HP yang
+berulang. Kartu pelanggan kosong memakai MenuRow satu area penuh. Kartu layanan
+kosong juga memakai MenuRow satu area penuh menuju rute layanan lama, tanpa
+tombol Pilih layanan berbingkai. Tidak ada perubahan provider, state, atau rute.
+Tes fungsi mempertahankan simpan/validasi/pemilihan dan mengganti finder visual;
+ketukan di area kiri kartu serta impor pengganti pelanggan ikut diperiksa.

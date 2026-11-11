@@ -12,6 +12,8 @@ void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
   testWidgets('import reviews a contact before saving and selecting it', (tester) async {
     final host = await pumpAntrean(tester, location: '/transaksi/baru');
+    host.container.read(transactionDraftProvider.notifier).selectCustomer('cust-001');
+    await tester.pumpAndSettle();
     final repository = host.container.read(customerRepositoryProvider);
     final before = await repository.getCustomers();
     final draft = host.container.read(transactionDraftProvider);

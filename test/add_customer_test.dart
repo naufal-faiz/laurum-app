@@ -43,20 +43,12 @@ void main() {
 
   testWidgets('contact picker fills the add customer form and saves', (tester) async {
     await pumpAntrean(tester, location: '/transaksi/baru');
-    await tester.tap(find.text('Belum ada pelanggan'));
-    await tester.pumpAndSettle();
-    await tester.enterText(
-      find.descendant(of: find.byType(CustomerPickerSheet), matching: find.byType(TextField)),
-      'tidak ada',
-    );
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Tambah pelanggan baru'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Ambil dari kontak HP'));
+    await tester.tap(find.text('Impor kontak'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Agus Pratama'));
     await tester.pumpAndSettle();
     expect(find.text('Agus Pratama'), findsOneWidget);
+    expect(find.text('Ambil dari kontak HP'), findsNothing);
     await tester.tap(find.text('Simpan pelanggan'));
     await tester.pumpAndSettle();
     expect(find.text('Agus Pratama'), findsOneWidget);
