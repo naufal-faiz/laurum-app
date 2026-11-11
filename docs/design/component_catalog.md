@@ -1120,6 +1120,12 @@ memakai AppTextStyles.label. Data, callback submit, validasi dan busy tetap.
 
 ## Molecules detail (018)
 - AppBarSub.subtitle null dan variant standard/detail; detail membungkus secara intrinsik, header template harus memberi ruang sesuai konten. Standard tetap 64 dp.
+
+## CustomerContactCard (019)
+- Organism kontak detail: name/phone wajib, initials/address/badge opsional.
+- showContact=true, onContact, contactLabel='Buka WhatsApp'; Formatters.telepon.
+- Avatar dan kontak adaptif pada 320 dp/teks 2x; callback null nonaktif.
+- Golden customer_contact_card; CustomerRow dan layar lama tetap.
 - SectionHeader.trailing Widget? null untuk metadata tanpa aksi.
 - PaymentBadge(label, status PayStatus): label yang sudah dihitung, warna semantik lunas/DP/belum bayar; tidak menghitung tagihan.
 - AppIcons.edit/dot memakai Ionicons pencilOutline/ellipse terpasang 0.2.3. Golden baru detail_molecules dan pembaruan app_icon.

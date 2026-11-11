@@ -21,13 +21,15 @@ Diperbarui: 2026-11-11 | Cabang `newdesign`
   Header 320 dp/teks 2x tidak overflow, kembali/menu dan badge diuji.
 - Lapisan 3 HIJAU: check_all exit 0, 1047 tes lulus/1 skip, REPO_MAP 1060.
   Bukti: TEMP/laurum-detail-layer3-check.log; lapisan aktif berikutnya 4 (019).
-- 019 belum diterapkan; CustomerContactCard baru menunggu lapisan 3 hijau.
+- Lapisan 3 disimpan di 9307a5c. Lapisan 4 (019) diterapkan: CustomerContactCard.
+  Tes komponen 4 lulus; check_all HIJAU: 1051 lulus/1 skip, REPO_MAP 1063.
+  Bukti: TEMP/laurum-detail-layer4-complete-check.log (exit 0).
 - 020 belum diterapkan; FormScaffold detail menunggu 019 hijau.
 - Page/Section kedua layar BELUM diubah; tunggu gerbang lapisan di atas.
 
 ## Langkah berikutnya
-1. Selesaikan 018 dengan check_all hijau, catat bukti dan commit atomik.
-2. Implementasikan 019, tes/golden + check_all, lalu 020 dengan tes keyboard.
+1. Simpan 019 yang sudah hijau, lalu terapkan 020 dengan tes keyboard.
+2. Gerbang 020: golden default tetap dan check_all hijau sebelum kedua Page.
 3. Terapkan Page/Section 25 lalu 09, semua data/callback/provider lama tetap.
 4. Golden dampak dicatat sebelum update; verifikasi Android termasuk keyboard
    usulan, check_all akhir, STATE dan commit. Jangan push/merge.

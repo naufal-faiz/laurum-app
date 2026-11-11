@@ -3,7 +3,7 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 79/79 dibuat
+## Registry widget: 80/80 dibuat
 
 Semua widget sudah dibuat.
 
@@ -706,6 +706,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_hero.dart (110): AuthHero
 - bottom_nav_bar.dart (102): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
+- customer_contact_card.dart (110): CustomerContactCard
 - customer_row.dart (102): CustomerRow
 - expense_row.dart (57): ExpenseRow
 - nota_card.dart (75): NotaCard
@@ -829,6 +830,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### test/
 - contracts_in_memory_test.dart (62):
 - contracts_runner_test.dart (21):
+- customer_contact_card_golden_test.dart (40):
+- customer_contact_card_test.dart (76):
 - customer_deposit_page_test.dart (50):
 - customer_detail_data_test.dart (61):
 - customer_detail_page_test.dart (86):
