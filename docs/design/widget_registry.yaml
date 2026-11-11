@@ -20,6 +20,7 @@ atoms:
 molecules:
   - LabeledField
   - SectionHeader
+  - PaymentBadge
   - InfoRow
   - StatTile
   - MenuRow

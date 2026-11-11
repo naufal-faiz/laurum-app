@@ -1,53 +1,51 @@
 # STATE Laurum
 Diperbarui: 2026-11-11 | Cabang `newdesign`
 
-## Sesi aktif
-- Dasar e6d138f (catatan koreksi), implementasi sebelumnya 2c96aa1.
-- Koreksi 017 selesai: pengguna menegaskan sasaran loader adalah Membuka data lokal
-  di lib/app.dart, bukan indikator tambahan di Beranda/Antrean.
-- Prasyarat branch newdesign + baca FigCraft frame 408 berhasil.
-- Codebase-memory transport closed; penelusuran memakai sumber langsung.
-- Ikon gate lokal diganti AppLoader; judul/deskripsi asli dipertahankan dalam
-  grup Center layar penuh. Error penyimpanan dan retry sama persis.
-- Gate menggabungkan pembukaan store dan pembacaan awal provider antrean,
-  pelanggan dan laporan yang sudah ada. Tidak ada provider/data/state baru.
-- Hanya pembacaan tanpa nilai awal menahan gate. Refresh yang mempunyai data
-  tidak melepas navigator; error query diteruskan ke error/retry halaman.
-- AppLoader sekunder Beranda/Antrean dilepas; skeleton halaman lama dipulihkan.
-  Pada startup lokal nyata, halaman tampil setelah data awal siap.
-- Padding kecil AntreanPage yang sudah ditambahkan pengguna dipertahankan.
-- Tidak ada perubahan token, registry, dependensi, repository, rute atau PRD.
+## Sesi aktif: Periksa Usulan AI + Detail Order
+- Dasar 49dd172. Pengguna meminta dua layar berurutan dalam sesi ini.
+- Frame FigCraft dibaca read-only: Detail Usulan AI 512, Detail Order 612.
+- Codebase-memory transport closed; REPO_MAP + sumber langsung menjadi bukti.
+- Proposal 018 molecules, 019 organisms, 020 templates DISETUJUI pengguna
+  ("Setuju, terapkan ketiganya"). Jalankan berurutan dengan gerbang check_all.
+- Pengguna menyetujui adaptasi: tidak menambah input berat/jadwal jemput baru
+  pada usulan. Field/draf/validasi/aksi lama tetap; berat melalui Edit order
+  sesudah persetujuan. Skor AI hanya contoh berlabel pada scope dummy yang ada.
+- Paritas awal dan selisih dicatat di spec 25 dan 09; belum ditandai selesai.
 
-## Bukti dan verifikasi
-- Tes terarah awal 9 lulus: storage/error/retry, pembacaan bertahap satu loader,
-  navigator tetap saat refresh, Drift create/payment/empty dan state Antrean.
-- Suite golden + regresi query error/retry 15 lulus.
-- Golden 5 berkas: local_storage_loading baru; antrean_loading kembali skeleton;
-  antrean_normal/proses/whatsapp mengikuti padding manual pengguna.
-- Android SM-N975F: gate produksi dipratinjau dengan entry diagnostik TEMP
-  (store sengaja pending, tanpa perubahan data); loader/judul/deskripsi terpusat.
-  Perangkat dikembalikan ke lib/main.dart normal; Beranda tampil dengan data lokal
-  tersimpan, tanpa entry diagnostik. Tidak ada aksi perubahan data dilakukan.
-- check_all HIJAU, exit 0: format 979 (0 berubah), analyze/Riverpod bersih,
-  check_arch OK, 1042 tes lulus/1 skip, REPO_MAP 1057 berkas.
-  Bukti lokal: TEMP/laurum-local-loader-check-all-complete.log.
-- iOS belum diuji. Detail paritas dan golden: proposals/017-loader-data-lokal.md.
+## Lapisan aktif UI-21
+- Lapisan 3 (018) diterapkan: AppBarSub subtitle + variant detail intrinsik,
+  SectionHeader trailing informatif, PaymentBadge; default lama tetap.
+- AppIcons.edit/dot: Ionicons pencilOutline/ellipse terverifikasi pada paket
+  terpasang 0.2.3. Tidak menambah dependensi atau token.
+- Tes terarah komponen 10 lulus; palet ikon 1 lulus; golden baru detail_molecules.
+  Header 320 dp/teks 2x tidak overflow, kembali/menu dan badge diuji.
+- Lapisan 3 HIJAU: check_all exit 0, 1047 tes lulus/1 skip, REPO_MAP 1060.
+  Bukti: TEMP/laurum-detail-layer3-check.log; lapisan aktif berikutnya 4 (019).
+- 019 belum diterapkan; CustomerContactCard baru menunggu lapisan 3 hijau.
+- 020 belum diterapkan; FormScaffold detail menunggu 019 hijau.
+- Page/Section kedua layar BELUM diubah; tunggu gerbang lapisan di atas.
 
 ## Langkah berikutnya
-1. Tinjauan pengguna atas loader pembukaan lokal dan transisi ke halaman siap.
-2. Lanjutkan hanya sesuai umpan balik; jangan mulai layar lain pada sesi ini.
+1. Selesaikan 018 dengan check_all hijau, catat bukti dan commit atomik.
+2. Implementasikan 019, tes/golden + check_all, lalu 020 dengan tes keyboard.
+3. Terapkan Page/Section 25 lalu 09, semua data/callback/provider lama tetap.
+4. Golden dampak dicatat sebelum update; verifikasi Android termasuk keyboard
+   usulan, check_all akhir, STATE dan commit. Jangan push/merge.
 
-## Sebelumnya dan backend
-- 015 Antrean/nav selesai; 016 jarak, warna dan modal filter selesai.
-- 014 AppLoader/aset refined 96 dp, semantics dan reduced motion (frame 50%) tetap.
-- Auth final + sembilan golden disetujui pengguna dan disimpan di 5860dd7.
-- Bukti terakhir sebelum sesi ini: 1040 tes lulus/1 skip, REPO_MAP 1055.
-- UI100/R0-R10, BP0, B1a-f, B0, B2a-d, B3a, B3c selesai; B3b/B2e+ menunggu.
-- Backend berikut: cloud/workmanager Android, Google login, lalu B3b;
-  docs/plans/B3-auth.md. Drift/wire v5, cloud 5/5 oleh pemilik.
-- PayStatus turunan, COD bersisa ditahan, multi-repo TransactionRunner.
+## Batas paritas penting
+- Usulan: pelanggan baru/terdaftar, sumber pesan lengkap, cancel/tolak/approve,
+  alamat kurang pasti, pending/error/final, idempotensi dan tombol WhatsApp tetap.
+- Order: subtotal/diskon/catatan, semua pembayaran/aktivitas, mode status/sederhana,
+  COD held/final, menu, Edit/Hapus/cetak/complete/terima pembayaran tetap.
+- State/data/domain/repository, rute, Formatters, PRD/lint/dependensi tidak diubah.
+- Tidak ada warna/font/ukuran baru; token global dan target sentuh yang ada dipakai.
 
-## Lingkungan dan Git
+## Sebelumnya dan lingkungan
+- Loader lokal 017 selesai (49dd172): satu gate terpusat + deskripsi, menunggu
+  data awal; refresh tidak melepas navigator. 1042 tes lulus/1 skip, Android diuji.
+- Auth final 5860dd7; UI 015/016 selesai. iOS belum diuji.
+- Backend: B3b/B2e+ menunggu; Drift/wire v5, cloud 5/5 oleh pemilik.
 - Sebelum Dart/Flutter: . ./tool/windows_native_sdk.ps1; BOT=true.
-- FigCraft sudah berubah sebelum sesi, tidak disertakan commit koreksi.
-- Jangan push/merge. Riwayat lama: docs/progress/state-history-2026-11-10.md.
+- FigCraft sudah berubah sebelum sesi, tidak masuk commit implementasi.
+- Rencana: docs/plans/018-detail-ai-order.md; proposal 018/019/020; spec 25/09.
+- Riwayat lama: docs/progress/state-history-2026-11-10.md.

@@ -92,3 +92,27 @@ Belum diuji manual di Android/iOS; pencetakan masih layanan palsu.
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
+
+## Redesign 018–020 — Paritas sebelum implementasi (11 Nov 2026)
+Frame FigCraft 612 dibaca; pengguna menyetujui ketiga proposal komponen bersama.
+| Butir | Sumber / aksi lama | Status implementasi |
+|---|---|---|
+| Order/nomor/status/tanggal, pelanggan/alamat/telepon | orderDetailProvider(orderId), OrderDetailData | Menunggu |
+| Semua item, harga/qty/subtotal/diskon/total/catatan | data.order/items, Formatters | Menunggu |
+| PayStatus turunan, paid/outstanding/canRecord, COD held | getter OrderDetailData / policy lama | Menunggu |
+| Semua aktivitas dan waktu | data.activity, label/Formatters lama | Menunggu |
+| Loading, gagal+Coba lagi, tidak ditemukan | snapshot.isLoading/hasError/data-null | Menunggu |
+| Pending, profil belum siap, cetak/complete busy | actions/printing/completion/profile lama | Menunggu |
+| Error/notice, berat belum diisi + link Edit | pesan dan callback lama | Menunggu |
+| Kembali, menu Edit/Ubah status/Batalkan | route dan showOrderDetailMenu lama | Menunggu |
+| Cetak struk / Edit / Hapus / Selesaikan | callback footer lama dengan argumen yang sama | Menunggu |
+| Catat/Terima pembayaran, held COD kedua mode/final | PaymentRecordSheet.show dan guard lama | Menunggu |
+| WhatsApp | externalLauncher.launchWhatsApp, phone/message sama | Menunggu |
+| Key dan mode status/sederhana/final | tidak ada Key eksplisit di Page/Section sasaran; Key order antrean tidak disentuh | Menunggu |
+
+Selisih desain: frame 612 menampilkan footer mode sederhana. Mode status aktif
+mempertahankan menu, cetak dan CTA status. COD tertahan tetap punya pembayaran
+serta akses struk; order final tetap struk dan pembayaran lanjutan bila memenuhi
+syarat. Subtotal/diskon/catatan dan seluruh aktivitas tidak dihilangkan demi
+menyamakan tinggi kartu contoh. Kartu WhatsApp mempertahankan aksi/style registry
+biru dengan logo merek; tidak menambah varian tombol hijau. Data tetap milik akun.

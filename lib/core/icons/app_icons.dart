@@ -50,7 +50,9 @@ enum AppIcons {
   qrCode(Ionicons.qrCodeOutline),
   offline(Ionicons.cloudOfflineOutline),
   addCustomer(Ionicons.personAddOutline),
-  backspace(Ionicons.backspaceOutline);
+  backspace(Ionicons.backspaceOutline),
+  edit(Ionicons.pencilOutline),
+  dot(Ionicons.ellipse);
 
   const AppIcons(this.data);
 

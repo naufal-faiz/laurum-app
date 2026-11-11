@@ -3,7 +3,7 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 78/78 dibuat
+## Registry widget: 79/79 dibuat
 
 Semua widget sudah dibuat.
 
@@ -70,7 +70,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - formatters.dart (55): Formatters
 
 ### lib/core/icons/
-- app_icons.dart (58): AppIcons
+- app_icons.dart (60): AppIcons
 - app_svgs.dart (9): AppSvgs
 
 ### lib/core/persistence/
@@ -664,7 +664,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/molecules/
 - app_bar_root.dart (48): AppBarRoot
-- app_bar_sub.dart (54): AppBarSub
+- app_bar_sub.dart (103): AppBarSubVariant, AppBarSub
 - avatar_stack.dart (58): AvatarStack
 - banner_message.dart (41): BannerMessageVariant, BannerMessage
 - brand_lockup.dart (32): BrandLockup
@@ -688,10 +688,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - nav_item.dart (56): NavItem
 - nominal_chips.dart (31): NominalChips
 - notice_ai.dart (17): NoticeAi
+- payment_badge.dart (27): PaymentBadge
 - period_tabs.dart (29): PeriodTabs
 - progress_row.dart (38): ProgressRow
 - rank_row.dart (71): RankRow
-- section_header.dart (48): SectionHeader
+- section_header.dart (51): SectionHeader
 - segmented_progress.dart (36): SegmentedProgress
 - stat_tile.dart (35): StatTile
 - stepper_field.dart (61): StepperField
@@ -840,6 +841,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_row_test.dart (39):
 - customer_savings_section_test.dart (48):
 - date_group_header_test.dart (24):
+- detail_molecules_golden_test.dart (49):
+- detail_molecules_test.dart (102):
 - discount_input_test.dart (118):
 - domain_cancel_test.dart (74):
 - domain_flow_test.dart (51):

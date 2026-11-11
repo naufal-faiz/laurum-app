@@ -42,3 +42,27 @@ Android/iOS/TalkBack/VoiceOver belum diuji untuk layar ini. Tidak ada AI/pesan n
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
+
+## Redesign 018–020 — Paritas sebelum implementasi (11 Nov 2026)
+Frame FigCraft 512 dibaca; pengguna menyetujui ketiga proposal komponen bersama.
+| Butir | Sumber / aksi lama | Status implementasi |
+|---|---|---|
+| Proposal lengkap, pelanggan, layanan aktif/harga | proposalReviewProvider(id) | Menunggu |
+| Nama/telepon/alamat/serviceId draf, validasi, draf tidak di-reset | proposalDraftProvider(id) | Menunggu |
+| Loading, error/retry, tidak ditemukan, final readonly | cabang snapshot/draft/status lama | Menunggu |
+| Pending/gagal aksi, cegah klik ganda | proposalActionsProvider(id) | Menunggu |
+| Field nama, telepon, alamat; pilih layanan | actions.name/phone/address/service, argumen sama | Menunggu |
+| WhatsApp (validasi nomor, tanpa pesan kirim otomatis) | openProposalWhatsApp(ref, draft.phone) | Menunggu |
+| Tolak + konfirmasi | rejectReviewedProposal(context, ref, id) | Menunggu |
+| Setujui/pembatalan + alamat belum pasti | approveReviewedProposal(context, ref, review, draft) | Menunggu |
+| Final/status dan Buka order | proposalStatusLabel; push orderId lama | Menunggu |
+| NoticeAi dan CalloutAi alamat | pesan lama, tidak menghapus peringatan | Menunggu |
+| Back, route id, label field / fokus dan keyboard 300 dp | canPop/pop atau go antrean; tidak ada Key eksplisit pada Page/Section lama | Menunggu |
+
+Selisih desain yang disetujui bersama proposal 020: berat tetap diisi lewat Edit
+order setelah persetujuan; jadwal jemput tidak tersedia dan tidak ditambahkan.
+Pilihan layanan dan field alamat/nama/telepon tetap inline agar alur/draf/callback
+lama tidak berubah. Data waktu/nominal memakai Formatters, bukan contoh frame.
+Skor AI hanya contoh berlabel dari scope dummy yang sudah ada; data nyata tanpa
+skor buatan. Buka WhatsApp tetap pada kartu pelanggan. Semua transaksi/validasi,
+pembatalan, koreksi ledger dan idempotensi berada di alur lama yang tidak diubah.

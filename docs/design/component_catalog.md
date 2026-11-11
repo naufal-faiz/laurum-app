@@ -1117,3 +1117,9 @@ Cuplikan desain tersimpan di `docs/progress/fase-1-visuals/`.
 Penyesuaian auth final pengguna (10 Nov, golden disetujui pada sesi 016):
 AuthSubmitSection memakai busy/onSubmit/label tanpa ikon trailing; AuthHero tagline
 memakai AppTextStyles.label. Data, callback submit, validasi dan busy tetap.
+
+## Molecules detail (018)
+- AppBarSub.subtitle null dan variant standard/detail; detail membungkus secara intrinsik, header template harus memberi ruang sesuai konten. Standard tetap 64 dp.
+- SectionHeader.trailing Widget? null untuk metadata tanpa aksi.
+- PaymentBadge(label, status PayStatus): label yang sudah dihitung, warna semantik lunas/DP/belum bayar; tidak menghitung tagihan.
+- AppIcons.edit/dot memakai Ionicons pencilOutline/ellipse terpasang 0.2.3. Golden baru detail_molecules dan pembaruan app_icon.

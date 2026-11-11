@@ -14,12 +14,14 @@ class SectionHeader extends StatelessWidget {
     this.onAction,
     this.icon,
     this.titleColor = AppColors.ink,
+    this.trailing,
   }) : assert(onAction == null || actionLabel != null);
   final String title;
   final String? subtitle, actionLabel;
   final VoidCallback? onAction;
   final AppIcons? icon;
   final Color titleColor;
+  final Widget? trailing;
   @override
   Widget build(BuildContext context) => Row(
     children: [
@@ -43,6 +45,7 @@ class SectionHeader extends StatelessWidget {
           onPressed: onAction,
           child: AppText(actionLabel!, variant: AppTextVariant.label, color: AppColors.primary),
         ),
+      ?trailing,
     ],
   );
 }
