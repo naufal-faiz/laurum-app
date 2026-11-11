@@ -30,7 +30,7 @@ class ReceiptRows extends StatelessWidget {
                 ],
               ),
             ),
-            Flexible(
+            Expanded(
               child: AppText(
                 row.value,
                 variant: row.emphasis ? AppTextVariant.bodyStrong : AppTextVariant.caption,

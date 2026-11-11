@@ -7,7 +7,7 @@ typedef ReceiptDownloadState = ({bool busy, String? error, String? notice});
 final receiptDownloadServiceProvider = Provider<ReceiptDownloadService>(
   (ref) => FileReceiptDownloadService(),
 );
-final receiptDownloadProvider = NotifierProvider<ReceiptDownload, ReceiptDownloadState>(
+final receiptDownloadProvider = NotifierProvider.autoDispose<ReceiptDownload, ReceiptDownloadState>(
   ReceiptDownload.new,
 );
 

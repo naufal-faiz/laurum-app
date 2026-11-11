@@ -2,50 +2,46 @@
 Diperbarui: 2026-11-11 | Cabang newdesign
 
 ## Sesi aktif
-08 Struk Pembayaran; frame 4294967599; dasar 71da260.
-Frame dibaca sekali; snapshot 1 atas permintaan pengguna, jangan ulang.
-Commit WIP sesi ini memuat berkas ini; lihat git log -1.
+08 Struk Pembayaran selesai; frame 4294967599; dasar 71da260; WIP 6c0616f.
+Commit feat(ui) irisan ini memuat berkas ini; lihat git log -1.
+Pembayaran dan struk siap ditinjau bersama sesuai permintaan pengguna.
 
 ## Status irisan
-Data dokumen bersama, preview grafis dan PDF + dialog simpan sudah ditulis.
-Atom tile 48 dp, ReceiptRows/ReceiptDocument, Content/Links Section selesai.
-Footer 4 aksi Selesai/WhatsApp/Unduh/Cetak; detail dan catat bayar menjadi tautan.
-Formatter cetak/WhatsApp, pembayaran, COD dan complete=1 tidak diubah.
-Ekspor provider baru menangani sibuk, sukses, batal dan error; layanan nyata file_saver.
-Komponen/data/PDF: 18 tes lulus pada run awal; 4 tes footer sempat gagal semantics.
-Semantics dipulihkan: footer normal 2 kasus lulus; teks 2x 2 kasus gagal tinggi Selesai.
-check_arch OK; analyzer terakhir hanya satu import berlebih, sudah dihapus.
-Paritas spec 08 belum penuh; tes halaman dan check_all BELUM dijalankan.
+Struk grafis memakai data nota tersimpan; perataan kolom preview/PDF sudah diperbaiki.
+Normal: Selesai/WhatsApp/Unduh/Cetak satu baris; >1,3x Selesai di atas tiga ikon.
+Detail/Catat pembayaran berupa tautan body; status printer/error/retry tetap ada.
+Unduh nyata melalui PDF + dialog simpan; batal tanpa sukses/error; anti-duplikasi.
+State unduh autoDispose, seluruh aksi dinonaktifkan saat busy; nota tidak berubah.
+Formatter, repository, transaksi bayar, COD dan complete=1 tidak diubah.
+Paritas spec 08 penuh; check_all SEMUA HIJAU.
+Golden 5: receipt_page, receipt_cod_actions_1x/2x, receipt_document baru, app_icon.
+Tes lama hanya finder/struktur visual; assertion callback/validasi/status tetap.
+Snapshot FigCraft 1; golden diperiksa; visual belum diverifikasi manual di perangkat.
+Dialog simpan Android dan iOS/printer nyata belum diuji manual.
 
 ## Keputusan pengguna terbaru
-Proposal 023 DISETUJUI termasuk state/layanan ekspor, dependensi dan tautan body.
-Selesai kembali ke /antrean tanpa mengubah status; label Ke beranda dihapus.
-Unduh harus benar-benar menyimpan PDF; batal dialog bukan sukses/gagal.
-Desain memakai frame terpilih; tinjau pembayaran dan struk bersama setelah selesai.
-Izin perubahan zona beku hanya untuk ekspor PDF; logika bayar/cetak tetap.
+Proposal 023 disetujui termasuk state/layanan ekspor, dependensi dan tautan body.
+Selesai kembali ke /antrean tanpa mengubah status order; Ke beranda dihapus.
+Desain memakai frame terpilih; tinjau pembayaran dan struk setelah selesai.
+Izin zona beku dibatasi ekspor PDF; logika bayar/cetak tetap utuh.
 
 ## Belum di-commit
-Sesudah WIP, sisakan AGENTS.md dan new-design-laurum.figcraft milik pengguna.
+Sesudah commit, hanya AGENTS.md dan new-design-laurum.figcraft milik pengguna.
 Stash f7a9e49 sudah diterapkan sesi lama; jangan apply ulang.
 
 ## Langkah berikutnya
-1. Setelah pengguna melanjutkan, kurangi/hilangkan ikon Selesai agar label muat pada 320 px/2x.
-2. Tes terarah footer lagi; jangan melemahkan assertion tinggi teks < 100 atau callback.
-3. Tes halaman cetak/WA/retry/COD/complete dan tombol Unduh dengan layanan fake.
-4. Update golden struk normal/COD/galeri ikon baru; check_all akhir, paritas dan diff.
-5. Commit feat(ui) irisan struk, lalu tinjau pembayaran dan struk bersama.
+1. Tinjau UI pembayaran dan struk bersama pengguna.
+2. Uji dialog Unduh pada Android saat sesi perangkat tersedia; iOS belum diuji.
+3. Kerjakan hanya koreksi yang diminta, jalur cepat bila memenuhi kriteria.
 
 ## Blocker
-UI-36: tes footer gagal dua kali; berhenti sebelum percobaan ketiga.
-Pertama semantics Cetak struk hilang (sudah dipulihkan); kedua Selesai 132 dp pada 2x.
+Tidak ada. Font PDF Helvetica dengan fallback IBM Plex Mono; pratinjau Inter.
 Skrip windows_native_sdk.ps1 sudah dipanggil sekali; jangan ulang sesi ini.
 
 ## Bukti terakhir
-- flutter pub add pdf file_saver: pdf 3.13.1, file_saver 0.7.0 berhasil.
-- Run komponen/data/PDF: 18 lulus, 4 gagal semantics; log laurum-receipt-components-tests.log.
-- Run footer terbaru: 2 lulus, 2 gagal tinggi 132 >= 100; log laurum-receipt-actions-tests.log.
-- PDF bytes valid, simpan/batal/error/duplikasi lolos; dialog native belum diuji manual.
-- check_arch OK; import analyzer berlebih sudah dihapus, belum diverifikasi ulang.
-- Golden receipt_document baru; golden halaman dan ikon belum diperbarui.
-- Pembayaran sebelumnya: check_all hijau, 1089 lulus, 1 skip; struk BELUM selesai.
-- Snapshot desain 1; UI aplikasi belum diverifikasi manual; iOS belum diuji.
+- dart run tool/check_all.dart: SEMUA HIJAU; 1101 lulus, 1 skip, exit 0.
+- Log TEMP/laurum-receipt-final-green.log; REPO_MAP 1107 berkas.
+- Analyzer penuh + Riverpod lint No issues found; check_arch OK.
+- Tes footer 4, alur struk/ekspor 24, alignment/PDF 8 lulus.
+- Golden normal 1, COD 2, ikon 1 lulus; semua Dart irisan <= 100 baris.
+- Diff dasar 71da260: hanya state ekspor baru + pubspec sebagai pengecualian zona beku.

@@ -60,6 +60,8 @@ void main() {
     expect(launcher.whatsAppCalls, hasLength(1));
     expect(launcher.whatsAppCalls.single.phone, '0813-7788-1122');
 
+    await tester.ensureVisible(find.text('Lihat detail'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Lihat detail'));
     await tester.pumpAndSettle();
     expect(find.text('Detail order'), findsWidgets);

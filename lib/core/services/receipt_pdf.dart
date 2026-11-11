@@ -51,7 +51,7 @@ Future<Uint8List> receiptPdf(ReceiptDocumentData data) async {
                     ),
                   ),
                   pw.SizedBox(width: AppSpacing.medium),
-                  pw.Flexible(
+                  pw.Expanded(
                     child: pw.Text(
                       row.value,
                       textAlign: pw.TextAlign.right,

@@ -56,8 +56,12 @@ void main() {
           expect(download.size, wa.size);
           expect(home.height, greaterThanOrEqualTo(wa.height));
           expect(print.center.dy, wa.center.dy);
-          expect(home.center.dy, wa.center.dy);
-          expect(home.right, lessThan(wa.left));
+          if (scale == 1) {
+            expect(home.center.dy, wa.center.dy);
+            expect(home.right, lessThan(wa.left));
+          } else {
+            expect(home.bottom, lessThan(wa.top));
+          }
           expect(wa.right, lessThan(download.left));
           expect(download.right, lessThan(print.left));
           expect(

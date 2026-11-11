@@ -26,6 +26,7 @@ void main() {
         ],
       );
       addTearDown(scope.dispose);
+      scope.listen(receiptDownloadProvider, (_, _) {});
       final data = await r9Checkout(scope);
       final view = (await scope.read(receiptViewProvider(data.order.id).future))!;
       final lines = view.lines;
@@ -48,6 +49,7 @@ void main() {
       ],
     );
     addTearDown(scope.dispose);
+    scope.listen(receiptDownloadProvider, (_, _) {});
     final data = await r9Checkout(scope);
     final view = (await scope.read(receiptViewProvider(data.order.id).future))!;
     final pending = scope.read(receiptDownloadProvider.notifier).save(view);

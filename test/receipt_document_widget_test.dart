@@ -43,6 +43,12 @@ void main() {
       expect(find.text('TOTAL'), findsOneWidget);
       expect(find.text('Rp25.000'), findsWidgets);
       expect(tester.takeException(), isNull);
+      if (kind == 'rows') {
+        expect(
+          tester.getRect(find.text('Rp25.000').first).right,
+          tester.getRect(find.byType(ReceiptRows)).right,
+        );
+      }
       if (kind == 'content') {
         for (final label in ['Lihat detail', 'Catat pembayaran', 'Pengaturan printer']) {
           await tester.ensureVisible(find.text(label));

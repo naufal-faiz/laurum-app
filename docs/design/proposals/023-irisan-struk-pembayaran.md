@@ -4,7 +4,7 @@ Dasar 71da260; frame terpilih 4294967599 dikonfirmasi lewat selection; snapshot 
 
 ## Tampilan yang diminta
 - Kartu struk membulat, label Pratinjau struk, header nomor nota/pelanggan/status.
-- Footer satu baris berurutan: Selesai, WhatsApp, Unduh, Cetak; tanpa tombol Ke beranda.
+- Footer normal satu baris Selesai/WhatsApp/Unduh/Cetak; teks >1,3x menempatkan Selesai di atas ikon.
 - Selesai tetap memakai onHome ke /antrean, bukan menyelesaikan status order.
 - WhatsApp/cetak tetap callback lama; ikon memiliki tooltip/semantics yang jelas.
 - Lihat detail menjadi tautan di body; Catat pembayaran hanya saat masih bersisa.

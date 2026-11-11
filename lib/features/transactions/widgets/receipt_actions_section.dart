@@ -17,31 +17,53 @@ class ReceiptActionsSection extends StatelessWidget {
   final bool busy;
   final VoidCallback onPrint, onWhatsApp, onHome, onDownload;
   @override
-  Widget build(BuildContext context) => Row(
-    spacing: AppSpacing.small,
-    children: [
-      Expanded(
-        child: AppButton('Selesai', icon: AppIcons.check, onPressed: busy ? null : onHome),
-      ),
-      for (final (label, icon, asset, variant, action) in [
-        ('WhatsApp', null, AppSvgs.whatsapp, AppIconButtonVariant.tileSuccess, onWhatsApp),
-        ('Unduh', AppIcons.download, null, AppIconButtonVariant.tileNeutral, onDownload),
-        ('Cetak struk', AppIcons.printer, null, AppIconButtonVariant.tilePrimary, onPrint),
-      ])
-        Semantics(
-          label: label,
-          button: true,
-          enabled: !busy,
-          excludeSemantics: true,
-          onTap: busy ? null : action,
-          child: AppIconButton(
+  Widget build(BuildContext context) {
+    final largeText = MediaQuery.textScalerOf(context).scale(1) > 1.3;
+    final finish = AppButton(
+      'Selesai',
+      icon: largeText ? null : AppIcons.check,
+      onPressed: busy ? null : onHome,
+    );
+    final quick = Row(
+      mainAxisSize: MainAxisSize.min,
+      spacing: AppSpacing.small,
+      children: [
+        for (final (label, icon, asset, variant, action) in [
+          ('WhatsApp', null, AppSvgs.whatsapp, AppIconButtonVariant.tileSuccess, onWhatsApp),
+          ('Unduh', AppIcons.download, null, AppIconButtonVariant.tileNeutral, onDownload),
+          ('Cetak struk', AppIcons.printer, null, AppIconButtonVariant.tilePrimary, onPrint),
+        ])
+          Semantics(
             label: label,
-            icon: icon,
-            iconAsset: asset,
-            variant: variant,
-            onPressed: busy ? null : action,
+            button: true,
+            enabled: !busy,
+            excludeSemantics: true,
+            onTap: busy ? null : action,
+            child: AppIconButton(
+              label: label,
+              icon: icon,
+              iconAsset: asset,
+              variant: variant,
+              onPressed: busy ? null : action,
+            ),
           ),
-        ),
-    ],
-  );
+      ],
+    );
+    return largeText
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: AppSpacing.small,
+            children: [
+              finish,
+              Align(alignment: Alignment.centerRight, child: quick),
+            ],
+          )
+        : Row(
+            spacing: AppSpacing.small,
+            children: [
+              Expanded(child: finish),
+              quick,
+            ],
+          );
+  }
 }
