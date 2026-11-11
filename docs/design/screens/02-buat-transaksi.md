@@ -56,3 +56,36 @@ TransactionCustomerSection menerima customer/balance dan onChoose/onCreate dari 
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
+
+## Redesign Transaksi - frame 691 (2026-11-11)
+Acuan dibaca sekali: frame 691, transaksi kosong. Varian isi 752 menunggu
+konfirmasi pengguna. Pemetaan: AppBarSub.detail + AppBadge Draft; SectionHeader
+primer; kartu pelanggan/layanan kosong lewat AppCard dan widget registry;
+Ringkasan lewat AppCard/InfoRow/AppDivider; footer total + tombol Bayar sejajar.
+Ukuran font/tap memakai token global, bukan ukuran contoh frame 8-11 px.
+
+### Paritas redesign
+| Butir | Sumber/aksi yang dipertahankan | Status |
+|---|---|---|
+| Pelanggan, saldo, katalog belum tersedia | customerCatalogProvider, customerBalanceProvider | Menunggu |
+| Pilih pelanggan | CustomerPickerSheet.show(context, ref) | Menunggu |
+| Pelanggan baru lalu pilih | AddCustomerSheet.show; invalidate catalog; selectCustomer(created.id) | Menunggu |
+| Draf/item/qty/harga/total/diskon/catatan | transactionDraftProvider, DraftLine, Formatters | Menunggu |
+| Pilih/tambah layanan | push /transaksi/baru/layanan | Menunggu |
+| Edit berat/jumlah dan stepper | TransactionLineSheet.show, WeightInputSheet jalur lama | Menunggu |
+| Hapus layanan (ikon diminta pengguna) | TransactionDraft.remove(serviceId), aksi lama | Menunggu |
+| Estimasi dan jam bisnis | estimateReady, businessClockProvider dari Section lama | Menunggu |
+| Atur diskon + validasi | DiscountSheet.show(context, ref), aksi lama | Menunggu |
+| Catatan nota dan keyboard 300 dp | setNote, label/maxLines/urutan fokus tetap | Menunggu |
+| Total/footer/Bayar nonaktif bila tanpa item | draft.total/itemCount/lines; push /transaksi/baru/bayar | Menunggu |
+| Kembali dan konfirmasi draf kotor | leaveTransaction(context, ref) | Menunggu |
+| Keadaan kosong/terisi, rute, key | cabang lama; tidak ada Key eksplisit pada Page/Section | Menunggu |
+
+### Selisih desain
+- Frame 691 menampilkan pilihan Lunas/Bayar nanti. Aplikasi menetapkan cara bayar
+  pada langkah Pembayaran; PayStatus tetap turunan, tidak boleh dipilih.
+- Estimasi dan catatan tetap tersedia meskipun tidak ditampilkan frame 691.
+- TransactionDetailsSection adalah utang ConsumerWidget yang sudah ada; pembacaan
+  provider dipertahankan sesuai UI-16, tanpa migrasi atau state baru.
+- Usulan penempatan: estimasi/catatan sesudah Ringkasan; pembayaran tetap langkah
+  lama. Menunggu konfirmasi bersama pasangan frame 752.

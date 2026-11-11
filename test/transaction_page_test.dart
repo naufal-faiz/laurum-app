@@ -131,6 +131,6 @@ void main() {
     expect(opacity, greaterThan(0));
     expect(opacity, lessThan(1));
     await tester.pumpAndSettle();
-    expect(find.text('Buat transaksi'), findsOneWidget);
+    expect(find.text('Buat Transaksi'), findsOneWidget);
   });
 }

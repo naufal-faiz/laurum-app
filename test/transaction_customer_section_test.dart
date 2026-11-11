@@ -5,9 +5,12 @@ import 'package:laurum/features/customers/data/customer_fixtures.dart';
 import 'package:laurum/features/transactions/widgets/transaction_customer_section.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 
+import 'test_fonts.dart';
+
 void main() {
   for (final selected in [false, true]) {
     testWidgets('customer section selected=$selected delegates actions', (tester) async {
+      await loadTestFonts();
       tester.view.physicalSize = const Size(320, 640);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
@@ -31,15 +34,15 @@ void main() {
         ),
       );
       if (selected) {
-        expect(find.text('Baru'), findsNothing);
+        expect(find.text('Pelanggan baru'), findsNothing);
         expect(find.text('Pilih pelanggan'), findsNothing);
         await tester.tap(find.byType(MenuRow));
       } else {
         expect(
-          tester.getTopLeft(find.text('Baru')).dx,
+          tester.getTopLeft(find.text('Pelanggan baru')).dx,
           greaterThan(tester.getTopLeft(find.text('Pilih pelanggan')).dx),
         );
-        await tester.tap(find.text('Baru'));
+        await tester.tap(find.text('Pelanggan baru'));
         expect(creates, 1);
         await tester.tap(find.text('Pilih pelanggan'));
       }

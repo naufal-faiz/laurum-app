@@ -12,8 +12,10 @@ import 'package:laurum/features/transactions/state/transaction_draft.dart';
 import 'package:laurum/features/transactions/state/transaction_providers.dart';
 import 'package:laurum/features/transactions/widgets/transaction_customer_section.dart';
 import 'package:laurum/features/transactions/widgets/transaction_details_section.dart';
+import 'package:laurum/features/transactions/widgets/transaction_footer_section.dart';
+import 'package:laurum/shared/widgets/atoms/app_badge.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
-import 'package:laurum/shared/widgets/atoms/app_text.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
@@ -33,19 +35,20 @@ class TransactionPage extends ConsumerWidget {
         ? 0
         : ref.watch(customerBalanceProvider(draft.customerId!)).value ?? 0;
     return FormScaffold(
-      title: 'Buat transaksi',
+      title: 'Buat Transaksi',
+      subtitle: 'Order baru · nota otomatis',
+      appBarVariant: AppBarSubVariant.detail,
+      padding: const EdgeInsets.all(AppSpacing.xlarge),
+      trailing: const AppBadge('Draft', variant: AppBadgeVariant.menungguJemput),
       backLabel: 'Kembali',
       onBack: () => leaveTransaction(context, ref),
-      summary: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppText('Total tagihan (${draft.itemCount} item)', variant: AppTextVariant.label),
-          AppText(Formatters.rupiah(draft.total), variant: AppTextVariant.figure),
-        ],
-      ),
-      footer: AppButton(
-        'Bayar',
-        onPressed: draft.lines.isEmpty ? null : () => context.push('/transaksi/baru/bayar'),
+      footer: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.small),
+        child: TransactionFooterSection(
+          total: draft.total,
+          itemCount: draft.itemCount,
+          onPay: draft.lines.isEmpty ? null : () => context.push('/transaksi/baru/bayar'),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

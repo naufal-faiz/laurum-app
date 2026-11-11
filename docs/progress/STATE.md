@@ -2,46 +2,46 @@
 Diperbarui: 2026-11-11 | Cabang newdesign
 
 ## Sesi aktif
-Layar 25 Periksa Usulan AI putaran 2 + layar 09 Detail Order.
-Frame FigCraft 512/612; dasar irisan a8d627e. Pekerjaan penerus SELESAI.
+Layar 02 Buat Transaksi; dasar commit d156170.
+FigCraft terhubung; pengguna memilih 691, dibaca sekali (tersimpan dalam spec).
+Pasangan frame 752 + adaptasi pembayaran/estimasi/catatan menunggu jawaban.
 
 ## Status irisan
-- Usulan: Ubah layanan lewat AppBottomSheet; Isi berat opsional dalam kartu;
-  alamat dan CalloutAi satu kartu, badge Periksa bagian ini oranye.
-- Berat masuk qty/total order; kosong tetap opsional, terisi minimal 0,5 kg.
-  Simpan/Setujui nonaktif saat invalid; nol/leading zero/titik-koma dinormalisasi.
-  Ganti layanan mengosongkan berat. Draf dipisah ke proposal_draft.dart (<110 baris).
-- Detail Order: header status/waktu, nota, kontak, rincian, pembayaran, aktivitas,
-  footer sesuai mode/COD/final. Seluruh aksi dan 12 baris paritas tetap lengkap.
-- InfoRow.compact opt-in hanya pada Detail Order; default layar lain tetap.
-- Golden 9: app_badge, callout_ai, proposal_card, proposal_rina, proposal_new_customer, r4_order_detail, r9_cod_detail, order_detail_actions_1x/2x.
-- Visual belum diverifikasi manual putaran ini (UI-19); golden diperiksa.
-  Keyboard 300 dp dan 320 dp/teks 2x lulus. iOS belum diuji.
+- Header detail/subjudul/Draft, kartu pelanggan kosong dan dua aksi, footer total
+  + Bayar sejajar sudah diterapkan. Body memakai padding 24 dp sesuai frame.
+- Kartu pelanggan terpilih masih MenuRow lama dalam AppCard; layanan terisi,
+  tombol sampah, Ringkasan dan susunan detail BELUM dikerjakan.
+- TransactionFooterSection baru (data/callback); tidak ada komponen bersama baru.
+- Paritas awal di spec 02 belum dicentang. Provider/aksi/state/rute tetap.
+- Snapshot/screenshot: 0. Visual belum diverifikasi manual; iOS belum diuji.
 
 ## Keputusan pengguna terbaru
-- Izin spesifik: "Izinkan, berat masuk draf"; mencakup state draf dan order.
-  Berkas state berubah hanya proposal_review, proposal_order, dan proposal_draft.
-- Pemilih layanan dalam kartu, alamat satu kartu, badge oranye; tanpa jadwal baru.
-- AGENTS.md terbaru dari pengguna ikut disimpan; tanpa push/merge.
+Akurat dengan FigCraft; sampah dan edit berat harus sama-sama tersedia.
+Ambang usage 10%: persentase akun tidak tersedia di alat; siapkan handoff sebelum
+kapasitas habis. Pilihan aktif yang dibaca setelah pengguna bertanya ID adalah 691.
+Pertanyaan async terbuka: pakai pasangan 752 untuk isi, bayar/COD tetap di langkah
+Pembayaran, estimasi/catatan setelah Ringkasan. Jangan menganggap sudah disetujui.
 
 ## Belum di-commit
-Kode/tes/spec/STATE disimpan dalam commit akhir. FigCraft pengguna dikecualikan.
-Stash f7a9e49 sudah diterapkan oleh agen sebelumnya dan tetap sebagai cadangan;
-jangan apply ulang otomatis.
+Progres awal disimpan dalam commit wip; FigCraft pengguna dikecualikan.
+File baru: transaction_footer_section.dart dan transaction_footer_section_test.dart.
+Stash f7a9e49 lama sudah diterapkan; jangan apply ulang.
 
 ## Langkah berikutnya
-1. Tinjauan pengguna untuk layar 25 dan 09.
-2. Tunggu arahan layar berikutnya; jangan mulai pekerjaan lain otomatis.
+1. Tunggu jawaban pertanyaan async; baca 752 sekali hanya jika disetujui.
+2. Selesaikan layanan + sampah + edit berat, Ringkasan dan detail; aksi lama tetap.
+3. Cek diskon saat hapus: remove saat ini mempertahankan diskon, berpotensi total
+   negatif bila subtotal menurun. State beku; minta izin jika perlu memperbaiki.
+4. Tes/golden/keyboard/320 dp/2x; check_all sekali di akhir, paritas dan diff.
+5. Satu commit feat(ui) akhir, lalu tinjauan pengguna. Jangan push/merge.
 
 ## Blocker
-Tidak ada. Graph sempat transport closed; tidak diulang, sumber langsung dipakai.
+UI-4/UI-9/UI-10: acuan varian isi dan penempatan fungsi di luar frame belum
+dikonfirmasi. Jangan menambah pilihan PayStatus manual (Lunas) dari frame.
 
 ## Bukti terakhir
-- dart run tool/check_all.dart: SEMUA HIJAU, exit 0; 1072 lulus/1 skip.
-  TEMP/laurum-resume-complete-check.log; REPO_MAP 1080 berkas.
-- Tes terarah 28 lulus; golden/alur Order 6 + COD 1 lulus; check_arch OK.
-- Finder visual diubah: proposal_pages/sections/detail_sections/alignment
-  (subtitle/modal/Text.rich), r4_detail_completion/r4_finish_flow (tooltip ikon).
-  Assertion aksi/transaksi lama tetap; proposal_keyboard menambah tes sheet berat.
-- Tes baru: order_detail_sections, proposal_weight, proposal_weight_validation.
-  app_badge menambah perhatian. Tidak mengubah tes non-widget.
+- Tes footer/pelanggan/Page 9 lulus; keyboard catatan/Bayar 300 dp 1 lulus.
+- Scoped flutter analyze 3 berkas: no issues; check_arch OK; diff --check bersih.
+- Finder diubah hanya label Baru -> Pelanggan baru dan kapitalisasi judul;
+  tes pelanggan memakai font Inter asli agar pengujian 320 dp/2x akurat.
+- check_all belum dijalankan karena irisan belum selesai; golden belum diperbarui.
