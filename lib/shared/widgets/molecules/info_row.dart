@@ -7,9 +7,16 @@ import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
 class InfoRow extends StatelessWidget {
-  const InfoRow({required this.label, required this.value, super.key, this.icon});
+  const InfoRow({
+    required this.label,
+    required this.value,
+    super.key,
+    this.icon,
+    this.compact = false,
+  });
   final String label, value;
   final AppIcons? icon;
+  final bool compact;
   @override
   Widget build(BuildContext context) => Row(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,7 +28,11 @@ class InfoRow extends StatelessWidget {
       Expanded(child: AppText(label, color: AppColors.ink2)),
       const SizedBox(width: AppMoleculeTokens.gap),
       Expanded(
-        child: AppText(value, variant: AppTextVariant.bodyStrong, textAlign: TextAlign.end),
+        child: AppText(
+          value,
+          variant: compact ? AppTextVariant.label : AppTextVariant.bodyStrong,
+          textAlign: TextAlign.end,
+        ),
       ),
     ],
   );

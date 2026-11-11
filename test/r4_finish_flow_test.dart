@@ -24,8 +24,8 @@ void main() {
       expect((await scope.read(businessRepositoryProvider).getProfile()).useOrderStatus, isFalse);
       final id = await createR4Order(tester, scope, savings: action == 'delete');
       expect(find.text('Sedang dikerjakan'), findsOneWidget);
-      expect(find.text('Edit'), findsOneWidget);
-      expect(find.text('Hapus'), findsOneWidget);
+      expect(find.byTooltip('Edit'), findsOneWidget);
+      expect(find.byTooltip('Hapus'), findsOneWidget);
       expect(find.text('Selesaikan'), findsOneWidget);
       expect(find.byTooltip('Menu order'), findsNothing);
       final repo = scope.read(orderRepositoryProvider);
@@ -35,7 +35,7 @@ void main() {
           await scope.read(savingsRepositoryProvider).getBalance('cust-001'),
           before.savings - 9000,
         );
-        await tester.tap(find.text('Hapus'));
+        await tester.tap(find.byTooltip('Hapus'));
         await tester.pumpAndSettle();
         await tester.tap(find.text('Ya, hapus nota'));
         await tester.pumpAndSettle();

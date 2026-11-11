@@ -26,24 +26,30 @@ class ProposalAddressSection extends StatelessWidget {
     children: [
       const SectionHeader(title: 'Alamat penjemputan', titleColor: AppColors.primaryInk),
       AppCard(
-        padding: const EdgeInsets.all(AppSpacing.small),
-        child: AppTextField(
-          label: 'Alamat penjemputan',
-          hint: 'Alamat penjemputan (opsional)',
-          dense: true,
-          leadingIcon: AppIcons.location,
-          value: draft.address,
-          enabled: enabled,
-          selectAllOnFocus: true,
-          maxLines: 3,
-          onChanged: onAddress,
+        padding: const EdgeInsets.all(AppSpacing.medium),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: AppSpacing.small,
+          children: [
+            AppTextField(
+              label: 'Alamat penjemputan',
+              hint: 'Alamat penjemputan (opsional)',
+              dense: true,
+              leadingIcon: AppIcons.location,
+              value: draft.address,
+              enabled: enabled,
+              selectAllOnFocus: true,
+              maxLines: 3,
+              onChanged: onAddress,
+            ),
+            if (uncertain)
+              const CalloutAi(
+                message: 'AI kurang yakin dengan nomor rumah/patokan detail.',
+                compact: true,
+              ),
+          ],
         ),
       ),
-      if (uncertain)
-        const CalloutAi(
-          message: 'AI kurang yakin dengan nomor rumah/patokan detail.',
-          compact: true,
-        ),
     ],
   );
 }

@@ -5,8 +5,8 @@ Template: FormScaffold, AppBarSub tanpa avatar; footer Tolak/Setujui jadi order.
 
 Komposisi: ProposalMessageSection (SectionHeader, AppCard, badge Belum terdaftar,
 pesan sumber, nomor/jam melalui Formatters, Buka WhatsApp tanpa teks kirim),
-ProposalFieldsSection (hasil baca, nama/telepon pelanggan baru, ChipBar layanan,
-harga, alamat, CalloutAi), NoticeAi. State loading/gagal-retry/tidak ditemukan.
+ProposalFieldsSection (hasil baca, nama/telepon pelanggan baru, kartu Opsi Layanan,
+alamat + CalloutAi), NoticeAi. State loading/gagal-retry/tidak ditemukan.
 Provider: proposalReviewProvider, proposalDraftProvider, proposalActionsProvider.
 Section Stateless, menerima data/callback; draf tidak di-reset saat repository berubah.
 
@@ -20,7 +20,8 @@ Interaksi:
 - Agus: pelanggan baru dibuat saat setuju; nomor yang sudah masuk lewat impor
   dipakai ulang. Tolak atau kembali tidak membuat pelanggan.
 - Setuju membuat order source whatsappAi; status memakai initialOrderStatus
-  profil R4. Layanan kg qtyMilli 0/total 0 sampai berat diisi; layanan pcs 1 pcs.
+  profil R4. Layanan kg memakai berat draf bila diisi (qty/total lineTotal);
+  tanpa berat qtyMilli 0/total 0. Layanan pcs 1 pcs.
 - Detail Order memperlihatkan pesan berat belum diisi dan tombol ke Edit Order.
 - Rudi: ConfirmModal Batalkan order A-0139?; konfirmasi memakai koreksi pembayaran
   dan ledger pembatalan yang ada. Batal dialog tidak mengubah order.
@@ -31,8 +32,9 @@ Interaksi:
   Atomicity lintas repository untuk pembatalan/tabungan tetap utang yang sudah ada.
 - Detail status final readonly, membuka order terkait bila tersedia.
 
-Selisih .pen: pilihan layanan lewat ChipBar registry; tidak menetapkan berat dari
-perkiraan pesan. Penyesuaian DATA MASTER disetujui pengguna 31 Okt.
+Selisih .pen: pilihan layanan dan berat memakai sheet registry (AppBottomSheet),
+bukan ChipBar/field inline; berat yang diisi dipakai untuk qty/total order. Penyesuaian
+DATA MASTER disetujui pengguna 31 Okt.
 Verifikasi: dua mode R4, idempotensi/retry, batal/tolak, pembuatan pelanggan,
 keyboard 300 dp (nama/telepon/alamat), golden dua varian dan 320 px/teks 2x.
 Android/iOS/TalkBack/VoiceOver belum diuji untuk layar ini. Tidak ada AI/pesan nyata.
@@ -49,6 +51,7 @@ Frame FigCraft 512 dibaca; pengguna menyetujui ketiga proposal komponen bersama.
 |---|---|---|
 | Proposal lengkap, pelanggan, layanan aktif/harga | proposalReviewProvider(id) | Selesai |
 | Nama/telepon/alamat/serviceId draf, validasi, draf tidak di-reset | proposalDraftProvider(id) | Selesai |
+| Berat opsional, minimum, normalisasi dan total; keyboard sheet | ProposalDraftController.weight, canApprove, lineTotal | Selesai |
 | Loading, error/retry, tidak ditemukan, final readonly | cabang snapshot/draft/status lama | Selesai |
 | Pending/gagal aksi, cegah klik ganda | proposalActionsProvider(id) | Selesai |
 | Field nama, telepon, alamat; pilih layanan | actions.name/phone/address/service, argumen sama | Selesai |
@@ -99,3 +102,38 @@ Tes posisi/paritas/keyboard akhir 17 lulus; golden/layout 6 lulus; check_all hij
 1063 lulus/1 skip. Android SM-N975F dibandingkan ulang frame 512 termasuk
 keyboard/selectAll/footer: lulus.
 Detail Order ditunda sesuai arahan; perubahan tersimpan di stash@{0}, bukan diterapkan.
+### Koreksi 11 Nov 2026 (putaran 2, izin state berat)
+Kartu "Opsi Layanan" mengikuti frame node 586: label kecil LAYANAN/BERAT (caption
+ink3) di atas nilai, pemisah inset 14 di antara baris, tautan Ubah/Isi berat
+(InlineLink) rata kanan pada baris nilai. Berat kosong tampil sebagai chip
+"Belum diketahui"; berat terisi tampil sebagai chip Formatters.berat. Baris Total
+menampilkan "Belum dihitung" (ink3) sampai layanan pcs atau berat terisi, lalu
+Formatters.rupiah(lineTotal). Baris PENJEMPUTAN di frame tidak dibuat karena tidak
+ada data jadwal jemput (UI-9).
+Pilihan layanan: tautan Ubah membuka AppBottomSheet berisi semua layanan aktif
+(pengganti ChipBar). Berat: tautan Isi berat membuka sheet AppBottomSheet +
+SheetScaffold (field dense hint "0", filter angka/koma, selectAllOnFocus, footer
+Simpan); ada tes keyboard 300 dp untuk sheet ini. Draft menampung berat dan
+proposal_order memakai qtyMilli berat (total = lineTotal); mengganti layanan
+mengosongkan berat; catatan "Berat belum diisi" hanya bila berat 0. Layanan pcs
+tetap 1 pcs.
+Alamat: field dan pesan AI dibungkus satu AppCard. CalloutAi compact memakai
+Text.rich + WidgetSpan agar badge mengalir tepat setelah kalimat, ikon lokasi
+di-center terhadap blok teks. Badge "Periksa bagian ini" memakai
+AppBadgeVariant.perhatian oranye tegas (warningBorder/onPrimary).
+Section baru ProposalServiceCardSection menerima data primitif (nama layanan,
+chip berat, total) dan dua callback; ProposalServiceSection hanya header + kartu.
+Tes: proposal_detail_sections (baris kartu + sheet), proposal_sections,
+proposal_weight (4,5 kg -> Rp40.500), proposal_keyboard (sheet Isi berat),
+proposal_pages (subtitle baru), dan proposal_alignment (WidgetSpan + ikon center).
+Golden diperbarui: proposal_rina, proposal_new_customer, app_badge, r9_cod_detail,
+r4_order_detail, order_detail_actions_1x/2x. Selisih token: teks frame 8/11,5/9 px
+dipetakan ke caption/label/bodyStrong 13-16 px; border kartu AppColors.border
+(frame borderStrong); tidak ada varian chip 8 px (AppBadge dipakai).
+
+Penyelesaian validasi berat: kosong tetap opsional; nilai yang terisi di bawah
+0,5 kg menampilkan error dan menonaktifkan Simpan serta Setujui. Nol tunggal
+dinormalisasi menjadi kosong/hint 0, nol di depan dihapus, titik/koma diterima
+sebagai desimal. Mengganti layanan mengosongkan berat. ProposalWeightSheet membaca
+draf Riverpod yang sama; ProposalDraft dipisah ke berkas state agar batas baris
+terpenuhi, API lama tetap diekspor melalui proposal_review.dart.

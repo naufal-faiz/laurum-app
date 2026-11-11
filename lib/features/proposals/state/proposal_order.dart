@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/domain/order_item.dart';
 import 'package:laurum/core/domain/order_rules.dart';
@@ -22,7 +23,8 @@ Future<Order> saveProposalOrder(
   final profile = await ref.read(businessRepositoryProvider).getProfile();
   final now = ref.read(businessClockProvider)();
   final kilo = service.kind == ServiceKind.kiloan;
-  final total = kilo ? 0 : service.price;
+  final qtyMilli = kilo ? draft.weightMilli : 1000;
+  final total = lineTotal(qtyMilli: qtyMilli, unitPrice: service.price);
   final order = Order(
     id: ref.read(idGeneratorProvider).derived(proposal.id, 'order'),
     ownerId: proposal.ownerId,
@@ -43,7 +45,7 @@ Future<Order> saveProposalOrder(
     total: total,
     note: [
       if (draft.address.trim().isNotEmpty) 'Alamat penjemputan: ${draft.address.trim()}',
-      if (kilo) 'Berat belum diisi. Lengkapi lewat Edit order.',
+      if (kilo && qtyMilli == 0) 'Berat belum diisi. Lengkapi lewat Edit order.',
     ].join('\n'),
   );
   await repo.saveOrder(
@@ -58,7 +60,7 @@ Future<Order> saveProposalOrder(
         serviceId: service.id,
         serviceName: service.name,
         unit: kilo ? 'kg' : 'pcs',
-        qtyMilli: kilo ? 0 : 1000,
+        qtyMilli: qtyMilli,
         unitPrice: service.price,
         lineTotal: total,
       ),

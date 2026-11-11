@@ -23,6 +23,7 @@ void main() {
         AppBadgeVariant.siap => AppColors.primary,
         AppBadgeVariant.menungguJemput || AppBadgeVariant.selesai => AppColors.slateInk,
         AppBadgeVariant.dibatalkan => AppColors.errorInk,
+        AppBadgeVariant.perhatian => AppColors.onPrimary,
       });
     }
   });

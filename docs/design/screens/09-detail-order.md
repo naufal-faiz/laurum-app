@@ -3,7 +3,7 @@ Rute: /order/:id   Fase: 5   Frame .pen: "Transaksi - Detail Order"; state "Stat
 Template: FormScaffold (AppBarSub + FooterBar, tanpa nav)
 
 Komposisi (urut dari atas, HANYA nama widget registry + argumen penting):
-- AppBarSub(title: 'Detail order', trailing: AppIconButton(AppIcons.more) -> AppBottomSheet)
+- AppBarSub(title: 'Detail order', subtitle: status Â· dibuat jam, trailing: AppIconButton(AppIcons.more) -> AppBottomSheet)
 - AppCard: AppText 'No. nota' + nomor, AppBadge status, AppStatusText pembayaran,
   InfoRow 'Masuk', InfoRow 'Estimasi siap'
 - AppCard pelanggan: AppAvatar inisial, AppText nama, AppText telepon, AppText alamat,
@@ -93,22 +93,22 @@ Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
 
-## Redesign 018–020 — Paritas sebelum implementasi (11 Nov 2026)
+## Redesign 018ï¿½020 ï¿½ Paritas sebelum implementasi (11 Nov 2026)
 Frame FigCraft 612 dibaca; pengguna menyetujui ketiga proposal komponen bersama.
 | Butir | Sumber / aksi lama | Status implementasi |
 |---|---|---|
-| Order/nomor/status/tanggal, pelanggan/alamat/telepon | orderDetailProvider(orderId), OrderDetailData | Menunggu |
-| Semua item, harga/qty/subtotal/diskon/total/catatan | data.order/items, Formatters | Menunggu |
-| PayStatus turunan, paid/outstanding/canRecord, COD held | getter OrderDetailData / policy lama | Menunggu |
-| Semua aktivitas dan waktu | data.activity, label/Formatters lama | Menunggu |
-| Loading, gagal+Coba lagi, tidak ditemukan | snapshot.isLoading/hasError/data-null | Menunggu |
-| Pending, profil belum siap, cetak/complete busy | actions/printing/completion/profile lama | Menunggu |
-| Error/notice, berat belum diisi + link Edit | pesan dan callback lama | Menunggu |
-| Kembali, menu Edit/Ubah status/Batalkan | route dan showOrderDetailMenu lama | Menunggu |
-| Cetak struk / Edit / Hapus / Selesaikan | callback footer lama dengan argumen yang sama | Menunggu |
-| Catat/Terima pembayaran, held COD kedua mode/final | PaymentRecordSheet.show dan guard lama | Menunggu |
-| WhatsApp | externalLauncher.launchWhatsApp, phone/message sama | Menunggu |
-| Key dan mode status/sederhana/final | tidak ada Key eksplisit di Page/Section sasaran; Key order antrean tidak disentuh | Menunggu |
+| Order/nomor/status/tanggal, pelanggan/alamat/telepon | orderDetailProvider(orderId), OrderDetailData | Selesai |
+| Semua item, harga/qty/subtotal/diskon/total/catatan | data.order/items, Formatters | Selesai |
+| PayStatus turunan, paid/outstanding/canRecord, COD held | getter OrderDetailData / policy lama | Selesai |
+| Semua aktivitas dan waktu | data.activity, label/Formatters lama | Selesai |
+| Loading, gagal+Coba lagi, tidak ditemukan | snapshot.isLoading/hasError/data-null | Selesai |
+| Pending, profil belum siap, cetak/complete busy | actions/printing/completion/profile lama | Selesai |
+| Error/notice, berat belum diisi + link Edit | pesan dan callback lama | Selesai |
+| Kembali, menu Edit/Ubah status/Batalkan | route dan showOrderDetailMenu lama | Selesai |
+| Cetak struk / Edit / Hapus / Selesaikan | callback footer lama dengan argumen yang sama | Selesai |
+| Catat/Terima pembayaran, held COD kedua mode/final | PaymentRecordSheet.show dan guard lama | Selesai |
+| WhatsApp | externalLauncher.launchWhatsApp, phone/message sama | Selesai |
+| Key dan mode status/sederhana/final | tidak ada Key eksplisit di Page/Section sasaran; Key order antrean tidak disentuh | Selesai |
 
 Selisih desain: frame 612 menampilkan footer mode sederhana. Mode status aktif
 mempertahankan menu, cetak dan CTA status. COD tertahan tetap punya pembayaran
@@ -124,3 +124,22 @@ primaryInk. Mode sederhana memakai ikon Edit/Hapus dan CTA; akses struk COD teta
 Aktivitas tetap urutan lama. Golden yang diperbarui: r4_order_detail, r9_cod_detail,
 order_detail_actions_1x dan order_detail_actions_2x karena susunan header/kartu/footer.
 Golden struk, pembayaran, antrean dan piutang dipertahankan.
+
+### Penerapan frame 612 (11 Nov 2026)
+Frame dibaca sekali (node 626/637/650/662/669/676). Header intrinsik: judul
+'Detail order' dan subjudul status Â· dibuat jam. Kartu nota: nomor + badge bayar +
+badge status dalam satu Wrap, InfoRow Masuk/Estimasi. Kartu pelanggan memakai
+CustomerContactCard (avatar, telepon, alamat, tombol WhatsApp). Rincian cucian:
+jumlah layanan di trailing, nama + hitungan di kiri, nominal di kanan, divider per
+baris, subtotal/diskon/catatan tetap. Pembayaran dan jejak aktivitas tetap.
+Footer mode sederhana: ikon Edit/Hapus (tooltip, 48 dp) + CTA; mode status tetap
+dua tombol sejajar. Tes widget Section baru order_detail_sections_test. Finder tes
+r4_detail_completion/r4_finish_flow memakai tooltip karena tombol berikon.
+Golden diperbarui: r4_order_detail, order_detail_actions_1x/2x.
+Selisih: chip ikon berwarna di frame 612 belum ada variannya (AppIconButton plain);
+dot jejak memakai warna primer tunggal; subtotal/diskon/catatan dipertahankan.
+Visual belum diverifikasi manual di emulator; iOS belum diuji.
+InfoRow.compact=true dipakai hanya pada tanggal nota serta subtotal/diskon
+Detail Order. Default InfoRow tetap bodyStrong agar layar lain tidak ikut berubah.
+Golden komponen/layar menjadi bukti visual putaran ini; visual belum diverifikasi
+manual sesuai UI-19. iOS belum diuji.

@@ -414,7 +414,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_cancel_flow.dart (24):
 - order_completion_flow.dart (19):
 - order_detail_menu_flow.dart (22):
-- order_detail_page.dart (93): OrderDetailPage
+- order_detail_page.dart (100): OrderDetailPage
 - order_edit_page.dart (84): OrderEditPage
 - order_menu_sheet.dart (60): OrderMenuAction, OrderMenuSheet
 - order_status_sheet.dart (67): OrderStatusSheet
@@ -445,16 +445,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_status_section.dart (79): AntreanStatusSection
 - antrean_summary_section.dart (49): AntreanSummarySection
 - antrean_toolbar_section.dart (33): AntreanToolbarSection
-- order_customer_section.dart (56): OrderCustomerSection
+- order_customer_section.dart (18): OrderCustomerSection
 - order_detail_body_section.dart (35): OrderDetailBodySection
 - order_detail_content_section.dart (70): OrderDetailContentSection
-- order_detail_footer_section.dart (99): OrderDetailFooterSection
+- order_detail_footer_section.dart (100): OrderDetailFooterSection
 - order_edit_body_section.dart (61): OrderEditBodySection
 - order_edit_customer_section.dart (43): OrderEditCustomerSection
-- order_items_section.dart (76): OrderItemsSection
-- order_payment_section.dart (44): OrderPaymentSection
-- order_summary_section.dart (56): OrderSummarySection
-- order_timeline_section.dart (55): OrderTimelineSection
+- order_items_section.dart (103): OrderItemsSection
+- order_payment_section.dart (74): OrderPaymentSection
+- order_summary_section.dart (49): OrderSummarySection
+- order_timeline_section.dart (54): OrderTimelineSection
 - payment_record_input_section.dart (58): PaymentRecordInputSection
 
 ### lib/features/printer/data/
@@ -488,9 +488,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/proposals/pages/
 - ai_routes.dart (15):
 - ai_settings_page.dart (86): AiSettingsPage
-- proposal_detail_page.dart (91): ProposalDetailPage
+- proposal_detail_page.dart (92): ProposalDetailPage
 - proposal_history_page.dart (48): ProposalHistoryPage
 - proposal_review_flow.dart (68):
+- proposal_service_picker_flow.dart (33):
+- proposal_weight_flow.dart (15):
+- proposal_weight_sheet.dart (55): ProposalWeightSheet
 - whatsapp_link_page.dart (30): WhatsappLinkPage
 
 ### lib/features/proposals/state/
@@ -498,22 +501,24 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - proposal_accept.dart (62):
 - proposal_actions.dart (73): ProposalActions, proposalActionsProvider
 - proposal_demo_accuracy.dart (4): proposalDemoAccuracyProvider
+- proposal_draft.dart (39): ProposalDraft
 - proposal_history.dart (46): ProposalHistory, ProposalHistoryFilter, proposalHistoryProvider, proposalHistoryFilterProvider
-- proposal_order.dart (68):
-- proposal_review.dart (92): ProposalReview, ProposalDraft, ProposalDraftController, proposalReviewProvider, proposalDraftProvider
+- proposal_order.dart (70):
+- proposal_review.dart (84): ProposalReview, ProposalDraftController, proposalReviewProvider, proposalDraftProvider
 - whatsapp_link.dart (38): WhatsappLinkStatus, WhatsappLink, whatsappLinkProvider
 
 ### lib/features/proposals/widgets/
 - ai_connection_section.dart (59): AiConnectionSection
 - ai_preferences_section.dart (64): AiPreferencesSection
-- proposal_address_section.dart (49): ProposalAddressSection
+- proposal_address_section.dart (55): ProposalAddressSection
 - proposal_customer_fields_section.dart (53): ProposalCustomerFieldsSection
-- proposal_fields_section.dart (53): ProposalFieldsSection
+- proposal_fields_section.dart (55): ProposalFieldsSection
 - proposal_footer_section.dart (49): ProposalFooterSection
 - proposal_history_section.dart (49): ProposalHistorySection
 - proposal_message_section.dart (88): ProposalMessageSection
 - proposal_privacy_section.dart (25): ProposalPrivacySection
-- proposal_service_section.dart (89): ProposalServiceSection
+- proposal_service_card_section.dart (98): ProposalServiceCardSection
+- proposal_service_section.dart (73): ProposalServiceSection
 - whatsapp_link_section.dart (75): WhatsappLinkSection
 
 ### lib/features/reports/data/
@@ -649,7 +654,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
-- app_badge.dart (31): AppBadgeVariant, AppBadge
+- app_badge.dart (32): AppBadgeVariant, AppBadge
 - app_button.dart (85): AppButtonIconPlacement, AppButton
 - app_card.dart (68): AppCardRail, AppCardStyle, AppCard
 - app_chip.dart (40): AppChip
@@ -673,7 +678,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - avatar_stack.dart (58): AvatarStack
 - banner_message.dart (41): BannerMessageVariant, BannerMessage
 - brand_lockup.dart (32): BrandLockup
-- callout_ai.dart (44): CalloutAi
+- callout_ai.dart (54): CalloutAi
 - chip_bar.dart (29): ChipBar
 - create_action.dart (62): CreateAction
 - date_group_header.dart (41): DateGroupHeader
@@ -681,7 +686,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - feature_strip.dart (46): FeatureStrip
 - footer_bar.dart (28): FooterBar
 - icon_tile.dart (78): IconTile
-- info_row.dart (28): InfoRow
+- info_row.dart (39): InfoRow
 - inline_link.dart (32): InlineLink
 - inline_link_row.dart (36): InlineLinkRow
 - labeled_divider.dart (24): LabeledDivider
@@ -754,7 +759,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_test_host.dart (49):
 - antrean_test_host_test.dart (22):
 - app_avatar_test.dart (28):
-- app_badge_test.dart (29):
+- app_badge_test.dart (30):
 - app_bar_root_test.dart (32):
 - app_bar_sub_test.dart (26):
 - app_bottom_sheet_test.dart (45):
@@ -917,6 +922,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_actions_test.dart (72):
 - order_card_test.dart (89):
 - order_detail_receipt_test.dart (80):
+- order_detail_sections_test.dart (80):
 - order_detail_test.dart (89):
 - order_edit_test.dart (80):
 - order_number_generator_test.dart (34):
@@ -996,17 +1002,19 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - printer_service_test.dart (42):
 - progress_row_test.dart (23):
 - proposal_actions_test.dart (72):
-- proposal_alignment_test.dart (102):
+- proposal_alignment_test.dart (103):
 - proposal_card_test.dart (41):
-- proposal_detail_sections_test.dart (108):
+- proposal_detail_sections_test.dart (146):
 - proposal_footer_section_test.dart (83):
 - proposal_golden_test.dart (35):
 - proposal_history_page_test.dart (61):
-- proposal_keyboard_test.dart (32):
+- proposal_keyboard_test.dart (48):
 - proposal_order_rollback_test.dart (54): FailingProposalOrder
 - proposal_pages_test.dart (89):
 - proposal_retry_test.dart (60): FailOnceProposalRepository
-- proposal_sections_test.dart (92):
+- proposal_sections_test.dart (94):
+- proposal_weight_test.dart (55):
+- proposal_weight_validation_test.dart (62):
 - r10_account_flow_test.dart (64):
 - r10_account_keyboard_test.dart (32):
 - r10_account_sections_test.dart (64):

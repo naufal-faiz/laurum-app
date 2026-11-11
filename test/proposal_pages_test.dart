@@ -30,7 +30,7 @@ void main() {
       ),
     );
     expect(find.text('Bu Rina'), findsOneWidget);
-    expect(find.textContaining('Periksa dan sesuaikan'), findsOneWidget);
+    expect(find.textContaining('Ketuk Ubah jika AI salah tafsir'), findsOneWidget);
     await tester.tap(find.widgetWithText(AppButton, 'Setujui jadi order'));
     await tester.pumpAndSettle();
     expect(find.text('Alamat belum dipastikan'), findsOneWidget);

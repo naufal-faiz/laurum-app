@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/domain/order_rules.dart' as policy;
+import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_colors.dart';
@@ -17,6 +18,7 @@ import 'package:laurum/features/orders/widgets/order_detail_footer_section.dart'
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 
 class OrderDetailPage extends ConsumerWidget {
@@ -38,6 +40,11 @@ class OrderDetailPage extends ConsumerWidget {
         profile == null;
     return FormScaffold(
       title: 'Detail order',
+      subtitle: data == null
+          ? null
+          : '${policy.orderStatusLabel(data.order.status, useOrderStatus: useStatus)}'
+                ' · dibuat ${Formatters.jam(data.order.enteredAt)}',
+      appBarVariant: AppBarSubVariant.detail,
       backLabel: 'Kembali',
       onBack: () => context.canPop() ? context.pop() : context.go('/antrean'),
       trailing: !useStatus

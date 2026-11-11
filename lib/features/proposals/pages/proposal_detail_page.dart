@@ -82,6 +82,7 @@ class ProposalDetailPage extends ConsumerWidget {
                   onPhone: actions.phone,
                   onAddress: actions.address,
                   onService: actions.service,
+                  onWeight: actions.weight,
                 ),
                 const ProposalPrivacySection(),
               ],

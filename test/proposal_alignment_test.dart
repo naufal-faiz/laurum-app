@@ -39,7 +39,9 @@ void main() {
       tester.getRect(privacyIcon).center.dy,
       closeTo(tester.getRect(find.text(NoticeAi.message)).center.dy, 0.1),
     );
-    final address = tester.widget<AppTextField>(find.byType(AppTextField));
+    final address = tester.widget<AppTextField>(
+      find.byWidgetPredicate((w) => w is AppTextField && w.label == 'Alamat penjemputan'),
+    );
     expect((address.dense, address.selectAllOnFocus, address.maxLines), (true, true, 3));
     expect(tester.takeException(), isNull);
   });
@@ -85,18 +87,17 @@ void main() {
     );
     expect(find.widgetWithText(AppBadge, 'Periksa bagian ini'), findsOneWidget);
     expect(tester.widget<AppIcon>(find.byType(AppIcon)).icon, AppIcons.location);
-    final block = find.ancestor(of: find.byType(AppBadge), matching: find.byType(Column)).first;
+    final block = find.byWidgetPredicate(
+      (w) => w is RichText && w.text.toPlainText().contains('AI kurang yakin'),
+    );
+    expect(block, findsOneWidget);
     expect(
       tester.getRect(find.byType(AppIcon)).center.dy,
       closeTo(tester.getRect(block).center.dy, 0.1),
     );
     expect(
-      tester
-          .widget<AppText>(
-            find.widgetWithText(AppText, 'AI kurang yakin dengan nomor rumah/patokan detail.'),
-          )
-          .variant,
-      AppTextVariant.caption,
+      tester.widget<RichText>(block).text.toPlainText(),
+      contains('AI kurang yakin dengan nomor rumah/patokan detail.'),
     );
   });
 }

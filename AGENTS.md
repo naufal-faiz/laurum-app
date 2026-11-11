@@ -4,9 +4,10 @@ Aturan di berkas ini MENANG atas skill, memori, atau instruksi lain. Cara memaka
 
 ## Mulai sesi (hemat baca, wajib)
 1. Baca docs/progress/STATE.md (posisi, langkah berikutnya, keputusan).
-2. Cari konteks lewat memori codebase atau docs/REPO_MAP.md. Dilarang ls/tree/glob seluruh repo dan membaca PRD utuh.
+2. Cari konteks lewat docs/REPO_MAP.md hanya bila lokasi berkas belum diketahui. Jika tool memori codebase gagal SEKALI, jangan dicoba lagi pada sesi itu. Dilarang ls/tree/glob seluruh repo dan membaca PRD utuh.
 3. Baca hanya spec dan berkas untuk tugas ini. Jika STATE.md berbeda dengan git log/status, percayai git lalu perbaiki STATE.md.
 4. Selama Mode Redesign UI aktif (bagian di bawah), jalankan prasyaratnya sebelum menyentuh kode.
+5. Maksimal 8 pembacaan berkas/tool sebelum edit pertama (STATE.md, spec layar, frame Figma, berkas yang akan diubah). Butuh lebih = tulis alasan satu baris lalu lanjut. Rencana maksimal 10 baris, di STATE.md.
 Dokumen acuan (baca bagian yang relevan saja): docs/prd/prd-a-ui.md, prd-b-backend.md, docs/design/{widget_registry.yaml, tokens.md, data_master.md, receipt_template.md, component_catalog.md, screens/<layar>.md (template: _TEMPLATE.md), redesign/figma_map.md}. Acuan visual: FigCraft lewat MCP (dokumen docs/design/new-design-laurum.figcraft; peta layar ke frame: docs/design/redesign/figma_map.md). Keputusan desain global: docs/design/redesign/decisions.md. Rencana per lapisan: docs/plans/redesign-atomic.md. docs/design/laurum-ready.pen = legacy, BUKAN acuan selama Mode Redesign UI. Pembagian wewenang spec layar dan Figma: lihat Mode Redesign UI, UI-1.
 
 ## Platform
@@ -37,7 +38,7 @@ Satu basis kode untuk Android dan iOS. Saat ini HANYA Android yang bisa diuji. J
 22. Rahasia: kunci service_role, token, dan berkas .env tidak masuk repo; aplikasi hanya memakai URL dan kunci publik lewat --dart-define; Edge Function memakai secrets Supabase.
 
 ## Mode Redesign UI (AKTIF di branch UI; hapus bagian ini sebelum merge ke main)
-Tujuan: menerapkan desain baru dari Figma ke UI yang sudah ada. Murni tampilan (tata letak, posisi, gaya). Perilaku, data, dan alur DILARANG berubah. Aturan keras 1-22 tetap berlaku penuh; tidak ada pengecualian selain yang tertulis di bagian ini. Redesign dikerjakan BERURUTAN per lapisan atomic (UI-21 sampai UI-29), BUKAN per halaman.
+Tujuan: menerapkan desain baru dari Figma ke UI yang sudah ada. Murni tampilan (tata letak, posisi, gaya). Perilaku, data, dan alur DILARANG berubah. Aturan keras 1-22 tetap berlaku penuh; tidak ada pengecualian selain yang tertulis di bagian ini. Redesign dikerjakan per IRISAN LAYAR dengan urutan atomic di dalam tiap irisan (UI-21). Mode ringkas UI-30 sampai UI-36 berlaku: kerja langsung, sedikit dokumen, sedikit commit.
 
 Prasyarat setiap sesi (gagal = berhenti dan lapor, jangan menebak):
 - git branch --show-current menunjukkan branch UI, bukan main/master.
@@ -54,15 +55,15 @@ UI-5. BOLEH diubah: susunan widget di features/*/pages/ (pembacaan provider dan 
 UI-6. BEKU (dilarang diubah tanpa izin eksplisit pengguna): features/*/state/, features/*/data/, core/persistence, core/sync, supabase/, tool/, app_router.dart dan *_routes.dart (path, nama rute, parameter), Formatters, TransactionRunner, IdGenerator, aturan lint, docs/prd, API widget_registry.yaml (nama dan parameter yang ada; parameter opsional baru berdefault hanya lewat UI-13), dependensi di pubspec.yaml, dan semua tes non-widget (state, data, kontrak repository, migrasi). Struktur navigasi (jumlah tab, tujuan rute) tetap; hanya tata letak bar navigasi yang boleh berubah.
 
 Paritas fungsi (inti mode ini):
-UI-7. Sebelum menulis kode sebuah layar, tulis tabel "Paritas redesign" di spec layarnya: semua data yang dibaca layar, semua aksi/callback, semua keadaan tampil (kosong, memuat, error, tertahan COD, dsb), dan semua Key yang dipakai tes. Setelah implementasi, centang satu per satu; tiap butir harus ada di UI baru.
+UI-7. Sebelum menulis kode sebuah layar, tulis tabel "Paritas redesign" di spec layarnya: semua data yang dibaca layar, semua aksi/callback, semua keadaan tampil (kosong, memuat, error, tertahan COD, dsb), dan semua Key yang dipakai tes. Setelah implementasi, centang satu per satu; tiap butir harus ada di UI baru. Tabel ringkas (satu baris per butir, tanpa narasi), dibuat sekali, tidak ditulis ulang saat koreksi.
 UI-8. Sumber data dan aksi sama persis: provider yang sama, method yang sama, argumen yang sama, urutan pemanggilan yang sama. Section boleh dipecah atau digabung, tetapi data dan callback-nya tetap. Butuh data atau aksi baru dari state = berhenti dan tanya (state beku).
 UI-9. Elemen di Figma tanpa dukungan PRD/state (tombol, filter, kartu, data baru): JANGAN dibuat, termasuk tombol mati atau data palsu. Catat di "Selisih desain" lalu tanya.
 UI-10. Fungsi yang ada di aplikasi tetapi tidak tampak di Figma: JANGAN dihapus. Pertahankan di UI, catat selisih, tanya letaknya.
 UI-11. Key, urutan fokus form, aturan input (aturan 16), dan validasi tidak berubah. Setiap layar dengan field tetap lolos tes keyboard (16e) pada tata letak baru.
 
 Token, widget bersama, aset:
-UI-12. Nilai Figma dipetakan ke token yang ada. Selisih kecil: pakai token terdekat dan catat. Tidak ada yang cocok: jangan hardcode (aturan 8) dan jangan ubah tema sendiri; tulis docs/design/proposals/NNN-token-<nama>.md (tabel token lama ke baru, layar terdampak) lalu tunggu persetujuan. Setelah disetujui, ubah hanya lib/core/theme/ dan tokens.md sesuai proposal. Token desain bersifat GLOBAL: dilarang membuat namespace token per layar atau per fitur (contoh terlarang: AppAuth*, AppColors.auth*). Perubahan token dikerjakan di lapisan token (UI-21), bukan saat mengerjakan halaman.
-UI-13. Perubahan tampilan widget di widget_registry.yaml (gaya, ukuran, padding, varian baru) berdampak ke banyak layar: satu proposal PER LAPISAN (UI-21), bukan per widget atau per halaman; isinya daftar widget terdampak, varian baru, dan layar yang visualnya bergeser. API publik: nama dan parameter yang ada tidak berubah; parameter opsional baru berdefault boleh. Widget baru: aturan 2.
+UI-12. Nilai Figma dipetakan ke token yang ada. Selisih kecil: pakai token terdekat dan catat. Tidak ada yang cocok: jangan hardcode (aturan 8) dan jangan ubah tema sendiri; tulis docs/design/proposals/NNN-token-<nama>.md (tabel token lama ke baru, layar terdampak) lalu tunggu persetujuan. Setelah disetujui, ubah hanya lib/core/theme/ dan tokens.md sesuai proposal. Token desain bersifat GLOBAL: dilarang membuat namespace token per layar atau per fitur (contoh terlarang: AppAuth*, AppColors.auth*). Perubahan token dikerjakan sebagai langkah tersendiri dengan proposal singkat (UI-21), bukan diselipkan saat mengerjakan halaman.
+UI-13. Perubahan tampilan widget di widget_registry.yaml (gaya, ukuran, padding, varian baru) berdampak ke banyak layar: satu proposal PER IRISAN LAYAR (UI-21) yang memuat semua komponen bersama baru/berubah untuk layar itu, maksimal 30 baris: widget terdampak, varian baru, layar yang bergeser. API publik: nama dan parameter yang ada tidak berubah; parameter opsional baru berdefault boleh. Widget baru: aturan 2.
 UI-14. Ikon Figma dipetakan ke AppIcons. Ada padanan Ionicons = tambah entri dan catat; tidak ada = SVG di assets/icons lewat AppSvg, catat sumbernya. Font baru atau paket baru = proposal (aturan 10).
 UI-15. Teks dan angka contoh di Figma BUKAN data: dilarang disalin ke fixture (aturan 11) atau di-hardcode di widget. Label UI mengikuti spec; label diubah hanya bila tertulis di Figma dan dicatat di spec layar.
 UI-16. Utang Section ConsumerWidget (tool/section_riverpod_debt.txt): selama mode ini JANGAN dimigrasikan kecuali pengguna meminta, karena migrasi menyentuh pembacaan state. Tetap dilarang menambah.
@@ -70,19 +71,28 @@ UI-17. Token akses Figma dan kredensial MCP lain hanya lewat environment variabl
 
 Tes dan selesai:
 UI-18. Tes perilaku tidak boleh diubah. Tes widget Section/Page boleh disesuaikan hanya pada finder dan struktur visual; dilarang menghapus, melemahkan, atau men-skip assertion perilaku. Laporkan setiap tes yang diubah beserta alasannya.
-UI-19. Satu layar selesai = (a) dart run tool/check_all.dart hijau dengan bukti keluaran; (b) git diff --name-only terhadap commit awal sesi tidak memuat zona beku (tampilkan keluarannya); (c) tabel paritas penuh tanpa butir kosong; (d) hasil dibandingkan dengan frame Figma di emulator Android, termasuk keyboard terbuka bila ada field. Jika lingkungan tidak bisa menjalankan emulator, tulis "visual belum diverifikasi" di STATE.md dan minta pengguna memeriksa.
-UI-20. Berhenti dan tanya bila: perlu mengubah zona beku, perlu state/data baru, desain menuntut perilaku baru, paritas tidak terpenuhi, keputusan UI-22 belum terisi, urutan lapisan UI-21 akan dilanggar, atau check_arch gagal karena desain. Dilarang mengakali pemeriksaan (melonggarkan check, memindah logika ke Section, dan sejenisnya).
+UI-19. Satu layar selesai = (a) dart run tool/check_all.dart hijau SEKALI di akhir irisan, bukti cukup perintah dan angka tes; (b) git diff --name-only terhadap dasar irisan tidak memuat zona beku (tampilkan keluarannya); (c) tabel paritas penuh. Bukti visual utama = golden test komponen/layar yang disentuh. Screenshot emulator HANYA atas permintaan pengguna (maksimal 2 per layar: normal dan keyboard bila ada field); tanpa itu tulis "visual belum diverifikasi manual" di STATE.md dan pengguna yang memeriksa.
+UI-20. Berhenti dan tanya bila: perlu mengubah zona beku, perlu state/data baru, desain menuntut perilaku baru, paritas tidak terpenuhi, keputusan UI-22 belum terisi, urutan atomic di dalam irisan (UI-21) akan dilanggar, atau check_arch gagal karena desain. Dilarang mengakali pemeriksaan (melonggarkan check, memindah logika ke Section, dan sejenisnya).
 
 Urutan atomic (gerbang):
-UI-21. Redesign dikerjakan BERURUTAN per lapisan: (0) keputusan desain global (UI-22), (1) token, (2) atoms, (3) molecules, (4) organisms, (5) templates, (6) Page/Section. Setiap lapisan 1-5 = satu proposal docs/design/proposals/NNN-lapisan-<nama>.md (komponen/token yang berubah, padanan komponen Figma, varian baru, layar terdampak). Lapisan berikutnya dimulai setelah proposal lapisan sebelumnya disetujui DAN selesai (check_all hijau). Page/Section sebuah layar baru dikerjakan setelah semua lapisan di bawah yang dipakai layar itu selesai. Persetujuan proposal lapisan = izin aturan 13 hanya untuk lingkup proposal itu.
-UI-22. Keputusan desain global (warna primer dan peran hijau, font, skala tipografi minimum, varian ukuran tombol) dicatat PENGGUNA di docs/design/redesign/decisions.md. Kolom "Usulan" bukan keputusan. Selama kolom "Keputusan pengguna" kosong, lapisan 1 dilarang dimulai: berhenti dan lapor. Dilarang memilih sendiri.
-UI-23. Utang token auth: app_auth_text_styles.dart, app_field_styles.dart, AppColors.auth*, AppRadius.auth*, AppShadows.auth*. Dimigrasikan ke token global pada lapisan 1; sebelum itu hanya boleh menyusut (dilarang menambah entri baru), sesudahnya dilarang ada lagi.
+UI-21. Lapisan 0-2 (keputusan, token, atoms) selesai; berubah lagi hanya bila desain menuntut (proposal singkat). Setiap layar = SATU IRISAN: (a) komponen bersama baru yang dibutuhkan, dari bawah ke atas (molecule, organism, template), lalu (b) Page/Section. Satu proposal singkat per irisan bila ada komponen bersama baru (aturan 2 tetap), satu persetujuan, satu commit. Irisan tanpa komponen baru tidak butuh proposal. Koreksi tata letak dari pengguna dikerjakan langsung, tanpa proposal baru, selama tidak menambah komponen bersama, token, atau dependensi.
+UI-22. Keputusan desain global ada di docs/design/redesign/decisions.md (sudah terisi) dan hanya diubah pengguna. Nilai yang belum ada di sana: berhenti dan tanya, jangan memilih sendiri.
+UI-23. [SELESAI] Utang token auth sudah dimigrasikan. Namespace token per layar atau per fitur tetap dilarang (UI-12).
 UI-24. Section dilarang membuat kontrol atau dekorasi sendiri: Material, InkWell, GestureDetector, ColorFiltered, BoxDecoration/DecoratedBox/Container berdekorasi, Stack+Positioned dekoratif. Tombol = AppButton/AppIconButton, kartu = AppCard atau organisme, pemisah = AppDivider atau molekul, dan seterusnya. Tidak ada padanan = aturan 2 (proposal), bukan membuat sendiri. Tata letak murni (Padding, Align, Column, Row, Expanded, Flexible, SizedBox) tetap boleh.
 UI-25. Pola visual atau struktur yang sama di dua Section atau lebih, termasuk dalam satu fitur, wajib diangkat menjadi molekul/organisme lewat proposal lapisan. Dua Section yang hanya beda teks adalah satu komponen dengan parameter.
 UI-26. Angka spacing/ukuran literal di Section dilarang (SizedBox(height: 12), EdgeInsets literal): pakai AppSpacing, AppGap, atau AppDimensions. Nilai yang belum ada diusulkan di proposal lapisan token.
 UI-27. Page memakai template di shared/widgets/templates. Scaffold, Stack, atau SingleChildScrollView langsung di Page dilarang; butuh slot baru (mis. hero) = ubah template lewat proposal lapisan 5.
-UI-28. Bukti lapisan 1-5: tes widget/golden komponen yang berubah diperbarui, check_all hijau, dan SEMUA golden layar lama yang berubah dilaporkan (daftar + alasan) agar pengguna menyetujui pergeseran visual. Dilarang memperbarui golden layar lama tanpa daftar itu.
-UI-29. Setelah lapisan 1-5 selesai, Page/Section auth (layar 29 dan 31) dikerjakan ulang menjadi komposisi murni: tanpa primitif terlarang (UI-24), tanpa duplikasi (UI-25), tanpa literal (UI-26), memakai AuthScaffold (UI-27). Perilaku, Key, dan tes perilaku tidak berubah (UI-8, UI-11, UI-18).
+UI-28. Golden: perbarui hanya golden komponen/layar yang disentuh irisan. Golden layar lama yang bergeser akibat komponen bersama yang disetujui boleh diperbarui langsung dan dilaporkan SATU baris di STATE.md (jumlah dan layar); tanpa proposal golden terpisah.
+UI-29. [SELESAI] Auth dirapikan menjadi komposisi murni (5c0efcf).
+
+Mode ringkas (hemat waktu dan token):
+UI-30. Frame Figma dibaca SATU kali per layar dan diringkas ke spec layar (elemen ke widget registry). Dilarang membaca ulang frame yang sama. Gambar/screenshot Figma hanya bila struktur node tidak cukup, maksimal 1 per frame.
+UI-31. Saat mengedit pakai dart format, flutter analyze <path yang berubah>, flutter test <berkas terarah>, dan dart run tool/check_arch.dart. check_all penuh hanya di akhir irisan (UI-19); jangan mengulang suite penuh setelah koreksi kecil yang tes terarahnya hijau, kecuali sebelum commit akhir.
+UI-32. Satu commit per irisan (feat(ui)) berisi kode, tes, golden, spec, dan STATE.md. Satu commit fix(ui) per putaran koreksi pengguna. Dilarang commit terpisah untuk docs/state; wip: hanya sebelum berhenti dalam keadaan belum hijau.
+UI-33. Dokumen per irisan hanya: proposal singkat (bila ada komponen bersama baru), spec layar (paritas dan selisih), STATE.md. Dilarang membuat plan, audit, riwayat, atau proposal golden/koreksi baru.
+UI-34. Handoff: pengguna sering berpindah agent, jadi STATE.md adalah satu-satunya sumber lanjut, maksimal 60 baris, format tetap: Sesi aktif (layar, frame, dasar commit); Status irisan (komponen, Section, verifikasi); Keputusan pengguna terbaru; Belum di-commit; Langkah berikutnya (maksimal 5); Blocker; Bukti terakhir (perintah dan angka tes). Diperbarui di akhir irisan, sebelum berhenti, atau saat pengguna bilang pindah agent, bukan tiap langkah. Lebih dari 60 baris = arsipkan bagian lama ke docs/progress/state-history-<tanggal>.md.
+UI-35. Kerjakan hanya layar/frame yang diminta di sesi ini. Dilarang memperbaiki hal lain "sekalian" (layar lain, refactor, utang lama) kecuali memblokir; catat sebagai saran di STATE.md. Fitur, state, atau dependensi baru: berhenti dan tanya SATU kali; jawaban pengguna dicatat sebagai izin spesifik.
+UI-36. Langkah yang sama gagal dua kali (tool MCP, SDK, tes): berhenti, tulis blocker di STATE.md, dan lapor; jangan mencoba pola ketiga. Skrip SDK Windows (. ./tool/windows_native_sdk.ps1) cukup sekali per sesi.
 
 ## Skill dan memori (ringkas; detail di SKILLS.md)
 - Pilih skill lewat tabel niat di SKILLS.md, sekali di awal tugas. Tugas kecil (sekitar 20 baris atau kurang), status, dan pertanyaan singkat tidak perlu skill.
@@ -91,9 +101,9 @@ UI-29. Setelah lapisan 1-5 selesai, Page/Section auth (layar 29 dan 31) dikerjak
 
 ## Selesai dan handoff
 - Selesai = dart run tool/check_all.dart hijau, dengan bukti keluarannya. Tanpa bukti, belum selesai.
-- Setiap tugas atomik selesai, atau saat usage menipis, atau sebelum berhenti: perbarui docs/progress/STATE.md, commit (wip: bila belum hijau), dan laporkan commit terakhir serta langkah berikutnya. Jangan push atau merge tanpa izin.
+- Di akhir tugas (Mode Redesign UI: akhir irisan, UI-32), saat usage menipis, atau sebelum berhenti: perbarui docs/progress/STATE.md, commit (wip: bila belum hijau), dan laporkan commit terakhir serta langkah berikutnya. Jangan push atau merge tanpa izin.
 - Kerjakan satu kelompok widget atau satu layar per sesi, lalu berhenti menunggu tinjauan.
-- Mode Redesign UI: STATE.md juga memuat lapisan aktif (UI-21), layar selesai/ditunda, proposal yang menunggu, selisih desain, tes yang diubah, dan status verifikasi visual.
+- Mode Redesign UI: format STATE.md mengikuti UI-34.
 
 ## Perintah
 flutter run -t lib/main_dummy.dart      # data dummy

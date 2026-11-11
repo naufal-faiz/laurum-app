@@ -1,8 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/customer.dart';
+import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/proposal.dart';
 import 'package:laurum/core/domain/service_item.dart';
 import 'package:laurum/core/services/repository_providers.dart';
+import 'package:laurum/features/proposals/state/proposal_draft.dart';
+
+export 'package:laurum/features/proposals/state/proposal_draft.dart';
 
 class ProposalReview {
   const ProposalReview(this.proposal, this.customer, this.services);
@@ -12,7 +16,12 @@ class ProposalReview {
   bool canApprove(ProposalDraft draft) =>
       proposal.cancelRequested ||
       draft.valid &&
-          services.any((s) => s.id == draft.serviceId && s.isActive) &&
+          services.any(
+            (s) =>
+                s.id == draft.serviceId &&
+                s.isActive &&
+                (s.kind != ServiceKind.kiloan || draft.weightError == null),
+          ) &&
           (customer != null || draft.phoneValid);
 }
 
@@ -40,27 +49,6 @@ final proposalReviewProvider = FutureProvider.family<ProposalReview?, String>((r
   ]);
 });
 
-class ProposalDraft {
-  const ProposalDraft({
-    required this.name,
-    required this.phone,
-    required this.address,
-    required this.serviceId,
-  });
-  final String name, phone, address, serviceId;
-  bool get valid => name.trim().isNotEmpty && serviceId.isNotEmpty;
-  bool get phoneValid =>
-      RegExp(r'^08\d{8,11}$')
-          .hasMatch(phone.replaceAll(RegExp(r'[\s()-]'), '').replaceFirst(RegExp(r'^\+?62'), '0'));
-  ProposalDraft copyWith({String? name, String? phone, String? address, String? serviceId}) =>
-      ProposalDraft(
-        name: name ?? this.name,
-        phone: phone ?? this.phone,
-        address: address ?? this.address,
-        serviceId: serviceId ?? this.serviceId,
-      );
-}
-
 class ProposalDraftController extends AsyncNotifier<ProposalDraft?> {
   ProposalDraftController(this.id);
   final String id;
@@ -79,7 +67,11 @@ class ProposalDraftController extends AsyncNotifier<ProposalDraft?> {
   void name(String value) => state = AsyncData(state.value?.copyWith(name: value));
   void phone(String value) => state = AsyncData(state.value?.copyWith(phone: value));
   void address(String value) => state = AsyncData(state.value?.copyWith(address: value));
-  void service(String value) => state = AsyncData(state.value?.copyWith(serviceId: value));
+  void service(String value) =>
+      state = AsyncData(state.value?.copyWith(serviceId: value, weight: ''));
+  void weight(String value) =>
+      state = AsyncData(state.value?.copyWith(weight: normalizeProposalWeight(value)));
+
   void retry() {
     ref.invalidate(proposalReviewProvider(id));
     ref.invalidateSelf();

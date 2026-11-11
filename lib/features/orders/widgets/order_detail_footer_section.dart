@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
+import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
 
 class OrderDetailFooterSection extends StatelessWidget {
   const OrderDetailFooterSection({
@@ -31,38 +33,37 @@ class OrderDetailFooterSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: AppSpacing.cardGap,
           children: [
-            Row(
-              spacing: AppSpacing.cardGap,
-              children: [
-                Expanded(
-                  child: AppButton(
-                    'Edit',
-                    variant: AppButtonVariant.actionOutline,
-                    onPressed: busy ? null : onEdit,
-                  ),
-                ),
-                Expanded(
-                  child: AppButton(
-                    'Hapus',
-                    variant: AppButtonVariant.actionOutline,
-                    onPressed: busy ? null : onDelete,
-                  ),
-                ),
-              ],
-            ),
             if (data.completionHeld)
               AppButton(
                 'Cetak struk',
                 variant: AppButtonVariant.actionOutline,
                 onPressed: busy ? null : onPrint,
               ),
-            AppButton(
-              data.completionHeld ? 'Terima pembayaran' : 'Selesaikan',
-              onPressed: busy
-                  ? null
-                  : data.completionHeld
-                  ? onPayment
-                  : onComplete,
+            Row(
+              spacing: AppSpacing.cardGap,
+              children: [
+                AppIconButton(
+                  icon: AppIcons.edit,
+                  label: 'Edit',
+                  onPressed: busy ? null : onEdit,
+                ),
+                AppIconButton(
+                  icon: AppIcons.delete,
+                  label: 'Hapus',
+                  color: AppColors.error,
+                  onPressed: busy ? null : onDelete,
+                ),
+                Expanded(
+                  child: AppButton(
+                    data.completionHeld ? 'Terima pembayaran' : 'Selesaikan',
+                    onPressed: busy
+                        ? null
+                        : data.completionHeld
+                        ? onPayment
+                        : onComplete,
+                  ),
+                ),
+              ],
             ),
           ],
         )

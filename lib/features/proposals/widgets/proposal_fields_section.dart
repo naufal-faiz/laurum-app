@@ -15,12 +15,13 @@ class ProposalFieldsSection extends StatelessWidget {
     required this.onPhone,
     required this.onAddress,
     required this.onService,
+    required this.onWeight,
     super.key,
   });
   final ProposalReview review;
   final ProposalDraft draft;
   final bool enabled;
-  final ValueChanged<String> onName, onPhone, onAddress, onService;
+  final ValueChanged<String> onName, onPhone, onAddress, onService, onWeight;
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,6 +41,7 @@ class ProposalFieldsSection extends StatelessWidget {
           draft: draft,
           enabled: enabled,
           onService: onService,
+          onWeight: onWeight,
         ),
         ProposalAddressSection(
           draft: draft,

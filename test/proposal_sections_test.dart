@@ -10,7 +10,6 @@ import 'package:laurum/features/proposals/widgets/proposal_history_section.dart'
 import 'package:laurum/features/proposals/widgets/proposal_message_section.dart';
 import 'package:laurum/features/services/data/service_fixtures.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
-import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
@@ -53,6 +52,7 @@ void main() {
               onPhone: (_) {},
               onAddress: (_) {},
               onService: (v) => service = v,
+              onWeight: (_) {},
             ),
           ),
         ),
@@ -64,9 +64,11 @@ void main() {
     );
     await tester.enterText(field, 'Agus Baru');
     expect(name, 'Agus Baru');
-    final chip = find.descendant(of: find.byType(ChipBar), matching: find.text('Cuci kiloan'));
-    await tester.ensureVisible(chip);
-    await tester.tap(chip);
+    await tester.ensureVisible(find.text('Ubah'));
+    await tester.tap(find.text('Ubah'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Cuci kiloan'));
+    await tester.pumpAndSettle();
     expect(service, 'srv-002');
   });
   testWidgets('ProposalHistorySection counts baseline and delegates filter', (tester) async {

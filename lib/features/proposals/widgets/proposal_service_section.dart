@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/domain/money.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/proposals/pages/proposal_service_picker_flow.dart';
+import 'package:laurum/features/proposals/pages/proposal_weight_flow.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
-import 'package:laurum/shared/widgets/atoms/app_badge.dart';
-import 'package:laurum/shared/widgets/atoms/app_card.dart';
-import 'package:laurum/shared/widgets/atoms/app_divider.dart';
+import 'package:laurum/features/proposals/widgets/proposal_service_card_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
-import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
 class ProposalServiceSection extends StatelessWidget {
@@ -17,73 +17,57 @@ class ProposalServiceSection extends StatelessWidget {
     required this.draft,
     required this.enabled,
     required this.onService,
+    required this.onWeight,
     super.key,
   });
   final ProposalReview review;
   final ProposalDraft draft;
   final bool enabled;
-  final ValueChanged<String> onService;
+  final ValueChanged<String> onService, onWeight;
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    spacing: AppSpacing.small,
-    children: [
-      const SectionHeader(
-        title: 'Layanan yang diusulkan AI',
-        titleColor: AppColors.primaryInk,
-        subtitle: 'Periksa dan sesuaikan sebelum menyetujui',
-      ),
-      AppCard(
-        padding: const EdgeInsets.all(AppSpacing.medium),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: AppSpacing.xsmall,
-          children: [
-            const AppText('Layanan', variant: AppTextVariant.label, color: AppColors.ink3),
-            for (final service in review.services.where((s) => s.id == draft.serviceId))
-              AppText(service.name, variant: AppTextVariant.bodyStrong),
-            if (review.services.any(
-              (s) => s.id == draft.serviceId && s.kind == ServiceKind.kiloan,
-            )) ...[
-              const AppDivider(),
-              const AppText('Berat', variant: AppTextVariant.label, color: AppColors.ink3),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: AppBadge('Belum diketahui', variant: AppBadgeVariant.menungguJemput),
-              ),
-            ],
-            const AppDivider(),
-            for (final service in review.services.where((s) => s.id == draft.serviceId))
-              Row(
-                spacing: AppSpacing.small,
-                children: [
-                  const AppText('Tarif', variant: AppTextVariant.caption, color: AppColors.ink3),
-                  Expanded(
-                    child: AppText(
-                      '${Formatters.rupiah(service.price)} / ${service.kind == ServiceKind.kiloan ? 'kg' : 'pcs'}',
-                      variant: AppTextVariant.label,
-                      color: AppColors.primaryInk,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-          ],
+  Widget build(BuildContext context) {
+    final service = review.services.where((s) => s.id == draft.serviceId).firstOrNull;
+    final kilo = service?.kind == ServiceKind.kiloan;
+    final total = service == null || (kilo && draft.weightMilli == 0)
+        ? null
+        : Formatters.rupiah(
+            lineTotal(qtyMilli: kilo ? draft.weightMilli : 1000, unitPrice: service.price),
+          );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      spacing: AppSpacing.small,
+      children: [
+        const SectionHeader(
+          title: 'Layanan yang diusulkan AI',
+          titleColor: AppColors.primaryInk,
+          subtitle: 'Ketuk Ubah jika AI salah tafsir',
         ),
-      ),
-      ChipBar(
-        labels: review.services.map((s) => s.name).toList(),
-        selectedIndex: review.services.any((s) => s.id == draft.serviceId)
-            ? review.services.indexWhere((s) => s.id == draft.serviceId)
-            : null,
-        onSelected: enabled ? (i) => onService(review.services[i].id) : null,
-      ),
-      if (review.services.any((s) => s.id == draft.serviceId && s.kind == ServiceKind.kiloan))
-        const AppText(
-          'Berat belum diisi. Lengkapi setelah disetujui lewat Edit order.',
-          variant: AppTextVariant.caption,
-          color: AppColors.ink3,
+        ProposalServiceCardSection(
+          serviceName: service?.name ?? 'Pilih layanan',
+          weight: !kilo || draft.weightMilli == 0 ? null : Formatters.berat(draft.weightMilli),
+          total: total,
+          kilo: kilo,
+          enabled: enabled,
+          onChangeService: enabled
+              ? () => showProposalServicePicker(
+                  context,
+                  services: review.services,
+                  selectedId: draft.serviceId,
+                  onService: onService,
+                )
+              : null,
+          onChangeWeight: enabled
+              ? () => showProposalWeightSheet(
+                  context,
+                  id: review.proposal.id,
+                  value: draft.weight,
+                  onChanged: onWeight,
+                )
+              : null,
         ),
-    ],
-  );
+        if (kilo && draft.weightError != null)
+          AppText(draft.weightError!, variant: AppTextVariant.caption, color: AppColors.errorInk),
+      ],
+    );
+  }
 }

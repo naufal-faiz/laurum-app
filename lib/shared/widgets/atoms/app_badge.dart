@@ -4,7 +4,7 @@ import 'package:laurum/core/theme/app_control_tokens.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
-enum AppBadgeVariant { diproses, siap, menungguJemput, selesai, dibatalkan }
+enum AppBadgeVariant { diproses, siap, menungguJemput, selesai, dibatalkan, perhatian }
 
 class AppBadge extends StatelessWidget {
   const AppBadge(this.label, {required this.variant, super.key});
@@ -19,6 +19,7 @@ class AppBadge extends StatelessWidget {
       AppBadgeVariant.menungguJemput ||
       AppBadgeVariant.selesai => (AppColors.slateTint, AppColors.slateInk),
       AppBadgeVariant.dibatalkan => (AppColors.errorTint, AppColors.errorInk),
+      AppBadgeVariant.perhatian => (AppColors.warningBorder, AppColors.onPrimary),
     };
     return DecoratedBox(
       decoration: BoxDecoration(color: background, borderRadius: AppRadius.badge),

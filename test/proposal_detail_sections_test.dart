@@ -6,10 +6,10 @@ import 'package:laurum/features/proposals/state/proposal_review.dart';
 import 'package:laurum/features/proposals/widgets/proposal_address_section.dart';
 import 'package:laurum/features/proposals/widgets/proposal_customer_fields_section.dart';
 import 'package:laurum/features/proposals/widgets/proposal_privacy_section.dart';
+import 'package:laurum/features/proposals/widgets/proposal_service_card_section.dart';
 import 'package:laurum/features/proposals/widgets/proposal_service_section.dart';
 import 'package:laurum/features/services/data/service_fixtures.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
-import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/notice_ai.dart';
 
 void main() {
@@ -65,7 +65,10 @@ void main() {
         ),
       ),
     );
-    expect(find.text('AI kurang yakin dengan nomor rumah/patokan detail.'), findsOneWidget);
+    expect(
+      find.textContaining('AI kurang yakin dengan nomor rumah/patokan detail.', findRichText: true),
+      findsOneWidget,
+    );
     await tester.enterText(find.byType(TextField), proposal.address);
     expect(address, proposal.address);
     expect(tester.widget<AppTextField>(find.byType(AppTextField)).maxLines, 3);
@@ -80,21 +83,56 @@ void main() {
             child: ProposalServiceSection(
               review: ProposalReview(proposal, null, serviceFixtures),
               draft: draft,
-              enabled: false,
+              enabled: true,
               onService: (_) => edits++,
+              onWeight: (_) {},
             ),
           ),
         ),
       ),
     );
+    await tester.tap(find.text('Ubah'));
+    await tester.pumpAndSettle();
+    final sheet = find.byType(BottomSheet);
     for (final service in serviceFixtures) {
-      expect(
-        find.descendant(of: find.byType(ChipBar), matching: find.text(service.name)),
-        findsOneWidget,
-      );
+      expect(find.descendant(of: sheet, matching: find.text(service.name)), findsOneWidget);
     }
-    await tester.tap(find.text(serviceFixtures.first.name));
-    expect(edits, 0);
+    await tester.tap(
+      find.descendant(of: sheet, matching: find.text(serviceFixtures.last.name)),
+    );
+    await tester.pumpAndSettle();
+    expect(edits, 1);
+  });
+  testWidgets('service card shows chip, total and delegates two links', (tester) async {
+    var service = 0, weight = 0;
+    Future<void> pump(String? chipLabel, String? total) => tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: Scaffold(
+          body: ProposalServiceCardSection(
+            serviceName: 'Cuci Setrika',
+            weight: chipLabel,
+            total: total,
+            kilo: true,
+            enabled: true,
+            onChangeService: () => service++,
+            onChangeWeight: () => weight++,
+          ),
+        ),
+      ),
+    );
+    await pump(null, null);
+    expect(find.text('LAYANAN'), findsOneWidget);
+    expect(find.text('Cuci Setrika'), findsOneWidget);
+    expect(find.text('Belum diketahui'), findsOneWidget);
+    expect(find.text('Belum dihitung'), findsOneWidget);
+    await tester.tap(find.text('Ubah'));
+    await tester.tap(find.text('Isi berat'));
+    expect(service, 1);
+    expect(weight, 1);
+    await pump('4,5 kg', 'Rp40.500');
+    expect(find.text('4,5 kg'), findsOneWidget);
+    expect(find.text('Rp40.500'), findsOneWidget);
   });
   testWidgets('privacy retains original AI promise', (tester) async {
     await tester.pumpWidget(

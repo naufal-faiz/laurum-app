@@ -29,4 +29,20 @@ void main() {
       );
     });
   }
+  testWidgets('sheet Isi berat visible above keyboard with save', (tester) async {
+    configureKeyboardTest(tester, size: const Size(320, 844));
+    await pumpAntrean(tester, location: '/antrean/usulan/prop-002');
+    await tester.ensureVisible(find.text('Isi berat'));
+    await tester.tap(find.text('Isi berat'));
+    await tester.pumpAndSettle();
+    final field = find.descendant(
+      of: find.byWidgetPredicate((w) => w is AppTextField && w.label == 'Berat'),
+      matching: find.byType(TextField),
+    );
+    await expectKeyboardVisible(
+      tester,
+      field: field,
+      save: find.widgetWithText(AppButton, 'Simpan'),
+    );
+  });
 }
