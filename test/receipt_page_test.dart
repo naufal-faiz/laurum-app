@@ -39,7 +39,7 @@ void main() {
     final orderId = (await checkout.save())!;
 
     final host = await pumpAntrean(tester, container: scope, location: '/transaksi/nota/$orderId');
-    expect(find.text('Nota tersimpan'), findsWidgets);
+    expect(find.text('Struk Pembayaran'), findsWidgets);
     expect(find.text('A-0143'), findsOneWidget);
     expect(find.textContaining('TOTAL'), findsOneWidget);
     await tester.ensureVisible(find.byTooltip('Cetak struk'));
@@ -53,9 +53,9 @@ void main() {
     expect(find.text('Coba lagi'), findsOneWidget);
     expect(find.text('Pengaturan printer'), findsOneWidget);
 
-    await tester.ensureVisible(find.text('WhatsApp'));
+    await tester.ensureVisible(find.byTooltip('WhatsApp'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('WhatsApp'));
+    await tester.tap(find.byTooltip('WhatsApp'));
     await tester.pumpAndSettle();
     expect(launcher.whatsAppCalls, hasLength(1));
     expect(launcher.whatsAppCalls.single.phone, '0813-7788-1122');
@@ -65,8 +65,8 @@ void main() {
     expect(find.text('Detail order'), findsWidgets);
     await tester.tap(find.byTooltip('Kembali'));
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.text('Ke beranda'));
-    await tester.tap(find.text('Ke beranda'));
+    await tester.ensureVisible(find.text('Selesai'));
+    await tester.tap(find.text('Selesai'));
     await tester.pumpAndSettle();
     expect(host.router.routeInformationProvider.value.uri.path, '/antrean');
   });

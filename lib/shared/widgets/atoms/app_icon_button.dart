@@ -10,7 +10,7 @@ import 'package:laurum/shared/widgets/atoms/app_svg.dart';
 
 /// `plain` = ikon polos 48 dp; `hero` = lingkaran 36 dp di atas hero auth;
 /// `compact` = ikon 40 dp untuk slot sempit (tombol mata di dalam field).
-enum AppIconButtonVariant { plain, hero, compact }
+enum AppIconButtonVariant { plain, hero, compact, tilePrimary, tileSuccess, tileNeutral }
 
 class AppIconButton extends StatelessWidget {
   const AppIconButton({
@@ -36,12 +36,20 @@ class AppIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final hero = variant == AppIconButtonVariant.hero;
     final compact = variant == AppIconButtonVariant.compact;
+    final tile = variant.index >= AppIconButtonVariant.tilePrimary.index;
+    final success = variant == AppIconButtonVariant.tileSuccess;
     final tint = hero
         ? AppColors.onPrimary
         : onPressed == null
         ? AppControlTokens.disabledForeground
+        : success
+        ? AppColors.successInk
         : color;
-    final glyphSize = hero ? AppDimensions.iconBack : AppDimensions.iconAction;
+    final glyphSize = tile
+        ? AppDimensions.icon
+        : hero
+        ? AppDimensions.iconBack
+        : AppDimensions.iconAction;
     final glyph = iconAsset != null
         ? AppSvg(iconAsset!, size: glyphSize, color: tint)
         : AppIcon(icon!, size: glyphSize, color: tint);
@@ -57,6 +65,14 @@ class AppIconButton extends StatelessWidget {
       maximumSize: Size.square(compact ? AppControlTokens.buttonSmall : AppSpacing.touchTarget),
       padding: EdgeInsets.zero,
       shape: const RoundedRectangleBorder(borderRadius: AppRadius.action),
+      backgroundColor: tile
+          ? (success
+                ? AppColors.successTint
+                : variant == AppIconButtonVariant.tilePrimary
+                ? AppColors.primaryTint
+                : AppColors.surfaceLow)
+          : null,
+      disabledBackgroundColor: tile ? AppColors.chipIdle : null,
       tapTargetSize: compact ? MaterialTapTargetSize.shrinkWrap : null,
     );
     return IconButton(

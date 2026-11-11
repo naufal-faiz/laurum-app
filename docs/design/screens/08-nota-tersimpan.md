@@ -2,6 +2,57 @@
 Rute: /transaksi/nota/:id   Fase: 3   Frame .pen: "Transaksi - Nota Tersimpan"
 Template: SubScaffold (AppBarSub, tanpa nav)
 
+## Redesign frame 4294967599 (11 Nov 2026)
+Frame dibaca sekali lewat MCP FigCraft. Pengguna lalu memilih frame yang sama dan
+meminta snapshot: selection 4294967599 dikonfirmasi, snapshot 1 diambil sebagai acuan terbaru.
+Ekspor PDF/dependensi dan penempatan tautan disetujui pengguna pada proposal 023.
+Urutan Figma: header kembali/judul/nomor nota/pelanggan/status; label pratinjau;
+kartu struk putih di area abu-abu; footer terbaru Selesai, WhatsApp, Unduh, Cetak satu baris.
+Pemetaan: FormScaffold detail, ReceiptStatusSection, ReceiptDocument + ReceiptRows,
+ReceiptActionsSection, AppIconButton tileSuccess/tilePrimary/tileNeutral, AppButton dan PaymentBadge.
+Pratinjau grafis mengikuti snapshot terpilih; keluaran formatter cetak/WhatsApp tetap utuh.
+Font minimum 11 dan warna/jarak memakai token global; radius 18 dipetakan ke card 16.
+
+### Paritas redesign
+Tabel dibuat sebelum implementasi; centang sesudah kode dan verifikasi.
+
+| Butir | Sumber/aksi/keadaan yang dipertahankan | Terverifikasi |
+|---|---|---|
+| Nota | receiptViewProvider(orderId): order/items/payments/customer/business/settings/savingsBalance | [ ] |
+| Isi | receipt.lines identik formatter; paperMm 80 -> lebar 384, lainnya 320 | [ ] |
+| Status | paidAmount/payStatus/paymentLabel turunan; Lunas/Sisa/COD | [ ] |
+| Cetak state | receiptPrintProvider: printing/error/notice; controller yang sama | [ ] |
+| Penyelesaian | orderCompletionProvider(orderId), query complete=1; _print dan guard lama | [ ] |
+| Printer | printServiceProvider: status dan connectedPrinter.name | [ ] |
+| Sibuk | printing.printing atau completion.busy; semua aksi footer nonaktif | [ ] |
+| Cetak/retry | _print(ref, receipt, completing) dengan argumen tetap | [ ] |
+| Printer settings | context.push('/lainnya/printer') | [ ] |
+| WhatsApp | controller.sendWhatsApp(receipt) | [ ] |
+| Selesai | pengganti label Ke beranda: context.go('/antrean'), tidak menyelesaikan order | [ ] |
+| Detail | context.push('/order/$orderId') | [ ] |
+| Catat bayar | openOrderPayment(context, ref, orderId); hanya sisa > 0 dan tidak batal | [ ] |
+| Kembali | context.canPop() ? context.pop() : context.go('/antrean') | [ ] |
+| Memuat | enam AppSkeleton; tidak ada aksi nota | [ ] |
+| Gagal/kosong | Gagal memuat nota / Nota tidak ditemukan; ikon lama | [ ] |
+| Error/notice | error completion/cetak sesuai mode, retry, Pengaturan printer, notice | [ ] |
+| Key/akses | tidak ada Key eksplisit di Page/Section; semantics/tooltip Cetak struk tetap | [ ] |
+| Teks besar | footer dan Catat pembayaran terbaca/terjangkau pada 320 px, teks 2x | [ ] |
+
+### Selisih desain
+- Bagikan tidak ditambahkan. Unduh PDF memakai layanan nyata dengan dialog simpan file_saver.
+- Tidak membuat tombol Unduh mati/placeholder. Barcode contoh tidak dipalsukan.
+- Isi preview grafis dari nota tersimpan; formatter cetak/WhatsApp 32 kolom tetap utuh.
+- Data kasir tidak ditambahkan; mengikuti isi/pengaturan nota yang sudah tersimpan.
+- Printer/status/konfirmasi, retry dan Catat pembayaran lama tetap tersedia.
+- Label Ke beranda diganti Selesai sesuai permintaan; callback navigasi tetap, status order tidak berubah.
+- Usulan penempatan fungsi lama: status/error di body, Lihat detail sebagai tautan,
+  Catat pembayaran di body bila tersedia; empat aksi utama tetap di footer.
+- Ekspor memakai pdf 3.13.1 dan file_saver 0.7.0 hasil flutter pub add; pembatalan tidak memunculkan sukses.
+- PDF memakai Helvetica dengan fallback aset IBM Plex Mono; pratinjau aplikasi memakai Inter.
+- Izin state/layanan/dependensi ekspor dan penempatan aksi tambahan diberikan pengguna 11 Nov.
+- WIP: footer normal lolos; teks 2x pada 320 px membuat label Selesai menjadi 132 dp (empat baris).
+- Tes callback lama dipertahankan; label judul/beranda/WhatsApp dan finder mengikuti struktur baru.
+
 Komposisi:
 - ReceiptStatusSection: AppCard Nomor nota, AppStatusText Lunas/DP/Belum bayar,
   konfirmasi pembayaran tersimpan atau dicatat saat diterima, status printer (nama + Terhubung / belum terhubung).

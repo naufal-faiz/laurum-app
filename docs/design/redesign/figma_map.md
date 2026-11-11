@@ -15,7 +15,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `05-tambah-pelanggan-cepat.md` (05 - Tambah Pelanggan Cepat) | | Menunggu | |
 | `06-printer-struk.md` (06 - Printer dan Struk) | | Menunggu | |
 | `07-pembayaran.md` (07 - Pembayaran) | `LAURUM · Pembayaran` (ID: 1146) | Selesai; check_all hijau; menunggu tinjauan | Total biru, pilihan metode per baris; footer Kembali/Konfirmasi pembayaran satu baris; tabungan/aksi lama tetap; lihat spec 07 |
-| `08-nota-tersimpan.md` (08 - Nota Tersimpan) | | Menunggu | |
+| `08-nota-tersimpan.md` (08 - Nota Tersimpan) | `LAURUM · Struk Pembayaran` (ID: 4294967599) | WIP; footer teks 2x belum hijau | Empat aksi Selesai/WhatsApp/Unduh/Cetak; ekspor PDF disetujui; snapshot 1; lihat spec 08 |
 | `09-detail-order.md` (09 - Detail Order) | `LAURUM · Detail Order` (ID: 612) | Persiapan 018–020 disetujui | Komponen bersama dahulu; seluruh mode/status/COD/aksi lama tetap |
 | `10-edit-order.md` (10 - Edit Order) | | Menunggu | |
 | `12-daftar-pelanggan.md` (12 - Pelanggan - Daftar Pelanggan) | | Menunggu | |

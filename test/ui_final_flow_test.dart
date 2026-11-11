@@ -41,14 +41,14 @@ void main() {
     expect(find.text('Tabungan dipakai -Rp5.000'), findsOneWidget);
     expect(find.text('Sisa bayar Rp13.000'), findsWidgets);
     await uiFinalTap(tester, 'Konfirmasi pembayaran');
-    expect(find.text('Nota tersimpan'), findsOneWidget);
+    expect(find.text('Struk Pembayaran'), findsOneWidget);
     final repo = scope.read(orderRepositoryProvider);
     final order = (await repo.getOrderByOrderNo('A-0143'))!;
     final payments = await repo.getPaymentsByOrderId(order.id);
     expect(payments.where((p) => p.method == PayMethod.tabungan).single.amount, 5000);
     expect(payments.where((p) => p.method == PayMethod.tunai).single.amount, 13000);
     expect(await scope.read(savingsRepositoryProvider).getBalance(customerId), 0);
-    await uiFinalTap(tester, 'Ke beranda');
+    await uiFinalTap(tester, 'Selesai');
     expect(
       (await scope.read(antreanDataProvider.future)).orders.map((o) => o.id),
       contains(order.id),

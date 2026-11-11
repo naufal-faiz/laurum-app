@@ -45,13 +45,6 @@ class ReceiptStatusSection extends StatelessWidget {
                 spacing: AppSpacing.cardGap,
                 alignment: WrapAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const AppText('Nomor nota', variant: AppTextVariant.caption),
-                      AppText(view.order.orderNo, variant: AppTextVariant.titleSub),
-                    ],
-                  ),
                   AppStatusText(
                     paymentLabel(view.order, paid),
                     variant: AppStatusTextVariant.values.byName(status.name),

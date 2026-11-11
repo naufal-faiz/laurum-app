@@ -25,6 +25,7 @@ molecules:
   - StatTile
   - MenuRow
   - SelectionTile
+  - ReceiptRows
   - ToggleRow
   - LockedRow
   - BannerMessage
@@ -73,6 +74,7 @@ organisms:
   - WeeklyBarChart
   - TopServices
   - ReceiptPreview
+  - ReceiptDocument
   - ReceiptToggleList
   - Numpad
   - ConfirmModal

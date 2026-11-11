@@ -48,7 +48,7 @@ void main() {
     expect(printer.calls, 0);
     await tester.tap(find.text('Cetak struk'));
     await tester.pumpAndSettle();
-    expect(find.text('Nota tersimpan'), findsOneWidget);
+    expect(find.text('Struk Pembayaran'), findsOneWidget);
     expect(printer.calls, 0);
     expect(
       (await scope.read(orderRepositoryProvider).getOrderById('ord-0142'))!.status,

@@ -4,7 +4,7 @@ import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/features/reports/state/outstanding_data.dart';
 import 'package:laurum/features/reports/widgets/outstanding_list_section.dart';
 import 'package:laurum/features/transactions/state/receipt_view.dart';
-import 'package:laurum/features/transactions/widgets/receipt_actions_section.dart';
+import 'package:laurum/features/transactions/widgets/receipt_links_section.dart';
 import 'package:laurum/features/transactions/widgets/receipt_status_section.dart';
 
 import 'r9_checkout_host.dart';
@@ -37,11 +37,8 @@ void main() {
     var recorded = false;
     await pumpR9Section(
       tester,
-      ReceiptActionsSection(
+      ReceiptLinksSection(
         busy: false,
-        onPrint: () {},
-        onWhatsApp: () {},
-        onHome: () {},
         onOrder: () {},
         onRecord: () => recorded = true,
       ),
@@ -50,11 +47,8 @@ void main() {
     expect(recorded, isTrue);
     await pumpR9Section(
       tester,
-      ReceiptActionsSection(
+      ReceiptLinksSection(
         busy: false,
-        onPrint: () {},
-        onWhatsApp: () {},
-        onHome: () {},
         onOrder: () {},
       ),
     );

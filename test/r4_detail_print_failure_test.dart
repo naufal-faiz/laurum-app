@@ -18,7 +18,7 @@ void main() {
       await tester.tap(find.text(cancelled ? 'Batal' : 'Cetak struk'));
       await tester.pumpAndSettle();
       if (!cancelled) {
-        expect(find.text('Nota tersimpan'), findsOneWidget);
+        expect(find.text('Struk Pembayaran'), findsOneWidget);
         expect(printer.calls, 0);
         await tester.ensureVisible(find.byTooltip('Cetak struk'));
         await tester.tap(find.byTooltip('Cetak struk'));

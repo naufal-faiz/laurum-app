@@ -51,7 +51,7 @@ void main() {
 
     await tester.tap(find.text('Konfirmasi pembayaran'));
     await tester.pumpAndSettle();
-    expect(find.text('Nota tersimpan'), findsWidgets);
+    expect(find.text('Struk Pembayaran'), findsWidgets);
     expect(find.text('A-0143'), findsOneWidget);
     expect(find.textContaining('TOTAL'), findsOneWidget);
     expect(host.container.read(transactionDraftProvider).isEmpty, isTrue);

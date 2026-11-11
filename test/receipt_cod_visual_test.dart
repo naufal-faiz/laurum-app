@@ -26,7 +26,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
       expect(find.text('Catat pembayaran').hitTestable(), findsOneWidget);
-      expect(find.text('Ke beranda').hitTestable(), findsOneWidget);
+      expect(find.text('Selesai').hitTestable(), findsOneWidget);
       await expectLater(
         find.byKey(const ValueKey('antrean-golden')),
         matchesGoldenFile('goldens/receipt_cod_actions_${scale.toInt()}x.png'),

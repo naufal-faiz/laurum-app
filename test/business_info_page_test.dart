@@ -34,7 +34,7 @@ void main() {
     final order = await host.container.read(orderRepositoryProvider).getOrderByOrderNo('A-0141');
     host.router.go('/transaksi/nota/${order!.id}');
     await tester.pumpAndSettle();
-    expect(find.text('Nota tersimpan'), findsOneWidget);
+    expect(find.text('Struk Pembayaran'), findsOneWidget);
     expect(find.textContaining('LAUNDRY BERSIH'), findsWidgets);
   });
 

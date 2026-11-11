@@ -60,7 +60,7 @@ void main() {
       }
       await tester.tap(find.text('Cetak struk'));
       await tester.pumpAndSettle();
-      expect(find.text('Nota tersimpan'), findsOneWidget);
+      expect(find.text('Struk Pembayaran'), findsOneWidget);
       expect(find.text('Printer belum terhubung'), findsOneWidget);
       expect(printer.calls, 0);
       expect((await repo.getOrderById(id))!.status, before.status);

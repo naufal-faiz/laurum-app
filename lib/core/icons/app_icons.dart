@@ -50,6 +50,7 @@ enum AppIcons {
   qrCode(Ionicons.qrCodeOutline),
   radioSelected(Ionicons.radioButtonOnOutline),
   radioUnselected(Ionicons.radioButtonOffOutline),
+  download(Ionicons.downloadOutline),
   offline(Ionicons.cloudOfflineOutline),
   addCustomer(Ionicons.personAddOutline),
   backspace(Ionicons.backspaceOutline),
