@@ -32,7 +32,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `22-info-usaha.md` (22 - Info Usaha) | | Menunggu | |
 | `23-daftar-pengeluaran.md` (23 - Daftar Pengeluaran) | | Menunggu | |
 | `24-catat-pengeluaran.md` (24 - Catat Pengeluaran) | | Menunggu | |
-| `25-detail-usulan-ai.md` (25 - Detail Usulan AI) | `LAURUM · Detail Usulan AI` (ID: 512) | Persiapan 018–020 disetujui | Tanpa fitur berat/jadwal jemput baru; field/draf/aksi lama dipertahankan |
+| `25-detail-usulan-ai.md` (25 - Detail Usulan AI) | `LAURUM · Detail Usulan AI` (ID: 512) | Selesai 018-020 | Android + keyboard diperiksa; 1060 tes lulus; tanpa fitur berat/jadwal baru |
 | `26-riwayat-usulan-ai.md` (26 - Riwayat Usulan AI) | | Menunggu | |
 | `27-pengaturan-ai.md` (27 - Pengaturan AI & WhatsApp) | | Menunggu | |
 | `28-hubungkan-whatsapp.md` (28 - Hubungkan WhatsApp) | | Menunggu | |

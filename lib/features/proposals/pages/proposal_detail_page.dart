@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
+import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/proposals/pages/proposal_review_flow.dart';
 import 'package:laurum/features/proposals/state/proposal_actions.dart';
+import 'package:laurum/features/proposals/state/proposal_demo_accuracy.dart';
 import 'package:laurum/features/proposals/state/proposal_history.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
 import 'package:laurum/features/proposals/widgets/proposal_fields_section.dart';
+import 'package:laurum/features/proposals/widgets/proposal_footer_section.dart';
 import 'package:laurum/features/proposals/widgets/proposal_message_section.dart';
+import 'package:laurum/features/proposals/widgets/proposal_privacy_section.dart';
+import 'package:laurum/shared/widgets/atoms/app_badge.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
-import 'package:laurum/shared/widgets/molecules/notice_ai.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 
 class ProposalDetailPage extends ConsumerWidget {
@@ -28,37 +33,23 @@ class ProposalDetailPage extends ConsumerWidget {
     final pending = review?.proposal.status == ProposalStatus.menunggu;
     final enabled = pending && !action.isLoading;
     return FormScaffold(
-      title: 'Detail usulan AI',
+      title: 'Periksa Usulan AI',
+      subtitle: review == null
+          ? null
+          : 'Dari pesan WhatsApp · ${Formatters.jam(review.proposal.createdAt)}',
+      appBarVariant: AppBarSubVariant.detail,
+      trailing: pending ? const AppBadge('Perlu dicek', variant: AppBadgeVariant.diproses) : null,
       backLabel: 'Kembali',
       onBack: () => context.canPop() ? context.pop() : context.go('/antrean'),
       footer: review == null || draft == null
           ? const SizedBox.shrink()
-          : pending
-          ? Row(
-              spacing: AppSpacing.cardGap,
-              children: [
-                Expanded(
-                  child: AppButton(
-                    'Tolak',
-                    variant: AppButtonVariant.destructiveOutline,
-                    onPressed: enabled ? () => rejectReviewedProposal(context, ref, id) : null,
-                  ),
-                ),
-                Expanded(
-                  child: AppButton(
-                    review.proposal.cancelRequested ? 'Batalkan order' : 'Setujui jadi order',
-                    onPressed: enabled && review.canApprove(draft)
-                        ? () => approveReviewedProposal(context, ref, review, draft)
-                        : null,
-                  ),
-                ),
-              ],
-            )
-          : review.proposal.orderId == null
-          ? AppText(proposalStatusLabel(review.proposal.status))
-          : AppButton(
-              'Buka order',
-              onPressed: () => context.push('/order/${review.proposal.orderId}'),
+          : ProposalFooterSection(
+              review: review,
+              draft: draft,
+              enabled: enabled,
+              onReject: () => rejectReviewedProposal(context, ref, id),
+              onApprove: () => approveReviewedProposal(context, ref, review, draft),
+              onOpen: () => context.push('/order/${review.proposal.orderId}'),
             ),
       body: snapshot.hasError
           ? AppButton('Coba lagi', onPressed: actions.retry)
@@ -78,6 +69,7 @@ class ProposalDetailPage extends ConsumerWidget {
                 if (!pending) AppText(proposalStatusLabel(review.proposal.status)),
                 ProposalMessageSection(
                   review: review,
+                  demoAccuracy: ref.watch(proposalDemoAccuracyProvider)[id],
                   onWhatsApp: draft?.phoneValid != true
                       ? null
                       : () => openProposalWhatsApp(ref, draft!.phone),
@@ -91,7 +83,7 @@ class ProposalDetailPage extends ConsumerWidget {
                   onAddress: actions.address,
                   onService: actions.service,
                 ),
-                const NoticeAi(),
+                const ProposalPrivacySection(),
               ],
             ),
     );

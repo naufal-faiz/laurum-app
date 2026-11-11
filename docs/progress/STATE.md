@@ -10,7 +10,7 @@ Diperbarui: 2026-11-11 | Cabang `newdesign`
 - Pengguna menyetujui adaptasi: tidak menambah input berat/jadwal jemput baru
   pada usulan. Field/draf/validasi/aksi lama tetap; berat melalui Edit order
   sesudah persetujuan. Skor AI hanya contoh berlabel pada scope dummy yang ada.
-- Paritas awal dan selisih dicatat di spec 25 dan 09; belum ditandai selesai.
+- Paritas 25 selesai; paritas 09 menunggu penerapan.
 
 ## Lapisan aktif UI-21
 - Lapisan 3 (018) diterapkan: AppBarSub subtitle + variant detail intrinsik,
@@ -28,13 +28,18 @@ Diperbarui: 2026-11-11 | Cabang `newdesign`
   Enam tes terarah lulus termasuk default, 320 dp/2x dan keyboard 300 dp.
   Golden baru detail_form; check_all HIJAU: 1054 lulus/1 skip, REPO_MAP 1064.
   Bukti: TEMP/laurum-detail-layer5-check.log, exit 0; default golden tetap.
-- Lapisan aktif berikutnya 6: Page/Section kedua layar.
+- 020 disimpan di 333fadf. Lapisan aktif 6: layar 25 diterapkan.
+  Header/kontak/pesan/layanan/alamat/privasi/footer; data/aksi lama tetap.
+  Tes lama 11 + baru 6 lulus, golden rina/new_customer diperbarui (4 tes lulus).
+  Android SM-N975F: dibandingkan frame 512, alamat + footer di atas keyboard.
+  check_all HIJAU: 1060 lulus/1 skip, REPO_MAP 1071, exit 0.
+  Bukti TEMP/laurum-detail-ai-final-check.log. Detail Order belum disentuh.
 
 ## Langkah berikutnya
-1. Simpan 020 yang sudah hijau, lalu terapkan Page/Section 25 dan 09.
-2. Semua data/callback/provider lama tetap, tes widget dan paritas lengkap.
-3. Golden dampak dicatat sebelum update; verifikasi Android termasuk keyboard
-   usulan, check_all akhir, STATE dan commit. Jangan push/merge.
+1. Simpan layar 25 yang sudah hijau, lalu terapkan layar 09.
+2. Detail Order: nota/status/kontak/rincian/pembayaran/timeline/footer sesuai mode.
+3. Golden dampak sudah dicatat; Android, check_all akhir, STATE dan commit.
+   Jangan push/merge.
 
 ## Batas paritas penting
 - Usulan: pelanggan baru/terdaftar, sumber pesan lengkap, cancel/tolak/approve,

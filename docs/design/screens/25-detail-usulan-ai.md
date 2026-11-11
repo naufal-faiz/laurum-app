@@ -47,17 +47,17 @@ APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diu
 Frame FigCraft 512 dibaca; pengguna menyetujui ketiga proposal komponen bersama.
 | Butir | Sumber / aksi lama | Status implementasi |
 |---|---|---|
-| Proposal lengkap, pelanggan, layanan aktif/harga | proposalReviewProvider(id) | Menunggu |
-| Nama/telepon/alamat/serviceId draf, validasi, draf tidak di-reset | proposalDraftProvider(id) | Menunggu |
-| Loading, error/retry, tidak ditemukan, final readonly | cabang snapshot/draft/status lama | Menunggu |
-| Pending/gagal aksi, cegah klik ganda | proposalActionsProvider(id) | Menunggu |
-| Field nama, telepon, alamat; pilih layanan | actions.name/phone/address/service, argumen sama | Menunggu |
-| WhatsApp (validasi nomor, tanpa pesan kirim otomatis) | openProposalWhatsApp(ref, draft.phone) | Menunggu |
-| Tolak + konfirmasi | rejectReviewedProposal(context, ref, id) | Menunggu |
-| Setujui/pembatalan + alamat belum pasti | approveReviewedProposal(context, ref, review, draft) | Menunggu |
-| Final/status dan Buka order | proposalStatusLabel; push orderId lama | Menunggu |
-| NoticeAi dan CalloutAi alamat | pesan lama, tidak menghapus peringatan | Menunggu |
-| Back, route id, label field / fokus dan keyboard 300 dp | canPop/pop atau go antrean; tidak ada Key eksplisit pada Page/Section lama | Menunggu |
+| Proposal lengkap, pelanggan, layanan aktif/harga | proposalReviewProvider(id) | Selesai |
+| Nama/telepon/alamat/serviceId draf, validasi, draf tidak di-reset | proposalDraftProvider(id) | Selesai |
+| Loading, error/retry, tidak ditemukan, final readonly | cabang snapshot/draft/status lama | Selesai |
+| Pending/gagal aksi, cegah klik ganda | proposalActionsProvider(id) | Selesai |
+| Field nama, telepon, alamat; pilih layanan | actions.name/phone/address/service, argumen sama | Selesai |
+| WhatsApp (validasi nomor, tanpa pesan kirim otomatis) | openProposalWhatsApp(ref, draft.phone) | Selesai |
+| Tolak + konfirmasi | rejectReviewedProposal(context, ref, id) | Selesai |
+| Setujui/pembatalan + alamat belum pasti | approveReviewedProposal(context, ref, review, draft) | Selesai |
+| Final/status dan Buka order | proposalStatusLabel; push orderId lama | Selesai |
+| NoticeAi dan CalloutAi alamat | pesan lama, tidak menghapus peringatan | Selesai |
+| Back, route id, label field / fokus dan keyboard 300 dp | canPop/pop atau go antrean; tidak ada Key eksplisit pada Page/Section lama | Selesai |
 
 Selisih desain yang disetujui bersama proposal 020: berat tetap diisi lewat Edit
 order setelah persetujuan; jadwal jemput tidak tersedia dan tidak ditambahkan.
@@ -73,3 +73,13 @@ Hasil bacaan AI dan pesan lengkap di bubble muted; peringatan pemeriksaan;
 layanan/field pelanggan baru serta alamat inline dalam kartu; privasi; footer lama.
 Golden yang diperbarui: proposal_rina dan proposal_new_customer, karena susunan
 header/kartu/footer. proposal_history dan proposal_card dipertahankan.
+### Verifikasi penerapan layar 25 (11 Nov 2026)
+Semua baris paritas selesai: provider/aksi/argumen lama tetap, hanya membaca skor
+contoh dari proposalDemoAccuracyProvider yang sudah ada. Final readonly dan Buka
+order tetap. NoticeAi.message dipertahankan dalam ProposalPrivacySection.
+Tes lama tanpa perubahan assertion/finder: proposal_pages, sections, keyboard,
+retry; enam tes baru untuk lima Section baru. Golden rina/new_customer diperbarui;
+320 dp/2x tanpa overflow. Android SM-N975F dibandingkan dengan frame 512:
+header/kartu/pesan/layanan/alamat/privasi dan footer diperiksa; field alamat
+select-all serta tombol Tolak/Setujui tetap terlihat di atas keyboard.
+Ukuran teks/tap global lebih besar daripada frame. iOS belum diuji.

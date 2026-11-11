@@ -1,44 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/domain_enums.dart';
-import 'package:laurum/core/formatters/formatters.dart';
+import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
 import 'package:laurum/shared/widgets/atoms/app_badge.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
+import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
+import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
+import 'package:laurum/shared/widgets/organisms/customer_contact_card.dart';
 
 class ProposalMessageSection extends StatelessWidget {
-  const ProposalMessageSection({required this.review, required this.onWhatsApp, super.key});
+  const ProposalMessageSection({
+    required this.review,
+    required this.onWhatsApp,
+    this.demoAccuracy,
+    super.key,
+  });
   final ProposalReview review;
   final VoidCallback? onWhatsApp;
+  final int? demoAccuracy;
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     spacing: AppSpacing.cardGap,
     children: [
-      const SectionHeader(
-        title: 'Pemeriksaan usulan WhatsApp',
-        subtitle: 'Periksa data dari pesan pelanggan sebelum menyetujui order.',
+      CustomerContactCard(
+        name: review.customer?.name ?? review.proposal.customerName,
+        phone: review.customer?.phone ?? review.proposal.phone,
+        onContact: onWhatsApp,
+        badge: review.customer == null && review.proposal.status == ProposalStatus.menunggu
+            ? const AppBadge('Belum terdaftar', variant: AppBadgeVariant.menungguJemput)
+            : null,
       ),
+      const SectionHeader(title: 'Hasil bacaan AI', titleColor: AppColors.primaryInk),
       AppCard(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: AppSpacing.cardGap,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: AppSpacing.small,
           children: [
-            SectionHeader(
-              title: review.customer?.name ?? review.proposal.customerName,
-              subtitle: Formatters.telepon(review.customer?.phone ?? review.proposal.phone),
-              actionLabel: 'Buka WhatsApp',
-              onAction: onWhatsApp,
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              alignment: WrapAlignment.spaceBetween,
+              spacing: AppSpacing.small,
+              runSpacing: AppSpacing.small,
+              children: [
+                const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: AppSpacing.xxsmall,
+                  children: [
+                    AppIcon(AppIcons.sparkles, color: AppColors.primary),
+                    Flexible(
+                      child: AppText(
+                        'Dibaca dari pesan WhatsApp',
+                        variant: AppTextVariant.label,
+                        color: AppColors.primaryInk,
+                      ),
+                    ),
+                  ],
+                ),
+                if (demoAccuracy != null)
+                  AppBadge('Contoh akurasi $demoAccuracy%', variant: AppBadgeVariant.diproses),
+              ],
             ),
-            if (review.customer == null && review.proposal.status == ProposalStatus.menunggu)
-              const AppBadge('Belum terdaftar', variant: AppBadgeVariant.menungguJemput),
-            AppText(review.proposal.sourceText),
-            AppText(Formatters.jam(review.proposal.createdAt), variant: AppTextVariant.caption),
+            AppCard(
+              style: AppCardStyle.muted,
+              padding: const EdgeInsets.all(AppSpacing.small),
+              child: AppText(review.proposal.sourceText, variant: AppTextVariant.caption),
+            ),
           ],
         ),
       ),
+      const BannerMessage(message: 'Baca detail sebelum disetujui. AI bisa salah tafsir.'),
     ],
   );
 }

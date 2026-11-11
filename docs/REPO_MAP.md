@@ -488,7 +488,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/proposals/pages/
 - ai_routes.dart (15):
 - ai_settings_page.dart (86): AiSettingsPage
-- proposal_detail_page.dart (99): ProposalDetailPage
+- proposal_detail_page.dart (91): ProposalDetailPage
 - proposal_history_page.dart (48): ProposalHistoryPage
 - proposal_review_flow.dart (68):
 - whatsapp_link_page.dart (30): WhatsappLinkPage
@@ -506,9 +506,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/proposals/widgets/
 - ai_connection_section.dart (59): AiConnectionSection
 - ai_preferences_section.dart (64): AiPreferencesSection
-- proposal_fields_section.dart (95): ProposalFieldsSection
+- proposal_address_section.dart (44): ProposalAddressSection
+- proposal_customer_fields_section.dart (53): ProposalCustomerFieldsSection
+- proposal_fields_section.dart (53): ProposalFieldsSection
+- proposal_footer_section.dart (49): ProposalFooterSection
 - proposal_history_section.dart (49): ProposalHistorySection
-- proposal_message_section.dart (44): ProposalMessageSection
+- proposal_message_section.dart (79): ProposalMessageSection
+- proposal_privacy_section.dart (26): ProposalPrivacySection
+- proposal_service_section.dart (64): ProposalServiceSection
 - whatsapp_link_section.dart (75): WhatsappLinkSection
 
 ### lib/features/reports/data/
@@ -666,7 +671,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_bar_root.dart (48): AppBarRoot
 - app_bar_sub.dart (103): AppBarSubVariant, AppBarSub
 - avatar_stack.dart (58): AvatarStack
-- banner_message.dart (41): BannerMessageVariant, BannerMessage
+- banner_message.dart (42): BannerMessageVariant, BannerMessage
 - brand_lockup.dart (32): BrandLockup
 - callout_ai.dart (36): CalloutAi
 - chip_bar.dart (29): ChipBar
@@ -992,6 +997,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - progress_row_test.dart (23):
 - proposal_actions_test.dart (72):
 - proposal_card_test.dart (41):
+- proposal_detail_sections_test.dart (104):
+- proposal_footer_section_test.dart (83):
 - proposal_golden_test.dart (35):
 - proposal_history_page_test.dart (61):
 - proposal_keyboard_test.dart (32):
