@@ -116,3 +116,11 @@ serta akses struk; order final tetap struk dan pembayaran lanjutan bila memenuhi
 syarat. Subtotal/diskon/catatan dan seluruh aktivitas tidak dihilangkan demi
 menyamakan tinggi kartu contoh. Kartu WhatsApp mempertahankan aksi/style registry
 biru dengan logo merek; tidak menambah varian tombol hijau. Data tetap milik akun.
+
+### Tata letak dan golden penerapan 018-020
+Header detail/waktu dibuat; kartu nota/badge pembayaran dan status; kartu kontak;
+Rincian cucian dengan jumlah di kanan; Pembayaran; Jejak aktivitas. Judul bagian
+primaryInk. Mode sederhana memakai ikon Edit/Hapus dan CTA; akses struk COD tetap.
+Aktivitas tetap urutan lama. Golden yang diperbarui: r4_order_detail, r9_cod_detail,
+order_detail_actions_1x dan order_detail_actions_2x karena susunan header/kartu/footer.
+Golden struk, pembayaran, antrean dan piutang dipertahankan.

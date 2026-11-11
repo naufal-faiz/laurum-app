@@ -725,7 +725,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/templates/
 - auth_scaffold.dart (42): AuthScaffold
-- form_scaffold.dart (44): FormScaffold
+- form_scaffold.dart (64): FormScaffold
 - root_scaffold.dart (103): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
 - sub_scaffold.dart (62): SubScaffold
@@ -844,6 +844,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_row_test.dart (39):
 - customer_savings_section_test.dart (48):
 - date_group_header_test.dart (24):
+- detail_form_scaffold_test.dart (93):
 - detail_molecules_golden_test.dart (49):
 - detail_molecules_test.dart (102):
 - discount_input_test.dart (118):

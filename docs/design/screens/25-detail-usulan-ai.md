@@ -66,3 +66,10 @@ lama tidak berubah. Data waktu/nominal memakai Formatters, bukan contoh frame.
 Skor AI hanya contoh berlabel dari scope dummy yang sudah ada; data nyata tanpa
 skor buatan. Buka WhatsApp tetap pada kartu pelanggan. Semua transaksi/validasi,
 pembatalan, koreksi ledger dan idempotensi berada di alur lama yang tidak diubah.
+
+### Tata letak dan golden penerapan 018-020
+Header detail intrinsik dengan waktu pesan dan status; kartu kontak; judul primer
+Hasil bacaan AI dan pesan lengkap di bubble muted; peringatan pemeriksaan;
+layanan/field pelanggan baru serta alamat inline dalam kartu; privasi; footer lama.
+Golden yang diperbarui: proposal_rina dan proposal_new_customer, karena susunan
+header/kartu/footer. proposal_history dan proposal_card dipertahankan.

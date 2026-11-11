@@ -14,31 +14,51 @@ class FormScaffold extends StatelessWidget {
     this.summary,
     this.onBack,
     this.trailing,
+    this.subtitle,
+    this.appBarVariant = AppBarSubVariant.standard,
     this.padding = const EdgeInsets.all(AppSpacing.screenPadding),
   });
 
   final String title, backLabel;
+  final String? subtitle;
+  final AppBarSubVariant appBarVariant;
   final Widget body, footer;
   final Widget? summary, trailing;
   final VoidCallback? onBack;
   final EdgeInsetsGeometry padding;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    backgroundColor: AppColors.bg,
-    appBar: PreferredSize(
-      preferredSize: const Size.fromHeight(AppSpacing.appBarHeight),
-      child: AppBarSub(
-        title: title,
-        backLabel: backLabel,
-        onBack: onBack,
-        trailing: trailing,
+  Widget build(BuildContext context) {
+    final detail = appBarVariant == AppBarSubVariant.detail;
+    final header = AppBarSub(
+      title: title,
+      backLabel: backLabel,
+      onBack: onBack,
+      trailing: trailing,
+      subtitle: detail && MediaQuery.viewInsetsOf(context).bottom > 0 ? null : subtitle,
+      variant: appBarVariant,
+    );
+    final content = SingleChildScrollView(padding: padding, child: body);
+    return Scaffold(
+      backgroundColor: AppColors.bg,
+      appBar: detail
+          ? null
+          : PreferredSize(
+              preferredSize: const Size.fromHeight(AppSpacing.appBarHeight),
+              child: header,
+            ),
+      body: detail
+          ? Column(
+              children: [
+                header,
+                Expanded(child: content),
+              ],
+            )
+          : content,
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+        child: FooterBar(summary: summary, child: footer),
       ),
-    ),
-    body: SingleChildScrollView(padding: padding, child: body),
-    bottomNavigationBar: Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
-      child: FooterBar(summary: summary, child: footer),
-    ),
-  );
+    );
+  }
 }

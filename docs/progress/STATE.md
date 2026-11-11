@@ -24,14 +24,16 @@ Diperbarui: 2026-11-11 | Cabang `newdesign`
 - Lapisan 3 disimpan di 9307a5c. Lapisan 4 (019) diterapkan: CustomerContactCard.
   Tes komponen 4 lulus; check_all HIJAU: 1051 lulus/1 skip, REPO_MAP 1063.
   Bukti: TEMP/laurum-detail-layer4-complete-check.log (exit 0).
-- 020 belum diterapkan; FormScaffold detail menunggu 019 hijau.
-- Page/Section kedua layar BELUM diubah; tunggu gerbang lapisan di atas.
+- 019 disimpan di 4325a7c. Lapisan 5 (020) diterapkan: FormScaffold detail.
+  Enam tes terarah lulus termasuk default, 320 dp/2x dan keyboard 300 dp.
+  Golden baru detail_form; check_all HIJAU: 1054 lulus/1 skip, REPO_MAP 1064.
+  Bukti: TEMP/laurum-detail-layer5-check.log, exit 0; default golden tetap.
+- Lapisan aktif berikutnya 6: Page/Section kedua layar.
 
 ## Langkah berikutnya
-1. Simpan 019 yang sudah hijau, lalu terapkan 020 dengan tes keyboard.
-2. Gerbang 020: golden default tetap dan check_all hijau sebelum kedua Page.
-3. Terapkan Page/Section 25 lalu 09, semua data/callback/provider lama tetap.
-4. Golden dampak dicatat sebelum update; verifikasi Android termasuk keyboard
+1. Simpan 020 yang sudah hijau, lalu terapkan Page/Section 25 dan 09.
+2. Semua data/callback/provider lama tetap, tes widget dan paritas lengkap.
+3. Golden dampak dicatat sebelum update; verifikasi Android termasuk keyboard
    usulan, check_all akhir, STATE dan commit. Jangan push/merge.
 
 ## Batas paritas penting

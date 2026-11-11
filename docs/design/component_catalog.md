@@ -1126,6 +1126,12 @@ memakai AppTextStyles.label. Data, callback submit, validasi dan busy tetap.
 - showContact=true, onContact, contactLabel='Buka WhatsApp'; Formatters.telepon.
 - Avatar dan kontak adaptif pada 320 dp/teks 2x; callback null nonaktif.
 - Golden customer_contact_card; CustomerRow dan layar lama tetap.
+
+## FormScaffold detail (020)
+- subtitle opsional, appBarVariant default AppBarSubVariant.standard.
+- Detail: header intrinsik tetap di atas area gulir. Metadata diringkas saat
+  keyboard terbuka; footer lama tetap di atas keyboard.
+- Varian standard mempertahankan appbar dan galeri lama; golden detail_form baru.
 - SectionHeader.trailing Widget? null untuk metadata tanpa aksi.
 - PaymentBadge(label, status PayStatus): label yang sudah dihitung, warna semantik lunas/DP/belum bayar; tidak menghitung tagihan.
 - AppIcons.edit/dot memakai Ionicons pencilOutline/ellipse terpasang 0.2.3. Golden baru detail_molecules dan pembaruan app_icon.
