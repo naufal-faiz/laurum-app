@@ -8,7 +8,7 @@ import 'package:laurum/core/theme/app_spacing.dart';
 enum AppCardRail { none, warning, error, info, success }
 
 /// `outlined` = border tipis tanpa bayangan; `elevated` = radius 24 + shadow.
-enum AppCardStyle { outlined, elevated, muted }
+enum AppCardStyle { outlined, elevated, muted, primary }
 
 class AppCard extends StatelessWidget {
   const AppCard({
@@ -28,6 +28,7 @@ class AppCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final elevated = style == AppCardStyle.elevated;
     final muted = style == AppCardStyle.muted;
+    final primary = style == AppCardStyle.primary;
     final radius = elevated
         ? AppRadius.cardLarge
         : muted
@@ -35,8 +36,12 @@ class AppCard extends StatelessWidget {
         : AppRadius.card;
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: muted ? AppColors.surfaceLow : AppColors.surface,
-        border: elevated || muted ? null : AppBorders.card,
+        color: primary
+            ? AppColors.primary
+            : muted
+            ? AppColors.surfaceLow
+            : AppColors.surface,
+        border: elevated || muted || primary ? null : AppBorders.card,
         borderRadius: radius,
         boxShadow: elevated ? AppShadows.cardElevated : null,
       ),

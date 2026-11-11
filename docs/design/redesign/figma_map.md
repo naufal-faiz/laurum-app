@@ -14,7 +14,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `04-input-berat.md` (04 - Input Berat) | | Menunggu | |
 | `05-tambah-pelanggan-cepat.md` (05 - Tambah Pelanggan Cepat) | | Menunggu | |
 | `06-printer-struk.md` (06 - Printer dan Struk) | | Menunggu | |
-| `07-pembayaran.md` (07 - Pembayaran) | | Menunggu | |
+| `07-pembayaran.md` (07 - Pembayaran) | `LAURUM · Pembayaran` (ID: 1146) | Persiapan; proposal 022 menunggu persetujuan | Tabungan dan dua footer tetap; header tanpa nomor nota contoh; lihat spec 07 |
 | `08-nota-tersimpan.md` (08 - Nota Tersimpan) | | Menunggu | |
 | `09-detail-order.md` (09 - Detail Order) | `LAURUM · Detail Order` (ID: 612) | Persiapan 018–020 disetujui | Komponen bersama dahulu; seluruh mode/status/COD/aksi lama tetap |
 | `10-edit-order.md` (10 - Edit Order) | | Menunggu | |

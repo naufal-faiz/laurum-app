@@ -1,46 +1,48 @@
-﻿# STATE Laurum
+# STATE Laurum
 Diperbarui: 2026-11-11 | Cabang newdesign
 
 ## Sesi aktif
-Koreksi layar 02 Buat Transaksi selesai; dasar 27d3e87.
-Commit fix(ui) koreksi tombol memuat berkas ini; lihat git log -1.
-Frame 691/752 sudah diringkas di spec; koneksi FigCraft dicek lewat 691 depth 0.
+07 Pembayaran; frame 1146 dikonfirmasi; dasar 0eee5b6.
+Frame dibaca sekali lewat MCP; snapshot 0. Struk 4294967599 belum dikerjakan.
+Commit sesi ini WIP karena UI-36; lihat git log -1.
 
 ## Status irisan
-Impor kontak dan Pelanggan baru tetap terlihat setelah pelanggan dipilih.
-Ganti tetap memilih pelanggan tersimpan; callback dan provider tetap.
-AddCustomerSheet hanya Simpan pelanggan, tombol kontak berulang dihapus.
-Kartu pelanggan kosong tetap MenuRow penuh; tes ketuk kiri kartu membuktikan aksi.
-Kartu layanan kosong menjadi MenuRow penuh tanpa tombol Pilih layanan berbingkai.
-Tidak ada perubahan state/data/rute/shared widget/token/dependensi.
-Golden 3 diperbarui: transaction_page, transaction_empty, add_customer_sheet.
-Tidak menambah tes detail tampilan baru; tes fungsi lama disesuaikan.
-Snapshot/screenshot 0; visual belum diverifikasi manual; iOS belum diuji.
-Paritas spec 02 tetap penuh.
+Proposal 022 disetujui; AppCard.primary dan SelectionTile sudah ditulis.
+Registry menambah SelectionTile; ikon radio dari Ionicons ditambahkan.
+Analyzer komponen lolos. Golden SelectionTile dibuat dan lolos.
+Page/Section pembayaran BELUM diubah; footer baru BELUM diterapkan.
+Spec 07 memuat ringkasan frame dan tabel paritas awal, belum dicentang.
 
 ## Keputusan pengguna terbaru
-Bisa mengganti pelanggan lewat impor atau pembuatan baru setelah terpilih.
-Hapus Ambil dari kontak HP dari form baru, gunakan tombol Impor kontak di body.
-Kartu kosong pelanggan/layanan bisa ditekan seluruh area; hapus tombol layanan.
-Tes cukup fungsi; tidak menambah tes detail tampilan. AGENTS mewajibkan check_all.
-Ambang usage 10%; persentase akun tidak tersedia di alat.
+Pembayaran terlebih dahulu, kemudian struk; minimalkan snapshot.
+Jalur biasa untuk irisan ini; jalur cepat hanya revisi kecil.
+Footer satu baris: Kembali kiri, Konfirmasi pembayaran kanan.
+Callback lama tetap: simpan ke antrean / simpan dan buka struk.
+Proposal 022 dan penyesuaian finder tes terkait diizinkan.
 
 ## Belum di-commit
-Hanya docs/design/new-design-laurum.figcraft milik pengguna setelah commit.
-Stash f7a9e49 lama sudah diterapkan; jangan apply ulang.
+Sesudah commit WIP, AGENTS.md dan new-design-laurum.figcraft milik pengguna.
+Stash f7a9e49 sudah diterapkan sesi lama; jangan apply ulang.
 
 ## Langkah berikutnya
-1. Tunggu tinjauan pengguna terhadap koreksi Transaksi.
-2. Kerjakan hanya koreksi/layar berikut yang diminta.
+1. Setelah pengguna melanjutkan, perbaiki cleanup SemanticsHandle di tes SelectionTile.
+2. Ringkas test/app_card_test.dart (102 baris) menjadi maksimal 100; tes komponen lagi.
+3. Implementasi Page/Section sesuai 022; footer Row, Kembali dan Konfirmasi pembayaran.
+4. Sesuaikan finder tes halaman/keyboard/checkout/validasi/r4 helper/ui_final.
+5. Tes terarah dan golden pembayaran; check_all sekali, paritas, commit irisan.
 
 ## Blocker
-Tidak ada. Saran lama di luar lingkup: audit diskon saat kuantitas berkurang;
-jangan mengubah state tambahan tanpa izin.
+UI-36: tes komponen gagal dua kali, dilarang percobaan ketiga sesi ini.
+Pertama: ekspektasi semantics kurang hasFocusAction; sudah diperbaiki.
+Kedua: SemanticsHandle masih aktif di akhir tes; addTearDown terlalu terlambat.
+Tindak lanjut: dispose handle dalam try/finally di callback testWidgets.
+SDK sempat ditolak sandbox; elevated analyze kemudian berhasil (106,3 detik).
+Skrip windows_native_sdk.ps1 sudah dipanggil sekali; jangan diulang sesi ini.
 
 ## Bukti terakhir
-- dart run tool/check_all.dart: SEMUA HIJAU; 1086 lulus, 1 skip, exit 0.
-- Log TEMP/laurum-transaction-buttons-final.log; REPO_MAP 1091 berkas.
-- Tes fungsi pelanggan/layanan/transaksi 21 lulus; analyze no issues; check_arch OK.
-- Tes pembuatan pelanggan/pencarian/keyboard 4 lulus; golden/layout lama 5 lulus.
-- Impor dan pembuatan baru diuji dari pelanggan terpilih; ketuk kiri kartu lulus.
-- Assertion simpan/validasi/qty/harga tetap; finder mengikuti kartu kosong.
+- flutter analyze tiga berkas komponen: No issues found.
+- flutter test test/app_card_test.dart test/selection_tile_test.dart: 5 lulus, 1 gagal.
+- Log TEMP/laurum-payment-components-fixed.log; golden SelectionTile lolos.
+- check_all belum dijalankan untuk irisan ini; belum selesai.
+- Bukti irisan sebelumnya: check_all hijau, 1086 lulus, 1 skip, exit 0.
+- Snapshot 0; visual belum diverifikasi manual; iOS belum diuji.

@@ -24,6 +24,7 @@ molecules:
   - InfoRow
   - StatTile
   - MenuRow
+  - SelectionTile
   - ToggleRow
   - LockedRow
   - BannerMessage

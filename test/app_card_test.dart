@@ -7,6 +7,17 @@ import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
 void main() {
+  testWidgets('primary card uses brand surface without a border', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: AppCard(style: AppCardStyle.primary, child: AppText('Total')),
+      ),
+    );
+    final box = tester.widget<DecoratedBox>(find.byType(DecoratedBox).last);
+    final decoration = box.decoration as BoxDecoration;
+    expect(decoration.color, AppColors.primary);
+    expect(decoration.border, isNull);
+  });
   testWidgets('muted card uses low surface without a border', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(

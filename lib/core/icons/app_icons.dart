@@ -48,6 +48,8 @@ enum AppIcons {
   visibleOff(Ionicons.eyeOffOutline),
   mail(Ionicons.mailOutline),
   qrCode(Ionicons.qrCodeOutline),
+  radioSelected(Ionicons.radioButtonOnOutline),
+  radioUnselected(Ionicons.radioButtonOffOutline),
   offline(Ionicons.cloudOfflineOutline),
   addCustomer(Ionicons.personAddOutline),
   backspace(Ionicons.backspaceOutline),
