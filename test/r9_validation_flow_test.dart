@@ -23,7 +23,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Simpan uang diterima'));
     await tester.pumpAndSettle();
-    for (final label in ['Cetak struk', 'Ke antrean']) {
+    for (final label in ['Konfirmasi pembayaran', 'Kembali']) {
       expect(tester.widget<AppButton>(find.widgetWithText(AppButton, label)).onPressed, isNull);
     }
     expect(find.text('Isi jumlah atau pilih Bayar nanti (COD)'), findsOneWidget);
@@ -32,7 +32,7 @@ void main() {
     await tester.tap(find.text('Bayar nanti (COD)'));
     await tester.pumpAndSettle();
     expect(
-      tester.widget<AppButton>(find.widgetWithText(AppButton, 'Ke antrean')).onPressed,
+      tester.widget<AppButton>(find.widgetWithText(AppButton, 'Kembali')).onPressed,
       isNotNull,
     );
   });

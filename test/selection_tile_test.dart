@@ -8,35 +8,40 @@ import 'r9_section_host.dart';
 void main() {
   testWidgets('selection tile delegates whole-row taps and exposes selected state', (tester) async {
     final semantics = tester.ensureSemantics();
-    addTearDown(semantics.dispose);
-    var taps = 0;
-    await pumpR9Section(
-      tester,
-      SelectionTile(
-        label: 'Tunai',
-        subtitle: 'Uang diterima langsung',
-        icon: AppIcons.wallet,
-        selected: true,
-        onPressed: () => taps++,
-      ),
-    );
-    expect(
-      tester.getSemantics(find.byType(TextButton)),
-      matchesSemantics(
-        label: 'Tunai\nUang diterima langsung',
-        isButton: true,
-        isSelected: true,
-        isEnabled: true,
-        hasEnabledState: true,
-        hasSelectedState: true,
-        isFocusable: true,
-        isInMutuallyExclusiveGroup: true,
-        hasTapAction: true,
-        hasFocusAction: true,
-      ),
-    );
-    await tester.tapAt(tester.getRect(find.byType(SelectionTile)).centerLeft + const Offset(4, 0));
-    expect(taps, 1);
+    try {
+      var taps = 0;
+      await pumpR9Section(
+        tester,
+        SelectionTile(
+          label: 'Tunai',
+          subtitle: 'Uang diterima langsung',
+          icon: AppIcons.wallet,
+          selected: true,
+          onPressed: () => taps++,
+        ),
+      );
+      expect(
+        tester.getSemantics(find.byType(TextButton)),
+        matchesSemantics(
+          label: 'Tunai\nUang diterima langsung',
+          isButton: true,
+          isSelected: true,
+          isEnabled: true,
+          hasEnabledState: true,
+          hasSelectedState: true,
+          isFocusable: true,
+          isInMutuallyExclusiveGroup: true,
+          hasTapAction: true,
+          hasFocusAction: true,
+        ),
+      );
+      await tester.tapAt(
+        tester.getRect(find.byType(SelectionTile)).centerLeft + const Offset(4, 0),
+      );
+      expect(taps, 1);
+    } finally {
+      semantics.dispose();
+    }
   });
   testWidgets('selection tile golden includes selected, idle and wrapped labels', (tester) async {
     tester.view.physicalSize = const Size(320, 420);

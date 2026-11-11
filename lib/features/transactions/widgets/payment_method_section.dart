@@ -10,6 +10,7 @@ import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
+import 'package:laurum/shared/widgets/molecules/selection_tile.dart';
 
 class PaymentMethodSection extends StatelessWidget {
   const PaymentMethodSection({
@@ -30,43 +31,46 @@ class PaymentMethodSection extends StatelessWidget {
       ? const BannerMessage(
           message: 'Pelanggan membayar saat struk/barang diterima. Order tetap di antrean sampai pembayaran dicatat.',
         )
-      : AppCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: AppSpacing.cardGap,
-            children: [
-              const AppText('Metode pembayaran', variant: AppTextVariant.section),
-              ChipBar(
-                labels: const ['Tunai', 'QRIS', 'Transfer'],
-                selectedIndex: checkout.method.index.clamp(0, 2),
-                onSelected: (i) => onMethod(PayMethod.values[i]),
+      : Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: AppSpacing.cardGap,
+          children: [
+            const AppText('Metode pembayaran', variant: AppTextVariant.section),
+            for (final (index, label) in const ['Tunai', 'QRIS', 'Transfer'].indexed)
+              SelectionTile(
+                label: label,
+                selected: checkout.method.index.clamp(0, 2) == index,
+                icon: const [AppIcons.wallet, AppIcons.qrCode, AppIcons.reports][index],
+                onPressed: () => onMethod(PayMethod.values[index]),
               ),
-              MenuRow(
+            AppCard(
+              padding: EdgeInsets.zero,
+              child: MenuRow(
                 label: 'Uang diterima',
                 subtitle: Formatters.rupiah(quote.received),
                 icon: AppIcons.wallet,
                 onTap: onAmount,
               ),
-              if (quote.outstanding > 0)
-                AppText('Sisa ${Formatters.rupiah(quote.outstanding)} masuk piutang'),
-              if (!quote.valid)
-                BannerMessage(
-                  variant: BannerMessageVariant.error,
-                  message: quote.received == 0
-                      ? 'Isi jumlah atau pilih Bayar nanti (COD)'
-                      : 'Nominal melebihi sisa tagihan untuk metode ini.',
-                ),
-              if (quote.change + quote.deposit > 0) ...[
-                AppText(
-                  '${checkout.saveExcess ? 'Simpan ke tabungan' : 'Kembali'} ${Formatters.rupiah(quote.change + quote.deposit)}',
-                ),
-                ChipBar(
-                  labels: const ['Kembalian', 'Simpan ke tabungan'],
-                  selectedIndex: checkout.saveExcess ? 1 : 0,
-                  onSelected: (i) => onExcess(i == 1),
-                ),
-              ],
+            ),
+            if (quote.outstanding > 0)
+              AppText('Sisa ${Formatters.rupiah(quote.outstanding)} masuk piutang'),
+            if (!quote.valid)
+              BannerMessage(
+                variant: BannerMessageVariant.error,
+                message: quote.received == 0
+                    ? 'Isi jumlah atau pilih Bayar nanti (COD)'
+                    : 'Nominal melebihi sisa tagihan untuk metode ini.',
+              ),
+            if (quote.change + quote.deposit > 0) ...[
+              AppText(
+                '${checkout.saveExcess ? 'Simpan ke tabungan' : 'Kembali'} ${Formatters.rupiah(quote.change + quote.deposit)}',
+              ),
+              ChipBar(
+                labels: const ['Kembalian', 'Simpan ke tabungan'],
+                selectedIndex: checkout.saveExcess ? 1 : 0,
+                onSelected: (i) => onExcess(i == 1),
+              ),
             ],
-          ),
+          ],
         );
 }

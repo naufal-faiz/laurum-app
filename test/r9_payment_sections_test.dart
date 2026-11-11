@@ -55,21 +55,24 @@ void main() {
   });
   testWidgets('method section delegates excess and amount actions', (tester) async {
     var save = false, opened = false;
+    PayMethod? selectedMethod;
     const state = CheckoutState(received: 30000);
     await pumpR9Section(
       tester,
       PaymentMethodSection(
         checkout: state,
         quote: quotePayment(total: 25000, balance: 0, state: state),
-        onMethod: (_) {},
+        onMethod: (value) => selectedMethod = value,
         onAmount: () => opened = true,
         onExcess: (value) => save = value,
       ),
     );
     await tester.tap(find.text('Simpan ke tabungan'));
+    await tester.tap(find.text('QRIS'));
     await tester.tap(find.text('Uang diterima'));
     expect(save, isTrue);
     expect(opened, isTrue);
+    expect(selectedMethod, PayMethod.qris);
     expect(find.text('Kembali Rp5.000'), findsOneWidget);
   });
   testWidgets('record input permits cash excess and delegates savings choice', (tester) async {

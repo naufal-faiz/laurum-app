@@ -22,10 +22,15 @@ void main() {
       ..selectCustomer('cust-001')
       ..add(serviceFixtures.firstWhere((s) => s.id == 'srv-004'));
     await pumpAntrean(tester, container: scope, location: '/transaksi/baru/bayar');
+    final confirm = find.widgetWithText(AppButton, 'Konfirmasi pembayaran');
+    final back = find.widgetWithText(AppButton, 'Kembali');
+    expect(tester.getRect(back).center.dy, tester.getRect(confirm).center.dy);
+    expect(tester.getRect(back).right, lessThan(tester.getRect(confirm).left));
     tester.view.viewInsets = const FakeViewPadding(bottom: 600);
     await tester.pumpAndSettle();
-    final pageSave = find.widgetWithText(AppButton, 'Ke antrean');
+    final pageSave = find.widgetWithText(AppButton, 'Kembali');
     expect(tester.getRect(pageSave).bottom, lessThanOrEqualTo(544));
+    expect(tester.getRect(confirm).bottom, lessThanOrEqualTo(544));
     await tester.ensureVisible(find.text('Uang diterima'));
     await tester.tap(find.text('Uang diterima'));
     await tester.pumpAndSettle();

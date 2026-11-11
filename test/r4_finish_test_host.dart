@@ -37,7 +37,7 @@ Future<String> createR4Order(
     scope.read(checkoutControllerProvider.notifier).setReceived(1000);
     await tester.pumpAndSettle();
   }
-  await tester.tap(find.text('Cetak struk'));
+  await tester.tap(find.text('Konfirmasi pembayaran'));
   await tester.pumpAndSettle();
   final order = (await scope.read(orderRepositoryProvider).getOrderByOrderNo('A-0143'))!;
   await tester.ensureVisible(find.text('Lihat detail'));

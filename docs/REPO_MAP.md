@@ -3,7 +3,7 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 80/80 dibuat
+## Registry widget: 81/81 dibuat
 
 Semua widget sudah dibuat.
 
@@ -70,7 +70,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - formatters.dart (55): Formatters
 
 ### lib/core/icons/
-- app_icons.dart (60): AppIcons
+- app_icons.dart (62): AppIcons
 - app_svgs.dart (9): AppSvgs
 
 ### lib/core/persistence/
@@ -612,7 +612,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_picker_sheet.dart (97): CustomerPickerSheet
 - discount_sheet.dart (74): DiscountSheet
 - payment_flow.dart (19):
-- payment_page.dart (90): PaymentPage
+- payment_page.dart (98): PaymentPage
 - receipt_page.dart (89): ReceiptPage
 - service_picker_page.dart (54): ServicePickerPage
 - transaction_leave_flow.dart (22):
@@ -640,9 +640,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/transactions/widgets/
 - add_customer_form_section.dart (77): AddCustomerFormSection
-- payment_method_section.dart (72): PaymentMethodSection
+- payment_method_section.dart (76): PaymentMethodSection
 - payment_savings_section.dart (55): PaymentSavingsSection
-- payment_summary_section.dart (56): PaymentSummarySection
+- payment_summary_section.dart (72): PaymentSummarySection
 - receipt_actions_section.dart (81): ReceiptActionsSection
 - receipt_status_section.dart (96): ReceiptStatusSection
 - service_picker_list_section.dart (84): ServicePickerListSection
@@ -661,7 +661,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_avatar.dart (36): AppAvatar
 - app_badge.dart (32): AppBadgeVariant, AppBadge
 - app_button.dart (85): AppButtonIconPlacement, AppButton
-- app_card.dart (68): AppCardRail, AppCardStyle, AppCard
+- app_card.dart (73): AppCardRail, AppCardStyle, AppCard
 - app_chip.dart (40): AppChip
 - app_divider.dart (16): AppDivider
 - app_gap.dart (19): AppGap
@@ -709,6 +709,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - rank_row.dart (71): RankRow
 - section_header.dart (51): SectionHeader
 - segmented_progress.dart (36): SegmentedProgress
+- selection_tile.dart (77): SelectionTile
 - stat_tile.dart (35): StatTile
 - stepper_field.dart (61): StepperField
 - sync_indicator.dart (46): SyncState, SyncIndicator
@@ -769,7 +770,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_bar_sub_test.dart (26):
 - app_bottom_sheet_test.dart (45):
 - app_button_test.dart (119):
-- app_card_test.dart (91):
+- app_card_test.dart (96):
 - app_chip_test.dart (41):
 - app_divider_test.dart (41):
 - app_gap_test.dart (33):
@@ -1075,10 +1076,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r9_input_test.dart (32):
 - r9_order_fixture.dart (22):
 - r9_payment_entrypoints_test.dart (44):
-- r9_payment_keyboard_test.dart (60):
+- r9_payment_keyboard_test.dart (65):
 - r9_payment_rollback_test.dart (68): FailingExcessSavings
 - r9_payment_rules_test.dart (83):
-- r9_payment_sections_test.dart (93):
+- r9_payment_sections_test.dart (96):
 - r9_payment_state_test.dart (84):
 - r9_payment_visual_test.dart (60):
 - r9_receipt_sections_test.dart (84):
@@ -1105,6 +1106,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - root_scroll_clearance_test.dart (44):
 - savings_row_test.dart (33):
 - section_header_test.dart (26):
+- selection_tile_test.dart (75):
 - service_directory_page_test.dart (110):
 - service_picker_list_section_test.dart (38):
 - service_picker_test.dart (53):

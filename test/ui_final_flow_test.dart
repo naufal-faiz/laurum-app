@@ -40,7 +40,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Tabungan dipakai -Rp5.000'), findsOneWidget);
     expect(find.text('Sisa bayar Rp13.000'), findsWidgets);
-    await uiFinalTap(tester, 'Cetak struk');
+    await uiFinalTap(tester, 'Konfirmasi pembayaran');
     expect(find.text('Nota tersimpan'), findsOneWidget);
     final repo = scope.read(orderRepositoryProvider);
     final order = (await repo.getOrderByOrderNo('A-0143'))!;

@@ -34,7 +34,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Uang diterima'), findsNothing);
       expect(find.text('Tunai'), findsNothing);
-      await tester.tap(find.text('Cetak struk'));
+      await tester.tap(find.text('Konfirmasi pembayaran'));
       await tester.pumpAndSettle();
       expect(host.router.routeInformationProvider.value.uri.path, '/transaksi/nota/ord-0143');
       final orders = scope.read(orderRepositoryProvider);
@@ -68,7 +68,7 @@ void main() {
       ..selectCustomer('cust-001')
       ..add(serviceFixtures.firstWhere((s) => s.id == 'srv-004'));
     final host = await pumpAntrean(tester, container: scope, location: '/transaksi/baru/bayar');
-    await tester.tap(find.text('Ke antrean'));
+    await tester.tap(find.text('Kembali'));
     await tester.pumpAndSettle();
     expect(host.router.routeInformationProvider.value.uri.path, '/antrean');
     expect(find.text('Nota A-0143 tersimpan'), findsOneWidget);

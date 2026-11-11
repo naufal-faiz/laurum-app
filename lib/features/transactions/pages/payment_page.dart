@@ -13,6 +13,7 @@ import 'package:laurum/features/transactions/widgets/payment_method_section.dart
 import 'package:laurum/features/transactions/widgets/payment_savings_section.dart';
 import 'package:laurum/features/transactions/widgets/payment_summary_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 
@@ -34,19 +35,26 @@ class PaymentPage extends ConsumerWidget {
     return FormScaffold(
       title: 'Pembayaran',
       backLabel: 'Kembali',
+      appBarVariant: AppBarSubVariant.detail,
+      subtitle: customer?.name,
       onBack: () => context.pop(),
-      footer: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      footer: Row(
         spacing: AppSpacing.cardGap,
         children: [
-          AppButton(
-            'Cetak struk',
-            onPressed: enabled ? () => finishCheckout(context, ref, receipt: true) : null,
+          Expanded(
+            child: AppButton(
+              'Kembali',
+              variant: AppButtonVariant.secondary,
+              size: AppButtonSize.large,
+              onPressed: enabled ? () => finishCheckout(context, ref, receipt: false) : null,
+            ),
           ),
-          AppButton(
-            'Ke antrean',
-            variant: AppButtonVariant.secondary,
-            onPressed: enabled ? () => finishCheckout(context, ref, receipt: false) : null,
+          Expanded(
+            flex: 2,
+            child: AppButton(
+              'Konfirmasi pembayaran',
+              onPressed: enabled ? () => finishCheckout(context, ref, receipt: true) : null,
+            ),
           ),
         ],
       ),

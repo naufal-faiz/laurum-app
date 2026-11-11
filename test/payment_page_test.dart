@@ -49,7 +49,7 @@ void main() {
     expect(host.container.read(checkoutControllerProvider).received, 10000);
     expect(find.text('Kembali Rp3.500'), findsOneWidget);
 
-    await tester.tap(find.text('Cetak struk'));
+    await tester.tap(find.text('Konfirmasi pembayaran'));
     await tester.pumpAndSettle();
     expect(find.text('Nota tersimpan'), findsWidgets);
     expect(find.text('A-0143'), findsOneWidget);
