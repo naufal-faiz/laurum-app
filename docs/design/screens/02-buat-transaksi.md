@@ -4,7 +4,7 @@ Template: FormScaffold (AppBarSub + body gulir + FooterBar sticky)
 
 Komposisi:
 - AppBarSub(title: 'Buat transaksi', backLabel: 'Kembali') dengan guard ConfirmModal.
-- SectionHeader('Pelanggan'), lalu satu baris AppButton('Pilih pelanggan') melebar
+- SectionHeader('Pelanggan'), lalu satu baris AppButton('Impor kontak') melebar
   dan AppButton('Baru', ikon add, actionOutline). Saat terpilih, hanya MenuRow
   pelanggan (nama, telepon, saldo) yang membuka CustomerPickerSheet.
 - SectionHeader('Layanan', subtitle: '<n> layanan di nota'), AppButton('Pilih layanan' /
@@ -58,8 +58,8 @@ State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI]
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
 
 ## Redesign Transaksi - frame 691 (2026-11-11)
-Acuan dibaca sekali: frame 691, transaksi kosong. Varian isi 752 menunggu
-konfirmasi pengguna. Pemetaan: AppBarSub.detail + AppBadge Draft; SectionHeader
+Acuan dibaca sekali: frame 691 kosong dan frame 752 terisi, sesuai
+persetujuan pengguna. Pemetaan: AppBarSub.detail + AppBadge Draft; SectionHeader
 primer; kartu pelanggan/layanan kosong lewat AppCard dan widget registry;
 Ringkasan lewat AppCard/InfoRow/AppDivider; footer total + tombol Bayar sejajar.
 Ukuran font/tap memakai token global, bukan ukuran contoh frame 8-11 px.
@@ -67,19 +67,20 @@ Ukuran font/tap memakai token global, bukan ukuran contoh frame 8-11 px.
 ### Paritas redesign
 | Butir | Sumber/aksi yang dipertahankan | Status |
 |---|---|---|
-| Pelanggan, saldo, katalog belum tersedia | customerCatalogProvider, customerBalanceProvider | Menunggu |
-| Pilih pelanggan | CustomerPickerSheet.show(context, ref) | Menunggu |
-| Pelanggan baru lalu pilih | AddCustomerSheet.show; invalidate catalog; selectCustomer(created.id) | Menunggu |
-| Draf/item/qty/harga/total/diskon/catatan | transactionDraftProvider, DraftLine, Formatters | Menunggu |
-| Pilih/tambah layanan | push /transaksi/baru/layanan | Menunggu |
-| Edit berat/jumlah dan stepper | TransactionLineSheet.show, WeightInputSheet jalur lama | Menunggu |
-| Hapus layanan (ikon diminta pengguna) | TransactionDraft.remove(serviceId), aksi lama | Menunggu |
-| Estimasi dan jam bisnis | estimateReady, businessClockProvider dari Section lama | Menunggu |
-| Atur diskon + validasi | DiscountSheet.show(context, ref), aksi lama | Menunggu |
-| Catatan nota dan keyboard 300 dp | setNote, label/maxLines/urutan fokus tetap | Menunggu |
-| Total/footer/Bayar nonaktif bila tanpa item | draft.total/itemCount/lines; push /transaksi/baru/bayar | Menunggu |
-| Kembali dan konfirmasi draf kotor | leaveTransaction(context, ref) | Menunggu |
-| Keadaan kosong/terisi, rute, key | cabang lama; tidak ada Key eksplisit pada Page/Section | Menunggu |
+| Pelanggan, saldo, katalog belum tersedia | customerCatalogProvider, customerBalanceProvider | Selesai |
+| Pilih pelanggan lewat kartu kosong / Ganti | CustomerPickerSheet.show(context, ref) | Selesai |
+| Impor kontak lalu tinjau dan simpan | ContactPickerSheet, AddCustomerSheet, aksi simpan/pilih lama | Selesai |
+| Pelanggan baru lalu pilih | AddCustomerSheet.show; invalidate catalog; selectCustomer(created.id) | Selesai |
+| Draf/item/qty/harga/total/diskon/catatan | transactionDraftProvider, DraftLine, Formatters | Selesai |
+| Pilih/tambah layanan | push /transaksi/baru/layanan | Selesai |
+| Edit berat/jumlah dan stepper | TransactionLineSheet.show, WeightInputSheet jalur lama | Selesai |
+| Hapus layanan (ikon diminta pengguna) | TransactionDraft.remove(serviceId), aksi lama | Selesai |
+| Estimasi dan jam bisnis | estimateReady, businessClockProvider dari Section lama | Selesai |
+| Atur diskon + validasi | DiscountSheet.show(context, ref), aksi lama | Selesai |
+| Catatan nota dan keyboard 300 dp | setNote, label/maxLines/urutan fokus tetap | Selesai |
+| Total/footer/Bayar nonaktif bila tanpa item | draft.total/itemCount/lines; push /transaksi/baru/bayar | Selesai |
+| Kembali dan konfirmasi draf kotor | leaveTransaction(context, ref) | Selesai |
+| Keadaan kosong/terisi, rute, key | cabang lama; tidak ada Key eksplisit pada Page/Section | Selesai |
 
 ### Selisih desain
 - Frame 691 menampilkan pilihan Lunas/Bayar nanti. Aplikasi menetapkan cara bayar
@@ -88,4 +89,38 @@ Ukuran font/tap memakai token global, bukan ukuran contoh frame 8-11 px.
 - TransactionDetailsSection adalah utang ConsumerWidget yang sudah ada; pembacaan
   provider dipertahankan sesuai UI-16, tanpa migrasi atau state baru.
 - Usulan penempatan: estimasi/catatan sesudah Ringkasan; pembayaran tetap langkah
-  lama. Menunggu konfirmasi bersama pasangan frame 752.
+  lama. Penempatan disetujui bersama pasangan frame 752.
+### Penerapan pasangan 691 + 752 (disetujui pengguna)
+Frame 752 dibaca sekali: header/draft, pelanggan avatar/nama/telepon + Ganti,
+Layanan dengan Tambah, kartu beraksen primer berisi nama/perhitungan/total/sampah,
+Ringkasan subtotal-diskon-total, footer total/Bayar. Widget: AppBarSub.detail,
+CustomerContactCard, TransactionServicesSection/ItemSection, AppCard,
+InfoRow/AppDivider/InlineLink, TransactionSummarySection dan FooterSection.
+Tombol sampah langsung memanggil remove(serviceId); Ubah berat/jumlah tetap
+membuka TransactionLineSheet (stepper dan Input Berat lama tetap tersedia).
+Pelanggan baru memakai teks penuh tanpa ikon agar muat satu baris dengan font global.
+Estimasi/catatan sesudah Ringkasan dan pilihan cara bayar tetap di langkah
+Pembayaran, sesuai persetujuan pengguna. Label Bayar dipertahankan karena tombol
+ini menuju langkah pembayaran, belum menyimpan order. Nomor nota belum dibuat
+pada draf, sehingga subtitle tetap nota otomatis, bukan nomor contoh frame.
+Saldo pelanggan tetap tampil; badge WhatsApp contoh frame tidak menambah aksi baru.
+Ikon sampah memakai AppIconButton error bertarget sentuh 48 dp dari registry;
+kotak merah 34 dp pada frame tidak dibuat sebagai dekorasi khusus.
+TransactionDetailsSection tetap ConsumerWidget utang lama (UI-16); provider tetap.
+
+Izin state spesifik: pengguna menyetujui pembatasan diskon ke subtotal yang tersisa
+saat menghapus layanan. remove mempertahankan pelanggan/catatan/baris lain, dan
+mengosongkan diskon saat semua item dihapus. DraftLine dipisah ke transaction_line
+untuk batas 110 baris; API diekspor ulang, tanpa perubahan data atau perhitungan.
+Tes regresi non-widget baru dibuat sesuai izin; tes perilaku lama tidak dilemahkan.
+Finder tes hanya mengikuti label Pelanggan baru/Buat Transaksi, Ganti, dan
+Ubah berat sebagai pengganti ketukan subtitle layanan. Nilai qty/total tetap diuji.
+Golden: transaction_page diperbarui, transaction_empty baru, add_customer_sheet
+diperbarui hanya backdrop Transaksi. Tanpa screenshot emulator; iOS belum diuji.
+Koreksi pengguna: tombol utama pelanggan kosong menjadi Impor kontak; seluruh
+kartu Belum ada pelanggan membuka daftar pemilihan lewat MenuRow. Impor membuka
+ContactPickerSheet lalu formulir AddCustomerSheet untuk ditinjau; belum menulis
+pelanggan sampai Simpan pelanggan. Pembatalan tidak mengubah draf atau repository.
+Padding atas body 8 dp (sebelumnya 24); sisi tetap 24 dp. Finder pemilihan pada
+add_customer, keyboard_audit, transaction_page/golden mengikuti kartu kosong,
+assertion perilaku tetap. Tes impor mencakup tinjau/simpan/pilih dan pembatalan.

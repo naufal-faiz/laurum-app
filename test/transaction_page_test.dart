@@ -17,7 +17,7 @@ void main() {
 
   testWidgets('transaction flow selects customer, service, weight and discount', (tester) async {
     final host = await pumpAntrean(tester, location: '/transaksi/baru');
-    await tester.tap(find.text('Pilih pelanggan'));
+    await tester.tap(find.text('Belum ada pelanggan'));
     await tester.pumpAndSettle();
     await tester.enterText(
       find.descendant(of: find.byType(CustomerPickerSheet), matching: find.byType(TextField)),
@@ -34,9 +34,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(host.container.read(transactionDraftProvider).itemCount, 1);
     expect(host.router.routeInformationProvider.value.uri.path, '/transaksi/baru');
-    expect(find.text('1 kg · Rp9.000'), findsOneWidget);
+    expect(find.text('1 kg × Rp9.000'), findsOneWidget);
 
-    await tester.tap(find.text('1 kg · Rp9.000'));
+    await tester.tap(find.text('Ubah berat'));
     await tester.pumpAndSettle();
     final plus = find.descendant(of: find.byType(StepperField), matching: find.text('+'));
     await tester.tap(plus);
@@ -53,7 +53,8 @@ void main() {
     expect(host.container.read(transactionDraftProvider).lines.single.qtyMilli, 3000);
     await tester.tap(find.text('Selesai'));
     await tester.pumpAndSettle();
-    expect(find.text('3 kg · Rp27.000'), findsOneWidget);
+    expect(find.text('3 kg × Rp9.000'), findsOneWidget);
+    expect(find.text('Rp27.000'), findsWidgets);
     expect(host.container.read(transactionDraftProvider).discount, 0);
 
     await tester.ensureVisible(find.text('Atur diskon'));
@@ -93,7 +94,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Cuci setrika').first);
     await tester.pumpAndSettle();
-    await tester.tap(find.text('1 kg · Rp9.000'));
+    await tester.tap(find.text('Ubah berat'));
     await tester.pumpAndSettle();
     final minus = find.descendant(of: find.byType(StepperField), matching: find.text('−'));
     TextButton minusButton() => tester.widget<TextButton>(
@@ -102,7 +103,8 @@ void main() {
     expect(minusButton().onPressed, isNotNull);
     await tester.tap(minus);
     await tester.pumpAndSettle();
-    expect(find.text('0,5 kg · Rp4.500'), findsOneWidget);
+    expect(find.text('0,5 kg × Rp9.000'), findsOneWidget);
+    expect(find.text('Rp4.500'), findsWidgets);
     expect(minusButton().onPressed, isNull);
     await tester.tap(find.descendant(of: find.byType(StepperField), matching: find.text('+')));
     await tester.pumpAndSettle();

@@ -31,7 +31,7 @@ void main() {
     expect(find.text('Belum ada order aktif'), findsOneWidget);
     await tester.tap(find.text('Transaksi baru').first);
     await tester.pumpAndSettle();
-    expect(find.text('Buat transaksi'), findsWidgets);
+    expect(find.text('Buat Transaksi'), findsWidgets);
     expect(host.router.canPop(), isTrue);
   });
   testWidgets('filter with no results stays selectable', (tester) async {

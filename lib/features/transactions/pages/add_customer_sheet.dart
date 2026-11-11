@@ -13,8 +13,19 @@ class AddCustomerSheet extends ConsumerWidget {
   const AddCustomerSheet({super.key, this.forOrder = true});
   final bool forOrder;
 
-  static Future<Customer?> show(BuildContext context, WidgetRef ref, {bool forOrder = true}) {
+  static Future<Customer?> show(
+    BuildContext context,
+    WidgetRef ref, {
+    bool forOrder = true,
+    bool fromContacts = false,
+  }) async {
     ref.read(addCustomerFormProvider.notifier).reset();
+    if (fromContacts) {
+      await ContactPickerSheet.show(context, ref);
+      if (!context.mounted) return null;
+      final form = ref.read(addCustomerFormProvider);
+      if (form.name.isEmpty && form.phone.isEmpty) return null;
+    }
     return AppBottomSheet.show<Customer>(
       context: context,
       title: 'Tambah pelanggan cepat',

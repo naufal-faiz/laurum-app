@@ -47,7 +47,7 @@ void main() {
     final host = await pumpAntrean(tester);
     host.router.go('/transaksi/baru');
     await tester.pumpAndSettle();
-    expect(find.text('Buat transaksi'), findsWidgets);
+    expect(find.text('Buat Transaksi'), findsWidgets);
     expect(find.byType(BottomNavBar), findsNothing);
     host.router.go('/transaksi/baru/layanan');
     await tester.pumpAndSettle();

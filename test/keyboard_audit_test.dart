@@ -143,7 +143,7 @@ void main() {
   testWidgets('Pilih pelanggan: pencarian di atas keyboard', (tester) async {
     configureKeyboardTest(tester);
     await pumpAntrean(tester, location: '/transaksi/baru');
-    await tester.tap(find.text('Pilih pelanggan'));
+    await tester.tap(find.text('Belum ada pelanggan'));
     await tester.pumpAndSettle();
     await expectKeyboardVisible(tester, field: find.byType(AppSearchField).first);
   });

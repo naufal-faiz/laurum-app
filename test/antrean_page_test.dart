@@ -48,7 +48,7 @@ void main() {
     await tester.tap(find.descendant(of: nav, matching: find.text('Transaksi')));
     await tester.pumpAndSettle();
     expect(host.router.canPop(), isTrue);
-    expect(find.text('Buat transaksi'), findsWidgets);
+    expect(find.text('Buat Transaksi'), findsWidgets);
     expect(tester.takeException(), isNull);
   });
   testWidgets('WhatsApp banner follows fake connection and does not block order data', (

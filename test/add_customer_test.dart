@@ -12,7 +12,7 @@ void main() {
 
   testWidgets('add customer validates, detects duplicate and can use it', (tester) async {
     await pumpAntrean(tester, location: '/transaksi/baru');
-    await tester.tap(find.text('Pilih pelanggan'));
+    await tester.tap(find.text('Belum ada pelanggan'));
     await tester.pumpAndSettle();
     await tester.enterText(
       find.descendant(of: find.byType(CustomerPickerSheet), matching: find.byType(TextField)),
@@ -43,7 +43,7 @@ void main() {
 
   testWidgets('contact picker fills the add customer form and saves', (tester) async {
     await pumpAntrean(tester, location: '/transaksi/baru');
-    await tester.tap(find.text('Pilih pelanggan'));
+    await tester.tap(find.text('Belum ada pelanggan'));
     await tester.pumpAndSettle();
     await tester.enterText(
       find.descendant(of: find.byType(CustomerPickerSheet), matching: find.byType(TextField)),

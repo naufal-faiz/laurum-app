@@ -16,7 +16,7 @@ void main() {
   ) async {
     configureKeyboardTest(tester);
     final host = await pumpAntrean(tester, location: '/transaksi/baru');
-    await tester.tap(find.widgetWithText(AppButton, 'Baru'));
+    await tester.tap(find.widgetWithText(AppButton, 'Pelanggan baru'));
     await tester.pumpAndSettle();
     expect(tester.widget<AddCustomerSheet>(find.byType(AddCustomerSheet)).forOrder, isTrue);
     final fields = find.descendant(
@@ -39,17 +39,17 @@ void main() {
     expect(find.byType(AddCustomerSheet), findsNothing);
     expect(host.container.read(transactionDraftProvider).customerId, isNotNull);
     expect(find.text('Pelanggan R3'), findsOneWidget);
-    expect(find.widgetWithText(AppButton, 'Baru'), findsNothing);
+    expect(find.widgetWithText(AppButton, 'Pelanggan baru'), findsNothing);
   });
   testWidgets('closing direct add-customer leaves the draft unchanged', (tester) async {
     configureKeyboardTest(tester);
     final host = await pumpAntrean(tester, location: '/transaksi/baru');
     final before = host.container.read(transactionDraftProvider);
-    await tester.tap(find.widgetWithText(AppButton, 'Baru'));
+    await tester.tap(find.widgetWithText(AppButton, 'Pelanggan baru'));
     await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Tutup'));
     await tester.pumpAndSettle();
     expect(host.container.read(transactionDraftProvider), same(before));
-    expect(find.widgetWithText(AppButton, 'Baru'), findsOneWidget);
+    expect(find.widgetWithText(AppButton, 'Pelanggan baru'), findsOneWidget);
   });
 }

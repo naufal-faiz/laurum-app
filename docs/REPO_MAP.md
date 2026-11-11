@@ -606,7 +606,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_status_section.dart (61): SyncStatusSection
 
 ### lib/features/transactions/pages/
-- add_customer_sheet.dart (51): AddCustomerSheet
+- add_customer_sheet.dart (62): AddCustomerSheet
 - cash_input_sheet.dart (57): CashInputSheet
 - contact_picker_sheet.dart (58): ContactPickerSheet, contactsProvider
 - customer_picker_sheet.dart (97): CustomerPickerSheet
@@ -617,7 +617,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_picker_page.dart (54): ServicePickerPage
 - transaction_leave_flow.dart (22):
 - transaction_line_sheet.dart (76): TransactionLineSheet
-- transaction_page.dart (87): TransactionPage
+- transaction_page.dart (83): TransactionPage
 - transaction_routes.dart (37):
 - weight_input_sheet.dart (91): WeightInputSheet
 
@@ -633,7 +633,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_quote.dart (40): PaymentQuote
 - receipt_print_controller.dart (59): ReceiptPrintState, ReceiptPrint, receiptPrintProvider
 - receipt_view.dart (60): ReceiptView, receiptViewProvider
-- transaction_draft.dart (110): DraftLine, TransactionDraftState, TransactionDraft, transactionDraftProvider
+- transaction_draft.dart (100): TransactionDraftState, TransactionDraft, transactionDraftProvider
+- transaction_line.dart (18): DraftLine
 - transaction_providers.dart (32): ServiceSearch, CustomerSearch, serviceCatalogProvider, customerCatalogProvider, customerBalanceProvider, serviceSearchProvider, customerSearchProvider
 - weight_edit.dart (79): WeightEditState, WeightEdit, weightEditProvider
 
@@ -645,8 +646,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_actions_section.dart (81): ReceiptActionsSection
 - receipt_status_section.dart (96): ReceiptStatusSection
 - service_picker_list_section.dart (84): ServicePickerListSection
-- transaction_customer_section.dart (57): TransactionCustomerSection
-- transaction_details_section.dart (66): TransactionDetailsSection
+- transaction_customer_section.dart (82): TransactionCustomerSection
+- transaction_details_section.dart (68): TransactionDetailsSection
+- transaction_footer_section.dart (42): TransactionFooterSection
+- transaction_item_section.dart (65): TransactionItemSection
+- transaction_services_section.dart (88): TransactionServicesSection
+- transaction_summary_section.dart (63): TransactionSummarySection
 
 ### lib/
 - main.dart (48):
@@ -1144,12 +1149,18 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### test/
 - top_services_test.dart (30):
-- transaction_customer_section_test.dart (50):
+- transaction_customer_section_test.dart (56):
+- transaction_delete_test.dart (48):
 - transaction_draft_test.dart (43):
 - transaction_flow_rollback_test.dart (85): FailingSavings
+- transaction_footer_section_test.dart (44):
 - transaction_golden_test.dart (70):
-- transaction_page_test.dart (136):
+- transaction_import_contact_test.dart (55):
+- transaction_page_test.dart (138):
+- transaction_redesign_layout_test.dart (39):
+- transaction_remove_discount_test.dart (39):
 - transaction_runner_test.dart (91): TransactionValue
+- transaction_sections_test.dart (96):
 - trust_note_test.dart (24):
 - ui_final_accessibility_test.dart (52):
 - ui_final_flow_host.dart (53):

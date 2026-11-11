@@ -1,47 +1,49 @@
-# STATE Laurum
+﻿# STATE Laurum
 Diperbarui: 2026-11-11 | Cabang newdesign
 
 ## Sesi aktif
-Layar 02 Buat Transaksi; dasar commit d156170.
-FigCraft terhubung; pengguna memilih 691, dibaca sekali (tersimpan dalam spec).
-Pasangan frame 752 + adaptasi pembayaran/estimasi/catatan menunggu jawaban.
+Layar 02 Buat Transaksi selesai; dasar d156170, WIP awal eec4bfc.
+Frame 691/752 dibaca masing-masing sekali, ringkasan di spec 02.
+Commit feat(ui) irisan Transaksi memuat berkas ini; lihat git log -1.
 
 ## Status irisan
-- Header detail/subjudul/Draft, kartu pelanggan kosong dan dua aksi, footer total
-  + Bayar sejajar sudah diterapkan. Body memakai padding 24 dp sesuai frame.
-- Kartu pelanggan terpilih masih MenuRow lama dalam AppCard; layanan terisi,
-  tombol sampah, Ringkasan dan susunan detail BELUM dikerjakan.
-- TransactionFooterSection baru (data/callback); tidak ada komponen bersama baru.
-- Paritas awal di spec 02 belum dicentang. Provider/aksi/state/rute tetap.
-- Snapshot/screenshot: 0. Visual belum diverifikasi manual; iOS belum diuji.
+Header detail/Draft; pelanggan kosong/terpilih + Ganti; layanan kosong/terisi,
+sampah terpisah dari Ubah berat/jumlah; Ringkasan; estimasi/catatan; footer sejajar.
+Section footer/services/item/summary hanya menyusun widget registry.
+TransactionDetailsSection tetap ConsumerWidget utang lama, provider tetap.
+remove membatasi diskon ke subtotal baru; DraftLine dipisah/diekspor ulang
+untuk batas baris. Paritas spec 02 seluruhnya Selesai.
+Golden 3: transaction_page, transaction_empty (baru), add_customer_sheet (backdrop).
+Snapshot/screenshot 0; visual belum diverifikasi manual; iOS belum diuji.
 
 ## Keputusan pengguna terbaru
-Akurat dengan FigCraft; sampah dan edit berat harus sama-sama tersedia.
-Ambang usage 10%: persentase akun tidak tersedia di alat; siapkan handoff sebelum
-kapasitas habis. Pilihan aktif yang dibaca setelah pengguna bertanya ID adalah 691.
-Pertanyaan async terbuka: pakai pasangan 752 untuk isi, bayar/COD tetap di langkah
-Pembayaran, estimasi/catatan setelah Ringkasan. Jangan menganggap sudah disetujui.
+Pasangan 691+752 disetujui; pembayaran tetap langkah lama; estimasi/catatan
+sesudah Ringkasan. PayStatus tidak dipilih manual dari frame.
+Izin spesifik: clamp diskon saat hapus + tes regresi dan pemisahan DraftLine.
+Terbaru: tombol Pilih pelanggan menjadi Impor kontak; kartu kosong membuka
+pemilihan. Kontak ditinjau di formulir lama sebelum simpan/pilih pelanggan.
+Padding atas body dari 24 menjadi 8 dp, sisi tetap 24 dp.
+Ambang usage 10%; persentase akun tidak tersedia di alat. FigCraft pengguna
+selalu dikecualikan dari commit; tidak ada push/merge.
 
 ## Belum di-commit
-Progres awal disimpan dalam commit wip; FigCraft pengguna dikecualikan.
-File baru: transaction_footer_section.dart dan transaction_footer_section_test.dart.
+Hanya docs/design/new-design-laurum.figcraft milik pengguna setelah commit.
 Stash f7a9e49 lama sudah diterapkan; jangan apply ulang.
+Pengecualian zona beku berizin: transaction_draft.dart, transaction_line.dart,
+transaction_remove_discount_test.dart. Rute/data/token/dependensi tetap.
 
 ## Langkah berikutnya
-1. Tunggu jawaban pertanyaan async; baca 752 sekali hanya jika disetujui.
-2. Selesaikan layanan + sampah + edit berat, Ringkasan dan detail; aksi lama tetap.
-3. Cek diskon saat hapus: remove saat ini mempertahankan diskon, berpotensi total
-   negatif bila subtotal menurun. State beku; minta izin jika perlu memperbaiki.
-4. Tes/golden/keyboard/320 dp/2x; check_all sekali di akhir, paritas dan diff.
-5. Satu commit feat(ui) akhir, lalu tinjauan pengguna. Jangan push/merge.
+1. Tunggu tinjauan pengguna terhadap Transaksi; satu irisan selesai.
+2. Kerjakan hanya koreksi/layar berikut yang diminta pengguna.
 
 ## Blocker
-UI-4/UI-9/UI-10: acuan varian isi dan penempatan fungsi di luar frame belum
-dikonfirmasi. Jangan menambah pilihan PayStatus manual (Lunas) dari frame.
+Tidak ada. Saran di luar lingkup: audit diskon saat kuantitas berkurang (bukan
+jalur hapus); jangan ubah state tambahan tanpa izin.
 
 ## Bukti terakhir
-- Tes footer/pelanggan/Page 9 lulus; keyboard catatan/Bayar 300 dp 1 lulus.
-- Scoped flutter analyze 3 berkas: no issues; check_arch OK; diff --check bersih.
-- Finder diubah hanya label Baru -> Pelanggan baru dan kapitalisasi judul;
-  tes pelanggan memakai font Inter asli agar pengujian 320 dp/2x akurat.
-- check_all belum dijalankan karena irisan belum selesai; golden belum diperbarui.
+- dart run tool/check_all.dart: SEMUA HIJAU; 1086 lulus, 1 skip, exit 0.
+- Log TEMP/laurum-transaction-import-final.log; REPO_MAP 1091 berkas.
+- Scoped analyze no issues; check_arch OK; keyboard 300 dp 2 lulus.
+- Tes impor/pelanggan/transaksi 13 lulus; layout/golden 320dp/2x 5 lulus.
+- Finder mengikuti label/jalur visual; assertion perilaku lama tetap.
+- Regresi diskon saat hapus sesuai izin pengguna; tidak ada state tambahan.

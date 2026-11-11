@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:laurum/core/formatters/formatters.dart';
-import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/transactions/pages/add_customer_sheet.dart';
 import 'package:laurum/features/transactions/pages/customer_picker_sheet.dart';
@@ -13,11 +11,9 @@ import 'package:laurum/features/transactions/state/transaction_providers.dart';
 import 'package:laurum/features/transactions/widgets/transaction_customer_section.dart';
 import 'package:laurum/features/transactions/widgets/transaction_details_section.dart';
 import 'package:laurum/features/transactions/widgets/transaction_footer_section.dart';
+import 'package:laurum/features/transactions/widgets/transaction_services_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_badge.dart';
-import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
-import 'package:laurum/shared/widgets/molecules/menu_row.dart';
-import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 
 class TransactionPage extends ConsumerWidget {
@@ -34,11 +30,23 @@ class TransactionPage extends ConsumerWidget {
     final balance = draft.customerId == null
         ? 0
         : ref.watch(customerBalanceProvider(draft.customerId!)).value ?? 0;
+    Future<void> createCustomer({bool fromContacts = false}) async {
+      final created = await AddCustomerSheet.show(context, ref, fromContacts: fromContacts);
+      if (created == null || !context.mounted) return;
+      ref.invalidate(customerCatalogProvider);
+      ref.read(transactionDraftProvider.notifier).selectCustomer(created.id);
+    }
+
     return FormScaffold(
       title: 'Buat Transaksi',
       subtitle: 'Order baru · nota otomatis',
       appBarVariant: AppBarSubVariant.detail,
-      padding: const EdgeInsets.all(AppSpacing.xlarge),
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.xlarge,
+        AppSpacing.small,
+        AppSpacing.xlarge,
+        AppSpacing.xlarge,
+      ),
       trailing: const AppBadge('Draft', variant: AppBadgeVariant.menungguJemput),
       backLabel: 'Kembali',
       onBack: () => leaveTransaction(context, ref),
@@ -58,30 +66,15 @@ class TransactionPage extends ConsumerWidget {
             customer: customer,
             balance: balance,
             onChoose: () => CustomerPickerSheet.show(context, ref),
-            onCreate: () async {
-              final created = await AddCustomerSheet.show(context, ref);
-              if (created == null || !context.mounted) return;
-              ref.invalidate(customerCatalogProvider);
-              ref.read(transactionDraftProvider.notifier).selectCustomer(created.id);
-            },
+            onCreate: createCustomer,
+            onImport: () => createCustomer(fromContacts: true),
           ),
-          SectionHeader(
-            title: 'Layanan',
-            subtitle: '${draft.itemCount} layanan di nota',
+          TransactionServicesSection(
+            lines: draft.lines,
+            onAdd: () => context.push('/transaksi/baru/layanan'),
+            onEdit: (id) => TransactionLineSheet.show(context, ref, id),
+            onRemove: (id) => ref.read(transactionDraftProvider.notifier).remove(id),
           ),
-          AppButton(
-            draft.lines.isEmpty ? 'Pilih layanan' : 'Tambah layanan lain',
-            variant: AppButtonVariant.actionOutline,
-            icon: AppIcons.add,
-            onPressed: () => context.push('/transaksi/baru/layanan'),
-          ),
-          for (final line in draft.lines)
-            MenuRow(
-              label: line.service.name,
-              subtitle: '${line.quantityLabel} · ${Formatters.rupiah(line.total)}',
-              icon: AppIcons.service,
-              onTap: () => TransactionLineSheet.show(context, ref, line.service.id),
-            ),
           const TransactionDetailsSection(),
         ],
       ),

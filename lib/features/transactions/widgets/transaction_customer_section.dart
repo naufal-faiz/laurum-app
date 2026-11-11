@@ -6,11 +6,10 @@ import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
-import 'package:laurum/shared/widgets/atoms/app_icon.dart';
-import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
+import 'package:laurum/shared/widgets/organisms/customer_contact_card.dart';
 
 class TransactionCustomerSection extends StatelessWidget {
   const TransactionCustomerSection({
@@ -18,50 +17,34 @@ class TransactionCustomerSection extends StatelessWidget {
     required this.balance,
     required this.onChoose,
     required this.onCreate,
+    required this.onImport,
     super.key,
   });
   final Customer? customer;
   final int balance;
-  final VoidCallback onChoose, onCreate;
+  final VoidCallback onChoose, onCreate, onImport;
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     spacing: AppSpacing.small,
     children: [
-      const SectionHeader(
+      SectionHeader(
         title: 'Pelanggan',
         titleColor: AppColors.primaryInk,
-        trailing: AppText('Wajib diisi', variant: AppTextVariant.caption, color: AppColors.ink3),
+        actionLabel: customer == null ? null : 'Ganti',
+        onAction: customer == null ? null : onChoose,
+        trailing: customer == null
+            ? const AppText('Wajib diisi', variant: AppTextVariant.caption, color: AppColors.ink3)
+            : null,
       ),
       if (customer == null) ...[
         AppCard(
-          child: Row(
-            spacing: AppSpacing.small,
-            children: [
-              const AppCard(
-                style: AppCardStyle.muted,
-                padding: EdgeInsets.all(AppSpacing.small),
-                child: AppIcon(AppIcons.person, color: AppColors.ink3),
-              ),
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText('Belum ada pelanggan', variant: AppTextVariant.bodyStrong),
-                    AppText(
-                      'Pilih dari daftar atau buat baru',
-                      variant: AppTextVariant.caption,
-                      color: AppColors.ink3,
-                    ),
-                  ],
-                ),
-              ),
-              AppIconButton(
-                icon: AppIcons.next,
-                label: 'Pilih pelanggan dari kartu',
-                onPressed: onChoose,
-              ),
-            ],
+          padding: EdgeInsets.zero,
+          child: MenuRow(
+            label: 'Belum ada pelanggan',
+            subtitle: 'Pilih dari daftar atau buat baru',
+            icon: AppIcons.person,
+            onTap: onChoose,
           ),
         ),
         Row(
@@ -69,30 +52,29 @@ class TransactionCustomerSection extends StatelessWidget {
           children: [
             Expanded(
               child: AppButton(
-                'Pilih pelanggan',
+                'Impor kontak',
                 variant: AppButtonVariant.action,
-                onPressed: onChoose,
+                onPressed: onImport,
               ),
             ),
             Expanded(
               child: AppButton(
                 'Pelanggan baru',
                 variant: AppButtonVariant.actionOutline,
-                icon: AppIcons.add,
                 onPressed: onCreate,
               ),
             ),
           ],
         ),
       ] else
-        AppCard(
-          padding: EdgeInsets.zero,
-          child: MenuRow(
-            label: customer!.name,
-            subtitle:
-                '${Formatters.telepon(customer!.phone)} · Saldo ${Formatters.rupiah(balance)}',
-            icon: AppIcons.person,
-            onTap: onChoose,
+        CustomerContactCard(
+          name: customer!.name,
+          phone: customer!.phone,
+          showContact: false,
+          badge: AppText(
+            'Saldo ${Formatters.rupiah(balance)}',
+            variant: AppTextVariant.caption,
+            color: AppColors.primaryInk,
           ),
         ),
     ],

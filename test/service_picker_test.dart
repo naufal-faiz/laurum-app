@@ -34,7 +34,7 @@ void main() {
     final draft = host.container.read(transactionDraftProvider);
     expect(draft.itemCount, 1);
     expect(draft.lines.single.service.name, 'Bed cover');
-    expect(find.text('1 pcs · Rp25.000'), findsOneWidget);
+    expect(find.text('1 pcs × Rp25.000'), findsOneWidget);
   });
 
   testWidgets('service search without results shows an empty state', (tester) async {

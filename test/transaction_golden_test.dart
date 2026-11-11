@@ -52,7 +52,7 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
     await pumpAntrean(tester, location: '/transaksi/baru');
-    await tester.tap(find.text('Pilih pelanggan'));
+    await tester.tap(find.text('Belum ada pelanggan'));
     await tester.pumpAndSettle();
     await tester.enterText(
       find.descendant(of: find.byType(CustomerPickerSheet), matching: find.byType(TextField)),

@@ -14,7 +14,7 @@ Future<void> uiFinalTap(WidgetTester tester, String text) async {
 }
 
 Future<void> uiFinalCreateCustomer(WidgetTester tester) async {
-  await uiFinalTap(tester, 'Baru');
+  await uiFinalTap(tester, 'Pelanggan baru');
   final fields = find.descendant(
     of: find.byType(AddCustomerSheet),
     matching: find.byType(EditableText),
@@ -22,7 +22,7 @@ Future<void> uiFinalCreateCustomer(WidgetTester tester) async {
   await tester.enterText(fields.at(0), 'Pelanggan Uji Akhir');
   await tester.enterText(fields.at(1), '081299991234');
   await uiFinalTap(tester, 'Simpan pelanggan');
-  expect(find.widgetWithText(AppButton, 'Baru'), findsNothing);
+  expect(find.widgetWithText(AppButton, 'Pelanggan baru'), findsNothing);
 }
 
 Future<void> uiFinalDeposit(WidgetTester tester) async {
@@ -45,7 +45,7 @@ Future<void> uiFinalSelectWeight(WidgetTester tester) async {
   await tester.tap(choose);
   await tester.pumpAndSettle();
   await uiFinalTap(tester, 'Cuci setrika');
-  await uiFinalTap(tester, '1 kg · Rp9.000');
+  await uiFinalTap(tester, 'Ubah berat');
   await uiFinalTap(tester, '1 kg');
   await uiFinalTap(tester, '2');
   await uiFinalTap(tester, 'Simpan berat');

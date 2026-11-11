@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 import 'package:laurum/features/customers/data/customer_fixtures.dart';
 import 'package:laurum/features/transactions/widgets/transaction_customer_section.dart';
-import 'package:laurum/shared/widgets/molecules/menu_row.dart';
 
 import 'test_fonts.dart';
 
@@ -17,6 +16,7 @@ void main() {
       addTearDown(tester.view.resetDevicePixelRatio);
       var chooses = 0;
       var creates = 0;
+      var imports = 0;
       await tester.pumpWidget(
         MaterialApp(
           theme: AppTheme.light,
@@ -28,6 +28,7 @@ void main() {
                 balance: 0,
                 onChoose: () => chooses++,
                 onCreate: () => creates++,
+                onImport: () => imports++,
               ),
             ),
           ),
@@ -35,16 +36,18 @@ void main() {
       );
       if (selected) {
         expect(find.text('Pelanggan baru'), findsNothing);
-        expect(find.text('Pilih pelanggan'), findsNothing);
-        await tester.tap(find.byType(MenuRow));
+        expect(find.text('Impor kontak'), findsNothing);
+        await tester.tap(find.text('Ganti'));
       } else {
         expect(
           tester.getTopLeft(find.text('Pelanggan baru')).dx,
-          greaterThan(tester.getTopLeft(find.text('Pilih pelanggan')).dx),
+          greaterThan(tester.getTopLeft(find.text('Impor kontak')).dx),
         );
         await tester.tap(find.text('Pelanggan baru'));
         expect(creates, 1);
-        await tester.tap(find.text('Pilih pelanggan'));
+        await tester.tap(find.text('Impor kontak'));
+        expect(imports, 1);
+        await tester.tap(find.text('Belum ada pelanggan'));
       }
       expect(chooses, 1);
       expect(tester.takeException(), isNull);

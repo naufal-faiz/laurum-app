@@ -19,7 +19,7 @@ void main() {
       expect(tester.widget<BottomNavBar>(nav).activeIndex, index);
       await tester.tap(find.descendant(of: nav, matching: find.text('Transaksi')));
       await tester.pumpAndSettle();
-      expect(find.text('Buat transaksi'), findsOneWidget);
+      expect(find.text('Buat Transaksi'), findsOneWidget);
       expect(find.byType(BottomNavBar), findsNothing);
       expect(host.router.canPop(), isTrue);
       host.router.pop();
