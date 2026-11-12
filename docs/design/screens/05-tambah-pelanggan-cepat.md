@@ -8,7 +8,7 @@ Template: AppBottomSheet + SheetScaffold
 Komposisi:
 - AppBottomSheet(title: 'Tambah pelanggan cepat', subtitle 'Tersimpan ke kontak usaha.').
 - BannerMessage info 'Pelanggan yang disimpan langsung dipilih untuk nota ini.'.
-- LabeledField + AppTextField: Nama pelanggan (wajib), Nomor WhatsApp (wajib),
+- LabeledField + AppTextField: Nama pelanggan (wajib), Nomor WhatsApp (opsional),
   Alamat (opsional, multiline), Catatan (opsional).
 - Saat nomor duplikat: AppButton('Pakai pelanggan ini') di bawah field nomor.
 - Footer AppButton('Simpan pelanggan') + AppButton('Ambil dari kontak HP').
@@ -19,7 +19,9 @@ Data dan provider:
 - AuthService.currentUserId dan businessClockProvider untuk ownerId/createdAt.
 
 Interaksi:
-- Simpan memvalidasi nama dan nomor; nomor dinormalkan ke 0... (62/8 -> 0).
+- Hanya nama wajib. Nomor kosong, alamat kosong, dan catatan kosong diperbolehkan;
+  disimpan sebagai string kosong sesuai kontrak repository yang ada, tanpa migrasi.
+  Nomor yang diisi tetap divalidasi dan dinormalkan ke 0... (62/8 -> 0).
 - Nomor yang sudah dipakai menampilkan 'Nomor ini sudah terdaftar atas nama <nama>.'
   dan tautan 'Pakai pelanggan ini' memilih pelanggan tersebut.
 - 'Ambil dari kontak HP' membuka ContactPickerSheet; memilih kontak mengisi nama/nomor.

@@ -77,12 +77,19 @@ Data dan provider:
 - receiptViewProvider(:id): Order, OrderItem, Payment, Customer, BusinessProfile,
   ReceiptSettings, saldo tabungan; nota tidak ditemukan -> EmptyState.
 - receiptPrintProvider: printing/error/notice; PrintService.printReceipt(ReceiptData).
-- ExternalLauncher.launchWhatsApp (palsu) untuk kirim nota.
+- ExternalLauncher.launchWhatsApp: DeviceExternalLauncher pada build Drift, palsu untuk dummy/tes.
 
 Interaksi:
 - Cetak struk mengirim 32 kolom + paperMm/fontSize; sukses notice, gagal banner + retry.
 - Pengaturan printer membuka /lainnya/printer.
-- Kirim lewat WhatsApp memakai nomor pelanggan dan teks struk; gagal menampilkan banner.
+- WhatsApp membagikan gambar PNG berisi seluruh data struk dan pesan otomatis berisi
+  nama pelanggan, nomor nota, serta nama usaha. Pengguna mengonfirmasi pengiriman di WhatsApp.
+  No. HP kosong ditampilkan `-` pada preview, PDF, gambar, dan cetak; beberapa pelanggan
+  boleh tanpa nomor. Tanpa nomor, WhatsApp memilih penerima biasa.
+  Android mengirim lampiran lewat ACTION_SEND ke WhatsApp/WhatsApp Business dengan
+  petunjuk penerima bila ada nomor; aplikasi WhatsApp bisa tetap meminta pilihan penerima.
+  iOS memakai lembar berbagi, dengan penerima dipilih di WhatsApp (belum diuji di iOS).
+  Gagal membuka aplikasi menampilkan banner; sukses berarti siap dibagikan, bukan bukti terkirim.
 - Selesai ke /antrean; Lihat detail ke /order/:id.
 - Unduh membuat PDF dari data pratinjau dan membuka dialog simpan sistem; sukses notice,
   batal tidak mengubah nota atau memunculkan sukses, exception menjadi pesan umum.

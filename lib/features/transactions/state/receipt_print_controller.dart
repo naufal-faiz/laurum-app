@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/services/service_providers.dart';
+import 'package:laurum/features/transactions/state/receipt_document.dart';
 import 'package:laurum/features/transactions/state/receipt_view.dart';
 
 typedef ReceiptPrintState = ({bool printing, String? error, String? notice});
@@ -44,16 +45,27 @@ class ReceiptPrint extends Notifier<ReceiptPrintState> {
   }
 
   Future<void> sendWhatsApp(ReceiptView view) async {
-    final ok = await ref
-        .read(externalLauncherProvider)
-        .launchWhatsApp(
-          phone: view.customer.phone,
-          message: view.lines.join('\n'),
-        );
+    if (state.printing) return;
+    state = (printing: true, error: null, notice: null);
+    var ok = false;
+    try {
+      ok = await ref
+          .read(externalLauncherProvider)
+          .launchWhatsApp(
+            phone: view.customer.phone,
+            message:
+                'Halo ${view.customer.name}, berikut struk ${view.order.orderNo} '
+                'dari ${view.business.name}. Terima kasih.',
+            receipt: receiptDocument(view),
+          );
+    } on Object {
+      ok = false;
+    }
+    if (!ref.mounted) return;
     state = (
       printing: false,
       error: ok ? null : 'Gagal membuka WhatsApp.',
-      notice: ok ? 'Nota dikirim lewat WhatsApp.' : null,
+      notice: ok ? 'Struk siap dibagikan lewat WhatsApp.' : null,
     );
   }
 }

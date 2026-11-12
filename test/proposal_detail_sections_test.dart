@@ -28,7 +28,7 @@ void main() {
         home: Scaffold(
           body: SingleChildScrollView(
             child: ProposalCustomerFieldsSection(
-              draft: draft.copyWith(name: '', phone: ''),
+              draft: draft.copyWith(name: '', phone: '123'),
               enabled: true,
               onName: (_) {},
               onPhone: (v) => phone = v,

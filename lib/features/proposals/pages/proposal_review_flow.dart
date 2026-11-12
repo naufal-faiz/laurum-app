@@ -8,11 +8,8 @@ import 'package:laurum/features/proposals/state/proposal_actions.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
 import 'package:laurum/shared/widgets/organisms/confirm_modal.dart';
 
-Future<bool> openProposalWhatsApp(WidgetRef ref, String phone) => ref
-    .read(externalLauncherProvider)
-    .launchUrl(
-      'https://wa.me/${phone.replaceAll(RegExp(r'\D'), '').replaceFirst(RegExp('^0'), '62')}',
-    );
+Future<bool> openProposalWhatsApp(WidgetRef ref, String phone) =>
+    ref.read(externalLauncherProvider).launchWhatsApp(phone: phone, message: '');
 
 Future<void> approveReviewedProposal(
   BuildContext context,

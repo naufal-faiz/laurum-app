@@ -31,13 +31,12 @@ class CustomerEditController extends Notifier<CustomerEditState> {
     final form = state.form;
     final id = state.customer!.id;
     final phone = normalizePhone(form.phone);
-    if (!deactivate && (form.name.trim().isEmpty || !RegExp(r'^08\d{8,11}$').hasMatch(phone))) {
+    final invalidPhone = form.phone.trim().isNotEmpty && !RegExp(r'^08\d{8,11}$').hasMatch(phone);
+    if (!deactivate && (form.name.trim().isEmpty || invalidPhone)) {
       state = state.copyWith(
         form: form.copyWith(
           nameError: form.name.trim().isEmpty ? 'Nama wajib diisi.' : null,
-          phoneError: !RegExp(r'^08\d{8,11}$').hasMatch(phone)
-              ? 'Nomor WhatsApp tidak valid.'
-              : null,
+          phoneError: invalidPhone ? 'Nomor WhatsApp tidak valid.' : null,
         ),
       );
       return false;
@@ -56,7 +55,7 @@ class CustomerEditController extends Notifier<CustomerEditState> {
       }
       if (!deactivate) {
         final duplicate = (await repository.getCustomers())
-            .where((c) => c.id != id && normalizePhone(c.phone) == phone)
+            .where((c) => phone.isNotEmpty && c.id != id && normalizePhone(c.phone) == phone)
             .firstOrNull;
         if (duplicate != null) {
           state = state.copyWith(

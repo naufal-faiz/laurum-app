@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/customers/pages/customer_edit_sheet.dart';
 import 'package:laurum/features/customers/state/customer_detail_data.dart';
 import 'package:laurum/features/customers/widgets/customer_orders_section.dart';
 import 'package:laurum/features/customers/widgets/customer_profile_section.dart';
@@ -41,7 +43,16 @@ class CustomerDetailPage extends ConsumerWidget {
               : ListView(
                   padding: const EdgeInsets.all(AppSpacing.screenPadding),
                   children: [
-                    CustomerProfileSection(summary: data.summary),
+                    CustomerProfileSection(
+                      summary: data.summary,
+                      onWhatsApp: () => ref
+                          .read(externalLauncherProvider)
+                          .launchWhatsApp(
+                            phone: data.summary.customer.phone,
+                            message: '',
+                          ),
+                      onEdit: () => CustomerEditSheet.show(context, ref, data.summary.customer),
+                    ),
                     const SizedBox(height: AppSpacing.screenPadding),
                     CustomerSavingsSection(data: data),
                     const SizedBox(height: AppSpacing.screenPadding),

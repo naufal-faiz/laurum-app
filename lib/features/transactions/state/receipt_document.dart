@@ -36,6 +36,11 @@ ReceiptDocumentData receiptDocument(ReceiptView view) {
             view.customer.name,
             valueDetail: view.customer.address.trim().isEmpty ? null : view.customer.address.trim(),
           ),
+        if (settings.showCustomer)
+          ReceiptDocumentRow(
+            'No. HP',
+            view.customer.phone.trim().isEmpty ? '-' : Formatters.telepon(view.customer.phone),
+          ),
       ],
       [
         for (final item in view.items.where((i) => i.deletedAt == null))

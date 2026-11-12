@@ -10,6 +10,7 @@ import 'package:laurum/core/persistence/supabase_bootstrap.dart';
 import 'package:laurum/core/persistence/sync_bindings.dart';
 import 'package:laurum/core/services/auth_config.dart';
 import 'package:laurum/core/services/device_contact_source.dart';
+import 'package:laurum/core/services/device_external_launcher.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/services/store_configuration.dart';
 import 'package:laurum/core/sync/background_sync.dart';
@@ -50,6 +51,7 @@ Future<void> main() async {
           EscPosPrintService(BlePrinterTransport()),
         ),
       if (drift) contactSourceProvider.overrideWithValue(DeviceContactSource()),
+      if (drift) externalLauncherProvider.overrideWithValue(DeviceExternalLauncher()),
       if (realAuth) syncCycleFactoryProvider.overrideWithValue(supabaseSyncCycleFromSession()),
     ],
   );

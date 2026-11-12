@@ -35,6 +35,17 @@ dari daftar diff di atas. Tidak ada kasus BE-7 pada daftar ini.
 | Printer dan struk | Printer tersimpan | `printer_id`/`printer_name` ditulis saat connect, tidak pernah dibaca | disambung ulang otomatis saat halaman Printer dibuka (`printerRestoreProvider`), diam bila printer mati | `LocalSettingsRepository` + `PrintService.connect` | spec 06-printer-struk:22; permintaan pengguna 12 Nov 2026 | BE-5a: tanpa state atau tabel baru | terverifikasi |
 
 ## Log tugas backend
+- 12 Nov 2026: izin pengguna membuat hanya Nama pelanggan wajib, serta menyetujui
+  url_launcher 6.3.3 dan share_plus 13.3.1 untuk WhatsApp nyata.
+  Verifikasi akhir: check_all SEMUA HIJAU (1172 lulus/1 skip), APK debug Android berhasil.
+  Lima golden struk diperbarui karena baris No. HP; uji WhatsApp perangkat/iOS menunggu.
+
+| Layar | Aksi | Lama/baru | Hasil | Sumber logika | Tujuan/sumber | Keputusan | Bukti |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Tambah/edit pelanggan | Simpan | ada keduanya | hanya Nama wajib, field lain boleh kosong; tanpa migrasi | AddCustomerForm, CustomerEditController, repository yang sama | arahan pengguna 12 Nov 2026; spec 05/14 | string kosong mempertahankan kontrak data; nomor kosong bukan duplikat | customer_optional_fields_test |
+| Struk | WhatsApp | ada keduanya | PNG lengkap + pesan otomatis; nomor kosong memilih penerima; No. HP tampil `-` | ReceiptPrint, receiptDocument, DeviceExternalLauncher | arahan pengguna 12 Nov 2026; spec 08 | Android ACTION_SEND; iOS lembar berbagi, penerima dipilih manual; belum diuji di iOS | whatsapp_share_test, receipt_whatsapp_optional_phone_test |
+| Detail pelanggan/order/usulan | WhatsApp | ada keduanya | profil membuka chat; detail order membawa pesan status; usulan membuka chat tanpa pesan; tanpa nomor membuka WhatsApp umum | ExternalLauncher, callback Page | arahan pengguna 12 Nov 2026; spec 09/13/25 | memakai launcher nyata pada build Drift; dummy/tes tetap palsu | customer_profile_section_test, receipt_page_test |
+
 - 12 Nov 2026, B5.3 + B5.4: chip 80 mm menampilkan pesan coming soon; impor kontak
   memakai `DeviceContactSource` pada build Drift; printer tersimpan disambung ulang
   otomatis. Dua baris tabel di atas ditambahkan.

@@ -26,7 +26,9 @@ Data/provider:
 
 Interaksi:
 - Edit profil membuka CustomerEditSheet (spec 14) di navigator utama.
-- Buka WhatsApp memakai ExternalLauncher palsu; disabled jika nomor kosong.
+- Buka WhatsApp memakai DeviceExternalLauncher pada build Drift; nomor terisi membuka
+  percakapan, nomor kosong membuka pilihan WhatsApp tanpa penerima tertentu.
+  Dummy/tes tetap memakai FakeExternalLauncher. Belum diuji di iOS.
 - Setor -> /pelanggan/:id/setor; riwayat mutasi -> /pelanggan/:id/tabungan,
   keduanya placeholder sampai prompt 51. Setor/Edit disabled jika pelanggan nonaktif.
 - Nota -> Detail order. Kembali: pop, atau /pelanggan jika dibuka langsung.

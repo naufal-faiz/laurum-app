@@ -59,6 +59,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(launcher.whatsAppCalls, hasLength(1));
     expect(launcher.whatsAppCalls.single.phone, '0813-7788-1122');
+    expect(launcher.whatsAppCalls.single.message, contains('A-0143'));
+    expect(launcher.whatsAppReceipts.single!.fileName, 'struk-A-0143');
 
     await tester.ensureVisible(find.text('Lihat detail'));
     await tester.pumpAndSettle();

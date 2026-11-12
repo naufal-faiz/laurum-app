@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_svgs.dart';
-import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
-import 'package:laurum/features/customers/pages/customer_edit_sheet.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_avatar.dart';
@@ -15,11 +12,17 @@ import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/info_row.dart';
 import 'package:laurum/shared/widgets/molecules/stat_tile.dart';
 
-class CustomerProfileSection extends ConsumerWidget {
-  const CustomerProfileSection({required this.summary, super.key});
+class CustomerProfileSection extends StatelessWidget {
+  const CustomerProfileSection({
+    required this.summary,
+    required this.onWhatsApp,
+    required this.onEdit,
+    super.key,
+  });
   final CustomerDirectoryRow summary;
+  final VoidCallback onWhatsApp, onEdit;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final customer = summary.customer;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -46,18 +49,12 @@ class CustomerProfileSection extends ConsumerWidget {
                 'Buka WhatsApp',
                 variant: AppButtonVariant.actionOutline,
                 iconAsset: AppSvgs.whatsapp,
-                onPressed: customer.phone.isEmpty
-                    ? null
-                    : () => ref
-                          .read(externalLauncherProvider)
-                          .launchWhatsApp(phone: customer.phone, message: ''),
+                onPressed: onWhatsApp,
               ),
               AppButton(
                 'Edit profil',
                 variant: AppButtonVariant.secondary,
-                onPressed: customer.isActive
-                    ? () => CustomerEditSheet.show(context, ref, customer)
-                    : null,
+                onPressed: customer.isActive ? onEdit : null,
               ),
             ],
           ),

@@ -11,8 +11,10 @@ Komposisi:
 
 Provider: customerEditProvider (CustomerEditState/CustomerEditController).
 Draf diisi dari Customer; form tidak mengubah repository sebelum Simpan.
-Nama wajib, telepon dinormalisasi ke 0... dan harus cocok 08 + 8..11 digit.
-Nomor pelanggan aktif lain ditolak; nomor milik sendiri diperbolehkan.
+Hanya nama wajib; telepon, alamat, dan catatan boleh dikosongkan (string kosong,
+tanpa migrasi). Telepon yang diisi dinormalisasi ke 0... dan harus cocok 08 + 8..11 digit.
+Nomor pelanggan aktif lain ditolak; nomor milik sendiri diperbolehkan. Nomor kosong
+tidak diperiksa sebagai duplikat, sehingga beberapa pelanggan dapat tanpa nomor.
 Simpan mempertahankan id/ownerId/createdAt; updatedAt memakai jam usaha dan sync pending.
 State busy menonaktifkan input/tombol dan mencegah pengiriman ganda.
 Kegagalan simpan mempertahankan draf dan menampilkan 'Perubahan gagal disimpan. Coba lagi.'.

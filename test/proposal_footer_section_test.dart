@@ -44,7 +44,7 @@ void main() {
         home: Scaffold(
           body: ProposalFooterSection(
             review: review,
-            draft: draft.copyWith(phone: ''),
+            draft: draft.copyWith(phone: '123'),
             enabled: true,
             onReject: () => rejects++,
             onApprove: () => approves++,

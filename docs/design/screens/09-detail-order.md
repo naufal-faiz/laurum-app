@@ -53,7 +53,9 @@ Interaksi:
 - Cetak struk selalu membuka /transaksi/nota/:id, termasuk COD tertahan/order final.
   Tidak memanggil PrintService di Detail. Pencetakan/retry dan akses Pengaturan printer
   berada di receipt agar printer belum terdeteksi ditangani di satu tempat.
-- Buka WhatsApp memakai ExternalLauncher palsu.
+- Buka WhatsApp memakai DeviceExternalLauncher pada build Drift, dengan pesan status
+  order saat ini. Nomor kosong membuka share WhatsApp tanpa penerima tertentu.
+  Dummy/tes memakai ExternalLauncher palsu. Belum diuji di iOS.
 
 State layar: loading skeleton, gagal memuat, nota tidak ditemukan, modal batalkan
 (State - Batalkan order A-0142), menu sheet, sheet pembayaran, error aksi.

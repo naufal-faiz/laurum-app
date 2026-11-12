@@ -12,8 +12,10 @@ Section Stateless, menerima data/callback; draf tidak di-reset saat repository b
 
 Fixture tersinkron: Rudi minta batal A-0139, Bu Rina cuci setrika/alamat perlu
 pemeriksaan, Agus Pratama baru/Bed cover 1 pcs. Layanan terpilih tampil pertama.
-Nama/telepon/alamat memakai selectAllOnFocus. Nama dan telepon pelanggan baru
-wajib valid; layanan harus aktif. Pelanggan terdaftar dibaca dari repository.
+Nama/telepon/alamat memakai selectAllOnFocus. Hanya nama pelanggan baru wajib;
+nomor dan alamat boleh kosong. Nomor yang diisi harus valid; layanan harus aktif.
+Pelanggan terdaftar dibaca dari repository. Tanpa nomor, Buka WhatsApp membuka
+WhatsApp umum tanpa penerima tertentu (arahan pengguna 12 Nov 2026).
 
 Interaksi:
 - Bu Rina: konfirmasi Alamat belum dipastikan sebelum membuat order.

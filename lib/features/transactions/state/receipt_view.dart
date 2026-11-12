@@ -33,6 +33,7 @@ class ReceiptView {
     items: items,
     payments: payments,
     customerName: customer.name,
+    customerPhone: customer.phone,
     settings: settings,
     savingsBalance: savingsBalance,
     paymentLabel: paidAmount(payments, orderId: order.id) < order.total

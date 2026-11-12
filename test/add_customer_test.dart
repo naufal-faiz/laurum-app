@@ -25,7 +25,7 @@ void main() {
     await tester.tap(find.text('Simpan pelanggan'));
     await tester.pumpAndSettle();
     expect(find.text('Nama wajib diisi.'), findsOneWidget);
-    expect(find.text('Nomor WhatsApp tidak valid.'), findsOneWidget);
+    expect(find.text('Nomor WhatsApp tidak valid.'), findsNothing);
 
     final fields = find.descendant(
       of: find.byType(AddCustomerSheet),

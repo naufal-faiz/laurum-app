@@ -18,6 +18,7 @@ class ProposalDraft {
   final String name, phone, address, serviceId, weight;
   bool get valid => name.trim().isNotEmpty && serviceId.isNotEmpty;
   bool get phoneValid =>
+      phone.trim().isEmpty ||
       RegExp(r'^08\d{8,11}$')
           .hasMatch(phone.replaceAll(RegExp(r'[\s()-]'), '').replaceFirst(RegExp(r'^\+?62'), '0'));
   int get weightMilli => ((double.tryParse(weight.replaceAll(',', '.')) ?? 0) * 1000).round();

@@ -50,17 +50,18 @@ class AddCustomerForm extends Notifier<AddCustomerState> {
   Future<Customer?> save() async {
     final name = state.name.trim();
     final phone = normalizePhone(state.phone);
-    if (name.isEmpty || phone.length < 10) {
+    final invalidPhone = state.phone.trim().isNotEmpty && phone.length < 10;
+    if (name.isEmpty || invalidPhone) {
       state = state.copyWith(
         nameError: name.isEmpty ? 'Nama wajib diisi.' : null,
-        phoneError: phone.length < 10 ? 'Nomor WhatsApp tidak valid.' : null,
+        phoneError: invalidPhone ? 'Nomor WhatsApp tidak valid.' : null,
       );
       return null;
     }
     final repository = ref.read(customerRepositoryProvider);
     final customers = await repository.getCustomers(includeInactive: true);
     final existing = customers
-        .where((c) => c.deletedAt == null && normalizePhone(c.phone) == phone)
+        .where((c) => phone.isNotEmpty && c.deletedAt == null && normalizePhone(c.phone) == phone)
         .firstOrNull;
     if (existing != null) {
       state = state.copyWith(

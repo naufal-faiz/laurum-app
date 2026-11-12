@@ -17,6 +17,7 @@ List<String> receiptLines({
   required List<Payment> payments,
   required String customerName,
   required ReceiptSettings settings,
+  String customerPhone = '',
   int savingsBalance = 0,
   String? paymentLabel,
 }) {
@@ -37,6 +38,8 @@ List<String> receiptLines({
     'No. Nota : ${order.orderNo}',
     'Tanggal  : ${Formatters.tanggalStruk(order.enteredAt)} ${Formatters.jam(order.enteredAt, struk: true)}',
     if (settings.showCustomer) 'Pelanggan: $customerName',
+    if (settings.showCustomer)
+      'No. HP  : ${customerPhone.trim().isEmpty ? '-' : Formatters.telepon(customerPhone)}',
     ReceiptLayout.rule,
     for (final item in active) ...[
       ReceiptLayout.row(item.serviceName, Formatters.rupiah(item.lineTotal)),

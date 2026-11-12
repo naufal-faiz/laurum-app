@@ -6,6 +6,7 @@ const receiptTemplateLines = <String>[
   'No. Nota : A-0143',
   'Tanggal  : 16 Okt 2026 10:45',
   'Pelanggan: Pak Dedi',
+  'No. HP  : -',
   '--------------------------------',
   'Cuci setrika            Rp31.500',
   '  3,5 kg @ Rp9.000',
