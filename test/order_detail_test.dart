@@ -4,6 +4,7 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/features/reports/data/report_samples.dart';
+import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 
 import 'antrean_test_host.dart';
 
@@ -42,6 +43,16 @@ void main() {
     expect(data.activity.first.label, 'Status diubah menjadi Siap');
     final after = await host.container.read(reportRepositoryProvider).getReport(weekRange);
     expect(after.revenue, before.revenue);
+  });
+
+  testWidgets('refreshing keeps the order detail instead of placeholders', (tester) async {
+    final host = await pumpAntrean(tester, location: '/order/ord-0142');
+
+    host.container.invalidate(orderDetailProvider('ord-0142'));
+    await tester.pump();
+
+    expect(find.byType(AppSkeleton), findsNothing);
+    expect(find.text('Tandai siap'), findsOneWidget);
   });
 
   testWidgets('menu cancels the order and removes it from reports', (tester) async {

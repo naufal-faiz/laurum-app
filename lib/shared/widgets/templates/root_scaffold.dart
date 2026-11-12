@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_dimensions.dart';
-import 'package:laurum/core/theme/app_motion.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_root.dart';
 import 'package:laurum/shared/widgets/molecules/sync_indicator.dart';
@@ -72,28 +71,11 @@ class RootScaffold extends StatelessWidget {
         );
         return MediaQuery(
           data: media.copyWith(padding: media.padding.copyWith(bottom: bottom)),
-          child: Stack(
-            fit: StackFit.expand,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  if (pageHeader != null) SafeArea(bottom: false, child: pageHeader!),
-                  Expanded(child: body),
-                ],
-              ),
-              IgnorePointer(
-                child: TweenAnimationBuilder<double>(
-                  key: ValueKey('tab-fade-$activeIndex'),
-                  tween: Tween(begin: 1, end: 0),
-                  duration: MediaQuery.disableAnimationsOf(context)
-                      ? Duration.zero
-                      : AppMotion.tabDuration,
-                  curve: AppMotion.tabCurve,
-                  child: const ColoredBox(color: AppColors.bg),
-                  builder: (context, opacity, child) => Opacity(opacity: opacity, child: child),
-                ),
-              ),
+              if (pageHeader != null) SafeArea(bottom: false, child: pageHeader!),
+              Expanded(child: body),
             ],
           ),
         );

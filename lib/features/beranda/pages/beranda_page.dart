@@ -36,8 +36,15 @@ class BerandaPage extends ConsumerWidget {
       daily: report.value?.daily ?? const [],
       now: ref.watch(businessClockProvider)(),
     );
-    final loading = antrean.isLoading || customers.isLoading || report.isLoading;
-    final error = antrean.hasError || customers.hasError || report.hasError;
+    // A refresh keeps the previous value, so only the very first read may show
+    // placeholders. Reacting to `isLoading` alone blanks the dashboard on every
+    // sync and reads as flicker.
+    final loading = [
+      antrean,
+      customers,
+      report,
+    ].any((value) => value.isLoading && !value.hasValue);
+    final error = [antrean, customers, report].any((value) => value.hasError && !value.hasValue);
     return ListView(
       padding: const EdgeInsets.fromLTRB(
         AppSpacing.large,

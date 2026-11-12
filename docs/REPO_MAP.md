@@ -14,7 +14,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ## Berkas (jumlah baris): nama deklarasi
 
 ### lib/
-- app.dart (88): LaurumApp
+- app.dart (89): LaurumApp
 
 ### lib/core/domain/
 - business_profile.dart (50): BusinessProfile
@@ -206,11 +206,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_molecule_tokens.dart (15): AppMoleculeTokens
 - app_mono_text_styles.dart (19): AppMonoTextStyles
 - app_motion.dart (6): AppMotion
+- app_page_transitions.dart (37): AppPageTransitionsBuilder
 - app_radius.dart (20): AppRadius
 - app_shadows.dart (22): AppShadows
 - app_spacing.dart (22): AppSpacing
 - app_text_styles.dart (102): AppTextStyles
-- app_theme.dart (53): AppTheme
+- app_theme.dart (67): AppTheme
 - receipt_edge_clipper.dart (27): ReceiptEdgeClipper
 
 ### lib/features/auth/data/
@@ -281,7 +282,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sign_up_hero_section.dart (17): SignUpHeroSection
 
 ### lib/features/beranda/pages/
-- beranda_page.dart (100): BerandaPage
+- beranda_page.dart (107): BerandaPage
 
 ### lib/features/beranda/state/
 - beranda_services.dart (29): BerandaStageTone
@@ -770,7 +771,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/templates/
 - auth_scaffold.dart (42): AuthScaffold
 - form_scaffold.dart (64): FormScaffold
-- root_scaffold.dart (108): RootScaffold
+- root_scaffold.dart (90): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
 - sub_scaffold.dart (62): SubScaffold
 
@@ -807,6 +808,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_loader_test.dart (38):
 - app_numpad_key_test.dart (43):
 - app_page_header_test.dart (54):
+- app_page_transitions_test.dart (43):
 - app_router_test.dart (64):
 - app_search_field_test.dart (66):
 - app_skeleton_test.dart (32):
@@ -839,7 +841,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - b3b_new_password_test.dart (53):
 - banner_message_test.dart (23):
 - beranda_molecules_test.dart (113):
-- beranda_page_test.dart (58):
+- beranda_page_test.dart (70):
 - beranda_report_navigation_test.dart (33):
 - beranda_sections_test.dart (183):
 - beranda_view_test.dart (136):
@@ -965,7 +967,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_card_test.dart (89):
 - order_detail_receipt_test.dart (80):
 - order_detail_sections_test.dart (80):
-- order_detail_test.dart (89):
+- order_detail_test.dart (100):
 - order_edit_test.dart (80):
 - order_number_generator_test.dart (34):
 - organism_gallery.dart (49):
@@ -1196,7 +1198,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_changes_test.dart (25):
 - sync_indicator_test.dart (23):
 - sync_page_test.dart (68):
-- tab_motion_test.dart (55):
+- tab_motion_test.dart (43):
 - template_gallery.dart (49):
 - test_fonts.dart (22):
 - toggle_row_test.dart (25):

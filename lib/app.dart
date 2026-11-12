@@ -23,8 +23,9 @@ class LaurumApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(syncBindingsProvider);
     final storage = ref.watch(storageGateEnabledProvider) ? ref.watch(accountStoreProvider) : null;
+    final storageReady = storage == null || storage.hasValue;
     var readingInitialData = false;
-    if (storage != null && !storage.isLoading && !storage.hasError && storage.value != null) {
+    if (storage != null && storage.hasValue && storage.value != null) {
       readingInitialData = [
         ref.watch(antreanDataProvider),
         ref.watch(customerDirectoryProvider),
@@ -44,13 +45,13 @@ class LaurumApp extends ConsumerWidget {
       ],
       routerConfig: router,
       builder: (context, child) {
-        if (storage == null || (!storage.isLoading && !storage.hasError && !readingInitialData)) {
+        if (storageReady && !readingInitialData) {
           return child!;
         }
         return Scaffold(
           body: SafeArea(
             child: Center(
-              child: storage.hasError
+              child: (storage?.hasError ?? false)
                   ? EmptyState(
                       title: 'Penyimpanan belum dapat dibuka',
                       icon: AppIcons.alert,

@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_colors.dart';
+import 'package:laurum/core/theme/app_page_transitions.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/core/theme/app_text_styles.dart';
 
@@ -32,6 +34,18 @@ abstract final class AppTheme {
       labelMedium: AppTextStyles.label,
     ).apply(bodyColor: AppColors.ink, displayColor: AppColors.ink),
     dividerColor: AppColors.border,
+    // The default Android transition fades both pages through the surface
+    // colour, which reads as a blank flash on every page open. This builder
+    // only animates the incoming page over the one already painted.
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: AppPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.windows: AppPageTransitionsBuilder(),
+        TargetPlatform.linux: AppPageTransitionsBuilder(),
+      },
+    ),
     datePickerTheme: const DatePickerThemeData(
       backgroundColor: AppColors.surface,
       headerBackgroundColor: AppColors.primary,

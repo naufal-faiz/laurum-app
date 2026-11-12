@@ -74,8 +74,8 @@ class OrderDetailPage extends ConsumerWidget {
       body: OrderDetailContentSection(
         onFillWeight: () => context.push('/order/$orderId/edit'),
         data: data,
-        loading: snapshot.isLoading,
-        failed: snapshot.hasError,
+        loading: snapshot.isLoading && data == null,
+        failed: snapshot.hasError && data == null,
         useOrderStatus: useStatus,
         error: completion.error ?? actions.error ?? printing.error,
         notice: completion.error == null ? printing.notice : null,

@@ -25,6 +25,8 @@ APK release untuk pemakaian laundry rumah; dasar commit 1091715. Tanpa push/merg
   receipt_cod_actions_1x, printer_page, receipt_preview. Nomor terisi invalid tetap ditolak.
 - B5 tetap: BLE 58 mm, kontak asli, restore printer; 80 mm coming soon.
   Rincian: docs/progress/b5.md. B3b recovery selesai; uji perangkat masih menunggu.
+- Kedip: transisi halaman kustom (halaman lama tetap tampil), overlay fade tab
+  dihapus, gate hasValue, skeleton beranda/detail hanya saat data belum ada.
 
 ## Keputusan pengguna terbaru
 - Pengguna meminta APK ringan untuk penggunaan laundry rumah, meski fitur belum lengkap.
@@ -49,9 +51,10 @@ android/build/ artefak Gradle tak terlacak tetap dikecualikan; .gitignore belum 
 Uji penerima/gambar WhatsApp nyata, printer fisik, dan iOS belum dilakukan.
 
 ## Bukti terakhir
-- dart run tool/check_all.dart: SEMUA HIJAU, 1172 lulus/1 skip; REPO_MAP 1146 berkas.
+- dart run tool/check_all.dart: SEMUA HIJAU, 1176 lulus/1 skip; REPO_MAP 1148 berkas.
 - Format, flutter analyze, dart analyze (Riverpod), check_arch: OK.
 - flutter build apk --release --target-platform android-arm64 dengan .env.local
   dan LAURUM_STORE=drift: berhasil (27,4 MB). aapt: non-debug + izin INTERNET.
 - apksigner verify: valid, sertifikat sama dengan APK debug; libapp/libflutter ARM64.
-- HP tidak terhubung lewat ADB; pemasangan/tes runtime release belum dilakukan.
+- Tes kedip (transisi, tab_motion, refresh beranda/detail) lulus. Runtime belum diuji:
+  HP tidak terhubung lewat ADB.

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/features/beranda/widgets/beranda_header_section.dart';
+import 'package:laurum/features/orders/state/antrean_data.dart';
+import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/organisms/bottom_nav_bar.dart';
 
 import 'antrean_test_host.dart';
@@ -29,6 +31,16 @@ void main() {
       find.byKey(const ValueKey('antrean-golden')),
       matchesGoldenFile('goldens/beranda.png'),
     );
+  });
+
+  testWidgets('refreshing keeps the dashboard instead of flashing placeholders', (tester) async {
+    final host = await pumpAntrean(tester, location: '/beranda');
+
+    host.container.invalidate(antreanDataProvider);
+    await tester.pump();
+
+    expect(find.byType(AppSkeleton), findsNothing);
+    expect(find.text('Selamat datang kembali,'), findsOneWidget);
   });
 
   testWidgets('nav opens Beranda and fits 320 px at double text', (tester) async {
