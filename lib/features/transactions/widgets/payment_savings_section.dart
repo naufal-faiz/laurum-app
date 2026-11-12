@@ -23,7 +23,7 @@ class PaymentSavingsSection extends StatelessWidget {
   Widget build(BuildContext context) => AppCard(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      spacing: AppSpacing.cardGap,
+      spacing: AppSpacing.xxsmall,
       children: [
         const AppText('Tabungan pelanggan', variant: AppTextVariant.bodyStrong),
         Row(
@@ -40,15 +40,20 @@ class PaymentSavingsSection extends StatelessWidget {
         if (quote.savingsUsed > 0) ...[
           AppText(
             'Tabungan dipakai -${Formatters.rupiah(quote.savingsUsed)}',
+            variant: AppTextVariant.label,
             color: AppColors.primary,
           ),
-          AppText('Sisa bayar ${Formatters.rupiah(quote.due)}'),
+          AppText('Sisa bayar ${Formatters.rupiah(quote.due)}', variant: AppTextVariant.label),
           AppText(
             'Sisa tabungan ${Formatters.rupiah(balance - quote.savingsUsed)}',
             variant: AppTextVariant.caption,
           ),
         ] else if (balance == 0)
-          const AppText('Tidak ada saldo tabungan.', color: AppColors.ink3),
+          const AppText(
+            'Tidak ada saldo tabungan.',
+            color: AppColors.ink3,
+            variant: AppTextVariant.caption,
+          ),
       ],
     ),
   );

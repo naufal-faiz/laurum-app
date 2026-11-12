@@ -15,7 +15,7 @@ Centang setelah implementasi dan tes terarah; tabel ini tidak ditulis ulang saat
 
 | Butir | Sumber/aksi/keadaan yang dipertahankan | Terverifikasi |
 |---|---|---|
-| Draf | transactionDraftProvider: customerId, lines, itemCount, total | [x] |
+| Draf | transactionDraftProvider: customerId, lines/kind/qtyMilli, itemCount, total, discount; berat jumlah kiloan | [x] |
 | Pelanggan | customerCatalogProvider; nama pelanggan terpilih | [x] |
 | Tabungan | customerBalanceProvider(customerId); saldo/pemakaian/sisa | [x] |
 | Checkout | checkoutControllerProvider; payTerm, method, useSavings, saveExcess, saving, error | [x] |
@@ -39,11 +39,16 @@ Centang setelah implementasi dan tes terarah; tabel ini tidak ditulis ulang saat
 - Koreksi pengguna: footer satu baris, Kembali di kiri dan Konfirmasi pembayaran di kanan.
 - Kedua tombol tetap menyimpan; tombol kembali pada header tetap context.pop tanpa simpan.
 - Nomor nota belum tersedia sebelum simpan; header memakai nama pelanggan tanpa nomor contoh.
-- Nama bank contoh dan badge Belum bayar tidak ditambahkan; status tetap turunan pembayaran.
+- Deskripsi metode sesuai koreksi pengguna: Uang diterima langsung; Scan semua e-wallet & bank;
+  Transfer BCA · Mandiri · BRI · DLL. Tidak menambah aksi rekening/scan baru.
+- Badge Belum bayar tidak ditambahkan; status tetap turunan pembayaran.
 - Label Bayar nanti (COD), Transfer, pesan validasi dan aksi mengikuti spec perilaku.
 - Input uang tetap membuka CashInputSheet, bukan mengubah alur menjadi input inline.
-- Rincian total tetap jumlah layanan yang sudah dibaca; tidak menambah berat/diskon dari state.
-- Kartu total memakai warna primer polos; dekorasi lingkaran tidak ditambahkan.
+- Total menampilkan jumlah layanan, agregat berat kiloan dan diskon dari draf.
+- AppCard.primary memakai bubble opsional (default false) dari token heroBlob;
+  kembalian dan status lunas memakai varian success dengan successTint yang sudah ada.
+- Tabungan memakai gap vertikal xxsmall; perubahan awal caption/label SelectionTile pengguna dipertahankan.
+- PaymentChangeSection menyusun kartu kembalian dan pilihan kelebihan; callback/nominal tetap.
 - Penempatan selisih disetujui bersama proposal 022 dan koreksi footer 11 Nov 2026.
 
 ### Tes yang disesuaikan
@@ -62,6 +67,13 @@ Centang setelah implementasi dan tes terarah; tabel ini tidak ditulis ulang saat
 - Ikon radio dipetakan ke Ionicons radioButtonOnOutline/radioButtonOffOutline
   melalui AppIcons.radioSelected/radioUnselected, tanpa aset atau paket baru.
 - Snapshot 0; visual belum diverifikasi manual. iOS belum diuji.
+
+### Revisi lanjutan tanpa commit
+Izin pengguna: jalur biasa, termasuk shared dan pemetaan data; tanpa commit.
+Tes payment_revision_test memeriksa bubble, berat/diskon, deskripsi, pembungkus hijau
+dan callback PaymentChangeSection. Finder nominal pada r9_payment_sections_test dan
+payment_page_test mengikuti nilai yang kini terpisah dari label; assertion jumlah tetap.
+Verifikasi akhir 12 Nov: check_all hijau, 1104 lulus, 1 skip; batch dibiarkan tanpa commit.
 
 ## R9 (2 Nov 2026)
 - PaymentSummarySection: pelanggan, jumlah layanan, total dan hanya dua pilihan:

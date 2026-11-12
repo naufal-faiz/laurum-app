@@ -30,7 +30,12 @@ ReceiptDocumentData receiptDocument(ReceiptView view) {
           'Tanggal',
           '${Formatters.tanggalStruk(order.enteredAt)} · ${Formatters.jam(order.enteredAt, struk: true)}',
         ),
-        if (settings.showCustomer) ReceiptDocumentRow('Pelanggan', view.customer.name),
+        if (settings.showCustomer)
+          ReceiptDocumentRow(
+            'Pelanggan',
+            view.customer.name,
+            valueDetail: view.customer.address.trim().isEmpty ? null : view.customer.address.trim(),
+          ),
       ],
       [
         for (final item in view.items.where((i) => i.deletedAt == null))
@@ -62,7 +67,12 @@ ReceiptDocumentData receiptDocument(ReceiptView view) {
           ),
       ],
     ],
-    status: 'STATUS: ${paymentLabel(order, paid).toUpperCase()}',
+    status: due == 0 ? 'Pembayaran lunas' : paymentLabel(order, paid),
+    statusDetail: [
+      for (final method in PayMethod.values)
+        if (ledger.any((p) => p.method == method && p.amount > 0))
+          method == PayMethod.tabungan ? 'Tabungan' : methods[method]!,
+    ].join(' + '),
     settled: due == 0,
     footer: [
       if (settings.showNote && order.note.isNotEmpty) 'Catatan: ${order.note}',
@@ -70,5 +80,6 @@ ReceiptDocumentData receiptDocument(ReceiptView view) {
       if (business.receiptNote.isNotEmpty) business.receiptNote,
     ],
     fileName: 'struk-${order.orderNo.replaceAll(RegExp(r'[^a-zA-Z0-9_-]'), '_')}',
+    footerTitle: business.receiptFooter,
   );
 }

@@ -67,6 +67,8 @@ class PaymentPage extends ConsumerWidget {
                   customerName: customer.name,
                   itemCount: draft.itemCount,
                   total: draft.total,
+                  lines: draft.lines,
+                  discount: draft.discount,
                   term: checkout.payTerm,
                   onTerm: controller.setTerm,
                   error: checkout.error,

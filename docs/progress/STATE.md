@@ -1,47 +1,52 @@
 # STATE Laurum
-Diperbarui: 2026-11-11 | Cabang newdesign
+Diperbarui: 2026-11-12 | Cabang newdesign
 
 ## Sesi aktif
-08 Struk Pembayaran selesai; frame 4294967599; dasar 71da260; WIP 6c0616f.
-Commit feat(ui) irisan ini memuat berkas ini; lihat git log -1.
-Pembayaran dan struk siap ditinjau bersama sesuai permintaan pengguna.
+Batch revisi pembayaran 1146 + struk 4294967599 SELESAI; dasar/HEAD 877126b.
+Seluruh perubahan BELUM di-commit sesuai instruksi pengguna.
+Frame sudah dibaca; snapshot desain struk 1, tidak diulang; golden dilihat untuk QA.
 
 ## Status irisan
-Struk grafis memakai data nota tersimpan; perataan kolom preview/PDF sudah diperbaiki.
-Normal: Selesai/WhatsApp/Unduh/Cetak satu baris; >1,3x Selesai di atas tiga ikon.
-Detail/Catat pembayaran berupa tautan body; status printer/error/retry tetap ada.
-Unduh nyata melalui PDF + dialog simpan; batal tanpa sukses/error; anti-duplikasi.
-State unduh autoDispose, seluruh aksi dinonaktifkan saat busy; nota tidak berubah.
-Formatter, repository, transaksi bayar, COD dan complete=1 tidak diubah.
-Paritas spec 08 penuh; check_all SEMUA HIJAU.
-Golden 5: receipt_page, receipt_cod_actions_1x/2x, receipt_document baru, app_icon.
-Tes lama hanya finder/struktur visual; assertion callback/validasi/status tetap.
-Snapshot FigCraft 1; golden diperiksa; visual belum diverifikasi manual di perangkat.
-Dialog simpan Android dan iOS/printer nyata belum diuji manual.
+Pembayaran: deskripsi metode, kartu kembalian hijau, gap tabungan 4, bubble/berat/diskon.
+Transfer terbaru BCA · Mandiri · BRI · DLL dipertahankan; tes/spec/golden sesuai.
+PaymentChangeSection baru menjaga batas 100 baris; nilai/callback kelebihan tetap.
+Struk: header/footer rapat; alamat pelanggan di bawah nama maksimal 2 baris.
+Lunas: centang + label + metode spaceBetween, successTint; ucapan terima kasih tebal.
+Printer di atas pratinjau, hanya info printer, reload/gerigi satu kartu; error/notice tetap.
+PDF mengikuti alamat/status/footer; helper receipt_pdf_rows baru.
+Tidak mengubah transaksi bayar, repository, formatter thermal atau guard COD/complete=1.
+Check_all SEMUA HIJAU; paritas spec 07/08 tetap penuh.
+Golden 8: payment_page, receipt_page, r9_cod_payment, receipt_cod_actions_1x/2x,
+receipt_document, selection_tile, app_icon. Visual belum diverifikasi manual di perangkat.
 
 ## Keputusan pengguna terbaru
-Proposal 023 disetujui termasuk state/layanan ekspor, dependensi dan tautan body.
-Selesai kembali ke /antrean tanpa mengubah status order; Ke beranda dihapus.
-Desain memakai frame terpilih; tinjau pembayaran dan struk setelah selesai.
-Izin zona beku dibatasi ekspor PDF; logika bayar/cetak tetap utuh.
+Normal/shared/pemetaan PDF diizinkan; tanpa commit.
+Pekerjaan sempat dihentikan pada laporan usage 9%; pengguna meminta lanjut sampai selesai 12 Nov.
+Pembahasan akses usage ditunda; angka akun tidak tersedia otomatis lewat alat sesi.
 
 ## Belum di-commit
-Sesudah commit, hanya AGENTS.md dan new-design-laurum.figcraft milik pengguna.
-Stash f7a9e49 sudah diterapkan sesi lama; jangan apply ulang.
+Semua batch kode/tes/spec/golden dan REPO_MAP; git status --short adalah daftar lengkap.
+Baru: lib/core/services/receipt_pdf_rows.dart,
+lib/features/transactions/widgets/payment_change_section.dart, test/payment_revision_test.dart.
+AGENTS.md dan new-design-laurum.figcraft milik pengguna; tidak diubah/commit oleh agen.
+Perubahan awal label SelectionTile/caption tabungan pengguna dipertahankan.
+Commit terakhir tetap 877126b; stash f7a9e49 jangan diterapkan ulang.
 
 ## Langkah berikutnya
-1. Tinjau UI pembayaran dan struk bersama pengguna.
-2. Uji dialog Unduh pada Android saat sesi perangkat tersedia; iOS belum diuji.
-3. Kerjakan hanya koreksi yang diminta, jalur cepat bila memenuhi kriteria.
+1. Tinjau revisi pembayaran dan struk bersama pengguna.
+2. Uji manual Android untuk dialog simpan PDF/printer saat perangkat tersedia; iOS belum diuji.
+3. Commit hanya bila pengguna memintanya; tidak ada commit pada batch ini.
 
 ## Blocker
-Tidak ada. Font PDF Helvetica dengan fallback IBM Plex Mono; pratinjau Inter.
-Skrip windows_native_sdk.ps1 sudah dipanggil sekali; jangan ulang sesi ini.
+Tidak ada. Analyzer sempat crash pada telemetri Google Analytics, bukan kode aplikasi.
+Run hijau memakai DASH__SUPPRESS_ANALYTICS=true dan FLUTTER_SUPPRESS_ANALYTICS=true
+hanya pada proses shell; tidak mengubah SDK/config global atau aturan pemeriksaan.
 
 ## Bukti terakhir
-- dart run tool/check_all.dart: SEMUA HIJAU; 1101 lulus, 1 skip, exit 0.
-- Log TEMP/laurum-receipt-final-green.log; REPO_MAP 1107 berkas.
-- Analyzer penuh + Riverpod lint No issues found; check_arch OK.
-- Tes footer 4, alur struk/ekspor 24, alignment/PDF 8 lulus.
-- Golden normal 1, COD 2, ikon 1 lulus; semua Dart irisan <= 100 baris.
-- Diff dasar 71da260: hanya state ekspor baru + pubspec sebagai pengecualian zona beku.
+- dart run tool/check_all.dart: SEMUA HIJAU; 1104 lulus, 1 skip, exit 0.
+- Log TEMP/laurum-revisions-resumed-green.log; REPO_MAP 1110 berkas.
+- Analyzer Flutter dan lint Riverpod No issues found; check_arch OK.
+- Tes terarah 32, kartu kembalian 7, alamat/status 3, transfer/golden terbaru 5 lulus.
+- Semua Dart batch <=100 baris; diff zona beku hanya mapping receipt_document yang diizinkan.
+- Artefak kegagalan golden sementara sudah dibersihkan; tidak ada snapshot tambahan.
+- Android/iOS/printer/dialog simpan native belum diuji manual; seluruh perubahan tanpa commit.

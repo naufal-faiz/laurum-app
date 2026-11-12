@@ -58,7 +58,7 @@ class SelectionTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: AppSpacing.xxsmall,
                 children: [
-                  AppText(label, variant: AppTextVariant.bodyStrong),
+                  AppText(label, variant: AppTextVariant.label),
                   if (subtitle != null)
                     AppText(subtitle!, variant: AppTextVariant.caption, color: AppColors.ink3),
                 ],

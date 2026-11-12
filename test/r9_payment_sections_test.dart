@@ -73,7 +73,7 @@ void main() {
     expect(save, isTrue);
     expect(opened, isTrue);
     expect(selectedMethod, PayMethod.qris);
-    expect(find.text('Kembali Rp5.000'), findsOneWidget);
+    expect(find.text('Rp5.000'), findsOneWidget);
   });
   testWidgets('record input permits cash excess and delegates savings choice', (tester) async {
     var save = false;

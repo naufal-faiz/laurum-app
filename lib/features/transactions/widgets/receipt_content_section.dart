@@ -36,14 +36,6 @@ class ReceiptContentSection extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.stretch,
     spacing: AppSpacing.medium,
     children: [
-      const AppText('Pratinjau struk', variant: AppTextVariant.label),
-      Center(
-        child: SizedBox(
-          width: view.settings.paperMm == 80 ? 384 : 320,
-          child: ReceiptDocument(data: receiptDocument(view)),
-        ),
-      ),
-      ReceiptLinksSection(busy: printState.printing, onOrder: onOrder, onRecord: onRecord),
       ReceiptStatusSection(
         view: view,
         printState: printState,
@@ -52,6 +44,14 @@ class ReceiptContentSection extends StatelessWidget {
         onRetry: onRetry,
         onSettings: onSettings,
       ),
+      const AppText('Pratinjau struk', variant: AppTextVariant.label),
+      Center(
+        child: SizedBox(
+          width: view.settings.paperMm == 80 ? 384 : 320,
+          child: ReceiptDocument(data: receiptDocument(view)),
+        ),
+      ),
+      ReceiptLinksSection(busy: printState.printing, onOrder: onOrder, onRecord: onRecord),
       if (download.error != null)
         BannerMessage(message: download.error!, variant: BannerMessageVariant.error),
       if (download.notice != null) BannerMessage(message: download.notice!),

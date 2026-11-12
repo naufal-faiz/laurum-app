@@ -70,7 +70,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - formatters.dart (55): Formatters
 
 ### lib/core/icons/
-- app_icons.dart (63): AppIcons
+- app_icons.dart (64): AppIcons
 - app_svgs.dart (9): AppSvgs
 
 ### lib/core/persistence/
@@ -147,9 +147,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - local_settings_providers.dart (11): localSettingsRepositoryProvider, orderNumberGeneratorProvider
 - photo_picker.dart (16): PhotoPicker, FakePhotoPicker
 - print_service.dart (96): PrintStatus, PrinterDevice, ReceiptData, PrintService, FakePrintService
-- receipt_document_data.dart (22): ReceiptDocumentRow, ReceiptDocumentData
+- receipt_document_data.dart (33): ReceiptDocumentRow, ReceiptDocumentData
 - receipt_download_service.dart (22): ReceiptDownloadService, FileReceiptDownloadService
-- receipt_pdf.dart (94):
+- receipt_pdf.dart (90):
+- receipt_pdf_rows.dart (49):
 - repository_providers.dart (51): businessRepositoryProvider, receiptSettingsRepositoryProvider, customerRepositoryProvider, serviceRepositoryProvider, orderRepositoryProvider, savingsRepositoryProvider, expenseRepositoryProvider, proposalRepositoryProvider, reportRepositoryProvider, transactionRunnerProvider
 - service_providers.dart (41): printServiceProvider, externalLauncherProvider, contactSourceProvider, photoPickerProvider, exportServiceProvider, authServiceProvider, localDataServiceProvider, syncServiceProvider
 - store_configuration.dart (10):
@@ -615,7 +616,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_picker_sheet.dart (97): CustomerPickerSheet
 - discount_sheet.dart (74): DiscountSheet
 - payment_flow.dart (19):
-- payment_page.dart (98): PaymentPage
+- payment_page.dart (100): PaymentPage
 - receipt_page.dart (88): ReceiptPage
 - service_picker_page.dart (54): ServicePickerPage
 - transaction_leave_flow.dart (22):
@@ -634,7 +635,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - checkout_state.dart (36): Checkout, checkoutControllerProvider
 - discount_input.dart (19): DiscountInputState, DiscountInput, discountInputProvider
 - payment_quote.dart (40): PaymentQuote
-- receipt_document.dart (74):
+- receipt_document.dart (85):
 - receipt_download.dart (32): ReceiptDownloadState, ReceiptDownload, receiptDownloadServiceProvider, receiptDownloadProvider
 - receipt_print_controller.dart (59): ReceiptPrintState, ReceiptPrint, receiptPrintProvider
 - receipt_view.dart (60): ReceiptView, receiptViewProvider
@@ -645,13 +646,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/transactions/widgets/
 - add_customer_form_section.dart (77): AddCustomerFormSection
-- payment_method_section.dart (76): PaymentMethodSection
-- payment_savings_section.dart (55): PaymentSavingsSection
-- payment_summary_section.dart (72): PaymentSummarySection
+- payment_change_section.dart (54): PaymentChangeSection
+- payment_method_section.dart (80): PaymentMethodSection
+- payment_savings_section.dart (59): PaymentSavingsSection
+- payment_summary_section.dart (82): PaymentSummarySection
 - receipt_actions_section.dart (69): ReceiptActionsSection
 - receipt_content_section.dart (60): ReceiptContentSection
 - receipt_links_section.dart (19): ReceiptLinksSection
-- receipt_status_section.dart (89): ReceiptStatusSection
+- receipt_status_section.dart (69): ReceiptStatusSection
 - service_picker_list_section.dart (84): ServicePickerListSection
 - transaction_customer_section.dart (82): TransactionCustomerSection
 - transaction_details_section.dart (68): TransactionDetailsSection
@@ -668,7 +670,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_avatar.dart (36): AppAvatar
 - app_badge.dart (32): AppBadgeVariant, AppBadge
 - app_button.dart (85): AppButtonIconPlacement, AppButton
-- app_card.dart (73): AppCardRail, AppCardStyle, AppCard
+- app_card.dart (87): AppCardRail, AppCardStyle, AppCard
 - app_chip.dart (40): AppChip
 - app_divider.dart (16): AppDivider
 - app_gap.dart (19): AppGap
@@ -714,7 +716,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - period_tabs.dart (29): PeriodTabs
 - progress_row.dart (38): ProgressRow
 - rank_row.dart (71): RankRow
-- receipt_rows.dart (45): ReceiptRows
+- receipt_rows.dart (59): ReceiptRows
 - section_header.dart (51): SectionHeader
 - segmented_progress.dart (36): SegmentedProgress
 - selection_tile.dart (77): SelectionTile
@@ -738,7 +740,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_card.dart (110): OrderCard
 - piutang_card.dart (83): PiutangCard
 - proposal_card.dart (106): ProposalCard
-- receipt_document.dart (50): ReceiptDocument
+- receipt_document.dart (85): ReceiptDocument
 - receipt_preview.dart (44): ReceiptPreview
 - receipt_toggle_list.dart (65): ReceiptToggleList
 - report_summary.dart (109): ReportSummary
@@ -945,6 +947,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - outstanding_page_test.dart (38):
 - payment_golden_test.dart (60):
 - payment_page_test.dart (59):
+- payment_revision_test.dart (74):
 - period_tabs_test.dart (29):
 
 ### test/persistence/
@@ -1091,13 +1094,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r9_payment_sections_test.dart (96):
 - r9_payment_state_test.dart (84):
 - r9_payment_visual_test.dart (60):
-- r9_receipt_sections_test.dart (78):
+- r9_receipt_sections_test.dart (86):
 - r9_section_host.dart (10):
 - r9_validation_flow_test.dart (39):
 - raised_navigation_test.dart (54):
 - receipt_actions_layout_test.dart (97):
 - receipt_cod_visual_test.dart (35):
-- receipt_document_widget_test.dart (68):
+- receipt_document_widget_test.dart (91):
 - receipt_download_fake.dart (18): FakeReceiptDownload
 - receipt_download_page_test.dart (55):
 - receipt_download_test.dart (76):

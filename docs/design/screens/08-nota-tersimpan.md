@@ -9,7 +9,7 @@ Ekspor PDF/dependensi dan penempatan tautan disetujui pengguna pada proposal 023
 Urutan Figma: header kembali/judul/nomor nota/pelanggan/status; label pratinjau;
 kartu struk putih di area abu-abu; footer terbaru Selesai, WhatsApp, Unduh, Cetak satu baris.
 Pemetaan: FormScaffold detail, ReceiptStatusSection, ReceiptDocument + ReceiptRows,
-ReceiptActionsSection, AppIconButton tileSuccess/tilePrimary/tileNeutral, AppButton dan AppStatusText.
+ReceiptActionsSection, AppIconButton tileSuccess/tilePrimary/tileNeutral, AppButton dan AppText.
 Pratinjau grafis mengikuti snapshot terpilih; keluaran formatter cetak/WhatsApp tetap utuh.
 Font minimum 11 dan warna/jarak memakai token global; radius 18 dipetakan ke card 16.
 
@@ -45,7 +45,14 @@ Tabel dibuat sebelum implementasi; centang sesudah kode dan verifikasi.
 - Tidak membuat tombol Unduh mati/placeholder. Barcode contoh tidak dipalsukan.
 - Isi preview grafis dari nota tersimpan; formatter cetak/WhatsApp 32 kolom tetap utuh.
 - Data kasir tidak ditambahkan; mengikuti isi/pengaturan nota yang sudah tersimpan.
-- Printer/status/konfirmasi, retry dan Catat pembayaran lama tetap tersedia.
+- Alamat pelanggan di bawah nama maksimal 2 baris, mengikuti showCustomer; kosong tidak ditampilkan.
+- Header/ucapan dirapatkan ke xxsmall; receiptFooter memakai variant label (tebal), catatan caption.
+- Bar status memakai label, centang dan successTint saat lunas; metode rata kanan (spaceBetween).
+- PDF mengikuti alamat/status/metode/tebal footer dari data yang sama; formatter thermal tetap.
+- Kartu printer dipindah ke atas pratinjau dan hanya berisi info printer;
+  status lunas dan kalimat Pembayaran tersimpan pada kartu itu dihapus sesuai pengguna.
+- Reload (tooltip Coba lagi) saat error dan gerigi Pengaturan printer berada di satu kartu;
+  callback, pesan error/notice serta Catat pembayaran tetap.
 - Label Ke beranda diganti Selesai sesuai permintaan; callback navigasi tetap, status order tidak berubah.
 - Usulan penempatan fungsi lama: status/error di body, Lihat detail sebagai tautan,
   Catat pembayaran di body bila tersedia; empat aksi utama tetap di footer.
@@ -58,10 +65,10 @@ Tabel dibuat sebelum implementasi; centang sesudah kode dan verifikasi.
 Komposisi:
 - ReceiptDocument: kartu grafis berisi identitas usaha, nomor/tanggal/pelanggan, item,
   subtotal/diskon/total/pembayaran/sisa, status turunan dan footer; nomor nota tidak diulang.
-- ReceiptStatusSection: AppCard AppStatusText Lunas/Sisa/COD,
-  konfirmasi pembayaran tersimpan atau dicatat saat diterima, status printer (nama + Terhubung / belum terhubung).
+- ReceiptStatusSection: satu AppCard printer di atas pratinjau, nama/status terhubung,
+  ikon reload saat error dan gerigi pengaturan; tanpa duplikasi status bayar/konfirmasi.
 - BannerMessage error 'Struk gagal dicetak. Pastikan printer menyala dan Bluetooth aktif.'
-  + AppButton 'Coba lagi' dan 'Pengaturan printer'.
+  + AppIconButton reload 'Coba lagi' dan gerigi 'Pengaturan printer' di dalam kartu.
 - Lebar kartu 320/384 sesuai ReceiptSettings; ReceiptPreview thermal lama tetap utuh.
 - ReceiptActionsSection: Selesai + tiga ikon WhatsApp/Unduh/Cetak, tooltip/semantics tetap.
 - ReceiptLinksSection di body: Lihat detail, serta Catat pembayaran bila tersedia.
@@ -125,6 +132,11 @@ Selisih .pen: aksi pembayaran tambahan dan label sisa; tes callback, alur dan 32
   receipt_document_widget_test (Rows/Document/Content); helper receipt_download_fake.
 - Golden 5: receipt_page, receipt_cod_actions_1x/2x, receipt_document (baru), app_icon.
 - Snapshot FigCraft tetap 1; UI aplikasi belum diverifikasi manual.
+- Revisi lanjutan: receipt_page_test/order_detail_receipt_test/r4_finish_flow_test memakai
+  tooltip reload/pengaturan. r9_receipt_sections_test memeriksa COD di ReceiptDocument dan
+  callback pengaturan kartu printer; assertion fungsi tetap. receipt_document_widget_test
+  memeriksa alamat 2 baris, label/metode, perataan dan callback pada struktur baru.
+- Batch koreksi diizinkan lewat jalur biasa, tanpa commit; check_all 12 Nov: 1104 lulus, 1 skip.
 
 
 ## Audit penyelesaian UI - prompt 100

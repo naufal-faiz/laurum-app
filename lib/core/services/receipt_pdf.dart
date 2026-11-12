@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:laurum/core/services/receipt_document_data.dart';
+import 'package:laurum/core/services/receipt_pdf_rows.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
@@ -19,6 +20,12 @@ Future<Uint8List> receiptPdf(ReceiptDocumentData data) async {
   final strong = normal.copyWith(color: primary, fontWeight: pw.FontWeight.bold);
   final caption = normal.copyWith(color: PdfColor.fromInt(AppColors.ink3.toARGB32()));
   final border = PdfColor.fromInt(AppColors.border.toARGB32());
+  final statusStyle = normal.copyWith(
+    fontWeight: pw.FontWeight.bold,
+    color: PdfColor.fromInt(
+      (data.settled ? AppColors.successInk : AppColors.warningInk).toARGB32(),
+    ),
+  );
   final document = pw.Document();
   document.addPage(
     pw.MultiPage(
@@ -35,32 +42,7 @@ Future<Uint8List> receiptPdf(ReceiptDocumentData data) async {
         for (final line in data.header) pw.Center(child: pw.Text(line, style: caption)),
         for (final rows in data.groups) ...[
           pw.Divider(color: border),
-          for (final row in rows)
-            pw.Padding(
-              padding: const pw.EdgeInsets.symmetric(vertical: AppSpacing.xxsmall),
-              child: pw.Row(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Expanded(
-                    child: pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Text(row.label, style: row.emphasis ? strong : normal),
-                        if (row.detail != null) pw.Text(row.detail!, style: caption),
-                      ],
-                    ),
-                  ),
-                  pw.SizedBox(width: AppSpacing.medium),
-                  pw.Expanded(
-                    child: pw.Text(
-                      row.value,
-                      textAlign: pw.TextAlign.right,
-                      style: row.emphasis ? strong : normal,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          ...receiptPdfRows(rows, normal: normal, strong: strong, caption: caption),
         ],
         pw.Divider(color: border),
         pw.Container(
@@ -71,20 +53,34 @@ Future<Uint8List> receiptPdf(ReceiptDocumentData data) async {
             ),
             borderRadius: pw.BorderRadius.circular(AppRadius.card.topLeft.x),
           ),
-          child: pw.Text(
-            data.status,
-            style: normal.copyWith(
-              color: PdfColor.fromInt(
-                (data.settled ? AppColors.successInk : AppColors.warningInk).toARGB32(),
+          child: pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+            children: [
+              pw.Expanded(
+                child: pw.Text(
+                  data.status,
+                  style: statusStyle,
+                ),
               ),
-            ),
+              pw.Flexible(
+                child: pw.Text(
+                  data.statusDetail,
+                  textAlign: pw.TextAlign.right,
+                  style: statusStyle,
+                ),
+              ),
+            ],
           ),
         ),
         for (final line in data.footer)
           pw.Padding(
-            padding: const pw.EdgeInsets.only(top: AppSpacing.small),
+            padding: const pw.EdgeInsets.only(top: AppSpacing.xxsmall),
             child: pw.Center(
-              child: pw.Text(line, textAlign: pw.TextAlign.center, style: normal),
+              child: pw.Text(
+                line,
+                textAlign: pw.TextAlign.center,
+                style: line == data.footerTitle ? strong : normal,
+              ),
             ),
           ),
       ],

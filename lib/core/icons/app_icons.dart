@@ -38,6 +38,7 @@ enum AppIcons {
   add(Ionicons.add),
   chat(Ionicons.chatbubbleOutline),
   refresh(Ionicons.refreshOutline),
+  settings(Ionicons.settingsOutline),
   privacy(Ionicons.shieldCheckmarkOutline),
   bell(Ionicons.notificationsOutline),
   expand(Ionicons.chevronDownOutline),

@@ -69,8 +69,8 @@ void main() {
       await tester.pumpAndSettle();
       expect(printer.calls, 1);
       expect(find.textContaining('Struk gagal dicetak'), findsOneWidget);
-      await tester.ensureVisible(find.text('Pengaturan printer'));
-      await tester.tap(find.text('Pengaturan printer'));
+      await tester.ensureVisible(find.byTooltip('Pengaturan printer'));
+      await tester.tap(find.byTooltip('Pengaturan printer'));
       await tester.pumpAndSettle();
       expect(find.text('Printer dan struk'), findsOneWidget);
       expect((await repo.getOrderById(id))!.status, before.status);

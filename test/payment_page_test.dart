@@ -47,7 +47,7 @@ void main() {
     await tester.tap(find.text('Simpan uang diterima'));
     await tester.pumpAndSettle();
     expect(host.container.read(checkoutControllerProvider).received, 10000);
-    expect(find.text('Kembali Rp3.500'), findsOneWidget);
+    expect(find.text('Rp3.500'), findsOneWidget);
 
     await tester.tap(find.text('Konfirmasi pembayaran'));
     await tester.pumpAndSettle();

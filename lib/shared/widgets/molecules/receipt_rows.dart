@@ -31,11 +31,25 @@ class ReceiptRows extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: AppText(
-                row.value,
-                variant: row.emphasis ? AppTextVariant.bodyStrong : AppTextVariant.caption,
-                color: row.emphasis ? AppColors.primaryInk : AppColors.ink,
-                textAlign: TextAlign.end,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AppText(
+                    row.value,
+                    variant: row.emphasis ? AppTextVariant.bodyStrong : AppTextVariant.caption,
+                    color: row.emphasis ? AppColors.primaryInk : AppColors.ink,
+                    textAlign: TextAlign.end,
+                  ),
+                  if (row.valueDetail != null)
+                    AppText(
+                      row.valueDetail!,
+                      variant: AppTextVariant.caption,
+                      color: AppColors.ink3,
+                      textAlign: TextAlign.end,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                ],
               ),
             ),
           ],

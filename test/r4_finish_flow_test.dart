@@ -60,8 +60,8 @@ void main() {
           expect(find.text('Selesaikan tanpa cetak'), findsNothing);
           printer.printSucceeds = true;
           await printer.connect(printer.devices.first);
-          await tester.ensureVisible(find.text('Coba lagi'));
-          await tester.tap(find.text('Coba lagi'));
+          await tester.ensureVisible(find.byTooltip('Coba lagi'));
+          await tester.tap(find.byTooltip('Coba lagi'));
           await tester.pumpAndSettle();
         }
         expect((await repo.getOrderById(id))!.status, OrderStatus.selesai);

@@ -8,7 +8,7 @@ import 'package:laurum/core/theme/app_spacing.dart';
 enum AppCardRail { none, warning, error, info, success }
 
 /// `outlined` = border tipis tanpa bayangan; `elevated` = radius 24 + shadow.
-enum AppCardStyle { outlined, elevated, muted, primary }
+enum AppCardStyle { outlined, elevated, muted, primary, success }
 
 class AppCard extends StatelessWidget {
   const AppCard({
@@ -16,12 +16,14 @@ class AppCard extends StatelessWidget {
     super.key,
     this.style = AppCardStyle.outlined,
     this.rail = AppCardRail.none,
+    this.bubble = false,
     this.padding = const EdgeInsets.all(AppSpacing.cardPadding),
   });
 
   final Widget child;
   final AppCardStyle style;
   final AppCardRail rail;
+  final bool bubble;
   final EdgeInsetsGeometry padding;
 
   @override
@@ -29,6 +31,7 @@ class AppCard extends StatelessWidget {
     final elevated = style == AppCardStyle.elevated;
     final muted = style == AppCardStyle.muted;
     final primary = style == AppCardStyle.primary;
+    final success = style == AppCardStyle.success;
     final radius = elevated
         ? AppRadius.cardLarge
         : muted
@@ -36,12 +39,13 @@ class AppCard extends StatelessWidget {
         : AppRadius.card;
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: primary
-            ? AppColors.primary
-            : muted
-            ? AppColors.surfaceLow
-            : AppColors.surface,
-        border: elevated || muted || primary ? null : AppBorders.card,
+        color: switch (style) {
+          AppCardStyle.primary => AppColors.primary,
+          AppCardStyle.success => AppColors.successTint,
+          AppCardStyle.muted => AppColors.surfaceLow,
+          _ => AppColors.surface,
+        },
+        border: elevated || muted || primary || success ? null : AppBorders.card,
         borderRadius: radius,
         boxShadow: elevated ? AppShadows.cardElevated : null,
       ),
@@ -49,6 +53,16 @@ class AppCard extends StatelessWidget {
         borderRadius: radius,
         child: Stack(
           children: [
+            if (bubble)
+              const Positioned(
+                top: -AppSpacing.xxlarge,
+                right: -AppSpacing.touchTarget,
+                width: AppSpacing.touchTarget * 3,
+                height: AppSpacing.touchTarget * 3,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(color: AppColors.heroBlob, shape: BoxShape.circle),
+                ),
+              ),
             Padding(padding: padding, child: child),
             if (rail != AppCardRail.none)
               Positioned(
