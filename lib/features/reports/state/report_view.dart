@@ -51,10 +51,14 @@ class ReportView {
       : ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
 }
 
-final reportViewProvider = FutureProvider<ReportView>((ref) async {
-  final period = ref.watch(reportPeriodProvider);
+final reportViewProvider = FutureProvider<ReportView>(
+  (ref) => _loadReport(ref, ref.watch(reportPeriodProvider)),
+);
+final weeklyReportViewProvider = FutureProvider<ReportView>((ref) => _loadReport(ref, 1));
+
+Future<ReportView> _loadReport(Ref ref, int period) async {
   final now = ref.watch(businessClockProvider)();
-  final custom = ref.watch(reportCustomRangeProvider);
+  final custom = period == 3 ? ref.watch(reportCustomRangeProvider) : null;
   final range = reportPeriodRange(period, now, custom: custom);
   final reports = ref.watch(reportRepositoryProvider);
   final totals = await reports.getReport(range);
@@ -74,4 +78,4 @@ final reportViewProvider = FutureProvider<ReportView>((ref) async {
     daily: visibleDailyRevenue(range, amounts, now),
     services: services,
   );
-});
+}

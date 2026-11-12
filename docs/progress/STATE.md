@@ -2,51 +2,51 @@
 Diperbarui: 2026-11-12 | Cabang newdesign
 
 ## Sesi aktif
-Batch revisi pembayaran 1146 + struk 4294967599 SELESAI; dasar/HEAD 877126b.
-Seluruh perubahan BELUM di-commit sesuai instruksi pengguna.
-Frame sudah dibaca; snapshot desain struk 1, tidak diulang; golden dilihat untuk QA.
+Irisan Lainnya SELESAI; dasar b3dde16; commit irisan ini lihat git log -1.
+Frame pilihan pengguna 4294968100 LAURUM Â· Lainnya, MCP FigCraft attach9876.
+Frame dibaca sekali; tanpa snapshot desain atau screenshot emulator.
 
 ## Status irisan
-Pembayaran: deskripsi metode, kartu kembalian hijau, gap tabungan 4, bubble/berat/diskon.
-Transfer terbaru BCA · Mandiri · BRI · DLL dipertahankan; tes/spec/golden sesuai.
-PaymentChangeSection baru menjaga batas 100 baris; nilai/callback kelebihan tetap.
-Struk: header/footer rapat; alamat pelanggan di bawah nama maksimal 2 baris.
-Lunas: centang + label + metode spaceBetween, successTint; ucapan terima kasih tebal.
-Printer di atas pratinjau, hanya info printer, reload/gerigi satu kartu; error/notice tetap.
-PDF mengikuti alamat/status/footer; helper receipt_pdf_rows baru.
-Tidak mengubah transaksi bayar, repository, formatter thermal atau guard COD/complete=1.
-Check_all SEMUA HIJAU; paritas spec 07/08 tetap penuh.
-Golden 8: payment_page, receipt_page, r9_cod_payment, receipt_cod_actions_1x/2x,
-receipt_document, selection_tile, app_icon. Visual belum diverifikasi manual di perangkat.
+Proposal024 disetujui: varian boxed AppIcon, compact MenuRow/ToggleRow/NoticeAi,
+subtitle AppBarRoot/RootScaffold, susunan Settings Menu/Operational/Account.
+Menu Laporan setelah Pengeluaran membuka rute /laporan yang sudah ada.
+Beranda: seluruh AppCard pendapatan dapat diketuk, select(1) lalu push('/laporan').
+Tidak menambah komponen/ikon visual di kartu pendapatan.
+Provider weeklyReportViewProvider terpisah dari pilihan periode Laporan.
+Pemuat data/perhitungan/repository laporan sama; gate awal memakai data mingguan.
+Paritas spec19 penuh; golden Lainnya diperiksa, visual belum diverifikasi manual di perangkat.
 
 ## Keputusan pengguna terbaru
-Normal/shared/pemetaan PDF diizinkan; tanpa commit.
-Pekerjaan sempat dihentikan pada laporan usage 9%; pengguna meminta lanjut sampai selesai 12 Nov.
-Pembahasan akses usage ditunda; angka akun tidak tersedia otomatis lewat alat sesi.
+Proposal024 dan pemindahan Laporan ke Lainnya disetujui12 Nov2026.
+Revisi tambahan: seluruh kartu pendapatan membuka laporan mingguan, tanpa ikon baru.
+Izin spesifik: pemisahan provider mingguan Beranda dari pilihan periode Laporan.
+MCP FigCraft CLI melalui stdio diperbolehkan; kurangi snapshot.
+Pembahasan usage ditunda; angka akun tidak tersedia otomatis.
 
 ## Belum di-commit
-Semua batch kode/tes/spec/golden dan REPO_MAP; git status --short adalah daftar lengkap.
-Baru: lib/core/services/receipt_pdf_rows.dart,
-lib/features/transactions/widgets/payment_change_section.dart, test/payment_revision_test.dart.
-AGENTS.md dan new-design-laurum.figcraft milik pengguna; tidak diubah/commit oleh agen.
-Perubahan awal label SelectionTile/caption tabungan pengguna dipertahankan.
-Commit terakhir tetap 877126b; stash f7a9e49 jangan diterapkan ulang.
+Paket irisan ini dimasukkan ke satu commit feat(ui) bersama STATE/spec/proposal/golden.
+AGENTS.md, new-design-laurum.figcraft dan assets/icons/whatsapp.svg bukan perubahan agen; dikecualikan.
+Stash f7a9e49 jangan diterapkan ulang; batch sebelumnya sudah b3dde16.
 
 ## Langkah berikutnya
-1. Tinjau revisi pembayaran dan struk bersama pengguna.
-2. Uji manual Android untuk dialog simpan PDF/printer saat perangkat tersedia; iOS belum diuji.
-3. Commit hanya bila pengguna memintanya; tidak ada commit pada batch ini.
+1. Tinjau Lainnya dan ketukan kartu pendapatan Beranda bersama pengguna.
+2. Uji manual Android saat tersedia; iOS belum diuji.
+3. Revisi kecil berikutnya memakai jalur cepat; jangan ulang suite penuh tanpa alasan.
 
 ## Blocker
-Tidak ada. Analyzer sempat crash pada telemetri Google Analytics, bukan kode aplikasi.
-Run hijau memakai DASH__SUPPRESS_ANALYTICS=true dan FLUTTER_SUPPRESS_ANALYTICS=true
-hanya pada proses shell; tidak mengubah SDK/config global atau aturan pemeriksaan.
+Tidak ada. MCP native belum terdaftar, tetapi initialize/tools/call CLI attach9876 berhasil.
+Memori codebase Transport closed sekali; jangan ulangi sesi ini, sumber repo sudah dipakai.
+Helper TEMP/laurum-figcraft-mcp.ps1; cache frame TEMP/laurum-lainnya-frame.json.
+Jangan baca ulang frame yang sama; spec19 menyimpan ringkasannya.
 
 ## Bukti terakhir
-- dart run tool/check_all.dart: SEMUA HIJAU; 1104 lulus, 1 skip, exit 0.
-- Log TEMP/laurum-revisions-resumed-green.log; REPO_MAP 1110 berkas.
-- Analyzer Flutter dan lint Riverpod No issues found; check_arch OK.
-- Tes terarah 32, kartu kembalian 7, alamat/status 3, transfer/golden terbaru 5 lulus.
-- Semua Dart batch <=100 baris; diff zona beku hanya mapping receipt_document yang diizinkan.
-- Artefak kegagalan golden sementara sudah dibersihkan; tidak ada snapshot tambahan.
-- Android/iOS/printer/dialog simpan native belum diuji manual; seluruh perubahan tanpa commit.
+- dart run tool/check_all.dart: SEMUA HIJAU,1109 lulus,1skip,exit0.
+- Log TEMP/laurum-lainnya-check-all.log; REPO_MAP1112 berkas.
+- Format1034 berkas tanpa perubahan; analyzer/lint Riverpod bersih; check_arch OK.
+- Tes terarah43 lulus: Lainnya,320px teks2x,logout/toggle,laporan,loader,Beranda.
+- Golden2: lainnya.png baru,r4_settings.png diperbarui; Beranda/laporan/default tetap lolos.
+- Tes lama: version finder ke header,Laporan di peta rute,override loader ke provider mingguan;
+  assertion perilaku/error/retry tidak dihapus atau dilemahkan.
+- Audit diff zona beku hanya reports/state/report_view.dart sesuai izin spesifik pengguna.
+- Router,repository,token,dependensi dan tes non-widget tidak berubah.
+- Flutter memakai DASH__SUPPRESS_ANALYTICS=true,FLUTTER_SUPPRESS_ANALYTICS=true per proses.

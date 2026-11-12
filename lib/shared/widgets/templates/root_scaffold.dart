@@ -21,8 +21,10 @@ class RootScaffold extends StatelessWidget {
     this.onAccount,
     this.onTabSelected,
     this.onCreate,
+    this.subtitle,
   });
   final String title, accountLabel;
+  final String? subtitle;
   final int activeIndex;
   final Widget body;
   final SyncState syncState;
@@ -31,14 +33,16 @@ class RootScaffold extends StatelessWidget {
   final double headerHeight;
   final VoidCallback? onAccount, onCreate;
   final ValueChanged<int>? onTabSelected;
-
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: AppColors.bg,
     appBar: showAppBar || header != null
         ? PreferredSize(
             preferredSize: Size.fromHeight(
-              headerHeight * (header == null ? 1 : MediaQuery.textScalerOf(context).scale(1)),
+              headerHeight *
+                  (header == null && subtitle == null
+                      ? 1
+                      : MediaQuery.textScalerOf(context).scale(1)),
             ),
             child: header != null
                 ? SafeArea(
@@ -50,6 +54,7 @@ class RootScaffold extends StatelessWidget {
                   )
                 : AppBarRoot(
                     title: title,
+                    subtitle: subtitle,
                     accountLabel: accountLabel,
                     syncIndicator: SyncIndicator(state: syncState),
                     onAccount: onAccount,

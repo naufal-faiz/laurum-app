@@ -23,6 +23,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `14-edit-pelanggan.md` (14 - Edit Pelanggan) | | Menunggu | |
 | `15-setor-tabungan.md` (15 - Setor Tabungan) | | Menunggu | |
 | `16-riwayat-tabungan.md` (16 - Riwayat Tabungan) | | Menunggu | |
+| `19-pengaturan-akun.md` (Lainnya) | `LAURUM · Lainnya` (ID: 4294968100) | 024 selesai; check_all hijau; menunggu tinjauan | Menu padat, ikon boxed, akun rapat, Laporan ke /laporan; kartu Beranda membuka laporan mingguan |
 | `17-impor-kontak.md` (17 - Impor Kontak HP) | | Menunggu | |
 | `18-daftar-piutang.md` (18 - Daftar Piutang) | | Menunggu | |
 | `18-laporan-ringkasan.md` (18 - Laporan - Ringkasan) | | Menunggu | |
@@ -62,7 +63,9 @@ Daftar frame level teratas yang terbaca dari dokumen aktif FigCraft:
 - `LAURUM · Struk COD` (ID: 4294967729)
 - `LAURUM · Detail Order COD` (ID: 4294967861)
 - `LAURUM · Detail Order COD · Catat Pembayaran` (ID: 4294967961)
-- `LAURUM · Lainnya` (ID: 4294968100)
+- `LAURUM · Lainnya` (ID: 4294968100) — pilihan pengguna/dibaca MCP12 Nov2026;
+  spec19,proposal024 disetujui; implementasi Lainnya + menu Laporan ke /laporan,
+  check_all hijau 1109 lulus,1skip. Kartu pendapatan Beranda membuka Laporan mingguan.
 - `LAURUM · Tambah Layanan` (ID: 4294968237)
 - `LAURUM · Laporan` (ID: 4294968337)
 - `LAURUM · Laporan · Pilih Tanggal` (ID: 4294968452)

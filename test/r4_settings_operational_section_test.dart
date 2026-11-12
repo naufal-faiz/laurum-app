@@ -25,6 +25,7 @@ void main() {
       final routes = {
         'Layanan dan tarif': '/lainnya/layanan',
         'Pengeluaran': '/lainnya/pengeluaran',
+        'Laporan': '/laporan',
         'Printer dan struk': '/lainnya/printer',
         'Otomatisasi AI': '/lainnya/ai',
       };

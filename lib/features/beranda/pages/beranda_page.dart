@@ -11,6 +11,7 @@ import 'package:laurum/features/beranda/widgets/beranda_stats_section.dart';
 import 'package:laurum/features/beranda/widgets/beranda_welcome_section.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
+import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
@@ -25,7 +26,7 @@ class BerandaPage extends ConsumerWidget {
     final profile = ref.watch(businessProfileProvider);
     final antrean = ref.watch(antreanDataProvider);
     final customers = ref.watch(customerDirectoryProvider);
-    final report = ref.watch(reportViewProvider);
+    final report = ref.watch(weeklyReportViewProvider);
     final view = BerandaView.from(
       businessName: profile.value?.name ?? 'Laurum',
       orders: antrean.value?.orders ?? const [],
@@ -60,7 +61,7 @@ class BerandaPage extends ConsumerWidget {
             onAction: () {
               ref.invalidate(antreanDataProvider);
               ref.invalidate(customerDirectoryProvider);
-              ref.invalidate(reportViewProvider);
+              ref.invalidate(weeklyReportViewProvider);
             },
           )
         else ...[
@@ -76,6 +77,10 @@ class BerandaPage extends ConsumerWidget {
           ),
           const SizedBox(height: AppSpacing.large),
           BerandaStatsSection(
+            onRevenue: () {
+              ref.read(reportPeriodProvider.notifier).select(1);
+              context.push('/laporan');
+            },
             savedCustomers: view.savedCustomers,
             newCustomers: view.newCustomers,
             initials: view.initials,

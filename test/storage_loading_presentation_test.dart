@@ -41,7 +41,9 @@ void main() {
     final peopleValue = await tester.runAsync(
       () => app.container.read(customerDirectoryProvider.future),
     );
-    final reportValue = await tester.runAsync(() => app.container.read(reportViewProvider.future));
+    final reportValue = await tester.runAsync(
+      () => app.container.read(weeklyReportViewProvider.future),
+    );
     final opening = Completer<AccountStore?>();
     final queue = Completer<AntreanData>();
     final people = Completer<List<CustomerDirectoryRow>>();
@@ -55,7 +57,7 @@ void main() {
         accountStoreProvider.overrideWith((ref) => opening.future),
         antreanDataProvider.overrideWith((ref) => ++reads == 1 ? queue.future : refreshed.future),
         customerDirectoryProvider.overrideWith((ref) => people.future),
-        reportViewProvider.overrideWith((ref) => report.future),
+        weeklyReportViewProvider.overrideWith((ref) => report.future),
       ],
     );
     final router = createAppRouter(container: scope);

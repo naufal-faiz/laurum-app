@@ -274,7 +274,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sign_up_hero_section.dart (17): SignUpHeroSection
 
 ### lib/features/beranda/pages/
-- beranda_page.dart (95): BerandaPage
+- beranda_page.dart (100): BerandaPage
 
 ### lib/features/beranda/state/
 - beranda_services.dart (29): BerandaStageTone
@@ -284,7 +284,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - beranda_frequent_section.dart (63): BerandaFrequentSection
 - beranda_header_section.dart (55): BerandaHeaderSection
 - beranda_queue_section.dart (101): BerandaQueueSection
-- beranda_stats_section.dart (99): BerandaStatsSection
+- beranda_stats_section.dart (100): BerandaStatsSection
 - beranda_welcome_section.dart (23): BerandaWelcomeSection
 
 ### lib/features/business/data/
@@ -547,7 +547,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_orders_controller.dart (24): ReportOrdersFilter, ReportOrdersSearch, reportOrdersFilterProvider, reportOrdersSearchProvider
 - report_orders_data.dart (68): ReportOrdersData, reportOrdersProvider
 - report_period.dart (30): ReportPeriod, reportPeriodProvider
-- report_view.dart (77): ReportView, reportViewProvider
+- report_view.dart (81): ReportView, reportViewProvider, weeklyReportViewProvider
 
 ### lib/features/reports/widgets/
 - outstanding_list_section.dart (76): OutstandingListSection
@@ -583,16 +583,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_status_setting.dart (31): OrderStatusSettingState, OrderStatusSetting, orderStatusSettingProvider
 
 ### lib/features/settings/widgets/
-- settings_account_section.dart (53): SettingsAccountSection
-- settings_menu_section.dart (82): SettingsMenuSection
-- settings_operational_section.dart (59): SettingsOperationalSection
+- settings_account_section.dart (71): SettingsAccountSection
+- settings_menu_section.dart (96): SettingsMenuSection
+- settings_operational_section.dart (85): SettingsOperationalSection
 
 ### lib/features/shell/pages/
 - app_router.dart (110):
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (7):
-- root_shell_page.dart (89): RootShellPage
+- root_shell_page.dart (91): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (27): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, shellSyncStatusProvider, whatsappConnectionProvider
@@ -647,8 +647,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/transactions/widgets/
 - add_customer_form_section.dart (77): AddCustomerFormSection
 - payment_change_section.dart (54): PaymentChangeSection
-- payment_method_section.dart (80): PaymentMethodSection
-- payment_savings_section.dart (59): PaymentSavingsSection
+- payment_method_section.dart (83): PaymentMethodSection
+- payment_savings_section.dart (60): PaymentSavingsSection
 - payment_summary_section.dart (82): PaymentSummarySection
 - receipt_actions_section.dart (69): ReceiptActionsSection
 - receipt_content_section.dart (60): ReceiptContentSection
@@ -670,11 +670,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_avatar.dart (36): AppAvatar
 - app_badge.dart (32): AppBadgeVariant, AppBadge
 - app_button.dart (85): AppButtonIconPlacement, AppButton
-- app_card.dart (87): AppCardRail, AppCardStyle, AppCard
+- app_card.dart (93): AppCardRail, AppCardStyle, AppCard
 - app_chip.dart (40): AppChip
 - app_divider.dart (16): AppDivider
 - app_gap.dart (19): AppGap
-- app_icon.dart (27): AppIcon
+- app_icon.dart (38): AppIcon
 - app_icon_button.dart (97): AppIconButtonVariant, AppIconButton
 - app_loader.dart (38): AppLoader
 - app_numpad_key.dart (54): AppNumpadKeyValue, AppNumpadKey
@@ -687,7 +687,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_text_field.dart (107): AppTextField, _AppTextFieldState
 
 ### lib/shared/widgets/molecules/
-- app_bar_root.dart (48): AppBarRoot
+- app_bar_root.dart (67): AppBarRoot
 - app_bar_sub.dart (96): AppBarSubVariant, AppBarSub
 - avatar_stack.dart (58): AvatarStack
 - banner_message.dart (41): BannerMessageVariant, BannerMessage
@@ -706,12 +706,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - labeled_divider.dart (24): LabeledDivider
 - labeled_field.dart (35): LabeledField
 - locked_row.dart (47): LockedRow
-- menu_row.dart (45): MenuRow
+- menu_row.dart (63): MenuRow
 - metric_tile.dart (47): MetricTile
 - mini_bar_chart.dart (40): MiniBarChart
 - nav_item.dart (56): NavItem
 - nominal_chips.dart (31): NominalChips
-- notice_ai.dart (17): NoticeAi
+- notice_ai.dart (23): NoticeAi
 - payment_badge.dart (27): PaymentBadge
 - period_tabs.dart (29): PeriodTabs
 - progress_row.dart (38): ProgressRow
@@ -723,7 +723,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - stat_tile.dart (35): StatTile
 - stepper_field.dart (61): StepperField
 - sync_indicator.dart (46): SyncState, SyncIndicator
-- toggle_row.dart (49): ToggleRow
+- toggle_row.dart (62): ToggleRow
 - trust_note.dart (30): TrustNote
 
 ### lib/shared/widgets/organisms/
@@ -753,7 +753,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/templates/
 - auth_scaffold.dart (42): AuthScaffold
 - form_scaffold.dart (64): FormScaffold
-- root_scaffold.dart (103): RootScaffold
+- root_scaffold.dart (108): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
 - sub_scaffold.dart (62): SubScaffold
 
@@ -820,6 +820,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - banner_message_test.dart (23):
 - beranda_molecules_test.dart (113):
 - beranda_page_test.dart (58):
+- beranda_report_navigation_test.dart (33):
 - beranda_sections_test.dart (183):
 - beranda_view_test.dart (136):
 - bottom_nav_bar_test.dart (104):
@@ -1071,7 +1072,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r4_order_store_guards_test.dart (66):
 - r4_profile_persistence_test.dart (50):
 - r4_setting_controller_test.dart (61):
-- r4_settings_operational_section_test.dart (43):
+- r4_settings_operational_section_test.dart (44):
 - r4_settings_page_test.dart (97):
 - r4_settings_test_support.dart (23): BusinessSaveControl, ControlledBusiness
 - r5_custom_report_test.dart (65):
@@ -1129,12 +1130,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_picker_test.dart (53):
 - service_row_test.dart (41):
 - settings_page_test.dart (82):
+- settings_redesign_test.dart (90):
 - sheet_scaffold_test.dart (37):
 - stat_tile_test.dart (24):
 - stepper_field_test.dart (33):
 - storage_gate_query_error_test.dart (71):
 - storage_gate_test.dart (67):
-- storage_loading_presentation_test.dart (107):
+- storage_loading_presentation_test.dart (109):
 - store_configuration_test.dart (11):
 - sub_scaffold_fab_test.dart (37):
 - sub_scaffold_test.dart (32):

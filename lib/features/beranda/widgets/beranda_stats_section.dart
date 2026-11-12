@@ -15,14 +15,14 @@ class BerandaStatsSection extends StatelessWidget {
     required this.initials,
     required this.revenue,
     required this.daily,
+    this.onRevenue,
     super.key,
   });
-
   final int savedCustomers, newCustomers;
   final List<String> initials;
   final String revenue;
   final List<int?> daily;
-
+  final VoidCallback? onRevenue;
   @override
   Widget build(BuildContext context) {
     final customerCard = AppCard(
@@ -54,6 +54,7 @@ class BerandaStatsSection extends StatelessWidget {
       ),
     );
     final revenueCard = AppCard(
+      onTap: onRevenue,
       padding: const EdgeInsets.all(AppSpacing.mediumLarge),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -26,7 +26,7 @@ void main() {
     expect(find.text('Hapus akun'), findsNothing);
     expect(find.text('ratna@example.com'), findsOneWidget);
     expect(find.text('Keluar'), findsOneWidget);
-    expect(find.text('Laurum v1.0.0'), findsOneWidget);
+    expect(find.text('Pengaturan toko · Laurum v1.0.0'), findsOneWidget);
     expect(find.text(NoticeAi.message), findsOneWidget);
     expect(find.widgetWithText(MenuRow, 'Keluar'), findsNothing);
     final logout = tester.widget<AppButton>(find.widgetWithText(AppButton, 'Keluar'));

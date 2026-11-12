@@ -13,13 +13,14 @@ Nav bawah mengambang memakai frame 388/494 dengan koreksi proposal 013.
 | Waktu pembaruan | Data | ✅ | `updatedAt`/`createdAt` terbaru, `Formatters.jam` |
 | Jumlah pelanggan aktif | Data | ✅ | `customerDirectoryProvider` |
 | Pelanggan baru bulan berjalan | Data | ✅ | `Customer.createdAt` vs `businessClockProvider` |
-| Omzet minggu berjalan | Data | ✅ | `reportViewProvider` (periode bawaan minggu) |
+| Omzet minggu berjalan | Data | ✅ | `weeklyReportViewProvider`, terpisah dari pilihan periode Laporan (izin12 Nov2026) |
 | Omzet harian untuk grafik | Data | ✅ | `ReportView.daily` (hari mendatang kosong) |
 | 3 pelanggan paling sering | Data | ✅ | urut `orderCount` menurun |
 | Inisial pelanggan | Data | ✅ | dua huruf awal nama |
 | `Kelola antrean` | Aksi | ✅ | `go('/antrean')` |
 | `Lihat semua` | Aksi | ✅ | `go('/pelanggan')` |
 | Baris pelanggan | Aksi | ✅ | `push('/pelanggan/:id')` |
+| Seluruh kartu Pendapatan minggu ini | Aksi | ✅ | `reportPeriodProvider.select(1)` lalu `push('/laporan')`, tanpa ikon/komponen visual baru |
 | Muat / gagal | Keadaan | ✅ | gate lokal AppLoader terpusat (017), skeleton halaman; `EmptyState` + Coba lagi |
 | Kosong | Keadaan | ✅ | angka 0, `Belum ada antrean`, teks kosong pelanggan |
 | Label nav Beranda/Antrean/Pelanggan/Lainnya | Navigasi | ✅ | aktif mengikuti indeks 0..3 |
@@ -49,7 +50,7 @@ Nav bawah mengambang memakai frame 388/494 dengan koreksi proposal 013.
 
 ## Provider
 `businessProfileProvider`, `antreanDataProvider`, `customerDirectoryProvider`,
-`reportViewProvider`, `businessClockProvider`. Tidak ada provider baru; turunan
+`weeklyReportViewProvider`, `businessClockProvider`; provider mingguan disetujui12 Nov2026, turunan
 di `features/beranda/state/beranda_view.dart`.
 
 ## Selisih desain
@@ -67,9 +68,13 @@ di `features/beranda/state/beranda_view.dart`.
    frame 9-10,5 dinaikkan sesuai keputusan UI-22.
 
 ## Catatan
-- Kartu pendapatan membaca `reportViewProvider` (periode bawaan minggu). Karena
-  `/laporan` tidak punya slot nav, periode tidak dapat diubah dari UI saat ini;
-  bila nanti Laporan dikembalikan, kartu ini perlu provider khusus Beranda.
+- Kartu pendapatan membaca `weeklyReportViewProvider`, selalu periode1.
+  Pilihan hari/bulan/rentang di Laporan tidak mengubah angka/grafik Beranda.
+  Kedua provider memakai pemuat laporan/repository/perhitungan yang sama.
+- Kartu memakai AppCard.onTap opsional; area padding dan isi membuka Laporan
+  mingguan. Tes mengetuk sudut kartu setelah memilih periode bulanan.
+- Gate pemuatan awal dan tes error/retry memakai provider mingguan sesuai data
+  Beranda; semua assertion loader, retry dan data tetap dipertahankan.
 - Rute `/laporan` tidak lagi punya slot nav; tetap ada sebagai deep link di
   cabang Lainnya agar perilaku laporan dan tes lama tidak hilang.
 - Titik awal aplikasi, selesai login, dan selesai onboarding menuju `/beranda`

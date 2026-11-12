@@ -16,13 +16,13 @@ void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
   testWidgets('initial query error leaves loader for page error and keeps retry', (tester) async {
     final app = (await tester.runAsync(driftAppHarness))!;
-    final report = await tester.runAsync(() => app.container.read(reportViewProvider.future));
+    final report = await tester.runAsync(() => app.container.read(weeklyReportViewProvider.future));
     var reads = 0;
     final scope = ProviderContainer(
       overrides: [
         ...driftRepositoryOverrides(),
         accountStoreProvider.overrideWith((ref) async => app.store),
-        reportViewProvider.overrideWith((ref) async {
+        weeklyReportViewProvider.overrideWith((ref) async {
           if (++reads == 1) throw StateError('private/file/password/token');
           return report!;
         }),
@@ -59,7 +59,7 @@ void main() {
       () => Future.wait([
         scope.read(antreanDataProvider.future),
         scope.read(customerDirectoryProvider.future),
-        scope.read(reportViewProvider.future),
+        scope.read(weeklyReportViewProvider.future),
       ]),
     );
     await tester.pumpAndSettle();

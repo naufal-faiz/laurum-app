@@ -7,21 +7,39 @@ import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
 class MenuRow extends StatelessWidget {
-  const MenuRow({required this.label, required this.icon, super.key, this.subtitle, this.onTap});
+  const MenuRow({
+    required this.label,
+    required this.icon,
+    super.key,
+    this.subtitle,
+    this.onTap,
+    this.compact = false,
+  });
   final String label;
   final AppIcons icon;
   final String? subtitle;
   final VoidCallback? onTap;
+  final bool compact;
   @override
   Widget build(BuildContext context) => TextButton(
     onPressed: onTap,
     style: TextButton.styleFrom(
-      padding: const EdgeInsets.all(AppSpacing.cardPadding),
-      minimumSize: const Size(0, AppSpacing.touchTarget),
+      padding: compact
+          ? const EdgeInsets.symmetric(
+              horizontal: AppSpacing.mediumLarge,
+              vertical: AppSpacing.xsmall,
+            )
+          : const EdgeInsets.all(AppSpacing.cardPadding),
+      minimumSize: Size(0, compact ? AppSpacing.minTouchTarget : AppSpacing.touchTarget),
     ),
     child: Row(
       children: [
-        AppIcon(icon, color: AppColors.primary),
+        AppIcon(
+          icon,
+          color: AppColors.primary,
+          boxed: compact,
+          size: compact ? AppDimensions.iconSmall : AppDimensions.icon,
+        ),
         const SizedBox(width: AppSpacing.cardGap),
         Expanded(
           child: Column(
@@ -30,7 +48,7 @@ class MenuRow extends StatelessWidget {
             children: [
               AppText(
                 label,
-                variant: AppTextVariant.bodyStrong,
+                variant: compact ? AppTextVariant.label : AppTextVariant.bodyStrong,
                 color: onTap == null ? AppColors.ink3 : AppColors.ink,
               ),
               if (subtitle != null)

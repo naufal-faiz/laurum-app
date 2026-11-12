@@ -28,7 +28,7 @@ class LaurumApp extends ConsumerWidget {
       readingInitialData = [
         ref.watch(antreanDataProvider),
         ref.watch(customerDirectoryProvider),
-        ref.watch(reportViewProvider),
+        ref.watch(weeklyReportViewProvider),
       ].any((value) => value.isLoading && !value.hasValue);
     }
     return MaterialApp.router(

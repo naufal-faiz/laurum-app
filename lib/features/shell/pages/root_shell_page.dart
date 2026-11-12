@@ -22,6 +22,7 @@ class RootShellPage extends ConsumerWidget {
     final profile = ref.watch(businessProfileProvider);
     final sync = ref.watch(shellSyncProvider);
     final index = navigationShell.currentIndex;
+    final settings = index == 3 && GoRouterState.of(context).uri.path == '/lainnya';
     final queue = index == 1 ? ref.watch(antreanDataProvider).value : null;
     final search = index == 1 ? ref.watch(antreanSearchProvider) : (open: false, query: '');
     final syncState = sync.hasError
@@ -29,6 +30,7 @@ class RootShellPage extends ConsumerWidget {
         : SyncState.values.byName(sync.value?.name ?? 'menyimpan');
     return RootScaffold(
       title: profile.value?.name ?? 'Laurum',
+      subtitle: settings ? 'Pengaturan toko · Laurum v1.0.0' : null,
       accountLabel: 'Usaha dan akun',
       activeIndex: navigationShell.currentIndex,
       showAppBar: index > 1,

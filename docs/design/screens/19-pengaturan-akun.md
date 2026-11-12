@@ -1,7 +1,60 @@
 # 19 - Pengaturan dan Akun
 Rute: /lainnya (tab Lainnya, indeks 3; Transaksi adalah aksi tengah)   Prompt: 70/R4/R10
-Frame .pen: "Lainnya - Pengaturan & Akun"; State "Keluar dari akun".
+Frame acuan: MCP FigCraft `LAURUM · Lainnya`, ID4294968100, pilihan pengguna12 Nov2026.
 Template: RootScaffold dari RootShellPage; isi memakai SettingsMenuSection.
+
+## Paritas redesign
+| Butir | Data/aksi/keadaan/Key | Status |
+|---|---|---|
+| Profil | businessProfileProvider: alamat,useOrderStatus; nama usaha di shell | Selesai |
+| Status setting | orderStatusSettingProvider saving/error; disabled loading/saving | Selesai |
+| Akun | authSessionProvider busy/error; authServiceProvider.email; kosong Belum masuk | Selesai |
+| WhatsApp | whatsappConnectionProvider Terhubung/Terputus | Selesai |
+| Operasional | onNavigate layanan,pengeluaran,printer,AI; rute/argumen tetap | Selesai |
+| Pengaturan | onNavigate info-usaha/sinkronisasi; setEnabled(enabled: enabled) | Selesai |
+| Kelola akun | onNavigate /lainnya/akun; disabled saat busy | Selesai |
+| Keluar | confirmSignOut(context, ref); dialog,batal/konfirmasi,pending/offline,signOut tetap | Selesai |
+| Error | BannerMessage setting.error ?? session.error | Selesai |
+| Shell | sync loading/sukses/offline/gagal,akun,empat tab,aksi transaksi tetap | Selesai |
+| Responsif | gulir,320px teks2x; tanpa field/tes keyboard | Selesai |
+| Key tes | antrean-golden dari host; Section tidak punya Key eksplisit | Selesai |
+
+## Ringkasan frame redesign (dibaca sekali)
+- Kanvas390×844; header nama usaha + Pengaturan toko · Laurum v1.0.0,
+  status simpan dan akun; konten bg,padding horizontal24/vertikal10.
+- Kelompok Operasional,Pengaturan,Akun: gap8; judul kecil ink3,gap kartu6.
+- Kartu putih radius frame18 dipetakan token16; tanpa padding luar ganda.
+- Baris44,ikon kotak primaryTint,label/caption,chevron,divider inset14.
+- Operasional: layanan,pengeluaran,Laporan,printer,AI; catatan AI di bawah.
+- Pengaturan: alamat aktual,status order,sinkronisasi; akun: Email,nilai,Kelola akun.
+- Subtitle Kelola akun: Nama, nomor HP, kata sandi; Keluar outline merah di luar kartu.
+- Pemetaan: AppIcon/MenuRow/ToggleRow/NoticeAi varian padat,AppCard,AppDivider,
+  AppText caption/label,AppButton kecil,AppBarRoot/RootScaffold subtitle opsional.
+
+## Selisih desain aktif
+- Proposal024 disetujui 12 Nov 2026; varian komponen dan susunan Lainnya diterapkan.
+- Laporan belum ada di menu lama; /laporan sudah tersedia.
+  Penambahan onNavigate('/laporan') disetujui pengguna dan diterapkan, router tetap.
+- Teks contoh alamat/nama/email tidak disalin; data/provider aplikasi tetap.
+- Font8–10.5 dinaikkan sesuai keputusan global minimum11; area sentuh minimal44.
+- Radius18/ikon30/gap1 memakai token terdekat; tanpa token khusus layar.
+- Shell global dipertahankan; subtitle baru dibatasi tab Lainnya.
+- Subtitle header maksimal dua baris agar versi tetap terbaca pada lebar normal.
+- Catatan AI/toggle dan email dapat membungkus; Keluar tetap dapat dicapai dengan gulir.
+- Header/nav memakai komponen global yang ada; status tersimpan/ikon akun tetap
+  varian global (biru dan ikon akun), tidak menyalin inisial R/status hijau contoh frame.
+
+## Verifikasi redesign
+- Tes widget lama tetap mempertahankan assertion perilaku; versi pada tes halaman
+  dipindah ke subtitle header, peta navigasi Section menambah /laporan.
+- settings_redesign_test: golden normal, navigasi Laporan, akun kosong/busy,
+  callback MenuRow padat serta seluruh area AppCard tetap interaktif.
+- r4_settings_page_test: saving/error/retry dan lebar320 teks2x tetap diuji.
+- Golden terkait: lainnya.png baru dan r4_settings.png diperbarui.
+- dart run tool/check_all.dart: SEMUA HIJAU, 1109 lulus, 1 skip, exit0 (12 Nov2026).
+- Analyzer/lint Riverpod bersih, check_arch OK; visual belum diverifikasi manual di perangkat.
+
+## Komposisi dan perilaku sebelum redesign
 
 Komposisi:
 - SectionHeader 'OPERASIONAL'; AppCard berisi MenuRow:

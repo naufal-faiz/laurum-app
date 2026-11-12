@@ -3,6 +3,7 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_molecule_tokens.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_switch.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
@@ -15,19 +16,31 @@ class ToggleRow extends StatelessWidget {
     this.description,
     this.icon,
     this.onChanged,
+    this.compact = false,
   });
   final String label;
   final bool value;
   final AppIcons? icon;
   final String? description;
   final ValueChanged<bool>? onChanged;
+  final bool compact;
   @override
   Widget build(BuildContext context) => Padding(
-    padding: AppMoleculeTokens.rowPadding,
+    padding: compact
+        ? const EdgeInsets.symmetric(
+            horizontal: AppSpacing.mediumLarge,
+            vertical: AppSpacing.xsmall,
+          )
+        : AppMoleculeTokens.rowPadding,
     child: Row(
       children: [
         if (icon != null) ...[
-          AppIcon(icon!, size: AppDimensions.iconSmall),
+          AppIcon(
+            icon!,
+            size: AppDimensions.iconSmall,
+            boxed: compact,
+            color: compact ? AppColors.primary : AppColors.ink2,
+          ),
           const SizedBox(width: AppMoleculeTokens.gap),
         ],
         Expanded(
@@ -35,7 +48,7 @@ class ToggleRow extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText(label, variant: AppTextVariant.bodyStrong),
+              AppText(label, variant: compact ? AppTextVariant.label : AppTextVariant.bodyStrong),
               if (description != null)
                 AppText(description!, variant: AppTextVariant.caption, color: AppColors.ink3),
             ],
