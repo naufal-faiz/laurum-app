@@ -26,9 +26,9 @@ class SettingsAccountSection extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.stretch,
     spacing: AppSpacing.small,
     children: [
-      const AppText('AKUN', variant: AppTextVariant.caption, color: AppColors.ink3),
+      const AppText('AKUN', variant: AppTextVariant.label, color: AppColors.ink3),
       AppCard(
-        padding: EdgeInsets.zero,
+        padding: const EdgeInsets.all(AppSpacing.xxsmall / 2),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

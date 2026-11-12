@@ -22,6 +22,7 @@ class RootScaffold extends StatelessWidget {
     this.onTabSelected,
     this.onCreate,
     this.subtitle,
+    this.pageHeader,
   });
   final String title, accountLabel;
   final String? subtitle;
@@ -29,14 +30,14 @@ class RootScaffold extends StatelessWidget {
   final Widget body;
   final SyncState syncState;
   final bool showAppBar;
-  final Widget? header;
+  final Widget? header, pageHeader;
   final double headerHeight;
   final VoidCallback? onAccount, onCreate;
   final ValueChanged<int>? onTabSelected;
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: AppColors.bg,
-    appBar: showAppBar || header != null
+    appBar: pageHeader == null && (showAppBar || header != null)
         ? PreferredSize(
             preferredSize: Size.fromHeight(
               headerHeight *
@@ -65,33 +66,32 @@ class RootScaffold extends StatelessWidget {
     body: Builder(
       builder: (context) {
         final media = MediaQuery.of(context);
+        final bottom = (media.padding.bottom - AppDimensions.navCreateLift).clamp(
+          0.0,
+          double.infinity,
+        );
         return MediaQuery(
-          data: media.copyWith(
-            padding: media.padding.copyWith(
-              bottom: (media.padding.bottom - AppDimensions.navCreateLift).clamp(
-                0,
-                double.infinity,
-              ),
-            ),
-          ),
+          data: media.copyWith(padding: media.padding.copyWith(bottom: bottom)),
           child: Stack(
             fit: StackFit.expand,
             children: [
-              body,
-              Positioned.fill(
-                child: IgnorePointer(
-                  child: TweenAnimationBuilder<double>(
-                    key: ValueKey('tab-fade-$activeIndex'),
-                    tween: Tween(begin: 1, end: 0),
-                    duration: MediaQuery.disableAnimationsOf(context)
-                        ? Duration.zero
-                        : AppMotion.tabDuration,
-                    curve: AppMotion.tabCurve,
-                    builder: (context, opacity, _) => Opacity(
-                      opacity: opacity,
-                      child: const ColoredBox(color: AppColors.bg),
-                    ),
-                  ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (pageHeader != null) SafeArea(bottom: false, child: pageHeader!),
+                  Expanded(child: body),
+                ],
+              ),
+              IgnorePointer(
+                child: TweenAnimationBuilder<double>(
+                  key: ValueKey('tab-fade-$activeIndex'),
+                  tween: Tween(begin: 1, end: 0),
+                  duration: MediaQuery.disableAnimationsOf(context)
+                      ? Duration.zero
+                      : AppMotion.tabDuration,
+                  curve: AppMotion.tabCurve,
+                  child: const ColoredBox(color: AppColors.bg),
+                  builder: (context, opacity, child) => Opacity(opacity: opacity, child: child),
                 ),
               ),
             ],

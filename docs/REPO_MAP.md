@@ -3,7 +3,7 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 83/83 dibuat
+## Registry widget: 84/84 dibuat
 
 Semua widget sudah dibuat.
 
@@ -342,8 +342,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/customers/widgets/
 - customer_deposit_form_section.dart (88): CustomerDepositFormSection
 - customer_directory_actions_section.dart (51): CustomerDirectoryActionsSection
-- customer_directory_list_section.dart (93): CustomerDirectoryListSection
+- customer_directory_list_section.dart (90): CustomerDirectoryListSection
 - customer_edit_form_section.dart (65): CustomerEditFormSection
+- customer_header_section.dart (21): CustomerHeaderSection
 - customer_import_list_section.dart (94): CustomerImportListSection
 - customer_orders_section.dart (39): CustomerOrdersSection
 - customer_profile_section.dart (75): CustomerProfileSection
@@ -443,11 +444,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_label.dart (10):
 
 ### lib/features/orders/widgets/
-- antrean_header_section.dart (37): AntreanHeaderSection
+- antrean_header_section.dart (31): AntreanHeaderSection
 - antrean_orders_section.dart (54): AntreanOrdersSection
 - antrean_proposals_section.dart (61): AntreanProposalsSection
 - antrean_status_section.dart (79): AntreanStatusSection
-- antrean_summary_section.dart (49): AntreanSummarySection
 - antrean_toolbar_section.dart (33): AntreanToolbarSection
 - order_customer_section.dart (18): OrderCustomerSection
 - order_detail_body_section.dart (35): OrderDetailBodySection
@@ -536,7 +536,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/reports/pages/
 - outstanding_page.dart (73): OutstandingPage
-- report_page.dart (105): ReportPage
+- report_page.dart (106): ReportPage
 - report_range_flow.dart (41):
 
 ### lib/features/reports/state/
@@ -584,15 +584,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/settings/widgets/
 - settings_account_section.dart (71): SettingsAccountSection
+- settings_header_section.dart (38): SettingsHeaderSection
 - settings_menu_section.dart (96): SettingsMenuSection
-- settings_operational_section.dart (85): SettingsOperationalSection
+- settings_operational_section.dart (88): SettingsOperationalSection
 
 ### lib/features/shell/pages/
 - app_router.dart (110):
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (7):
-- root_shell_page.dart (91): RootShellPage
+- root_shell_page.dart (103): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (27): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, shellSyncStatusProvider, whatsappConnectionProvider
@@ -674,8 +675,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_chip.dart (40): AppChip
 - app_divider.dart (16): AppDivider
 - app_gap.dart (19): AppGap
-- app_icon.dart (38): AppIcon
-- app_icon_button.dart (97): AppIconButtonVariant, AppIconButton
+- app_icon.dart (46): AppIcon
+- app_icon_button.dart (99): AppIconButtonVariant, AppIconButton
 - app_loader.dart (38): AppLoader
 - app_numpad_key.dart (54): AppNumpadKeyValue, AppNumpadKey
 - app_search_field.dart (90): AppSearchField, _AppSearchFieldState
@@ -706,7 +707,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - labeled_divider.dart (24): LabeledDivider
 - labeled_field.dart (35): LabeledField
 - locked_row.dart (47): LockedRow
-- menu_row.dart (63): MenuRow
+- menu_row.dart (69): MenuRow
 - metric_tile.dart (47): MetricTile
 - mini_bar_chart.dart (40): MiniBarChart
 - nav_item.dart (56): NavItem
@@ -717,7 +718,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - progress_row.dart (38): ProgressRow
 - rank_row.dart (71): RankRow
 - receipt_rows.dart (59): ReceiptRows
-- section_header.dart (51): SectionHeader
+- section_header.dart (55): SectionHeader
 - segmented_progress.dart (36): SegmentedProgress
 - selection_tile.dart (77): SelectionTile
 - stat_tile.dart (35): StatTile
@@ -728,6 +729,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/organisms/
 - app_bottom_sheet.dart (95): AppBottomSheet
+- app_page_header.dart (82): AppPageHeader
 - auth_card.dart (21): AuthCard
 - auth_hero.dart (110): AuthHero
 - bottom_nav_bar.dart (102): BottomNavBar
@@ -768,7 +770,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_controller_test.dart (67):
 - antrean_golden_test.dart (56):
 - antrean_page_test.dart (73):
-- antrean_redesign_sections_test.dart (110):
+- antrean_redesign_sections_test.dart (112):
 - antrean_search_page_test.dart (101):
 - antrean_search_test.dart (47):
 - antrean_spacing_modal_test.dart (46):
@@ -789,6 +791,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_icon_test.dart (29):
 - app_loader_test.dart (38):
 - app_numpad_key_test.dart (43):
+- app_page_header_test.dart (54):
 - app_router_test.dart (64):
 - app_search_field_test.dart (66):
 - app_skeleton_test.dart (32):
@@ -826,7 +829,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - bottom_nav_bar_test.dart (104):
 - bp0_id_flow_test.dart (61):
 - brand_lockup_test.dart (25):
-- business_info_page_test.dart (50):
+- business_info_page_test.dart (59):
 - callout_ai_test.dart (20):
 - checkout_controller_test.dart (90):
 - chip_bar_test.dart (30):
@@ -868,6 +871,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_directory_data_test.dart (39):
 - customer_directory_states_test.dart (64):
 - customer_directory_test.dart (100):
+- customer_header_golden_test.dart (23):
 - customer_import_page_test.dart (68):
 - customer_row_test.dart (39):
 - customer_savings_section_test.dart (48):
@@ -1129,8 +1133,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_picker_list_section_test.dart (38):
 - service_picker_test.dart (53):
 - service_row_test.dart (41):
+- settings_header_alignment_test.dart (64):
 - settings_page_test.dart (82):
 - settings_redesign_test.dart (90):
+- settings_report_revision_test.dart (71):
 - sheet_scaffold_test.dart (37):
 - stat_tile_test.dart (24):
 - stepper_field_test.dart (33):

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/icons/app_svgs.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
@@ -18,9 +19,9 @@ class SettingsOperationalSection extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.stretch,
     spacing: AppSpacing.small,
     children: [
-      const AppText('OPERASIONAL', variant: AppTextVariant.caption, color: AppColors.ink3),
+      const AppText('OPERASIONAL', variant: AppTextVariant.label, color: AppColors.ink3),
       AppCard(
-        padding: EdgeInsets.zero,
+        padding: const EdgeInsets.all(AppSpacing.xxsmall / 2),
         child: Column(
           children: [
             MenuRow(
@@ -74,6 +75,8 @@ class SettingsOperationalSection extends StatelessWidget {
                   ? 'Integrasi WhatsApp AI • Terhubung'
                   : 'Integrasi WhatsApp AI • Terputus',
               icon: AppIcons.chat,
+              iconAsset: AppSvgs.whatsapp,
+              iconTileColor: AppColors.successTint,
               onTap: () => onNavigate('/lainnya/ai'),
             ),
           ],

@@ -36,7 +36,7 @@ void main() {
     await tester.runAsync(() => container.read(antreanDataProvider.future));
     await tester.pumpAndSettle();
     expect(find.byType(AntreanHeaderSection), findsOneWidget);
-    expect(find.text('12 order aktif'), findsOneWidget);
+    expect(find.textContaining(RegExp(r'^12 order aktif\b')), findsOneWidget);
     await tester.runAsync(() async {
       final service = (await store.services.getServices()).firstWhere(
         (s) => s.name == 'Cuci setrika',
@@ -59,7 +59,7 @@ void main() {
     router.go('/antrean');
     await tester.runAsync(() => container.read(antreanDataProvider.future));
     await tester.pumpAndSettle();
-    expect(find.text('13 order aktif'), findsOneWidget);
+    expect(find.textContaining(RegExp(r'^13 order aktif\b')), findsOneWidget);
     expect(container.read(orderRepositoryProvider), same(store.orders));
     expect(tester.takeException(), isNull);
   });

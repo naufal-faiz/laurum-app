@@ -14,18 +14,22 @@ Template: RootScaffold pada RootShellPage, empat cabang StatefulShellRoute.
 | Pending/klik ganda, galat aksi | Keadaan | ✅ | antreanActionsProvider |
 | Memuat, gagal+Coba lagi, kosong, filter kosong, review kosong | Keadaan | ✅ | AntreanStatusSection |
 | Notice nota, offline, sync gagal, WhatsApp terputus+Hubungkan | Keadaan/aksi | ✅ | provider dan callback lama |
-| Akun, status sinkronisasi | Aksi/data | ✅ | akun melalui Lainnya; sync di body sesuai koreksi pengguna |
+| Akun, status sinkronisasi | Aksi/data | ✅ | akun melalui Lainnya; sync di header bersama sesuai proposal025 |
 | ord-*/ValueKey(order.id), antrean-golden | Key tes | ✅ | tidak diubah |
 | Query nama/nota/layanan/teks usulan, kosong, tutup, keyboard | Baru diminta pengguna | ✅ | state layar saja, tanpa persistensi |
 | Pindah tab, filter/scroll bertahan, reduced motion | Animasi | ✅ | navigator tetap di pohon |
 
 ## Selisih desain frame 408
+- Koreksi pengguna12 Nov2026/proposal025: AntreanHeaderSection mendelegasikan
+  LAURUM/judul/subjudul/aksi/status ke AppPageHeader yang sama dengan Pelanggan/Lainnya.
+  Jumlah order/review dan sync pindah dari AntreanSummarySection ke header intrinsik;
+  kelas summary lama dihapus. Cari/tutup,query,filter,Key,banner dan callback tetap.
 - Pengguna meminta contoh akurasi: badge bertanda `contoh` hanya di main_dummy
   melalui fixture terpisah; build utama tidak menampilkan akurasi buatan.
 - Dua tab seperti frame; filter status lama ada di ikon Filter status. Daftar utama
   menampilkan dua usulan, Lihat semua menampilkan seluruhnya. Pesan dua baris
   sebagai preview; teks lengkap di Periksa. Semua CTA pembayaran/status tetap ada.
-- Jumlah order aktif/perlu dicek sejajar dengan sync di body. Nama usaha dan ikon
+- Jumlah order aktif/perlu dicek sejajar dengan sync di header bersama025. Nama usaha dan ikon
   akun dihapus sesuai permintaan terakhir pengguna; akun tetap melalui Lainnya.
 - Header LAURUM/Antrean/ikon cari tetap di slot AppBar, bukan di ListView.
 - Ukuran font global 16/13 dipertahankan; tinggi kartu mengikuti isi, bukan 74/124
@@ -144,3 +148,14 @@ menunggu pembacaan awal antrean/pelanggan/laporan tanpa mengganti sumber datanya
 Loading halaman kembali memakai skeleton, sehingga startup lokal tidak melewati
 loader tambahan di daftar. Error dan retry tetap. Padding kecil AntreanPage yang
 ditambahkan pengguna sebelum sesi dipertahankan.
+
+## Hasil uji header bersama 025 — 12 Nov 2026
+- AppPageHeader satu sumber gaya; slot pageHeader RootScaffold mengikuti tinggi isi.
+- Uji320/390px,skala1/2,judul/subjudul panjang,semua status sync,aksi akun/cari: lulus.
+- Pencarian keyboard300dp,filter/scroll/tab,save profil→inisial→struk tetap lulus.
+- dart run tool/check_all.dart: SEMUA HIJAU,1135 lulus,1skip,exit0.
+- Format1040 berkas tanpa perubahan; analyzer/lint Riverpod bersih,check_arch OK.
+- Tes lama hanya dimigrasikan pada finder/struktur header: count digabung menjadi subjudul;
+  nama usaha kini diperiksa lewat data SettingsHeaderSection + inisial; data repo/struk tetap.
+- Golden layar terkait diperbarui; Beranda/default template lama tetap lolos tanpa perubahan.
+- Pengguna menerima hasil akhir dan mengizinkan commit; agen belum menguji perangkat langsung.

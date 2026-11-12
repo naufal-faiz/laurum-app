@@ -6,10 +6,8 @@ import 'package:laurum/core/theme/app_theme.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/orders/widgets/antrean_header_section.dart';
 import 'package:laurum/features/orders/widgets/antrean_proposals_section.dart';
-import 'package:laurum/features/orders/widgets/antrean_summary_section.dart';
 import 'package:laurum/features/orders/widgets/antrean_toolbar_section.dart';
 import 'package:laurum/main_dummy.dart';
-import 'package:laurum/shared/widgets/molecules/sync_indicator.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
@@ -49,17 +47,21 @@ void main() {
     await tester.tap(find.byTooltip('Cari antrean'));
     expect(searches, 1);
   });
-  testWidgets('AntreanSummarySection aligns body counts with synchronization', (tester) async {
+  testWidgets('shared Antrean header keeps counts and synchronization', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         theme: AppTheme.light,
-        home: const Scaffold(
-          body: AntreanSummarySection(total: 12, reviewCount: 3, syncState: SyncState.tersimpan),
+        home: Scaffold(
+          body: AntreanHeaderSection(
+            searchOpen: false,
+            onSearch: () {},
+            total: 12,
+            reviewCount: 3,
+          ),
         ),
       ),
     );
-    expect(find.text('12 order aktif'), findsOneWidget);
-    expect(find.text('· 3 perlu dicek'), findsOneWidget);
+    expect(find.text('12 order aktif · 3 perlu dicek'), findsOneWidget);
     expect(find.text('Tersimpan'), findsOneWidget);
     expect(find.byTooltip('Usaha dan akun'), findsNothing);
   });

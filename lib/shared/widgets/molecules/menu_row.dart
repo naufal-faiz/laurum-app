@@ -14,12 +14,16 @@ class MenuRow extends StatelessWidget {
     this.subtitle,
     this.onTap,
     this.compact = false,
+    this.iconAsset,
+    this.iconTileColor,
   });
   final String label;
   final AppIcons icon;
   final String? subtitle;
   final VoidCallback? onTap;
   final bool compact;
+  final String? iconAsset;
+  final Color? iconTileColor;
   @override
   Widget build(BuildContext context) => TextButton(
     onPressed: onTap,
@@ -38,6 +42,8 @@ class MenuRow extends StatelessWidget {
           icon,
           color: AppColors.primary,
           boxed: compact,
+          assetName: iconAsset,
+          boxColor: iconTileColor,
           size: compact ? AppDimensions.iconSmall : AppDimensions.icon,
         ),
         const SizedBox(width: AppSpacing.cardGap),

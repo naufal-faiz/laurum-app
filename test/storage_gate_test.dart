@@ -60,7 +60,7 @@ void main() {
       ]);
     });
     await tester.pumpAndSettle();
-    expect(find.text('12 order aktif'), findsOneWidget);
+    expect(find.textContaining(RegExp(r'^12 order aktif\b')), findsOneWidget);
     expect(attempt, 2);
     expect(tester.takeException(), isNull);
   });

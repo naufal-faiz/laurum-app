@@ -45,10 +45,10 @@ class SettingsMenuSection extends StatelessWidget {
       spacing: AppSpacing.small,
       children: [
         SettingsOperationalSection(connected: connected, onNavigate: onNavigate),
-        const AppText('PENGATURAN', variant: AppTextVariant.caption, color: AppColors.ink3),
+        const AppText('PENGATURAN', variant: AppTextVariant.label, color: AppColors.ink3),
         if (error != null) BannerMessage(message: error!, variant: BannerMessageVariant.error),
         AppCard(
-          padding: EdgeInsets.zero,
+          padding: const EdgeInsets.all(AppSpacing.xxsmall / 2),
           child: Column(
             children: [
               MenuRow(

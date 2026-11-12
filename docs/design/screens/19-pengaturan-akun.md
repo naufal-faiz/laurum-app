@@ -32,17 +32,21 @@ Template: RootScaffold dari RootShellPage; isi memakai SettingsMenuSection.
   AppText caption/label,AppButton kecil,AppBarRoot/RootScaffold subtitle opsional.
 
 ## Selisih desain aktif
+- Koreksi pengguna12 Nov2026/proposal025: SettingsHeaderSection kini pembungkus tipis
+  AppPageHeader, judul Lainnya/subjudul Pengaturan toko · Laurum v1.0.0.
+  Inisial usaha dan aksi akun/sync tetap; tinggi intrinsik dari satu komponen bersama.
+  Tidak lagi memakai perhitungan88/112dp atau mengubah AppBarRoot semua halaman.
 - Proposal024 disetujui 12 Nov 2026; varian komponen dan susunan Lainnya diterapkan.
 - Laporan belum ada di menu lama; /laporan sudah tersedia.
   Penambahan onNavigate('/laporan') disetujui pengguna dan diterapkan, router tetap.
 - Teks contoh alamat/nama/email tidak disalin; data/provider aplikasi tetap.
 - Font8–10.5 dinaikkan sesuai keputusan global minimum11; area sentuh minimal44.
 - Radius18/ikon30/gap1 memakai token terdekat; tanpa token khusus layar.
-- Shell global dipertahankan; subtitle baru dibatasi tab Lainnya.
-- Subtitle header maksimal dua baris agar versi tetap terbaca pada lebar normal.
+- AppBarRoot lama dan Beranda dipertahankan; header intrinsik025 hanya untuk tiga tab.
+- Subjudul header membungkus sesuai ruang; teks dan versi tetap utuh.
 - Catatan AI/toggle dan email dapat membungkus; Keluar tetap dapat dicapai dengan gulir.
-- Header/nav memakai komponen global yang ada; status tersimpan/ikon akun tetap
-  varian global (biru dan ikon akun), tidak menyalin inisial R/status hijau contoh frame.
+- Status tersimpan memakai varian global biru; akun Lainnya memakai inisial usaha,
+  bukan inisial R contoh frame. Judul/subjudul/gaya dikelola AppPageHeader.
 
 ## Verifikasi redesign
 - Tes widget lama tetap mempertahankan assertion perilaku; versi pada tes halaman
@@ -115,3 +119,14 @@ Selisih terhadap .pen:
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
+
+## Hasil uji header bersama 025 — 12 Nov 2026
+- AppPageHeader satu sumber gaya; slot pageHeader RootScaffold mengikuti tinggi isi.
+- Uji320/390px,skala1/2,judul/subjudul panjang,semua status sync,aksi akun/cari: lulus.
+- Pencarian keyboard300dp,filter/scroll/tab,save profil→inisial→struk tetap lulus.
+- dart run tool/check_all.dart: SEMUA HIJAU,1135 lulus,1skip,exit0.
+- Format1040 berkas tanpa perubahan; analyzer/lint Riverpod bersih,check_arch OK.
+- Tes lama hanya dimigrasikan pada finder/struktur header: count digabung menjadi subjudul;
+  nama usaha kini diperiksa lewat data SettingsHeaderSection + inisial; data repo/struk tetap.
+- Golden layar terkait diperbarui; Beranda/default template lama tetap lolos tanpa perubahan.
+- Pengguna menerima hasil akhir dan mengizinkan commit; agen belum menguji perangkat langsung.

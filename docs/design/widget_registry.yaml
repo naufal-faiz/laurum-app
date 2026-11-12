@@ -57,6 +57,7 @@ molecules:
   - NavItem
   - CreateAction
 organisms:
+  - AppPageHeader
   - CustomerContactCard
   - BottomNavBar
   - WelcomeBanner

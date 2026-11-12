@@ -3,6 +3,7 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
+import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
 class SectionHeader extends StatelessWidget {
@@ -15,6 +16,7 @@ class SectionHeader extends StatelessWidget {
     this.icon,
     this.titleColor = AppColors.ink,
     this.trailing,
+    this.onBack,
   }) : assert(onAction == null || actionLabel != null);
   final String title;
   final String? subtitle, actionLabel;
@@ -22,9 +24,11 @@ class SectionHeader extends StatelessWidget {
   final AppIcons? icon;
   final Color titleColor;
   final Widget? trailing;
+  final VoidCallback? onBack;
   @override
   Widget build(BuildContext context) => Row(
     children: [
+      if (onBack != null) AppIconButton(icon: AppIcons.back, label: 'Kembali', onPressed: onBack),
       if (icon != null) ...[
         AppIcon(icon!, color: AppColors.primary),
         const SizedBox(width: AppSpacing.small),

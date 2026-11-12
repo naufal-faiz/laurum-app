@@ -5,11 +5,10 @@ import 'package:laurum/core/theme/app_control_tokens.dart';
 import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/shared/widgets/atoms/app_avatar.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_svg.dart';
 
-/// `plain` = ikon polos 48 dp; `hero` = lingkaran 36 dp di atas hero auth;
-/// `compact` = ikon 40 dp untuk slot sempit (tombol mata di dalam field).
 enum AppIconButtonVariant { plain, hero, compact, tilePrimary, tileSuccess, tileNeutral }
 
 class AppIconButton extends StatelessWidget {
@@ -21,6 +20,7 @@ class AppIconButton extends StatelessWidget {
     this.iconAsset,
     this.onPressed,
     this.color = AppColors.primary,
+    this.initials,
   }) : assert(
          (icon == null) != (iconAsset == null),
          'Provide exactly one of icon or iconAsset.',
@@ -31,7 +31,7 @@ class AppIconButton extends StatelessWidget {
   final AppIconButtonVariant variant;
   final VoidCallback? onPressed;
   final Color color;
-
+  final String? initials;
   @override
   Widget build(BuildContext context) {
     final hero = variant == AppIconButtonVariant.hero;
@@ -50,7 +50,9 @@ class AppIconButton extends StatelessWidget {
         : hero
         ? AppDimensions.iconBack
         : AppDimensions.iconAction;
-    final glyph = iconAsset != null
+    final glyph = initials != null
+        ? AppAvatar(initials: initials, semanticLabel: label)
+        : iconAsset != null
         ? AppSvg(iconAsset!, size: glyphSize, color: tint)
         : AppIcon(icon!, size: glyphSize, color: tint);
     final heroStyle = IconButton.styleFrom(

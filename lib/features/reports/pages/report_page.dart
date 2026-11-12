@@ -38,6 +38,7 @@ class ReportPage extends ConsumerWidget {
             spacing: AppSpacing.cardGap,
             children: [
               SectionHeader(
+                onBack: () => context.canPop() ? context.pop() : context.go('/lainnya'),
                 title: 'Laporan',
                 actionLabel: 'Ekspor Excel',
                 onAction: data == null || data.isEmpty || exporting.busy

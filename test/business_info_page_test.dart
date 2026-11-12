@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/services/repository_providers.dart';
+import 'package:laurum/features/settings/widgets/settings_header_section.dart';
+import 'package:laurum/shared/widgets/atoms/app_avatar.dart';
 
 import 'antrean_test_host.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
 
-  testWidgets('business info saves profile, app bar and receipt follow', (tester) async {
+  testWidgets('business info saves profile, header initials and receipt follow', (tester) async {
     final host = await pumpAntrean(tester, location: '/lainnya/info-usaha');
     expect(find.text('Info usaha'), findsOneWidget);
     expect(find.text('Berkah Laundry'), findsOneWidget);
@@ -29,7 +31,14 @@ void main() {
 
     host.router.go('/lainnya');
     await tester.pumpAndSettle();
-    expect(find.text('Laundry Bersih'), findsOneWidget);
+    final header = find.byType(SettingsHeaderSection);
+    expect(tester.widget<SettingsHeaderSection>(header).name, 'Laundry Bersih');
+    expect(
+      tester
+          .widget<AppAvatar>(find.descendant(of: header, matching: find.byType(AppAvatar)))
+          .initials,
+      'LB',
+    );
 
     final order = await host.container.read(orderRepositoryProvider).getOrderByOrderNo('A-0141');
     host.router.go('/transaksi/nota/${order!.id}');

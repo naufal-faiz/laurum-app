@@ -13,10 +13,10 @@ class NoticeAi extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: compact ? const EdgeInsets.all(AppSpacing.small) : AppMoleculeTokens.noticePadding,
-    decoration: const BoxDecoration(color: AppColors.primaryTint, borderRadius: AppRadius.numpad),
+    decoration: const BoxDecoration(color: AppColors.successTint, borderRadius: AppRadius.numpad),
     child: AppText(
       message,
-      color: AppColors.ink2,
+      color: AppColors.success,
       variant: compact ? AppTextVariant.caption : AppTextVariant.body,
     ),
   );

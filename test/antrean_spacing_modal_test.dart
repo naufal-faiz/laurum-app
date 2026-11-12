@@ -14,7 +14,7 @@ void main() {
   testWidgets('summary sits near title and section titles use primary', (tester) async {
     await pumpAntrean(tester);
     final title = find.text('Antrean').first;
-    final summary = find.text('12 order aktif');
+    final summary = find.textContaining(RegExp(r'^12 order aktif\b'));
     expect(tester.getTopLeft(summary).dy - tester.getBottomLeft(title).dy, inInclusiveRange(0, 12));
     for (final label in ['Rekomendasi AI', 'Antrean berjalan']) {
       await tester.scrollUntilVisible(

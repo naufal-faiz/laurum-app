@@ -18,7 +18,7 @@ void main() {
     expect(find.text('LAURUM'), findsOneWidget);
     expect(find.byTooltip('Usaha dan akun'), findsNothing);
     expect(find.text('Semua 12'), findsOneWidget);
-    expect(find.text('12 order aktif'), findsOneWidget);
+    expect(find.textContaining(RegExp(r'^12 order aktif\b')), findsOneWidget);
     expect(tester.widget<ChipBar>(find.byType(ChipBar)).labels.last, 'Perlu dicek 3');
     await tester.tap(find.byTooltip('Filter status'));
     await tester.pumpAndSettle();

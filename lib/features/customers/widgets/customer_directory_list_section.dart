@@ -8,7 +8,6 @@ import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_search_field.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
-import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/organisms/customer_row.dart';
 
 class CustomerDirectoryListSection extends StatelessWidget {
@@ -39,8 +38,6 @@ class CustomerDirectoryListSection extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.screenPadding)
           .add(const EdgeInsets.only(bottom: AppDimensions.navCreateSize / 2)),
       children: [
-        SectionHeader(title: 'Pelanggan', subtitle: '${rows.length} pelanggan'),
-        const SizedBox(height: AppSpacing.cardGap),
         CustomerDirectoryActionsSection(onImport: onImport, onAdd: onAdd),
         const SizedBox(height: AppSpacing.cardGap),
         if (rows.isNotEmpty) ...[

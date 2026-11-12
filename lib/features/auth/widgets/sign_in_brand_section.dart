@@ -7,5 +7,5 @@ class SignInBrandSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      const BrandLockup(name: 'LAURUM', tagline: 'LAUNDRY MANAGEMENT');
+      const BrandLockup(name: 'LAURUM', tagline: 'Laundry Management');
 }
