@@ -2,10 +2,13 @@
 Diperbarui: 2026-11-12 | Cabang backend-newdesign
 
 ## Sesi aktif
-Integrasi redesign/backend: pelanggan opsional + WhatsApp nyata.
-Dasar commit 31b5944: B5 printer BLE dan impor kontak HP asli selesai. Tanpa push/merge.
+APK release untuk pemakaian laundry rumah; dasar commit 1091715. Tanpa push/merge.
 
 ## Status irisan
+- APK release ARM64 berhasil (27,4 MB), konfigurasi publik .env.local + Drift,
+  tanpa DEMO_SEED. Izin INTERNET ditambahkan ke manifest utama untuk build release.
+- APK non-debug dan tanda tangan sama dengan app-debug; pembaruan tanpa uninstall.
+- Berkas: build/app/outputs/flutter-apk/laurum-rumah-1.0.0-arm64-release.apk.
 - Tambah/edit: hanya Nama wajib; HP/alamat/catatan boleh kosong (string kosong
   sesuai kontrak yang ada, tanpa migrasi). Nomor kosong tidak dianggap duplikat.
 - Usulan AI juga dapat membuat pelanggan tanpa nomor/alamat; nomor terisi tetap valid.
@@ -24,6 +27,7 @@ Dasar commit 31b5944: B5 printer BLE dan impor kontak HP asli selesai. Tanpa pus
   Rincian: docs/progress/b5.md. B3b recovery selesai; uji perangkat masih menunggu.
 
 ## Keputusan pengguna terbaru
+- Pengguna meminta APK ringan untuk penggunaan laundry rumah, meski fitur belum lengkap.
 - 12 Nov: semua input pelanggan opsional kecuali Nama; WhatsApp sesuai konteks,
   struk berupa gambar + pesan, tanpa nomor berbagi biasa dan struk menampilkan `-`.
 - Izin eksplisit url_launcher + share_plus; ter-resolve 6.3.3 dan 13.3.1.
@@ -35,10 +39,11 @@ AGENTS.md dan docs/design/new-design-laurum.figcraft milik pengguna, dikecualika
 android/build/ artefak Gradle tak terlacak tetap dikecualikan; .gitignore belum diubah.
 
 ## Langkah berikutnya
-1. Uji WhatsApp Android: nomor terisi/kosong, PNG+caption, WhatsApp/Business, kembali/batal.
-2. Uji impor kontak, restore printer, dan cetak 58 mm dengan printer fisik.
-3. Isi Data safety Contacts sebelum rilis; uji iOS dan B3b recovery dengan SMTP.
-4. B2e unggah foto pengeluaran memerlukan keputusan antrean/migrasi/kompresi.
+1. Pasang APK release sebagai pembaruan di HP; jangan uninstall agar data lokal terjaga.
+2. Uji WhatsApp Android: nomor terisi/kosong, PNG+caption, WhatsApp/Business, kembali/batal.
+3. Uji impor kontak, restore printer, dan cetak 58 mm dengan printer fisik.
+4. Isi Data safety Contacts sebelum Play Store; uji iOS dan B3b recovery dengan SMTP.
+5. B2e unggah foto pengeluaran memerlukan keputusan antrean/migrasi/kompresi.
 
 ## Blocker
 Uji penerima/gambar WhatsApp nyata, printer fisik, dan iOS belum dilakukan.
@@ -46,6 +51,7 @@ Uji penerima/gambar WhatsApp nyata, printer fisik, dan iOS belum dilakukan.
 ## Bukti terakhir
 - dart run tool/check_all.dart: SEMUA HIJAU, 1172 lulus/1 skip; REPO_MAP 1146 berkas.
 - Format, flutter analyze, dart analyze (Riverpod), check_arch: OK.
-- flutter build apk --debug --dart-define=LAURUM_STORE=drift: berhasil.
-- APK: build/app/outputs/flutter-apk/app-debug.apk. Golden struk diverifikasi;
-  WhatsApp di perangkat dan iOS belum diverifikasi manual.
+- flutter build apk --release --target-platform android-arm64 dengan .env.local
+  dan LAURUM_STORE=drift: berhasil (27,4 MB). aapt: non-debug + izin INTERNET.
+- apksigner verify: valid, sertifikat sama dengan APK debug; libapp/libflutter ARM64.
+- HP tidak terhubung lewat ADB; pemasangan/tes runtime release belum dilakukan.

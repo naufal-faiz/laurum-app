@@ -35,6 +35,11 @@ dari daftar diff di atas. Tidak ada kasus BE-7 pada daftar ini.
 | Printer dan struk | Printer tersimpan | `printer_id`/`printer_name` ditulis saat connect, tidak pernah dibaca | disambung ulang otomatis saat halaman Printer dibuka (`printerRestoreProvider`), diam bila printer mati | `LocalSettingsRepository` + `PrintService.connect` | spec 06-printer-struk:22; permintaan pengguna 12 Nov 2026 | BE-5a: tanpa state atau tabel baru | terverifikasi |
 
 ## Log tugas backend
+- 12 Nov 2026, APK laundry rumah: tidak ada aksi UI yang berubah. Release memakai
+  Drift + konfigurasi Supabase publik yang tersedia, DEMO_SEED nonaktif. Izin INTERNET
+  tersedia di manifest utama agar login/sinkronisasi berjalan pada release.
+  APK ARM64 27,4 MB, non-debug, tanda tangan cocok dengan app-debug untuk pembaruan.
+  Verifikasi: check_all SEMUA HIJAU (1172 lulus/1 skip); pemasangan HP menunggu pengguna.
 - 12 Nov 2026: izin pengguna membuat hanya Nama pelanggan wajib, serta menyetujui
   url_launcher 6.3.3 dan share_plus 13.3.1 untuk WhatsApp nyata.
   Verifikasi akhir: check_all SEMUA HIJAU (1172 lulus/1 skip), APK debug Android berhasil.
