@@ -38,7 +38,8 @@ Verifikasi "cetak 58 mm identik preview" menunggu printer fisik. Acuan: PRD B §
   `enableBluetooth` hanya memeriksa ulang setelah pengguna menyalakannya.
 - Karakteristik ditulis dengan response bila didukung (flow control printer);
   tanpa response hanya bila printer tidak menyediakan write biasa, dengan jeda 20 ms.
-- `fontSize` 80 mm belum didukung: formatter selalu 32 kolom. Menunggu keputusan.
+- Opsi 80 mm sengaja dinonaktifkan (coming soon): chip menampilkan pesan dan
+  `paperMm` tetap 58. `fontSize` 80 mm belum didukung: formatter selalu 32 kolom.
 
 ## Verifikasi
 

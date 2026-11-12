@@ -31,7 +31,11 @@ class PrinterSettingsSection extends ConsumerWidget {
               AppChip(
                 '$paper mm',
                 selected: settings.paperMm == paper,
-                onPressed: () => controller.edit(paperMm: paper),
+                onPressed: paper == 80
+                    ? () => controller.showNotice(
+                        'Printer 80 mm masih coming soon. Untuk sekarang gunakan 58 mm.',
+                      )
+                    : () => controller.edit(paperMm: paper),
               ),
           ],
         ),

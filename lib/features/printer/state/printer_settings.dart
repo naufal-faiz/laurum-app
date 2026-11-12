@@ -46,6 +46,8 @@ class PrinterSettingsController extends AsyncNotifier<PrinterSettingsState> {
     if (current != null) state = AsyncData(change(current));
   }
 
+  void showNotice(String message) => _set((s) => s.copyWith(notice: message));
+
   void edit({
     int? paperMm,
     int? fontSize,

@@ -18,20 +18,26 @@ sebelumnya. Jangan push/merge.
   tulis per 180 byte. `printServiceProvider` memakai layanan ini saat build `drift`;
   dummy/tes tetap `FakePrintService`.
 - Izin BLE: AndroidManifest + `NSBluetoothAlwaysUsageDescription`; spec 06 diperbarui.
+- B5.3: chip '80 mm' sengaja dinonaktifkan (coming soon) — menampilkan BannerMessage,
+  `paperMm` tetap 58. Kedipan layar di Samsung hilang setelah Impeller dimatikan
+  permanen lewat `AndroidManifest.xml` (`EnableImpeller=false`); Flutter menandai opt-out
+  ini deprecated, jadi perlu ditinjau saat upgrade Flutter berikutnya.
 - Rencana/arahan uji B5: `docs/plans/B5-printer.md`; bukti: `docs/progress/b5.md`.
 - PARITY.md: baris "Buat password baru" (B3b) sudah terverifikasi.
 
 ## Keputusan pengguna terbaru
 Mode Backend BE-1..BE-9 aktif; Mode Redesign UI dijeda. Satu tugas backend per sesi,
 tanpa push/merge. Printer: BLE, dan satu dependensi plugin disetujui
-(`flutter_blue_plus 1.34.5`). B3 perangkat dan B2e ditunda.
+(`flutter_blue_plus 1.34.5`). B3 perangkat dan B2e ditunda. Printer 80 mm ditunda
+(coming soon); yang didukung baru 58 mm.
 
 ## Belum di-commit
 AGENTS.md dan docs/design/new-design-laurum.figcraft milik pengguna, dikecualikan.
 
 ## Langkah berikutnya
 1. Uji cetak 58 mm di perangkat Android dan bandingkan dengan preview.
-2. Putuskan dukungan 80 mm (formatter masih 32 kolom).
+2. Mulai 80 mm hanya bila diminta: formatter 48 kolom, preview 384, encoder per
+   ukuran; hapus pesan coming soon setelahnya.
 3. B2e unggah foto pengeluaran: butuh keputusan antrean/migrasi dan kompresi (BE-7).
 4. Verifikasi perangkat B3 (tautan pemulihan, Cek email) dengan akun uji + SMTP.
 5. Uji iOS saat lingkungan tersedia; adapter hanya BLE, Classic tidak didukung.
@@ -44,3 +50,5 @@ memiliki lingkungan uji.
 - flutter test test/printer: 15 lulus; analyze lib/features/printer lib/main.dart
   test/printer bersih; check_arch OK.
 - dart run tool/check_all.dart: SEMUA HIJAU, 1159 lulus/1 skip, REPO_MAP 1136 berkas.
+- Uji perangkat SM-N975F: printer BLE tersambung (service 18F0, char 2AF1, semua tulis
+  GATT_SUCCESS); kedipan hilang dengan Impeller mati (diputuskan pengguna).

@@ -485,14 +485,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/printer/state/
 - printer_connection.dart (98): PrinterConnectionController, printerConnectionProvider
-- printer_settings.dart (91): PrinterSettingsState, PrinterSettingsController, printerSettingsProvider
+- printer_settings.dart (93): PrinterSettingsState, PrinterSettingsController, printerSettingsProvider
 - printer_state.dart (78): PrinterConnectionState
 - save_printer_settings.dart (25):
 
 ### lib/features/printer/widgets/
 - printer_connection_section.dart (79): PrinterConnectionSection
 - printer_preview_section.dart (42): PrinterPreviewSection
-- printer_settings_section.dart (84): PrinterSettingsSection
+- printer_settings_section.dart (88): PrinterSettingsSection
 
 ### lib/features/proposals/data/
 - account_proposal_fixtures.dart (23):

@@ -35,8 +35,8 @@ void main() {
     expect(find.text('Terhubung dan siap mencetak'), findsOneWidget);
     await tester.tap(find.text('80 mm'));
     await tester.pumpAndSettle();
-    expect(find.text('Thermal 80 mm'), findsOneWidget);
-
+    expect(find.textContaining('masih coming soon'), findsOneWidget);
+    expect(find.text('Thermal 58 mm'), findsOneWidget);
     await tester.ensureVisible(find.byType(AppSwitch).first);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(AppSwitch).first);
@@ -46,12 +46,12 @@ void main() {
     await tester.pumpAndSettle();
     final settings = await host.container.read(businessRepositoryProvider).getReceiptSettings();
     expect(settings.showAddress, isFalse);
-    expect(settings.paperMm, 80);
+    expect(settings.paperMm, 58);
 
     await tester.tap(find.text('Cetak uji'));
     await tester.pumpAndSettle();
     expect(host.service.printedReceipts, hasLength(1));
-    expect(host.service.printedReceipts.single.paperMm, 80);
+    expect(host.service.printedReceipts.single.paperMm, 58);
     expect(find.text('Struk uji terkirim ke printer.'), findsOneWidget);
   });
 

@@ -6,7 +6,9 @@ Komposisi:
 - AppBarSub(title: 'Printer dan struk', backLabel: 'Kembali').
 - PrinterConnectionSection: BannerMessage warning 'Printer belum terhubung.' + AppButton
   'Cari printer'; atau AppCard berisi nama printer + 'Terhubung dan siap mencetak' + Ganti.
-- PrinterSettingsSection: AppChip '58 mm'/'80 mm', AppChip 'Normal'/'Besar',
+- PrinterSettingsSection: AppChip '58 mm'/'80 mm' (mengetuk '80 mm' hanya
+  menampilkan BannerMessage 'Printer 80 mm masih coming soon...' dan ukuran tetap
+  58 mm), AppChip 'Normal'/'Besar',
   ReceiptToggleList (alamat, pelanggan, tabungan, catatan; dua baris terkunci),
   LabeledField + AppTextField 'Teks penutup struk' dan 'Catatan khusus nota'.
 - PrinterPreviewSection: ReceiptPreview (lebar 320 untuk 58 mm, 384 untuk 80 mm) memakai
