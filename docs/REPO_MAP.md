@@ -467,7 +467,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/printer/data/
 - drift_receipt_settings_repository.dart (54): DriftReceiptSettingsRepository
+- esc_pos_encoder.dart (37): EscPosEncoder
+- esc_pos_print_service.dart (85): EscPosPrintService
 - in_memory_receipt_settings_repository.dart (14): InMemoryReceiptSettingsRepository
+- printer_transport.dart (13): PrinterTransport
 - receipt_demo.dart (74):
 - receipt_storage_mapping.dart (47):
 
@@ -1027,6 +1030,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### test/
 - piutang_card_test.dart (43):
 - platform_services_test.dart (83):
+
+### test/printer/
+- esc_pos_encoder_test.dart (33):
+- esc_pos_print_service_test.dart (82): FakeTransport
+
+### test/
 - printer_page_test.dart (100):
 - printer_service_test.dart (42):
 - progress_row_test.dart (23):
