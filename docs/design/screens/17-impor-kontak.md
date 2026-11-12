@@ -18,7 +18,10 @@ Komposisi:
 - FooterBar: AppButton 'Simpan n pelanggan' (nonaktif bila n = 0).
 
 Data dan provider:
-- ContactSource (core, implementasi palsu memakai contactFixtures).
+- ContactSource (core): build backend memakai `DeviceContactSource`
+  (`flutter_contacts`, izin baca kontak; hanya nama + nomor yang dibaca); build
+  dummy/tes tetap `FakeContactSource` dengan `contactFixtures`. Kontak yang tidak
+  dicentang tidak disimpan ke database.
 - customerImportProvider = FutureProvider: kontak + pelanggan aktif/terdaftar,
   menghasilkan baris {kontak, sudahTerdaftar} memakai normalizePhone.
 - customerImportSelectionProvider (autoDispose): query pencarian dan himpunan nomor terpilih.

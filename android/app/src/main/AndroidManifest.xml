@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:maxSdkVersion="28" />
+    <!-- Bulk "Impor kontak HP" reads the address book so customers do not have
+         to be typed twice. Only contacts the user checks are saved. -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <application
         android:label="laurum"
         android:name="${applicationName}"

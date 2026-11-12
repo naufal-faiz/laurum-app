@@ -49,6 +49,8 @@
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Laurum memakai Bluetooth untuk menghubungkan printer struk thermal.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Laurum membaca kontak atas izin Anda untuk menambahkan pelanggan tanpa mengetik ulang.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

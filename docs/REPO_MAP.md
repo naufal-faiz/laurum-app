@@ -9,7 +9,7 @@ Semua widget sudah dibuat.
 
 ## Dependensi
 
-flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, supabase_flutter, connectivity_plus, flutter_secure_storage, google_sign_in, workmanager, lottie, pdf, file_saver, flutter_blue_plus, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner, fake_async
+flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, supabase_flutter, connectivity_plus, flutter_secure_storage, google_sign_in, workmanager, lottie, pdf, file_saver, flutter_blue_plus, flutter_contacts, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner, fake_async
 
 ## Berkas (jumlah baris): nama deklarasi
 
@@ -132,6 +132,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_failure.dart (8): AuthFailureKind, AuthFailure
 - auth_service.dart (32): AuthService
 - contact_source.dart (31): ContactItem, ContactSource, ContactPermissionDenied, FakeContactSource
+- device_contact_source.dart (55): DeviceContactSource
 - dummy_history.dart (13): DummyHistory, dummyHistoryEnabledProvider, dummyHistoryProvider
 - export_service.dart (19): ExportService, FakeExportService
 - external_launcher.dart (25): ExternalLauncher, FakeExternalLauncher
@@ -481,10 +482,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/printer/pages/
 - bluetooth_sheet.dart (44): BluetoothSheet
 - printer_device_sheet.dart (49): PrinterDeviceSheet
-- printer_page.dart (84): PrinterPage
+- printer_page.dart (86): PrinterPage
 
 ### lib/features/printer/state/
 - printer_connection.dart (98): PrinterConnectionController, printerConnectionProvider
+- printer_restore.dart (24): printerRestoreProvider
 - printer_settings.dart (93): PrinterSettingsState, PrinterSettingsController, printerSettingsProvider
 - printer_state.dart (78): PrinterConnectionState
 - save_printer_settings.dart (25):
@@ -675,7 +677,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_summary_section.dart (63): TransactionSummarySection
 
 ### lib/
-- main.dart (60):
+- main.dart (62):
 - main_dummy.dart (104):
 
 ### lib/shared/widgets/atoms/
@@ -892,6 +894,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - detail_form_scaffold_test.dart (93):
 - detail_molecules_golden_test.dart (49):
 - detail_molecules_test.dart (102):
+- device_contact_source_test.dart (56):
 - discount_input_test.dart (118):
 - domain_cancel_test.dart (74):
 - domain_flow_test.dart (51):
@@ -1043,6 +1046,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### test/
 - printer_page_test.dart (100):
+- printer_restore_test.dart (45):
 - printer_service_test.dart (42):
 - progress_row_test.dart (23):
 - proposal_actions_test.dart (72):

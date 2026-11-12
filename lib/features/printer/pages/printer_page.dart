@@ -7,6 +7,7 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/printer/data/receipt_demo.dart';
 import 'package:laurum/features/printer/pages/bluetooth_sheet.dart';
 import 'package:laurum/features/printer/state/printer_connection.dart';
+import 'package:laurum/features/printer/state/printer_restore.dart';
 import 'package:laurum/features/printer/state/printer_settings.dart';
 import 'package:laurum/features/printer/widgets/printer_connection_section.dart';
 import 'package:laurum/features/printer/widgets/printer_preview_section.dart';
@@ -22,6 +23,7 @@ class PrinterPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(printerSettingsProvider);
+    ref.watch(printerRestoreProvider);
     return FormScaffold(
       title: 'Printer dan struk',
       backLabel: 'Kembali',

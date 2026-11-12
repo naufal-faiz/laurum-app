@@ -20,7 +20,9 @@ Data dan provider:
   ReceiptSettingsRepository dan BusinessProfile lewat BusinessRepository.
   Edit langsung mengubah state; save menulis keduanya lewat TransactionRunner.
 - Printer yang dipilih disimpan di LocalSettingsRepository (printer_id/printer_name),
-  hanya lokal di perangkat dan tidak masuk outbox sinkron.
+  hanya lokal di perangkat dan tidak masuk outbox sinkron. Saat halaman Printer dibuka,
+  `printerRestoreProvider` mencoba menyambung ulang printer tersimpan secara diam
+  (tanpa banner error bila printer mati).
 - printerConnectionProvider (Notifier) memegang status, devices, connected, notice.
 - printServiceProvider: build backend memakai EscPosPrintService + BlePrinterTransport
   (BLE nyata); build dummy/tes memakai FakePrintService yang dapat disetel gagal/tidak

@@ -31,7 +31,13 @@ dari daftar diff di atas. Tidak ada kasus BE-7 pada daftar ini.
 | Aplikasi | Gate loader data lokal | tidak ada (`lib/app.dart` dev2backend hanya menunggu penyimpanan) | ada | `lib/app.dart` menunggu `antreanDataProvider`, `customerDirectoryProvider`, `weeklyReportViewProvider` | spec 01-beranda:76 | BE-5a: provider setara ada di build Drift/backend | terverifikasi |
 | Auth | Buat password baru dari tautan pemulihan | tidak ada (layar baru; `change_password_sheet` menuntut password lama) | ada: `/password-baru`, dipaksa router selama sesi recovery | `auth_form.dart` (`AuthFormKind.recovery`) → `auth_session.recoverPassword` → `AuthService.setRecoveredPassword` → gateway `changePassword` | prompt B3b:3-4; PRD B pemulihan password | BE-5a: tujuan ada di PRD, sesi dari tautan recovery | terverifikasi |
 
+| Pelanggan | Impor kontak HP | ada UI, tetapi sumber kontak hanya fixture (`FakeContactSource`) | membaca kontak HP asli lewat `DeviceContactSource` (`flutter_contacts` + izin `READ_CONTACTS`); hanya kontak dicentang yang disimpan | `contactSourceProvider` → `contactImportProvider` dan `contactsProvider` | spec 17-impor-kontak:22-25; PRD B:195; izin pengguna 12 Nov 2026 | BE-5b: sumber data nyata ditambahkan, data hanya dari repository pelanggan | terverifikasi |
+| Printer dan struk | Printer tersimpan | `printer_id`/`printer_name` ditulis saat connect, tidak pernah dibaca | disambung ulang otomatis saat halaman Printer dibuka (`printerRestoreProvider`), diam bila printer mati | `LocalSettingsRepository` + `PrintService.connect` | spec 06-printer-struk:22; permintaan pengguna 12 Nov 2026 | BE-5a: tanpa state atau tabel baru | terverifikasi |
+
 ## Log tugas backend
+- 12 Nov 2026, B5.3 + B5.4: chip 80 mm menampilkan pesan coming soon; impor kontak
+  memakai `DeviceContactSource` pada build Drift; printer tersimpan disambung ulang
+  otomatis. Dua baris tabel di atas ditambahkan.
 - 12 Nov 2026, B3b irisan state/data: sesi Auth disegarkan dari deep link
   `laurum://auth-callback` dan "Lanjut" pada Cek email memeriksa sesi server. Tidak ada
   aksi UI baru yang dihapus/ditambah, jadi tabel tidak berubah.
