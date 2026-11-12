@@ -13,14 +13,15 @@ class PrinterConnectionController extends Notifier<PrinterConnectionState> {
   @override
   PrinterConnectionState build() {
     final service = ref.watch(printServiceProvider);
-    return PrinterConnectionState(
-      status: service.status,
-      connected: service.connectedPrinter,
-    );
+    return PrinterConnectionState(status: service.status, connected: service.connectedPrinter);
   }
 
   void _set(PrinterConnectionState Function(PrinterConnectionState current) change) =>
       state = change(state);
+
+  void _fail(PrintStatus status, String notice) => _set(
+    (s) => s.copyWith(status: status, busy: false, notice: notice, noticeError: true),
+  );
 
   Future<PrintStatus> discover() async {
     _set((s) => s.copyWith(busy: true, clearNotice: true));
@@ -29,14 +30,9 @@ class PrinterConnectionController extends Notifier<PrinterConnectionState> {
       final devices = await service.discover();
       _set((s) => s.copyWith(devices: devices, status: service.status, busy: false));
     } on StateError {
-      _set(
-        (s) => s.copyWith(
-          status: PrintStatus.bluetoothOff,
-          busy: false,
-          notice: 'Bluetooth mati. Aktifkan untuk mencari printer.',
-          noticeError: true,
-        ),
-      );
+      _fail(PrintStatus.bluetoothOff, 'Bluetooth mati. Aktifkan untuk mencari printer.');
+    } on Object {
+      _fail(service.status, 'Gagal mencari printer. Periksa izin Bluetooth.');
     }
     return state.status;
   }
@@ -44,7 +40,12 @@ class PrinterConnectionController extends Notifier<PrinterConnectionState> {
   Future<bool> connect(PrinterDevice device) async {
     _set((s) => s.copyWith(busy: true, clearNotice: true));
     final service = ref.read(printServiceProvider);
-    final ok = await service.connect(device);
+    var ok = false;
+    try {
+      ok = await service.connect(device);
+    } on Object {
+      ok = false;
+    }
     if (ok) {
       final settings = ref.read(localSettingsRepositoryProvider);
       await settings.setString('printer_id', device.id);
@@ -87,7 +88,11 @@ class PrinterConnectionController extends Notifier<PrinterConnectionState> {
 
   Future<void> enableBluetooth() async {
     final service = ref.read(printServiceProvider);
-    await service.enableBluetooth();
+    try {
+      await service.enableBluetooth();
+    } on Object {
+      /* Keep the current status; the sheet explains the next step. */
+    }
     _set((s) => s.copyWith(status: service.status, clearNotice: true));
   }
 }

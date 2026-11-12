@@ -9,7 +9,7 @@ Semua widget sudah dibuat.
 
 ## Dependensi
 
-flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, supabase_flutter, connectivity_plus, flutter_secure_storage, google_sign_in, workmanager, lottie, pdf, file_saver, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner, fake_async
+flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons, flutter_svg, flutter_localizations, uuid, drift, sqlite3, path_provider, crypto, supabase_flutter, connectivity_plus, flutter_secure_storage, google_sign_in, workmanager, lottie, pdf, file_saver, flutter_blue_plus, flutter_test, flutter_lints, widgetbook, riverpod_lint, drift_dev, build_runner, fake_async
 
 ## Berkas (jumlah baris): nama deklarasi
 
@@ -466,11 +466,15 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_record_input_section.dart (58): PaymentRecordInputSection
 
 ### lib/features/printer/data/
+- ble_printer_discovery.dart (14):
+- ble_printer_scanner.dart (48): BlePrinterScanner
+- ble_printer_transport.dart (101): BlePrinterTransport
 - drift_receipt_settings_repository.dart (54): DriftReceiptSettingsRepository
 - esc_pos_encoder.dart (37): EscPosEncoder
 - esc_pos_print_service.dart (85): EscPosPrintService
 - in_memory_receipt_settings_repository.dart (14): InMemoryReceiptSettingsRepository
 - printer_transport.dart (13): PrinterTransport
+- printer_write_target.dart (85): WriteCandidate, WriteTarget
 - receipt_demo.dart (74):
 - receipt_storage_mapping.dart (47):
 
@@ -480,7 +484,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - printer_page.dart (84): PrinterPage
 
 ### lib/features/printer/state/
-- printer_connection.dart (93): PrinterConnectionController, printerConnectionProvider
+- printer_connection.dart (98): PrinterConnectionController, printerConnectionProvider
 - printer_settings.dart (91): PrinterSettingsState, PrinterSettingsController, printerSettingsProvider
 - printer_state.dart (78): PrinterConnectionState
 - save_printer_settings.dart (25):
@@ -671,7 +675,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - transaction_summary_section.dart (63): TransactionSummarySection
 
 ### lib/
-- main.dart (53):
+- main.dart (60):
 - main_dummy.dart (104):
 
 ### lib/shared/widgets/atoms/
@@ -1032,8 +1036,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - platform_services_test.dart (83):
 
 ### test/printer/
+- ble_printer_discovery_test.dart (24):
 - esc_pos_encoder_test.dart (33):
 - esc_pos_print_service_test.dart (82): FakeTransport
+- printer_write_target_test.dart (60):
 
 ### test/
 - printer_page_test.dart (100):

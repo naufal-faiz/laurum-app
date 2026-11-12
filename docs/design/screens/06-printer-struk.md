@@ -20,13 +20,15 @@ Data dan provider:
 - Printer yang dipilih disimpan di LocalSettingsRepository (printer_id/printer_name),
   hanya lokal di perangkat dan tidak masuk outbox sinkron.
 - printerConnectionProvider (Notifier) memegang status, devices, connected, notice.
-- printServiceProvider / FakePrintService: discover, connect, printReceipt(ReceiptData),
-  enableBluetooth; dapat disetel gagal/tidak terhubung.
+- printServiceProvider: build backend memakai EscPosPrintService + BlePrinterTransport
+  (BLE nyata); build dummy/tes memakai FakePrintService yang dapat disetel gagal/tidak
+  terhubung.
 - demoReceiptLines memakai A-0143 DATA MASTER.
 
 Interaksi:
 - Cari printer -> discover; jika Bluetooth mati buka BluetoothSheet 'Aktifkan Bluetooth',
-  lalu daftar printer palsu (MenuRow) -> connect.
+  lalu daftar printer (MenuRow) -> connect. Build dummy menampilkan daftar palsu; build
+  backend memakai hasil pindai BLE.
 - Mengubah kertas/huruf/toggle/teks langsung memperbarui pratinjau; Simpan menulis
   ReceiptSettings dan BusinessProfile (footer/note) secara atomik; memakai profil
   terbaru agar perubahan nama/status order setelah form dibuka tetap dipertahankan.
@@ -41,9 +43,11 @@ Format: ReceiptFormatter 32 kolom; ReceiptPreview mono 11/16; Formatters untuk t
 
 Selisih terhadap .pen: tanpa tab Printer/Tampilan struk (satu halaman gulir), tanpa
 pengaturan perataan header, pilihan ukuran huruf hanya Normal/Besar (11/13),
-pratinjau 80 mm tetap 32 kolom, dan tidak ada status koneksi nyata.
+pratinjau 80 mm tetap 32 kolom, dan status koneksi hanya berasal dari BLE nyata pada
+build backend (dummy memakai printer palsu).
 iOS: printer thermal banyak memakai Bluetooth Classic (SPP) yang tidak tersedia untuk
-aksesori non-MFi; perlu BLE/Wi-Fi sebelum rilis iOS. Fitur ini **belum diuji di iOS**.
+aksesori non-MFi; adapter hanya memakai BLE (`flutter_blue_plus`) sehingga Classic
+tidak didukung. Fitur ini **belum diuji di iOS**.
 
 
 ## Audit penyelesaian UI - prompt 100

@@ -55,6 +55,7 @@ dependencies:
   lottie: ^3.8.2
   pdf: ^3.13.1
   file_saver: ^0.7.0
+  flutter_blue_plus: ^1.34.5
 
 dev_dependencies:
   flutter_test:
