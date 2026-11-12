@@ -47,6 +47,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- Impeller OpenGLES blanked/flashed the whole screen on this Samsung
+             device (Mali GPU) while Skia renders steadily. Keep Skia until the
+             device is verified with Impeller again. -->
+        <meta-data
+            android:name="io.flutter.embedding.android.EnableImpeller"
+            android:value="false" />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
