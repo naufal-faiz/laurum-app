@@ -49,9 +49,12 @@ void main() {
   }
   testWidgets('Account opens Lainnya', (tester) async {
     final host = await pumpAntrean(tester, location: '/pelanggan');
-    await tester.tap(find.byTooltip('Usaha dan akun'));
+    await tester.tap(
+      find.descendant(of: find.byType(BottomNavBar), matching: find.text('Lainnya')),
+    );
     await tester.pumpAndSettle();
     expect(host.router.routeInformationProvider.value.uri.path, '/lainnya');
     expect(tester.widget<BottomNavBar>(find.byType(BottomNavBar)).activeIndex, 3);
+    expect(find.byTooltip('Usaha dan akun'), findsOneWidget);
   });
 }

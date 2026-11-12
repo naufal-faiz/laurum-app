@@ -2,12 +2,17 @@
 Diperbarui: 2026-11-12 | Cabang backend-newdesign
 
 ## Sesi aktif
+Perbaikan tes lama (diminta pengguna) selesai: tes akun memakai jalur tab Lainnya dan
+golden `goldens/lainnya.png` diperbarui. check_all kembali hijau.
 Backend B3b irisan state/data selesai: sesi Auth dari deep link `laurum://auth-callback`
 disegarkan ke AuthSession, dan "Lanjut" pada Cek email memeriksa sesi server.
-Dasar commit bbb0125; satu commit untuk tugas ini ada di `git log -1`. Jangan push/merge.
+Dasar bbb0125; dua commit sesi ini ada di `git log -2`. Jangan push/merge.
 
 ## Status irisan
-Tanpa perubahan tampilan: token, shared/widgets, Section, golden, router tidak disentuh.
+Golden hanya bergeser pada posisi subpiksel label "OPERASIONAL" (644 px); tidak ada
+regresi tampilan. Tes "Account opens Lainnya" tidak dilemahkan: assertion rute, indeks
+tab, dan tooltip akun di Lainnya tetap ada, mengikuti keputusan avatar Pelanggan dihapus.
+Irisan backend tanpa perubahan tampilan: token, shared/widgets, Section, router tidak disentuh.
 AuthGateway/AuthService menambah `sessionChanges` + `refreshUser`; mode dummy memakai
 stream kosong sehingga perilaku dummy tidak berubah.
 SupabaseAuthGateway memakai `onAuthStateChange` dan `getUser`; galat jaringan jatuh ke
@@ -33,13 +38,10 @@ AGENTS.md dan docs/design/new-design-laurum.figcraft milik pengguna, dikecualika
 5. Jangan push/merge tanpa izin.
 
 ## Blocker
-Dua tes lama sudah gagal di bbb0125 (dibuktikan dengan men-stash perubahan sesi ini):
-- test/settings_redesign_test.dart: golden goldens/lainnya.png beda 0,20% (644 px).
-- test/r2_navigation_test.dart "Account opens Lainnya": widget yang dicari tidak ada.
-Keduanya zona tampilan/golden; BE-1 melarang perbaikan di sesi backend. Menunggu keputusan.
+Tidak ada. Dua tes lama (golden Lainnya dan tes akun) sudah diperbaiki dengan izin
+pengguna pada commit fix(ui) sesi ini.
 
 ## Bukti terakhir
-- flutter test test/auth/auth_session_refresh_test.dart test/auth/supabase_auth_service_test.dart: 12 lulus.
-- flutter analyze lib/features/auth lib/core/services test/auth: tanpa isu.
-- dart run tool/check_all.dart: format 1041 berkas (0 ubah), analyze + Riverpod bersih,
-  check_arch OK, tes 1136 lulus/1 skip/2 gagal (dua blocker di atas, pra-ada), exit 1.
+- flutter test test/r2_navigation_test.dart test/settings_redesign_test.dart: 13 lulus.
+- dart run tool/check_all.dart: SEMUA HIJAU, 1138 lulus/1 skip, format/analyze/Riverpod/
+  check_arch bersih, REPO_MAP 1119 berkas, exit 0.

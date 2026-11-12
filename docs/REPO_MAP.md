@@ -130,7 +130,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/core/services/
 - auth_config.dart (42): AuthConfig
 - auth_failure.dart (8): AuthFailureKind, AuthFailure
-- auth_service.dart (23): AuthService
+- auth_service.dart (26): AuthService
 - contact_source.dart (31): ContactItem, ContactSource, ContactPermissionDenied, FakeContactSource
 - dummy_history.dart (13): DummyHistory, dummyHistoryEnabledProvider, dummyHistoryProvider
 - export_service.dart (19): ExportService, FakeExportService
@@ -138,7 +138,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - fake_auth_account.dart (31): FakeAuthAccount
 - fake_auth_accounts.dart (102): FakeAuthAccounts
 - fake_auth_service.dart (87): FakeAuthService
-- fake_password_auth.dart (76): FakePasswordAuth
+- fake_password_auth.dart (80): FakePasswordAuth
 - fake_sync_service.dart (103): FakeSyncService
 - id_generator_provider.dart (4): idGeneratorProvider
 - in_memory_local_settings_repository.dart (26): InMemoryLocalSettingsRepository
@@ -213,7 +213,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/auth/data/
 - auth_error_mapping.dart (25):
 - auth_fixtures.dart (1):
-- auth_gateway.dart (21): AuthGateway, GoogleTokenSource
+- auth_gateway.dart (29): AuthGateway, GoogleTokenSource
 - auth_identity.dart (14): AuthIdentity
 - dummy_account_data.dart (52):
 - dummy_session_overrides.dart (50):
@@ -221,10 +221,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - google_token_source.dart (28): GoogleSignInTokenSource
 - local_auth_service.dart (18):
 - reset_account_drafts.dart (26):
-- supabase_account_actions.dart (56): SupabaseAccountActions
+- supabase_account_actions.dart (69): SupabaseAccountActions
 - supabase_auth_factory.dart (12):
-- supabase_auth_gateway.dart (102): SupabaseAuthGateway
-- supabase_auth_service.dart (106): SupabaseAuthService
+- supabase_auth_gateway.dart (108): SupabaseAuthGateway
+- supabase_auth_service.dart (105): SupabaseAuthService
 
 ### lib/features/auth/pages/
 - account_edit_sheet.dart (33): AccountEditSheet
@@ -245,7 +245,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_form.dart (83): AuthForm, authFormProvider
 - auth_form_view.dart (34): AuthFormKind, AuthSecret, AuthFormView
 - auth_router_refresh.dart (11): authRouterRefreshProvider
-- auth_session.dart (92): AuthSession, authSessionProvider
+- auth_session.dart (103): AuthSession, authSessionProvider
 - auth_state.dart (16): AuthState
 - auth_validation.dart (45):
 - password_reset.dart (64): PasswordReset, passwordResetProvider
@@ -806,9 +806,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### test/auth/
 - auth_config_test.dart (87):
 - auth_error_mapping_test.dart (46):
-- fake_auth_gateway.dart (111): FakeAuthGateway, FakeGoogleTokenSource
+- auth_session_refresh_test.dart (36): StreamingAuthService
+- fake_auth_gateway.dart (132): FakeAuthGateway, FakeGoogleTokenSource
 - secure_session_storage_test.dart (38): MemoryTokenStore
-- supabase_auth_service_test.dart (163):
+- supabase_auth_service_test.dart (187):
 
 ### test/
 - auth_card_test.dart (24):
@@ -1054,7 +1055,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r10_signup_validation_test.dart (37):
 - r10_test_host.dart (66):
 - r10_visual_test.dart (70):
-- r2_navigation_test.dart (57):
+- r2_navigation_test.dart (60):
 - r3_customer_creation_test.dart (57):
 - r3_service_creation_test.dart (50):
 - r3_service_picker_keyboard_test.dart (36):
