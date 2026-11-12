@@ -10,6 +10,9 @@ abstract class AuthService {
   bool get googleLinked;
   bool get awaitingEmail;
   bool get needsBusinessSetup;
+
+  /// Emits when the real backend session changes without a local call.
+  Stream<void> get sessionChanges;
   Future<void> completeBusinessSetup();
   Future<bool> signInWithGoogle();
   Future<bool> signInWithPassword(String email, String password);

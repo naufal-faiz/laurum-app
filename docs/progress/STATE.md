@@ -1,51 +1,45 @@
 # STATE Laurum
-Diperbarui: 2026-11-12 | Cabang newdesign
+Diperbarui: 2026-11-12 | Cabang backend-newdesign
 
 ## Sesi aktif
-Header bersama025 + batch revisi final DISETUJUI pengguna dan masuk commit ini.
-Dasar88addea; commit final lihat git log -1. Jangan push/merge tanpa izin.
-Acuan: instruksi pengguna LAURUM→judul→subjudul; tidak membaca ulang frame.
+Backend B3b irisan state/data selesai: sesi Auth dari deep link `laurum://auth-callback`
+disegarkan ke AuthSession, dan "Lanjut" pada Cek email memeriksa sesi server.
+Dasar commit bbb0125; satu commit untuk tugas ini ada di `git log -1`. Jangan push/merge.
 
 ## Status irisan
-AppPageHeader satu organisme untuk Antrean/Pelanggan/Lainnya; registry disetujui025.
-RootScaffold.pageHeader intrinsik; gaya/tinggi di satu tempat,tanpa kalkulasi88/112 per fitur.
-Wrapper header memasok data/aksi; summary Antrean lama dihapus,counts/sync tetap.
-Judul/jumlah Pelanggan pindah ke header; provider yang sama dibaca RootShell dengan izin025.
-REVISI FINAL: avatar Pelanggan dihapus; akun tetap melalui Lainnya. Inisial usaha di Lainnya tetap.
-Ruang<320dp/teks>1.3 menumpuk subjudul/status; header tidak ikut daftar bergulir.
-Overflow lama selesai; judul/subjudul sejajar320/390px,teks1/2.
-Beranda/default AppBarRoot tetap; golden Beranda/template lama lolos tanpa perubahan.
-Menu Lainnya: padding2px,WhatsApp SVG/border successTint; Laporan punya tombol kembali.
-Paritas spec01/12/19 penuh; router,state,data,token dan dependensi tidak berubah.
+Tanpa perubahan tampilan: token, shared/widgets, Section, golden, router tidak disentuh.
+AuthGateway/AuthService menambah `sessionChanges` + `refreshUser`; mode dummy memakai
+stream kosong sehingga perilaku dummy tidak berubah.
+SupabaseAuthGateway memakai `onAuthStateChange` dan `getUser`; galat jaringan jatuh ke
+identitas cache (tidak mengaku terkonfirmasi, sesi tidak dihapus).
+AuthSession berlangganan stream lalu menyegarkan state + accountIdentity; router refresh
+dan gerbang penyimpanan ikut bereaksi.
+PARITY.md: lima baris titik awal diverifikasi diganti fakta + lima baris perilaku baru
+dari daftar diff; tidak ada kasus BE-7 pada daftar itu.
 
 ## Keputusan pengguna terbaru
-Pengguna puas hasil akhir dan secara eksplisit meminta commit seluruh batch.
-Permintaan sebelumnya menunda commit sudah digantikan persetujuan terbaru.
-Judul/subjudul lewat parameter kode,bukan form baru; customer provider kondisional diizinkan025.
-Edit SVG/tagline/catatan AI pengguna diterima bersama hasil UI; golden diselaraskan.
+Mode Backend BE-1..BE-9 aktif; Mode Redesign UI dijeda.
+Satu tugas backend per sesi, tanpa push/merge, tanpa Figma.
 
 ## Belum di-commit
-AGENTS.md dan docs/design/new-design-laurum.figcraft milik pengguna,dikecualikan dari commit.
-Kode/tes/golden/spec/proposal025/registry/REPO_MAP/STATE lainnya masuk satu fix(ui).
-Stash f7a9e49 jangan diterapkan ulang.
+AGENTS.md dan docs/design/new-design-laurum.figcraft milik pengguna, dikecualikan.
 
 ## Langkah berikutnya
-1. Lanjut layar berikutnya sesuai arahan pengguna; header baru sudah diterima.
-2. Bila mengubah gaya3header,edit AppPageHeader; judul/subjudul di wrapper fitur.
-3. Uji manual Android/iOS saat tersedia; agen belum menguji perangkat langsung.
-4. Jangan push/merge tanpa izin pengguna.
+1. B3b bagian UI: layar "Buat password baru" untuk sesi recovery; butuh keputusan
+   penempatan/tampilan (BE-7) sebelum dikerjakan.
+2. B2e unggah foto pengeluaran: butuh keputusan antrean/migrasi dan kompresi (BE-7).
+3. B5 printer nyata (butuh printer 58 mm fisik).
+4. Uji perangkat: konfirmasi email/deep link ujung-ke-ujung dengan akun uji dan SMTP.
+5. Jangan push/merge tanpa izin.
 
 ## Blocker
-Tidak ada; check_all dan tes revisi avatar terakhir sudah hijau.
-Memori codebase sempat Transport closed; gunakan repo/STATE/REPO_MAP bila alat tidak tersedia.
+Dua tes lama sudah gagal di bbb0125 (dibuktikan dengan men-stash perubahan sesi ini):
+- test/settings_redesign_test.dart: golden goldens/lainnya.png beda 0,20% (644 px).
+- test/r2_navigation_test.dart "Account opens Lainnya": widget yang dicari tidak ada.
+Keduanya zona tampilan/golden; BE-1 melarang perbaikan di sesi backend. Menunggu keputusan.
 
 ## Bukti terakhir
-- dart run tool/check_all.dart: SEMUA HIJAU,1135 lulus,1skip,exit0 sebelum revisi avatar.
-- Revisi avatar: analyze2berkas bersih;5tes alignment+navigasi dan1golden Pelanggan lulus.
-- Prakomit: dart run tool/check_arch.dart OK sekali; suite penuh tidak diulang untuk revisi kecil.
-- Log TEMP/laurum-shared-header-check-all.log; REPO_MAP1118 berkas.
-- Format1040 berkas0ubah; analyzer/lint Riverpod bersih pada suite lengkap.
-- Golden33: Antrean9,Lainnya2,Pelanggan1,customer2,order2,proposal2,receipt3,auth6,AI5,laporan1.
-- Finder count digabung; profil tetap assert nama/telepon repo+inisial+struk.
-- Audit zona beku kosong; registry/template/header/provider-read disetujui025.
-- Tidak ada screenshot emulator; visual hasil akhir diterima pengguna.
+- flutter test test/auth/auth_session_refresh_test.dart test/auth/supabase_auth_service_test.dart: 12 lulus.
+- flutter analyze lib/features/auth lib/core/services test/auth: tanpa isu.
+- dart run tool/check_all.dart: format 1041 berkas (0 ubah), analyze + Riverpod bersih,
+  check_arch OK, tes 1136 lulus/1 skip/2 gagal (dua blocker di atas, pra-ada), exit 1.

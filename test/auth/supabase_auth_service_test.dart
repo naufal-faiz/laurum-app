@@ -59,6 +59,30 @@ void main() {
     expect(auth.needsBusinessSetup, isTrue);
   });
 
+  test('deep link emits a session change and exposes the signed identity', () async {
+    final events = <void>[];
+    final subscription = auth.sessionChanges.listen(events.add);
+    gateway.deepLink(identity(email: 'baru@example.com'));
+    await pumpEventQueue();
+    await subscription.cancel();
+    expect(events, hasLength(1));
+    expect(auth.isSignedIn, isTrue);
+    expect(auth.email, 'baru@example.com');
+  });
+
+  test('confirming e-mail trusts the server session, not the cached identity', () async {
+    gateway.user = identity(confirmed: false);
+    gateway.refreshConfirmed = true;
+    expect(await auth.confirmEmail(), isTrue);
+    expect(auth.needsBusinessSetup, isTrue);
+    gateway.user = identity();
+    gateway.refreshConfirmed = false;
+    expect(await auth.confirmEmail(), isFalse);
+    gateway.refreshError = AuthRetryableFetchException();
+    expect(await auth.confirmEmail(), isTrue);
+    expect(gateway.calls.where((call) => call == 'refreshUser'), hasLength(3));
+  });
+
   test('duplicate registration stays generic; weak password and limits are errors', () async {
     gateway.signUpError = error('user_already_exists', status: '422');
     await auth.signUp('ratna@example.com', 'Attacker123!', 'Lain');

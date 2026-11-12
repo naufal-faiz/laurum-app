@@ -15,6 +15,12 @@ class SupabaseAuthGateway implements AuthGateway {
   }
 
   @override
+  Stream<void> get sessionChanges => _auth.onAuthStateChange.map((_) {});
+
+  @override
+  Future<bool> refreshUser() async => (await _auth.getUser()).user?.emailConfirmedAt != null;
+
+  @override
   Future<AuthIdentity> signInWithPassword(String email, String password) async {
     final response = await _auth.signInWithPassword(
       email: normalizeAuthEmail(email),

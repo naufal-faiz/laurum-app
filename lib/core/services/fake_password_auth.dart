@@ -20,6 +20,10 @@ mixin FakePasswordAuth implements AuthService {
   bool get googleLinked => accountStore.profile.googleLinked;
   @override
   bool get awaitingEmail => accountStore.awaitingEmail;
+
+  /// Dummy mode has no external session; nothing can change outside the app.
+  @override
+  Stream<void> get sessionChanges => const Stream.empty();
   void checkAuthRate() {
     if (rateLimited) throw const AuthFailure(AuthFailureKind.requestLimit);
   }

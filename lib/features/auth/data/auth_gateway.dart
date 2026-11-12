@@ -4,6 +4,14 @@ import 'package:laurum/features/auth/data/auth_identity.dart';
 /// without a network or plugin. Implementations may throw `AuthException`.
 abstract interface class AuthGateway {
   AuthIdentity? get currentUser;
+
+  /// Emits after the session changes outside our own calls, e.g. the
+  /// `laurum://auth-callback` deep link or an expired token refresh.
+  Stream<void> get sessionChanges;
+
+  /// Re-reads the session from the server; false when it is gone or the
+  /// e-mail is still unconfirmed.
+  Future<bool> refreshUser();
   Future<AuthIdentity> signInWithPassword(String email, String password);
   Future<void> signUp({required String email, required String password, required String name});
   Future<AuthIdentity> signInWithGoogleIdToken(String idToken);

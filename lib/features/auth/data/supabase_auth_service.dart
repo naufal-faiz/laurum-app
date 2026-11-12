@@ -61,8 +61,7 @@ class SupabaseAuthService
 
   @override
   Future<bool> confirmEmail() async {
-    final user = _user;
-    if (user == null || !user.emailConfirmed) return false;
+    if (!isSignedIn || !await confirmedSession()) return false;
     _awaitingEmail = false;
     _needsSetup = true;
     return true;

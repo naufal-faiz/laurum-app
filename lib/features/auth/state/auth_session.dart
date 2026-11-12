@@ -12,7 +12,18 @@ final authSessionProvider = NotifierProvider<AuthSession, AuthState>(AuthSession
 
 class AuthSession extends Notifier<AuthState> {
   @override
-  AuthState build() => authSnapshot(ref.watch(authServiceProvider));
+  AuthState build() {
+    final auth = ref.watch(authServiceProvider);
+    // A deep link or an external confirmation changes the session without a
+    // local call; mirror it so the router and storage gate see it.
+    final changes = auth.sessionChanges.listen((_) {
+      ref.read(accountIdentityProvider.notifier).refresh();
+      state = authSnapshot(auth, busy: state.busy);
+    });
+    ref.onDispose(changes.cancel);
+    return authSnapshot(auth);
+  }
+
   AuthState _snapshot({bool busy = false, String? error}) =>
       authSnapshot(ref.read(authServiceProvider), busy: busy, error: error);
   Future<void> _restore() async {

@@ -10,6 +10,19 @@ mixin SupabaseAccountActions implements AuthService {
   AuthGateway get gateway;
 
   @override
+  Stream<void> get sessionChanges => gateway.sessionChanges;
+
+  /// Re-reads the session server-side so a deep link or a browser confirmation
+  /// is not missed; offline keeps the cached identity instead of failing.
+  Future<bool> confirmedSession() async {
+    try {
+      return await gateway.refreshUser();
+    } on AuthException {
+      return gateway.currentUser?.emailConfirmed ?? false;
+    }
+  }
+
+  @override
   Future<void> updateProfile(String name, String phone) async {
     try {
       await gateway.updateProfile(name: name, phone: phone);

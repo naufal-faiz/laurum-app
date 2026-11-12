@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:laurum/features/auth/data/auth_gateway.dart';
 import 'package:laurum/features/auth/data/auth_identity.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -25,11 +27,30 @@ class FakeAuthGateway implements AuthGateway {
   AuthIdentity? user;
   AuthException? signInError, signUpError, googleError, profileError, passwordError, resetError;
   AuthException? verifyError, updatePasswordError, deleteError;
+  AuthException? refreshError;
+  bool? refreshConfirmed;
+  final sessionChangesController = StreamController<void>.broadcast();
   final calls = <String>[];
   String? lastReset, lastGoogleToken;
 
   @override
   AuthIdentity? get currentUser => user;
+
+  @override
+  Stream<void> get sessionChanges => sessionChangesController.stream;
+
+  /// Simulates the `laurum://auth-callback` deep link.
+  void deepLink(AuthIdentity signed) {
+    user = signed;
+    sessionChangesController.add(null);
+  }
+
+  @override
+  Future<bool> refreshUser() async {
+    calls.add('refreshUser');
+    if (refreshError != null) throw refreshError!;
+    return refreshConfirmed ?? user?.emailConfirmed ?? false;
+  }
 
   @override
   Future<AuthIdentity> signInWithPassword(String email, String password) async {
