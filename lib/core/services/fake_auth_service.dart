@@ -14,6 +14,7 @@ class FakeAuthService with FakePasswordAuth implements AuthService, TransactionP
     this.signInSucceeds = true,
     this.deleteSucceeds = true,
     this.rateLimited = false,
+    this.recovering = false,
     Iterable<FakeAuthAccount> accounts = const [],
     IdGenerator ids = const IdGenerator(),
   }) : accountStore = FakeAuthAccounts(
@@ -36,6 +37,8 @@ class FakeAuthService with FakePasswordAuth implements AuthService, TransactionP
   bool isSignedIn;
   @override
   bool needsBusinessSetup;
+  @override
+  bool recovering;
   final String userId;
   final bool signInSucceeds, deleteSucceeds;
   @override
@@ -55,6 +58,12 @@ class FakeAuthService with FakePasswordAuth implements AuthService, TransactionP
   Future<void> completeBusinessSetup() async {
     accountStore.finishSetup();
     needsBusinessSetup = false;
+  }
+
+  @override
+  Future<void> setRecoveredPassword(String password) async {
+    await super.setRecoveredPassword(password);
+    recovering = false;
   }
 
   @override

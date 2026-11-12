@@ -81,6 +81,13 @@ class FakeAuthAccounts {
     _save(profile.copyWith(password: next));
   }
 
+  /// Recovery flow: ownership is proven by the link, so no old password.
+  void recoverPassword(String next) {
+    if (next.runes.length < 8) throw const AuthFailure(AuthFailureKind.invalidInput);
+    _save(profile.copyWith(password: next));
+    usesPassword = true;
+  }
+
   void finishSetup() => _save(profile.copyWith(needsSetup: false));
   void delete() {
     _records.remove(profile.email);

@@ -5,12 +5,13 @@ import 'package:laurum/features/auth/data/auth_error_mapping.dart';
 import 'package:laurum/features/auth/data/auth_gateway.dart';
 import 'package:laurum/features/auth/data/auth_identity.dart';
 import 'package:laurum/features/auth/data/supabase_account_actions.dart';
+import 'package:laurum/features/auth/data/supabase_recovery.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Real Auth implementation backed by Supabase. Passwords and tokens never
 /// leave the gateway; this class only exposes session identity.
 class SupabaseAuthService
-    with SupabaseAccountActions
+    with SupabaseAccountActions, SupabaseRecovery
     implements AuthService, TransactionParticipant {
   SupabaseAuthService(this._gateway, this._google);
   final AuthGateway _gateway;
@@ -74,6 +75,7 @@ class SupabaseAuthService
     } finally {
       _awaitingEmail = false;
       _needsSetup = true;
+      clearRecovery();
     }
   }
 

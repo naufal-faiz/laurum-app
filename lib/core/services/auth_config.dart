@@ -40,3 +40,10 @@ bool isAuthCallbackUri(Uri uri) {
   final fragment = uri.hasFragment ? Uri.splitQueryString(uri.fragment) : const <String, String>{};
   return keys.any(uri.queryParameters.containsKey) || keys.any(fragment.containsKey);
 }
+
+/// A recovery callback must set a new password before the app opens.
+bool isRecoveryUri(Uri uri) {
+  if (!isAuthCallbackUri(uri)) return false;
+  final fragment = uri.hasFragment ? Uri.splitQueryString(uri.fragment) : const <String, String>{};
+  return uri.queryParameters['type'] == 'recovery' || fragment['type'] == 'recovery';
+}

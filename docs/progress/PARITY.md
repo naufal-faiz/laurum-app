@@ -29,9 +29,11 @@ dari daftar diff di atas. Tidak ada kasus BE-7 pada daftar ini.
 | Transaksi | Hapus baris ikut membatasi diskon ke subtotal baru | tidak ada (dulu hanya `setDiscount` yang menjaga) | ada | `transaction_draft.dart` `remove()` clamp | spec 02-buat-transaksi:111-113 (izin pengguna) | BE-5a | terverifikasi |
 | Nota tersimpan | Unduh PDF dari pratinjau struk | tidak ada | ada | `receipt_document.dart`, `receipt_download.dart` (`FileReceiptDownloadService`) | spec 08-nota-tersimpan:28-29,44 | BE-5a | terverifikasi |
 | Aplikasi | Gate loader data lokal | tidak ada (`lib/app.dart` dev2backend hanya menunggu penyimpanan) | ada | `lib/app.dart` menunggu `antreanDataProvider`, `customerDirectoryProvider`, `weeklyReportViewProvider` | spec 01-beranda:76 | BE-5a: provider setara ada di build Drift/backend | terverifikasi |
+| Auth | Buat password baru dari tautan pemulihan | tidak ada (layar baru; `change_password_sheet` menuntut password lama) | ada: `/password-baru`, dipaksa router selama sesi recovery | `auth_form.dart` (`AuthFormKind.recovery`) → `auth_session.recoverPassword` → `AuthService.setRecoveredPassword` → gateway `changePassword` | prompt B3b:3-4; PRD B pemulihan password | BE-5a: tujuan ada di PRD, sesi dari tautan recovery | terverifikasi |
 
 ## Log tugas backend
 - 12 Nov 2026, B3b irisan state/data: sesi Auth disegarkan dari deep link
   `laurum://auth-callback` dan "Lanjut" pada Cek email memeriksa sesi server. Tidak ada
-  aksi UI baru yang dihapus/ditambah, jadi tabel tidak berubah. Layar "Buat password baru"
-  (B3b bagian UI) menunggu keputusan penempatan (BE-7).
+  aksi UI baru yang dihapus/ditambah, jadi tabel tidak berubah.
+- 12 Nov 2026, B3b irisan UI: layar "Buat password baru" (`/password-baru`) mengakhiri
+  sesi recovery tanpa menanyakan password lama. Baris tabel di bawah ditambahkan.

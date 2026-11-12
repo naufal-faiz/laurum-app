@@ -1,4 +1,4 @@
-enum AuthFormKind { signIn, signUp, password }
+enum AuthFormKind { signIn, signUp, password, recovery }
 
 enum AuthSecret { password, confirmation, current }
 
@@ -11,9 +11,10 @@ class AuthFormView {
     this.visible = false,
     this.errors = const {},
     this.error,
+    this.done = false,
   });
   final String name, email;
-  final bool busy, visible;
+  final bool busy, visible, done;
   final Map<String, String> errors;
   final String? error;
   AuthFormView copyWith({
@@ -23,6 +24,7 @@ class AuthFormView {
     bool? visible,
     Map<String, String>? errors,
     String? error,
+    bool? done,
   }) => AuthFormView(
     name: name ?? this.name,
     email: email ?? this.email,
@@ -30,5 +32,6 @@ class AuthFormView {
     visible: visible ?? this.visible,
     errors: errors ?? this.errors,
     error: error,
+    done: done ?? this.done,
   );
 }

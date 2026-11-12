@@ -73,8 +73,10 @@ class AuthForm extends Notifier<AuthFormView> {
       AuthFormKind.signIn => session.signInWithPassword(state.email, _password),
       AuthFormKind.signUp => session.signUp(state.email, _password, state.name),
       AuthFormKind.password => session.changePassword(_current, _password),
+      AuthFormKind.recovery => session.recoverPassword(_password),
     };
     if (ok) _clearSecrets();
+    if (ok && _kind == AuthFormKind.recovery) state = state.copyWith(done: true);
     if (ref.mounted) {
       state = state.copyWith(busy: false, error: ok ? null : ref.read(authSessionProvider).error);
     }

@@ -153,6 +153,37 @@ void main() {
     );
   });
 
+  test('recovery session sets a password without the old one; expired links fail safe', () async {
+    auth.watchRecovery(active: true);
+    expect(auth.recovering, isFalse);
+    gateway.user = identity();
+    expect(auth.recovering, isTrue);
+    await auth.setRecoveredPassword('NewPass123!');
+    expect(gateway.calls, ['changePassword']);
+    expect(auth.recovering, isFalse);
+
+    gateway.user = null;
+    await expectLater(
+      auth.setRecoveredPassword('NewPass123!'),
+      throwsA(isA<AuthFailure>().having((e) => e.kind, 'kind', AuthFailureKind.unavailable)),
+    );
+    expect(gateway.calls, ['changePassword']);
+
+    gateway.user = identity();
+    gateway.updatePasswordError = error('over_request_rate_limit', status: '429');
+    await expectLater(
+      auth.setRecoveredPassword('NewPass123!'),
+      throwsA(isA<AuthFailure>().having((e) => e.kind, 'kind', AuthFailureKind.requestLimit)),
+    );
+  });
+
+  test('a warm recovery link marks the session as recovering', () async {
+    auth.watchRecovery();
+    gateway.recoveryLink(identity());
+    await pumpEventQueue();
+    expect(auth.recovering, isTrue);
+  });
+
   test('sign out clears the session and keeps the local rollback checkpoint', () async {
     await auth.signInWithPassword('ratna@example.com', 'Laundry123!');
     final restore = auth.checkpoint();

@@ -13,6 +13,7 @@ class AuthPasswordsSection extends StatelessWidget {
     this.onCurrent,
     this.onConfirmation,
     this.errors = const {},
+    this.passwordLabel,
     super.key,
   });
   final bool visible, busy;
@@ -20,6 +21,7 @@ class AuthPasswordsSection extends StatelessWidget {
   final ValueChanged<String>? onCurrent, onConfirmation;
   final VoidCallback onToggle;
   final Map<String, String> errors;
+  final String? passwordLabel;
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -34,7 +36,7 @@ class AuthPasswordsSection extends StatelessWidget {
           onChanged: onCurrent!,
         ),
       AuthSecretFieldSection(
-        label: onCurrent == null ? 'Password' : 'Password baru',
+        label: passwordLabel ?? (onCurrent == null ? 'Password' : 'Password baru'),
         visible: visible,
         busy: busy,
         error: errors['password'],

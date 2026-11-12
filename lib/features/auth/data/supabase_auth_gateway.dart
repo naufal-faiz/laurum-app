@@ -1,21 +1,22 @@
 import 'package:laurum/core/services/auth_config.dart';
 import 'package:laurum/features/auth/data/auth_gateway.dart';
 import 'package:laurum/features/auth/data/auth_identity.dart';
+import 'package:laurum/features/auth/data/supabase_auth_events.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SupabaseAuthGateway implements AuthGateway {
+class SupabaseAuthGateway with SupabaseAuthEvents implements AuthGateway {
   SupabaseAuthGateway(this._client);
   final SupabaseClient _client;
   GoTrueClient get _auth => _client.auth;
+
+  @override
+  GoTrueClient get auth => _auth;
 
   @override
   AuthIdentity? get currentUser {
     final user = _auth.currentUser;
     return user == null ? null : authUserFromSupabase(user);
   }
-
-  @override
-  Stream<void> get sessionChanges => _auth.onAuthStateChange.map((_) {});
 
   @override
   Future<bool> refreshUser() async => (await _auth.getUser()).user?.emailConfirmedAt != null;

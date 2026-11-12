@@ -11,6 +11,9 @@ abstract class AuthService {
   bool get awaitingEmail;
   bool get needsBusinessSetup;
 
+  /// True when a recovery link must set a new password before entering.
+  bool get recovering;
+
   /// Emits when the real backend session changes without a local call.
   Stream<void> get sessionChanges;
   Future<void> completeBusinessSetup();
@@ -21,6 +24,9 @@ abstract class AuthService {
   Future<void> sendPasswordReset(String email);
   Future<void> updateProfile(String name, String phone);
   Future<void> changePassword(String current, String next);
+
+  /// Sets a password from a recovery session; no old password is required.
+  Future<void> setRecoveredPassword(String password);
   Future<void> signOut();
   Future<bool> deleteAccount();
 }

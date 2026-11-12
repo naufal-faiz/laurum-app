@@ -64,6 +64,10 @@ class AuthSession extends Notifier<AuthState> {
     await ref.read(authServiceProvider).changePassword(current, next);
     return true;
   });
+  Future<bool> recoverPassword(String next) => _run(() async {
+    await ref.read(authServiceProvider).setRecoveredPassword(next);
+    return true;
+  }, failure: 'Password baru tidak dapat disimpan. Minta tautan baru.');
   Future<bool> completeSetup() => _run(() async {
     await ref.read(authServiceProvider).completeBusinessSetup();
     await _restore();

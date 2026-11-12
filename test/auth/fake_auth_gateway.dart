@@ -30,6 +30,7 @@ class FakeAuthGateway implements AuthGateway {
   AuthException? refreshError;
   bool? refreshConfirmed;
   final sessionChangesController = StreamController<void>.broadcast();
+  final recoveryEventsController = StreamController<void>.broadcast();
   final calls = <String>[];
   String? lastReset, lastGoogleToken;
 
@@ -39,10 +40,19 @@ class FakeAuthGateway implements AuthGateway {
   @override
   Stream<void> get sessionChanges => sessionChangesController.stream;
 
+  @override
+  Stream<void> get recoveryEvents => recoveryEventsController.stream;
+
   /// Simulates the `laurum://auth-callback` deep link.
   void deepLink(AuthIdentity signed) {
     user = signed;
     sessionChangesController.add(null);
+  }
+
+  /// Simulates a recovery callback that opened a session.
+  void recoveryLink(AuthIdentity signed) {
+    user = signed;
+    recoveryEventsController.add(null);
   }
 
   @override

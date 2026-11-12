@@ -21,6 +21,10 @@ mixin FakePasswordAuth implements AuthService {
   @override
   bool get awaitingEmail => accountStore.awaitingEmail;
 
+  /// Dummy mode has no external sessions or recovery links.
+  @override
+  bool get recovering => false;
+
   /// Dummy mode has no external session; nothing can change outside the app.
   @override
   Stream<void> get sessionChanges => const Stream.empty();
@@ -76,5 +80,12 @@ mixin FakePasswordAuth implements AuthService {
     checkAuthRate();
     authActionLogs.add('changePassword');
     accountStore.changePassword(current, next);
+  }
+
+  @override
+  Future<void> setRecoveredPassword(String password) async {
+    checkAuthRate();
+    authActionLogs.add('setRecoveredPassword');
+    accountStore.recoverPassword(password);
   }
 }

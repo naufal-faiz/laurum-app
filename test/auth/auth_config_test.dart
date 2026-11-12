@@ -76,6 +76,23 @@ void main() {
     expect(isAuthCallbackUri(Uri.parse('https://auth-callback?code=abc')), isFalse);
   });
 
+  test('only laurum auth links carry recovery intent', () {
+    expect(
+      isRecoveryUri(Uri.parse('laurum://auth-callback?type=recovery&code=abc')),
+      isTrue,
+    );
+    expect(
+      isRecoveryUri(Uri.parse('laurum://auth-callback#type=recovery&access_token=abc')),
+      isTrue,
+    );
+    expect(isRecoveryUri(Uri.parse('laurum://auth-callback?code=abc')), isFalse);
+    expect(
+      isRecoveryUri(Uri.parse('laurum://auth-callback?type=signup&code=abc')),
+      isFalse,
+    );
+    expect(isRecoveryUri(Uri.parse('https://auth-callback?type=recovery')), isFalse);
+  });
+
   test('android manifest registers the same deep link', () {
     final manifest = File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
     expect(manifest, contains('android:scheme="laurum"'));

@@ -29,7 +29,7 @@ Map<String, String> authFormErrors(
   required String current,
 }) {
   final issues = <String, String?>{
-    if (kind != AuthFormKind.password) 'email': authEmailError(email),
+    if (kind == AuthFormKind.signIn || kind == AuthFormKind.signUp) 'email': authEmailError(email),
     if (kind == AuthFormKind.signUp) 'name': authNameError(name),
     'password': kind == AuthFormKind.signIn
         ? (password.isEmpty ? 'Password wajib diisi.' : null)

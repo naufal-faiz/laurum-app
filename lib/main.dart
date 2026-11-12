@@ -32,7 +32,12 @@ Future<void> main() async {
     overrides: [
       ...(drift
           ? driftRepositoryOverrides(
-              auth: realAuth ? supabaseAuthService(authConfigFromEnvironment) : null,
+              auth: realAuth
+                  ? supabaseAuthService(
+                      authConfigFromEnvironment,
+                      recovery: recoveryLinkAtStartup,
+                    )
+                  : null,
             )
           : dummyRepositoryOverrides),
       realConnectionMonitor(),

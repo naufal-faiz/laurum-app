@@ -9,6 +9,9 @@ abstract interface class AuthGateway {
   /// `laurum://auth-callback` deep link or an expired token refresh.
   Stream<void> get sessionChanges;
 
+  /// Emits when a password-recovery link opened a valid session.
+  Stream<void> get recoveryEvents;
+
   /// Re-reads the session from the server; false when it is gone or the
   /// e-mail is still unconfirmed.
   Future<bool> refreshUser();
