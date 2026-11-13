@@ -1,4 +1,36 @@
 # 12 - Pelanggan - Daftar Pelanggan
+## Redesign FigCraft — persiapan 13 Nov 2026
+Frame pilihan: `LAURUM · Pelanggan` (`4294969460`, 390 × 844).
+Proposal027 menunggu persetujuan. Struktur frame dibaca sekali sesi ini.
+
+### Paritas redesign
+Belum dicentang: implementasi belum dimulai.
+
+| Butir | Data/aksi/keadaan yang dipertahankan | Verifikasi |
+|---|---|---|
+| Data | customerDirectoryProvider; nama/nomor/inisial/orderCount/historyTotal/debt/savings/paid | [ ] |
+| Header | jumlah pelanggan dan indikator sinkron dari sumber yang sama | [ ] |
+| Filter | customerDirectoryFilterProvider; Semua/Ada piutang/Punya tabungan; jumlah dari semua rows | [ ] |
+| Cari | customerDirectorySearchProvider; normalisasi nama/nomor; hapus pencarian | [ ] |
+| Impor | context.push('/pelanggan/impor') | [ ] |
+| Tambah | AddCustomerSheet.show(forOrder: false); sukses mereset filter/search | [ ] |
+| Buka | context.push('/pelanggan/$id') | [ ] |
+| Kontak | launcher sama; phone pelanggan/message kosong; disabled jika nomor kosong | [ ] |
+| Uang | Belum bayar atau DP + Sisa; tabungan; Formatters tetap | [ ] |
+| Keadaan | 4 skeleton, gagal/retry, kosong, tidak ditemukan, terisi | [ ] |
+| Key/fokus | Page/list/actions/header/CustomerRow tanpa Key eksplisit; host antrean-golden tetap | [ ] |
+| Keyboard | pencarian inset300dp, viewport320, teks besar, semua aksi terjangkau | [ ] |
+
+### Selisih desain
+- Header jumlah pemilik piutang belum tersedia pada API Section; jumlah pelanggan
+  dipertahankan dahulu tanpa mengubah pembacaan provider shell.
+- Angka/nama Figma hanya contoh; data tetap dari repository.
+- Seluruh hasil tetap dapat digulir; tidak membatasi tiga baris atau menambah Lihat semua.
+- Informasi DP dan Sisa dipertahankan meski tidak tampil pada contoh Figma.
+- Margin24/gap10/12 memakai token; font minimum/area sentuh mengikuti keputusan global.
+- Tinggi aksi48 sesuai revisi sebelumnya; chip tetap horizontal dan dapat digulir.
+- Frame detail pelanggan4294969558 dipilih pengguna untuk irisan berikutnya.
+
 Rute: /pelanggan   Prompt: 50 (bagian pertama)
 Frame .pen: "Pelanggan - Daftar Pelanggan"; State Pelanggan kosong,
 Pencarian pelanggan kosong, Memuat Daftar Pelanggan, Gagal memuat data.

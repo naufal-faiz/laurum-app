@@ -19,8 +19,8 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `08-nota-tersimpan.md` (08 - Nota Tersimpan) | `LAURUM · Struk Pembayaran` (ID: 4294967599) | Selesai; check_all hijau; siap ditinjau bersama pembayaran | Empat aksi Selesai/WhatsApp/Unduh/Cetak dan PDF nyata; teks besar responsif; snapshot desain 1; lihat spec 08 |
 | `09-detail-order.md` (09 - Detail Order) | `LAURUM · Detail Order` (ID: 612) | Persiapan 018–020 disetujui | Komponen bersama dahulu; seluruh mode/status/COD/aksi lama tetap |
 | `10-edit-order.md` (10 - Edit Order) | | Menunggu | |
-| `12-daftar-pelanggan.md` (12 - Pelanggan - Daftar Pelanggan) | | Menunggu | |
-| `13-detail-pelanggan.md` (13 - Detail Pelanggan & Tabungan) | | Menunggu | |
+| `12-daftar-pelanggan.md` (12 - Pelanggan - Daftar Pelanggan) | `LAURUM · Pelanggan` (ID: 4294969460) | Proposal027 menunggu izin | DP/Sisa dan seluruh hasil tetap; lihat spec12 |
+| `13-detail-pelanggan.md` (13 - Detail Pelanggan & Tabungan) | `LAURUM · Detail Pelanggan` (ID: 4294969558) | Pilihan pengguna; irisan berikutnya | Belum diimplementasikan |
 | `14-edit-pelanggan.md` (14 - Edit Pelanggan) | | Menunggu | |
 | `15-setor-tabungan.md` (15 - Setor Tabungan) | | Menunggu | |
 | `16-riwayat-tabungan.md` (16 - Riwayat Tabungan) | | Menunggu | |

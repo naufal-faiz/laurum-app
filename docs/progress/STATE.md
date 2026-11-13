@@ -1,50 +1,46 @@
 ﻿# STATE Laurum
-Diperbarui: 2026-11-13 | Cabang backend-newdesign
+Diperbarui: 2026-11-13 | Cabang ui/pelanggan
 
 ## Sesi aktif
-Revisi logo, harga antrean, PNG WhatsApp dan font; dasar 62e404c.
-Alur normal/perubahan komponen bersama disetujui pengguna; proposal 026.
+Mode Redesign UI aktif kembali atas permintaan pengguna; dasar 4f14852.
+Branch ui/pelanggan dibuat dari backend-newdesign dengan izin pengguna.
+Frame pilihan: Pelanggan4294969460 dan Detail Pelanggan4294969558.
+Dokumen aktif: docs/design/new-design-laurum.figcraft; MCP terhubung.
 
 ## Status irisan
-- Beranda dan header login memakai assets/laurum-logo.png melalui IconTile.
-- Tombol Edit/Hapus detail order memakai latar tile yang sudah tersedia.
-- Harga OrderCard selalu di footer kanan bawah, termasuk label COD panjang.
-- PNG WhatsApp memakai ReceiptDocument yang sama dengan preview, seluruh tinggi
-  struk, resolusi 2x; lebar 320/384 mengikuti pengaturan. PDF/thermal tetap.
-- Font maksimum 100% sesuai font_scale 1.0 HP acuan; ukuran lebih kecil tetap.
-- Callback, data uang, guard COD, penerima dan pesan WhatsApp tidak berubah.
-- Golden 23 yang terdampak logo/kartu/footer/font diperbarui + 2 PNG baru.
-  Tes host antrean kini mengharapkan font 100%; assertion viewport/keyboard tetap.
-- Visual golden logo/kartu/PNG diperiksa; belum diuji manual di HP/iOS.
-- APK belum dibangun ulang untuk batch ini. APK terakhir: 1.0.2 code 3,
-  build/app/outputs/flutter-apk/laurum-harian-1.0.2-arm64-release.apk.
-- Perbaikan sinkron lintas HP sudah di commit 62e404c; data lokal dipertahankan.
+- Irisan pertama daftar pelanggan; snapshot/paritas dicatat di spec12.
+- Proposal027 CustomerRow menunggu persetujuan sebelum implementasi.
+- Belum ada perubahan kode/tes/golden/provider/data.
+- Detail pelanggan menjadi irisan berikutnya.
+- Visual belum diverifikasi manual; tidak mengambil screenshot emulator.
+- Batch sebelumnya sudah di commit97b3980 dan4f14852 (git mengoreksi STATE lama).
 
 ## Keputusan pengguna terbaru
-- Lanjutkan revisi komponen bersama dan samakan PNG WhatsApp dengan preview.
-- Hanya Nama pelanggan wajib; tanpa nomor, WhatsApp berbagi umum.
-- Pertahankan data kedua HP; pembaruan tanpa uninstall/hapus DB/outbox.
-- Data safety Play Store wajib mencantumkan Contacts; iOS belum diuji.
+- Lanjutkan redesign pelanggan dengan frame FigCraft terpilih.
+- Buat ui/pelanggan dari backend-newdesign; disetujui sesi ini.
+- Merge kembali ke backend-newdesign HARUS melalui persetujuan eksplisit pengguna.
+- Hanya Nama pelanggan wajib; kebijakan detail/struk tanpa nomor tetap berlaku.
+- Pertahankan data kedua HP; jangan uninstall/hapus DB/outbox.
+- Data safety Play Store mencantumkan Contacts; iOS belum diuji.
 
 ## Belum di-commit
-Batch ini dicakup commit fix(ui): app/font, logo/aset/pubspec, OrderCard, footer detail,
-renderer PNG, tes/golden, proposal 026, spec 08, PARITY, REPO_MAP dan STATE.
-Milik pengguna dikecualikan: AGENTS.md, FigCraft, ikon launcher Android.
-android/build/ dan APK tidak masuk Git.
+Persiapan proposal027, spec12, figma_map dan STATE dicakup commit wip persiapan.
+android/build/ tetap artefak tak terlacak sesi sebelumnya; tidak dimasukkan Git.
 
 ## Langkah berikutnya
-1. Tinjau logo, harga COD dan PNG WhatsApp di perangkat setelah build berikutnya.
-2. Uji kedua HP online dengan akun sama dan APK 1.0.2 tanpa menghapus data.
-3. Uji cetak/iOS dan Data safety Contacts; B2e foto pengeluaran tertunda.
+1. Persetujuan proposal027 untuk komponen bersama CustomerRow.
+2. Setelah izin: komponen bersama dahulu, lalu Section, tanpa perubahan perilaku.
+3. Tes terarah/golden dan check_all sekali; lengkapi paritas.
+4. Commit feat(ui) irisan selesai; tunggu tinjauan pengguna.
+5. Detail pelanggan setelah daftar ditinjau; merge hanya dengan izin pengguna.
 
 ## Blocker
-Supabase lokal tidak tersedia saat pemeriksaan ini; dua tes integrasi membutuhkan
-layanan tersebut. Tes integrasi nyata sebelumnya lulus pada commit 62e404c.
+UI-13: perubahan CustomerRow memerlukan persetujuan proposal027.
+Header jumlah piutang Figma memerlukan pembacaan data shell; belum diizinkan.
 
 ## Bukti terakhir
-- Tes terarah golden komponen/layar: 89 lulus.
-- Harga COD panjang pada 280/320/390: 6 lulus; PNG vs preview/struk panjang: 3 lulus.
-- check_all SEMUA HIJAU: 1215 lulus, 2 skip (Supabase lokal); REPO_MAP 1179.
-- Flutter analyze/dart analyze tanpa masalah; check_arch OK; 1101 berkas terformat.
-- Helper molecule_gallery menunggu precacheImage agar golden logo deterministik;
-  4 tes logo lolos tanpa mengubah golden/toleransi untuk menutupi perbedaan.
+- Branch ui/pelanggan berhasil dibuat dari4f14852; MCP membaca frame pilihan.
+- Coverage9berkas: no_recorded_issue/metadata_match; sumber dibaca langsung.
+- Tes belum dijalankan: persiapan dokumen, belum implementasi.
+- Bukti lama dari STATE sebelumnya: check_all1215lulus/2skip (Supabase lokal).
+  Bukti lama tersebut bukan verifikasi redesign pelanggan.
