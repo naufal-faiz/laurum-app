@@ -55,55 +55,55 @@ class OrderCard extends StatelessWidget {
         (payStatus == PayStatus.lunas ? 'Lunas' : 'Sisa ${Formatters.rupiah(total - paid)}');
     final amount = Formatters.rupiah(total);
     final paymentStyle = AppStatusTextVariant.values.byName(payStatus.name);
-    return InkWell(
+    return AppCard(
       onTap: onTap,
-      child: AppCard(
-        rail: rail,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: AppSpacing.xsmall,
-          children: [
-            Wrap(
-              alignment: WrapAlignment.spaceBetween,
-              children: [
-                AppText(customerName, variant: AppTextVariant.bodyStrong),
-                AppBadge(
-                  statusLabel ?? orderStatusLabel(status),
-                  variant: AppBadgeVariant.values.byName(status.name),
-                ),
-              ],
-            ),
-            AppText(summary, variant: AppTextVariant.caption, color: AppColors.ink3),
-            Wrap(
-              alignment: WrapAlignment.spaceBetween,
-              spacing: AppSpacing.small,
-              children: [
-                AppText(orderNo, variant: AppTextVariant.monoLabel),
-                if (timeLabel.isNotEmpty)
-                  AppText(timeLabel, variant: AppTextVariant.monoLabel, color: AppColors.ink3),
-                AppStatusText(payment, variant: paymentStyle),
-                AppText(amount, variant: AppTextVariant.bodyStrong, color: AppColors.primary),
-              ],
-            ),
-            if (detail.isNotEmpty || (showAction && !compact && action != null))
-              Wrap(
-                alignment: WrapAlignment.spaceBetween,
-                spacing: AppSpacing.small,
-                runSpacing: AppSpacing.xxsmall,
-                children: [
-                  if (detail.isNotEmpty)
-                    AppText(detail, variant: AppTextVariant.caption, color: AppColors.ink3),
-                  if (showAction && !compact && action != null)
-                    AppButton(
-                      action,
-                      variant: AppButtonVariant.action,
-                      size: AppButtonSize.small,
-                      onPressed: onAction,
-                    ),
-                ],
+      rail: rail,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: AppSpacing.xsmall,
+        children: [
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            children: [
+              AppText(customerName, variant: AppTextVariant.bodyStrong),
+              AppBadge(
+                statusLabel ?? orderStatusLabel(status),
+                variant: AppBadgeVariant.values.byName(status.name),
               ),
-          ],
-        ),
+            ],
+          ),
+          AppText(summary, variant: AppTextVariant.caption, color: AppColors.ink3),
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            spacing: AppSpacing.small,
+            children: [
+              AppText(orderNo, variant: AppTextVariant.monoLabel),
+              if (timeLabel.isNotEmpty)
+                AppText(timeLabel, variant: AppTextVariant.monoLabel, color: AppColors.ink3),
+              AppStatusText(payment, variant: paymentStyle),
+            ],
+          ),
+          if (detail.isNotEmpty)
+            AppText(detail, variant: AppTextVariant.caption, color: AppColors.ink3),
+          OverflowBar(
+            alignment: MainAxisAlignment.spaceBetween,
+            overflowAlignment: OverflowBarAlignment.end,
+            spacing: AppSpacing.small,
+            overflowSpacing: AppSpacing.xxsmall,
+            children: [
+              if (showAction && !compact && action != null)
+                AppButton(
+                  action,
+                  variant: AppButtonVariant.action,
+                  size: AppButtonSize.small,
+                  onPressed: onAction,
+                )
+              else
+                const SizedBox.shrink(),
+              AppText(amount, variant: AppTextVariant.bodyStrong, color: AppColors.primary),
+            ],
+          ),
+        ],
       ),
     );
   }

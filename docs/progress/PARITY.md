@@ -1,5 +1,15 @@
 # Paritas Aksi: UI Baru dan Backend
 
+## Revisi visual dan gambar WhatsApp 13 Nov 2026
+- WhatsApp Struk memakai ReceiptDocument yang sama dengan preview untuk PNG lengkap
+  2x (320/384 dp). Data, pesan/penerima, PDF, cetak dan guard COD tetap; sumber:
+  arahan pengguna dan spec 08. Bukti: receipt_png_preview_test, whatsapp_share_test.
+- IconTile mendukung PNG logo Laurum untuk Beranda/BrandLockup. OrderCard menaruh
+  harga di footer kanan bawah; callback dan nilai uang tetap (proposal 026).
+- Footer detail: latar tombol Edit/Hapus; font global maksimum 100% sesuai HP acuan.
+  Tes host antrean mengharapkan batas font 100%, dengan assertion keyboard/viewport
+  tetap; tes perilaku lain dipertahankan. Golden hanya komponen/layar terdampak.
+
 Aturan: AGENTS.md, Mode Backend (BE-2 sampai BE-6). Agent mengisi fakta dan menerapkan
 aturan BE-4/BE-5; kasus BE-7 menunggu keputusan pengguna.
 

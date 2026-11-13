@@ -16,9 +16,9 @@ class BerandaHeaderSection extends StatelessWidget {
     children: [
       IconTile(
         icon: AppIcons.droplet,
+        imageAsset: 'assets/laurum-logo.png',
         size: 42,
         iconSize: 20,
-        background: AppColors.primary,
         foreground: AppColors.surface,
         radius: AppRadius.logo,
       ),

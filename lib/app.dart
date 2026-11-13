@@ -51,56 +51,57 @@ class LaurumApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       routerConfig: router,
-      builder: (context, child) {
-        if (storageReady && !readingInitialData) {
-          return child!;
-        }
-        return Scaffold(
-          body: SafeArea(
-            child: Center(
-              child: (storage?.hasError ?? false) && !recovering
-                  ? Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        EmptyState(
-                          title: 'Penyimpanan belum dapat dibuka',
-                          icon: AppIcons.alert,
-                          description: 'Data Anda tetap tersimpan. Coba buka kembali penyimpanan.',
-                          actionLabel: 'Coba lagi',
-                          onAction: ref.read(storageRecoveryProvider.notifier).retry,
-                        ),
-                        AppButton(
-                          'Keluar akun',
-                          variant: AppButtonVariant.actionOutline,
-                          onPressed: () => ref.read(authSessionProvider.notifier).signOut(),
-                        ),
-                      ],
-                    )
-                  : const Padding(
-                      key: ValueKey('local-storage-loading'),
-                      padding: EdgeInsets.all(AppSpacing.screenPadding),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        spacing: AppSpacing.cardGap,
-                        children: [
-                          AppLoader(),
-                          AppText(
-                            'Membuka data lokal',
-                            variant: AppTextVariant.section,
-                            textAlign: TextAlign.center,
+      builder: (context, child) => MediaQuery.withClampedTextScaling(
+        maxScaleFactor: 1,
+        child: storageReady && !readingInitialData
+            ? child!
+            : Scaffold(
+                body: SafeArea(
+                  child: Center(
+                    child: (storage?.hasError ?? false) && !recovering
+                        ? Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              EmptyState(
+                                title: 'Penyimpanan belum dapat dibuka',
+                                icon: AppIcons.alert,
+                                description:
+                                    'Data Anda tetap tersimpan. Coba buka kembali penyimpanan.',
+                                actionLabel: 'Coba lagi',
+                                onAction: ref.read(storageRecoveryProvider.notifier).retry,
+                              ),
+                              AppButton(
+                                'Keluar akun',
+                                variant: AppButtonVariant.actionOutline,
+                                onPressed: () => ref.read(authSessionProvider.notifier).signOut(),
+                              ),
+                            ],
+                          )
+                        : const Padding(
+                            key: ValueKey('local-storage-loading'),
+                            padding: EdgeInsets.all(AppSpacing.screenPadding),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              spacing: AppSpacing.cardGap,
+                              children: [
+                                AppLoader(),
+                                AppText(
+                                  'Membuka data lokal',
+                                  variant: AppTextVariant.section,
+                                  textAlign: TextAlign.center,
+                                ),
+                                AppText(
+                                  'Tunggu sebentar, data usaha sedang disiapkan.',
+                                  color: AppColors.ink2,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
                           ),
-                          AppText(
-                            'Tunggu sebentar, data usaha sedang disiapkan.',
-                            color: AppColors.ink2,
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-            ),
-          ),
-        );
-      },
+                  ),
+                ),
+              ),
+      ),
     );
   }
 }

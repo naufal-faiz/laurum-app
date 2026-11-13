@@ -20,6 +20,11 @@ void registerMoleculeGolden(String name, WidgetBuilder builder) {
         ),
       ),
     );
+    await tester.runAsync(() async {
+      for (final element in find.byType(Image).evaluate()) {
+        await precacheImage((element.widget as Image).image, element);
+      }
+    });
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
     await expectLater(

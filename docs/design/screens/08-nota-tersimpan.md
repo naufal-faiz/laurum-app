@@ -10,7 +10,8 @@ Urutan Figma: header kembali/judul/nomor nota/pelanggan/status; label pratinjau;
 kartu struk putih di area abu-abu; footer terbaru Selesai, WhatsApp, Unduh, Cetak satu baris.
 Pemetaan: FormScaffold detail, ReceiptStatusSection, ReceiptDocument + ReceiptRows,
 ReceiptActionsSection, AppIconButton tileSuccess/tilePrimary/tileNeutral, AppButton dan AppText.
-Pratinjau grafis mengikuti snapshot terpilih; keluaran formatter cetak/WhatsApp tetap utuh.
+Pratinjau grafis mengikuti snapshot terpilih; PNG WhatsApp memakai dokumen yang sama,
+sedangkan keluaran formatter cetak thermal tetap utuh.
 Font minimum 11 dan warna/jarak memakai token global; radius 18 dipetakan ke card 16.
 
 ### Paritas redesign
@@ -44,7 +45,7 @@ Tabel dibuat sebelum implementasi; centang sesudah kode dan verifikasi.
 ### Selisih desain
 - Bagikan tidak ditambahkan. Unduh PDF memakai layanan nyata dengan dialog simpan file_saver.
 - Tidak membuat tombol Unduh mati/placeholder. Barcode contoh tidak dipalsukan.
-- Isi preview grafis dari nota tersimpan; formatter cetak/WhatsApp 32 kolom tetap utuh.
+- Isi preview dan PNG WhatsApp grafis dari nota tersimpan; cetak thermal tetap 32 kolom.
 - Data kasir tidak ditambahkan; mengikuti isi/pengaturan nota yang sudah tersimpan.
 - Alamat pelanggan di bawah nama maksimal 2 baris, mengikuti showCustomer; kosong tidak ditampilkan.
 - Header/ucapan dirapatkan ke xxsmall; receiptFooter memakai variant label (tebal), catatan caption.
@@ -105,7 +106,8 @@ Interaksi:
 State: loading skeleton, gagal memuat, nota tidak ditemukan, cetak sukses/gagal,
 WhatsApp sukses/gagal, printer belum terhubung.
 
-Format: struk identik ReceiptFormatter 32 kolom; pelanggan memakai nama lengkap kecuali
+Format thermal: ReceiptFormatter 32 kolom; PNG memakai ReceiptDocument seperti preview.
+Pelanggan memakai nama lengkap kecuali
 fixture nota yang memang menyimpan nama pendek.
 
 Selisih terhadap .pen: struk tidak dicetak otomatis saat nota dibuka (tombol Cetak struk);
@@ -130,6 +132,10 @@ Selisih .pen: aksi pembayaran tambahan dan label sisa; tes callback, alur dan 32
 - Belum diuji manual di perangkat Android/iOS atau printer nyata.
 
 ## Perubahan tes dan golden
+- Revisi 13 Nov 2026: PNG WhatsApp dirender dari ReceiptDocument yang sama dengan
+  preview, lebar 320/384 sesuai paperMm dan resolusi 2x, termasuk seluruh tinggi struk.
+  receipt_png_preview_test membandingkan piksel preview/PNG untuk kedua lebar serta
+  struk panjang; isi, penerima WhatsApp, PDF dan formatter thermal tetap.
 - business_info_page_test, order_detail_receipt_test, payment_page_test,
   r4_detail_completion_test, r4_detail_print_failure_test: finder judul menjadi Struk Pembayaran.
 - receipt_page_test dan ui_final_flow_test: finder judul/Selesai; WhatsApp memakai tooltip,

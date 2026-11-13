@@ -23,10 +23,12 @@ class ReceiptDocumentData {
     required this.fileName,
     this.statusDetail = '',
     this.footerTitle,
+    this.width = 320,
   });
   final String title, status, fileName;
   final String statusDetail;
   final String? footerTitle;
+  final double width;
   final List<String> header, footer;
   final List<List<ReceiptDocumentRow>> groups;
   final bool settled;

@@ -45,11 +45,13 @@ class OrderDetailFooterSection extends StatelessWidget {
                 AppIconButton(
                   icon: AppIcons.edit,
                   label: 'Edit',
+                  variant: AppIconButtonVariant.tilePrimary,
                   onPressed: busy ? null : onEdit,
                 ),
                 AppIconButton(
                   icon: AppIcons.delete,
                   label: 'Hapus',
+                  variant: AppIconButtonVariant.tileNeutral,
                   color: AppColors.error,
                   onPressed: busy ? null : onDelete,
                 ),

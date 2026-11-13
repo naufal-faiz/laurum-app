@@ -1,52 +1,50 @@
-# STATE Laurum
+﻿# STATE Laurum
 Diperbarui: 2026-11-13 | Cabang backend-newdesign
 
 ## Sesi aktif
-Perbaikan fatal sinkron dua HP satu akun; dasar 55de839, tercakup commit ini.
-APK pembaruan 1.0.2 (3) selesai; tanpa push/merge atau perubahan cloud/migrasi.
+Revisi logo, harga antrean, PNG WhatsApp dan font; dasar 62e404c.
+Alur normal/perubahan komponen bersama disetujui pengguna; proposal 026.
 
 ## Status irisan
-- Bug direproduksi: startup tidak fetch, pull SQL tidak menotifikasi query,
-  profil/struk ganda membuat getSingleOrNull gagal, enum tidak mengenali conflict
-  yang sudah disimpan SQLite sehingga profil/pelanggan/antrean gagal dibaca.
-- AccountStore.start mencoba sync sebelum setup; kegagalan jaringan menjaga lokal.
-  Timeout request 15 dtk/bootstrap 20 dtk; retry pull menuntaskan setup tanpa relogin.
-- Pull commit memberi notifyUpdates agar halaman kontak/antrean tidak tetap nol.
-- Profil/struk ganda memakai baris aktif tertua created_at/id yang stabil;
-  baris lain tidak dihapus. RecordSyncState kini mengenali conflict.
-- Push tertahan tetap mencoba pull; manual sync menunggu siklus berjalan.
-- Coba lagi menutup/membuka storage; disposal menunggu sync/SQL selesai.
-  Keluar akun dari recovery mempertahankan berkas/outbox. Tidak mengubah nilai uang.
-- Tes nyata Supabase lokal: dua sesi/satu akun bertukar pelanggan dan dua transaksi,
-  profil legacy ganda, serta isolasi dua akun/all tables. Seluruh suite hijau.
-- Docker aktif oleh pengguna. Stack DB/Auth/RPC minimal berjalan; stack penuh gagal
-  storage-api. Tidak reset data. Kunci lokal hanya environment proses tes.
-- APK: build/app/outputs/flutter-apk/laurum-harian-1.0.2-arm64-release.apk
-  28709594 byte (27,4 MiB); versionCode 3; ID com.cashier.laurum; tidak debuggable.
-  Tanda tangan v2 valid dan cocok v1.0.1; binary libapp ARM64 berubah.
+- Beranda dan header login memakai assets/laurum-logo.png melalui IconTile.
+- Tombol Edit/Hapus detail order memakai latar tile yang sudah tersedia.
+- Harga OrderCard selalu di footer kanan bawah, termasuk label COD panjang.
+- PNG WhatsApp memakai ReceiptDocument yang sama dengan preview, seluruh tinggi
+  struk, resolusi 2x; lebar 320/384 mengikuti pengaturan. PDF/thermal tetap.
+- Font maksimum 100% sesuai font_scale 1.0 HP acuan; ukuran lebih kecil tetap.
+- Callback, data uang, guard COD, penerima dan pesan WhatsApp tidak berubah.
+- Golden 23 yang terdampak logo/kartu/footer/font diperbarui + 2 PNG baru.
+  Tes host antrean kini mengharapkan font 100%; assertion viewport/keyboard tetap.
+- Visual golden logo/kartu/PNG diperiksa; belum diuji manual di HP/iOS.
+- APK belum dibangun ulang untuk batch ini. APK terakhir: 1.0.2 code 3,
+  build/app/outputs/flutter-apk/laurum-harian-1.0.2-arm64-release.apk.
+- Perbaikan sinkron lintas HP sudah di commit 62e404c; data lokal dipertahankan.
 
 ## Keputusan pengguna terbaru
-- Kedua HP sempat menyimpan data. HP kedua melihat halaman kontak/antrean 0 tetapi
-  kontak muncul di pemilih transaksi; lalu transaksi/sync dan relogin terkunci.
-- Pertahankan data kedua HP. Pembaruan dipasang tanpa uninstall/hapus DB/outbox.
-- Hanya Nama wajib; struk PNG + pesan WhatsApp; tanpa nomor share umum.
+- Lanjutkan revisi komponen bersama dan samakan PNG WhatsApp dengan preview.
+- Hanya Nama pelanggan wajib; tanpa nomor, WhatsApp berbagi umum.
+- Pertahankan data kedua HP; pembaruan tanpa uninstall/hapus DB/outbox.
 - Data safety Play Store wajib mencantumkan Contacts; iOS belum diuji.
 
 ## Belum di-commit
-Kode/tes/spec 22/30/PARITY/REPO_MAP dan catatan ini dicakup commit perbaikan sinkron.
-AGENTS.md dan docs/design/new-design-laurum.figcraft milik pengguna, dikecualikan.
-android/build/ tak terlacak dikecualikan. APK dan kunci tidak masuk Git.
+Batch ini dicakup commit fix(ui): app/font, logo/aset/pubspec, OrderCard, footer detail,
+renderer PNG, tes/golden, proposal 026, spec 08, PARITY, REPO_MAP dan STATE.
+Milik pengguna dikecualikan: AGENTS.md, FigCraft, ikon launcher Android.
+android/build/ dan APK tidak masuk Git.
 
 ## Langkah berikutnya
-1. Pasang APK 1.0.2 sebagai update di KEDUA HP, tanpa uninstall/hapus data.
-2. Online: buka akun yang sama, coba Sinkron sekarang dan periksa kontak/antrean.
-3. Uji cetak 58 mm/iOS dan Data safety Contacts; B2e foto pengeluaran tertunda.
+1. Tinjau logo, harga COD dan PNG WhatsApp di perangkat setelah build berikutnya.
+2. Uji kedua HP online dengan akun sama dan APK 1.0.2 tanpa menghapus data.
+3. Uji cetak/iOS dan Data safety Contacts; B2e foto pengeluaran tertunda.
 
 ## Blocker
-Tidak ada blocker kode/build. Verifikasi kedua HP fisik dengan APK baru belum dilakukan.
+Supabase lokal tidak tersedia saat pemeriksaan ini; dua tes integrasi membutuhkan
+layanan tersebut. Tes integrasi nyata sebelumnya lulus pada commit 62e404c.
 
 ## Bukti terakhir
-- check_all SEMUA HIJAU: 1207 lulus, 0 skip; REPO_MAP 1176; dua analyzer/arch OK.
-- Tes lama disesuaikan: blocked push tetap pull + outbox utuh; startup menjalankan sync.
-- Build release main.dart, drift, .env.local produksi: berhasil (243,6 dtk).
-- APK SHA256: 851AB260CAF2F6028F1DFA8457DD5DCF7E31778DA9229F511740E3C629ED336D
+- Tes terarah golden komponen/layar: 89 lulus.
+- Harga COD panjang pada 280/320/390: 6 lulus; PNG vs preview/struk panjang: 3 lulus.
+- check_all SEMUA HIJAU: 1215 lulus, 2 skip (Supabase lokal); REPO_MAP 1179.
+- Flutter analyze/dart analyze tanpa masalah; check_arch OK; 1101 berkas terformat.
+- Helper molecule_gallery menunggu precacheImage agar golden logo deterministik;
+  4 tes logo lolos tanpa mengubah golden/toleransi untuk menutupi perbedaan.

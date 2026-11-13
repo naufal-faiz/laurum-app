@@ -1,63 +1,67 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter/painting.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:laurum/core/services/receipt_document_data.dart';
 import 'package:laurum/core/theme/app_colors.dart';
-import 'package:laurum/core/theme/app_text_styles.dart';
+import 'package:laurum/core/theme/app_theme.dart';
+import 'package:laurum/shared/widgets/organisms/receipt_document.dart';
 
-/// Renders the complete receipt, including content outside the screen viewport.
+/// Paints the same widget as the preview, at full height and 2x resolution.
 Future<Uint8List> receiptPng(ReceiptDocumentData data) async {
-  const width = 640, padding = 32.0;
-  final recording = ui.PictureRecorder();
-  final canvas = ui.Canvas(recording);
-  var y = padding;
-  final lines = <({String text, bool strong})>[
-    (text: data.title, strong: true),
-    for (final line in data.header) (text: line, strong: false),
-    for (final group in data.groups) ...[
-      (text: '', strong: false),
-      for (final row in group) ...[
-        (text: '${row.label}: ${row.value}', strong: row.emphasis),
-        if (row.detail != null) (text: row.detail!, strong: false),
-        if (row.valueDetail != null) (text: row.valueDetail!, strong: false),
-      ],
-    ],
-    (text: '', strong: false),
-    (text: data.status, strong: true),
-    if (data.statusDetail.isNotEmpty) (text: data.statusDetail, strong: false),
-    for (final line in data.footer) (text: line, strong: false),
-  ];
-  for (final line in lines) {
-    final painter = TextPainter(
-      text: TextSpan(
-        text: line.text.isEmpty ? ' ' : line.text,
-        style: (line.strong ? AppTextStyles.section : AppTextStyles.body).copyWith(
-          color: AppColors.ink,
-          fontSize: AppTextStyles.titleRoot.fontSize,
+  final boundary = RenderRepaintBoundary();
+  final pipeline = PipelineOwner();
+  final focus = FocusManager();
+  final owner = BuildOwner(focusManager: focus);
+  ViewConfiguration configuration(double height) => ViewConfiguration(
+    logicalConstraints: BoxConstraints.tightFor(width: data.width, height: height),
+    physicalConstraints: BoxConstraints.tightFor(width: data.width, height: height),
+  );
+  final view = RenderView(
+    view: ui.PlatformDispatcher.instance.views.first,
+    configuration: configuration(1),
+    child: boundary,
+  );
+  pipeline.rootNode = view;
+  view.prepareInitialFrame();
+  final root = RenderObjectToWidgetAdapter<RenderBox>(
+    container: boundary,
+    child: Directionality(
+      textDirection: TextDirection.ltr,
+      child: MediaQuery(
+        data: MediaQueryData(size: Size(data.width, 1)),
+        child: Theme(
+          data: AppTheme.light,
+          child: Material(
+            color: AppColors.surface,
+            child: ReceiptDocument(data: data),
+          ),
         ),
       ),
-      textDirection: TextDirection.ltr,
-    )..layout(maxWidth: width - padding * 2);
-    painter.paint(canvas, ui.Offset(padding, y));
-    y += painter.height + 8;
-    painter.dispose();
-  }
-  final content = recording.endRecording();
-  final background = ui.PictureRecorder();
-  final output = ui.Canvas(background);
-  output.drawRect(
-    ui.Rect.fromLTWH(0, 0, width.toDouble(), y + padding),
-    ui.Paint()..color = AppColors.surface,
-  );
-  output.drawPicture(content);
-  final picture = background.endRecording();
-  final image = await picture.toImage(width, (y + padding).ceil());
+    ),
+  ).attachToRenderTree(owner);
   try {
-    return (await image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+    owner.buildScope(root);
+    view.configuration = configuration(boundary.getMaxIntrinsicHeight(data.width));
+    pipeline.flushLayout();
+    pipeline.flushCompositingBits();
+    pipeline.flushPaint();
+    final image = await boundary.toImage(pixelRatio: 2);
+    try {
+      return (await image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+    } finally {
+      image.dispose();
+    }
   } finally {
-    image.dispose();
-    picture.dispose();
-    content.dispose();
+    RenderObjectToWidgetAdapter<RenderBox>(container: boundary).attachToRenderTree(owner, root);
+    owner.buildScope(root);
+    owner.finalizeTree();
+    pipeline.rootNode = null;
+    view.child = null;
+    boundary.dispose();
+    view.dispose();
+    pipeline.dispose();
+    focus.dispose();
   }
 }

@@ -15,6 +15,7 @@ class IconTile extends StatelessWidget {
     this.foreground = AppColors.primary,
     this.radius = AppRadius.chip,
     this.dot = false,
+    this.imageAsset,
   });
 
   /// White 38 logo tile of the auth hero (icon 18, radius 12).
@@ -25,6 +26,7 @@ class IconTile extends StatelessWidget {
       background = AppColors.surface,
       foreground = AppColors.primary,
       radius = AppRadius.logo,
+      imageAsset = 'assets/laurum-logo.png',
       dot = false;
 
   /// Blue 118 circle with the shirt illustration of `LAURUM · Masuk`.
@@ -35,12 +37,14 @@ class IconTile extends StatelessWidget {
       background = AppColors.illustration,
       foreground = AppColors.surface,
       radius = AppRadius.chip,
+      imageAsset = null,
       dot = false;
 
   final AppIcons icon;
   final double size, iconSize;
   final Color background, foreground;
   final BorderRadius radius;
+  final String? imageAsset;
 
   /// Small notification dot in the top-right corner (frame `LAURUM · Beranda`).
   final bool dot;
@@ -52,7 +56,9 @@ class IconTile extends StatelessWidget {
       child: SizedBox.square(
         dimension: size,
         child: Center(
-          child: AppIcon(icon, size: iconSize, color: foreground),
+          child: imageAsset == null
+              ? AppIcon(icon, size: iconSize, color: foreground)
+              : Image.asset(imageAsset!, width: size, height: size, fit: BoxFit.contain),
         ),
       ),
     );

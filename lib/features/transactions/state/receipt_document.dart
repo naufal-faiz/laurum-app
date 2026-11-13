@@ -19,6 +19,7 @@ ReceiptDocumentData receiptDocument(ReceiptView view) {
   };
   return ReceiptDocumentData(
     title: business.name.toUpperCase(),
+    width: settings.paperMm == 80 ? 384 : 320,
     header: [
       if (settings.showAddress && business.address.isNotEmpty) business.address,
       if (business.phone.isNotEmpty) Formatters.telepon(business.phone),

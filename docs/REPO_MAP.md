@@ -14,7 +14,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ## Berkas (jumlah baris): nama deklarasi
 
 ### lib/
-- app.dart (106): LaurumApp
+- app.dart (107): LaurumApp
 
 ### lib/core/domain/
 - business_profile.dart (50): BusinessProfile
@@ -151,11 +151,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - local_settings_providers.dart (11): localSettingsRepositoryProvider, orderNumberGeneratorProvider
 - photo_picker.dart (16): PhotoPicker, FakePhotoPicker
 - print_service.dart (96): PrintStatus, PrinterDevice, ReceiptData, PrintService, FakePrintService
-- receipt_document_data.dart (33): ReceiptDocumentRow, ReceiptDocumentData
+- receipt_document_data.dart (35): ReceiptDocumentRow, ReceiptDocumentData
 - receipt_download_service.dart (22): ReceiptDownloadService, FileReceiptDownloadService
 - receipt_pdf.dart (90):
 - receipt_pdf_rows.dart (49):
-- receipt_png.dart (63):
+- receipt_png.dart (67):
 - repository_providers.dart (51): businessRepositoryProvider, receiptSettingsRepositoryProvider, customerRepositoryProvider, serviceRepositoryProvider, orderRepositoryProvider, savingsRepositoryProvider, expenseRepositoryProvider, proposalRepositoryProvider, reportRepositoryProvider, transactionRunnerProvider
 - service_providers.dart (41): printServiceProvider, externalLauncherProvider, contactSourceProvider, photoPickerProvider, exportServiceProvider, authServiceProvider, localDataServiceProvider, syncServiceProvider
 - store_configuration.dart (10):
@@ -462,7 +462,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_customer_section.dart (18): OrderCustomerSection
 - order_detail_body_section.dart (35): OrderDetailBodySection
 - order_detail_content_section.dart (70): OrderDetailContentSection
-- order_detail_footer_section.dart (100): OrderDetailFooterSection
+- order_detail_footer_section.dart (102): OrderDetailFooterSection
 - order_edit_body_section.dart (61): OrderEditBodySection
 - order_edit_customer_section.dart (43): OrderEditCustomerSection
 - order_items_section.dart (103): OrderItemsSection
@@ -658,7 +658,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - checkout_state.dart (36): Checkout, checkoutControllerProvider
 - discount_input.dart (19): DiscountInputState, DiscountInput, discountInputProvider
 - payment_quote.dart (40): PaymentQuote
-- receipt_document.dart (90):
+- receipt_document.dart (91):
 - receipt_download.dart (32): ReceiptDownloadState, ReceiptDownload, receiptDownloadServiceProvider, receiptDownloadProvider
 - receipt_print_controller.dart (71): ReceiptPrintState, ReceiptPrint, receiptPrintProvider
 - receipt_view.dart (61): ReceiptView, receiptViewProvider
@@ -722,7 +722,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - empty_state.dart (48): EmptyState
 - feature_strip.dart (46): FeatureStrip
 - footer_bar.dart (28): FooterBar
-- icon_tile.dart (78): IconTile
+- icon_tile.dart (84): IconTile
 - info_row.dart (39): InfoRow
 - inline_link.dart (32): InlineLink
 - inline_link_row.dart (36): InlineLinkRow
@@ -798,7 +798,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_spacing_modal_test.dart (46):
 - antrean_states_test.dart (84):
 - antrean_test_host.dart (49):
-- antrean_test_host_test.dart (22):
+- antrean_test_host_test.dart (24):
 - app_avatar_test.dart (28):
 - app_badge_test.dart (30):
 - app_bar_root_test.dart (32):
@@ -823,6 +823,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_switch_test.dart (42):
 - app_text_field_focus_test.dart (53):
 - app_text_field_test.dart (70):
+- app_text_scaling_test.dart (35):
 - app_text_test.dart (40):
 - atom_gallery_test.dart (68):
 
@@ -967,13 +968,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - locked_row_test.dart (25):
 - login_storage_readiness_test.dart (82):
 - menu_row_test.dart (25):
-- molecule_gallery.dart (30):
+- molecule_gallery.dart (35):
 - nominal_chips_test.dart (25):
 - nominal_input_test.dart (77):
 - nota_card_test.dart (37):
 - notice_ai_test.dart (20):
 - numpad_test.dart (47):
 - order_actions_test.dart (72):
+- order_card_price_position_test.dart (50):
 - order_card_test.dart (89):
 - order_detail_receipt_test.dart (80):
 - order_detail_sections_test.dart (80):
@@ -1168,6 +1170,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_formatter_test.dart (70):
 - receipt_icon_tiles_test.dart (38):
 - receipt_page_test.dart (77):
+- receipt_png_preview_test.dart (105):
 - receipt_preview_test.dart (32):
 - receipt_reconnect_page_test.dart (61): SlowReceiptPrinter
 - receipt_template_lines.dart (29):
@@ -1210,7 +1213,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - fake_sync_transport.dart (62): FakeSyncTransport
 - in_memory_outbox_store_test.dart (13):
 - local_account_devices.dart (62): LocalAccountDevices
-- multidevice_supabase_local_test.dart (111):
+- multidevice_supabase_local_test.dart (110):
 - supabase_sync_local_test.dart (281):
 - sync_bindings_test.dart (59): _FakeMonitor
 - sync_coordinator_test.dart (82): _RecordingPullTransport, _MemoryCursors, _NoopApplier
