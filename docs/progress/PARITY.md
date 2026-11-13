@@ -4,6 +4,23 @@ Aturan: AGENTS.md, Mode Backend (BE-2 sampai BE-6). Agent mengisi fakta dan mene
 aturan BE-4/BE-5; kasus BE-7 menunggu keputusan pengguna.
 
 ## Perbaikan login pertama
+Perbaikan fatal sinkron dua HP satu akun (permintaan pengguna 13 Nov 2026):
+- Root storage recovery kini membuka ulang koneksi, menyediakan Keluar akun yang
+  mempertahankan data; disposal menunggu SQL/sync yang berjalan.
+- AccountStore.start mencoba fetch Supabase sebelum pemeriksaan setup. Pull berhasil
+  setelah kegagalan awal menyelesaikan metadata setup tanpa login ulang.
+- DriftSyncRemoteApplier mengirim notifikasi query setelah commit (sebelumnya daftar
+  kontak/antrean tetap nol meski data sudah ada di pemilih pelanggan transaksi).
+- RecordSyncState mengenali conflict yang sudah valid di SQLite/outbox; penolakan
+  server tidak membuat pemetaan profil/pelanggan/antrean gagal saat membuka akun.
+- Profil/struk multi-ID legacy dibaca deterministik tanpa menghapus data. Manual sync
+  menunggu pekerjaan aktif; push gagal tetap mencoba pull, outbox tetap dipertahankan.
+- Tes Supabase lokal nyata: dua sesi/satu akun bertukar pelanggan dan antrean,
+  dua transaksi, profil ganda, serta tes RLS/isolasi dua akun yang sudah ada.
+- Sumber: PRD B §4/§7, spec 22/30, laporan dan klarifikasi pengguna.
+- Bukti: check_all SEMUA HIJAU, 1207 lulus tanpa skip. Kedua tes Supabase lokal
+  dijalankan: lintas perangkat (termasuk dua transaksi/profil ganda) dan isolasi akun.
+
 Perbaikan login pertama (izin alur normal pengguna 13 Nov 2026):
 - Gate aplikasi dan binding sync menunggu storage akun selesai tanpa error;
   nilai lama/null dari sebelum login tidak membuka form info usaha terlalu cepat.

@@ -98,7 +98,7 @@ class DriftSyncService implements SyncService {
   }
 
   Future<void> dispose() async {
-    _trigger.dispose();
+    await _trigger.close();
     await _subscription?.cancel();
     unawaited(_status.close()); // A paused listener must not block closing the DB.
   }

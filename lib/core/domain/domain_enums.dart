@@ -15,4 +15,4 @@ enum ProposalStatus { menunggu, disetujui, ditolak, ditutupOtomatis }
 enum OrderSource { kasir, whatsappAi }
 
 // Metadata lokal sesuai PRD B 5, bukan status sinkron UI.
-enum RecordSyncState { synced, pending }
+enum RecordSyncState { synced, pending, conflict }

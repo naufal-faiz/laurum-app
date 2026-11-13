@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import 'package:laurum/core/domain/id_generator.dart';
 import 'package:laurum/core/domain/receipt_settings.dart';
 import 'package:laurum/core/domain/repositories/receipt_settings_repository.dart';
@@ -23,11 +24,19 @@ class DriftReceiptSettingsRepository implements ReceiptSettingsRepository {
   late final _initial = ReceiptSettings(id: ids.newId(), ownerId: ownerId, createdAt: clock());
   @override
   Future<ReceiptSettings> getReceiptSettings() async {
-    final row = await (db.select(
-      db.receiptSettingRecords,
-    )..where((r) => r.ownerId.equals(ownerId))).getSingleOrNull();
+    final row = await _stored();
     return row == null ? _initial : receiptFromRow(row);
   }
+
+  Future<ReceiptSettingRow?> _stored() =>
+      (db.select(db.receiptSettingRecords)
+            ..where((r) => r.ownerId.equals(ownerId) & r.deletedAt.isNull())
+            ..orderBy([
+              (r) => OrderingTerm(expression: r.createdAt),
+              (r) => OrderingTerm(expression: r.id),
+            ])
+            ..limit(1))
+          .getSingleOrNull();
 
   @override
   Future<void> saveReceiptSettings(ReceiptSettings settings) => writer.runner.run(() async {
@@ -39,7 +48,7 @@ class DriftReceiptSettingsRepository implements ReceiptSettingsRepository {
     if (collision != null && collision.ownerId != ownerId) {
       throw StateError('Receipt settings belong to another account');
     }
-    final old = await (db.select(table)..where((r) => r.ownerId.equals(ownerId))).getSingleOrNull();
+    final old = await _stored();
     if (old != null && old.id != settings.id) throw StateError('Receipt settings ID cannot change');
     final at = clock();
     await writer.write(

@@ -17,6 +17,7 @@ class SyncScheduler {
   Timer? _periodic;
   bool _online = true;
   bool _running = false;
+  Completer<void>? _idle;
   bool _waiting = false;
   bool _disposed = false;
   int _attempt = 0;
@@ -31,7 +32,6 @@ class SyncScheduler {
       _waiting = true;
       return;
     }
-    _timer?.cancel();
     unawaited(_fire());
   }
 
@@ -65,9 +65,9 @@ class SyncScheduler {
     if (!_online) throw StateError('Offline');
     if (_running) {
       _waiting = true;
-      return;
+      await _idle!.future;
+      return triggerNow();
     }
-    _timer?.cancel();
     await _fire(throwOnError: true);
   }
 
@@ -85,6 +85,7 @@ class SyncScheduler {
     if (_disposed || !_online || _running) return;
     _timer?.cancel();
     _running = true;
+    _idle = Completer<void>();
     (Object, StackTrace)? failure;
     try {
       await run();
@@ -93,6 +94,7 @@ class SyncScheduler {
       failure = (error, stack);
     }
     _running = false;
+    _idle?.complete();
     if (_disposed) return;
     if (failure != null) {
       _waiting = false;

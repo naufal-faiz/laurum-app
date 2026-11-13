@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import 'package:laurum/core/domain/business_profile.dart';
 import 'package:laurum/core/domain/id_generator.dart';
 import 'package:laurum/core/domain/receipt_settings.dart';
@@ -32,11 +33,19 @@ class DriftBusinessRepository implements BusinessRepository {
   );
   @override
   Future<BusinessProfile> getProfile() async {
-    final row = await (db.select(
-      db.businessRecords,
-    )..where((r) => r.ownerId.equals(ownerId))).getSingleOrNull();
+    final row = await _stored();
     return row == null ? _initial : businessFromRow(row);
   }
+
+  Future<BusinessRow?> _stored() =>
+      (db.select(db.businessRecords)
+            ..where((r) => r.ownerId.equals(ownerId) & r.deletedAt.isNull())
+            ..orderBy([
+              (r) => OrderingTerm(expression: r.createdAt),
+              (r) => OrderingTerm(expression: r.id),
+            ])
+            ..limit(1))
+          .getSingleOrNull();
 
   @override
   Future<void> saveProfile(BusinessProfile profile) => writer.runner.run(() async {
@@ -48,7 +57,7 @@ class DriftBusinessRepository implements BusinessRepository {
     if (collision != null && collision.ownerId != ownerId) {
       throw StateError('Business belongs to another account');
     }
-    final old = await (db.select(table)..where((r) => r.ownerId.equals(ownerId))).getSingleOrNull();
+    final old = await _stored();
     if (old != null && old.id != profile.id) throw StateError('Business ID cannot change');
     final at = clock();
     await writer.write(

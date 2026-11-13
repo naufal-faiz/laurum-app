@@ -14,7 +14,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ## Berkas (jumlah baris): nama deklarasi
 
 ### lib/
-- app.dart (90): LaurumApp
+- app.dart (106): LaurumApp
 
 ### lib/core/domain/
 - business_profile.dart (50): BusinessProfile
@@ -76,8 +76,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/core/persistence/
 - account_local_data_service.dart (27): AccountLocalDataService
 - account_repositories.dart (51): AccountRepositories
+- account_setup_restore.dart (17): accountSetupRestoreProvider
 - account_storage.dart (95): AccountStorage
-- account_store.dart (41): AccountStore
+- account_store.dart (46): AccountStore
 - app_database.dart (54): AppDatabase
 - app_database_factory.dart (65): AppDatabaseFactory
 - business_records.dart (14): BusinessRecords
@@ -95,7 +96,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - drift_sync_ack_writer.dart (50): DriftSyncAckWriter
 - drift_sync_cursor_store.dart (38): DriftSyncCursorStore
 - drift_sync_outbox_store.dart (99): DriftSyncOutboxStore
-- drift_sync_remote_applier.dart (86): DriftSyncRemoteApplier
+- drift_sync_remote_applier.dart (87): DriftSyncRemoteApplier
 - drift_sync_service.dart (105): DriftSyncService
 - drift_transaction_runner.dart (79): DriftTransactionRunner, _DriftScope
 - entitlement_records.dart (16): EntitlementRecords
@@ -119,6 +120,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_records.dart (21): ServiceRecords
 - sql_timestamp.dart (6):
 - storage_providers.dart (74): storageGateEnabledProvider, syncCycleFactoryProvider, accountStorageProvider, activeOwnerProvider, accountStoreProvider, accountChangesProvider
+- storage_recovery.dart (23): StorageRecovery, storageRecoveryProvider
 - supabase_bootstrap.dart (32):
 - sync_bindings.dart (41): syncConnectionMonitorProvider, syncBindingsProvider
 - sync_cursor_records.dart (12): SyncCursorRecords
@@ -171,7 +173,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - supabase_sync_transport.dart (65): SupabaseSyncTransport
 - supabase_sync_wire.dart (77):
 - sync_change.dart (25): SyncChange
-- sync_coordinator.dart (31): SyncCycleResult, SyncCycle, SyncCoordinator
+- sync_coordinator.dart (30): SyncCycleResult, SyncCycle, SyncCoordinator
 - sync_cursor_store.dart (6): SyncCursorStore
 - sync_engine.dart (108): SyncEngine
 - sync_group.dart (7): SyncGroup
@@ -187,12 +189,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_push_result.dart (47): SyncGroupStatus, SyncChangeResult, SyncPushResult
 - sync_remote_applier.dart (3): SyncRemoteApplier
 - sync_run_result.dart (15): SyncRunStatus, SyncRunResult
-- sync_scheduler.dart (108): SyncScheduler
+- sync_scheduler.dart (110): SyncScheduler
 - sync_table_names.dart (34):
 - sync_timing.dart (13):
 - sync_transport.dart (6): SyncTransport
 - sync_transport_exception.dart (7): SyncTransportException
-- sync_trigger.dart (73): SyncTrigger
+- sync_trigger.dart (85): SyncTrigger
 
 ### lib/core/theme/
 - app_borders.dart (7): AppBorders
@@ -298,7 +300,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/business/data/
 - business_fixtures.dart (21):
 - business_storage_mapping.dart (47):
-- drift_business_repository.dart (68): DriftBusinessRepository
+- drift_business_repository.dart (77): DriftBusinessRepository
 - in_memory_business_repository.dart (52): BusinessState, InMemoryBusinessRepository, inMemoryBusinessRepositoryProvider
 
 ### lib/features/business/pages/
@@ -473,7 +475,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - ble_printer_discovery.dart (14):
 - ble_printer_scanner.dart (48): BlePrinterScanner
 - ble_printer_transport.dart (101): BlePrinterTransport
-- drift_receipt_settings_repository.dart (54): DriftReceiptSettingsRepository
+- drift_receipt_settings_repository.dart (63): DriftReceiptSettingsRepository
 - esc_pos_encoder.dart (37): EscPosEncoder
 - esc_pos_print_service.dart (85): EscPosPrintService
 - in_memory_receipt_settings_repository.dart (14): InMemoryReceiptSettingsRepository
@@ -986,6 +988,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - period_tabs_test.dart (29):
 
 ### test/persistence/
+- account_late_restore_test.dart (42):
 - account_storage_test.dart (54):
 - b1c_harness.dart (31): B1cHarness
 - b1d_commands.dart (44):
@@ -1042,11 +1045,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - outbox_group_operation_test.dart (43):
 - outbox_writer_test.dart (97):
 - printer_repository_integration_test.dart (75):
+- pull_query_refresh_test.dart (34):
 - report_contracts_test.dart (30):
 - report_migration_test.dart (42):
 - report_scope_plan_test.dart (45):
 - report_seed.dart (45):
 - storage_providers_test.dart (85):
+- sync_conflict_readability_test.dart (33):
+- sync_dispose_inflight_test.dart (41): PendingSyncCycle
+- sync_duplicate_profiles_test.dart (65):
+- sync_pull_visibility_test.dart (21):
 - sync_wire_rows.dart (185):
 
 ### test/
@@ -1191,19 +1199,24 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - storage_gate_query_error_test.dart (71):
 - storage_gate_test.dart (67):
 - storage_loading_presentation_test.dart (109):
+- storage_recovery_actions_test.dart (84): RecoverableStorage
 - store_configuration_test.dart (11):
 - sub_scaffold_fab_test.dart (37):
 - sub_scaffold_test.dart (32):
 
 ### test/sync/
+- account_initial_fetch_test.dart (55): RestoringCycle
 - canonical_json_test.dart (35):
 - fake_sync_transport.dart (62): FakeSyncTransport
 - in_memory_outbox_store_test.dart (13):
+- local_account_devices.dart (62): LocalAccountDevices
+- multidevice_supabase_local_test.dart (111):
 - supabase_sync_local_test.dart (281):
 - sync_bindings_test.dart (59): _FakeMonitor
-- sync_coordinator_test.dart (81): _RecordingPullTransport, _MemoryCursors, _NoopApplier
+- sync_coordinator_test.dart (82): _RecordingPullTransport, _MemoryCursors, _NoopApplier
 - sync_engine_test.dart (93):
-- sync_gate_wiring_test.dart (65): _Cycle
+- sync_gate_wiring_test.dart (66): _Cycle
+- sync_manual_join_test.dart (26):
 - sync_pull_runner_test.dart (122): _MemoryCursors, _RecordingApplier, _FakePullTransport, _FailingPullTransport
 - sync_pull_wire_test.dart (100):
 - sync_scheduler_test.dart (136):

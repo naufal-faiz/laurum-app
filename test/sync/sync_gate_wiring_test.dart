@@ -38,6 +38,7 @@ void main() {
       await db.close();
     });
     await store.start();
+    expect(cycle.runs, 1, reason: 'opening an account restores existing cloud data first');
     expect(store.sync.canSync, isTrue);
     expect(
       await db.select(db.deviceRecords).get(),
@@ -45,7 +46,7 @@ void main() {
       reason: 'the install registers itself once real sync exists',
     );
     await store.sync.syncNow();
-    expect(cycle.runs, 1);
+    expect(cycle.runs, 2);
     expect(store.sync.lastSyncedAt, isNotNull);
   });
 

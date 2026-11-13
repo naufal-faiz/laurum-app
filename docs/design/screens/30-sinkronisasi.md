@@ -1,5 +1,23 @@
 # 30 - Sinkronisasi
 Rute: /lainnya/sinkronisasi | Prompt: 90
+Perilaku backend nyata (perbaikan 13 Nov 2026, PRD B §4/§7):
+- Saat akun dibuka, jalankan siklus Supabase push/pull sebelum menentukan setup.
+  Akun lama di HP baru memakai profil/pelanggan/antrean yang dipulihkan.
+- Sinkron manual menunggu siklus aktif lalu menjalankan siklus berikutnya;
+  push tertahan tetap memberi kesempatan pull, tanpa membuang outbox lokal.
+- Pull berkomit memberi notifikasi ke query halaman, sehingga daftar yang semula
+  nol diperbarui tanpa perlu login ulang. Foreground/koneksi pulih tetap memicu sinkron.
+- Status lokal conflict tetap bisa dibaca; kegagalan sinkron tidak mengunci data.
+- Data profil/pengaturan struk ganda dari perangkat lama dibaca dengan urutan stabil
+  created_at/id (yang tertua aktif); baris lain tetap disimpan, tidak dihapus.
+- Error pembukaan lokal: Coba lagi menutup/membuka ulang koneksi dengan menunggu
+  pekerjaan sync selesai; Keluar akun mempertahankan file/outbox sebagai jalan keluar.
+- Request jaringan dibatasi 15 detik, bootstrap menunggu maksimal 20 detik lalu
+  tetap menyediakan data lokal. Retry berhasil juga menuntaskan metadata setup.
+- Teruji dua sesi/satu akun pada Supabase lokal: fetch awal, perubahan dua arah,
+  dua transaksi, profil legacy ganda; isolasi dua akun tetap diuji terpisah.
+
+Catatan historis B1f/dummy berikut bukan perilaku build backend saat ini:
 Pembaruan B1f: main memakai DriftSyncService. Pending berasal dari COUNT outbox,
 termasuk sesudah restart. Nol = tersimpan lokal; ada antrean = menyimpan.
 Sinkron sekarang membaca ulang jumlah, tidak mengirim atau menghapus outbox;

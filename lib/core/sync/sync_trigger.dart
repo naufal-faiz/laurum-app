@@ -25,6 +25,7 @@ class SyncTrigger {
   bool _online = true;
   bool _running = false;
   bool _failed = false;
+  Future<void>? _inFlight;
 
   bool get isOnline => _online;
   bool get isRunning => _running;
@@ -50,7 +51,9 @@ class SyncTrigger {
     if (canSync) await _scheduler.triggerNow();
   }
 
-  Future<void> _run() async {
+  Future<void> _run() => _inFlight = _execute().whenComplete(() => _inFlight = null);
+
+  Future<void> _execute() async {
     final cycle = _cycle;
     if (cycle == null) return;
     _running = true;
@@ -70,4 +73,13 @@ class SyncTrigger {
   }
 
   void dispose() => _scheduler.dispose();
+
+  Future<void> close() async {
+    dispose();
+    try {
+      await _inFlight;
+    } catch (_) {
+      // Sync already reported the failure; disposal still closes the local DB.
+    }
+  }
 }

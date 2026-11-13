@@ -28,6 +28,11 @@ class AccountStore extends AccountRepositories {
     changes.start();
     if (!_syncEnabled) return;
     try {
+      await sync.syncNow().timeout(const Duration(seconds: 20));
+    } catch (_) {
+      // Network failure must not prevent opening the preserved local database.
+    }
+    try {
       await device.ensureRegistered();
     } catch (_) {
       /* A missing device row must never block opening the account. */

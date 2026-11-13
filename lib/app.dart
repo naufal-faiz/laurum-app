@@ -3,14 +3,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/persistence/account_setup_restore.dart';
 import 'package:laurum/core/persistence/storage_providers.dart';
+import 'package:laurum/core/persistence/storage_recovery.dart';
 import 'package:laurum/core/persistence/sync_bindings.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/core/theme/app_theme.dart';
+import 'package:laurum/features/auth/state/auth_session.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
 import 'package:laurum/features/orders/state/antrean_data.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
+import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_loader.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -22,6 +26,8 @@ class LaurumApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(syncBindingsProvider);
+    if (ref.watch(storageGateEnabledProvider)) ref.watch(accountSetupRestoreProvider);
+    final recovering = ref.watch(storageRecoveryProvider);
     final storage = ref.watch(storageGateEnabledProvider) ? ref.watch(accountStoreProvider) : null;
     final storageReady =
         storage == null || (storage.hasValue && !storage.isLoading && !storage.hasError);
@@ -52,13 +58,23 @@ class LaurumApp extends ConsumerWidget {
         return Scaffold(
           body: SafeArea(
             child: Center(
-              child: (storage?.hasError ?? false)
-                  ? EmptyState(
-                      title: 'Penyimpanan belum dapat dibuka',
-                      icon: AppIcons.alert,
-                      description: 'Data Anda tetap tersimpan. Coba buka kembali penyimpanan.',
-                      actionLabel: 'Coba lagi',
-                      onAction: () => ref.invalidate(accountStoreProvider),
+              child: (storage?.hasError ?? false) && !recovering
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        EmptyState(
+                          title: 'Penyimpanan belum dapat dibuka',
+                          icon: AppIcons.alert,
+                          description: 'Data Anda tetap tersimpan. Coba buka kembali penyimpanan.',
+                          actionLabel: 'Coba lagi',
+                          onAction: ref.read(storageRecoveryProvider.notifier).retry,
+                        ),
+                        AppButton(
+                          'Keluar akun',
+                          variant: AppButtonVariant.actionOutline,
+                          onPressed: () => ref.read(authSessionProvider.notifier).signOut(),
+                        ),
+                      ],
                     )
                   : const Padding(
                       key: ValueKey('local-storage-loading'),

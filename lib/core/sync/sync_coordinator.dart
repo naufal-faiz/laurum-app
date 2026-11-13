@@ -25,7 +25,6 @@ class SyncCoordinator implements SyncCycle {
   @override
   Future<SyncCycleResult> run() async {
     final push = await pushEngine.run();
-    if (!push.succeeded) return SyncCycleResult(push: push);
     return SyncCycleResult(push: push, pull: await pullRunner.run());
   }
 }

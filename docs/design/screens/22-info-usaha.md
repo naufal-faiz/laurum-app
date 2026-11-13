@@ -11,6 +11,10 @@ Komposisi:
 
 Data dan provider:
 - businessInfoProvider memuat BusinessProfile dari BusinessRepository.
+- Pemulihan Supabase dicoba saat akun dibuka sebelum setup diputuskan. Profil
+  yang diterima dari HP lain dipakai kembali; retry pull menuntaskan setup tanpa relogin.
+- Profil legacy ganda tetap dapat dibaca/diedit melalui ID aktif tertua yang stabil;
+  baris lain dipertahankan. Metadata conflict juga tetap dapat dipetakan ke model.
 - Simpan menulis name, address, phone, receiptFooter, updatedAt jam usaha.
 - businessRepositoryProvider yang reaktif memperbarui businessProfileProvider
   (judul AppBarRoot) dan ReceiptView/printer settings (struk).

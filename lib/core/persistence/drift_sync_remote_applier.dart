@@ -25,6 +25,7 @@ class DriftSyncRemoteApplier implements SyncRemoteApplier {
         await _applyRow(table, row, columns);
       }
     });
+    db.notifyUpdates({TableUpdate(table)});
   }
 
   Future<void> _applyRow(

@@ -26,7 +26,7 @@ class SupabaseSyncTransport implements SyncTransport, SyncPullTransport {
 
   Future<T> _guard<T>(Future<T> Function() body) async {
     try {
-      return await body();
+      return await body().timeout(const Duration(seconds: 15));
     } on SyncTransportException {
       rethrow;
     } catch (error) {

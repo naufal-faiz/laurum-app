@@ -29,7 +29,7 @@ void main() {
     expect(pullTransport.requests.map((r) => r.table), syncPullOrder);
   });
 
-  test('a blocked push never touches the pull transport', () async {
+  test('a blocked push still fetches remote data without discarding pending changes', () async {
     final store = InMemoryOutboxStore(legacy: [_change()]);
     final pullTransport = _RecordingPullTransport();
     final result = await SyncCoordinator(
@@ -37,9 +37,10 @@ void main() {
       SyncPullRunner(pullTransport, _MemoryCursors(), _NoopApplier()),
     ).run();
     expect(result.push.status, SyncRunStatus.legacy);
-    expect(result.pull, isNull);
+    expect(result.pull, isNotNull);
     expect(result.succeeded, isFalse);
-    expect(pullTransport.requests, isEmpty);
+    expect(pullTransport.requests.map((r) => r.table), syncPullOrder);
+    expect(await store.legacyCount(), 1);
   });
 }
 
