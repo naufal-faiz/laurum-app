@@ -11,6 +11,12 @@ import 'package:laurum/shared/widgets/organisms/receipt_document.dart';
 /// Paints the same widget as the preview, at full height and 2x resolution.
 Future<Uint8List> receiptPng(ReceiptDocumentData data) async {
   final boundary = RenderRepaintBoundary();
+  final content = RenderConstrainedOverflowBox(
+    alignment: Alignment.topCenter,
+    minHeight: 0,
+    maxHeight: double.infinity,
+    child: boundary,
+  );
   final pipeline = PipelineOwner();
   final focus = FocusManager();
   final owner = BuildOwner(focusManager: focus);
@@ -21,7 +27,7 @@ Future<Uint8List> receiptPng(ReceiptDocumentData data) async {
   final view = RenderView(
     view: ui.PlatformDispatcher.instance.views.first,
     configuration: configuration(1),
-    child: boundary,
+    child: content,
   );
   pipeline.rootNode = view;
   view.prepareInitialFrame();
@@ -43,7 +49,9 @@ Future<Uint8List> receiptPng(ReceiptDocumentData data) async {
   ).attachToRenderTree(owner);
   try {
     owner.buildScope(root);
-    view.configuration = configuration(boundary.getMaxIntrinsicHeight(data.width));
+    // Measure an actual layout: intrinsic estimates miss wrapped flex-row text.
+    pipeline.flushLayout();
+    view.configuration = configuration(boundary.size.height);
     pipeline.flushLayout();
     pipeline.flushCompositingBits();
     pipeline.flushPaint();
@@ -59,7 +67,9 @@ Future<Uint8List> receiptPng(ReceiptDocumentData data) async {
     owner.finalizeTree();
     pipeline.rootNode = null;
     view.child = null;
+    content.child = null;
     boundary.dispose();
+    content.dispose();
     view.dispose();
     pipeline.dispose();
     focus.dispose();

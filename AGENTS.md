@@ -2,7 +2,17 @@
 
 Aturan di berkas ini MENANG atas skill, memori, atau instruksi lain. Cara memakai skill, memori, dan handoff: SKILLS.md.
 
-## Mulai sesi (hemat baca, wajib)
+## Jalur cepat (revisi kecil) - didahulukan atas bagian lain
+Berlaku bila pesan pengguna diawali `rev:` ATAU jelas hanya mengubah posisi, ukuran, jarak, warna, atau teks pada Page/Section yang sudah ada. Jalur ini MENGGANTIKAN Mulai sesi, prasyarat Mode Redesign, UI-7, UI-19, UI-21, dan UI-30 sampai UI-34. Aturan keras 1-22 dan zona beku (UI-6) tetap berlaku.
+1. Dilarang membaca STATE.md, spec layar, atau frame Figma, dan dilarang mengambil screenshot. Cari berkas SEKALI (grep nama Section atau Key), baca hanya berkas itu dan tes terarahnya.
+2. Edit minimal sesuai permintaan, dengan token dan widget registry yang ada.
+3. Cek: dart format <berkas>, flutter analyze <berkas>, flutter test <satu berkas tes layar/Section itu>. Bila golden layar itu bergeser sesuai permintaan: flutter test <berkas golden itu> --update-goldens, hanya berkas itu. Dilarang check_all dan suite penuh.
+4. Lapor maksimal 5 baris: berkas, apa yang bergeser, hasil tes. Tanpa tabel.
+5. JANGAN commit dan JANGAN ubah STATE.md, spec, atau proposal. Perubahan belum di-commit (git status) adalah catatannya. Saat pengguna meminta commit: jalankan dart run tool/check_arch.dart sekali, lalu satu commit fix(ui) untuk seluruh batch.
+6. Maksimal 6 tool call per revisi. Berhenti dan tanya bila revisi menyentuh lib/shared/widgets, token, zona beku, atau dependensi, mengubah lebih dari 3 berkas, membuat berkas lebih dari 100 baris, atau membuat tes perilaku gagal.
+7. Handoff: bila pengguna bilang pindah agent atau sesi berakhir, tulis SATU baris di STATE.md bagian "Belum di-commit": layar dan daftar berkas dari git status --short.
+
+## Mulai sesi (hemat baca, wajib; TIDAK berlaku untuk Jalur cepat)
 1. Baca docs/progress/STATE.md (posisi, langkah berikutnya, keputusan).
 2. Cari konteks lewat docs/REPO_MAP.md hanya bila lokasi berkas belum diketahui. Jika tool memori codebase gagal SEKALI, jangan dicoba lagi pada sesi itu. Dilarang ls/tree/glob seluruh repo dan membaca PRD utuh.
 3. Baca hanya spec dan berkas untuk tugas ini. Jika STATE.md berbeda dengan git log/status, percayai git lalu perbaiki STATE.md.
@@ -37,7 +47,8 @@ Satu basis kode untuk Android dan iOS. Saat ini HANYA Android yang bisa diuji. J
 21. Kontrak repository: setiap antarmuka repository punya satu suite tes kontrak yang dijalankan terhadap InMemory* dan Drift*; implementasi baru tidak boleh lolos tanpa suite itu. ID baris memakai IdGenerator (UUID v4; UUID v5 hanya untuk percobaan ulang idempoten); dilarang membuat ID dari rangkaian teks atau hitungan.
 22. Rahasia: kunci service_role, token, dan berkas .env tidak masuk repo; aplikasi hanya memakai URL dan kunci publik lewat --dart-define; Edge Function memakai secrets Supabase.
 
-## Mode Redesign UI (AKTIF di branch UI; hapus bagian ini sebelum merge ke main)
+## Mode Redesign UI (DIJEDA; layar sisa dikerjakan nanti)
+Saat tugas backend (Mode Backend di bawah), UI-6 dan UI-30 sampai UI-36 TIDAK berlaku. Bagian ini aktif lagi hanya bila pengguna meminta melanjutkan redesign layar.
 Tujuan: menerapkan desain baru dari Figma ke UI yang sudah ada. Murni tampilan (tata letak, posisi, gaya). Perilaku, data, dan alur DILARANG berubah. Aturan keras 1-22 tetap berlaku penuh; tidak ada pengecualian selain yang tertulis di bagian ini. Redesign dikerjakan per IRISAN LAYAR dengan urutan atomic di dalam tiap irisan (UI-21). Mode ringkas UI-30 sampai UI-36 berlaku: kerja langsung, sedikit dokumen, sedikit commit.
 
 Prasyarat setiap sesi (gagal = berhenti dan lapor, jangan menebak):
@@ -93,6 +104,18 @@ UI-33. Dokumen per irisan hanya: proposal singkat (bila ada komponen bersama bar
 UI-34. Handoff: pengguna sering berpindah agent, jadi STATE.md adalah satu-satunya sumber lanjut, maksimal 60 baris, format tetap: Sesi aktif (layar, frame, dasar commit); Status irisan (komponen, Section, verifikasi); Keputusan pengguna terbaru; Belum di-commit; Langkah berikutnya (maksimal 5); Blocker; Bukti terakhir (perintah dan angka tes). Diperbarui di akhir irisan, sebelum berhenti, atau saat pengguna bilang pindah agent, bukan tiap langkah. Lebih dari 60 baris = arsipkan bagian lama ke docs/progress/state-history-<tanggal>.md.
 UI-35. Kerjakan hanya layar/frame yang diminta di sesi ini. Dilarang memperbaiki hal lain "sekalian" (layar lain, refactor, utang lama) kecuali memblokir; catat sebagai saran di STATE.md. Fitur, state, atau dependensi baru: berhenti dan tanya SATU kali; jawaban pengguna dicatat sebagai izin spesifik.
 UI-36. Langkah yang sama gagal dua kali (tool MCP, SDK, tes): berhenti, tulis blocker di STATE.md, dan lapor; jangan mencoba pola ketiga. Skrip SDK Windows (. ./tool/windows_native_sdk.ps1) cukup sekali per sesi.
+
+## Mode Backend di atas desain baru (AKTIF di branch backend-newdesign)
+Tujuan: melanjutkan backend (PRD B) di atas UI baru. Aturan keras 1-22 tetap berlaku. Branch kerja: backend-newdesign (dari newdesign). Dilarang push atau merge ke branch lain tanpa izin pengguna. Mode ini tidak membaca Figma.
+BE-1. Boleh disentuh: state/, data/, core/persistence, core/sync, supabase/migrations, dan pembacaan provider di Page/Sheet, sesuai PRD B. DILARANG mengubah tampilan: token, shared/widgets, gaya Section, golden. Butuh perubahan tampilan agar sebuah aksi bisa tersambung: pakai komponen yang ada; selain itu berhenti dan tanya.
+BE-2. Aksi yang ada di desain lama DAN baru dengan tujuan sama WAJIB tetap bekerja dengan logika yang sama. Tes perilaku tidak boleh dilemahkan atau dihapus.
+BE-3. Setiap layar yang disambungkan: isi baris di docs/progress/PARITY.md (aksi, ada di lama/baru, sumber logika, tujuan beserta sumbernya, keputusan). Tujuan diambil dari PRD, spec layar, dan proposal. Tanpa sumber = BE-7.
+BE-4. Aksi dihapus di desain baru: (a) tujuannya masih dibutuhkan PRD: harus tetap terjangkau di tempat lain pada desain baru; tempat tidak jelas = tanya penempatan; (b) digantikan aksi baru: petakan logikanya ke aksi pengganti; (c) sengaja dibuang (alasan tertulis di spec/proposal): lepas dari UI, tetapi JANGAN hapus logika, state, atau tes sampai pengguna meminta.
+BE-5. Aksi ditambah di desain baru: (a) tujuan ada di PRD dan sumber datanya ada di repository: sambungkan; (b) tujuan ada di PRD tetapi sumber data belum ada: kerjakan sebagai tugas backend terpisah (kontrak repository, tes, migrasi bila perlu); (c) tujuan tidak ada di PRD: jangan implementasikan, catat, dan tanya.
+BE-6. Elemen berbasis data contoh atau fixture (mis. nilai akurasi AI contoh) tidak boleh tampil sebagai data nyata di build backend: sambungkan ke sumber nyata atau jangan dirender. Catat di PARITY.md.
+BE-7. Berhenti dan tanya bila: skema atau migrasi baru, penghapusan kode atau tes backend, perilaku uang (pembayaran, COD, kembalian, tabungan), auth/keamanan/data pengguna, penempatan UI tidak jelas, atau tujuan tidak ditemukan di PRD, spec, dan proposal.
+BE-8. Verifikasi: method repository baru = suite kontrak InMemory* dan Drift* (aturan 21); skema berubah = migrasi + tes migrasi (aturan 19); check_all sekali per tugas; alur uang diuji asap oleh pengguna di backend sungguhan (Supabase lokal) sebelum dianggap selesai.
+BE-9. Handoff: STATE.md (format UI-34) dan PARITY.md diperbarui di akhir tugas; satu commit per tugas backend.
 
 ## Skill dan memori (ringkas; detail di SKILLS.md)
 - Pilih skill lewat tabel niat di SKILLS.md, sekali di awal tugas. Tugas kecil (sekitar 20 baris atau kurang), status, dan pertanyaan singkat tidak perlu skill.
