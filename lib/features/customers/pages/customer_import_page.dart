@@ -40,6 +40,7 @@ class CustomerImportPage extends ConsumerWidget {
               },
       ),
       body: contacts.when(
+        skipLoadingOnReload: true,
         loading: () => const Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: AppSpacing.cardGap,
@@ -58,7 +59,7 @@ class CustomerImportPage extends ConsumerWidget {
                 icon: AppIcons.alert,
                 description: 'Periksa izin kontak lalu coba lagi.',
                 actionLabel: 'Coba lagi',
-                onAction: () => ref.invalidate(contactImportProvider),
+                onAction: () => ref.invalidate(contactImportSourceProvider),
               ),
         data: (value) => CustomerImportListSection(data: value),
       ),

@@ -88,7 +88,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - demo_seeder.dart (63): DemoSeeder
 - device_records.dart (12): DeviceRecords
 - device_registrar.dart (76): DeviceRegistrar
-- drift_change_monitor.dart (22): DriftChangeMonitor
+- drift_change_monitor.dart (28): DriftChangeMonitor
 - drift_local_data_service.dart (50): DriftLocalDataService
 - drift_local_settings_repository.dart (39): DriftLocalSettingsRepository
 - drift_repository_overrides.dart (60):
@@ -330,7 +330,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_detail_page.dart (67): CustomerDetailPage
 - customer_directory_page.dart (69): CustomerDirectoryPage
 - customer_edit_sheet.dart (68): CustomerEditSheet
-- customer_import_page.dart (67): CustomerImportPage
+- customer_import_page.dart (68): CustomerImportPage
 - customer_savings_history_page.dart (63): CustomerSavingsHistoryPage
 
 ### lib/features/customers/state/
@@ -343,7 +343,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_edit_state.dart (36): CustomerEditState
 - customer_history_offsets.dart (6): customerHistoryOffsetsProvider
 - customer_import_controller.dart (65): CustomerImportState, CustomerImportSelection, customerImportSelectionProvider
-- customer_import_data.dart (53): ContactImportRow, ContactImportData, contactImportProvider
+- customer_import_data.dart (59): ContactImportRow, ContactImportData, contactImportSourceProvider, contactImportProvider
 - customer_savings_controller.dart (14): CustomerSavingsFilter, customerSavingsFilterProvider
 - customer_savings_data.dart (59): CustomerSavingsData, customerSavingsProvider
 
@@ -485,7 +485,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/printer/pages/
 - bluetooth_sheet.dart (44): BluetoothSheet
 - printer_device_sheet.dart (49): PrinterDeviceSheet
-- printer_page.dart (86): PrinterPage
+- printer_page.dart (87): PrinterPage
 
 ### lib/features/printer/state/
 - printer_connection.dart (98): PrinterConnectionController, printerConnectionProvider
@@ -853,6 +853,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - checkout_controller_test.dart (90):
 - chip_bar_test.dart (30):
 - confirm_modal_test.dart (74):
+- contact_import_refresh_visibility_test.dart (42):
 
 ### test/contracts/
 - business_contract.dart (44):
@@ -901,6 +902,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - detail_molecules_golden_test.dart (49):
 - detail_molecules_test.dart (102):
 - device_contact_source_test.dart (56):
+- device_work_refresh_test.dart (68):
 - discount_input_test.dart (118):
 - domain_cancel_test.dart (74):
 - domain_flow_test.dart (51):
@@ -998,6 +1000,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - date_time_storage_test.dart (29):
 - demo_seed_atomic_test.dart (45):
 - demo_seeder_test.dart (50):
+- device_metadata_refresh_test.dart (31):
 - device_registrar_test.dart (48):
 - drift_contracts_test.dart (30):
 - drift_runner_test.dart (55):
@@ -1052,6 +1055,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### test/
 - printer_page_test.dart (100):
+- printer_refresh_visibility_test.dart (49): DeferredPrinterSettings
 - printer_restore_test.dart (45):
 - printer_service_test.dart (42):
 - progress_row_test.dart (23):

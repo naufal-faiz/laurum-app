@@ -47,6 +47,11 @@ ketat di Play Store. Mitigasi yang disarankan: pemilih kontak sistem untuk satu 
 (tanpa izin) dan impor massal tetap opsional dengan penjelasan izin. Implementasi palsu
 memakai ContactSource di core sehingga penggantian ke pemilih sistem tidak mengubah layar.
 
+Pembacaan kontak HP dilakukan sekali per sesi halaman impor. Perubahan repository
+pelanggan hanya memperbarui penanda nomor terdaftar, tanpa membaca/meminta izin kontak
+lagi. Daftar dan pencarian tetap terpasang selama pemetaan ulang. Coba lagi mengambil
+ulang kontak HP; keluar lalu membuka halaman kembali membuat pembacaan baru.
+
 Format: nomor lewat Formatters.telepon di daftar; pencarian memakai normalizePhone.
 
 Selisih terhadap .pen:

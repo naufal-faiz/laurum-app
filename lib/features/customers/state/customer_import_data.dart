@@ -32,9 +32,15 @@ List<ContactImportRow> filterContacts(List<ContactImportRow> rows, String search
       .toList();
 }
 
-final contactImportProvider = FutureProvider<ContactImportData>(
+// Keep the device read stable while customer writes only update duplicate flags.
+final contactImportSourceProvider = FutureProvider.autoDispose<List<ContactItem>>(
+  (ref) => ref.watch(contactSourceProvider).getContacts(),
+  retry: (retryCount, error) => null,
+);
+
+final contactImportProvider = FutureProvider.autoDispose<ContactImportData>(
   (ref) async {
-    final contacts = await ref.watch(contactSourceProvider).getContacts();
+    final contacts = await ref.watch(contactImportSourceProvider.future);
     final customers = await ref
         .watch(customerRepositoryProvider)
         .getCustomers(includeInactive: true);

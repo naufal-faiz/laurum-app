@@ -12,7 +12,13 @@ class DriftChangeMonitor {
   int _revision = 0;
   Stream<int> get stream => _changes.stream;
   void start() {
-    _subscription = db.tableUpdates().listen((_) => _changes.add(++_revision));
+    // Device preferences and sync bookkeeping do not change business query data.
+    const metadata = {'local_settings', 'outbox', 'sync_cursors'};
+    _subscription = db.tableUpdates().listen((updates) {
+      if (updates.any((update) => !metadata.contains(update.table))) {
+        _changes.add(++_revision);
+      }
+    });
   }
 
   Future<void> dispose() async {

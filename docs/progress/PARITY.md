@@ -35,6 +35,16 @@ dari daftar diff di atas. Tidak ada kasus BE-7 pada daftar ini.
 | Printer dan struk | Printer tersimpan | `printer_id`/`printer_name` ditulis saat connect, tidak pernah dibaca | disambung ulang otomatis saat halaman Printer dibuka (`printerRestoreProvider`), diam bila printer mati | `LocalSettingsRepository` + `PrintService.connect` | spec 06-printer-struk:22; permintaan pengguna 12 Nov 2026 | BE-5a: tanpa state atau tabel baru | terverifikasi |
 
 ## Log tugas backend
+- 13 Nov 2026, flicker Bluetooth/impor kontak: aksi dan data tersimpan tetap sama.
+  DriftChangeMonitor tidak mengirim invalidasi bisnis untuk local_settings/outbox/
+  sync_cursors; subscriber sinkronisasi memakai stream sendiri. Kontak HP dibaca
+  sekali per sesi impor; perubahan pelanggan hanya memetakan ulang duplikat.
+  Printer/daftar impor mempertahankan konten saat reload. Sumber: laporan pengguna,
+  spec 06/17; tes device_metadata_refresh/device_work_refresh dan kedua tes visibility.
+  Pengguna melarang rebuild APK. Diagnosis ADB nirkabel pada SM-N975F: scan/connect
+  berjalan, Skia aktif, pengguna tidak melihat kedip pada percobaan ini di APK lama.
+  Layar putih menyeluruh belum berhasil direproduksi; perbaikan refresh teruji otomatis.
+  check_all: SEMUA HIJAU (1182 lulus/1 skip), 6 tes regresi baru, tanpa rebuild APK.
 - 12 Nov 2026, APK laundry rumah: tidak ada aksi UI yang berubah. Release memakai
   Drift + konfigurasi Supabase publik yang tersedia, DEMO_SEED nonaktif. Izin INTERNET
   tersedia di manifest utama agar login/sinkronisasi berjalan pada release.

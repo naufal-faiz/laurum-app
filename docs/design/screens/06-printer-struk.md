@@ -43,6 +43,10 @@ Interaksi:
 State: memuat skeleton, gagal memuat + Coba lagi, belum terhubung, Bluetooth mati,
 daftar printer kosong, cetak gagal, cetak sukses.
 
+Skeleton hanya untuk pemuatan awal; pembaruan pengaturan di latar belakang tetap
+menampilkan kontrol yang sudah terpasang. Penulisan preferensi printer dan metadata
+sinkronisasi tidak memuat ulang query bisnis (DriftChangeMonitor).
+
 Format: ReceiptFormatter 32 kolom; ReceiptPreview mono 11/16; Formatters untuk tanggal.
 
 Selisih terhadap .pen: tanpa tab Printer/Tampilan struk (satu halaman gulir), tanpa

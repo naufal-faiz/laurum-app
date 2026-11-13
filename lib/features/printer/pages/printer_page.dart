@@ -44,6 +44,7 @@ class PrinterPage extends ConsumerWidget {
         ],
       ),
       body: settings.when(
+        skipLoadingOnReload: true,
         loading: () => Column(
           spacing: AppSpacing.cardGap,
           children: [for (var i = 0; i < 4; i++) const AppSkeleton()],
