@@ -35,6 +35,15 @@ dari daftar diff di atas. Tidak ada kasus BE-7 pada daftar ini.
 | Printer dan struk | Printer tersimpan | `printer_id`/`printer_name` ditulis saat connect, tidak pernah dibaca | disambung ulang otomatis saat halaman Printer dibuka (`printerRestoreProvider`), diam bila printer mati | `LocalSettingsRepository` + `PrintService.connect` | spec 06-printer-struk:22; permintaan pengguna 12 Nov 2026 | BE-5a: tanpa state atau tabel baru | terverifikasi |
 
 ## Log tugas backend
+- 13 Nov 2026, diagnosis lanjut resume WhatsApp: kedip kembali saat printer terhubung.
+  Pada APK lama, software rendering dan TextureView (dibuktikan hierarchy/mapping)
+  sama-sama masih berkedip menurut pengguna. Perubahan native eksperimental dibatalkan.
+  Pengguna menghapus APK lama dan mengizinkan debug ulang kode terbaru di HP lewat
+  koneksi nirkabel. Build debug diizinkan; APK release tidak dibangun ulang.
+  Flutter debug terbaru berhasil dipasang/dijalankan. Pengguna menyatakan belum kedip
+  setelah dicoba berulang; log mencatat 2 startScan, 1 connect, 0 error Flutter.
+  Renderer eksperimental dibatalkan; kode tetap 42e284f. Debugger dilepas, app tetap
+  terpasang; perilaku release baru belum diverifikasi karena release belum dibangun.
 - 13 Nov 2026, flicker Bluetooth/impor kontak: aksi dan data tersimpan tetap sama.
   DriftChangeMonitor tidak mengirim invalidasi bisnis untuk local_settings/outbox/
   sync_cursors; subscriber sinkronisasi memakai stream sendiri. Kontak HP dibaca
