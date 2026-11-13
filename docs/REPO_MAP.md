@@ -330,7 +330,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/customers/pages/
 - customer_deposit_page.dart (71): CustomerDepositPage
 - customer_detail_page.dart (67): CustomerDetailPage
-- customer_directory_page.dart (68): CustomerDirectoryPage
+- customer_directory_page.dart (71): CustomerDirectoryPage
 - customer_edit_sheet.dart (68): CustomerEditSheet
 - customer_import_page.dart (68): CustomerImportPage
 - customer_savings_history_page.dart (63): CustomerSavingsHistoryPage
@@ -341,6 +341,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_detail_data.dart (51): CustomerMovement, CustomerDetailData, customerDetailProvider
 - customer_directory_controller.dart (20): CustomerDirectoryFilter, CustomerDirectorySearch, customerDirectoryFilterProvider, customerDirectorySearchProvider
 - customer_directory_data.dart (81): CustomerDirectoryRow, customerSummariesProvider, customerDirectoryProvider
+- customer_directory_expansion.dart (17): CustomerDirectoryExpansion, customerDirectoryExpansionProvider
 - customer_edit_controller.dart (89): CustomerEditController, customerEditProvider
 - customer_edit_state.dart (36): CustomerEditState
 - customer_history_offsets.dart (6): customerHistoryOffsetsProvider
@@ -351,8 +352,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/customers/widgets/
 - customer_deposit_form_section.dart (88): CustomerDepositFormSection
-- customer_directory_actions_section.dart (52): CustomerDirectoryActionsSection
-- customer_directory_list_section.dart (92): CustomerDirectoryListSection
+- customer_directory_actions_section.dart (55): CustomerDirectoryActionsSection
+- customer_directory_footer_section.dart (26): CustomerDirectoryFooterSection
+- customer_directory_list_section.dart (104): CustomerDirectoryListSection
 - customer_edit_form_section.dart (65): CustomerEditFormSection
 - customer_header_section.dart (21): CustomerHeaderSection
 - customer_import_list_section.dart (94): CustomerImportListSection
@@ -894,8 +896,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_detail_data_test.dart (61):
 - customer_detail_page_test.dart (86):
 - customer_detail_states_test.dart (60):
-- customer_directory_actions_section_test.dart (63):
+- customer_directory_actions_section_test.dart (71):
 - customer_directory_data_test.dart (39):
+- customer_directory_footer_section_test.dart (27):
+- customer_directory_limit_test.dart (71):
 - customer_directory_states_test.dart (64):
 - customer_directory_test.dart (100):
 - customer_directory_whatsapp_test.dart (30):

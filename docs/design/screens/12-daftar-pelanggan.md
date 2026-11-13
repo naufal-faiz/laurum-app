@@ -12,6 +12,7 @@ Implementasi proposal027 selesai; semua butir paritas diverifikasi.
 | Header | jumlah pelanggan dan indikator sinkron dari sumber yang sama | [x] |
 | Filter | customerDirectoryFilterProvider; Semua/Ada piutang/Punya tabungan; jumlah dari semua rows | [x] |
 | Cari | customerDirectorySearchProvider; normalisasi nama/nomor; hapus pencarian | [x] |
+| Lihat semua | awal10 hasil setelah filter/search; ekspansi semua hasil; reset saat query/filter berubah; izin eksplisit pengguna | [x] |
 | Impor | context.push('/pelanggan/impor') | [x] |
 | Tambah | AddCustomerSheet.show(forOrder: false); sukses mereset filter/search | [x] |
 | Buka | context.push('/pelanggan/$id') | [x] |
@@ -25,14 +26,32 @@ Implementasi proposal027 selesai; semua butir paritas diverifikasi.
 - Header jumlah pemilik piutang belum tersedia pada API Section; jumlah pelanggan
   dipertahankan dahulu tanpa mengubah pembacaan provider shell.
 - Angka/nama Figma hanya contoh; data tetap dari repository.
-- Seluruh hasil tetap dapat digulir; tidak membatasi tiga baris atau menambah Lihat semua.
+- Revisi pengguna: tampil awal maksimal10 hasil; Lihat semua membuka seluruh hasil
+  di daftar yang sama, bukan rute baru. Batas diterapkan setelah filter/pencarian.
 - Informasi DP dan Sisa dipertahankan meski tidak tampil pada contoh Figma.
 - Margin24/gap10/12 memakai token; font minimum/area sentuh mengikuti keputusan global.
 - Tinggi aksi48 sesuai revisi sebelumnya; chip tetap horizontal dan dapat digulir.
 - Frame detail pelanggan4294969558 dipilih pengguna untuk irisan berikutnya.
 - Status memakai AppStatusText/AppText yang tersedia, bukan chip baru; DP/Sisa tetap.
 - Tombol WhatsApp memakai tileSuccess48, bukan tombol32 pada contoh frame.
-- Label Pelanggan baru dapat membungkus; kedua tombol tetap sejajar dan sama tinggi.
+- Kedua tombol memakai AppButtonSize.small (teks label), tinggi sentuh tetap48;
+  impor memakai AppIcons.download. Pada layar acuan label tampil satu baris.
+
+### Revisi batas10 dan Lihat semua — disetujui pengguna
+- Pengguna secara eksplisit mengizinkan perubahan perilaku dan zona state terkait,
+  termasuk melewati batasan AGENTS.md yang diperlukan untuk permintaan ini.
+- CustomerDirectoryExpansion menyimpan status Lihat semua dalam Riverpod, dibaca Page;
+  Section menerima showAll/onShowAll. Tidak ada perubahan repository/skema/rute.
+- Perubahan filter atau pencarian mereset ekspansi. Jumlah chip tetap seluruh pelanggan.
+- Footer menampilkan jumlah hasil/total cocok; Lihat semua hanya jika hasil lebih10.
+- Hasil kosong tidak menampilkan footer; hasil10atau kurang tidak menampilkan link.
+- Tidak perlu proposal komponen baru: footer adalah Section sefitur, tersusun dari
+  AppText/InlineLink yang terdaftar; API shared, token dan dependensi tetap.
+- Tes terarah15lulus; check_all SEMUA HIJAU1222lulus/2skip Supabase lokal, exit0.
+- Tes lama tidak dilemahkan: actions_section_test menambah assertion ikon/ukuran;
+  limit_test menguji ekspansi10ke48, reset filter/search dan pencarian pelanggan terakhir;
+  footer_section_test menguji ringkasan dan callback pada lebar272.
+- Golden customer_directory diperbarui dan diperiksa; keyboard300dp lulus suite penuh.
 
 ### Implementasi proposal027
 - CustomerRow: padding12, status Wrap berjarak8 dengan runSpacing6, WhatsApp tileSuccess;

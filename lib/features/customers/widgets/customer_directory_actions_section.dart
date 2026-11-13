@@ -18,6 +18,8 @@ class CustomerDirectoryActionsSection extends StatelessWidget {
       height: AppSpacing.touchTarget,
       child: AppButton(
         'Impor kontak',
+        size: AppButtonSize.small,
+        icon: AppIcons.download,
         variant: AppButtonVariant.actionOutline,
         onPressed: onImport,
       ),
@@ -26,6 +28,7 @@ class CustomerDirectoryActionsSection extends StatelessWidget {
       height: AppSpacing.touchTarget,
       child: AppButton(
         'Pelanggan baru',
+        size: AppButtonSize.small,
         variant: AppButtonVariant.action,
         icon: AppIcons.add,
         onPressed: onAdd,

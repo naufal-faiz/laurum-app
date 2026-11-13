@@ -2,45 +2,46 @@
 Diperbarui: 2026-11-13 | Cabang ui/pelanggan
 
 ## Sesi aktif
-Redesign daftar pelanggan selesai; dasar irisan4f14852, persiapan c07610e.
-Frame Pelanggan4294969460 dari docs/design/new-design-laurum.figcraft.
-Frame Detail Pelanggan4294969558 dipilih untuk irisan berikutnya.
+Revisi daftar pelanggan: batas10/Lihat semua/ikon impor/teks tombol; dasar da59bdd.
+Frame Pelanggan4294969460; snapshot spec12, tidak dibaca ulang.
+Frame Detail Pelanggan4294969558 menunggu irisan berikutnya.
 
 ## Status irisan
-- Proposal027 disetujui pengguna: ya lakukan; implementasi/paritas spec12 lengkap.
-- CustomerRow padding12, status sejajar/wrap, WhatsApp tileSuccess, ringkasan muted.
-- Daftar horizontal24/vertikal12/gap10; aksi sejajar pada ruang cukup, tinggi48.
-- Provider, callback, DP/Sisa, tabungan, filter, pencarian dan semua pelanggan tetap.
-- Tes lama tetap; dua tes baru untuk aksi sejajar dan DP/Sisa pada kartu sempit.
-- Dua golden diperbarui: customer_row/customer_directory; keduanya diperiksa.
-- Visual belum diverifikasi manual pada perangkat; screenshot emulator tidak diambil.
-- Tidak ada perubahan zona beku, registry, token, dependensi atau desain FigCraft.
+- Awal maksimal10 hasil setelah filter/pencarian; Lihat semua membuka seluruh hasil.
+- Footer jumlah ditampilkan/total; link hanya bila hasil melebihi10; kosong tanpa footer.
+- Jumlah chip tetap dari seluruh pelanggan; pencarian tetap menemukan di luar10 awal.
+- Ekspansi memakai CustomerDirectoryExpansion; reset saat filter/search berubah.
+- Hanya Page membaca provider baru; Section menerima data/callback.
+- Tombol impor memakai AppIcons.download; kedua aksi AppButtonSize.small, tinggi48.
+- Tidak ada perubahan repository/skema/rute/shared/token/dependensi/uang.
+- Golden customer_directory diperbarui dan diperiksa; tes lama tidak dilemahkan.
+- Empat tes baru: state reset, ekspansi10ke48, pencarian terakhir, footer sempit/callback.
+- Visual belum diverifikasi manual pada HP; tidak mengambil screenshot emulator.
 
 ## Keputusan pengguna terbaru
-- Mode Redesign UI dilanjutkan; branch ui/pelanggan dari backend-newdesign.
-- Proposal027 disetujui 13 Nov 2026; detail pelanggan adalah irisan berikutnya.
+- Pengguna meminta batas10, Lihat semua, ikon impor dan teks tombol lebih kecil.
+- Pengguna eksplisit mengizinkan melewati batas AGENTS.md yang diperlukan;
+  izin dipakai untuk perilaku baru dan berkas state ekspansi, dicatat juga di spec12.
 - Merge kembali ke backend-newdesign HARUS melalui persetujuan eksplisit pengguna.
-- Hanya Nama pelanggan wajib; kebijakan detail/struk tanpa nomor tetap berlaku.
 - Pertahankan data kedua HP; jangan uninstall/hapus DB/outbox.
-- Data safety Play Store mencantumkan Contacts; iOS belum diuji.
+- Hanya Nama wajib; kebijakan detail/struk tanpa nomor tetap; Contacts Data safety wajib.
 
 ## Belum di-commit
-Seluruh perubahan irisan dicakup commit feat(ui) penyelesaian sesi ini.
+Revisi dicakup satu commit fix(ui) penyelesaian sesi ini.
 android/build/ tetap artefak tak terlacak sesi sebelumnya; tidak dimasukkan Git.
 
 ## Langkah berikutnya
-1. Pengguna meninjau daftar pelanggan; bila perlu build untuk uji perangkat.
-2. Lanjutkan Detail Pelanggan4294969558 sebagai irisan berikutnya setelah tinjauan.
-3. Jumlah pemilik piutang pada header memerlukan izin pembacaan data shell.
-4. Merge ke backend-newdesign hanya setelah pengguna memberi persetujuan.
+1. Tinjau revisi di HP melalui hot restart/build branch ui/pelanggan.
+2. Lanjutkan Detail Pelanggan4294969558 setelah daftar ditinjau.
+3. Header jumlah pemilik piutang belum diubah; lihat selisih spec12.
+4. Merge ke backend-newdesign hanya dengan persetujuan pengguna.
 
 ## Blocker
-Tidak ada untuk irisan daftar; selisih header jumlah piutang dicatat di spec12.
-Supabase lokal tidak tersedia; dua tes integrasi nyata dilewati, bukan dinyatakan lulus.
+Tidak ada untuk revisi; Supabase lokal tidak tersedia, dua tes integrasi dilewati.
 
 ## Bukti terakhir
-- Tes terarah14lulus; analisis lima berkas bersih.
-- dart run tool/check_all.dart: SEMUA HIJAU,1218lulus/2skip,exit0.
-- Format1101berkas tanpa perubahan; flutter analyze/dart analyze bersih; check_arch OK.
-- REPO_MAP1179berkas; diff terhadap4f14852 hanya komponen/Section/tes/golden/docs.
-- Key/fokus dan keyboard pelanggan300dp lulus dalam suite penuh; belum diuji di iOS.
+- Tes terarah15lulus; golden daftar diperiksa.
+- dart run tool/check_all.dart: SEMUA HIJAU,1222lulus/2skip,exit0.
+- Format1105berkas tanpa perubahan; Flutter analyze/dart analyze bersih; check_arch OK.
+- REPO_MAP1183berkas; keyboard pelanggan300dp dan viewport320 lulus suite penuh.
+- Satu lint urutan impor diperbaiki sebelum check_all terakhir; iOS belum diuji.

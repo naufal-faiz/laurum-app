@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 import 'package:laurum/features/customers/widgets/customer_directory_actions_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
@@ -24,6 +25,13 @@ void main() {
     expect(imports.top, adds.top);
     expect(imports.size, adds.size);
     expect(imports.right, lessThan(adds.left));
+    final importButton = tester.widget<AppButton>(find.widgetWithText(AppButton, 'Impor kontak'));
+    expect(importButton.icon, AppIcons.download);
+    expect(importButton.size, AppButtonSize.small);
+    expect(
+      tester.widget<AppButton>(find.widgetWithText(AppButton, 'Pelanggan baru')).size,
+      AppButtonSize.small,
+    );
     expect(tester.takeException(), isNull);
   });
 

@@ -4,6 +4,7 @@ import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
 import 'package:laurum/features/customers/widgets/customer_directory_actions_section.dart';
+import 'package:laurum/features/customers/widgets/customer_directory_footer_section.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_search_field.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
@@ -21,11 +22,15 @@ class CustomerDirectoryListSection extends StatelessWidget {
     required this.onAdd,
     required this.onOpen,
     required this.onContact,
+    required this.showAll,
+    required this.onShowAll,
     super.key,
   });
   final List<CustomerDirectoryRow> rows;
   final int filter;
   final String search;
+  final bool showAll;
+  final VoidCallback onShowAll;
   final ValueChanged<int> onFilter;
   final ValueChanged<String> onSearch;
   final VoidCallback onImport, onAdd;
@@ -33,7 +38,8 @@ class CustomerDirectoryListSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final visible = filterCustomers(rows, filter: filter, search: search);
+    final matches = filterCustomers(rows, filter: filter, search: search);
+    final visible = showAll ? matches : matches.take(10).toList();
     return ListView(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.xlarge,
@@ -85,6 +91,12 @@ class CustomerDirectoryListSection extends StatelessWidget {
               onTap: () => onOpen(row.customer.id),
               onContact: row.customer.phone.isEmpty ? null : () => onContact(row.customer.phone),
             ),
+          ),
+        if (visible.isNotEmpty)
+          CustomerDirectoryFooterSection(
+            shown: visible.length,
+            total: matches.length,
+            onShowAll: onShowAll,
           ),
       ],
     );
