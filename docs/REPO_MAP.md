@@ -14,7 +14,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ## Berkas (jumlah baris): nama deklarasi
 
 ### lib/
-- app.dart (89): LaurumApp
+- app.dart (90): LaurumApp
 
 ### lib/core/domain/
 - business_profile.dart (50): BusinessProfile
@@ -963,6 +963,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - local_auth_service_test.dart (18):
 - local_settings_test.dart (35):
 - locked_row_test.dart (25):
+- login_storage_readiness_test.dart (82):
 - menu_row_test.dart (25):
 - molecule_gallery.dart (30):
 - nominal_chips_test.dart (25):

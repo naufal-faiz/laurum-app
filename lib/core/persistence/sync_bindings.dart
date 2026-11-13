@@ -19,7 +19,7 @@ final syncConnectionMonitorProvider = Provider<ConnectionMonitor>((ref) {
 final syncBindingsProvider = Provider<void>((ref) {
   if (ref.watch(storageGateEnabledProvider)) {
     final store = ref.watch(accountStoreProvider);
-    if (!store.hasValue || store.value == null) return;
+    if (store.isLoading || store.hasError || !store.hasValue || store.value == null) return;
   }
   final service = ref.watch(syncServiceProvider);
   final monitor = ref.watch(syncConnectionMonitorProvider);

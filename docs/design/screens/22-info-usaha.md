@@ -16,6 +16,9 @@ Data dan provider:
   (judul AppBarRoot) dan ReceiptView/printer settings (struk).
 
 Validasi dan state:
+- Setelah login, gate lokal menunggu pembukaan penyimpanan akun selesai sebelum
+  form setup dibangun. Nilai storage sebelumnya tidak dianggap siap saat loading/error.
+  Gagal membuka storage memakai Coba lagi dengan sesi tetap aktif, tanpa login ulang.
 - Nama kosong -> 'Nama usaha wajib diisi.' dan tidak menyimpan.
 - Busy menandai tombol 'Menyimpan...'; gagal simpan memakai BannerMessage.
 

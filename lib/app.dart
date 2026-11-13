@@ -23,9 +23,10 @@ class LaurumApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(syncBindingsProvider);
     final storage = ref.watch(storageGateEnabledProvider) ? ref.watch(accountStoreProvider) : null;
-    final storageReady = storage == null || storage.hasValue;
+    final storageReady =
+        storage == null || (storage.hasValue && !storage.isLoading && !storage.hasError);
     var readingInitialData = false;
-    if (storage != null && storage.hasValue && storage.value != null) {
+    if (storageReady && storage?.value != null) {
       readingInitialData = [
         ref.watch(antreanDataProvider),
         ref.watch(customerDirectoryProvider),

@@ -3,6 +3,15 @@
 Aturan: AGENTS.md, Mode Backend (BE-2 sampai BE-6). Agent mengisi fakta dan menerapkan
 aturan BE-4/BE-5; kasus BE-7 menunggu keputusan pengguna.
 
+## Perbaikan login pertama
+Perbaikan login pertama (izin alur normal pengguna 13 Nov 2026):
+- Gate aplikasi dan binding sync menunggu storage akun selesai tanpa error;
+  nilai lama/null dari sebelum login tidak membuka form info usaha terlalu cepat.
+- Kegagalan pembukaan storage memakai retry lokal dengan sesi tetap aktif.
+  Konfirmasi keluar saat pengguna sengaja meninggalkan setup tetap sesuai spec 22.
+- Verifikasi: login_storage_readiness (dua skenario) dan check_all hijau,
+  1193 lulus/1 skip. APK 1.0.1 belum dibangun ulang dengan fix ini.
+
 ## Revisi UX printer, struk dan kontak
 Revisi pengguna 13 Nov 2026 (alur normal disetujui):
 - Daftar pelanggan: ikon WhatsApp membuka chat nomor terkait, menggantikan `tel:`.
