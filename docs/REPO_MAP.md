@@ -155,7 +155,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_download_service.dart (22): ReceiptDownloadService, FileReceiptDownloadService
 - receipt_pdf.dart (90):
 - receipt_pdf_rows.dart (49):
-- receipt_png.dart (67):
+- receipt_png.dart (77):
 - repository_providers.dart (51): businessRepositoryProvider, receiptSettingsRepositoryProvider, customerRepositoryProvider, serviceRepositoryProvider, orderRepositoryProvider, savingsRepositoryProvider, expenseRepositoryProvider, proposalRepositoryProvider, reportRepositoryProvider, transactionRunnerProvider
 - service_providers.dart (41): printServiceProvider, externalLauncherProvider, contactSourceProvider, photoPickerProvider, exportServiceProvider, authServiceProvider, localDataServiceProvider, syncServiceProvider
 - store_configuration.dart (10):
@@ -351,8 +351,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/customers/widgets/
 - customer_deposit_form_section.dart (88): CustomerDepositFormSection
-- customer_directory_actions_section.dart (51): CustomerDirectoryActionsSection
-- customer_directory_list_section.dart (90): CustomerDirectoryListSection
+- customer_directory_actions_section.dart (52): CustomerDirectoryActionsSection
+- customer_directory_list_section.dart (92): CustomerDirectoryListSection
 - customer_edit_form_section.dart (65): CustomerEditFormSection
 - customer_header_section.dart (21): CustomerHeaderSection
 - customer_import_list_section.dart (94): CustomerImportListSection
@@ -757,7 +757,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - bottom_nav_bar.dart (102): BottomNavBar
 - confirm_modal.dart (89): ConfirmModal
 - customer_contact_card.dart (110): CustomerContactCard
-- customer_row.dart (102): CustomerRow
+- customer_row.dart (99): CustomerRow
 - expense_row.dart (57): ExpenseRow
 - nota_card.dart (75): NotaCard
 - numpad.dart (62): NumpadVariant, Numpad
@@ -894,7 +894,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_detail_data_test.dart (61):
 - customer_detail_page_test.dart (86):
 - customer_detail_states_test.dart (60):
-- customer_directory_actions_section_test.dart (41):
+- customer_directory_actions_section_test.dart (63):
 - customer_directory_data_test.dart (39):
 - customer_directory_states_test.dart (64):
 - customer_directory_test.dart (100):
@@ -903,7 +903,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_import_page_test.dart (68):
 - customer_optional_fields_test.dart (70):
 - customer_profile_section_test.dart (34):
-- customer_row_test.dart (39):
+- customer_row_test.dart (72):
 - customer_savings_section_test.dart (48):
 - date_group_header_test.dart (24):
 - detail_form_scaffold_test.dart (93):
@@ -1170,7 +1170,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_formatter_test.dart (70):
 - receipt_icon_tiles_test.dart (38):
 - receipt_page_test.dart (77):
-- receipt_png_preview_test.dart (105):
+- receipt_png_preview_test.dart (109):
 - receipt_preview_test.dart (32):
 - receipt_reconnect_page_test.dart (61): SlowReceiptPrinter
 - receipt_template_lines.dart (29):

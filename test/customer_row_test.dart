@@ -36,4 +36,37 @@ void main() {
     expect(opened, 1);
   });
   registerMoleculeGolden('customer_row', customerRowUseCase.builder);
+  testWidgets('customer balances wrap without losing DP or remaining debt on narrow cards', (
+    tester,
+  ) async {
+    for (final width in [272.0, 342.0]) {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.light,
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: width,
+                child: CustomerRow(
+                  name: 'Pelanggan dengan nama panjang',
+                  phone: '',
+                  paid: 25000,
+                  outstanding: 31500,
+                  savings: 50000,
+                  onTap: () {},
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      expect(find.text('DP Rp25.000'), findsOneWidget);
+      expect(find.text('Sisa Rp31.500'), findsOneWidget);
+      expect(find.text('Tabungan Rp50.000'), findsOneWidget);
+      final contact = tester.widget<AppIconButton>(find.byType(AppIconButton));
+      expect(contact.variant, AppIconButtonVariant.tileSuccess);
+      expect(contact.onPressed, isNull);
+      expect(tester.takeException(), isNull);
+    }
+  });
 }

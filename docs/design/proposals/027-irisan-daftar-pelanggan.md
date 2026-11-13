@@ -1,6 +1,6 @@
 # 027 — Irisan daftar pelanggan
 
-Status: MENUNGGU PERSETUJUAN pengguna (UI-13).
+Status: DISETUJUI pengguna 13 Nov 2026: "ya lakukan" (UI-13).
 Branch ui/pelanggan dari backend-newdesign, dasar 4f14852.
 Merge kembali hanya dengan persetujuan eksplisit pengguna.
 Acuan: LAURUM · Pelanggan, frame 4294969460 (390 × 844).

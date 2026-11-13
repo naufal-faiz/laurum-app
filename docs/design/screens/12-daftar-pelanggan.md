@@ -1,25 +1,25 @@
 # 12 - Pelanggan - Daftar Pelanggan
 ## Redesign FigCraft — persiapan 13 Nov 2026
 Frame pilihan: `LAURUM · Pelanggan` (`4294969460`, 390 × 844).
-Proposal027 menunggu persetujuan. Struktur frame dibaca sekali sesi ini.
+Proposal027 disetujui pengguna 13 Nov 2026 ("ya lakukan"). Struktur frame dibaca sekali.
 
 ### Paritas redesign
-Belum dicentang: implementasi belum dimulai.
+Implementasi proposal027 selesai; semua butir paritas diverifikasi.
 
 | Butir | Data/aksi/keadaan yang dipertahankan | Verifikasi |
 |---|---|---|
-| Data | customerDirectoryProvider; nama/nomor/inisial/orderCount/historyTotal/debt/savings/paid | [ ] |
-| Header | jumlah pelanggan dan indikator sinkron dari sumber yang sama | [ ] |
-| Filter | customerDirectoryFilterProvider; Semua/Ada piutang/Punya tabungan; jumlah dari semua rows | [ ] |
-| Cari | customerDirectorySearchProvider; normalisasi nama/nomor; hapus pencarian | [ ] |
-| Impor | context.push('/pelanggan/impor') | [ ] |
-| Tambah | AddCustomerSheet.show(forOrder: false); sukses mereset filter/search | [ ] |
-| Buka | context.push('/pelanggan/$id') | [ ] |
-| Kontak | launcher sama; phone pelanggan/message kosong; disabled jika nomor kosong | [ ] |
-| Uang | Belum bayar atau DP + Sisa; tabungan; Formatters tetap | [ ] |
-| Keadaan | 4 skeleton, gagal/retry, kosong, tidak ditemukan, terisi | [ ] |
-| Key/fokus | Page/list/actions/header/CustomerRow tanpa Key eksplisit; host antrean-golden tetap | [ ] |
-| Keyboard | pencarian inset300dp, viewport320, teks besar, semua aksi terjangkau | [ ] |
+| Data | customerDirectoryProvider; nama/nomor/inisial/orderCount/historyTotal/debt/savings/paid | [x] |
+| Header | jumlah pelanggan dan indikator sinkron dari sumber yang sama | [x] |
+| Filter | customerDirectoryFilterProvider; Semua/Ada piutang/Punya tabungan; jumlah dari semua rows | [x] |
+| Cari | customerDirectorySearchProvider; normalisasi nama/nomor; hapus pencarian | [x] |
+| Impor | context.push('/pelanggan/impor') | [x] |
+| Tambah | AddCustomerSheet.show(forOrder: false); sukses mereset filter/search | [x] |
+| Buka | context.push('/pelanggan/$id') | [x] |
+| Kontak | launcher sama; phone pelanggan/message kosong; disabled jika nomor kosong | [x] |
+| Uang | Belum bayar atau DP + Sisa; tabungan; Formatters tetap | [x] |
+| Keadaan | 4 skeleton, gagal/retry, kosong, tidak ditemukan, terisi | [x] |
+| Key/fokus | Page/list/actions/header/CustomerRow tanpa Key eksplisit; host antrean-golden tetap | [x] |
+| Keyboard | pencarian inset300dp, viewport320, teks besar, semua aksi terjangkau | [x] |
 
 ### Selisih desain
 - Header jumlah pemilik piutang belum tersedia pada API Section; jumlah pelanggan
@@ -30,6 +30,19 @@ Belum dicentang: implementasi belum dimulai.
 - Margin24/gap10/12 memakai token; font minimum/area sentuh mengikuti keputusan global.
 - Tinggi aksi48 sesuai revisi sebelumnya; chip tetap horizontal dan dapat digulir.
 - Frame detail pelanggan4294969558 dipilih pengguna untuk irisan berikutnya.
+- Status memakai AppStatusText/AppText yang tersedia, bukan chip baru; DP/Sisa tetap.
+- Tombol WhatsApp memakai tileSuccess48, bukan tombol32 pada contoh frame.
+- Label Pelanggan baru dapat membungkus; kedua tombol tetap sejajar dan sama tinggi.
+
+### Implementasi proposal027
+- CustomerRow: padding12, status Wrap berjarak8 dengan runSpacing6, WhatsApp tileSuccess;
+  ringkasan memakai AppCard muted/padding sync. API dan nilai uang tetap.
+- Daftar: horizontal24/vertikal12, gap10; tombol sejajar jika konten minimal320 dan
+  skala di bawah1,3; selain itu bertumpuk. Tinggi tetap48.
+- Tes lama tidak diubah/dilemahkan; customer_row_test menambah kasus DP/Sisa sempit,
+  customer_directory_actions_section_test menambah kasus aksi sejajar pada lebar342.
+- Dua golden diperbarui: customer_row dan customer_directory; keduanya diperiksa.
+- Tes terarah14lulus; analisis lima berkas bersih. check_all SEMUA HIJAU: 1218 lulus, 2 skip integrasi Supabase lokal; exit0.
 
 Rute: /pelanggan   Prompt: 50 (bagian pertama)
 Frame .pen: "Pelanggan - Daftar Pelanggan"; State Pelanggan kosong,

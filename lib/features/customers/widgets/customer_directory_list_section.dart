@@ -35,11 +35,13 @@ class CustomerDirectoryListSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final visible = filterCustomers(rows, filter: filter, search: search);
     return ListView(
-      padding: const EdgeInsets.all(AppSpacing.screenPadding)
-          .add(const EdgeInsets.only(bottom: AppDimensions.navCreateSize / 2)),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.xlarge,
+        vertical: AppSpacing.medium,
+      ).add(const EdgeInsets.only(bottom: AppDimensions.navCreateSize / 2)),
       children: [
         CustomerDirectoryActionsSection(onImport: onImport, onAdd: onAdd),
-        const SizedBox(height: AppSpacing.cardGap),
+        const SizedBox(height: AppSpacing.smallMedium),
         if (rows.isNotEmpty) ...[
           AppSearchField(
             label: 'Nama pelanggan',
@@ -48,7 +50,7 @@ class CustomerDirectoryListSection extends StatelessWidget {
             value: search,
             onChanged: onSearch,
           ),
-          const SizedBox(height: AppSpacing.cardGap),
+          const SizedBox(height: AppSpacing.smallMedium),
           ChipBar(
             labels: [
               'Semua (${rows.length})',
@@ -58,7 +60,7 @@ class CustomerDirectoryListSection extends StatelessWidget {
             selectedIndex: filter,
             onSelected: onFilter,
           ),
-          const SizedBox(height: AppSpacing.cardGap),
+          const SizedBox(height: AppSpacing.smallMedium),
         ],
         if (visible.isEmpty)
           EmptyState(
@@ -70,7 +72,7 @@ class CustomerDirectoryListSection extends StatelessWidget {
           ),
         for (final row in visible)
           Padding(
-            padding: const EdgeInsets.only(bottom: AppSpacing.cardGap),
+            padding: const EdgeInsets.only(bottom: AppSpacing.smallMedium),
             child: CustomerRow(
               name: row.customer.name,
               phone: row.customer.phone,
