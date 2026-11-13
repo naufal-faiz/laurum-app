@@ -28,9 +28,8 @@ class CustomerDirectoryPage extends ConsumerWidget {
         onImport: () => context.push('/pelanggan/impor'),
         onAdd: () => _addCustomer(context, ref),
         onOpen: (id) => context.push('/pelanggan/$id'),
-        onContact: (phone) => ref
-            .read(externalLauncherProvider)
-            .launchUrl('tel:${phone.replaceAll(RegExp(r'\D'), '')}'),
+        onContact: (phone) =>
+            ref.read(externalLauncherProvider).launchWhatsApp(phone: phone, message: ''),
       );
     }
     if (snapshot.hasError) {

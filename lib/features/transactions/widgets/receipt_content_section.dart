@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/features/printer/state/printer_reconnect.dart';
 import 'package:laurum/features/transactions/state/receipt_document.dart';
 import 'package:laurum/features/transactions/state/receipt_download.dart';
 import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
@@ -22,11 +23,13 @@ class ReceiptContentSection extends StatelessWidget {
     required this.onSettings,
     required this.onOrder,
     this.onRecord,
+    this.reconnect = (busy: false, result: null),
     super.key,
   });
   final ReceiptView view;
   final ReceiptPrintState printState;
   final ReceiptDownloadState download;
+  final PrinterReconnectState reconnect;
   final PrintStatus printerStatus;
   final String? printerName;
   final VoidCallback onRetry, onSettings, onOrder;
@@ -39,6 +42,7 @@ class ReceiptContentSection extends StatelessWidget {
       ReceiptStatusSection(
         view: view,
         printState: printState,
+        reconnect: reconnect,
         printerStatus: printerStatus,
         printerName: printerName,
         onRetry: onRetry,
@@ -54,7 +58,8 @@ class ReceiptContentSection extends StatelessWidget {
       ReceiptLinksSection(busy: printState.printing, onOrder: onOrder, onRecord: onRecord),
       if (download.error != null)
         BannerMessage(message: download.error!, variant: BannerMessageVariant.error),
-      if (download.notice != null) BannerMessage(message: download.notice!),
+      if (download.notice != null)
+        BannerMessage(message: download.notice!, variant: BannerMessageVariant.success),
     ],
   );
 }

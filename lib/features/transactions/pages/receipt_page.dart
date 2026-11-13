@@ -7,6 +7,8 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/orders/pages/payment_record_flow.dart';
 import 'package:laurum/features/orders/state/order_completion_controller.dart';
+import 'package:laurum/features/printer/state/printer_connection.dart';
+import 'package:laurum/features/printer/state/printer_reconnect.dart';
 import 'package:laurum/features/transactions/state/receipt_download.dart';
 import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
 import 'package:laurum/features/transactions/state/receipt_view.dart';
@@ -26,8 +28,11 @@ class ReceiptPage extends ConsumerWidget {
     final printing = ref.watch(receiptPrintProvider);
     final completion = ref.watch(orderCompletionProvider(orderId));
     final download = ref.watch(receiptDownloadProvider);
+    final reconnect = ref.watch(printerReconnectProvider);
+    final connecting = ref.watch(printerConnectionProvider).busy;
     final completing = GoRouterState.of(context).uri.queryParameters['complete'] == '1';
-    final busy = printing.printing || completion.busy || download.busy;
+    final busy =
+        printing.printing || completion.busy || download.busy || reconnect.busy || connecting;
     final printer = ref.watch(printServiceProvider);
     final controller = ref.read(receiptPrintProvider.notifier);
     return FormScaffold(
@@ -60,6 +65,7 @@ class ReceiptPage extends ConsumerWidget {
             ? const EmptyState(title: 'Nota tidak ditemukan', icon: AppIcons.receipt)
             : ReceiptContentSection(
                 view: receipt,
+                reconnect: reconnect,
                 printState: (
                   printing: busy,
                   error: completing ? completion.error ?? printing.error : printing.error,
@@ -68,7 +74,10 @@ class ReceiptPage extends ConsumerWidget {
                 download: download,
                 printerStatus: printer.status,
                 printerName: printer.connectedPrinter?.name,
-                onRetry: () => _print(ref, receipt, completing),
+                onRetry: () {
+                  controller.clearResult();
+                  ref.read(printerReconnectProvider.notifier).reconnect();
+                },
                 onSettings: () => context.push('/lainnya/printer'),
                 onOrder: () => context.push('/order/$orderId'),
                 onRecord:

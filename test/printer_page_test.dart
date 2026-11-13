@@ -67,14 +67,14 @@ void main() {
     expect(find.text('Cetak gagal. Periksa printer.'), findsOneWidget);
   });
 
-  testWidgets('bluetooth off opens the enable sheet before discovery', (tester) async {
+  testWidgets('bluetooth off warns without an activation sheet and can retry', (tester) async {
     final host = await pumpPrinter(tester, service: FakePrintService(bluetoothOn: false));
     await tester.tap(find.text('Cari printer'));
     await tester.pumpAndSettle();
-    expect(find.text('Aktifkan Bluetooth'), findsWidgets);
-    await tester.tap(find.text('Aktifkan Bluetooth').last);
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Cari printer'));
+    expect(find.text('Aktifkan Bluetooth terlebih dahulu, lalu cari lagi.'), findsWidgets);
+    expect(find.text('Aktifkan Bluetooth'), findsNothing);
+    host.service.bluetoothOn = true;
+    await tester.tap(find.text('Cari lagi'));
     await tester.pumpAndSettle();
     expect(find.text('Thermal 58mm'), findsOneWidget);
     expect(host.service.printedReceipts, isEmpty);

@@ -3,6 +3,7 @@ import 'package:laurum/core/services/local_settings_providers.dart';
 import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/features/printer/state/printer_state.dart';
+import 'package:laurum/features/printer/state/saved_printer.dart';
 
 final printerConnectionProvider =
     NotifierProvider<PrinterConnectionController, PrinterConnectionState>(
@@ -18,38 +19,37 @@ class PrinterConnectionController extends Notifier<PrinterConnectionState> {
 
   void _set(PrinterConnectionState Function(PrinterConnectionState current) change) =>
       state = change(state);
-
   void _fail(PrintStatus status, String notice) => _set(
     (s) => s.copyWith(status: status, busy: false, notice: notice, noticeError: true),
   );
-
   Future<PrintStatus> discover() async {
+    if (state.busy) return state.status;
     _set((s) => s.copyWith(busy: true, clearNotice: true));
     final service = ref.read(printServiceProvider);
     try {
       final devices = await service.discover();
       _set((s) => s.copyWith(devices: devices, status: service.status, busy: false));
     } on StateError {
-      _fail(PrintStatus.bluetoothOff, 'Bluetooth mati. Aktifkan untuk mencari printer.');
+      _fail(PrintStatus.bluetoothOff, 'Aktifkan Bluetooth terlebih dahulu, lalu cari lagi.');
     } on Object {
       _fail(service.status, 'Gagal mencari printer. Periksa izin Bluetooth.');
     }
     return state.status;
   }
 
-  Future<bool> connect(PrinterDevice device) async {
-    _set((s) => s.copyWith(busy: true, clearNotice: true));
+  Future<bool> connect(PrinterDevice device, {bool silent = false}) async {
+    if (state.busy) return false;
+    _set((s) => s.copyWith(busy: true, status: PrintStatus.connecting, clearNotice: true));
     final service = ref.read(printServiceProvider);
     var ok = false;
     try {
       ok = await service.connect(device);
+      if (ok) {
+        await rememberPrinter(ref.read(localSettingsRepositoryProvider), device);
+        ref.invalidate(savedPrinterProvider);
+      }
     } on Object {
       ok = false;
-    }
-    if (ok) {
-      final settings = ref.read(localSettingsRepositoryProvider);
-      await settings.setString('printer_id', device.id);
-      await settings.setString('printer_name', device.name);
     }
     _set(
       (s) => s.copyWith(
@@ -57,7 +57,12 @@ class PrinterConnectionController extends Notifier<PrinterConnectionState> {
         connected: service.connectedPrinter,
         clearConnected: service.connectedPrinter == null,
         busy: false,
-        notice: ok ? 'Terhubung ke ${device.name}.' : 'Gagal menghubungkan printer.',
+        clearNotice: silent,
+        notice: service.status == PrintStatus.bluetoothOff
+            ? 'Aktifkan Bluetooth terlebih dahulu, lalu coba lagi.'
+            : ok
+            ? 'Terhubung ke ${device.name}.'
+            : 'Gagal menghubungkan printer.',
         noticeError: !ok,
       ),
     );
@@ -71,6 +76,12 @@ class PrinterConnectionController extends Notifier<PrinterConnectionState> {
   }) async {
     final service = ref.read(printServiceProvider);
     if (service.status != PrintStatus.connected || service.connectedPrinter == null) {
+      _fail(
+        service.status,
+        service.status == PrintStatus.bluetoothOff
+            ? 'Aktifkan Bluetooth terlebih dahulu, lalu coba lagi.'
+            : 'Hubungkan printer terlebih dahulu.',
+      );
       return service.status;
     }
     final ok = await service.printReceipt(
@@ -91,7 +102,7 @@ class PrinterConnectionController extends Notifier<PrinterConnectionState> {
     try {
       await service.enableBluetooth();
     } on Object {
-      /* Keep the current status; the sheet explains the next step. */
+      // Preserve the existing status if the platform cannot enable Bluetooth.
     }
     _set((s) => s.copyWith(status: service.status, clearNotice: true));
   }

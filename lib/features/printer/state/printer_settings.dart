@@ -10,19 +10,23 @@ class PrinterSettingsState {
     required this.settings,
     required this.profile,
     this.notice,
+    this.noticeSuccess = false,
   });
   final ReceiptSettings settings;
   final BusinessProfile profile;
   final String? notice;
+  final bool noticeSuccess;
   PrinterSettingsState copyWith({
     ReceiptSettings? settings,
     BusinessProfile? profile,
     String? notice,
     bool clearNotice = false,
+    bool noticeSuccess = false,
   }) => PrinterSettingsState(
     settings: settings ?? this.settings,
     profile: profile ?? this.profile,
     notice: clearNotice ? null : notice ?? this.notice,
+    noticeSuccess: noticeSuccess,
   );
 }
 
@@ -88,6 +92,9 @@ class PrinterSettingsController extends AsyncNotifier<PrinterSettingsState> {
       current.settings,
       current.profile,
     );
-    _set((s) => s.copyWith(profile: profile, notice: 'Pengaturan struk disimpan.'));
+    _set(
+      (s) =>
+          s.copyWith(profile: profile, notice: 'Pengaturan struk disimpan.', noticeSuccess: true),
+    );
   }
 }

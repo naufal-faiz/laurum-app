@@ -50,7 +50,7 @@ void main() {
       find.text('Struk gagal dicetak. Pastikan printer menyala dan Bluetooth aktif.'),
       findsOneWidget,
     );
-    expect(find.byTooltip('Coba lagi'), findsOneWidget);
+    expect(find.byTooltip('Refresh printer'), findsOneWidget);
     expect(find.byTooltip('Pengaturan printer'), findsOneWidget);
 
     await tester.ensureVisible(find.byTooltip('WhatsApp'));

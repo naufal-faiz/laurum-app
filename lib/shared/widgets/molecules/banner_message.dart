@@ -7,7 +7,7 @@ import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
-enum BannerMessageVariant { info, warning, error }
+enum BannerMessageVariant { info, warning, error, success }
 
 class BannerMessage extends StatelessWidget {
   const BannerMessage({required this.message, super.key, this.variant = BannerMessageVariant.info});
@@ -19,6 +19,7 @@ class BannerMessage extends StatelessWidget {
       BannerMessageVariant.info => (AppColors.primaryTint, AppColors.primary, AppIcons.info),
       BannerMessageVariant.warning => (AppColors.warningTint, AppColors.warningInk, AppIcons.alert),
       BannerMessageVariant.error => (AppColors.errorTint, AppColors.errorInk, AppIcons.alert),
+      BannerMessageVariant.success => (AppColors.successTint, AppColors.successInk, AppIcons.check),
     };
     return Container(
       padding: AppMoleculeTokens.noticePadding,

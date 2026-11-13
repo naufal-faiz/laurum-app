@@ -24,10 +24,11 @@ Tabel dibuat sebelum implementasi; centang sesudah kode dan verifikasi.
 | Cetak state | receiptPrintProvider: printing/error/notice; controller yang sama | [x] |
 | Penyelesaian | orderCompletionProvider(orderId), query complete=1; _print dan guard lama | [x] |
 | Printer | printServiceProvider: status dan connectedPrinter.name | [x] |
-| Sibuk | printing.printing atau completion.busy atau download.busy; semua aksi footer nonaktif | [x] |
+| Sibuk | printing.printing, completion.busy, download.busy, reconnect.busy atau printerConnection.busy; aksi footer nonaktif | [x] |
 | Unduh | receiptDownloadProvider/service: dokumen sama, dialog simpan PDF, cegah duplikasi | [x] |
 | Hasil unduh | sukses/error ditampilkan; batal tanpa pesan sukses/error; state dilepas saat meninggalkan layar | [x] |
-| Cetak/retry | _print(ref, receipt, completing) dengan argumen tetap | [x] |
+| Cetak | _print(ref, receipt, completing) dengan argumen tetap | [x] |
+| Refresh printer | printerReconnectProvider; koneksi ulang printer aktif/tersimpan, tanpa cetak/penyelesaian order | [x] |
 | Printer settings | context.push('/lainnya/printer') | [x] |
 | WhatsApp | controller.sendWhatsApp(receipt) | [x] |
 | Selesai | pengganti label Ke beranda: context.go('/antrean'), tidak menyelesaikan order | [x] |
@@ -51,8 +52,9 @@ Tabel dibuat sebelum implementasi; centang sesudah kode dan verifikasi.
 - PDF mengikuti alamat/status/metode/tebal footer dari data yang sama; formatter thermal tetap.
 - Kartu printer dipindah ke atas pratinjau dan hanya berisi info printer;
   status lunas dan kalimat Pembayaran tersimpan pada kartu itu dihapus sesuai pengguna.
-- Reload (tooltip Coba lagi) saat error dan gerigi Pengaturan printer berada di satu kartu;
-  callback, pesan error/notice serta Catat pembayaran tetap.
+- Refresh printer selalu tersedia di kartu printer; loader selama menghubungkan ulang,
+  alert berhasil/gagal/Bluetooth mati/belum ada printer tersimpan sesudah proses.
+  Refresh tidak mencetak atau menyelesaikan order. Pengaturan printer tetap di kartu.
 - Label Ke beranda diganti Selesai sesuai permintaan; callback navigasi tetap, status order tidak berubah.
 - Usulan penempatan fungsi lama: status/error di body, Lihat detail sebagai tautan,
   Catat pembayaran di body bila tersedia; empat aksi utama tetap di footer.
@@ -66,9 +68,9 @@ Komposisi:
 - ReceiptDocument: kartu grafis berisi identitas usaha, nomor/tanggal/pelanggan, item,
   subtotal/diskon/total/pembayaran/sisa, status turunan dan footer; nomor nota tidak diulang.
 - ReceiptStatusSection: satu AppCard printer di atas pratinjau, nama/status terhubung,
-  ikon reload saat error dan gerigi pengaturan; tanpa duplikasi status bayar/konfirmasi.
+  refresh koneksi dan gerigi pengaturan; tanpa duplikasi status bayar/konfirmasi.
 - BannerMessage error 'Struk gagal dicetak. Pastikan printer menyala dan Bluetooth aktif.'
-  + AppIconButton reload 'Coba lagi' dan gerigi 'Pengaturan printer' di dalam kartu.
+  + AppIconButton 'Refresh printer' dan gerigi 'Pengaturan printer' di dalam kartu.
 - Lebar kartu 320/384 sesuai ReceiptSettings; ReceiptPreview thermal lama tetap utuh.
 - ReceiptActionsSection: Selesai + tiga ikon WhatsApp/Unduh/Cetak, tooltip/semantics tetap.
 - ReceiptLinksSection di body: Lihat detail, serta Catat pembayaran bila tersedia.
@@ -80,7 +82,8 @@ Data dan provider:
 - ExternalLauncher.launchWhatsApp: DeviceExternalLauncher pada build Drift, palsu untuk dummy/tes.
 
 Interaksi:
-- Cetak struk mengirim 32 kolom + paperMm/fontSize; sukses notice, gagal banner + retry.
+- Cetak struk mengirim 32 kolom + paperMm/fontSize; sukses notice hijau, gagal banner merah.
+  Mengulang cetak tetap melalui ikon Cetak; Refresh printer hanya menghubungkan ulang.
 - Pengaturan printer membuka /lainnya/printer.
 - WhatsApp membagikan gambar PNG berisi seluruh data struk dan pesan otomatis berisi
   nama pelanggan, nomor nota, serta nama usaha. Pengguna mengonfirmasi pengiriman di WhatsApp.
@@ -93,7 +96,7 @@ Interaksi:
 - Selesai ke /antrean; Lihat detail ke /order/:id.
 - Unduh membuat PDF dari data pratinjau dan membuka dialog simpan sistem; sukses notice,
   batal tidak mengubah nota atau memunculkan sukses, exception menjadi pesan umum.
-- Dibuka dari Selesaikan pada Detail dengan query complete=1: ikon cetak dan retry
+- Dibuka dari Selesaikan pada Detail dengan query complete=1: ikon cetak
   memakai orderCompletionProvider. Cetak berhasil baru menyelesaikan order; gagal
   atau kembali tetap aktif. Guard memeriksa ulang mode/status/COD saat mencetak.
   Membuka struk biasa tetap hanya mencetak tanpa mengubah status.

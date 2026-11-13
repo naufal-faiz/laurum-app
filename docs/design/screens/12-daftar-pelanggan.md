@@ -10,7 +10,7 @@ Template: RootScaffold dari RootShellPage; tanpa FooterBar (R7).
 | Judul/jumlah | AppPageHeader melalui CustomerHeaderSection; jumlah dari customerDirectoryProvider yang sama |
 | Status/sync | status shellSyncProvider tetap; avatar Pelanggan dihapus sesuai revisi final, akun melalui Lainnya |
 | Daftar/filter/search | rows/filter/search dan semua callback CustomerDirectoryPage tetap |
-| Impor/tambah/buka/telepon | rute,AddCustomerSheet,ExternalLauncher dan argumen tetap |
+| Impor/tambah/buka/WhatsApp | rute dan AddCustomerSheet tetap; ikon WhatsApp membuka chat nomor pelanggan melalui ExternalLauncher.launchWhatsApp |
 | Loading/error/kosong | skeleton,retry,kosong/tidak ditemukan tetap; jumlah kosong saat belum dimuat |
 | Key/keyboard | antrean-golden dan Key lama tetap; field pencarian diuji keyboard300dp |
 
@@ -49,7 +49,8 @@ Interaksi:
 - Pelanggan baru (tombol atas, action ikon add) -> AddCustomerSheet di navigator utama;
   simpan memperbarui daftar, mereset filter dan pencarian. Banner form menjelaskan
   konteks daftar, bukan nota. Tidak ada FooterBar di layar ini (R7).
-- Ikon telepon -> ExternalLauncher palsu dengan tel:; disabled bila nomor kosong.
+- Ikon WhatsApp -> ExternalLauncher.launchWhatsApp dengan nomor pelanggan dan pesan
+  kosong; disabled bila nomor kosong. Build perangkat memakai launcher WhatsApp nyata.
 - Coba lagi mengulang provider. Perubahan repository memperbarui daftar dan jumlah.
 
 Format: uang/telepon lewat CustomerRow dan Formatters; nominal seluruhnya int rupiah.
@@ -63,7 +64,7 @@ Selisih terhadap .pen:
 Verifikasi: tes fixture/filter/normalisasi, pembatalan, tambah pelanggan/navigasi,
 loading/kosong/error/retry, serta lebar 320 px pada teks 2x.
 Perangkat Android, keyboard nyata, dan TalkBack belum diuji; belum diuji di iOS.
-Panggilan telepon masih palsu; integrasi platform belum diuji di iOS.
+Integrasi WhatsApp platform belum diuji di iOS.
 
 
 ## Audit penyelesaian UI - prompt 100

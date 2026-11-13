@@ -30,15 +30,20 @@ Data dan provider:
 - demoReceiptLines memakai A-0143 DATA MASTER.
 
 Interaksi:
-- Cari printer -> discover; jika Bluetooth mati buka BluetoothSheet 'Aktifkan Bluetooth',
-  lalu daftar printer (MenuRow) -> connect. Build dummy menampilkan daftar palsu; build
-  backend memakai hasil pindai BLE.
+- Cari/Ganti langsung membuka modal pencarian dengan loader selama discover/connect.
+  Modal menampilkan printer terakhir tersimpan di perangkat dan hasil pindai tanpa duplikasi.
+  Cari lagi dan pemilihan printer nonaktif selama proses; callback juga menolak duplikasi.
+  Bluetooth mati menampilkan peringatan untuk mengaktifkannya terlebih dahulu, tanpa
+  modal/tombol aktivasi. Build dummy memakai daftar palsu; backend memakai hasil BLE.
+  Printer tersimpan memakai preferensi perangkat yang sudah ada, tidak disinkronkan ke cloud.
 - Mengubah kertas/huruf/toggle/teks langsung memperbarui pratinjau; Simpan menulis
   ReceiptSettings dan BusinessProfile (footer/note) secara atomik; memakai profil
   terbaru agar perubahan nama/status order setelah form dibuka tetap dipertahankan.
 - Cetak uji mengirim List<String> 32 kolom + paperMm/fontSize ke PrintService;
   sukses menampilkan notice, gagal menampilkan BannerMessage error.
 - Ganti membuka daftar printer lagi.
+- Alert memakai info biru, berhasil hijau, peringatan jingga dan gagal merah, dengan
+  ikon dan pesan yang menjelaskan hasil. Simpan/koneksi/cetak berhasil memakai success.
 
 State: memuat skeleton, gagal memuat + Coba lagi, belum terhubung, Bluetooth mati,
 daftar printer kosong, cetak gagal, cetak sukses.

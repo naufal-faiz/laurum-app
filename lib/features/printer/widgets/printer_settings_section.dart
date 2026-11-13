@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/printer/state/printer_settings.dart';
+import 'package:laurum/features/printer/state/printer_settings_edit.dart';
 import 'package:laurum/shared/widgets/atoms/app_chip.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
@@ -9,20 +9,31 @@ import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
 import 'package:laurum/shared/widgets/molecules/section_header.dart';
 import 'package:laurum/shared/widgets/organisms/receipt_toggle_list.dart';
 
-class PrinterSettingsSection extends ConsumerWidget {
-  const PrinterSettingsSection({super.key});
+class PrinterSettingsSection extends StatelessWidget {
+  const PrinterSettingsSection({
+    required this.printer,
+    required this.onEdit,
+    required this.onNotice,
+    super.key,
+  });
+  final PrinterSettingsState printer;
+  final PrinterSettingsEdit onEdit;
+  final ValueChanged<String> onNotice;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final printer = ref.watch(printerSettingsProvider).value;
-    if (printer == null) return const SizedBox.shrink();
+  Widget build(BuildContext context) {
     final settings = printer.settings;
-    final controller = ref.read(printerSettingsProvider.notifier);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: AppSpacing.cardGap,
       children: [
-        if (printer.notice != null) BannerMessage(message: printer.notice!),
+        if (printer.notice != null)
+          BannerMessage(
+            message: printer.notice!,
+            variant: printer.noticeSuccess
+                ? BannerMessageVariant.success
+                : BannerMessageVariant.info,
+          ),
         const SectionHeader(title: 'Ukuran kertas'),
         Wrap(
           spacing: AppSpacing.cardGap,
@@ -32,10 +43,10 @@ class PrinterSettingsSection extends ConsumerWidget {
                 '$paper mm',
                 selected: settings.paperMm == paper,
                 onPressed: paper == 80
-                    ? () => controller.showNotice(
+                    ? () => onNotice(
                         'Printer 80 mm masih coming soon. Untuk sekarang gunakan 58 mm.',
                       )
-                    : () => controller.edit(paperMm: paper),
+                    : () => onEdit(paperMm: paper),
               ),
           ],
         ),
@@ -47,7 +58,7 @@ class PrinterSettingsSection extends ConsumerWidget {
               AppChip(
                 size == 11 ? 'Normal' : 'Besar',
                 selected: settings.fontSize == size,
-                onPressed: () => controller.edit(fontSize: size),
+                onPressed: () => onEdit(fontSize: size),
               ),
           ],
         ),
@@ -57,10 +68,10 @@ class PrinterSettingsSection extends ConsumerWidget {
           showCustomer: settings.showCustomer,
           showSavings: settings.showSavings,
           showNote: settings.showNote,
-          onAddressChanged: (value) => controller.edit(showAddress: value),
-          onCustomerChanged: (value) => controller.edit(showCustomer: value),
-          onSavingsChanged: (value) => controller.edit(showSavings: value),
-          onNoteChanged: (value) => controller.edit(showNote: value),
+          onAddressChanged: (value) => onEdit(showAddress: value),
+          onCustomerChanged: (value) => onEdit(showCustomer: value),
+          onSavingsChanged: (value) => onEdit(showSavings: value),
+          onNoteChanged: (value) => onEdit(showNote: value),
         ),
         LabeledField(
           label: 'Teks penutup struk',
@@ -69,7 +80,7 @@ class PrinterSettingsSection extends ConsumerWidget {
             hint: 'Terima kasih atas kepercayaan Anda',
             value: printer.profile.receiptFooter,
             maxLines: 2,
-            onChanged: (value) => controller.edit(footer: value),
+            onChanged: (value) => onEdit(footer: value),
           ),
         ),
         LabeledField(
@@ -79,7 +90,7 @@ class PrinterSettingsSection extends ConsumerWidget {
             hint: 'Pakaian bersih, wangi & rapi',
             value: printer.profile.receiptNote,
             maxLines: 2,
-            onChanged: (value) => controller.edit(note: value),
+            onChanged: (value) => onEdit(note: value),
           ),
         ),
       ],

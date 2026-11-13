@@ -328,7 +328,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/customers/pages/
 - customer_deposit_page.dart (71): CustomerDepositPage
 - customer_detail_page.dart (67): CustomerDetailPage
-- customer_directory_page.dart (69): CustomerDirectoryPage
+- customer_directory_page.dart (68): CustomerDirectoryPage
 - customer_edit_sheet.dart (68): CustomerEditSheet
 - customer_import_page.dart (68): CustomerImportPage
 - customer_savings_history_page.dart (63): CustomerSavingsHistoryPage
@@ -484,20 +484,24 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/printer/pages/
 - bluetooth_sheet.dart (44): BluetoothSheet
-- printer_device_sheet.dart (49): PrinterDeviceSheet
-- printer_page.dart (87): PrinterPage
+- printer_device_sheet.dart (82): PrinterDeviceSheet
+- printer_page.dart (92): PrinterPage
 
 ### lib/features/printer/state/
-- printer_connection.dart (98): PrinterConnectionController, printerConnectionProvider
-- printer_restore.dart (24): printerRestoreProvider
-- printer_settings.dart (93): PrinterSettingsState, PrinterSettingsController, printerSettingsProvider
+- printer_connection.dart (109): PrinterConnectionController, printerConnectionProvider
+- printer_reconnect.dart (42): PrinterReconnectResult, PrinterReconnectState, PrinterReconnect, printerReconnectProvider
+- printer_restore.dart (21): printerRestoreProvider
+- printer_settings.dart (100): PrinterSettingsState, PrinterSettingsController, printerSettingsProvider
+- printer_settings_edit.dart (10): PrinterSettingsEdit
 - printer_state.dart (78): PrinterConnectionState
 - save_printer_settings.dart (25):
+- saved_printer.dart (17): savedPrinterProvider
 
 ### lib/features/printer/widgets/
-- printer_connection_section.dart (79): PrinterConnectionSection
+- printer_connection_section.dart (77): PrinterConnectionSection
+- printer_device_list_section.dart (46): PrinterDeviceListSection
 - printer_preview_section.dart (42): PrinterPreviewSection
-- printer_settings_section.dart (88): PrinterSettingsSection
+- printer_settings_section.dart (99): PrinterSettingsSection
 
 ### lib/features/proposals/data/
 - account_proposal_fixtures.dart (23):
@@ -634,7 +638,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - discount_sheet.dart (74): DiscountSheet
 - payment_flow.dart (19):
 - payment_page.dart (100): PaymentPage
-- receipt_page.dart (88): ReceiptPage
+- receipt_page.dart (97): ReceiptPage
 - service_picker_page.dart (54): ServicePickerPage
 - transaction_leave_flow.dart (22):
 - transaction_line_sheet.dart (76): TransactionLineSheet
@@ -668,9 +672,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment_savings_section.dart (60): PaymentSavingsSection
 - payment_summary_section.dart (82): PaymentSummarySection
 - receipt_actions_section.dart (69): ReceiptActionsSection
-- receipt_content_section.dart (60): ReceiptContentSection
+- receipt_content_section.dart (65): ReceiptContentSection
 - receipt_links_section.dart (19): ReceiptLinksSection
-- receipt_status_section.dart (69): ReceiptStatusSection
+- receipt_status_section.dart (102): ReceiptStatusSection
 - service_picker_list_section.dart (84): ServicePickerListSection
 - transaction_customer_section.dart (82): TransactionCustomerSection
 - transaction_details_section.dart (68): TransactionDetailsSection
@@ -707,7 +711,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_bar_root.dart (67): AppBarRoot
 - app_bar_sub.dart (96): AppBarSubVariant, AppBarSub
 - avatar_stack.dart (58): AvatarStack
-- banner_message.dart (41): BannerMessageVariant, BannerMessage
+- banner_message.dart (42): BannerMessageVariant, BannerMessage
 - brand_lockup.dart (32): BrandLockup
 - callout_ai.dart (54): CalloutAi
 - chip_bar.dart (29): ChipBar
@@ -891,6 +895,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_directory_data_test.dart (39):
 - customer_directory_states_test.dart (64):
 - customer_directory_test.dart (100):
+- customer_directory_whatsapp_test.dart (30):
 - customer_header_golden_test.dart (23):
 - customer_import_page_test.dart (68):
 - customer_optional_fields_test.dart (70):
@@ -1054,9 +1059,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - printer_write_target_test.dart (60):
 
 ### test/
+- printer_device_list_section_test.dart (38):
+- printer_discovery_feedback_test.dart (81): PendingDiscoveryPrinter
 - printer_page_test.dart (100):
+- printer_reconnect_test.dart (70): DeferredReconnectPrinter
 - printer_refresh_visibility_test.dart (49): DeferredPrinterSettings
 - printer_restore_test.dart (45):
+- printer_sections_feedback_test.dart (72):
 - printer_service_test.dart (42):
 - progress_row_test.dart (23):
 - proposal_actions_test.dart (72):
@@ -1104,7 +1113,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r4_completion_test_host.dart (38): CompletionPrinter
 - r4_detail_completion_test.dart (95):
 - r4_detail_print_failure_test.dart (40):
-- r4_finish_flow_test.dart (84):
+- r4_finish_flow_test.dart (89):
 - r4_finish_test_host.dart (48):
 - r4_order_completion_test.dart (80):
 - r4_order_policy_test.dart (72):
@@ -1151,6 +1160,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_icon_tiles_test.dart (38):
 - receipt_page_test.dart (77):
 - receipt_preview_test.dart (32):
+- receipt_reconnect_page_test.dart (61): SlowReceiptPrinter
 - receipt_template_lines.dart (29):
 - receipt_toggle_list_test.dart (37):
 - receipt_whatsapp_optional_phone_test.dart (49):

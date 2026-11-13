@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
-import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/printer/data/receipt_demo.dart';
-import 'package:laurum/features/printer/pages/bluetooth_sheet.dart';
+import 'package:laurum/features/printer/pages/printer_device_sheet.dart';
 import 'package:laurum/features/printer/state/printer_connection.dart';
 import 'package:laurum/features/printer/state/printer_restore.dart';
 import 'package:laurum/features/printer/state/printer_settings.dart';
@@ -23,6 +22,8 @@ class PrinterPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(printerSettingsProvider);
+    final connection = ref.watch(printerConnectionProvider);
+    final controller = ref.read(printerSettingsProvider.notifier);
     ref.watch(printerRestoreProvider);
     return FormScaffold(
       title: 'Printer dan struk',
@@ -39,7 +40,7 @@ class PrinterPage extends ConsumerWidget {
           AppButton(
             'Cetak uji',
             variant: AppButtonVariant.secondary,
-            onPressed: () => _testPrint(context, ref),
+            onPressed: connection.busy ? null : () => _testPrint(ref),
           ),
         ],
       ),
@@ -57,31 +58,35 @@ class PrinterPage extends ConsumerWidget {
             onAction: () => ref.invalidate(printerSettingsProvider),
           ),
         ),
-        data: (_) => const Column(
+        data: (printer) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: AppSpacing.screenPadding,
           children: [
-            PrinterConnectionSection(),
-            PrinterSettingsSection(),
-            PrinterPreviewSection(),
+            PrinterConnectionSection(
+              printer: connection,
+              onFind: () => PrinterDeviceSheet.show(context, ref),
+            ),
+            PrinterSettingsSection(
+              printer: printer,
+              onEdit: controller.edit,
+              onNotice: controller.showNotice,
+            ),
+            const PrinterPreviewSection(),
           ],
         ),
       ),
     );
   }
 
-  Future<void> _testPrint(BuildContext context, WidgetRef ref) async {
+  Future<void> _testPrint(WidgetRef ref) async {
     final printer = ref.read(printerSettingsProvider).value;
     if (printer == null) return;
-    final status = await ref
+    await ref
         .read(printerConnectionProvider.notifier)
         .testPrint(
           demoReceiptLines(business: printer.profile, settings: printer.settings),
           paperMm: printer.settings.paperMm,
           fontSize: printer.settings.fontSize,
         );
-    if (context.mounted && status == PrintStatus.bluetoothOff) {
-      await BluetoothSheet.show(context, ref);
-    }
   }
 }

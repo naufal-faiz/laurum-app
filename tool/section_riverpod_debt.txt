@@ -7,8 +7,6 @@ lib/features/customers/widgets/customer_savings_list_section.dart
 lib/features/customers/widgets/customer_savings_section.dart
 lib/features/orders/widgets/order_edit_body_section.dart
 lib/features/orders/widgets/order_edit_customer_section.dart
-lib/features/printer/widgets/printer_connection_section.dart
 lib/features/printer/widgets/printer_preview_section.dart
-lib/features/printer/widgets/printer_settings_section.dart
 lib/features/transactions/widgets/add_customer_form_section.dart
 lib/features/transactions/widgets/transaction_details_section.dart

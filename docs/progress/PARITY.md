@@ -3,6 +3,20 @@
 Aturan: AGENTS.md, Mode Backend (BE-2 sampai BE-6). Agent mengisi fakta dan menerapkan
 aturan BE-4/BE-5; kasus BE-7 menunggu keputusan pengguna.
 
+## Revisi UX printer, struk dan kontak
+Revisi pengguna 13 Nov 2026 (alur normal disetujui):
+- Daftar pelanggan: ikon WhatsApp membuka chat nomor terkait, menggantikan `tel:`.
+- Struk: refresh memakai PrinterReconnect, loader dan alert hasil; tidak memanggil
+  cetak atau penyelesaian order. Cetak dan guard COD tetap melalui jalur semula.
+- Printer: modal tampil sebelum discover selesai; savedPrinter membaca preferensi
+  perangkat `printer_id`/`printer_name` yang sudah ada, tanpa tabel/cloud baru.
+  Discover/connect/restore memakai guard busy yang sama, kontrol modal ikut nonaktif.
+- Bluetooth mati: peringatan aktifkan terlebih dahulu, tanpa modal/tombol aktivasi.
+- Alert struk/printer: success hijau, warning jingga, error merah, info biru; ikon/teks
+  tetap menjelaskan state. Sumber: arahan pengguna; spec 06, 08, 12.
+- Verifikasi: check_all hijau, 1191 lulus/1 skip. r4_finish_flow mempertahankan
+  asersi ledger/status; retry cetak melalui Cetak, Refresh terbukti tidak mencetak.
+
 ## Audit awal (jalankan sekali di branch backend-newdesign)
 Daftar perubahan newdesign di zona logika dibanding dev2backend:
 
