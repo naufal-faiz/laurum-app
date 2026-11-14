@@ -1,4 +1,44 @@
 # 13 - Detail Pelanggan & Tabungan
+## Redesign FigCraft — persiapan14Nov2026
+Frame dipilih pengguna: `LAURUM · Detail Pelanggan` (`4294969558`,390×844).
+Snapshot dibaca sekali; proposal028 menunggu persetujuan, kode belum diubah.
+
+### Snapshot tata letak
+- Header: kembali + judul + subtitle nama/jumlah order.
+- Konten: horizontal24/atas12, gap12; kartu profil biru/avatar/nama/nomor/alamat,
+  aksi WhatsApp dan Edit sejajar; catatan/nonaktif tetap harus disertakan.
+- Empat statistik2×2 dengan gap10, kemudian Setor/Riwayat mutasi sejajar.
+- Judul riwayat mutasi/order disertai Lihat semua; kartu riwayat ringkas di bawahnya.
+
+### Paritas redesign
+Belum dicentang: implementasi menunggu persetujuan proposal028.
+
+| Butir | Sumber/aksi/keadaan | Verifikasi |
+|---|---|---|
+| Data | customerDetailProvider(customerId), summary/history/movements/orders | [ ] |
+| Profil | nama, inisial, Formatters.telepon, alamat/catatan opsional, status aktif | [ ] |
+| Statistik | historyTotal/orderCount/debt/savings dari summary, tanpa angka contoh baru | [ ] |
+| WhatsApp | externalLauncherProvider.launchWhatsApp(phone: customer.phone,message: '') termasuk nomor kosong | [ ] |
+| Edit | CustomerEditSheet.show(context,ref,customer); disabled nonaktif | [ ] |
+| Setor | /pelanggan/:id/setor; disabled nonaktif | [ ] |
+| Mutasi | /pelanggan/:id/tabungan; savingsLabel/tanggal/jam/jenis/nominal/saldo tetap | [ ] |
+| Order | data.orders awal3; orderNo/summary/total/status/payStatus/paymentLabel/paid/timeLabel | [ ] |
+| Buka order | context.push('/order/${order.id}') | [ ] |
+| Kembali | canPop?pop:go('/pelanggan') | [ ] |
+| Keadaan | loading4skeleton, gagal/retry/invalidate, tidak ditemukan, nonaktif, mutasi/order kosong | [ ] |
+| Key/fokus | Page/profile/savings/orders tanpa Key eksplisit; host antrean-golden dan fokus sheet tetap | [ ] |
+| Aksesibilitas | viewport320/teks2x, aksi terjangkau; keyboard edit tetap melalui tes sheet | [ ] |
+
+### Selisih desain
+- Font7–10px dan tombol36px Figma dipetakan ke minimum font/area sentuh global.
+- Profil memakai biru solid+bubble yang tersedia, bukan membuat token gradien baru.
+- Tetap menampilkan catatan opsional, pesan nonaktif dan tiga riwayat terakhir.
+- Tidak menyalin angka/nama/tanggal contoh; tanpa klaim Sejak Okt2025 atau jumlah
+  nota belum lunas sebelum sumber data dan semantiknya dipastikan.
+- Lihat semua mutasi punya rute tersedia; Lihat semua order belum ada perilaku lama:
+  proposal028 meminta izin ekspansi riwayat di halaman sama menggunakan history tersedia.
+- Perubahan callback navigasi Section dan pembacaan provider Page hanya setelah izin.
+
 Rute: /pelanggan/:id   Prompt: 50
 Frame .pen: "Pelanggan - Detail Pelanggan & Tabungan".
 Template: SubScaffold; daftar gulir vertikal.
