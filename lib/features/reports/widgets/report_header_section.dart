@@ -27,7 +27,7 @@ class ReportHeaderSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final exportButton = AppButton(
-      'Ekspor Excel',
+      'Excel',
       icon: AppIcons.download,
       size: AppButtonSize.small,
       variant: AppButtonVariant.actionOutline,

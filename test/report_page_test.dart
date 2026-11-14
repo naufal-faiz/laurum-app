@@ -51,8 +51,8 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('-Rp986.000'), findsOneWidget);
-    await tester.scrollUntilVisible(find.byType(WeeklyBarChart), 300, scrollable: vertical);
-    expect(tester.widget<WeeklyBarChart>(find.byType(WeeklyBarChart)).labels, hasLength(31));
+    expect(find.byType(WeeklyBarChart), findsNothing);
+    expect(find.text('Grafik harian ditampilkan untuk rentang hingga 7 hari.'), findsNothing);
     final debtTile = find.widgetWithText(StatTile, 'Piutang aktif');
     await tester.scrollUntilVisible(
       debtTile,

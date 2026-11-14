@@ -46,33 +46,47 @@ verifikasi akhir setelah WIP08dc364. Batas baris/lint diperbaiki; check_arch lul
   assertion nominal/range/locale/batal tetap. Lint impor/const dibetulkan pada tes
   laporan sebelumnya; assertion nominal dan laba satu baris tidak berubah.
 
-## Revisi chart14Nov2026 — arahan pengguna
-- Revisi warna terbaru: primaryTint di atas ke primary di bawah, agar lebih cerah.
-  AppChartStyles memakai warna/radius yang ada; tanpa token warna baru.
-- Pengguna memilih bulanan satu batang per hari dengan geser horizontal.
-- Bulanan mengambil dailyRevenue repository yang sama, satu label tanggal per hari;
-  tanggal mendatang tetap null/penanda putus-putus, bukan omzet0 yang dibuat-buat.
-- Chart panjang memakai lebar minimum batang yang mengikuti skala teks; hari ini dan
-  minggu ini memakai lebar konten seperti sebelumnya. Semua berbagi WeeklyBarChart.
-- Ekspor/periode/total/filter/notifikasi repository tetap; custom>7hari tetap memakai
-  pesan batas lama. Perubahan perilaku hanya mengaktifkan tampilan harian bulanan.
-- Tes report_page_test memperbarui satu assertion bulan: dari tanpa chart menjadi
-  chart31tanggal. Semua assertion uang, ekspor, navigasi dan keyboard lama tetap.
+## Keputusan laporan terbaru14Nov2026
+- Pengguna membatalkan grafik harian bulanan karena deret batang terlalu panjang.
+- Periode Bulan ini tidak menampilkan grafik, rata-rata/puncak, atau banner batas
+  grafik; ringkasan, layanan terlaris, piutang, ekspor dan daftar nota tetap lengkap.
+- reportView.daily=null khusus period2; visibleDailyRevenue kembali membatasi7hari.
+  Sumber repository, rentang dan nominal tidak berubah; grafik Hari ini/Minggu ini
+  tetap memakai gradasi primaryTint di atas ke primary di bawah.
+- Rentang kustom hingga7hari tetap menampilkan grafik; lebih panjang tetap memakai
+  pesan batas lama. Keputusan ini menggantikan pilihan31batang bulanan sebelumnya.
+- Label UI pilihan pengguna dipertahankan: Masuk untuk pendapatan, Keluar untuk
+  pengeluaran. Parameter warna badge opsional dan label Excel lokal ikut integrasi
+  hasil akhir agar kode yang disimpan sama dengan tampilan yang diuji.
+- CSV dan perhitungan ledger tetap memakai kontrak/kolom yang sudah ada.
+- Izin pengguna mencakup pencabutan grafik bulanan pada state/UI dan penyesuaian
+  tes bulanan terkait; test/report_view_test.dart tidak perlu diubah lagi.
+- Finder ui_final_flow_test kini memeriksa teks Masuk dengan nominal tepat, bukan
+  Pendapatan. Semua assertion tabungan/pembayaran/status/jumlah transaksi tetap.
+- report_monthly_chart_test memeriksa daily null, total864000, laba-986000 dan total
+  layanan864000; tes gradasi generik tetap. report_page_test memeriksa tanpa chart
+  dan tanpa banner khusus bulanan; assertion uang/ekspor/piutang tetap.
+- report_monthly_layout_test menguji320dp/font1–2×: Masuk/Keluar/nominal utuh,
+  tanpa grafik/banner, layanan terlaris dan pencarian nota tetap terjangkau.
+- Verifikasi terarah17tes lulus; golden bulanan1×/2× dibuat dan ditinjau.
+- Blocker golden akun: pembaruan sebelumnya sempat menangkap logo sebelum decode.
+  auth_sync_golden_test dan r10_visual_test kini menunggu precacheImage pada kasus
+  error masuk, mengikuti pola molecule_gallery yang sudah ada; UI/auth tidak diubah.
+  Dua golden error masuk diperbarui; seluruh26tes visual akun lulus.
+- check_all akhir: SEMUA HIJAU;1291tes lulus/2skip, format/analyzer/lint/
+  arsitektur bersih; REPO_MAP diperbarui1212berkas.
 
-### Paritas revisi chart
+### Paritas revisi laporan
 | Butir | Sumber/perilaku | Verifikasi terarah |
 |---|---|---|
-| Total omzet | ReportRepository.getReport; tidak mengubah ledger/perhitungan uang | [x] |
-| Data batang | getDailyRevenue; jumlah nilai bulan sama dengan totals.revenue | [x] |
-| Masa depan | null tetap penanda putus-putus; hari lampau tanpa data tetap0 | [x] |
-| Periode | Hari ini1, Minggu ini7, Bulan ini28–31; provider/range lama | [x] |
-| Label | Tanggal bulanan melalui Formatters; hari/minggu tetap | [x] |
-| Font/scroll | Widget langsung320px/font1–2×,31batang bisa digeser sampai akhir | [x] |
-| Aksi lama | ekspor, ubah periode, buka piutang, daftar/filter/keyboard tidak diubah | [x] |
-- Tes terarah12lulus; analyzer berkas berubah bersih. check_all sebelumnya dihentikan
-  saat pengguna mengganti warna; hasil penuh laporan belum dinyatakan hijau.
-
-## Persiapan irisan laporan029
+| Total omzet/laba | ReportRepository.getReport; ledger tidak berubah | [x] |
+| Bulanan | daily=null; grafik dan banner batas tidak tampil | [x] |
+| Hari/minggu | 1/7batang; null masa depan tetap, gradasi cerah | [x] |
+| Kustom | hingga7hari memakai grafik; lebih panjang memakai pesan lama | [x] |
+| Label | Masuk/Keluar dengan nilai penuh, CSV tetap | [x] |
+| Font/scroll | 320dp/font1–2×, layanan dan nota dapat dijangkau | [x] |
+| Aksi lama | ekspor, periode, piutang, transaksi hingga laporan tetap | [x] |
+## Redesign laporan029
 Frame aktif pilihan pengguna `LAURUM · Laporan`4294968337 (390×844) dibaca sekali.
 Proposal029 disetujui melalui arahan pengguna untuk redesign seluruh halaman.
 
@@ -94,12 +108,11 @@ Proposal029 disetujui melalui arahan pengguna untuk redesign seluruh halaman.
 - Regresi laporan/modal40tes lulus, termasuk16kombinasi lebar280/320/390/600 ×
   font0,85/1/1,3/2. Pengecekan laba satu baris memakai getBoxesForSelection dan lulus.
 - Delapan tes tambahan kalender/back/barrier/golden laporan juga lulus.
-- check_all: format/analyzer/lint/arsitektur lulus; tes1253lulus/36gagal/2skip.
-  Sebanyak34kegagalan golden sudah diperbarui dan lulus. Dua temuan tersisa adalah
-  ekspektasi monthly.daily=null pada tes beku dan finder Pendapatan/Masuk pada tes alur.
-  Izin khusus penyesuaian tes serta lanjut setelah UI-36 diminta; belum dijalankan ulang.
-- Golden laporan normal/font2× dan report_summary/top_services diperbarui; golden
-  radius dari batch7580497 dan warna StatTile pada layar lain belum diverifikasi penuh.
+- Revisi terbaru meniadakan grafik bulanan, sehingga assertion daily=null lama
+  kembali sesuai; finder alur diperbarui ke Masuk dengan nominal yang sama.
+  Regresi terbaru17tes lulus; tidak ada assertion uang yang dihapus.
+- Golden laporan dan komponen yang disetujui sudah diperbarui pada d4acfa8.
+  Golden bulanan baru320dp/font1–2× lulus; suite penuh1291tes lulus/2skip.
 - Visual belum diverifikasi manual pada HP; screenshot emulator tidak diambil.
 
 ### Snapshot pemetaan desain
@@ -107,24 +120,24 @@ Proposal029 disetujui melalui arahan pengguna untuk redesign seluruh halaman.
   AppBarSub/SectionHeader/AppButton yang terdaftar; periode tetap PeriodTabs.
 - Laba biru+bubble → AppCard primary dengan teks nilai dan rincian ledger.
 - Kas/piutang2kolom → StatTile compact responsif; aksi piutang tetap callback lama.
-- Chart → WeeklyBarChart dengan revisi warna cerah dan bulanan yang sudah disetujui.
+- Chart → WeeklyBarChart dengan gradasi cerah untuk hari/minggu/kustom pendek; bulanan tanpa grafik.
 - Peringkat layanan → TopServices, komposisi registry untuk peringkat/ikon/progress.
 - Nota terbaru Figma → daftar nota lengkap aplikasi tetap dipertahankan.
 
 ### Paritas redesign029
 | Butir | Data/aksi/keadaan yang dipertahankan | Verifikasi |
 |---|---|---|
-| Sumber | reportViewProvider/reportOrdersProvider/export/customRange/businessProfile.useOrderStatus | [ ] |
-| Ringkasan | revenue/expenses/profit/transactionCount/cashIn/savingsBalance/activeOutstanding/unpaidCount | [ ] |
-| Chart | daily/dayLabels/dailyAverage/peakDayName; aturan null/zero dan bulan harian tetap | [ ] |
-| Layanan | nama/unit/qtyMilli/revenue/persentase; urutan/data lama | [ ] |
-| Periode | reportPeriodProvider; selectReportPeriod; custom range/batal/label tanggal | [ ] |
-| Ekspor | reportExportProvider.notifier.export(data,orders:orders); loading/kosong/busy disabled | [ ] |
-| Kembali/piutang | canPop?pop:go('/lainnya'); push('/laporan/piutang') | [ ] |
-| Nota | search/filter/notifikasi/range/group tanggal/push('/order/:id'); useOrderStatus tetap | [ ] |
-| Keadaan | loading4skeleton, gagal/retry, kosong, posisi saldo/piutang, export success/error | [ ] |
-| Key/fokus | ValueKey((data.period,data.range)); antrean-golden; fokus field pencarian tetap | [ ] |
-| Aksesibilitas | lebar280–600/font0,85–2× dan keyboard300dp; navbar tetap terjangkau | [ ] |
+| Sumber | reportViewProvider/reportOrdersProvider/export/customRange/businessProfile.useOrderStatus | [x] |
+| Ringkasan | revenue/expenses/profit/transactionCount/cashIn/savingsBalance/activeOutstanding/unpaidCount | [x] |
+| Chart | daily/dayLabels/dailyAverage/peakDayName; bulan tanpa grafik sesuai revisi pengguna | [x] |
+| Layanan | nama/unit/qtyMilli/revenue/persentase; urutan/data lama | [x] |
+| Periode | reportPeriodProvider; selectReportPeriod; custom range/batal/label tanggal | [x] |
+| Ekspor | reportExportProvider.notifier.export(data,orders:orders); loading/kosong/busy disabled | [x] |
+| Kembali/piutang | canPop?pop:go('/lainnya'); push('/laporan/piutang') | [x] |
+| Nota | search/filter/notifikasi/range/group tanggal/push('/order/:id'); useOrderStatus tetap | [x] |
+| Keadaan | loading4skeleton, gagal/retry, kosong, posisi saldo/piutang, export success/error | [x] |
+| Key/fokus | ValueKey((data.period,data.range)); antrean-golden; fokus field pencarian tetap | [x] |
+| Aksesibilitas | lebar280–600/font0,85–2× dan keyboard300dp; navbar tetap terjangkau | [x] |
 
 ### Selisih desain029
 - Font7–10px dan area sentuh30/34px Figma mengikuti minimum global aplikasi.
@@ -141,7 +154,7 @@ angka historis lama di .pen. Golden diperbarui, struktur/tampilan widget tetap.
 Template: RootScaffold dari RootShellPage; tanpa FooterBar ekspor (R5).
 
 Komposisi:
-- SectionHeader Laporan, aksi kanan 'Ekspor Excel'; BannerMessage hasil ekspor
+- ReportHeaderSection Laporan, aksi kanan 'Excel'; BannerMessage hasil ekspor
   tepat di bawah header; PeriodTabs Hari ini / Minggu ini / Bulan ini / Pilih tanggal.
 - ReportSummary dengan kartu piutang yang membuka /laporan/piutang.
 - WeeklyBarChart, AppText puncak hari, TopServices (peringkat pendapatan).
@@ -169,8 +182,8 @@ Data/provider:
   puncak Rabu. Hari lampau tanpa nota bernilai nol, masa depan belum memiliki batang.
 - Top services seluruh periode dari snapshot item dan alokasi diskon yang sama;
   urutan berdasarkan pendapatan. Minggu memuat lima layanan nyata, tanpa bucket fiktif.
-- Hari ini memakai satu batang; minggu tujuh batang; bulan satu batang per hari
-  dengan geser horizontal sesuai keputusan pengguna14Nov2026.
+- Hari ini memakai satu batang; minggu tujuh batang; bulan tidak menampilkan grafik
+  sesuai keputusan terbaru pengguna14Nov2026.
 - Perubahan checkout/pembayaran/setoran mengikuti notifikasi repository.
 - Semua preset dan rentang kustom melewati ReportRepository dan buildReport yang sama.
   InMemory menghitung ledger; Drift memakai query range dan posisi SQL lalu fungsi
@@ -223,5 +236,3 @@ R5: golden r5_report_custom/r5_date_picker ditinjau, grafik 7 hari dan kalender 
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
-
-

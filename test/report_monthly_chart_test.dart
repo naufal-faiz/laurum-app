@@ -11,25 +11,23 @@ import 'package:laurum/shared/widgets/organisms/weekly_bar_chart.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
-  test('monthly daily series retains ledger totals and future days stay unknown', () async {
+  test('monthly report omits daily chart while retaining ledger totals and services', () async {
     final scope = ProviderContainer(overrides: dummyRepositoryOverrides);
     addTearDown(scope.dispose);
     scope.read(reportPeriodProvider.notifier).select(2);
     final view = await scope.read(reportViewProvider.future);
-    expect(view.daily, hasLength(31));
-    expect(view.dayLabels, hasLength(31));
-    expect(view.dayLabels.first, '1 Okt');
-    expect(view.dayLabels.last, '31 Okt');
-    expect(view.daily!.take(16), everyElement(isNotNull));
-    expect(view.daily!.skip(16), everyElement(isNull));
+    expect(view.daily, isNull);
+    expect(view.dayLabels, isEmpty);
+    expect(view.totals.revenue, 864000);
+    expect(view.totals.profit, -986000);
     expect(
-      view.daily!.whereType<int>().fold(0, (sum, amount) => sum + amount),
+      view.services!.fold(0, (sum, service) => sum + service.revenue),
       view.totals.revenue,
     );
   });
   for (final count in [1, 7, 31]) {
     for (final scale in [1.0, 2.0]) {
-      testWidgets('gradient for$count days, actual font$scale, horizontal month reaches last day', (
+      testWidgets('gradient for$count days, actual font$scale, long series reaches last day', (
         tester,
       ) async {
         await tester.pumpWidget(

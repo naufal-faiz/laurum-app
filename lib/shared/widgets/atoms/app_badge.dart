@@ -7,9 +7,10 @@ import 'package:laurum/shared/widgets/atoms/app_text.dart';
 enum AppBadgeVariant { diproses, siap, menungguJemput, selesai, dibatalkan, perhatian }
 
 class AppBadge extends StatelessWidget {
-  const AppBadge(this.label, {required this.variant, super.key});
+  const AppBadge(this.label, {required this.variant, this.color, super.key});
   final String label;
   final AppBadgeVariant variant;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AppBadge extends StatelessWidget {
       decoration: BoxDecoration(color: background, borderRadius: AppRadius.badge),
       child: Padding(
         padding: AppControlTokens.badgePadding,
-        child: AppText(label, variant: AppTextVariant.label, color: foreground),
+        child: AppText(label, variant: AppTextVariant.label, color: color ?? foreground),
       ),
     );
   }

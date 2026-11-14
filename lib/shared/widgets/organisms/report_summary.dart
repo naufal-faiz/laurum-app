@@ -24,8 +24,8 @@ class ReportSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     const title = 'Estimasi laba bersih';
     final transactions = '${totals.transactionCount} transaksi';
-    final income = 'Pendapatan ${Formatters.rupiah(totals.revenue)}';
-    final expense = 'Pengeluaran ${Formatters.rupiah(totals.expenses)}';
+    final income = 'Masuk ${Formatters.rupiah(totals.revenue)}';
+    final expense = 'Keluar ${Formatters.rupiah(totals.expenses)}';
     final positions = [
       StatTile(
         label: 'Kas masuk',
@@ -78,8 +78,8 @@ class ReportSummary extends StatelessWidget {
                 spacing: AppSpacing.small,
                 runSpacing: AppSpacing.small,
                 children: [
-                  AppBadge(income, variant: AppBadgeVariant.diproses),
-                  AppBadge(expense, variant: AppBadgeVariant.diproses),
+                  AppBadge(income, variant: AppBadgeVariant.diproses, color: AppColors.successInk),
+                  AppBadge(expense, variant: AppBadgeVariant.diproses, color: AppColors.errorInk),
                 ],
               ),
               AppText(expenseSummary, variant: AppTextVariant.caption, color: AppColors.onPrimary),

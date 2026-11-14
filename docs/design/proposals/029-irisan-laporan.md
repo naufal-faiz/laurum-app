@@ -1,4 +1,4 @@
-# 029 — Irisan laporan
+﻿# 029 — Irisan laporan
 Status: DISETUJUI14Nov2026 melalui arahan redesign seluruh halaman; dasar7580497.
 Acuan: LAURUM · Laporan4294968337, pilihan aktif pengguna, dibaca14Nov2026.
 
@@ -21,7 +21,7 @@ Acuan: LAURUM · Laporan4294968337, pilihan aktif pengguna, dibaca14Nov2026.
 - Nota lengkap, pencarian, filter, pengelompokan tanggal dan buka order tetap di bawah
   ringkasan; tidak dipotong menjadi satu nota contoh dan tidak menambah aksi mati.
 - Tidak menyalin teks Figma "dihitung dari nota lunas"; semantik ledger/uang tetap.
-- Chart yang sudah disetujui tetap primaryTint→primary, bulan harian geser horizontal;
+- Chart yang sudah disetujui tetap primaryTint→primary, bulanan tanpa grafik sesuai revisi terbaru pengguna14Nov2026;
   custom>7hari dan seluruh aksi uang/ekspor tetap sesuai sumber lama.
 
 ## Verifikasi

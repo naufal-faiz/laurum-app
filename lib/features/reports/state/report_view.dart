@@ -75,7 +75,7 @@ Future<ReportView> _loadReport(Ref ref, int period) async {
     range: range,
     totals: totals,
     unpaidCount: await reports.getUnpaidCount(),
-    daily: visibleDailyRevenue(range, amounts, now, allowLongRange: period == 2),
+    daily: period == 2 ? null : visibleDailyRevenue(range, amounts, now),
     services: services,
   );
 }

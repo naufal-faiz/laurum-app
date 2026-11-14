@@ -3,7 +3,7 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 84/84 dibuat
+## Registry widget: 87/87 dibuat
 
 Semua widget sudah dibuat.
 
@@ -199,6 +199,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/core/theme/
 - app_borders.dart (7): AppBorders
 - app_button_styles.dart (71): AppButtonVariant, AppButtonSize, AppButtonStyles
+- app_calendar_styles.dart (21): AppCalendarStyles
 - app_chart_styles.dart (15): AppChartStyles
 - app_colors.dart (64): AppColors
 - app_control_tokens.dart (19): AppControlTokens
@@ -565,16 +566,19 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/reports/pages/
 - outstanding_page.dart (73): OutstandingPage
 - report_page.dart (85): ReportPage
-- report_range_flow.dart (41):
+- report_range_flow.dart (39):
+- report_range_sheet.dart (85): ReportRangeSheet
 
 ### lib/features/reports/state/
 - outstanding_data.dart (69): OutstandingRow, OutstandingListData, OutstandingFilter, outstandingListProvider, outstandingFilterProvider
 - report_custom_range.dart (24): ReportCustomRange, reportCustomRangeProvider
-- report_daily_view.dart (15):
+- report_daily_view.dart (10):
 - report_export.dart (97): ReportExportState, ReportExport, reportExportProvider
 - report_orders_controller.dart (24): ReportOrdersFilter, ReportOrdersSearch, reportOrdersFilterProvider, reportOrdersSearchProvider
 - report_orders_data.dart (68): ReportOrdersData, reportOrdersProvider
 - report_period.dart (30): ReportPeriod, reportPeriodProvider
+- report_range_controller.dart (48): ReportRangeController, reportRangeDraftProvider
+- report_range_draft.dart (20): ReportRangeDraft
 - report_view.dart (81): ReportView, reportViewProvider, weeklyReportViewProvider
 
 ### lib/features/reports/widgets/
@@ -582,6 +586,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_body_section.dart (99): ReportBodySection
 - report_header_section.dart (76): ReportHeaderSection
 - report_orders_section.dart (104): ReportOrdersSection
+- report_range_summary_section.dart (47): ReportRangeSummarySection
 
 ### lib/features/services/data/
 - drift_service_repository.dart (63): DriftServiceRepository
@@ -698,8 +703,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
-- app_badge.dart (32): AppBadgeVariant, AppBadge
+- app_badge.dart (33): AppBadgeVariant, AppBadge
 - app_button.dart (85): AppButtonIconPlacement, AppButton
+- app_calendar_day.dart (41): AppCalendarDay
 - app_card.dart (93): AppCardRail, AppCardStyle, AppCard
 - app_chip.dart (40): AppChip
 - app_divider.dart (16): AppDivider
@@ -759,6 +765,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/organisms/
 - app_bottom_sheet.dart (95): AppBottomSheet
 - app_page_header.dart (82): AppPageHeader
+- app_range_calendar.dart (110): AppRangeCalendar
 - auth_card.dart (21): AuthCard
 - auth_hero.dart (110): AuthHero
 - bottom_nav_bar.dart (102): BottomNavBar
@@ -784,6 +791,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/shared/widgets/templates/
 - auth_scaffold.dart (42): AuthScaffold
 - form_scaffold.dart (64): FormScaffold
+- modal_scaffold.dart (80): ModalScaffold
 - root_scaffold.dart (90): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
 - sub_scaffold.dart (82): SubScaffold
@@ -822,6 +830,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_numpad_key_test.dart (43):
 - app_page_header_test.dart (54):
 - app_page_transitions_test.dart (43):
+- app_range_calendar_test.dart (87):
 - app_router_test.dart (64):
 - app_search_field_test.dart (66):
 - app_skeleton_test.dart (32):
@@ -850,7 +859,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_routes_test.dart (62):
 - auth_scaffold_test.dart (38):
 - auth_session_test.dart (64):
-- auth_sync_golden_test.dart (84):
+- auth_sync_golden_test.dart (90):
 - auth_sync_sections_test.dart (100):
 - b3b_new_password_test.dart (53):
 - banner_message_test.dart (23):
@@ -1123,7 +1132,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r10_signup_sections_test.dart (110):
 - r10_signup_validation_test.dart (37):
 - r10_test_host.dart (66):
-- r10_visual_test.dart (70):
+- r10_visual_test.dart (76):
 - r2_navigation_test.dart (60):
 - r3_customer_creation_test.dart (57):
 - r3_service_creation_test.dart (50):
@@ -1150,11 +1159,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r4_settings_page_test.dart (97):
 - r4_settings_test_support.dart (23): BusinessSaveControl, ControlledBusiness
 - r5_custom_report_test.dart (65):
-- r5_picker_test.dart (66):
+- r5_picker_test.dart (65):
 - r5_range_test.dart (39):
 - r5_report_body_section_test.dart (58):
-- r5_report_visual_test.dart (70):
-- r5_report_widgets_test.dart (100): HeldReportExport
+- r5_report_visual_test.dart (71):
+- r5_report_widgets_test.dart (108): HeldReportExport
 - r9_cards_test.dart (60):
 - r9_checkout_flow_test.dart (79):
 - r9_checkout_host.dart (37):
@@ -1192,15 +1201,19 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_whatsapp_optional_phone_test.dart (49):
 - report_export_test.dart (60): RetryExportService
 - report_financial_responsive_test.dart (78):
-- report_header_section_test.dart (50):
+- report_header_section_test.dart (52):
 - report_memory_contract_test.dart (32):
-- report_monthly_chart_test.dart (76):
+- report_monthly_chart_test.dart (74):
+- report_monthly_layout_test.dart (42):
 - report_orders_test.dart (110):
 - report_page_test.dart (80):
+- report_range_controller_test.dart (37):
+- report_range_dismiss_test.dart (50):
+- report_range_modal_test.dart (78):
 - report_redesign_golden_test.dart (30):
 - report_redesign_host.dart (46):
-- report_redesign_test.dart (73):
-- report_states_test.dart (61):
+- report_redesign_test.dart (77):
+- report_states_test.dart (65):
 - report_summary_test.dart (36):
 - report_view_test.dart (81):
 - root_scaffold_test.dart (81):

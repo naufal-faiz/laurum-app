@@ -60,7 +60,7 @@ class ReportBodySection extends StatelessWidget {
             onOutstandingTap: onOutstanding,
           ),
         if (!data.isEmpty) ...[
-          const SizedBox(height: AppSpacing.mediumLarge),
+          if (daily != null || data.period != 2) const SizedBox(height: AppSpacing.mediumLarge),
           if (daily != null) ...[
             WeeklyBarChart(
               labels: data.dayLabels,
@@ -68,7 +68,7 @@ class ReportBodySection extends StatelessWidget {
               averageLabel: 'Rata-rata ${Formatters.rupiah(data.dailyAverage)}/hari',
             ),
             if (data.peakDayName != null) AppText('Puncak: ${data.peakDayName}'),
-          ] else
+          ] else if (data.period != 2)
             const BannerMessage(
               message: 'Grafik harian ditampilkan untuk rentang hingga 7 hari.',
             ),
