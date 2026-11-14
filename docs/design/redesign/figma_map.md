@@ -28,6 +28,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `17-impor-kontak.md` (17 - Impor Kontak HP) | | Menunggu | |
 | `18-daftar-piutang.md` (18 - Daftar Piutang) | | Menunggu | |
 | `18-laporan-ringkasan.md` (18 - Laporan - Ringkasan) | `LAURUM · Laporan` (ID:4294968337) | 029 disetujui/diimplementasikan WIP; verifikasi tertahan UI-36 | Header/kartu/layanan responsif;45tes sempat hijau; tes tambahan diperbaiki belum diulang; lihat spec18 |
+| `18-laporan-ringkasan.md` (Pilih tanggal) | `LAURUM · Laporan · Pilih Tanggal` (ID:4294968452) | Frame dibaca14Nov; proposal030 menunggu izin | Popup tengah, Dari/Ke, kalender, Reset/Terapkan; batas tanggal/semantik range tetap |
 | `19-pengaturan-akun.md` (19 - Pengaturan dan Akun) | | Menunggu | |
 | `20-daftar-layanan.md` (20 - Daftar Layanan) | | Menunggu | |
 | `21-form-layanan.md` (21 - Tambah dan Edit Layanan) | | Menunggu | |

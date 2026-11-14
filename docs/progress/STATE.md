@@ -2,50 +2,49 @@
 Diperbarui: 2026-11-14 | Cabang ui/pelanggan
 
 ## Sesi aktif
-Redesign seluruh Laporan029 WIP; dasar7580497, persiapan/chart e5cf69b.
-Frame4294968337 sudah dibaca sekali; snapshot/paritas spec18, FigCraft hanya dibaca.
+Persiapan modal Pilih tanggal030, dasar533d772 (redesign Laporan029 WIP).
+Frame pilihan aktif4294968452 dibaca sekali; popup tengah342×470, bukan halaman.
+Dokumen docs/design/new-design-laurum.figcraft; snapshot/paritas030 di spec18.
 
 ## Status irisan
-- Pengguna mengizinkan seluruh redesign/proposal029; kode UI sudah dipasang.
-- Header tunggal, ekspor berikon,4periode, pesan ekspor; RootShell appbar lama disembunyikan
-  khusus /laporan, SafeArea tetap melindungi banner offline/error.
-- Laba biru+bubble/badge; angka laba FittedBox scaleDown agar utuh satu baris.
-- Kas/piutang2kolom tinggi intrinsik atau bertumpuk; StatTile.onTap menjaga aksi piutang.
-- Warna label StatTile primaryInk lokal dipertahankan sesuai029; ikut irisan ini.
-- TopServices rapat dengan peringkat/ikon, qty/nominal/persen/progress tetap.
-- Chart cerah primaryTint→primary, bulan harian scroll tetap; custom>7hari tetap batas lama.
-- Nota penuh/pencarian/filter/range/ekspor/data uang/rute/navbar tetap.
-- UI terpasang tetapi verifikasi akhir belum lengkap; belum dinyatakan selesai.
+- Proposal030 disiapkan untuk kalender rentang dan template modal yang belum di registry.
+- Rencana: AppCalendarDay, AppRangeCalendar, ModalScaffold, ReportRangeSheet dan UI draft.
+- Dari/Ke, panah bulan, Sen–Min, Reset/Terapkan; konten scroll saat font besar/layar sempit.
+- Belum mengubah kode/registry/state/tes untuk modal; menunggu izin komponen baru.
+- Alur lama masih showDateRangePicker halaman penuh; batas/range/Terapkan akan tetap.
+- Pekerjaan029 sudah di533d772; verifikasi akhir masih tertunda, sumber tes API sudah diperbaiki.
 
 ## Keputusan pengguna terbaru
-- Redesign seluruh halaman Laporan sesuai frame terpilih, persetujuan029.
-- Font HP berbeda: uji langsung280–600dp,font0,85–2×,keyboard300dp,teks/nominal panjang.
+- Pilih tanggal diubah menjadi modal mengikuti frame FigCraft yang dipilih.
+- Frame menunjukkan popup tengah dengan latar redup; Reset adalah aksi baru yang
+  diusulkan hanya mengosongkan draft, tidak menghapus filter laporan aktif.
+- Font HP berbeda tetap diuji; tidak memaksa dimensi470px atau font kecil Figma.
 - Merge ke backend-newdesign HARUS melalui persetujuan eksplisit pengguna.
 - Pertahankan data HP; jangan uninstall/hapus DB/outbox; Contacts Data safety wajib.
 
 ## Belum di-commit
-Semua perubahan029 dicakup commit wip penyelesaian sesi ini.
-android/build/ tetap artefak tak terlacak sesi sebelumnya; tidak dimasukkan Git.
+Perubahan lokal yang sudah ada saat tugas mulai (agen tidak membuat/mengembalikan):
+- lib/features/reports/widgets/report_header_section.dart: Ekspor Excel menjadi Excel.
+- lib/shared/widgets/atoms/app_badge.dart: parameter warna opsional.
+- lib/shared/widgets/organisms/report_summary.dart: Masuk/Keluar dan warna badge.
+android/build/ tetap artefak tak terlacak; tidak dimasukkan Git.
+Dokumen persiapan030 dicakup commit wip sesi ini, kode lokal di atas dikecualikan.
 
 ## Langkah berikutnya
-1. Tunggu arahan lanjut pengguna karena UI-36: dua proses tes tambahan gagal kompilasi.
-2. Sumber2tes sudah memakai RenderParagraph.getBoxesForSelection (SDK baris1129),
-   menggantikan getLineBoundary yang tidak tersedia; belum tes ulang setelah perbaikan.
-3. Setelah pengguna melanjutkan: flutter test test/report_redesign_test.dart
-   test/report_financial_responsive_test.dart test/report_header_section_test.dart.
-4. Lanjutkan tes alur laporan/golden; periksa golden radius7580497 dan StatTile terdampak;
-   check_all akhir harus hijau sebelum commit feat(ui), lalu tinjauan HP.
-5. Merge hanya dengan izin pengguna.
+1. Persetujuan030 untuk komponen/registry/template baru, draft dan Reset UI.
+2. Setelah izin: atom→organism→template→Sheet/flow; provider aktual diubah hanya Terapkan.
+3. Migrasikan finder tes Material ke modal baru, pertahankan assertion batas/locale/
+   satu hari/range/batal/rute/ekspor; tambah reset/lintas bulan/font/scroll/golden modal.
+4. Selesaikan verifikasi029 (getBoxesForSelection sudah sesuai SDK), lalu check_all akhir.
+5. Tinjauan HP dan commit irisan; merge hanya dengan izin pengguna.
 
 ## Blocker
-UI-36: dua proses tes tambahan gagal kompilasi API tes yang sama; agen berhenti
-sebelum percobaan ketiga. Sumber sudah diperbaiki, belum diverifikasi ulang.
+Aturan2/UI-13: kalender rentang dan template modal baru memerlukan persetujuan030.
+Verifikasi029 belum tuntas setelah dua proses tes tambahan gagal API; sumber sudah diperbaiki.
 
 ## Bukti terakhir
-- Sebelum tambahan tes angka laba:45tes UI/alur lulus (16kombinasi viewport/font,
-  header/keyboard300dp,ekspor/periode/range/error/kosong/piutang/month31hari).
-- Run terakhir:3tes lulus,2berkas tes gagal load akibat getLineBoundary; sumber kini diperbaiki.
-- Analisis12berkas bersih sebelum tambahan tes; check_arch OK setelah kode FittedBox.
-- Golden report_redesign/large_text/report_summary/top_services diperbarui; belum fullcheck.
-- check_all penuh sebelumnya1244lulus/2skip adalah bukti detail pelanggan, bukan laporan.
+- Branch ui/pelanggan; FigCraft aktif4294968452; coverage5berkas sumber lama bersih.
+- Belum menjalankan tes modal karena sesi ini baru persiapan dokumen.
+- Bukti029:45tes UI/alur sempat hijau; tambahan tes API sudah diperbaiki belum tes ulang.
+- Fullcheck1244lulus/2skip adalah bukti detail pelanggan, bukan modal/laporan029.
 - Visual belum diverifikasi manual pada HP; iOS belum diuji.

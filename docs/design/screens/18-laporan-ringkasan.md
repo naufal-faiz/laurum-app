@@ -1,4 +1,39 @@
 # 18 - Laporan - Ringkasan
+## Modal rentang tanggal030 — persiapan14Nov2026
+Frame aktif pilihan pengguna `LAURUM · Laporan · Pilih Tanggal`4294968452 dibaca sekali.
+Proposal030 menunggu persetujuan karena kalender/template modal belum ada di registry.
+
+### Snapshot modal
+- Latar redup menutupi laporan; popup tengah x24/y190,342×470 pada kanvas390×844.
+- Judul Pilih tanggal, subjudul Rentang laporan kustom, tombol X kanan atas.
+- Kotak Dari dan Ke di atas kalender; nilai contoh November2026 bukan fixture/data baru.
+- Navigasi bulan dengan panah; header Sen–Min; grid6baris dan rentang terpilih.
+- Reset kiri dan Terapkan berikon kanan; ukuran teks/target mengikuti token global.
+
+### Paritas modal030
+| Butir | Sumber/perilaku yang dipertahankan | Verifikasi |
+|---|---|---|
+| Sumber waktu | businessClockProvider; tanggal lokal tanpa konversi UTC | [ ] |
+| Batas | firstDate1Jan2026; lastDate/currentDate=today dari businessClock | [ ] |
+| Draft awal | custom lama atau reportPeriodRange; start/end dibatasi kalender seperti flow lama | [ ] |
+| Satu hari/rentang | start=end valid; selectedReportRange akhir eksklusif, UI inklusif | [ ] |
+| Terapkan | customRange.select → period.select(3) → export.reset, argumen sama | [ ] |
+| Batal | hasil null/Tutup/back/barrier tidak mengubah data atau periode lama | [ ] |
+| Locale/input | bahasa Indonesia; bulan/tanggal lewat Formatters; kalender tanpa TextField | [ ] |
+| Reaktivitas | laporan/ringkasan/CSV mengikuti rentang terpilih melalui sumber yang sama | [ ] |
+| Reset baru | perlu persetujuan030: kosongkan draft, bukan range laporan aktif | [ ] |
+| Font/akses | viewport280–600,font1–2×; konten scroll, aksi terjangkau | [ ] |
+
+### Selisih dan batas030
+- Popup kalender rentang baru diperlukan agar bentuk mengikuti FigCraft, bukan
+  halaman kalender Material yang sekarang dibuka showDateRangePicker.
+- Tanggal contoh Figma tidak disalin; kalender tetap memakai waktu bisnis/range aktif.
+- Grid/font dan tinggi popup tidak dipaksa470px; font besar/layar kecil boleh scroll.
+- Registry hanya ditambah setelah persetujuan; state draft baru hanya UI dan tidak
+  menyentuh repository/skema/perhitungan uang. Pembatalan tetap lewat X/back/barrier.
+- Perubahan lokal report_header_section/app_badge/report_summary saat mulai tugas
+  dipertahankan dan tidak termasuk perubahan agen pada tahap persiapan030.
+
 ## Revisi chart14Nov2026 — arahan pengguna
 - Revisi warna terbaru: primaryTint di atas ke primary di bawah, agar lebih cerah.
   AppChartStyles memakai warna/radius yang ada; tanpa token warna baru.
