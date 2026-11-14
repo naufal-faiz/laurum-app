@@ -41,7 +41,7 @@ class ReportBodySection extends StatelessWidget {
     final daily = data.daily;
     return ListView(
       key: ValueKey((data.period, data.range)),
-      padding: const EdgeInsets.all(AppSpacing.screenPadding)
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xlarge)
           .add(const EdgeInsets.only(bottom: AppDimensions.navCreateSize / 2)),
       children: [
         if (data.isEmpty)
@@ -60,7 +60,7 @@ class ReportBodySection extends StatelessWidget {
             onOutstandingTap: onOutstanding,
           ),
         if (!data.isEmpty) ...[
-          const SizedBox(height: AppSpacing.screenPadding),
+          const SizedBox(height: AppSpacing.mediumLarge),
           if (daily != null) ...[
             WeeklyBarChart(
               labels: data.dayLabels,
@@ -72,7 +72,7 @@ class ReportBodySection extends StatelessWidget {
             const BannerMessage(
               message: 'Grafik harian ditampilkan untuk rentang hingga 7 hari.',
             ),
-          const SizedBox(height: AppSpacing.screenPadding),
+          const SizedBox(height: AppSpacing.mediumLarge),
           if (data.services != null)
             TopServices(services: data.services!, totalRevenue: data.totals.revenue)
           else
@@ -81,7 +81,7 @@ class ReportBodySection extends StatelessWidget {
             ),
         ],
         if (orders != null) ...[
-          const SizedBox(height: AppSpacing.screenPadding),
+          const SizedBox(height: AppSpacing.mediumLarge),
           ReportOrdersSection(
             data: orders!,
             range: data.range,

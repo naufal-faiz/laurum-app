@@ -199,6 +199,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/core/theme/
 - app_borders.dart (7): AppBorders
 - app_button_styles.dart (71): AppButtonVariant, AppButtonSize, AppButtonStyles
+- app_chart_styles.dart (15): AppChartStyles
 - app_colors.dart (64): AppColors
 - app_control_tokens.dart (19): AppControlTokens
 - app_dimensions.dart (16): AppDimensions
@@ -209,7 +210,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_mono_text_styles.dart (19): AppMonoTextStyles
 - app_motion.dart (6): AppMotion
 - app_page_transitions.dart (37): AppPageTransitionsBuilder
-- app_radius.dart (20): AppRadius
+- app_radius.dart (21): AppRadius
 - app_shadows.dart (22): AppShadows
 - app_spacing.dart (22): AppSpacing
 - app_text_styles.dart (102): AppTextStyles
@@ -563,13 +564,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/reports/pages/
 - outstanding_page.dart (73): OutstandingPage
-- report_page.dart (106): ReportPage
+- report_page.dart (85): ReportPage
 - report_range_flow.dart (41):
 
 ### lib/features/reports/state/
 - outstanding_data.dart (69): OutstandingRow, OutstandingListData, OutstandingFilter, outstandingListProvider, outstandingFilterProvider
 - report_custom_range.dart (24): ReportCustomRange, reportCustomRangeProvider
-- report_daily_view.dart (10):
+- report_daily_view.dart (15):
 - report_export.dart (97): ReportExportState, ReportExport, reportExportProvider
 - report_orders_controller.dart (24): ReportOrdersFilter, ReportOrdersSearch, reportOrdersFilterProvider, reportOrdersSearchProvider
 - report_orders_data.dart (68): ReportOrdersData, reportOrdersProvider
@@ -579,6 +580,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/reports/widgets/
 - outstanding_list_section.dart (76): OutstandingListSection
 - report_body_section.dart (99): ReportBodySection
+- report_header_section.dart (76): ReportHeaderSection
 - report_orders_section.dart (104): ReportOrdersSection
 
 ### lib/features/services/data/
@@ -620,7 +622,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (7):
-- root_shell_page.dart (103): RootShellPage
+- root_shell_page.dart (104): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (27): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, shellSyncStatusProvider, whatsappConnectionProvider
@@ -748,7 +750,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - section_header.dart (55): SectionHeader
 - segmented_progress.dart (36): SegmentedProgress
 - selection_tile.dart (77): SelectionTile
-- stat_tile.dart (47): StatTile
+- stat_tile.dart (50): StatTile
 - stepper_field.dart (61): StepperField
 - sync_indicator.dart (46): SyncState, SyncIndicator
 - toggle_row.dart (62): ToggleRow
@@ -773,9 +775,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_preview.dart (44): ReceiptPreview
 - receipt_toggle_list.dart (65): ReceiptToggleList
 - report_summary.dart (109): ReportSummary
-- savings_row.dart (91): SavingsRow
+- savings_row.dart (98): SavingsRow
 - service_row.dart (84): ServiceRow
-- top_services.dart (106): TopServices
+- top_services.dart (108): TopServices
 - weekly_bar_chart.dart (110): WeeklyBarChart
 - welcome_banner.dart (110): WelcomeBanner
 
@@ -1189,15 +1191,21 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_toggle_list_test.dart (37):
 - receipt_whatsapp_optional_phone_test.dart (49):
 - report_export_test.dart (60): RetryExportService
+- report_financial_responsive_test.dart (78):
+- report_header_section_test.dart (50):
 - report_memory_contract_test.dart (32):
+- report_monthly_chart_test.dart (76):
 - report_orders_test.dart (110):
-- report_page_test.dart (76):
+- report_page_test.dart (80):
+- report_redesign_golden_test.dart (30):
+- report_redesign_host.dart (46):
+- report_redesign_test.dart (73):
 - report_states_test.dart (61):
 - report_summary_test.dart (36):
 - report_view_test.dart (81):
 - root_scaffold_test.dart (81):
 - root_scroll_clearance_test.dart (44):
-- savings_row_test.dart (33):
+- savings_row_test.dart (68):
 - section_header_test.dart (26):
 - selection_tile_test.dart (75):
 - service_directory_page_test.dart (110):

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/report_totals.dart';
 import 'package:laurum/core/formatters/formatters.dart';
-import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
-import 'package:laurum/core/theme/app_molecule_tokens.dart';
-import 'package:laurum/core/theme/app_radius.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/shared/widgets/atoms/app_badge.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
-import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
+import 'package:laurum/shared/widgets/molecules/stat_tile.dart';
 
 class ReportSummary extends StatelessWidget {
   const ReportSummary({
@@ -17,91 +16,92 @@ class ReportSummary extends StatelessWidget {
     super.key,
     this.onOutstandingTap,
   });
-
   final ReportTotals totals;
   final String expenseSummary;
   final int unpaidCount;
   final VoidCallback? onOutstandingTap;
-
   @override
   Widget build(BuildContext context) {
+    const title = 'Estimasi laba bersih';
+    final transactions = '${totals.transactionCount} transaksi';
+    final income = 'Pendapatan ${Formatters.rupiah(totals.revenue)}';
+    final expense = 'Pengeluaran ${Formatters.rupiah(totals.expenses)}';
+    final positions = [
+      StatTile(
+        label: 'Kas masuk',
+        value: Formatters.rupiah(totals.cashIn),
+        compact: true,
+        description:
+            'Tunai · QRIS · transfer\nKas termasuk setoran\n'
+            'Tabungan ${Formatters.rupiah(totals.savingsBalance)}\nTitipan, bukan omzet',
+      ),
+      StatTile(
+        label: 'Piutang aktif',
+        value: Formatters.rupiah(totals.activeOutstanding),
+        description: '$unpaidCount nota belum lunas',
+        valueColor: AppColors.error,
+        compact: true,
+        onTap: onOutstandingTap,
+      ),
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      spacing: AppMoleculeTokens.gap,
+      spacing: AppSpacing.mediumLarge,
       children: [
         AppCard(
+          style: AppCardStyle.primary,
+          bubble: true,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: AppMoleculeTokens.labelGap,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: AppSpacing.small,
             children: [
-              const AppText(
-                'Estimasi laba bersih',
-                variant: AppTextVariant.label,
-                color: AppColors.ink2,
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                spacing: AppSpacing.small,
+                runSpacing: AppSpacing.small,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  const AppText(title, variant: AppTextVariant.label, color: AppColors.onPrimary),
+                  AppBadge(transactions, variant: AppBadgeVariant.diproses),
+                ],
               ),
-              AppText(Formatters.rupiah(totals.profit), variant: AppTextVariant.figure),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                decoration: const BoxDecoration(
-                  color: AppColors.chipIdle,
-                  borderRadius: AppRadius.input,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: AppMoleculeTokens.smallGap,
-                  children: [
-                    AppText(
-                      'Pendapatan ${Formatters.rupiah(totals.revenue)} · '
-                      '${totals.transactionCount} transaksi',
-                      variant: AppTextVariant.label,
-                      color: AppColors.primary,
-                    ),
-                    AppText(
-                      'Pengeluaran ${Formatters.rupiah(totals.expenses)} · $expenseSummary',
-                      variant: AppTextVariant.label,
-                      color: AppColors.errorInk,
-                    ),
-                  ],
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: AppText(
+                  Formatters.rupiah(totals.profit),
+                  variant: AppTextVariant.figure,
+                  color: AppColors.onPrimary,
                 ),
               ),
+              Wrap(
+                spacing: AppSpacing.small,
+                runSpacing: AppSpacing.small,
+                children: [
+                  AppBadge(income, variant: AppBadgeVariant.diproses),
+                  AppBadge(expense, variant: AppBadgeVariant.diproses),
+                ],
+              ),
+              AppText(expenseSummary, variant: AppTextVariant.caption, color: AppColors.onPrimary),
             ],
           ),
         ),
-        AppCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: AppMoleculeTokens.labelGap,
-            children: [
-              AppText(
-                'Kas masuk ${Formatters.rupiah(totals.cashIn)}\n'
-                'Tunai, QRIS, transfer; termasuk setoran tabungan',
-                variant: AppTextVariant.bodyStrong,
-              ),
-              AppText(
-                'Tabungan pelanggan ${Formatters.rupiah(totals.savingsBalance)}\n'
-                'Titipan, bukan omzet',
-                variant: AppTextVariant.bodyStrong,
-              ),
-            ],
-          ),
-        ),
-        InkWell(
-          onTap: onOutstandingTap,
-          child: AppCard(
-            child: Row(
-              children: [
-                Expanded(
-                  child: AppText(
-                    'Piutang aktif ${Formatters.rupiah(totals.activeOutstanding)}\n'
-                    '$unpaidCount nota belum lunas',
-                    variant: AppTextVariant.section,
-                    color: AppColors.error,
+        LayoutBuilder(
+          builder: (context, constraints) =>
+              constraints.maxWidth < AppSpacing.touchTarget * 6 ||
+                  MediaQuery.textScalerOf(context).scale(1) > 1.2
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  spacing: AppSpacing.smallMedium,
+                  children: positions,
+                )
+              : IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    spacing: AppSpacing.smallMedium,
+                    children: [for (final tile in positions) Expanded(child: tile)],
                   ),
                 ),
-                const AppIcon(AppIcons.next),
-              ],
-            ),
-          ),
         ),
       ],
     );

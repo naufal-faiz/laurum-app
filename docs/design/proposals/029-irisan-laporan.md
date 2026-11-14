@@ -1,5 +1,5 @@
 # 029 — Irisan laporan
-Status: MENUNGGU PERSETUJUAN; branch ui/pelanggan, dasar7580497.
+Status: DISETUJUI14Nov2026 melalui arahan redesign seluruh halaman; dasar7580497.
 Acuan: LAURUM · Laporan4294968337, pilihan aktif pengguna, dibaca14Nov2026.
 
 ## Komponen bersama (UI-13; satu persetujuan)

@@ -25,6 +25,7 @@ class RootShellPage extends ConsumerWidget {
     final sync = ref.watch(shellSyncProvider);
     final index = navigationShell.currentIndex;
     final settings = index == 3 && GoRouterState.of(context).uri.path == '/lainnya';
+    final reporting = GoRouterState.of(context).uri.path == '/laporan';
     final queue = index == 1 ? ref.watch(antreanDataProvider).value : null;
     final search = index == 1 ? ref.watch(antreanSearchProvider) : (open: false, query: '');
     final customers = index == 2 ? ref.watch(customerDirectoryProvider).value : null;
@@ -35,7 +36,7 @@ class RootShellPage extends ConsumerWidget {
       title: profile.value?.name ?? 'Laurum',
       accountLabel: 'Usaha dan akun',
       activeIndex: navigationShell.currentIndex,
-      showAppBar: index > 1,
+      showAppBar: index > 1 && !reporting,
       pageHeader: settings
           ? SettingsHeaderSection(
               name: profile.value?.name ?? 'Laurum',
@@ -71,7 +72,7 @@ class RootShellPage extends ConsumerWidget {
       onTabSelected: navigationShell.goBranch,
       onCreate: () => context.push('/transaksi/baru'),
       body: SafeArea(
-        top: false,
+        top: reporting,
         child: Column(
           children: [
             if (sync.value == SyncServiceStatus.offline)

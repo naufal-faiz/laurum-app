@@ -12,12 +12,10 @@ import 'package:laurum/features/reports/state/report_orders_data.dart';
 import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/reports/widgets/report_body_section.dart';
+import 'package:laurum/features/reports/widgets/report_header_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
-import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
-import 'package:laurum/shared/widgets/molecules/period_tabs.dart';
-import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
 class ReportPage extends ConsumerWidget {
   const ReportPage({super.key});
@@ -30,45 +28,26 @@ class ReportPage extends ConsumerWidget {
     final custom = ref.watch(reportCustomRangeProvider);
     final useStatus = ref.watch(businessProfileProvider).value?.useOrderStatus ?? true;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(AppSpacing.screenPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: AppSpacing.cardGap,
-            children: [
-              SectionHeader(
-                onBack: () => context.canPop() ? context.pop() : context.go('/lainnya'),
-                title: 'Laporan',
-                actionLabel: 'Ekspor Excel',
-                onAction: data == null || data.isEmpty || exporting.busy
-                    ? null
-                    : () => ref.read(reportExportProvider.notifier).export(data, orders: orders),
-              ),
-              if (exporting.message != null)
-                BannerMessage(
-                  message: exporting.message!,
-                  variant: exporting.failed
-                      ? BannerMessageVariant.error
-                      : BannerMessageVariant.info,
-                ),
-              PeriodTabs(
-                labels: [
-                  ...reportPeriodLabels.take(3),
-                  custom == null
-                      ? 'Pilih tanggal'
-                      : Formatters.rentangTanggal(
-                          custom.start,
-                          custom.end.subtract(const Duration(days: 1)),
-                        ),
-                ],
-                selectedIndex: ref.watch(reportPeriodProvider),
-                onSelected: exporting.busy
-                    ? null
-                    : (index) => selectReportPeriod(context, ref, index),
-              ),
-            ],
-          ),
+        ReportHeaderSection(
+          labels: [
+            ...reportPeriodLabels.take(3),
+            custom == null
+                ? 'Pilih tanggal'
+                : Formatters.rentangTanggal(
+                    custom.start,
+                    custom.end.subtract(const Duration(days: 1)),
+                  ),
+          ],
+          selectedIndex: ref.watch(reportPeriodProvider),
+          onBack: () => context.canPop() ? context.pop() : context.go('/lainnya'),
+          onExport: data == null || data.isEmpty || exporting.busy
+              ? null
+              : () => ref.read(reportExportProvider.notifier).export(data, orders: orders),
+          onPeriod: exporting.busy ? null : (index) => selectReportPeriod(context, ref, index),
+          message: exporting.message,
+          failed: exporting.failed,
         ),
         Expanded(
           child: snapshot.when(

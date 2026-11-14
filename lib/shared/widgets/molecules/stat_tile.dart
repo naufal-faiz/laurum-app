@@ -16,14 +16,17 @@ class StatTile extends StatelessWidget {
     this.icon,
     this.compact = false,
     this.valueColor,
+    this.onTap,
   });
   final String label, value;
   final String? description;
   final AppIcons? icon;
   final bool compact;
   final Color? valueColor;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) => AppCard(
+    onTap: onTap,
     padding: compact
         ? AppMoleculeTokens.noticePadding
         : const EdgeInsets.all(AppSpacing.cardPadding),
@@ -33,7 +36,7 @@ class StatTile extends StatelessWidget {
       spacing: compact ? AppMoleculeTokens.smallGap : AppMoleculeTokens.gap,
       children: [
         if (icon != null) AppIcon(icon!, color: AppColors.primary),
-        AppText(label, variant: AppTextVariant.label, color: AppColors.ink2),
+        AppText(label, variant: AppTextVariant.label, color: AppColors.primaryInk),
         AppText(
           value,
           variant: compact ? AppTextVariant.section : AppTextVariant.figure,

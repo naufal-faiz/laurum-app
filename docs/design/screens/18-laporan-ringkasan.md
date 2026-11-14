@@ -27,7 +27,31 @@
 
 ## Persiapan irisan laporan029
 Frame aktif pilihan pengguna `LAURUM · Laporan`4294968337 (390×844) dibaca sekali.
-Proposal029 menunggu persetujuan perubahan komponen bersama.
+Proposal029 disetujui melalui arahan pengguna untuk redesign seluruh halaman.
+
+### Implementasi029 (WIP, verifikasi akhir tertahan UI-36)
+- Header laporan tunggal memakai AppBarSub detail dan ekspor berikon; saat sempit
+  atau font>1,2×, ekspor turun ke baris berikutnya. Semua4periode dan pesan ekspor tetap.
+- Appbar usaha RootShell disembunyikan khusus /laporan; SafeArea diaktifkan untuk
+  laporan termasuk banner offline/error. Provider, rute dan navbar tetap.
+- Laba memakai AppCard primary+bubble, badge transaksi/pendapatan/pengeluaran;
+  angka laba memakai FittedBox scaleDown agar nilai utuh tidak pecah antarbaris.
+- Kas/piutang memakai StatTile compact, tinggi intrinsik sejajar pada layar lebar,
+  bertumpuk pada layar sempit/font besar. Rincian kas/setoran/tabungan titipan tetap.
+- StatTile.onTap diteruskan ke AppCard; warna label primaryInk lokal dipertahankan.
+- TopServices lebih rapat, badge peringkat, IconTile layanan, nilai/persen/kuantitas
+  dan progress tetap; kolom fleksibel membungkus, tanpa tinggi konten tetap.
+- Margin horizontal24/gap14, daftar nota penuh, pencarian/filter/range/ekspor tetap.
+- Test report_page_test memisahkan finder label dan nilai piutang; assertion Rp400.500
+  dan callback buka piutang tetap. Tidak menghapus/melemahkan tes perilaku lama.
+- Terakhir45tes UI/alur lulus, termasuk16kombinasi lebar280/320/390/600 × font0,85/1/1,3/2.
+- Setelah tambahan pengecekan angka laba satu baris, dua proses tes gagal kompilasi
+  akibat RenderParagraph.getLineBoundary yang tidak tersedia. Sumber tes sudah diganti
+  ke getBoxesForSelection yang diverifikasi pada SDK, tetapi belum dijalankan ulang.
+- UI-36: berhenti sebelum percobaan ketiga. check_all akhir belum dijalankan.
+- Golden laporan normal/font2× dan report_summary/top_services diperbarui; golden
+  radius dari batch7580497 dan warna StatTile pada layar lain belum diverifikasi penuh.
+- Visual belum diverifikasi manual pada HP; screenshot emulator tidak diambil.
 
 ### Snapshot pemetaan desain
 - Header kembali/judul/subjudul periode/ekspor berikon → ReportHeaderSection,
