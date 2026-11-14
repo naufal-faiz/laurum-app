@@ -32,7 +32,11 @@ void main() {
         await tester.scrollUntilVisible(find.byType(AppSearchField), 500, scrollable: vertical);
         expect(tester.getTopLeft(find.byType(ReportHeaderSection)), header);
         expect(
-          tester.widget<AppButton>(find.widgetWithText(AppButton, 'Ekspor Excel')).onPressed,
+          tester
+              .widget<AppButton>(
+                find.ancestor(of: find.textContaining('Excel'), matching: find.byType(AppButton)),
+              )
+              .onPressed,
           isNotNull,
         );
         expect(tester.takeException(), isNull);

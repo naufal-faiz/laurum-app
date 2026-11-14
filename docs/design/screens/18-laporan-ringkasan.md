@@ -1,7 +1,7 @@
-# 18 - Laporan - Ringkasan
+﻿# 18 - Laporan - Ringkasan
 ## Modal rentang tanggal030 — persiapan14Nov2026
 Frame aktif pilihan pengguna `LAURUM · Laporan · Pilih Tanggal`4294968452 dibaca sekali.
-Proposal030 menunggu persetujuan karena kalender/template modal belum ada di registry.
+Proposal030 disetujui pengguna14Nov2026. Implementasi WIP;11tes terarah lulus; check_arch masih menolak111baris kalender (maks110), berhenti sesuai UI-36.
 
 ### Snapshot modal
 - Latar redup menutupi laporan; popup tengah x24/y190,342×470 pada kanvas390×844.
@@ -209,3 +209,4 @@ R5: golden r5_report_custom/r5_date_picker ditinjau, grafik 7 hari dan kalender 
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
+

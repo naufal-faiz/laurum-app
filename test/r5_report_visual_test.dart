@@ -12,6 +12,8 @@ import 'package:laurum/shared/widgets/organisms/weekly_bar_chart.dart';
 
 import 'antrean_test_host.dart';
 
+import 'package:laurum/features/reports/pages/report_range_sheet.dart';
+
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
   for (final width in [390, 320]) {
@@ -54,15 +56,15 @@ void main() {
       await tester.ensureVisible(dateTab);
       await tester.tap(dateTab);
       await tester.pumpAndSettle();
-      expect(find.byType(DateRangePickerDialog), findsOneWidget);
+      expect(find.byType(ReportRangeSheet), findsOneWidget);
       if (width == 390) {
         await expectLater(
           find.byKey(const ValueKey('antrean-golden')),
           matchesGoldenFile('goldens/r5_date_picker.png'),
         );
       }
-      final loc = MaterialLocalizations.of(tester.element(find.byType(DateRangePickerDialog)));
-      await tester.tap(find.byTooltip(loc.closeButtonTooltip));
+
+      await tester.tap(find.byTooltip('Tutup'));
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
     });

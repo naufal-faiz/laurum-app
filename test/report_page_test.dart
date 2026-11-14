@@ -29,7 +29,7 @@ void main() {
     await tester.scrollUntilVisible(find.byType(TopServices), 300, scrollable: vertical);
     await tester.pumpAndSettle();
     expect(find.text('Rp301.500'), findsOneWidget);
-    await tester.tap(find.text('Ekspor Excel'));
+    await tester.tap(find.textContaining('Excel'));
     await tester.pumpAndSettle();
     expect(find.text('Laporan siap diekspor.'), findsOneWidget);
     final export = host.container.read(exportServiceProvider) as FakeExportService;

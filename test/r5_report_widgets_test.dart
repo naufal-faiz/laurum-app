@@ -40,10 +40,14 @@ void main() {
     scope.read(reportPeriodProvider.notifier).select(3);
     await pumpAntrean(tester, container: scope, location: '/laporan');
     expect(find.byType(FooterBar), findsNothing);
-    await tester.tap(find.text('Ekspor Excel'));
+    await tester.tap(find.textContaining('Excel'));
     await tester.pumpAndSettle();
     expect(
-      tester.widget<TextButton>(find.widgetWithText(TextButton, 'Ekspor Excel')).onPressed,
+      tester
+          .widget<TextButton>(
+            find.ancestor(of: find.textContaining('Excel'), matching: find.byType(TextButton)),
+          )
+          .onPressed,
       isNull,
     );
     expect(tester.widget<PeriodTabs>(find.byType(PeriodTabs)).onSelected, isNull);
@@ -80,7 +84,11 @@ void main() {
         expect(find.text('Belum ada data periode ini'), findsOneWidget);
         expect(find.byType(ReportSummary), findsNothing);
         expect(
-          tester.widget<TextButton>(find.widgetWithText(TextButton, 'Ekspor Excel')).onPressed,
+          tester
+              .widget<TextButton>(
+                find.ancestor(of: find.textContaining('Excel'), matching: find.byType(TextButton)),
+              )
+              .onPressed,
           isNull,
         );
       } else {

@@ -36,7 +36,9 @@ void main() {
       ),
     );
     await tester.tap(find.byTooltip('Kembali'));
-    await tester.tap(find.widgetWithText(AppButton, 'Ekspor Excel'));
+    await tester.tap(
+      find.ancestor(of: find.textContaining('Excel'), matching: find.byType(AppButton)),
+    );
     await tester.tap(find.text('Hari ini'));
     expect(backs, 1);
     expect(exports, 1);

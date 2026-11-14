@@ -1,5 +1,5 @@
 # 030 — Modal pilih rentang tanggal
-Status: MENUNGGU PERSETUJUAN; branch ui/pelanggan, dasar533d772.
+Status: DISETUJUI pengguna14Nov2026: "ya, silahkan"; dasar533d772.
 Acuan: LAURUM · Laporan · Pilih Tanggal4294968452, pilihan aktif pengguna14Nov2026.
 
 ## Komponen baru (aturan2/UI-13; persetujuan termasuk registry)

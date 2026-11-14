@@ -35,7 +35,11 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Belum ada data periode ini'), findsOneWidget);
     expect(
-      tester.widget<TextButton>(find.widgetWithText(TextButton, 'Ekspor Excel')).onPressed,
+      tester
+          .widget<TextButton>(
+            find.ancestor(of: find.textContaining('Excel'), matching: find.byType(TextButton)),
+          )
+          .onPressed,
       isNull,
     );
   });
