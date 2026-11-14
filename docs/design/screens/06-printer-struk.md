@@ -3,12 +3,13 @@ Rute: /lainnya/printer   Fase: 4   Frame .pen: "Lainnya - Printer dan Struk"
 Template: FormScaffold (AppBarSub + body gulir + FooterBar sticky)
 
 Komposisi:
-- AppBarSub(title: 'Printer dan struk', backLabel: 'Kembali').
+- AppBarSub varian detail: back bulat, judul 'Printer dan struk', subjudul
+  'Koneksi & format nota kasir', badge status di kanan.
 - PrinterConnectionSection: BannerMessage warning 'Printer belum terhubung.' + AppButton
   'Cari printer'; atau AppCard berisi nama printer + 'Terhubung dan siap mencetak' + Ganti.
-- PrinterSettingsSection: AppChip '58 mm'/'80 mm' (mengetuk '80 mm' hanya
+- PrinterSettingsSection: SegmentedControl '58 mm'/'80 mm' (mengetuk '80 mm' hanya
   menampilkan BannerMessage 'Printer 80 mm masih coming soon...' dan ukuran tetap
-  58 mm), AppChip 'Normal'/'Besar',
+  58 mm), SegmentedControl 'Normal'/'Besar',
   ReceiptToggleList (alamat, pelanggan, tabungan, catatan; dua baris terkunci),
   LabeledField + AppTextField 'Teks penutup struk' dan 'Catatan khusus nota'.
 - PrinterPreviewSection: ReceiptPreview (lebar 320 untuk 58 mm, 384 untuk 80 mm) memakai
@@ -106,8 +107,12 @@ Frame: `LAURUM · Printer & Struk` (4294969167), `LAURUM · Cari Printer Bluetoo
   ada di registry (tanpa token/varian baru).
 - Kartu terhubung memakai AppCardStyle.success (#E9F5EE, tanpa garis hijau); Figma
   #F0FDF4 bergaris #86EFAC.
-- Kontrol 58/80 dan Normal/Besar memakai AppChip (bukan segmented track); label tetap
-  "58 mm", "80 mm", "Normal", "Besar" agar perilaku/tes tidak berubah.
+- Kontrol 58/80 dan Normal/Besar memakai SegmentedControl (molekul baru, proposal 032)
+  mengikuti track+pil Figma; ukuran teks segmen memakai token label 13 (Figma 10),
+  lebar track mengikuti sisa baris kartu (Figma 198). Label tetap "58 mm", "80 mm",
+  "Normal", "Besar" agar perilaku/tes tidak berubah.
+- Subjudul header memakai teks ringkas 'Koneksi & format nota kasir' agar muat satu
+  baris dengan badge di header detail bersama.
 - Device list memakai MenuRow di dalam AppCard (bukan kartu + tombol per baris), tanpa
   badge "Memindai..." karena loader + teks busy sudah ada.
 - Label Figma Title Case tidak diadopsi; teks pesan mengikuti spec.
@@ -117,6 +122,9 @@ Frame: `LAURUM · Printer & Struk` (4294969167), `LAURUM · Cari Printer Bluetoo
 - `printer_page_test.dart`: finder status awal `Printer belum terhubung.` menjadi
   `Belum terhubung`; finder judul pratinjau menjadi teks judul baru. Assertion perilaku
   lain tidak berubah. Golden `printer_page.png` diperbarui.
+- `printer_sections_feedback_test.dart`: finder ketuk `AppChip` 'Besar'/'80 mm' menjadi
+  `find.text(...)` karena kontrol kini SegmentedControl; assertion (font 13, notice
+  coming soon) tidak berubah.
 
 ## Audit penyelesaian UI - prompt 100
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.

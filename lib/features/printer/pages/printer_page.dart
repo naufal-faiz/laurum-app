@@ -15,6 +15,7 @@ import 'package:laurum/features/printer/widgets/printer_preview_section.dart';
 import 'package:laurum/features/printer/widgets/printer_settings_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_badge.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 
@@ -29,8 +30,9 @@ class PrinterPage extends ConsumerWidget {
     ref.watch(printerRestoreProvider);
     return FormScaffold(
       title: 'Printer dan struk',
-      subtitle: 'Pengaturan koneksi & format nota kasir',
+      subtitle: 'Koneksi & format nota kasir',
       backLabel: 'Kembali',
+      appBarVariant: AppBarSubVariant.detail,
       onBack: () => context.pop(),
       trailing: AppBadge(
         connection.status == PrintStatus.bluetoothOff
@@ -63,7 +65,7 @@ class PrinterPage extends ConsumerWidget {
         ),
         data: (printer) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: AppSpacing.screenPadding,
+          spacing: AppSpacing.cardGap,
           children: [
             PrinterConnectionSection(
               printer: connection,

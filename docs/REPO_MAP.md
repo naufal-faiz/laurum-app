@@ -3,7 +3,7 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 87/87 dibuat
+## Registry widget: 88/88 dibuat
 
 Semua widget sudah dibuat.
 
@@ -494,7 +494,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/printer/pages/
 - bluetooth_sheet.dart (44): BluetoothSheet
 - printer_device_sheet.dart (82): PrinterDeviceSheet
-- printer_page.dart (92): PrinterPage
+- printer_page.dart (100): PrinterPage
 
 ### lib/features/printer/state/
 - printer_connection.dart (109): PrinterConnectionController, printerConnectionProvider
@@ -507,10 +507,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - saved_printer.dart (17): savedPrinterProvider
 
 ### lib/features/printer/widgets/
-- printer_connection_section.dart (77): PrinterConnectionSection
-- printer_device_list_section.dart (46): PrinterDeviceListSection
-- printer_preview_section.dart (42): PrinterPreviewSection
-- printer_settings_section.dart (99): PrinterSettingsSection
+- printer_connection_section.dart (97): PrinterConnectionSection
+- printer_device_list_section.dart (53): PrinterDeviceListSection
+- printer_elements_section.dart (71): PrinterElementsSection
+- printer_footer_section.dart (32): PrinterFooterSection
+- printer_format_section.dart (64): PrinterFormatSection
+- printer_message_section.dart (46): PrinterMessageSection
+- printer_preview_section.dart (49): PrinterPreviewSection
+- printer_settings_section.dart (60): PrinterSettingsSection
 
 ### lib/features/proposals/data/
 - account_proposal_fixtures.dart (23):
@@ -754,6 +758,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - rank_row.dart (71): RankRow
 - receipt_rows.dart (59): ReceiptRows
 - section_header.dart (55): SectionHeader
+- segmented_control.dart (61): SegmentedControl
 - segmented_progress.dart (36): SegmentedProgress
 - selection_tile.dart (77): SelectionTile
 - stat_tile.dart (50): StatTile
@@ -1099,7 +1104,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - printer_reconnect_test.dart (70): DeferredReconnectPrinter
 - printer_refresh_visibility_test.dart (49): DeferredPrinterSettings
 - printer_restore_test.dart (45):
-- printer_sections_feedback_test.dart (72):
+- printer_sections_feedback_test.dart (71):
 - printer_service_test.dart (42):
 - progress_row_test.dart (23):
 - proposal_actions_test.dart (72):

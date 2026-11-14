@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/printer/state/printer_settings_edit.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
-import 'package:laurum/shared/widgets/atoms/app_chip.dart';
-import 'package:laurum/shared/widgets/atoms/app_divider.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
+import 'package:laurum/shared/widgets/molecules/segmented_control.dart';
 
 class PrinterFormatSection extends StatelessWidget {
   const PrinterFormatSection({
@@ -25,48 +24,37 @@ class PrinterFormatSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Expanded(
-              child: AppText(
-                'Lebar kertas',
-                variant: AppTextVariant.bodyStrong,
-              ),
+            const AppText(
+              'Lebar kertas',
+              variant: AppTextVariant.bodyStrong,
             ),
-            Wrap(
-              spacing: AppSpacing.small,
-              children: [
-                for (final paper in [58, 80])
-                  AppChip(
-                    '$paper mm',
-                    selected: paperMm == paper,
-                    onPressed: paper == 80
-                        ? () => onNotice(
-                            'Printer 80 mm masih coming soon. Untuk sekarang gunakan 58 mm.',
-                          )
-                        : () => onEdit(paperMm: paper),
-                  ),
-              ],
+            const SizedBox(width: AppSpacing.medium),
+            Expanded(
+              child: SegmentedControl(
+                labels: const ['58 mm', '80 mm'],
+                selectedIndex: paperMm == 80 ? 1 : 0,
+                onSelected: (index) => index == 0
+                    ? onEdit(paperMm: 58)
+                    : onNotice(
+                        'Printer 80 mm masih coming soon. Untuk sekarang gunakan 58 mm.',
+                      ),
+              ),
             ),
           ],
         ),
-        const AppDivider(),
         Row(
           children: [
-            const Expanded(
-              child: AppText(
-                'Ukuran huruf',
-                variant: AppTextVariant.bodyStrong,
-              ),
+            const AppText(
+              'Ukuran huruf',
+              variant: AppTextVariant.bodyStrong,
             ),
-            Wrap(
-              spacing: AppSpacing.small,
-              children: [
-                for (final size in [11, 13])
-                  AppChip(
-                    size == 11 ? 'Normal' : 'Besar',
-                    selected: fontSize == size,
-                    onPressed: () => onEdit(fontSize: size),
-                  ),
-              ],
+            const SizedBox(width: AppSpacing.medium),
+            Expanded(
+              child: SegmentedControl(
+                labels: const ['Normal', 'Besar'],
+                selectedIndex: fontSize == 13 ? 1 : 0,
+                onSelected: (index) => onEdit(fontSize: index == 0 ? 11 : 13),
+              ),
             ),
           ],
         ),
