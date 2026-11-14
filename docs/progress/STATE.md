@@ -1,48 +1,44 @@
 ﻿# STATE Laurum
-Diperbarui: 2026-11-14 | Cabang ui/pelanggan
+Diperbarui: 2026-11-14 | Cabang ui/printer (worktree terpisah dari ui/pelanggan)
 
 ## Sesi aktif
-Redesign Tambah layanan031, dasar0e81c8d.
-Frame pilihan4294968237 LAURUM · Tambah Layanan dibaca sekali lewat FigCraft aktif.
-Snapshot/pemetaan/paritas di spec21; proposal031 siap ditinjau.
+Redesign layar Printer & Struk, dasar 7e85870.
+Frame dibaca sekali lewat FigCraft: Printer & Struk (4294969167), Cari Printer
+Bluetooth (4294969275), Printer & Struk — Terhubung (4294969351).
+Paritas dan selisih di docs/design/screens/06-printer-struk.md.
 
 ## Status irisan
-- Rancangan: pratinjau biru, kartu informasi, kartu durasi/status, footer sejajar.
-- FormScaffold detail, toggle, chip durasi dan layout responsif sudah tersedia.
-- Dibutuhkan4varian bersama opt-in agar sesuai frame; belum mengubah kode/tes.
-- Proposal031: AppCard.gradient=false, AppBadge inverse, AppTextField.prefixText=null,
-  SelectionTile.compact=false. Semua default lama tetap dan memakai token yang ada.
-- Nama usaha di subtitle memerlukan pembacaan profil usaha read-only di Page.
-- Form Edit mempertahankan komposisi/binding lama; state/data/rute tidak diubah.
-- Draft/validasi/save/cancel/not-found/loading/error sudah dipetakan di tabel paritas.
-- Tidak mengambil screenshot FigCraft/emulator; struktur node mencukupi.
+- Page 06 sudah memakai tata letak frame: header + badge status, kartu koneksi,
+  kartu format, kartu elemen, kartu pesan, kartu pratinjau, footer dua tombol.
+- Section baru: printer_format_section, printer_elements_section,
+  printer_message_section, printer_footer_section.
+- Device list memakai MenuRow di dalam AppCard; sheet tetap memakai
+  AppBottomSheet (judul/subjudul spec).
+- Tidak ada perubahan state, data, rute, token, shared/widgets, atau dependensi.
+- Selisih: tanpa tombol Putus, tanpa banner cetak otomatis, tanpa baterai/sinyal,
+  badge hijau memakai varian `siap`, kontrol 58/80 memakai AppChip.
 
 ## Keputusan pengguna terbaru
-- Redesign Tambah layanan sesuai frame aktif; pengguna meminta pembaruan.
-- Nama usaha/contoh harga Figma bukan data; gunakan sumber nyata/draft yang ada.
-- Tetap dukung font HP besar dan keyboard300dp.
-- Merge ke backend-newdesign harus melalui persetujuan eksplisit pengguna.
-- Jangan uninstall atau menghapus DB/outbox perangkat.
+- Ketiga frame Printer dikerjakan dalam satu irisan.
+- Branch baru disetujui; merge butuh persetujuan; konflik dilaporkan.
+- Commit terpisah dari agen lain; jangan commit docs/design/new-design-laurum.figcraft.
 
 ## Belum di-commit
-Dokumen persiapan031 dicakup commit WIP sesi ini; kode belum diubah.
-android/build/ tetap artefak tak terlacak; tidak disertakan Git.
+(Irisan ini sudah di-commit berbarengan dengan STATE.md.)
 
 ## Langkah berikutnya
-1. Persetujuan proposal031 untuk4varian bersama dan pembacaan profil usaha di Page.
-2. Setelah izin: atom/tema→SelectionTile→Page/Section khusus Tambah; Edit tetap.
-3. Pertahankan provider/callback/validasi; tambahkan tes Section/varian/keyboard/font.
-4. Golden terarah, check_arch, check_all sekali di akhir, paritas penuh dan commit final.
-5. Pengguna meninjau HP; tidak push/merge tanpa izin.
+1. Pengguna meninjau layar di perangkat/emulator (visual belum diverifikasi manual).
+2. Koreksi tata letak dikerjakan sebagai commit fix(ui).
+3. Merge ke newdesign/backend-newdesign hanya setelah persetujuan pengguna;
+   docs/progress/STATE.md dan docs/design/redesign/figma_map.md berpotensi konflik
+   dengan perubahan agen lain di pohon utama.
 
 ## Blocker
-AGENTS UI-13/UI-21: perubahan komponen bersama perlu proposal dan persetujuan.
-UI-8: subjudul nama usaha perlu persetujuan pembacaan sumber profil yang sudah ada.
+Tidak ada.
 
 ## Bukti terakhir
-- Branch ui/pelanggan, HEAD0e81c8d, FigCraft aktif dengan pilihan4294968237.
-- Graph/snippet menemukan ServiceEditPage dan ServiceEditFieldsSection;
-  trace tidak merekam callee; API diverifikasi langsung dan coverage10berkas bersih.
-- Proposal/spec/peta frame siap; belum menjalankan tes karena belum ada perubahan kode.
-- Bukti1291lulus/2skip/check_all hijau adalah irisan laporan sebelumnya.
-- Visual belum diverifikasi manual pada HP; iOS belum diuji.
+- flutter analyze lib/features/printer: No issues found.
+- flutter test printer_page/sections/device list/discovery/refresh/reconnect/restore:
+  semua lulus; golden printer_page.png diperbarui.
+- flutter test test/keyboard_audit_test.dart: 14 tes lulus.
+- dart run tool/check_arch.dart: OK.

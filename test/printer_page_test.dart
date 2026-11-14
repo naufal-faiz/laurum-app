@@ -27,7 +27,7 @@ void main() {
 
   testWidgets('printer page connects, changes paper and saves settings', (tester) async {
     final host = await pumpPrinter(tester);
-    expect(find.text('Printer belum terhubung.'), findsOneWidget);
+    expect(find.text('Belum terhubung'), findsOneWidget);
     await tester.tap(find.text('Cari printer'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Thermal 58mm'));
@@ -36,7 +36,7 @@ void main() {
     await tester.tap(find.text('80 mm'));
     await tester.pumpAndSettle();
     expect(find.textContaining('masih coming soon'), findsOneWidget);
-    expect(find.text('Thermal 58 mm'), findsOneWidget);
+    expect(find.text('Pratinjau hasil cetak thermal (58 mm)'), findsOneWidget);
     await tester.ensureVisible(find.byType(AppSwitch).first);
     await tester.pumpAndSettle();
     await tester.tap(find.byType(AppSwitch).first);

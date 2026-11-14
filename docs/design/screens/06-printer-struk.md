@@ -63,6 +63,61 @@ aksesori non-MFi; adapter hanya memakai BLE (`flutter_blue_plus`) sehingga Class
 tidak didukung. Fitur ini **belum diuji di iOS**.
 
 
+## Redesign 14 Nov 2026 (frame LAURUM · Printer & Struk)
+
+Frame: `LAURUM · Printer & Struk` (4294969167), `LAURUM · Cari Printer Bluetooth`
+(4294969275), `LAURUM · Printer & Struk — Terhubung` (4294969351). Tampilan saja.
+
+### Paritas redesign
+
+| Butir | Sumber lama | Ada di UI baru |
+|---|---|---|
+| Data printerSettingsProvider (settings, profile, notice) | Page | ya |
+| Data printerConnectionProvider (status, connected, busy, notice) | Page | ya |
+| printerRestoreProvider saat halaman dibuka | Page | ya |
+| demoReceiptLines + ReceiptPreview | Preview | ya |
+| Memuat skeleton / gagal + Coba lagi | Page | ya |
+| Belum terhubung (kartu status) | Banner + tombol | ya (status di kartu) |
+| Terhubung + nama printer + id perangkat | Kartu | ya |
+| Busy koneksi ("Memproses koneksi printer...") | Kartu | ya |
+| Bluetooth mati (banner warning) | Banner | ya |
+| Tombol Cari printer / Ganti | Section | ya |
+| Chip 58/80 mm + notice coming soon | Settings | ya |
+| Chip Normal/Besar | Settings | ya |
+| Toggle alamat, pelanggan, tabungan, catatan | ReceiptToggleList | ya |
+| Info "nomor nota & rincian selalu tampil" | 2 LockedRow | ya (keterangan bawah judul kartu) |
+| Field teks penutup + catatan khusus | Settings | ya |
+| Pratinjau struk + lebar 320/384 + catatan belum diuji | Preview | ya |
+| Simpan pengaturan | Footer | ya |
+| Cetak uji + banner sukses/gagal | Footer | ya |
+| Sheet: printer tersimpan, hasil pindai, dedup, busy | DeviceSheet | ya |
+| Sheet: Bluetooth mati tanpa modal aktivasi | DeviceSheet | ya |
+| Sheet: Cari lagi | DeviceSheet | ya |
+| Key/golden host (`antrean-golden`) | tes | ya |
+
+### Selisih desain
+
+- Tombol header "Putus" tidak dibuat: state tidak punya aksi putuskan; aksi yang ada
+  (Ganti) dipertahankan (UI-9/UI-10).
+- Banner "Cetak otomatis aktif setelah pembayaran" tidak dirender: cetak otomatis
+  belum ada di PRD/state (UI-9).
+- Indikator baterai/sinyal tidak ditampilkan: PrinterDevice hanya punya id dan nama.
+- Badge hijau "Terhubung" memakai AppBadge varian `siap` (biru); varian sukses belum
+  ada di registry (tanpa token/varian baru).
+- Kartu terhubung memakai AppCardStyle.success (#E9F5EE, tanpa garis hijau); Figma
+  #F0FDF4 bergaris #86EFAC.
+- Kontrol 58/80 dan Normal/Besar memakai AppChip (bukan segmented track); label tetap
+  "58 mm", "80 mm", "Normal", "Besar" agar perilaku/tes tidak berubah.
+- Device list memakai MenuRow di dalam AppCard (bukan kartu + tombol per baris), tanpa
+  badge "Memindai..." karena loader + teks busy sudah ada.
+- Label Figma Title Case tidak diadopsi; teks pesan mengikuti spec.
+
+### Tes yang disesuaikan (finder/visual)
+
+- `printer_page_test.dart`: finder status awal `Printer belum terhubung.` menjadi
+  `Belum terhubung`; finder judul pratinjau menjadi teks judul baru. Assertion perilaku
+  lain tidak berubah. Golden `printer_page.png` diperbarui.
+
 ## Audit penyelesaian UI - prompt 100
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
