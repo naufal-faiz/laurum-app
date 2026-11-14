@@ -4,7 +4,7 @@ import 'package:laurum/core/theme/app_control_tokens.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
-enum AppBadgeVariant { diproses, siap, menungguJemput, selesai, dibatalkan, perhatian }
+enum AppBadgeVariant { diproses, siap, menungguJemput, selesai, dibatalkan, perhatian, inverse }
 
 class AppBadge extends StatelessWidget {
   const AppBadge(this.label, {required this.variant, this.color, super.key});
@@ -15,6 +15,7 @@ class AppBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (background, foreground) = switch (variant) {
+      AppBadgeVariant.inverse => (AppColors.illustration, AppColors.onPrimary),
       AppBadgeVariant.diproses => (AppColors.blueTint, AppColors.blueInk),
       AppBadgeVariant.siap => (AppColors.primaryTint, AppColors.primary),
       AppBadgeVariant.menungguJemput ||

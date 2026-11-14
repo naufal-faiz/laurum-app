@@ -70,7 +70,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - formatters.dart (55): Formatters
 
 ### lib/core/icons/
-- app_icons.dart (64): AppIcons
+- app_icons.dart (66): AppIcons
 - app_svgs.dart (9): AppSvgs
 
 ### lib/core/persistence/
@@ -204,16 +204,18 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_colors.dart (64): AppColors
 - app_control_tokens.dart (19): AppControlTokens
 - app_dimensions.dart (16): AppDimensions
-- app_field_decoration.dart (34): AppFieldDecoration
-- app_input_styles.dart (104): AppInputStyles
+- app_field_decoration.dart (42): AppFieldDecoration
+- app_input_styles.dart (105): AppInputStyles
 - app_molecule_styles.dart (32): AppMoleculeStyles
 - app_molecule_tokens.dart (15): AppMoleculeTokens
 - app_mono_text_styles.dart (19): AppMonoTextStyles
 - app_motion.dart (6): AppMotion
 - app_page_transitions.dart (37): AppPageTransitionsBuilder
 - app_radius.dart (21): AppRadius
+- app_selection_styles.dart (22): AppSelectionStyles
 - app_shadows.dart (22): AppShadows
 - app_spacing.dart (22): AppSpacing
+- app_surface_styles.dart (10): AppSurfaceStyles
 - app_text_styles.dart (102): AppTextStyles
 - app_theme.dart (67): AppTheme
 - receipt_edge_clipper.dart (27): ReceiptEdgeClipper
@@ -596,7 +598,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/services/pages/
 - service_directory_page.dart (71): ServiceDirectoryPage
-- service_edit_page.dart (73): ServiceEditPage
+- service_edit_page.dart (103): ServiceEditPage
 
 ### lib/features/services/state/
 - service_copy.dart (25):
@@ -606,9 +608,15 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_edit_state.dart (55): ServiceEditState
 
 ### lib/features/services/widgets/
+- service_create_footer_section.dart (61): ServiceCreateFooterSection
+- service_create_form_section.dart (53): ServiceCreateFormSection
 - service_directory_content_section.dart (68): ServiceDirectoryContentSection
 - service_directory_list_section.dart (37): ServiceDirectoryListSection
+- service_duration_section.dart (63): ServiceDurationSection
 - service_edit_fields_section.dart (100): ServiceEditFieldsSection
+- service_information_section.dart (82): ServiceInformationSection
+- service_preview_section.dart (71): ServicePreviewSection
+- service_type_section.dart (43): ServiceTypeSection
 
 ### lib/features/settings/pages/
 - settings_page.dart (33): SettingsPage
@@ -703,10 +711,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/atoms/
 - app_avatar.dart (36): AppAvatar
-- app_badge.dart (33): AppBadgeVariant, AppBadge
+- app_badge.dart (34): AppBadgeVariant, AppBadge
 - app_button.dart (85): AppButtonIconPlacement, AppButton
 - app_calendar_day.dart (41): AppCalendarDay
-- app_card.dart (93): AppCardRail, AppCardStyle, AppCard
+- app_card.dart (96): AppCardRail, AppCardStyle, AppCard
 - app_chip.dart (40): AppChip
 - app_divider.dart (16): AppDivider
 - app_gap.dart (19): AppGap
@@ -720,7 +728,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_svg.dart (29): AppSvg
 - app_switch.dart (50): AppSwitch
 - app_text.dart (67): AppTextVariant, AppText
-- app_text_field.dart (107): AppTextField, _AppTextFieldState
+- app_text_field.dart (91): _AppTextFieldState
+- app_text_field_widget.dart (39): AppTextField
 
 ### lib/shared/widgets/molecules/
 - app_bar_root.dart (67): AppBarRoot
@@ -755,7 +764,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_rows.dart (59): ReceiptRows
 - section_header.dart (55): SectionHeader
 - segmented_progress.dart (36): SegmentedProgress
-- selection_tile.dart (77): SelectionTile
+- selection_tile.dart (81): SelectionTile
 - stat_tile.dart (50): StatTile
 - stepper_field.dart (61): StepperField
 - sync_indicator.dart (46): SyncState, SyncIndicator
@@ -815,7 +824,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - antrean_test_host.dart (49):
 - antrean_test_host_test.dart (24):
 - app_avatar_test.dart (28):
-- app_badge_test.dart (30):
+- app_badge_test.dart (31):
 - app_bar_root_test.dart (32):
 - app_bar_sub_test.dart (26):
 - app_bottom_sheet_test.dart (45):
@@ -1221,10 +1230,20 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - savings_row_test.dart (68):
 - section_header_test.dart (26):
 - selection_tile_test.dart (75):
+- service_create_footer_section_test.dart (58):
+- service_create_form_section_test.dart (38):
+- service_create_keyboard_test.dart (22):
+- service_create_responsive_test.dart (67):
+- service_create_sections_test.dart (41):
+- service_create_test_host.dart (55):
+- service_creation_components_test.dart (71):
 - service_directory_page_test.dart (110):
+- service_duration_section_test.dart (40):
+- service_information_section_test.dart (49):
 - service_picker_list_section_test.dart (38):
 - service_picker_test.dart (53):
 - service_row_test.dart (41):
+- service_selection_compact_test.dart (58):
 - settings_header_alignment_test.dart (64):
 - settings_page_test.dart (82):
 - settings_redesign_test.dart (90):

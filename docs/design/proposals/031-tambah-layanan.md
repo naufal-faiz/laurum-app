@@ -1,5 +1,5 @@
 # 031 — Irisan Tambah layanan
-Status: MENUNGGU persetujuan; dasar0e81c8d; frame4294968237 dibaca14Nov2026.
+Status: DISETUJUI14Nov2026: "Ya lakukan"; dasar0e81c8d; frame4294968237.
 Acuan: LAURUM · Tambah Layanan,390×844, pilihan aktif pengguna di FigCraft.
 
 ## Komponen bersama (UI-13; satu persetujuan)
@@ -8,7 +8,7 @@ Acuan: LAURUM · Tambah Layanan,390×844, pilihan aktif pengguna di FigCraft.
 - AppBadge: varian inverse, latar illustration dan teks onPrimary untuk chip
   pratinjau; semua varian/default lama tetap.
 - AppTextField: prefixText=null opsional, diteruskan melalui dekorasi tema,
-  untuk awalan Rp; nilai harga baru tetap kosong dan hint0, bukan teks0.
+  untuk Rp; hint0 tetap kosong; scroll atas field padat menjaga tepi saat keyboard.
 - SelectionTile: compact=false opsional; mode true berikon, judul/subjudul,
   latar selected primaryTint/idle surfaceLow, tanpa radio; default lama tetap.
 - Nilai warna/radius/font/spacing memakai token yang tersedia; tanpa dependensi.

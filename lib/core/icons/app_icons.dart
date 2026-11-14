@@ -56,7 +56,9 @@ enum AppIcons {
   addCustomer(Ionicons.personAddOutline),
   backspace(Ionicons.backspaceOutline),
   edit(Ionicons.pencilOutline),
-  dot(Ionicons.ellipse);
+  dot(Ionicons.ellipse),
+  bag(Ionicons.bagHandleOutline),
+  power(Ionicons.powerOutline);
 
   const AppIcons(this.data);
 

@@ -3,44 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_field_decoration.dart';
+import 'package:laurum/core/theme/app_input_styles.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
+import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
-class AppTextField extends StatefulWidget {
-  const AppTextField({
-    required this.label,
-    super.key,
-    this.value = '',
-    this.hint,
-    this.errorText,
-    this.onChanged,
-    this.onSubmitted,
-    this.keyboardType,
-    this.inputFormatters,
-    this.enabled = true,
-    this.readOnly = false,
-    this.obscureText = false,
-    this.selectAllOnFocus = false,
-    this.minLines = 1,
-    this.maxLines = 1,
-    this.textInputAction,
-    this.leadingIcon,
-    this.trailing,
-    this.dense = false,
-  }) : assert(minLines > 0 && maxLines >= minLines && (!obscureText || maxLines == 1));
-  final String label, value;
-  final String? hint, errorText;
-  final ValueChanged<String>? onChanged, onSubmitted;
-  final TextInputType? keyboardType;
-  final TextInputAction? textInputAction;
-  final List<TextInputFormatter>? inputFormatters;
-  final bool enabled, readOnly, obscureText, selectAllOnFocus, dense;
-  final AppIcons? leadingIcon;
-  final Widget? trailing;
-  final int minLines, maxLines;
-
-  @override
-  State<AppTextField> createState() => _AppTextFieldState();
-}
+part 'app_text_field_widget.dart';
 
 class _AppTextFieldState extends State<AppTextField> {
   late final TextEditingController _controller;
@@ -74,34 +42,50 @@ class _AppTextFieldState extends State<AppTextField> {
   }
 
   @override
-  Widget build(BuildContext context) => Semantics(
-    label: widget.label,
-    child: TextField(
-      controller: _controller,
-      focusNode: _focusNode,
-      enabled: widget.enabled,
-      readOnly: widget.readOnly,
-      obscureText: widget.obscureText,
-      minLines: widget.minLines,
-      maxLines: widget.maxLines,
-      keyboardType: widget.keyboardType,
-      textInputAction: widget.textInputAction,
-      inputFormatters: widget.inputFormatters,
-      onChanged: widget.onChanged,
-      onSubmitted: widget.onSubmitted,
-      scrollPadding: widget.dense ? const EdgeInsets.only(bottom: 330) : const EdgeInsets.all(20),
-      style: AppFieldDecoration.style(dense: widget.dense, enabled: widget.enabled),
-      cursorColor: AppColors.primary,
-      decoration: AppFieldDecoration.of(
-        dense: widget.dense,
-        hint: widget.hint,
-        error: widget.errorText,
+  Widget build(BuildContext context) {
+    final leading = widget.prefixText != null
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.medium),
+            child: Center(
+              widthFactor: 1,
+              child: AppText(
+                widget.prefixText!.trimRight(),
+                variant: AppTextVariant.input,
+                color: AppColors.ink3,
+              ),
+            ),
+          )
+        : widget.leadingIcon == null
+        ? null
+        : AppIcon(widget.leadingIcon!, size: 16, color: AppColors.ink3);
+    return Semantics(
+      label: widget.label,
+      child: TextField(
+        controller: _controller,
+        focusNode: _focusNode,
         enabled: widget.enabled,
-        prefixIcon: widget.leadingIcon == null
-            ? null
-            : AppIcon(widget.leadingIcon!, size: 16, color: AppColors.ink3),
-        suffixIcon: widget.trailing,
+        readOnly: widget.readOnly,
+        obscureText: widget.obscureText,
+        minLines: widget.minLines,
+        maxLines: widget.maxLines,
+        keyboardType: widget.keyboardType,
+        textInputAction: widget.textInputAction,
+        inputFormatters: widget.inputFormatters,
+        onChanged: widget.onChanged,
+        onSubmitted: widget.onSubmitted,
+        scrollPadding: widget.dense ? AppInputStyles.denseScrollPadding : const EdgeInsets.all(20),
+        style: AppFieldDecoration.style(dense: widget.dense, enabled: widget.enabled),
+        cursorColor: AppColors.primary,
+        decoration: AppFieldDecoration.of(
+          prefixText: widget.prefixText,
+          dense: widget.dense,
+          hint: widget.hint,
+          error: widget.errorText,
+          enabled: widget.enabled,
+          prefixIcon: leading,
+          suffixIcon: widget.trailing,
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

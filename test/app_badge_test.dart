@@ -24,6 +24,7 @@ void main() {
         AppBadgeVariant.menungguJemput || AppBadgeVariant.selesai => AppColors.slateInk,
         AppBadgeVariant.dibatalkan => AppColors.errorInk,
         AppBadgeVariant.perhatian => AppColors.onPrimary,
+        AppBadgeVariant.inverse => AppColors.onPrimary,
       });
     }
   });

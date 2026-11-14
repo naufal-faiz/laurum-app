@@ -31,6 +31,7 @@ abstract final class AppInputStyles {
   static const fieldPadding = EdgeInsets.only(right: 10, top: 13, bottom: 13);
   static const fieldPrefixConstraints = BoxConstraints(minWidth: 41, minHeight: 48);
   static const fieldSuffixConstraints = BoxConstraints(minWidth: 38, minHeight: 48);
+  static const denseScrollPadding = EdgeInsets.only(top: AppSpacing.xlarge, bottom: 330);
 
   static TextStyle fieldTextStyle({required bool enabled}) =>
       AppTextStyles.input.copyWith(color: enabled ? AppColors.ink : AppColors.ink3);
