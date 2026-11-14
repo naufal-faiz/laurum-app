@@ -36,11 +36,13 @@ class SavingsRow extends StatelessWidget {
     final amountText = AppText(
       '${signed > 0 ? '+' : ''}${Formatters.rupiah(signed)}',
       variant: compact ? AppTextVariant.bodyStrong : AppTextVariant.section,
-      color: signed > 0 ? AppColors.primary : AppColors.ink,
+      color: signed > 0 ? AppColors.primary : AppColors.error,
+      textAlign: compact ? TextAlign.end : null,
     );
     final balanceText = AppText(
       'Saldo: ${Formatters.rupiah(balance)}',
       variant: AppTextVariant.caption,
+      textAlign: compact ? TextAlign.end : null,
     );
     return AppCard(
       padding: EdgeInsets.all(compact ? AppSpacing.medium : AppSpacing.cardPadding),
@@ -57,13 +59,18 @@ class SavingsRow extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppText(label, variant: AppTextVariant.bodyStrong),
+                    AppText(
+                      label,
+                      variant: AppTextVariant.bodyStrong,
+                      maxLines: compact ? 2 : null,
+                      overflow: compact ? TextOverflow.ellipsis : null,
+                    ),
                     AppText(timeLabel, variant: AppTextVariant.caption, color: AppColors.ink3),
                   ],
                 ),
               ),
               if (compact)
-                Flexible(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [amountText, balanceText],

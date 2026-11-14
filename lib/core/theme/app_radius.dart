@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppRadius {
+  static const small = BorderRadius.all(Radius.circular(6));
   static const action = BorderRadius.all(Radius.circular(12));
   static const input = BorderRadius.all(Radius.circular(12));
   static const field = input;
@@ -13,7 +14,7 @@ abstract final class AppRadius {
   static const logo = BorderRadius.all(Radius.circular(12));
   static const hero = BorderRadius.vertical(bottom: Radius.circular(32));
   static const chip = BorderRadius.all(Radius.circular(999));
-  static const badge = chip;
+  static const badge = small;
   static const sheet = BorderRadius.vertical(top: Radius.circular(28));
   static const numpad = BorderRadius.all(Radius.circular(12));
   static const modal = BorderRadius.all(Radius.circular(16));
