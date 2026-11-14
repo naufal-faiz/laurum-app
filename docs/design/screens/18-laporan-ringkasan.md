@@ -1,7 +1,8 @@
 ﻿# 18 - Laporan - Ringkasan
-## Modal rentang tanggal030 — persiapan14Nov2026
+## Modal rentang tanggal030 — implementasi14Nov2026
 Frame aktif pilihan pengguna `LAURUM · Laporan · Pilih Tanggal`4294968452 dibaca sekali.
-Proposal030 disetujui pengguna14Nov2026. Implementasi WIP;11tes terarah lulus; check_arch masih menolak111baris kalender (maks110), berhenti sesuai UI-36.
+Proposal030 disetujui pengguna14Nov2026. Pengguna mengizinkan perapihan dan
+verifikasi akhir setelah WIP08dc364. Batas baris/lint diperbaiki; check_arch lulus.
 
 ### Snapshot modal
 - Latar redup menutupi laporan; popup tengah x24/y190,342×470 pada kanvas390×844.
@@ -13,16 +14,16 @@ Proposal030 disetujui pengguna14Nov2026. Implementasi WIP;11tes terarah lulus; c
 ### Paritas modal030
 | Butir | Sumber/perilaku yang dipertahankan | Verifikasi |
 |---|---|---|
-| Sumber waktu | businessClockProvider; tanggal lokal tanpa konversi UTC | [ ] |
-| Batas | firstDate1Jan2026; lastDate/currentDate=today dari businessClock | [ ] |
-| Draft awal | custom lama atau reportPeriodRange; start/end dibatasi kalender seperti flow lama | [ ] |
-| Satu hari/rentang | start=end valid; selectedReportRange akhir eksklusif, UI inklusif | [ ] |
-| Terapkan | customRange.select → period.select(3) → export.reset, argumen sama | [ ] |
-| Batal | hasil null/Tutup/back/barrier tidak mengubah data atau periode lama | [ ] |
-| Locale/input | bahasa Indonesia; bulan/tanggal lewat Formatters; kalender tanpa TextField | [ ] |
-| Reaktivitas | laporan/ringkasan/CSV mengikuti rentang terpilih melalui sumber yang sama | [ ] |
-| Reset baru | perlu persetujuan030: kosongkan draft, bukan range laporan aktif | [ ] |
-| Font/akses | viewport280–600,font1–2×; konten scroll, aksi terjangkau | [ ] |
+| Sumber waktu | businessClockProvider; tanggal lokal tanpa konversi UTC | [x] |
+| Batas | firstDate1Jan2026; lastDate/currentDate=today dari businessClock | [x] |
+| Draft awal | custom lama atau reportPeriodRange; start/end dibatasi kalender seperti flow lama | [x] |
+| Satu hari/rentang | start=end valid; selectedReportRange akhir eksklusif, UI inklusif | [x] |
+| Terapkan | customRange.select → period.select(3) → export.reset, argumen sama | [x] |
+| Batal | hasil null/Tutup/back/barrier tidak mengubah data atau periode lama | [x] |
+| Locale/input | bahasa Indonesia; bulan/tanggal lewat Formatters; kalender tanpa TextField | [x] |
+| Reaktivitas | laporan/ringkasan/CSV mengikuti rentang terpilih melalui sumber yang sama | [x] |
+| Reset baru | disetujui030: kosongkan draft, bukan range laporan aktif | [x] |
+| Font/akses | viewport280–600,font1–2×; konten scroll, aksi terjangkau | [x] |
 
 ### Selisih dan batas030
 - Popup kalender rentang baru diperlukan agar bentuk mengikuti FigCraft, bukan
@@ -33,6 +34,17 @@ Proposal030 disetujui pengguna14Nov2026. Implementasi WIP;11tes terarah lulus; c
   menyentuh repository/skema/perhitungan uang. Pembatalan tetap lewat X/back/barrier.
 - Perubahan lokal report_header_section/app_badge/report_summary saat mulai tugas
   dipertahankan dan tidak termasuk perubahan agen pada tahap persiapan030.
+- AppRangeCalendar kini110baris melalui SizedBox.square; tanpa perubahan tata letak.
+- Key kalender ValueKey(DateTime lokal) dan urutan update provider tetap.
+- Pengecualian zona beku sesuai izin030 hanya dua berkas state draft baru dan
+  entri registry komponen baru; provider laporan lama, repository, rute, formatter,
+  skema, aturan lint dan dependensi tidak diubah pada irisan modal.
+- Tes tambahan app_range_calendar_test memeriksa grid Senin, batas, navigasi,
+  rentang, semantik tanggal lengkap dan tombol disabled; report_range_dismiss_test
+  memeriksa Reset/back/barrier, periode tidak berubah dan draft diisi ulang saat buka.
+- Finder r5_picker_test/r5_report_visual_test mengikuti modal, bukan dialog Material;
+  assertion nominal/range/locale/batal tetap. Lint impor/const dibetulkan pada tes
+  laporan sebelumnya; assertion nominal dan laba satu baris tidak berubah.
 
 ## Revisi chart14Nov2026 — arahan pengguna
 - Revisi warna terbaru: primaryTint di atas ke primary di bawah, agar lebih cerah.
@@ -64,7 +76,7 @@ Proposal030 disetujui pengguna14Nov2026. Implementasi WIP;11tes terarah lulus; c
 Frame aktif pilihan pengguna `LAURUM · Laporan`4294968337 (390×844) dibaca sekali.
 Proposal029 disetujui melalui arahan pengguna untuk redesign seluruh halaman.
 
-### Implementasi029 (WIP, verifikasi akhir tertahan UI-36)
+### Implementasi029
 - Header laporan tunggal memakai AppBarSub detail dan ekspor berikon; saat sempit
   atau font>1,2×, ekspor turun ke baris berikutnya. Semua4periode dan pesan ekspor tetap.
 - Appbar usaha RootShell disembunyikan khusus /laporan; SafeArea diaktifkan untuk
@@ -79,11 +91,13 @@ Proposal029 disetujui melalui arahan pengguna untuk redesign seluruh halaman.
 - Margin horizontal24/gap14, daftar nota penuh, pencarian/filter/range/ekspor tetap.
 - Test report_page_test memisahkan finder label dan nilai piutang; assertion Rp400.500
   dan callback buka piutang tetap. Tidak menghapus/melemahkan tes perilaku lama.
-- Terakhir45tes UI/alur lulus, termasuk16kombinasi lebar280/320/390/600 × font0,85/1/1,3/2.
-- Setelah tambahan pengecekan angka laba satu baris, dua proses tes gagal kompilasi
-  akibat RenderParagraph.getLineBoundary yang tidak tersedia. Sumber tes sudah diganti
-  ke getBoxesForSelection yang diverifikasi pada SDK, tetapi belum dijalankan ulang.
-- UI-36: berhenti sebelum percobaan ketiga. check_all akhir belum dijalankan.
+- Regresi laporan/modal40tes lulus, termasuk16kombinasi lebar280/320/390/600 ×
+  font0,85/1/1,3/2. Pengecekan laba satu baris memakai getBoxesForSelection dan lulus.
+- Delapan tes tambahan kalender/back/barrier/golden laporan juga lulus.
+- check_all: format/analyzer/lint/arsitektur lulus; tes1253lulus/36gagal/2skip.
+  Sebanyak34kegagalan golden sudah diperbarui dan lulus. Dua temuan tersisa adalah
+  ekspektasi monthly.daily=null pada tes beku dan finder Pendapatan/Masuk pada tes alur.
+  Izin khusus penyesuaian tes serta lanjut setelah UI-36 diminta; belum dijalankan ulang.
 - Golden laporan normal/font2× dan report_summary/top_services diperbarui; golden
   radius dari batch7580497 dan warna StatTile pada layar lain belum diverifikasi penuh.
 - Visual belum diverifikasi manual pada HP; screenshot emulator tidak diambil.
@@ -134,8 +148,8 @@ Komposisi:
 - ReportOrdersSection di bawah ringkasan untuk semua periode: judul 'Nota (n)',
   AppSearchField nomor/nama, ChipBar Semua/Belum lunas/Selesai/Dibatalkan,
   DateGroupHeader per tanggal, OrderCard ringkas per nota; ketuk membuka /order/:id.
-- Pemilih rentang bawaan showDateRangePicker dalam mode kalender saja, lokal id_ID,
-  warna DatePickerThemeData dari token yang ada. Tidak menambahkan input keyboard.
+- ReportRangeSheet melalui ModalScaffold.show menampilkan dialog tengah, lokal id_ID;
+  Dari/Ke, AppRangeCalendar, Reset/Terapkan. Tanpa input keyboard atau rute baru.
 - AppSkeleton; EmptyState kosong/error dengan Coba lagi.
 
 Data/provider:
@@ -209,4 +223,5 @@ R5: golden r5_report_custom/r5_date_picker ditinjau, grafik 7 hari dan kalender 
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
+
 

@@ -2,49 +2,54 @@
 Diperbarui: 2026-11-14 | Cabang ui/pelanggan
 
 ## Sesi aktif
-Modal Pilih tanggal030, dasar0012120; frame4294968452 sudah dibaca sekali.
-Snapshot dan paritas di spec18; proposal030 disetujui pengguna: ya, silahkan.
+Finalisasi modal030 dan verifikasi laporan029, dasar08dc364.
+Frame4294968452 dibaca sekali; FigCraft masih aktif dengan frame sama.
+Proposal030 disetujui; pengguna meminta perapihan dan verifikasi akhir.
 
 ## Status irisan
-- AppCalendarDay, AppRangeCalendar, ModalScaffold dan registry sudah dibuat.
-- ReportRangeSheet, ringkasan Dari/Ke, draft/controller dan flow sudah tersambung.
-- Reset mengosongkan draft; Terapkan mempertahankan urutan update provider lama.
-- Tutup mempertahankan periode; kalender Sen-Min, batas tanggal dan navigasi bulan.
-- Tes modal viewport280/320/390/600, font1/2, reset, rentang dan batal:11 lulus.
-- Golden modal normal dan font2 dibuat; visual belum diverifikasi manual pada HP.
-- check_arch gagal dua kali: AppRangeCalendar120 lalu111 baris (maks110).
-- Sesuai UI-36 berhenti; check_all belum dijalankan, irisan belum selesai.
+- Batas AppRangeCalendar110baris dan lint controller diperbaiki; check_arch lulus.
+- Regresi laporan/modal40tes dan8tes kalender/back/barrier/golden lulus.
+- Viewport280/320/390/600, font1/2; reset, satu hari/range, batal dan buka ulang lulus.
+- check_all: format1133berkas bersih; flutter analyze dan dart analyze bersih;
+  check_arch OK; tes1253lulus,36gagal,2skip. Repo map belum dijalankan.
+- 34kegagalan golden cocok komponen bersama yang disetujui029/7580497.
+- Batch pembaruan34golden lulus; satu tes alur non-golden keliru ikut batch.
+- Dua tes non-golden tersisa: bulanan masih expect daily=null; label Pendapatan/Masuk.
+- Golden report/modal4lain juga diperbarui; belum ada check_all hijau akhir.
+- Visual golden ditinjau; visual belum diverifikasi manual pada HP/iOS.
 
 ## Keputusan pengguna terbaru
-- Proposal030 komponen bersama/modal/draft/Reset disetujui.
-- Modal tengah mengikuti FigCraft; data laporan berubah hanya saat Terapkan.
-- Font HP besar tetap didukung melalui layout adaptif dan scroll.
-- Merge ke backend-newdesign harus melalui persetujuan pengguna.
+- Proposal030 komponen/modal/draft/Reset disetujui; lanjut perapihan diizinkan.
+- Bulanan satu batang per hari; gradasi primaryTint ke primary.
+- Merge ke backend-newdesign hanya melalui persetujuan eksplisit pengguna.
 - Jangan uninstall atau menghapus DB/outbox perangkat.
 
 ## Belum di-commit
-Perubahan lokal sebelum tugas, sengaja dikecualikan dari commit agen:
+Agen: calendar/controller, tes lint/finder, dua tes baru,38golden dan spec18.
+Lokal pengguna yang tetap dipertahankan/dikecualikan dari commit agen:
 - lib/features/reports/widgets/report_header_section.dart: label Excel.
 - lib/shared/widgets/atoms/app_badge.dart: parameter warna opsional.
 - lib/shared/widgets/organisms/report_summary.dart: Masuk/Keluar dan warna badge.
 android/build/ artefak tak terlacak, tidak masuk Git.
-Pekerjaan030 dicakup commit WIP sesi ini.
 
 ## Langkah berikutnya
-1. Lanjut setelah konfirmasi pengguna sesuai UI-36; rapikan kalender111 ke <=110baris.
-2. Selesaikan analyze, tes atom/organisme/template dan pembatalan back/barrier.
-3. Jalankan regresi029 serta golden r5_report_visual_test yang sudah dimigrasikan.
-4. check_all sekali di akhir, paritas penuh dan commit final setelah hijau.
-5. Tinjauan HP pengguna; tidak push/merge tanpa izin.
+1. Tunggu jawaban dua pertanyaan async: izin tes bulanan beku dan lanjut setelah UI-36.
+2. Setelah izin: ganti expect month.daily=null dengan31hari/total864000/future null;
+   ubah finder ui_final_flow_test agar nominal tetap tepat untuk label Pendapatan/Masuk.
+3. Uji dua tes itu terarah; check_all ulang setelah temuan diketahui sudah diperbaiki.
+4. Lengkapi paritas/spec/peta frame/STATE, commit final setelah hijau.
+5. Tinjauan HP; tidak push/merge tanpa izin.
 
 ## Blocker
-UI-36: check_arch dua kali gagal batas panjang berkas kalender (120 kemudian111).
-Dilarang mencoba pola ketiga dalam sesi ini. Implementasi dan11tes sudah tersimpan.
+UI-6/UI-18: report_view_test non-widget beku; izin penyesuaian assertion diminta.
+UI-36: finder ui_final_flow_test gagal kedua kali di batch golden yang keliru.
+Sudah meminta izin lanjut; jangan mencoba tes ketiga sebelum jawaban pengguna.
 
 ## Bukti terakhir
-- flutter test test/report_range_controller_test.dart test/report_range_modal_test.dart
-  test/r5_picker_test.dart --update-goldens:11 lulus.
-- dart run tool/check_arch.dart: gagal AppRangeCalendar111baris, batas110.
-- flutter analyze:1 info curly_braces_in_flow_control_structures controller baris38.
-- Verifikasi akhir029 dan check_all030 belum tuntas; iOS belum diuji.
+- targeted40tes lulus; kalender/dismiss/visual8tes lulus.
+- check_all kedua: analyze2tahap bersih, check_arch OK,1253lulus/36gagal/2skip.
+- flutter test kasus gagal --update-goldens:34lulus/1gagal (finder label, bukan golden).
+- 38golden:laporan,AI/WA,antrean,auth/sync,Beranda,pelanggan,nota/detail,printer,
+  usulan,COD,transaksi dan galeri; artefak kegagalan sesi dibersihkan.
+- Verifikasi memakai workspace termasuk3perubahan lokal pengguna yang tidak di-stage.
 

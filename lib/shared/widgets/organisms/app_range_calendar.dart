@@ -84,9 +84,8 @@ class AppRangeCalendar extends StatelessWidget {
                     Wrap(
                       children: [
                         for (final day in days)
-                          SizedBox(
-                            width: cell,
-                            height: cell,
+                          SizedBox.square(
+                            dimension: cell,
                             child: AppCalendarDay(
                               key: ValueKey(day),
                               day: day,

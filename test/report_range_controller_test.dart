@@ -10,7 +10,7 @@ void main() {
     controller.begin(
       firstDate: DateTime(2026),
       lastDate: DateTime(2026, 11, 14),
-      start: DateTime(2026, 11, 1),
+      start: DateTime(2026, 11),
       end: DateTime(2026, 11, 14),
     );
     controller.selectDay(DateTime(2026, 11, 9));

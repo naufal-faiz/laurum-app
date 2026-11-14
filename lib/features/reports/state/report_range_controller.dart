@@ -34,8 +34,9 @@ class ReportRangeController extends Notifier<ReportRangeDraft?> {
     final current = state!;
     final month = DateTime(date.year, date.month);
     if (month.isBefore(DateTime(current.firstDate.year, current.firstDate.month)) ||
-        month.isAfter(DateTime(current.lastDate.year, current.lastDate.month)))
+        month.isAfter(DateTime(current.lastDate.year, current.lastDate.month))) {
       return;
+    }
     state = current.withDates(start: current.start, end: current.end, month: month);
   }
 

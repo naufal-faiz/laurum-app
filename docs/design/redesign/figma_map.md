@@ -1,4 +1,4 @@
-# Peta Layar ke Frame Figma (Redesign UI Laurum)
+﻿# Peta Layar ke Frame Figma (Redesign UI Laurum)
 
 Dokumen ini memetakan spec layar di `docs/design/screens/` ke frame Figma/FigCraft.
 Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang menebak frame).
@@ -27,8 +27,8 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `19-pengaturan-akun.md` (Lainnya) | `LAURUM · Lainnya` (ID: 4294968100) | 024 selesai; check_all hijau; menunggu tinjauan | Menu padat, ikon boxed, akun rapat, Laporan ke /laporan; kartu Beranda membuka laporan mingguan |
 | `17-impor-kontak.md` (17 - Impor Kontak HP) | | Menunggu | |
 | `18-daftar-piutang.md` (18 - Daftar Piutang) | | Menunggu | |
-| `18-laporan-ringkasan.md` (18 - Laporan - Ringkasan) | `LAURUM · Laporan` (ID:4294968337) | 029 disetujui/diimplementasikan WIP; verifikasi tertahan UI-36 | Header/kartu/layanan responsif;45tes sempat hijau; tes tambahan diperbaiki belum diulang; lihat spec18 |
-| `18-laporan-ringkasan.md` (Pilih tanggal) | `LAURUM · Laporan · Pilih Tanggal` (ID:4294968452) | Frame dibaca14Nov; proposal030 menunggu izin | Popup tengah, Dari/Ke, kalender, Reset/Terapkan; batas tanggal/semantik range tetap |
+| `18-laporan-ringkasan.md` (18 - Laporan - Ringkasan) | `LAURUM · Laporan` (ID:4294968337) | 029 WIP; analyzer/lint/arsitektur hijau; dua penyesuaian tes menunggu izin | Regresi40tes lulus; golden diperbarui; check_all belum hijau; lihat STATE/spec18 |
+| `18-laporan-ringkasan.md` (Pilih tanggal) | `LAURUM · Laporan · Pilih Tanggal` (ID:4294968452) | 030 disetujui dan diimplementasikan; modal teruji, finalisasi WIP | Popup tengah, Dari/Ke, kalender, Reset/Terapkan; batas tanggal/semantik range tetap |
 | `19-pengaturan-akun.md` (19 - Pengaturan dan Akun) | | Menunggu | |
 | `20-daftar-layanan.md` (20 - Daftar Layanan) | | Menunggu | |
 | `21-form-layanan.md` (21 - Tambah dan Edit Layanan) | | Menunggu | |
@@ -81,3 +81,4 @@ Daftar frame level teratas yang terbaca dari dokumen aktif FigCraft:
 - `LAURUM · Printer & Struk` (ID: 4294969167)
 - `LAURUM · Cari Printer Bluetooth` (ID: 4294969275)
 - `LAURUM · Printer & Struk — Terhubung` (ID: 4294969351)
+

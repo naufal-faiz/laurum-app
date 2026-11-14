@@ -65,7 +65,7 @@ void main() {
     const amount = '-Rp1.000.000.000';
     final paragraph = tester.renderObject<RenderParagraph>(find.text(amount));
     final boxes = paragraph.getBoxesForSelection(
-      TextSelection(baseOffset: 0, extentOffset: amount.length),
+      const TextSelection(baseOffset: 0, extentOffset: amount.length),
     );
     expect(boxes.map((box) => box.top).toSet(), hasLength(1));
     await tester.ensureVisible(find.text('Piutang aktif'));

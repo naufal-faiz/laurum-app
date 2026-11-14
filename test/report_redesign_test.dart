@@ -56,7 +56,7 @@ void main() {
     await pumpReportUnscaled(tester, width: 280, scale: 2);
     final paragraph = tester.renderObject<RenderParagraph>(find.text('-Rp261.000'));
     final boxes = paragraph.getBoxesForSelection(
-      TextSelection(baseOffset: 0, extentOffset: '-Rp261.000'.length),
+      const TextSelection(baseOffset: 0, extentOffset: '-Rp261.000'.length),
     );
     expect(boxes.map((box) => box.top).toSet(), hasLength(1));
     expect(tester.takeException(), isNull);

@@ -4,11 +4,10 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/features/reports/state/report_custom_range.dart';
 import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/shared/widgets/molecules/period_tabs.dart';
+import 'package:laurum/shared/widgets/organisms/app_range_calendar.dart';
 import 'package:laurum/shared/widgets/organisms/report_summary.dart';
 
 import 'antrean_test_host.dart';
-
-import 'package:laurum/shared/widgets/organisms/app_range_calendar.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting('id_ID'));
