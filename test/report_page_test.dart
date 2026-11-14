@@ -50,7 +50,8 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('-Rp986.000'), findsOneWidget);
-    expect(find.byType(WeeklyBarChart), findsNothing);
+    await tester.scrollUntilVisible(find.byType(WeeklyBarChart), 300, scrollable: vertical);
+    expect(tester.widget<WeeklyBarChart>(find.byType(WeeklyBarChart)).labels, hasLength(31));
     await tester.scrollUntilVisible(
       find.textContaining('Piutang aktif Rp400.500'),
       200,

@@ -27,7 +27,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `19-pengaturan-akun.md` (Lainnya) | `LAURUM · Lainnya` (ID: 4294968100) | 024 selesai; check_all hijau; menunggu tinjauan | Menu padat, ikon boxed, akun rapat, Laporan ke /laporan; kartu Beranda membuka laporan mingguan |
 | `17-impor-kontak.md` (17 - Impor Kontak HP) | | Menunggu | |
 | `18-daftar-piutang.md` (18 - Daftar Piutang) | | Menunggu | |
-| `18-laporan-ringkasan.md` (18 - Laporan - Ringkasan) | | Menunggu | |
+| `18-laporan-ringkasan.md` (18 - Laporan - Ringkasan) | `LAURUM · Laporan` (ID:4294968337) | Chart12tes hijau; proposal029 menunggu persetujuan | Warna cerah primaryTint→primary; bulan harian scroll; kartu/header/layanan menyusul; lihat spec18 |
 | `19-pengaturan-akun.md` (19 - Pengaturan dan Akun) | | Menunggu | |
 | `20-daftar-layanan.md` (20 - Daftar Layanan) | | Menunggu | |
 | `21-form-layanan.md` (21 - Tambah dan Edit Layanan) | | Menunggu | |

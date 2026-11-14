@@ -1,4 +1,66 @@
 # 18 - Laporan - Ringkasan
+## Revisi chart14Nov2026 — arahan pengguna
+- Revisi warna terbaru: primaryTint di atas ke primary di bawah, agar lebih cerah.
+  AppChartStyles memakai warna/radius yang ada; tanpa token warna baru.
+- Pengguna memilih bulanan satu batang per hari dengan geser horizontal.
+- Bulanan mengambil dailyRevenue repository yang sama, satu label tanggal per hari;
+  tanggal mendatang tetap null/penanda putus-putus, bukan omzet0 yang dibuat-buat.
+- Chart panjang memakai lebar minimum batang yang mengikuti skala teks; hari ini dan
+  minggu ini memakai lebar konten seperti sebelumnya. Semua berbagi WeeklyBarChart.
+- Ekspor/periode/total/filter/notifikasi repository tetap; custom>7hari tetap memakai
+  pesan batas lama. Perubahan perilaku hanya mengaktifkan tampilan harian bulanan.
+- Tes report_page_test memperbarui satu assertion bulan: dari tanpa chart menjadi
+  chart31tanggal. Semua assertion uang, ekspor, navigasi dan keyboard lama tetap.
+
+### Paritas revisi chart
+| Butir | Sumber/perilaku | Verifikasi terarah |
+|---|---|---|
+| Total omzet | ReportRepository.getReport; tidak mengubah ledger/perhitungan uang | [x] |
+| Data batang | getDailyRevenue; jumlah nilai bulan sama dengan totals.revenue | [x] |
+| Masa depan | null tetap penanda putus-putus; hari lampau tanpa data tetap0 | [x] |
+| Periode | Hari ini1, Minggu ini7, Bulan ini28–31; provider/range lama | [x] |
+| Label | Tanggal bulanan melalui Formatters; hari/minggu tetap | [x] |
+| Font/scroll | Widget langsung320px/font1–2×,31batang bisa digeser sampai akhir | [x] |
+| Aksi lama | ekspor, ubah periode, buka piutang, daftar/filter/keyboard tidak diubah | [x] |
+- Tes terarah12lulus; analyzer berkas berubah bersih. check_all sebelumnya dihentikan
+  saat pengguna mengganti warna; hasil penuh laporan belum dinyatakan hijau.
+
+## Persiapan irisan laporan029
+Frame aktif pilihan pengguna `LAURUM · Laporan`4294968337 (390×844) dibaca sekali.
+Proposal029 menunggu persetujuan perubahan komponen bersama.
+
+### Snapshot pemetaan desain
+- Header kembali/judul/subjudul periode/ekspor berikon → ReportHeaderSection,
+  AppBarSub/SectionHeader/AppButton yang terdaftar; periode tetap PeriodTabs.
+- Laba biru+bubble → AppCard primary dengan teks nilai dan rincian ledger.
+- Kas/piutang2kolom → StatTile compact responsif; aksi piutang tetap callback lama.
+- Chart → WeeklyBarChart dengan revisi warna cerah dan bulanan yang sudah disetujui.
+- Peringkat layanan → TopServices, komposisi registry untuk peringkat/ikon/progress.
+- Nota terbaru Figma → daftar nota lengkap aplikasi tetap dipertahankan.
+
+### Paritas redesign029
+| Butir | Data/aksi/keadaan yang dipertahankan | Verifikasi |
+|---|---|---|
+| Sumber | reportViewProvider/reportOrdersProvider/export/customRange/businessProfile.useOrderStatus | [ ] |
+| Ringkasan | revenue/expenses/profit/transactionCount/cashIn/savingsBalance/activeOutstanding/unpaidCount | [ ] |
+| Chart | daily/dayLabels/dailyAverage/peakDayName; aturan null/zero dan bulan harian tetap | [ ] |
+| Layanan | nama/unit/qtyMilli/revenue/persentase; urutan/data lama | [ ] |
+| Periode | reportPeriodProvider; selectReportPeriod; custom range/batal/label tanggal | [ ] |
+| Ekspor | reportExportProvider.notifier.export(data,orders:orders); loading/kosong/busy disabled | [ ] |
+| Kembali/piutang | canPop?pop:go('/lainnya'); push('/laporan/piutang') | [ ] |
+| Nota | search/filter/notifikasi/range/group tanggal/push('/order/:id'); useOrderStatus tetap | [ ] |
+| Keadaan | loading4skeleton, gagal/retry, kosong, posisi saldo/piutang, export success/error | [ ] |
+| Key/fokus | ValueKey((data.period,data.range)); antrean-golden; fokus field pencarian tetap | [ ] |
+| Aksesibilitas | lebar280–600/font0,85–2× dan keyboard300dp; navbar tetap terjangkau | [ ] |
+
+### Selisih desain029
+- Font7–10px dan area sentuh30/34px Figma mengikuti minimum global aplikasi.
+- Teks "dihitung dari nota lunas" tidak cocok semantik omzet ledger; tidak disalin.
+- Tidak menyalin angka contoh atau klaim Semua nota lunas bila data tidak mendukung.
+- Semua nota/pencarian/filter tetap, bukan satu contoh dengan aksi Lihat semua baru.
+- Navbar aplikasi tetap meskipun tidak tampak pada frame; rute/struktur navigasi tetap.
+- Pendapatan/pengeluaran negatif dan saldo titipan tidak disamarkan oleh kartu biru.
+
 Rute: /laporan (tab)   Prompt: 60, bagian pertama
 Frame .pen: "Laporan - Ringkasan", State - Laporan kosong.
 Rekonsiliasi B1e (izin 4 Nov 2026): angka ledger pada spec/DATA MASTER menggantikan
@@ -34,8 +96,8 @@ Data/provider:
   puncak Rabu. Hari lampau tanpa nota bernilai nol, masa depan belum memiliki batang.
 - Top services seluruh periode dari snapshot item dan alokasi diskon yang sama;
   urutan berdasarkan pendapatan. Minggu memuat lima layanan nyata, tanpa bucket fiktif.
-- Hari ini memakai satu batang. Grafik tampilan dibatasi tujuh hari; data harian
-  bulan tetap dihitung repository, tampilan bulan memakai pesan batas tujuh hari.
+- Hari ini memakai satu batang; minggu tujuh batang; bulan satu batang per hari
+  dengan geser horizontal sesuai keputusan pengguna14Nov2026.
 - Perubahan checkout/pembayaran/setoran mengikuti notifikasi repository.
 - Semua preset dan rentang kustom melewati ReportRepository dan buildReport yang sama.
   InMemory menghitung ledger; Drift memakai query range dan posisi SQL lalu fungsi

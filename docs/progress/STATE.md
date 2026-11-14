@@ -2,47 +2,48 @@
 Diperbarui: 2026-11-14 | Cabang ui/pelanggan
 
 ## Sesi aktif
-Redesign Detail Pelanggan selesai; dasar36fdffe, persiapan158074d.
-Frame4294969558 dari docs/design/new-design-laurum.figcraft; snapshot/paritas spec13.
+Laporan: chart sudah diterapkan, persiapan sisa redesign; dasar7580497.
+Frame aktif pilihan pengguna4294968337 dibaca sekali; snapshot/paritas di spec18.
+Dokumen FigCraft: docs/design/new-design-laurum.figcraft; MCP terhubung.
 
 ## Status irisan
-- Proposal028 disetujui: profil biru, statistik2×2, aksi sejajar, riwayat ringkas.
-- StatTile/SavingsRow/NotaCard.compact dan SubScaffold detail opsional; default tetap.
-- Statistik tinggi intrinsik per baris; teks besar/layar sempit menjadi satu kolom.
-- Pasangan aksi responsif; label/nama/alamat/catatan membungkus tanpa tinggi tetap.
-- Header intrinsik tetap saat scroll; provider detail dibaca sekali untuk header/body.
-- Lihat semua mutasi ke rute lama; order awal3, ekspansi seluruh riwayat per pelanggan.
-- Callback/data uang/guard nonaktif tetap; SavingsSection kini callback murni.
-- Pengecualian zona beku sesuai izin028: state ekspansi baru dan hapus satu entri debt.
-- Tidak ada perubahan repository/skema/rute/token/registry/dependensi/perhitungan uang.
-- Dua golden detail baru diperiksa; tidak ada golden default/layar lain berubah.
+- Koreksi mutasi/radius selesai commit7580497, check_arch OK sebelum commit.
+- Chart laporan gradasi primaryTint→primary sesuai revisi terakhir pengguna.
+- Bulan satu batang per hari, geser horizontal; data repository sama, masa depan null.
+- Hari/minggu tetap; custom>7hari tetap pesan lama; totals/perhitungan uang tetap.
+- Warna/scroll/state view chart dan tes sedang dicatat dalam commit wip persiapan.
+- Proposal029 untuk kartu laba/kas/piutang, header dan layanan terlaris menunggu izin.
+- Detail pelanggan selesai5264090; tidak dikerjakan lagi dalam irisan laporan.
 - Visual belum diverifikasi manual pada HP; screenshot emulator tidak diambil.
 
 ## Keputusan pengguna terbaru
-- Proposal028 disetujui dan diminta aman terhadap perbedaan font HP pengguna.
-- Tes font langsung tanpa pembatas aplikasi; hanya inisial dekoratif avatar maks1×
-  agar tidak terpotong; nama lengkap dan isi tetap mengikuti ukuran teks pengujian.
+- Lanjutkan desain Laporan dari frame yang sedang dipilih di FigCraft.
+- Chart terbaru harus lebih cerah: primaryTint di atas, primary di bawah.
+- Bulanan satu batang per hari dengan geser horizontal (pilihan eksplisit pengguna).
+- Font HP berbeda tetap diperhatikan; uji langsung font1–2× untuk chart.
 - Merge ke backend-newdesign HARUS melalui persetujuan eksplisit pengguna.
-- Pertahankan data kedua HP; jangan uninstall/hapus DB/outbox.
-- Hanya Nama wajib; WhatsApp tanpa nomor tetap; Contacts Data safety wajib.
+- Pertahankan data kedua HP; jangan uninstall/hapus DB/outbox; Contacts Data safety wajib.
 
 ## Belum di-commit
-Seluruh irisan dicakup satu commit feat(ui) penyelesaian sesi ini.
+Perubahan lokal StatTile (label ink2→primaryInk) muncul saat tugas berjalan;
+agen tidak membuat/mengembalikannya dan belum memasukkannya ke commit chart.
 android/build/ tetap artefak tak terlacak sesi sebelumnya; tidak dimasukkan Git.
+Perubahan chart dan dokumen persiapan dicakup commit wip sesi ini.
 
 ## Langkah berikutnya
-1. Pengguna meninjau detail pelanggan di HP; hot restart R atau jalankan build terbaru.
-2. Periksa profil/empat statistik/aksi tabungan/riwayat dan font HP yang biasa dipakai.
-3. Lihat semua order muncul hanya bila pelanggan punya lebih3 order tersimpan.
-4. Koreksi visual sesuai tinjauan; layar baru menunggu pilihan pengguna.
-5. Merge ke backend-newdesign hanya dengan persetujuan eksplisit pengguna.
+1. Persetujuan proposal029 untuk komponen bersama/header dan mempertahankan warna StatTile.
+2. Kerjakan komponen bersama dahulu, kemudian Page/Section dengan callback/paritas sama.
+3. Pertahankan daftar nota/pencarian/filter/ekspor; jangan menyalin klaim nota lunas Figma.
+4. Tes langsung280–600dp,font0,85–2×; golden terkait; check_all akhir.
+5. Tinjauan pengguna dan commit feat(ui); merge hanya dengan izin pengguna.
 
 ## Blocker
-Tidak ada untuk irisan ini; Supabase lokal tidak tersedia, dua tes integrasi dilewati.
+UI-13: komponen bersama sisa redesign menunggu persetujuan029.
+check_all chart sebelumnya dihentikan atas revisi warna pengguna; belum ada bukti penuh.
 
 ## Bukti terakhir
-- Tes terarah40lulus; 16kombinasi lebar280/320/390/600 × font0,85/1/1,3/2.
-- Teks panjang/nominal besar/avatar/action/header/grid dan ekspansi3ke4 teruji.
-- dart run tool/check_all.dart: SEMUA HIJAU,1244lulus/2skip,exit0.
-- Format1113berkas tanpa perubahan; Flutter analyze/dart analyze bersih; check_arch OK.
-- REPO_MAP1191berkas; tes keyboard/edit/nonaktif/navigasi lama tetap; iOS belum diuji.
+- Analisis chart/view/tes yang berubah bersih;12tes laporan/chart lulus (warna terbaru).
+- Tes1/7/31batang,font1–2×,scroll tanggal terakhir, jumlah ledger bulan dan null masa depan.
+- Golden weekly_bar_chart diperbarui; STATE/spec kini mengikuti warna cerah terbaru.
+- Check_all yang dihentikan: format/analyze/Riverpod/check_arch lulus, suite tes belum selesai.
+- Bukti penuh detail sebelumnya1244lulus/2skip; bukan verifikasi penuh irisan laporan.
