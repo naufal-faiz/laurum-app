@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/formatters/formatters.dart';
+import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/icons/app_svgs.dart';
+import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
+import 'package:laurum/features/customers/widgets/customer_detail_actions_section.dart';
+import 'package:laurum/features/customers/widgets/customer_statistics_section.dart';
 import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/shared/widgets/atoms/app_avatar.dart';
-import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
-import 'package:laurum/shared/widgets/molecules/info_row.dart';
-import 'package:laurum/shared/widgets/molecules/stat_tile.dart';
 
 class CustomerProfileSection extends StatelessWidget {
   const CustomerProfileSection({
@@ -29,43 +30,68 @@ class CustomerProfileSection extends StatelessWidget {
       spacing: AppSpacing.cardGap,
       children: [
         AppCard(
+          style: AppCardStyle.primary,
+          bubble: true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             spacing: AppSpacing.cardGap,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: AppSpacing.cardGap,
                 children: [
-                  AppAvatar(initials: customerInitials(customer.name)),
-                  const SizedBox(width: AppSpacing.cardGap),
-                  Expanded(child: AppText(customer.name, variant: AppTextVariant.section)),
+                  MediaQuery.withClampedTextScaling(
+                    maxScaleFactor: 1,
+                    child: AppAvatar(initials: customerInitials(customer.name)),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: AppSpacing.xxsmall,
+                      children: [
+                        AppText(
+                          customer.name,
+                          variant: AppTextVariant.section,
+                          color: AppColors.onPrimary,
+                        ),
+                        AppText(
+                          Formatters.telepon(customer.phone),
+                          variant: AppTextVariant.caption,
+                          color: AppColors.onPrimary,
+                        ),
+                        if (customer.address.isNotEmpty)
+                          AppText(
+                            customer.address,
+                            variant: AppTextVariant.caption,
+                            color: AppColors.onPrimary,
+                          ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              InfoRow(label: 'Nomor WhatsApp', value: Formatters.telepon(customer.phone)),
-              if (customer.address.isNotEmpty) InfoRow(label: 'Alamat', value: customer.address),
-              if (customer.notes.isNotEmpty) InfoRow(label: 'Catatan', value: customer.notes),
+              if (customer.notes.isNotEmpty)
+                AppText(
+                  customer.notes,
+                  variant: AppTextVariant.caption,
+                  color: AppColors.onPrimary,
+                  semanticsLabel: 'Catatan: ${customer.notes}',
+                ),
               if (!customer.isActive)
                 const BannerMessage(message: 'Pelanggan nonaktif. Riwayat tetap tersimpan.'),
-              AppButton(
-                'Buka WhatsApp',
-                variant: AppButtonVariant.actionOutline,
-                iconAsset: AppSvgs.whatsapp,
-                onPressed: onWhatsApp,
-              ),
-              AppButton(
-                'Edit profil',
-                variant: AppButtonVariant.secondary,
-                onPressed: customer.isActive ? onEdit : null,
+              CustomerDetailActionsSection(
+                primaryLabel: 'Buka WhatsApp',
+                secondaryLabel: 'Edit profil',
+                primaryAsset: AppSvgs.whatsapp,
+                secondaryIcon: AppIcons.edit,
+                outlined: true,
+                onPrimary: onWhatsApp,
+                onSecondary: customer.isActive ? onEdit : null,
               ),
             ],
           ),
         ),
-        StatTile(
-          label: 'Total belanja',
-          value: Formatters.rupiah(summary.historyTotal),
-          description: 'Akumulasi',
-        ),
-        StatTile(label: 'Frekuensi', value: '${summary.orderCount} order'),
-        StatTile(label: 'Piutang aktif', value: Formatters.rupiah(summary.debt)),
+        CustomerStatisticsSection(summary: summary),
       ],
     );
   }

@@ -20,7 +20,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `09-detail-order.md` (09 - Detail Order) | `LAURUM · Detail Order` (ID: 612) | Persiapan 018–020 disetujui | Komponen bersama dahulu; seluruh mode/status/COD/aksi lama tetap |
 | `10-edit-order.md` (10 - Edit Order) | | Menunggu | |
 | `12-daftar-pelanggan.md` (12 - Pelanggan - Daftar Pelanggan) | `LAURUM · Pelanggan` (ID: 4294969460) | 027 + revisi10/Lihat semua selesai; check_all1222lulus/2skip | Awal10; Lihat semua; ikon impor dan teks kecil; DP/Sisa tetap; lihat spec12 |
-| `13-detail-pelanggan.md` (13 - Detail Pelanggan & Tabungan) | `LAURUM · Detail Pelanggan` (ID: 4294969558) | Frame dibaca14Nov; proposal028 menunggu persetujuan | Profil biru/statistik2×2/riwayat ringkas; Lihat semua order memerlukan izin perilaku; lihat spec13 |
+| `13-detail-pelanggan.md` (13 - Detail Pelanggan & Tabungan) | `LAURUM · Detail Pelanggan` (ID: 4294969558) | 028 selesai; check_all1244lulus/2skip; menunggu tinjauan | Profil biru/statistik2×2 responsif/riwayat ringkas; font0,85–2× diuji; Lihat semua disetujui; lihat spec13 |
 | `14-edit-pelanggan.md` (14 - Edit Pelanggan) | | Menunggu | |
 | `15-setor-tabungan.md` (15 - Setor Tabungan) | | Menunggu | |
 | `16-riwayat-tabungan.md` (16 - Riwayat Tabungan) | | Menunggu | |

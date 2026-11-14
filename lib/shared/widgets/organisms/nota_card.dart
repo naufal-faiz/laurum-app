@@ -3,6 +3,7 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_molecule_tokens.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_badge.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_status_text.dart';
@@ -21,6 +22,7 @@ class NotaCard extends StatelessWidget {
     this.paid = 0,
     this.onTap,
     this.paymentLabel,
+    this.compact = false,
   }) : assert(total >= 0 && paid >= 0);
   final String orderNo, customerName, summary, timeLabel;
   final String? paymentLabel;
@@ -28,6 +30,7 @@ class NotaCard extends StatelessWidget {
   final OrderStatus status;
   final PayStatus payStatus;
   final VoidCallback? onTap;
+  final bool compact;
   @override
   Widget build(BuildContext context) {
     const labels = ['Menunggu jemput', 'Diproses', 'Siap', 'Selesai', 'Dibatalkan'];
@@ -37,9 +40,10 @@ class NotaCard extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: AppCard(
+        padding: EdgeInsets.all(compact ? AppSpacing.medium : AppSpacing.cardPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: AppMoleculeTokens.gap,
+          spacing: compact ? AppMoleculeTokens.labelGap : AppMoleculeTokens.gap,
           children: [
             Wrap(
               alignment: WrapAlignment.spaceBetween,
@@ -54,8 +58,14 @@ class NotaCard extends StatelessWidget {
               alignment: WrapAlignment.spaceBetween,
               spacing: AppMoleculeTokens.gap,
               children: [
-                AppText(customerName, variant: AppTextVariant.section),
-                AppText(Formatters.rupiah(total), variant: AppTextVariant.section),
+                AppText(
+                  customerName,
+                  variant: compact ? AppTextVariant.label : AppTextVariant.section,
+                ),
+                AppText(
+                  Formatters.rupiah(total),
+                  variant: compact ? AppTextVariant.bodyStrong : AppTextVariant.section,
+                ),
               ],
             ),
             AppText(summary, color: AppColors.ink2),

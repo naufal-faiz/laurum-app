@@ -1,5 +1,5 @@
 # 028 — Irisan detail pelanggan
-Status: MENUNGGU PERSETUJUAN; branch ui/pelanggan, dasar36fdffe.
+Status: DISETUJUI pengguna14Nov2026; branch ui/pelanggan, dasar36fdffe.
 Acuan pengguna: LAURUM · Detail Pelanggan4294969558 (390×844), dibaca14Nov2026.
 
 ## Komponen bersama (UI-13; satu persetujuan seluruh irisan)

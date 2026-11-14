@@ -18,6 +18,8 @@ class SubScaffold extends StatelessWidget {
     this.trailing,
     this.fabLabel,
     this.onFab,
+    this.subtitle,
+    this.appBarVariant = AppBarSubVariant.standard,
   }) : assert((fabLabel == null) == (onFab == null));
 
   final String title, backLabel;
@@ -25,38 +27,56 @@ class SubScaffold extends StatelessWidget {
   final VoidCallback? onBack, onFab;
   final String? fabLabel;
   final Widget? trailing;
+  final String? subtitle;
+  final AppBarSubVariant appBarVariant;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    backgroundColor: AppColors.bg,
-    appBar: PreferredSize(
-      preferredSize: const Size.fromHeight(AppSpacing.appBarHeight),
-      child: AppBarSub(
-        title: title,
-        backLabel: backLabel,
-        onBack: onBack,
-        trailing: trailing,
-      ),
-    ),
-    body: SafeArea(top: false, child: body),
-    floatingActionButton: fabLabel == null || MediaQuery.viewInsetsOf(context).bottom > 0
-        ? null
-        : FloatingActionButton.extended(
-            onPressed: onFab,
-            elevation: 0,
-            backgroundColor: AppColors.primary,
-            shape: const RoundedRectangleBorder(borderRadius: AppRadius.chip),
-            extendedPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
-            icon: const AppIcon(
-              AppIcons.add,
-              size: AppDimensions.iconAction,
-              color: AppColors.onPrimary,
+  Widget build(BuildContext context) {
+    final detail = appBarVariant == AppBarSubVariant.detail;
+    final header = AppBarSub(
+      title: title,
+      backLabel: backLabel,
+      onBack: onBack,
+      trailing: trailing,
+      subtitle: subtitle,
+      variant: appBarVariant,
+    );
+    final content = SafeArea(top: false, child: body);
+    return Scaffold(
+      backgroundColor: AppColors.bg,
+      appBar: detail
+          ? null
+          : PreferredSize(
+              preferredSize: const Size.fromHeight(AppSpacing.appBarHeight),
+              child: header,
             ),
-            label: AppText(
-              fabLabel!,
-              variant: AppTextVariant.bodyStrong,
-              color: AppColors.onPrimary,
+      body: detail
+          ? Column(
+              children: [
+                header,
+                Expanded(child: content),
+              ],
+            )
+          : content,
+      floatingActionButton: fabLabel == null || MediaQuery.viewInsetsOf(context).bottom > 0
+          ? null
+          : FloatingActionButton.extended(
+              onPressed: onFab,
+              elevation: 0,
+              backgroundColor: AppColors.primary,
+              shape: const RoundedRectangleBorder(borderRadius: AppRadius.chip),
+              extendedPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
+              icon: const AppIcon(
+                AppIcons.add,
+                size: AppDimensions.iconAction,
+                color: AppColors.onPrimary,
+              ),
+              label: AppText(
+                fabLabel!,
+                variant: AppTextVariant.bodyStrong,
+                color: AppColors.onPrimary,
+              ),
             ),
-          ),
-  );
+    );
+  }
 }

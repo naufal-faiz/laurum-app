@@ -329,7 +329,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/customers/pages/
 - customer_deposit_page.dart (71): CustomerDepositPage
-- customer_detail_page.dart (67): CustomerDetailPage
+- customer_detail_page.dart (83): CustomerDetailPage
 - customer_directory_page.dart (71): CustomerDirectoryPage
 - customer_edit_sheet.dart (68): CustomerEditSheet
 - customer_import_page.dart (68): CustomerImportPage
@@ -347,22 +347,25 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_history_offsets.dart (6): customerHistoryOffsetsProvider
 - customer_import_controller.dart (65): CustomerImportState, CustomerImportSelection, customerImportSelectionProvider
 - customer_import_data.dart (59): ContactImportRow, ContactImportData, contactImportSourceProvider, contactImportProvider
+- customer_order_expansion.dart (12): CustomerOrderExpansion, customerOrderExpansionProvider
 - customer_savings_controller.dart (14): CustomerSavingsFilter, customerSavingsFilterProvider
 - customer_savings_data.dart (59): CustomerSavingsData, customerSavingsProvider
 
 ### lib/features/customers/widgets/
 - customer_deposit_form_section.dart (88): CustomerDepositFormSection
+- customer_detail_actions_section.dart (58): CustomerDetailActionsSection
 - customer_directory_actions_section.dart (55): CustomerDirectoryActionsSection
 - customer_directory_footer_section.dart (26): CustomerDirectoryFooterSection
 - customer_directory_list_section.dart (104): CustomerDirectoryListSection
 - customer_edit_form_section.dart (65): CustomerEditFormSection
 - customer_header_section.dart (21): CustomerHeaderSection
 - customer_import_list_section.dart (94): CustomerImportListSection
-- customer_orders_section.dart (39): CustomerOrdersSection
-- customer_profile_section.dart (72): CustomerProfileSection
+- customer_orders_section.dart (58): CustomerOrdersSection
+- customer_profile_section.dart (98): CustomerProfileSection
 - customer_savings_header_section.dart (66): CustomerSavingsHeaderSection
 - customer_savings_list_section.dart (58): CustomerSavingsListSection
-- customer_savings_section.dart (54): CustomerSavingsSection
+- customer_savings_section.dart (57): CustomerSavingsSection
+- customer_statistics_section.dart (62): CustomerStatisticsSection
 
 ### lib/features/expenses/data/
 - drift_expense_reader.dart (28): DriftExpenseReader
@@ -745,7 +748,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - section_header.dart (55): SectionHeader
 - segmented_progress.dart (36): SegmentedProgress
 - selection_tile.dart (77): SelectionTile
-- stat_tile.dart (35): StatTile
+- stat_tile.dart (47): StatTile
 - stepper_field.dart (61): StepperField
 - sync_indicator.dart (46): SyncState, SyncIndicator
 - toggle_row.dart (62): ToggleRow
@@ -761,7 +764,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_contact_card.dart (110): CustomerContactCard
 - customer_row.dart (99): CustomerRow
 - expense_row.dart (57): ExpenseRow
-- nota_card.dart (75): NotaCard
+- nota_card.dart (85): NotaCard
 - numpad.dart (62): NumpadVariant, Numpad
 - order_card.dart (110): OrderCard
 - piutang_card.dart (83): PiutangCard
@@ -770,7 +773,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_preview.dart (44): ReceiptPreview
 - receipt_toggle_list.dart (65): ReceiptToggleList
 - report_summary.dart (109): ReportSummary
-- savings_row.dart (74): SavingsRow
+- savings_row.dart (91): SavingsRow
 - service_row.dart (84): ServiceRow
 - top_services.dart (106): TopServices
 - weekly_bar_chart.dart (110): WeeklyBarChart
@@ -781,7 +784,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - form_scaffold.dart (64): FormScaffold
 - root_scaffold.dart (90): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
-- sub_scaffold.dart (62): SubScaffold
+- sub_scaffold.dart (82): SubScaffold
 
 ### test/
 - account_actions_test.dart (60):
@@ -894,8 +897,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_contact_card_test.dart (76):
 - customer_deposit_page_test.dart (50):
 - customer_detail_data_test.dart (61):
+- customer_detail_golden_test.dart (19):
 - customer_detail_page_test.dart (86):
+- customer_detail_responsive_test.dart (58):
 - customer_detail_states_test.dart (60):
+- customer_detail_test_host.dart (43):
 - customer_directory_actions_section_test.dart (71):
 - customer_directory_data_test.dart (39):
 - customer_directory_footer_section_test.dart (27):
@@ -906,6 +912,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_header_golden_test.dart (23):
 - customer_import_page_test.dart (68):
 - customer_optional_fields_test.dart (70):
+- customer_order_expansion_test.dart (82):
+- customer_profile_accessibility_test.dart (57):
 - customer_profile_section_test.dart (34):
 - customer_row_test.dart (72):
 - customer_savings_section_test.dart (48):
