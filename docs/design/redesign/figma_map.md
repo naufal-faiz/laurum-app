@@ -31,7 +31,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `18-laporan-ringkasan.md` (Pilih tanggal) | `LAURUM · Laporan · Pilih Tanggal` (ID:4294968452) | 030 selesai; check_all hijau1291tes/2skip; menunggu tinjauan | Popup tengah, Dari/Ke, kalender, Reset/Terapkan; batas tanggal/semantik range tetap |
 | `19-pengaturan-akun.md` (19 - Pengaturan dan Akun) | | Menunggu | |
 | `20-daftar-layanan.md` (20 - Daftar Layanan) | | Menunggu | |
-| `21-form-layanan.md` (21 - Tambah dan Edit Layanan) | | Menunggu | |
+| `21-form-layanan.md` (Tambah layanan) | `LAURUM · Tambah Layanan` (ID:4294968237) | Frame dibaca14Nov; proposal031 menunggu izin | Pratinjau gradient, informasi/durasi/status, footer sejajar; Edit tetap |
 | `22-info-usaha.md` (22 - Info Usaha) | | Menunggu | |
 | `23-daftar-pengeluaran.md` (23 - Daftar Pengeluaran) | | Menunggu | |
 | `24-catat-pengeluaran.md` (24 - Catat Pengeluaran) | | Menunggu | |
