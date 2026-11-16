@@ -1,41 +1,46 @@
 # STATE Laurum
-Diperbarui: 2026-11-16 | Cabang newdesign (worktree ui/pengeluaran sudah di-merge)
+Diperbarui: 2026-11-16 | Cabang newdesign
 
 ## Sesi aktif
-Merge ui/pengeluaran ke newdesign. Redesign layar 23 Daftar Pengeluaran mengikuti
-frame FigCraft `LAURUM · Pengeluaran` (ID 4294969797). Irisan layanan Tambah/Edit
-(2d403e3) tetap di newdesign. Paritas dan selisih di spec 23.
+Perbaikan gagal memuat Pengeluaran dengan database lokal; dasar76d12ad.
+Redesign Pengeluaran dan penyatuan form layanan tetap dipertahankan.
 
 ## Status irisan
-- Pengeluaran: SubScaffold varian detail (kembali, judul, sub jumlah transaksi,
-  SyncIndicator trailing), FAB Catat pengeluaran kanan bawah, kartu total ringkas,
-  tiga sub-card kategori terbesar; chip/tanggal/ExpenseRow/state tetap.
-- Layanan: ServiceFormSection dipakai Tambah dan Edit tanpa cabang layout ganda;
-  header detail, preview, durasi dan footer sama dengan Tambah; golden Edit 1x/2x.
-- Berkas merge: expense_directory_page, expense_list_section,
-  expense_summary_section, expense_golden_test, expense_sections_test,
-  golden expense_directory, spec 23, figma_map.
+- Reproduksi Drift: sort langsung pada daftar immutable melempar UnsupportedError.
+- Terjadi pada database kosong maupun berisi; dummy mengembalikan daftar mutable.
+- expenseDirectoryProvider kini mengurutkan salinan daftar dari repository.
+- Data, total, kategori, periode bulanan dan urutan terbaru tetap sama.
+- Tidak mengubah UI, repository, skema, migrasi atau dependensi.
+- Tes regresi memakai repository Drift asli dan SQLite sementara, bukan mock mutable.
+- Tes terarah11 lulus; check_all SEMUA HIJAU:1325 lulus/2skip,exit0.
 
 ## Keputusan pengguna terbaru
-- Header kembali seperti Layanan, tanpa nav bawah, CTA FAB di kanan bawah.
-- Rincian kategori jadi sub-card berjejer maks 3 (kategori terbesar).
-- Merge ui/pengeluaran ke newdesign diizinkan 16 Nov 2026; jangan push.
-- Draf FigCraft/figma_map/spec20 lokal dan android/build tidak di-commit.
+- Pengguna meminta memperbaiki error Pengeluaran; redesign tidak dimaksudkan mengubah logika.
+- Jangan menghapus data HP atau uninstall aplikasi.
+- Jangan push; merge backend-newdesign perlu izin tersendiri.
+- Revisi cepat sebelumnya tetap belum di-commit sampai diminta pengguna.
 
 ## Belum di-commit
-Perubahan lokal agen lain di worktree utama (reports, icon_tile, AndroidManifest,
-golden beranda/auth, spec20, figma_map WIP, figcraft) dipertahankan.
+Commit perbaikan mencakup expense_directory.dart, tes regresi Drift, STATE dan REPO_MAP.
+Revisi sebelumnya dipertahankan di luar commit perbaikan ini:
+- AndroidManifest: pembatasan multijendela.
+- root_shell_page, icon_tile, tes navigasi Beranda dan9golden logo/Login.
+- report_range_sheet, report_body_section, report_orders_section, report_summary.
+- r5_report_body_section_test, report_range_limit_test dan6golden Laporan.
+- Draf FigCraft, figma_map dan spec20; android/build artefak lokal.
 
 ## Langkah berikutnya
-1. Pengguna meninjau golden expense_directory.png / main_dummy di HP.
-2. Koreksi tata letak menjadi commit fix(ui) berikutnya.
-3. Layar 24 Catat Pengeluaran belum disentuh.
-4. Jangan push; merge backend-newdesign perlu izin tersendiri.
+1. Pengguna membuka ulang Pengeluaran dengan env lokal atau menekan Coba lagi.
+2. Commit batch revisi cepat menunggu permintaan pengguna.
 
 ## Blocker
-Tidak ada.
+Tidak ada blocker otomatis; verifikasi langsung di HP belum dilakukan.
 
 ## Bukti terakhir
-- check_all ui/pengeluaran: 1316 lulus/2skip, SEMUA HIJAU.
-- check_all newdesign 2d403e3: 1317 lulus/2skip, SEMUA HIJAU.
-- Merge hanya konflik STATE.md; REPO_MAP digenerate ulang; tidak ada kode beririsan.
+- Sebelum fix:2tes Drift gagal Cannot modify an unmodifiable list.
+- Setelah fix:11tes lulus (regresi2, kontrak3, halaman2, Section4).
+- Cakupan graf diperiksa; alur Dart diverifikasi langsung karena graf tanpa relasi calls.
+
+- dart run tool/check_all.dart: SEMUA HIJAU;1325 lulus/2skip,exit0;REPO_MAP1240.
+- Format1162 tanpa perubahan; flutter analyze/dart analyze/check_arch bersih.
+- Golden tertinggal dari revisi lama diselaraskan:4Login/6Laporan;31tes visual lulus.

@@ -1059,6 +1059,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - drift_sync_service_test.dart (127): _Cycle
 - expense_atomic_test.dart (89):
 - expense_contracts_test.dart (20):
+- expense_directory_loading_test.dart (64):
 - expense_photos_test.dart (82):
 - failing_b1d_proposal.dart (15): FailingB1dProposal
 

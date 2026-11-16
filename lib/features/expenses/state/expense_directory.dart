@@ -20,10 +20,10 @@ final expenseDirectoryProvider = FutureProvider<ExpenseDirectory>((ref) async {
   final now = ref.watch(businessClockProvider)();
   final repo = ref.watch(expenseRepositoryProvider);
   final categories = await repo.getCategories();
-  final expenses = await repo.getExpenses(
+  final expenses = (await repo.getExpenses(
     from: DateTime(now.year, now.month),
     to: DateTime(now.year, now.month + 1),
-  );
+  )).toList();
   expenses.sort((a, b) => b.spentAt.compareTo(a.spentAt));
   return ExpenseDirectory(DateTime(now.year, now.month), categories, expenses);
 });
