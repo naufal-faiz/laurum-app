@@ -119,6 +119,14 @@ Frame: `LAURUM · Printer & Struk` (4294969167), `LAURUM · Cari Printer Bluetoo
 
 ### Tes yang disesuaikan (finder/visual)
 
+- Review integrasi 16 Nov 2026: baris format sebelumnya overflow 111 px pada
+  lebar 320 dp/font 2x. Label dan kontrol kini bertumpuk pada ruang sempit/font besar;
+  segmen tumbuh mengikuti teks dengan area sentuh minimum 44 dp, tanpa ellipsis.
+- `printer_format_accessibility_test.dart`: regresi font 2x, ukuran sentuh,
+  keterbacaan label, callback font 13/58 mm, dan 80 mm tetap pemberitahuan.
+- Golden `printer_page.png` diperbarui karena tinggi kontrol berubah; ditinjau sebagai
+  gambar. Review Android dan cetak perangkat keras belum dilakukan pada integrasi ini.
+
 - `printer_page_test.dart`: finder status awal `Printer belum terhubung.` menjadi
   `Belum terhubung`; finder judul pratinjau menjadi teks judul baru. Assertion perilaku
   lain tidak berubah. Golden `printer_page.png` diperbarui.

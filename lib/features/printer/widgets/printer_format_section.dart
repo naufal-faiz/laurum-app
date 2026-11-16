@@ -19,46 +19,50 @@ class PrinterFormatSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AppCard(
-    child: Column(
-      spacing: AppSpacing.medium,
-      children: [
-        Row(
+    child: LayoutBuilder(
+      builder: (context, constraints) {
+        final stacked =
+            constraints.maxWidth < AppSpacing.touchTarget * 6 ||
+            MediaQuery.textScalerOf(context).scale(1) > 1.2;
+        final controls = [
+          SegmentedControl(
+            labels: const ['58 mm', '80 mm'],
+            selectedIndex: paperMm == 80 ? 1 : 0,
+            onSelected: (index) => index == 0
+                ? onEdit(paperMm: 58)
+                : onNotice('Printer 80 mm masih coming soon. Untuk sekarang gunakan 58 mm.'),
+          ),
+          SegmentedControl(
+            labels: const ['Normal', 'Besar'],
+            selectedIndex: fontSize == 13 ? 1 : 0,
+            onSelected: (index) => onEdit(fontSize: index == 0 ? 11 : 13),
+          ),
+        ];
+        const labels = ['Lebar kertas', 'Ukuran huruf'];
+        return Column(
+          spacing: AppSpacing.medium,
           children: [
-            const AppText(
-              'Lebar kertas',
-              variant: AppTextVariant.bodyStrong,
-            ),
-            const SizedBox(width: AppSpacing.medium),
-            Expanded(
-              child: SegmentedControl(
-                labels: const ['58 mm', '80 mm'],
-                selectedIndex: paperMm == 80 ? 1 : 0,
-                onSelected: (index) => index == 0
-                    ? onEdit(paperMm: 58)
-                    : onNotice(
-                        'Printer 80 mm masih coming soon. Untuk sekarang gunakan 58 mm.',
-                      ),
-              ),
-            ),
+            for (var i = 0; i < labels.length; i++)
+              if (stacked)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  spacing: AppSpacing.small,
+                  children: [
+                    AppText(labels[i], variant: AppTextVariant.bodyStrong),
+                    controls[i],
+                  ],
+                )
+              else
+                Row(
+                  spacing: AppSpacing.medium,
+                  children: [
+                    AppText(labels[i], variant: AppTextVariant.bodyStrong),
+                    Expanded(child: controls[i]),
+                  ],
+                ),
           ],
-        ),
-        Row(
-          children: [
-            const AppText(
-              'Ukuran huruf',
-              variant: AppTextVariant.bodyStrong,
-            ),
-            const SizedBox(width: AppSpacing.medium),
-            Expanded(
-              child: SegmentedControl(
-                labels: const ['Normal', 'Besar'],
-                selectedIndex: fontSize == 13 ? 1 : 0,
-                onSelected: (index) => onEdit(fontSize: index == 0 ? 11 : 13),
-              ),
-            ),
-          ],
-        ),
-      ],
+        );
+      },
     ),
   );
 }

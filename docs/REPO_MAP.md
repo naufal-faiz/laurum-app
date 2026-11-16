@@ -513,7 +513,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - printer_device_list_section.dart (53): PrinterDeviceListSection
 - printer_elements_section.dart (71): PrinterElementsSection
 - printer_footer_section.dart (32): PrinterFooterSection
-- printer_format_section.dart (64): PrinterFormatSection
+- printer_format_section.dart (68): PrinterFormatSection
 - printer_message_section.dart (46): PrinterMessageSection
 - printer_preview_section.dart (49): PrinterPreviewSection
 - printer_settings_section.dart (60): PrinterSettingsSection
@@ -601,7 +601,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_storage_mapping.dart (58):
 
 ### lib/features/services/pages/
-- service_directory_page.dart (71): ServiceDirectoryPage
+- service_directory_page.dart (77): ServiceDirectoryPage
 - service_edit_page.dart (103): ServiceEditPage
 
 ### lib/features/services/state/
@@ -767,7 +767,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - rank_row.dart (71): RankRow
 - receipt_rows.dart (59): ReceiptRows
 - section_header.dart (55): SectionHeader
-- segmented_control.dart (61): SegmentedControl
+- segmented_control.dart (60): SegmentedControl
 - segmented_progress.dart (36): SegmentedProgress
 - selection_tile.dart (81): SelectionTile
 - stat_tile.dart (50): StatTile
@@ -797,7 +797,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_toggle_list.dart (65): ReceiptToggleList
 - report_summary.dart (109): ReportSummary
 - savings_row.dart (98): SavingsRow
-- service_row.dart (84): ServiceRow
+- service_row.dart (100): ServiceRow
 - top_services.dart (108): TopServices
 - weekly_bar_chart.dart (110): WeeklyBarChart
 - welcome_banner.dart (110): WelcomeBanner
@@ -1109,6 +1109,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### test/
 - printer_device_list_section_test.dart (38):
 - printer_discovery_feedback_test.dart (81): PendingDiscoveryPrinter
+- printer_format_accessibility_test.dart (62):
 - printer_page_test.dart (100):
 - printer_reconnect_test.dart (70): DeferredReconnectPrinter
 - printer_refresh_visibility_test.dart (49): DeferredPrinterSettings

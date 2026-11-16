@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_control_tokens.dart';
 import 'package:laurum/core/theme/app_radius.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 
 class SegmentedControl extends StatelessWidget {
@@ -20,7 +21,6 @@ class SegmentedControl extends StatelessWidget {
   Widget build(BuildContext context) {
     assert(selectedIndex < labels.length);
     return Container(
-      height: AppControlTokens.switchHeight + AppControlTokens.switchInset * 2,
       padding: AppControlTokens.switchPadding,
       decoration: const BoxDecoration(
         color: AppColors.chipIdle,
@@ -37,8 +37,8 @@ class SegmentedControl extends StatelessWidget {
                   onPressed: onSelected == null ? null : () => onSelected!(i),
                   style: TextButton.styleFrom(
                     backgroundColor: i == selectedIndex ? AppColors.primary : AppColors.chipIdle,
-                    padding: EdgeInsets.zero,
-                    minimumSize: Size.zero,
+                    padding: const EdgeInsets.symmetric(vertical: AppSpacing.small),
+                    minimumSize: const Size(AppSpacing.minTouchTarget, AppSpacing.minTouchTarget),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     shape: const RoundedRectangleBorder(
                       borderRadius: AppRadius.small,
@@ -48,8 +48,7 @@ class SegmentedControl extends StatelessWidget {
                     labels[i],
                     variant: AppTextVariant.label,
                     color: i == selectedIndex ? AppColors.onPrimary : AppColors.ink2,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
