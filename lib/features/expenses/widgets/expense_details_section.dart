@@ -4,11 +4,14 @@ import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/expenses/state/expense_draft.dart';
-import 'package:laurum/shared/widgets/atoms/app_button.dart';
-import 'package:laurum/shared/widgets/atoms/app_text.dart';
+import 'package:laurum/features/expenses/widgets/expense_attachment_section.dart';
+import 'package:laurum/features/expenses/widgets/expense_category_section.dart';
+import 'package:laurum/shared/widgets/atoms/app_card.dart';
+import 'package:laurum/shared/widgets/atoms/app_divider.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
-import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
+import 'package:laurum/shared/widgets/molecules/menu_row.dart';
+import 'package:laurum/shared/widgets/molecules/section_header.dart';
 
 class ExpenseDetailsSection extends StatelessWidget {
   const ExpenseDetailsSection({
@@ -29,56 +32,67 @@ class ExpenseDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
-    spacing: AppSpacing.cardGap,
+    spacing: AppSpacing.medium,
     children: [
-      const AppText('Kategori pengeluaran', variant: AppTextVariant.label),
-      ChipBar(
-        labels: categories.map((c) => c.name).toList(),
-        selectedIndex: categories.any((c) => c.id == draft.categoryId)
-            ? categories.indexWhere((c) => c.id == draft.categoryId)
-            : null,
-        onSelected: draft.busy ? null : (i) => onCategory(categories[i].id),
+      const SectionHeader(title: 'Rincian pengeluaran'),
+      ExpenseCategorySection(
+        categories: categories,
+        selectedId: draft.categoryId,
+        busy: draft.busy,
+        onCategory: onCategory,
+        onNewCategory: onNewCategory,
       ),
-      AppButton(
-        'Kategori baru',
-        variant: AppButtonVariant.actionOutline,
-        icon: AppIcons.add,
-        onPressed: draft.busy ? null : onNewCategory,
-      ),
-      const AppText('Tanggal transaksi', variant: AppTextVariant.label),
-      AppButton(
-        Formatters.tanggal(draft.date),
-        variant: AppButtonVariant.actionOutline,
-        icon: AppIcons.calendar,
-        onPressed: draft.busy ? null : onDate,
-      ),
-      LabeledField(
-        label: 'Vendor / toko',
-        child: AppTextField(
-          label: 'Vendor / toko',
-          value: draft.vendor,
-          onChanged: onVendor,
-          selectAllOnFocus: true,
-          enabled: !draft.busy,
+      AppCard(
+        padding: EdgeInsets.zero,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            MenuRow(
+              label: 'Tanggal',
+              subtitle: Formatters.tanggal(draft.date),
+              icon: AppIcons.calendar,
+              compact: true,
+              onTap: draft.busy ? null : onDate,
+            ),
+            const AppDivider(),
+            Padding(
+              padding: const EdgeInsets.all(AppSpacing.cardPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: AppSpacing.medium,
+                children: [
+                  LabeledField(
+                    label: 'Vendor / toko',
+                    child: AppTextField(
+                      label: 'Vendor / toko',
+                      value: draft.vendor,
+                      onChanged: onVendor,
+                      selectAllOnFocus: true,
+                      enabled: !draft.busy,
+                    ),
+                  ),
+                  LabeledField(
+                    label: 'Catatan / rincian keperluan',
+                    child: AppTextField(
+                      label: 'Catatan / rincian keperluan',
+                      value: draft.note,
+                      onChanged: onNote,
+                      maxLines: 3,
+                      selectAllOnFocus: true,
+                      enabled: !draft.busy,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const AppDivider(),
+            ExpenseAttachmentSection(
+              photoPath: draft.photoPath,
+              busy: draft.busy,
+              onPhoto: onPhoto,
+            ),
+          ],
         ),
-      ),
-      LabeledField(
-        label: 'Catatan / rincian keperluan',
-        child: AppTextField(
-          label: 'Catatan / rincian keperluan',
-          value: draft.note,
-          onChanged: onNote,
-          maxLines: 3,
-          selectAllOnFocus: true,
-          enabled: !draft.busy,
-        ),
-      ),
-      const AppText('Foto struk / nota toko', variant: AppTextVariant.label),
-      AppText(draft.photoPath == null ? 'Belum dilampirkan (opsional)' : 'Foto dilampirkan'),
-      AppButton(
-        'Lampirkan',
-        variant: AppButtonVariant.actionOutline,
-        onPressed: draft.busy ? null : onPhoto,
       ),
     ],
   );

@@ -47,6 +47,7 @@ class ExpenseDirectoryPage extends ConsumerWidget {
           data: value,
           filter: filter,
           onFilter: ref.read(expenseFilterProvider.notifier).select,
+          onOpenReport: () => context.push('/laporan'),
           onOpen: (e) => ExpenseDetailSheet.show(context, e, value.category(e.categoryId)),
         ),
       ),

@@ -386,9 +386,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/expenses/pages/
 - expense_category_sheet.dart (46): ExpenseCategorySheet
+- expense_date_flow.dart (20):
 - expense_detail_sheet.dart (71): ExpenseDetailSheet
-- expense_directory_page.dart (55): ExpenseDirectoryPage
-- expense_form_page.dart (82): ExpenseFormPage
+- expense_directory_page.dart (56): ExpenseDirectoryPage
+- expense_form_page.dart (100): ExpenseFormPage
 
 ### lib/features/expenses/state/
 - expense_category_controller.dart (49): ExpenseCategoryDraft, ExpenseCategoryController, expenseCategoryProvider
@@ -398,9 +399,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_form_controller.dart (75): ExpenseFormController, expenseFormProvider
 
 ### lib/features/expenses/widgets/
-- expense_amount_section.dart (42): ExpenseAmountSection
-- expense_details_section.dart (85): ExpenseDetailsSection
-- expense_list_section.dart (87): ExpenseListSection
+- expense_amount_section.dart (58): ExpenseAmountSection
+- expense_attachment_section.dart (57): ExpenseAttachmentSection
+- expense_category_section.dart (50): ExpenseCategorySection
+- expense_details_section.dart (99): ExpenseDetailsSection
+- expense_list_section.dart (92): ExpenseListSection
+- expense_report_link_section.dart (36): ExpenseReportLinkSection
 - expense_summary_section.dart (90): ExpenseSummarySection
 
 ### lib/features/orders/data/
@@ -982,10 +986,10 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_failures_test.dart (76): FailingExpenseRepository
 - expense_form_actions_test.dart (49):
 - expense_golden_test.dart (40):
-- expense_keyboard_test.dart (70):
-- expense_pages_test.dart (66):
+- expense_keyboard_test.dart (26):
+- expense_pages_test.dart (75):
 - expense_row_test.dart (34):
-- expense_sections_test.dart (108):
+- expense_sections_test.dart (163):
 - fake_id_generator.dart (20): FakeIdGenerator
 - feature_strip_test.dart (29):
 - footer_bar_test.dart (30):

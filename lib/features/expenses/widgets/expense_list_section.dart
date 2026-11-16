@@ -4,6 +4,7 @@ import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/expenses/state/expense_directory.dart';
+import 'package:laurum/features/expenses/widgets/expense_report_link_section.dart';
 import 'package:laurum/features/expenses/widgets/expense_summary_section.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 import 'package:laurum/shared/widgets/molecules/date_group_header.dart';
@@ -16,12 +17,14 @@ class ExpenseListSection extends StatelessWidget {
     required this.filter,
     required this.onFilter,
     required this.onOpen,
+    required this.onOpenReport,
     super.key,
   });
   final ExpenseDirectory data;
   final String filter;
   final ValueChanged<String> onFilter;
   final ValueChanged<Expense> onOpen;
+  final VoidCallback onOpenReport;
   @override
   Widget build(BuildContext context) {
     final rows = data.visible(filter);
@@ -42,6 +45,8 @@ class ExpenseListSection extends StatelessWidget {
           total: data.total,
           breakdown: breakdown,
         ),
+        const SizedBox(height: AppSpacing.cardGap),
+        ExpenseReportLinkSection(onOpen: onOpenReport),
         const SizedBox(height: AppSpacing.cardGap),
         ChipBar(
           labels: ['Semua', ...data.categories.map((c) => c.name)],

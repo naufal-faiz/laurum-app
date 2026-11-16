@@ -1,17 +1,19 @@
 # 23 - Daftar Pengeluaran
 Rute: /lainnya/pengeluaran | Prompt: 71
-Frame .pen: Lainnya - Daftar Pengeluaran. Frame desain baru: LAURUM · Pengeluaran.
+Frame .pen: Lainnya - Daftar Pengeluaran. Frame desain baru: LAURUM · Pengeluaran (ID 4294969797).
 Template: SubScaffold header detail (tombol kembali) dengan FAB; tanpa nav bawah.
 
 Komposisi: ExpenseListSection menyusun ExpenseSummarySection (bulan, AppCard primary
-total + jumlah transaksi, tiga sub-card kategori terbesar), ChipBar, DateGroupHeader
-dan ExpenseRow. FAB Catat pengeluaran di pojok kanan bawah. Tanpa Ekspor.
+total + jumlah transaksi, tiga sub-card kategori terbesar), ExpenseReportLinkSection
+(tautan ke Laporan), ChipBar, DateGroupHeader dan ExpenseRow. FAB Catat pengeluaran
+di pojok kanan bawah. Tanpa Ekspor.
 Provider: expenseDirectoryProvider, expenseFilterProvider, ExpenseRepository.
 Bulan mengikuti businessClockProvider: [awal bulan, awal bulan berikutnya).
 DATA MASTER Oktober: 18 transaksi Rp1.850.000; Bahan cuci Rp850.000,
 Listrik & air Rp620.000, Kemasan Rp380.000. Filter tidak mengubah ringkasan bulan.
 
 Interaksi: Kembali menutup layar ke /lainnya (pop, atau go bila dibuka langsung).
+Tautan laporan membuka /laporan (push; kembali ke daftar).
 Catat membuka /lainnya/pengeluaran/baru dengan draf baru kosong.
 ExpenseRow membuka ExpenseDetailSheet via AppBottomSheet.show, berisi kategori,
 nominal, tanggal/jam, vendor, catatan, status lampiran. Hapus memerlukan
@@ -45,6 +47,7 @@ layar lama hanya acuan data. Tidak ada frame asli di .pen.
 | Status sinkron di header | SyncIndicator | ya (trailing) |
 | Kembali ke /lainnya | nav bawah | tombol kembali header |
 | Catat pengeluaran (invalidate draf + push) | FooterBar | FAB kanan bawah |
+| Tautan rekap pengeluaran ke Laporan (permintaan pengguna) | tidak ada | ExpenseReportLinkSection, push /laporan |
 | ExpenseRow membuka ExpenseDetailSheet | List | ya |
 | Total Rp1.850.000 + 18 transaksi | List | ya |
 | Top 3 kategori sebagai sub-card berjejer | List (rincian di kartu) | ya |
@@ -65,3 +68,7 @@ layar lama hanya acuan data. Tidak ada frame asli di .pen.
 - DateGroupHeader bawaan membungkus tanggal panjang menjadi dua baris pada 390 px;
   widget bersama tidak diubah.
 - Bulan tetap teks sendiri di atas kartu agar tes Section tetap berlaku.
+- Tautan laporan memakai AppCard putih bergaris (token terdekat); frame memakai
+  latar biru muda, tetapi belum ada style kartu bertint.
+- Tautan diletakkan di antara sub-card dan chip filter sesuai permintaan pengguna;
+  frame menunjukkan baris yang sama.
