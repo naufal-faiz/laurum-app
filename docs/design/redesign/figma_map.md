@@ -33,7 +33,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `20-daftar-layanan.md` (20 - Daftar Layanan) | | Menunggu | |
 | `21-form-layanan.md` (Tambah layanan) | `LAURUM · Tambah Layanan` (ID:4294968237) | 031 selesai; check_all hijau1314tes/2skip; menunggu tinjauan | Pratinjau reaktif, kartu informasi/durasi, prefix Rp dan footer responsif; Edit tetap |
 | `22-info-usaha.md` (22 - Info Usaha) | | Menunggu | |
-| `23-daftar-pengeluaran.md` (23 - Daftar Pengeluaran) | | Menunggu | |
+| `23-daftar-pengeluaran.md` (23 - Daftar Pengeluaran) | `LAURUM · Pengeluaran` (ID 4294969797), x 2200 y 5302 | Desain 16 Nov 2026 diterapkan di kode; golden diperbarui; menunggu tinjauan | Header detail + tombol kembali, 3 sub-card kategori terbesar, FAB kanan bawah, tanpa nav; DateGroupHeader lama membungkus 2 baris; lihat spec 23 |
 | `24-catat-pengeluaran.md` (24 - Catat Pengeluaran) | | Menunggu | |
 | `25-detail-usulan-ai.md` (25 - Detail Usulan AI) | `LAURUM · Detail Usulan AI` (ID: 512) | Selesai 018-020 | Android + keyboard diperiksa; 1060 tes lulus; tanpa fitur berat/jadwal baru |
 | `26-riwayat-usulan-ai.md` (26 - Riwayat Usulan AI) | | Menunggu | |

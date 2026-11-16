@@ -387,7 +387,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/expenses/pages/
 - expense_category_sheet.dart (46): ExpenseCategorySheet
 - expense_detail_sheet.dart (71): ExpenseDetailSheet
-- expense_directory_page.dart (75): ExpenseDirectoryPage
+- expense_directory_page.dart (55): ExpenseDirectoryPage
 - expense_form_page.dart (82): ExpenseFormPage
 
 ### lib/features/expenses/state/
@@ -400,7 +400,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/expenses/widgets/
 - expense_amount_section.dart (42): ExpenseAmountSection
 - expense_details_section.dart (85): ExpenseDetailsSection
-- expense_list_section.dart (97): ExpenseListSection
+- expense_list_section.dart (87): ExpenseListSection
+- expense_summary_section.dart (90): ExpenseSummarySection
 
 ### lib/features/orders/data/
 - active_order_queries.dart (40):
@@ -573,7 +574,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - outstanding_page.dart (73): OutstandingPage
 - report_page.dart (85): ReportPage
 - report_range_flow.dart (39):
-- report_range_sheet.dart (85): ReportRangeSheet
+- report_range_sheet.dart (96): ReportRangeSheet
 
 ### lib/features/reports/state/
 - outstanding_data.dart (69): OutstandingRow, OutstandingListData, OutstandingFilter, outstandingListProvider, outstandingFilterProvider
@@ -589,9 +590,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/reports/widgets/
 - outstanding_list_section.dart (76): OutstandingListSection
-- report_body_section.dart (99): ReportBodySection
+- report_body_section.dart (94): ReportBodySection
 - report_header_section.dart (76): ReportHeaderSection
-- report_orders_section.dart (104): ReportOrdersSection
+- report_orders_section.dart (110): ReportOrdersSection
 - report_range_summary_section.dart (47): ReportRangeSummarySection
 
 ### lib/features/services/data/
@@ -638,7 +639,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (7):
-- root_shell_page.dart (104): RootShellPage
+- root_shell_page.dart (106): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (27): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, shellSyncStatusProvider, whatsappConnectionProvider
@@ -747,7 +748,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - empty_state.dart (48): EmptyState
 - feature_strip.dart (46): FeatureStrip
 - footer_bar.dart (28): FooterBar
-- icon_tile.dart (84): IconTile
+- icon_tile.dart (94): IconTile
 - info_row.dart (39): InfoRow
 - inline_link.dart (32): InlineLink
 - inline_link_row.dart (36): InlineLinkRow
@@ -878,7 +879,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - banner_message_test.dart (23):
 - beranda_molecules_test.dart (113):
 - beranda_page_test.dart (70):
-- beranda_report_navigation_test.dart (33):
+- beranda_report_navigation_test.dart (74):
 - beranda_sections_test.dart (183):
 - beranda_view_test.dart (136):
 - bottom_nav_bar_test.dart (104):
@@ -980,11 +981,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_controller_test.dart (78):
 - expense_failures_test.dart (76): FailingExpenseRepository
 - expense_form_actions_test.dart (49):
-- expense_golden_test.dart (38):
+- expense_golden_test.dart (40):
 - expense_keyboard_test.dart (70):
 - expense_pages_test.dart (66):
 - expense_row_test.dart (34):
-- expense_sections_test.dart (87):
+- expense_sections_test.dart (108):
 - fake_id_generator.dart (20): FakeIdGenerator
 - feature_strip_test.dart (29):
 - footer_bar_test.dart (30):
@@ -1175,7 +1176,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r5_custom_report_test.dart (65):
 - r5_picker_test.dart (65):
 - r5_range_test.dart (39):
-- r5_report_body_section_test.dart (58):
+- r5_report_body_section_test.dart (70):
 - r5_report_visual_test.dart (71):
 - r5_report_widgets_test.dart (108): HeldReportExport
 - r9_cards_test.dart (60):
@@ -1223,6 +1224,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_page_test.dart (80):
 - report_range_controller_test.dart (37):
 - report_range_dismiss_test.dart (50):
+- report_range_limit_test.dart (48):
 - report_range_modal_test.dart (78):
 - report_redesign_golden_test.dart (30):
 - report_redesign_host.dart (46):
