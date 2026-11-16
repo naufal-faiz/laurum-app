@@ -8,6 +8,7 @@ import 'package:laurum/features/expenses/state/expense_draft.dart';
 import 'package:laurum/features/expenses/widgets/expense_amount_section.dart';
 import 'package:laurum/features/expenses/widgets/expense_details_section.dart';
 import 'package:laurum/features/expenses/widgets/expense_list_section.dart';
+import 'package:laurum/features/expenses/widgets/expense_summary_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 
@@ -32,6 +33,26 @@ void main() {
     expect(find.text('Oktober 2026'), findsOneWidget);
     await tester.tap(find.descendant(of: find.byType(ChipBar), matching: find.text('Bahan cuci')));
     expect(selected, 'cat-001');
+  });
+  testWidgets('ExpenseSummarySection shows month, total, count and breakdown', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: const Scaffold(
+          body: ExpenseSummarySection(
+            month: 'Oktober 2026',
+            count: 18,
+            total: 1850000,
+            breakdown: {'Bahan cuci': 850000},
+          ),
+        ),
+      ),
+    );
+    expect(find.text('Oktober 2026'), findsOneWidget);
+    expect(find.text('Rp1.850.000'), findsOneWidget);
+    expect(find.text('18 transaksi'), findsOneWidget);
+    expect(find.text('Bahan cuci'), findsOneWidget);
+    expect(find.text('Rp850.000'), findsOneWidget);
   });
   testWidgets('ExpenseAmountSection blank amount and keypad callback', (tester) async {
     var digits = '';

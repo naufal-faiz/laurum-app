@@ -14,6 +14,7 @@ import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/footer_bar.dart';
 import 'package:laurum/shared/widgets/molecules/sync_indicator.dart';
+import 'package:laurum/shared/widgets/organisms/app_page_header.dart';
 import 'package:laurum/shared/widgets/templates/root_scaffold.dart';
 
 class ExpenseDirectoryPage extends ConsumerWidget {
@@ -23,12 +24,19 @@ class ExpenseDirectoryPage extends ConsumerWidget {
     final data = ref.watch(expenseDirectoryProvider);
     final filter = ref.watch(expenseFilterProvider);
     final profile = ref.watch(businessProfileProvider).value;
+    final syncState = SyncState.values.byName(ref.watch(shellSyncStatusProvider).name);
+    final count = data.value?.expenses.length;
     return RootScaffold(
       title: profile?.name ?? 'Laurum',
       accountLabel: 'Usaha dan akun',
       activeIndex: 3,
-      syncState: SyncState.values.byName(ref.watch(shellSyncStatusProvider).name),
-      onAccount: () => context.go('/lainnya'),
+      showAppBar: false,
+      syncState: syncState,
+      pageHeader: AppPageHeader(
+        title: 'Pengeluaran',
+        subtitle: count == null ? 'Ringkasan bulan ini' : '$count transaksi bulan ini',
+        status: SyncIndicator(state: syncState),
+      ),
       onTabSelected: (i) => context.go(tabRoutes.keys.elementAt(i)),
       onCreate: () => context.push('/transaksi/baru'),
       body: SafeArea(
