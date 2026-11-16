@@ -18,55 +18,73 @@ class ExpenseSummarySection extends StatelessWidget {
   final Map<String, int> breakdown;
 
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      AppText(month, variant: AppTextVariant.label, color: AppColors.ink3),
-      const SizedBox(height: AppSpacing.small),
-      AppCard(
-        style: AppCardStyle.primary,
-        bubble: true,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: AppSpacing.xxsmall,
-          children: [
-            const AppText(
-              'Total pengeluaran bulan ini',
-              variant: AppTextVariant.caption,
-              color: AppColors.heroTagline,
-            ),
-            AppText(
-              Formatters.rupiah(total),
-              variant: AppTextVariant.figure,
-              color: AppColors.onPrimary,
-            ),
-            AppText(
-              '$count transaksi',
-              variant: AppTextVariant.caption,
-              color: AppColors.heroTagline,
-            ),
-            if (breakdown.isNotEmpty) const SizedBox(height: AppSpacing.small),
-            for (final entry in breakdown.entries)
-              Row(
-                spacing: AppSpacing.small,
-                children: [
+  Widget build(BuildContext context) {
+    final top = breakdown.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
+    final largest = top.take(3).toList();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        AppText(month, variant: AppTextVariant.label, color: AppColors.ink3),
+        const SizedBox(height: AppSpacing.small),
+        AppCard(
+          style: AppCardStyle.primary,
+          bubble: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: AppSpacing.xxsmall,
+            children: [
+              const AppText(
+                'Total pengeluaran bulan ini',
+                variant: AppTextVariant.caption,
+                color: AppColors.heroTagline,
+              ),
+              AppText(
+                Formatters.rupiah(total),
+                variant: AppTextVariant.figure,
+                color: AppColors.onPrimary,
+              ),
+              AppText(
+                '$count transaksi',
+                variant: AppTextVariant.caption,
+                color: AppColors.heroTagline,
+              ),
+            ],
+          ),
+        ),
+        if (largest.isNotEmpty) ...[
+          const SizedBox(height: AppSpacing.cardGap),
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: AppSpacing.medium,
+              children: [
+                for (final entry in largest)
                   Expanded(
-                    child: AppText(
-                      entry.key,
-                      variant: AppTextVariant.caption,
-                      color: AppColors.heroTagline,
+                    child: AppCard(
+                      padding: const EdgeInsets.all(AppSpacing.medium),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: AppSpacing.xxsmall,
+                        children: [
+                          AppText(
+                            entry.key,
+                            variant: AppTextVariant.caption,
+                            color: AppColors.ink3,
+                          ),
+                          AppText(
+                            Formatters.rupiah(entry.value),
+                            variant: AppTextVariant.label,
+                            color: AppColors.primaryInk,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  AppText(
-                    Formatters.rupiah(entry.value),
-                    variant: AppTextVariant.label,
-                    color: AppColors.onPrimary,
-                  ),
-                ],
-              ),
-          ],
-        ),
-      ),
-    ],
-  );
+              ],
+            ),
+          ),
+        ],
+      ],
+    );
+  }
 }

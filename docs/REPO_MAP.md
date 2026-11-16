@@ -387,7 +387,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/expenses/pages/
 - expense_category_sheet.dart (46): ExpenseCategorySheet
 - expense_detail_sheet.dart (71): ExpenseDetailSheet
-- expense_directory_page.dart (83): ExpenseDirectoryPage
+- expense_directory_page.dart (55): ExpenseDirectoryPage
 - expense_form_page.dart (82): ExpenseFormPage
 
 ### lib/features/expenses/state/
@@ -401,7 +401,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_amount_section.dart (42): ExpenseAmountSection
 - expense_details_section.dart (85): ExpenseDetailsSection
 - expense_list_section.dart (87): ExpenseListSection
-- expense_summary_section.dart (72): ExpenseSummarySection
+- expense_summary_section.dart (90): ExpenseSummarySection
 
 ### lib/features/orders/data/
 - active_order_queries.dart (40):
@@ -982,7 +982,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_controller_test.dart (78):
 - expense_failures_test.dart (76): FailingExpenseRepository
 - expense_form_actions_test.dart (49):
-- expense_golden_test.dart (38):
+- expense_golden_test.dart (40):
 - expense_keyboard_test.dart (70):
 - expense_pages_test.dart (66):
 - expense_row_test.dart (34):
