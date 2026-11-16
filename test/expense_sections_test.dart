@@ -6,10 +6,13 @@ import 'package:laurum/features/expenses/data/expense_fixtures.dart';
 import 'package:laurum/features/expenses/state/expense_directory.dart';
 import 'package:laurum/features/expenses/state/expense_draft.dart';
 import 'package:laurum/features/expenses/widgets/expense_amount_section.dart';
+import 'package:laurum/features/expenses/widgets/expense_attachment_section.dart';
+import 'package:laurum/features/expenses/widgets/expense_category_section.dart';
 import 'package:laurum/features/expenses/widgets/expense_details_section.dart';
 import 'package:laurum/features/expenses/widgets/expense_list_section.dart';
+import 'package:laurum/features/expenses/widgets/expense_report_link_section.dart';
 import 'package:laurum/features/expenses/widgets/expense_summary_section.dart';
-import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
+import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/chip_bar.dart';
 
 void main() {
@@ -25,6 +28,7 @@ void main() {
             filter: '',
             onFilter: (id) => selected = id,
             onOpen: (_) {},
+            onOpenReport: () {},
           ),
         ),
       ),
@@ -62,14 +66,14 @@ void main() {
         home: Scaffold(
           body: ExpenseAmountSection(
             draft: ExpenseDraft(date: DateTime(2026, 10, 16)),
-            onNominal: (_) {},
             onKey: (key) => digits = key.label,
           ),
         ),
       ),
     );
-    expect(tester.widget<AppTextField>(find.byType(AppTextField)).value, '');
-    expect(tester.widget<AppTextField>(find.byType(AppTextField)).hint, '0');
+    final nominal = tester.widget<AppText>(find.byKey(const ValueKey('expense-nominal')));
+    expect(nominal.data, '0');
+    expect(find.byType(EditableText), findsNothing);
     await tester.tap(find.text('5'));
     expect(digits, '5');
     expect(find.text('C'), findsNothing);
@@ -102,6 +106,57 @@ void main() {
     await tester.tap(find.text('Jumat, 16 Okt 2026'));
     expect(dates, 1);
     await tester.ensureVisible(find.text('Lampirkan'));
+    await tester.tap(find.text('Lampirkan'));
+    expect(photos, 1);
+  });
+  testWidgets('ExpenseReportLinkSection delegates the open action', (tester) async {
+    var opened = 0;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: Scaffold(body: ExpenseReportLinkSection(onOpen: () => opened++)),
+      ),
+    );
+    await tester.tap(find.text('Lihat semua pengeluaran di Laporan'));
+    expect(opened, 1);
+  });
+  testWidgets('ExpenseCategorySection selects a chip and opens a new category', (tester) async {
+    var category = '';
+    var created = 0;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: Scaffold(
+          body: ExpenseCategorySection(
+            categories: expenseCategoryFixtures,
+            selectedId: 'cat-001',
+            busy: false,
+            onCategory: (id) => category = id,
+            onNewCategory: () => created++,
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('Listrik & air'));
+    expect(category, 'cat-002');
+    await tester.tap(find.text('Kategori baru'));
+    expect(created, 1);
+  });
+  testWidgets('ExpenseAttachmentSection shows status and opens the picker', (tester) async {
+    var photos = 0;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: Scaffold(
+          body: ExpenseAttachmentSection(
+            photoPath: null,
+            busy: false,
+            onPhoto: () => photos++,
+          ),
+        ),
+      ),
+    );
+    expect(find.text('Belum dilampirkan (opsional)'), findsOneWidget);
     await tester.tap(find.text('Lampirkan'));
     expect(photos, 1);
   });
