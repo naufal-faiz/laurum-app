@@ -75,6 +75,7 @@ GoRouter createAppRouter({
       path: '/laporan/piutang',
       builder: (context, state) => const OutstandingPage(),
     ),
+    GoRoute(path: '/laporan', builder: (context, state) => const ReportPage()),
     GoRoute(
       path: '/pelanggan/:id',
       builder: (context, state) => CustomerDetailPage(customerId: state.pathParameters['id']!),
@@ -99,9 +100,6 @@ GoRouter createAppRouter({
                   _ => PlaceholderPage(title: route.value, isTab: true),
                 },
               ),
-              if (route.key == '/lainnya')
-                // Legacy deep link: Laporan has no nav slot since 10 Nov 2026.
-                GoRoute(path: '/laporan', builder: (context, state) => const ReportPage()),
             ],
           ),
       ],

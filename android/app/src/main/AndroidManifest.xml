@@ -15,7 +15,13 @@
     <application
         android:label="laurum"
         android:name="${applicationName}"
+        android:resizeableActivity="false"
         android:icon="@mipmap/ic_launcher">
+        <!-- Keep the app in compatibility mode on Android 16 large screens.
+             Android 17+ and device overrides may ignore resize restrictions. -->
+        <property
+            android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY"
+            android:value="true" />
         <provider android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.receipts"
             android:exported="false" android:grantUriPermissions="true">

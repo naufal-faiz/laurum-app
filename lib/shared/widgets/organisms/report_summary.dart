@@ -32,7 +32,7 @@ class ReportSummary extends StatelessWidget {
         value: Formatters.rupiah(totals.cashIn),
         compact: true,
         description:
-            'Tunai · QRIS · transfer\nKas termasuk setoran\n'
+            'Kas termasuk setoran\n'
             'Tabungan ${Formatters.rupiah(totals.savingsBalance)}\nTitipan, bukan omzet',
       ),
       StatTile(

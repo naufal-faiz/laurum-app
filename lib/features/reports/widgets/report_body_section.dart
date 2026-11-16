@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laurum/core/domain/order.dart';
 import 'package:laurum/core/formatters/formatters.dart';
-import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/reports/state/report_orders_data.dart';
@@ -9,7 +8,6 @@ import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/reports/widgets/report_orders_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
-import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/organisms/report_summary.dart';
 import 'package:laurum/shared/widgets/organisms/top_services.dart';
 import 'package:laurum/shared/widgets/organisms/weekly_bar_chart.dart';
@@ -44,12 +42,6 @@ class ReportBodySection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xlarge)
           .add(const EdgeInsets.only(bottom: AppDimensions.navCreateSize / 2)),
       children: [
-        if (data.isEmpty)
-          const EmptyState(
-            title: 'Belum ada data periode ini',
-            description: 'Laporan terisi setelah ada nota pada periode yang dipilih.',
-            icon: AppIcons.reports,
-          ),
         if (!data.isEmpty ||
             (data.period != 3 &&
                 (data.totals.activeOutstanding > 0 || data.totals.savingsBalance > 0)))
@@ -80,10 +72,13 @@ class ReportBodySection extends StatelessWidget {
               message: 'Rincian layanan terlaris belum tersedia untuk periode ini.',
             ),
         ],
-        if (orders != null) ...[
+        if (orders != null || data.isEmpty) ...[
           const SizedBox(height: AppSpacing.mediumLarge),
           ReportOrdersSection(
-            data: orders!,
+            data:
+                orders ??
+                const ReportOrdersData(orders: [], customers: {}, items: {}, payments: []),
+            emptyReport: data.isEmpty,
             range: data.range,
             filter: orderFilter,
             search: orderSearch,

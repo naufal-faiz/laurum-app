@@ -25,12 +25,13 @@ class ReportOrdersSection extends StatelessWidget {
     required this.onFilter,
     required this.onOpen,
     super.key,
+    this.emptyReport = false,
   });
   final ReportOrdersData data;
   final ReportRange range;
   final int filter;
   final String search;
-  final bool useOrderStatus;
+  final bool useOrderStatus, emptyReport;
   final ValueChanged<String> onSearch;
   final ValueChanged<int> onFilter;
   final ValueChanged<Order> onOpen;
@@ -88,16 +89,21 @@ class ReportOrdersSection extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.cardGap),
         ],
-        if (orders.isEmpty)
+        if (emptyReport || orders.isEmpty)
           EmptyState(
-            title: inRange.isEmpty ? 'Belum ada nota periode ini' : 'Nota tidak ditemukan',
+            title: emptyReport
+                ? 'Belum ada data periode ini'
+                : inRange.isEmpty
+                ? 'Belum ada nota periode ini'
+                : 'Nota tidak ditemukan',
             icon: AppIcons.receipt,
-            description: inRange.isEmpty
+            description: emptyReport
+                ? 'Laporan terisi setelah ada nota pada periode yang dipilih.'
+                : inRange.isEmpty
                 ? 'Nota pada periode ini akan tampil di sini.'
                 : 'Coba kata kunci atau filter lain.',
-          )
-        else
-          ...rows,
+          ),
+        if (orders.isNotEmpty) ...rows,
       ],
     );
   }

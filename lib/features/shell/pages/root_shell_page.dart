@@ -37,7 +37,9 @@ class RootShellPage extends ConsumerWidget {
       accountLabel: 'Usaha dan akun',
       activeIndex: navigationShell.currentIndex,
       showAppBar: index > 1 && !reporting,
-      pageHeader: settings
+      pageHeader: reporting
+          ? null
+          : settings
           ? SettingsHeaderSection(
               name: profile.value?.name ?? 'Laurum',
               syncState: syncState,
@@ -61,7 +63,7 @@ class RootShellPage extends ConsumerWidget {
               onAccount: () => navigationShell.goBranch(3),
             )
           : null,
-      header: index == 0
+      header: index == 0 && !reporting
           ? const Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
               child: BerandaHeaderSection(),

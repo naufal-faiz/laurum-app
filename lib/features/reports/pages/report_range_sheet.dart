@@ -5,6 +5,7 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/reports/state/report_range_controller.dart';
 import 'package:laurum/features/reports/widgets/report_range_summary_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
+import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/organisms/app_range_calendar.dart';
 import 'package:laurum/shared/widgets/templates/modal_scaffold.dart';
 
@@ -29,6 +30,11 @@ class ReportRangeSheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final draft = ref.watch(reportRangeDraftProvider)!;
     final controller = ref.read(reportRangeDraftProvider.notifier);
+    final start = draft.start, end = draft.end;
+    final withinLimit =
+        start == null ||
+        end == null ||
+        end.isBefore(DateTime(start.year, start.month, start.day + 14));
     final buttons = [
       AppButton(
         'Reset',
@@ -41,7 +47,7 @@ class ReportRangeSheet extends ConsumerWidget {
         icon: AppIcons.check,
         size: AppButtonSize.small,
         variant: AppButtonVariant.action,
-        onPressed: draft.canApply
+        onPressed: draft.canApply && withinLimit
             ? () => Navigator.of(context).pop(DateTimeRange(start: draft.start!, end: draft.end!))
             : null,
       ),
@@ -69,6 +75,11 @@ class ReportRangeSheet extends ConsumerWidget {
         spacing: AppSpacing.medium,
         children: [
           ReportRangeSummarySection(start: draft.start, end: draft.end),
+          if (!withinLimit)
+            const BannerMessage(
+              message: 'Rentang maksimal 14 hari, termasuk tanggal awal dan akhir.',
+              variant: BannerMessageVariant.warning,
+            ),
           AppRangeCalendar(
             month: draft.month,
             firstDate: draft.firstDate,

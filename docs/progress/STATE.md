@@ -1,52 +1,38 @@
-# STATE Laurum
-Diperbarui: 2026-11-16 | Cabang newdesign (merge ui/pengeluaran b55c22b)
+﻿# STATE Laurum
+Diperbarui: 2026-11-16 | Cabang newdesign
 
 ## Sesi aktif
-Irisan layar 24 Catat Pengeluaran dan penyesuaian 23 Daftar Pengeluaran dari cabang
-ui/pengeluaran (commit b55c22b) sudah di-merge ke newdesign. Frame:
-`LAURUM · Catat Pengeluaran` (ID 4294969900) dan `LAURUM · Pengeluaran` (ID 4294969797).
-Spec 23 dan 24 memuat tabel paritas + selisih desain.
+Commit batch revisi sebelumnya; berikutnya amankan kedipan sync sebelum refresh033.
+Dasar60e3297; redraw saat membuat antrean/impor kontak menjadi prioritas.
 
 ## Status irisan
-- ExpenseAmountSection: nominal teks baca-saja di AppCard (key `expense-nominal`,
-  '0' warna placeholder) + AppBadge Rupiah + Numpad; tidak ada field, tidak bisa
-  diketuk, tidak membuka keyboard Android.
-- ExpenseDetailsSection menyusun ExpenseCategorySection (chip AppChip membungkus +
-  Kategori baru), AppCard tanggal/vendor/catatan, ExpenseAttachmentSection.
-- Footer FormScaffold varian detail: Batal (outline, 3) + Simpan pengeluaran
-  (ikon centang, 5); menumpuk vertikal di <288 dp atau skala teks >1,2.
-- Daftar pengeluaran: ExpenseReportLinkSection di antara sub-card dan ChipBar
-  (push /laporan, kembali ke daftar).
-- Perbaikan sort immutable Drift (commit 760cdec) tetap berlaku; tidak ada perubahan
-  state, repository, skema, atau migrasi pada irisan ini.
-- Berkas: expense_form_page, expense_date_flow, 5 Section expenses, 2 Page,
-  3 tes expense, 2 golden, spec 23/24, figma_map, REPO_MAP, STATE.
+- Batch: Laporan mandiri tanpa navbar, empty state Nota tunggal, rentang maksimal14hari.
+- Logo lingkaran Beranda/Login, teks ringkas laporan, pembatasan multijendela Android.
+- Rute memakai SubScaffold yang sudah ada; tidak menambah template/opsi navbar.
+- check_arch batch OK; tes navigasi/visual/keyboard/aksesibilitas terarah75 lulus.
+- Bug immutable pengeluaran760cdec dan merge pengeluaran b55c22b tetap dipertahankan.
 
 ## Keputusan pengguna terbaru
-- Nominal tidak clickable dan tanpa keyboard sistem; input hanya lewat numpad.
-- Tambah tombol Batal di samping Simpan pada footer form.
-- Tambah tautan ke halaman Laporan di daftar pengeluaran.
-- Header tetap pola detail bersama seperti layar desain baru lain.
-- Pengguna menyetujui merge ke newdesign (satu berkas WIP di-stash sementara).
+- Commit pembaruan sebelumnya dahulu.
+- Perbaiki kedipan saat push antrean baru/impor kontak dahulu, baru refresh gesture.
+- Proposal033 disetujui16Nov2026; satu komponen refresh reusable dan registry diizinkan.
+- Jangan uninstall/menghapus DB/outbox; jangan push atau merge backend-newdesign.
 
 ## Belum di-commit
-Revisi sesi lain di worktree ini masih belum di-commit (35 berkas): laporan
-(report_page, report_range_sheet, report_body/orders/header, report_summary),
-app_router, root_shell_page, icon_tile, AndroidManifest, tes navigasi/header,
-golden Login/Beranda/Laporan, spec 20, figma_map, draf FigCraft, android/build.
-Jangan di-discard atau di-commit tanpa izin pemiliknya.
+Batch kode/tes/golden Android dan UI dicakup commit ini.
+Proposal033 belum dicakup; statusnya disetujui, implementasi menunggu fix kedipan.
+Draf FigCraft/figma_map/spec20 dan android/build dipertahankan di luar commit.
 
 ## Langkah berikutnya
-1. Pengguna meninjau golden expense_form.png/expense_directory.png atau menjalankan
-   flutter run -t lib/main_dummy.dart dari worktree utama.
-2. Koreksi tata letak pengeluaran: commit fix(ui) berikutnya.
-3. Usulan widget bersama bila numpad 36 px diinginkan (frame lebih pendek).
-4. Jangan push/merge ke cabang lain tanpa izin pengguna.
+1. Reproduksi kedipan dengan Drift dan sync yang ditahan; periksa invalidasi provider.
+2. Perbaiki akar penyebab dan verifikasi saat antrean baru/impor serta hasil pull.
+3. Implementasi033 sesudah fix aman; verifikasi terarah dan check_all di akhir.
 
 ## Blocker
-Tidak ada.
+Belum ada; investigasi kedipan akan dimulai setelah commit batch.
 
 ## Bukti terakhir
-- dart run tool/check_all.dart di ui/pengeluaran: SEMUA HIJAU, 1317 tes lulus, 2 skip.
-- flutter analyze lib/features/expenses: No issues found. check_arch: OK.
-- Merge newdesign + b55c22b: konflik hanya docs/progress/STATE.md (diselesaikan).
+- dart run tool/check_arch.dart:OK,exit0.
+- Laporan mandiri:75tes terarah lulus; analyzer bersih; golden diperbarui.
+- Full working tree sebelum perubahan rute mandiri terakhir:1325lulus/2skip.
+- Native manifest merge BUILD SUCCESSFUL; resizeableActivity=false terverifikasi.

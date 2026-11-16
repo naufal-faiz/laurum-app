@@ -14,8 +14,11 @@ import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/reports/widgets/report_body_section.dart';
 import 'package:laurum/features/reports/widgets/report_header_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
+import 'package:laurum/shared/widgets/templates/sub_scaffold.dart';
 
 class ReportPage extends ConsumerWidget {
   const ReportPage({super.key});
@@ -27,59 +30,78 @@ class ReportPage extends ConsumerWidget {
     final exporting = ref.watch(reportExportProvider);
     final custom = ref.watch(reportCustomRangeProvider);
     final useStatus = ref.watch(businessProfileProvider).value?.useOrderStatus ?? true;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        ReportHeaderSection(
-          labels: [
-            ...reportPeriodLabels.take(3),
-            custom == null
-                ? 'Pilih tanggal'
-                : Formatters.rentangTanggal(
-                    custom.start,
-                    custom.end.subtract(const Duration(days: 1)),
-                  ),
-          ],
-          selectedIndex: ref.watch(reportPeriodProvider),
-          onBack: () => context.canPop() ? context.pop() : context.go('/lainnya'),
-          onExport: data == null || data.isEmpty || exporting.busy
-              ? null
-              : () => ref.read(reportExportProvider.notifier).export(data, orders: orders),
-          onPeriod: exporting.busy ? null : (index) => selectReportPeriod(context, ref, index),
-          message: exporting.message,
-          failed: exporting.failed,
-        ),
-        Expanded(
-          child: snapshot.when(
-            skipLoadingOnReload: false,
-            skipLoadingOnRefresh: false,
-            loading: () => ListView(
-              padding: const EdgeInsets.all(AppSpacing.screenPadding),
-              children: [for (var i = 0; i < 4; i++) const AppSkeleton()],
+    final period = ref.watch(reportPeriodProvider);
+    final labels = [...reportPeriodLabels.take(3), 'Pilih tanggal'];
+    if (custom != null) {
+      labels[3] = Formatters.rentangTanggal(
+        custom.start,
+        custom.end.subtract(const Duration(days: 1)),
+      );
+    }
+    final narrow =
+        MediaQuery.sizeOf(context).width < AppSpacing.touchTarget * 7 ||
+        MediaQuery.textScalerOf(context).scale(1) > 1.2;
+    final onExport = data == null || data.isEmpty || exporting.busy
+        ? null
+        : () => ref.read(reportExportProvider.notifier).export(data, orders: orders);
+    return SubScaffold(
+      title: 'Laporan',
+      backLabel: 'Kembali',
+      subtitle: 'Ringkasan usaha · ${labels[period]}',
+      onBack: () => context.canPop() ? context.pop() : context.go('/lainnya'),
+      appBarVariant: AppBarSubVariant.detail,
+      trailing: narrow
+          ? null
+          : AppButton(
+              'Excel',
+              icon: AppIcons.download,
+              size: AppButtonSize.small,
+              variant: AppButtonVariant.actionOutline,
+              onPressed: onExport,
             ),
-            error: (_, _) => Center(
-              child: EmptyState(
-                title: 'Gagal memuat laporan',
-                icon: AppIcons.alert,
-                description: 'Data periode ini belum dapat dimuat.',
-                actionLabel: 'Coba lagi',
-                onAction: () => ref.invalidate(reportViewProvider),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ReportHeaderSection(
+            labels: labels,
+            selectedIndex: period,
+            onExport: onExport,
+            onPeriod: exporting.busy ? null : (index) => selectReportPeriod(context, ref, index),
+            message: exporting.message,
+            failed: exporting.failed,
+          ),
+          Expanded(
+            child: snapshot.when(
+              skipLoadingOnReload: false,
+              skipLoadingOnRefresh: false,
+              loading: () => ListView(
+                padding: const EdgeInsets.all(AppSpacing.screenPadding),
+                children: [for (var i = 0; i < 4; i++) const AppSkeleton()],
+              ),
+              error: (_, _) => Center(
+                child: EmptyState(
+                  title: 'Gagal memuat laporan',
+                  icon: AppIcons.alert,
+                  description: 'Data periode ini belum dapat dimuat.',
+                  actionLabel: 'Coba lagi',
+                  onAction: () => ref.invalidate(reportViewProvider),
+                ),
+              ),
+              data: (value) => ReportBodySection(
+                data: value,
+                onOutstanding: () => context.push('/laporan/piutang'),
+                orders: orders,
+                orderFilter: ref.watch(reportOrdersFilterProvider),
+                orderSearch: ref.watch(reportOrdersSearchProvider),
+                useOrderStatus: useStatus,
+                onOrderSearch: ref.read(reportOrdersSearchProvider.notifier).set,
+                onOrderFilter: ref.read(reportOrdersFilterProvider.notifier).select,
+                onOpenOrder: (order) => context.push('/order/${order.id}'),
               ),
             ),
-            data: (value) => ReportBodySection(
-              data: value,
-              onOutstanding: () => context.push('/laporan/piutang'),
-              orders: orders,
-              orderFilter: ref.watch(reportOrdersFilterProvider),
-              orderSearch: ref.watch(reportOrdersSearchProvider),
-              useOrderStatus: useStatus,
-              onOrderSearch: ref.read(reportOrdersSearchProvider.notifier).set,
-              onOrderFilter: ref.read(reportOrdersFilterProvider.notifier).select,
-              onOpenOrder: (order) => context.push('/order/${order.id}'),
-            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

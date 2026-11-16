@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
-import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/period_tabs.dart';
 
@@ -10,7 +9,6 @@ class ReportHeaderSection extends StatelessWidget {
   const ReportHeaderSection({
     required this.labels,
     required this.selectedIndex,
-    required this.onBack,
     required this.onExport,
     required this.onPeriod,
     super.key,
@@ -19,7 +17,6 @@ class ReportHeaderSection extends StatelessWidget {
   });
   final List<String> labels;
   final int selectedIndex;
-  final VoidCallback onBack;
   final VoidCallback? onExport;
   final ValueChanged<int>? onPeriod;
   final String? message;
@@ -41,14 +38,6 @@ class ReportHeaderSection extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            AppBarSub(
-              title: 'Laporan',
-              subtitle: 'Ringkasan usaha · ${labels[selectedIndex]}',
-              backLabel: 'Kembali',
-              onBack: onBack,
-              variant: AppBarSubVariant.detail,
-              trailing: narrow ? null : exportButton,
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSpacing.xlarge,

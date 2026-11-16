@@ -4,6 +4,7 @@ import 'package:laurum/core/theme/app_theme.dart';
 import 'package:laurum/features/reports/widgets/report_header_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/molecules/period_tabs.dart';
+import 'package:laurum/shared/widgets/templates/sub_scaffold.dart';
 
 import 'test_fonts.dart';
 
@@ -22,13 +23,17 @@ void main() {
             data: const MediaQueryData(textScaler: TextScaler.linear(2)),
             child: SizedBox(
               width: 280,
-              child: ReportHeaderSection(
-                labels: const ['Hari ini', 'Minggu ini', 'Bulan ini', 'Pilih tanggal'],
-                selectedIndex: 1,
-                message: 'Laporan siap diekspor.',
+              child: SubScaffold(
+                title: 'Laporan',
+                backLabel: 'Kembali',
                 onBack: () => backs++,
-                onExport: () => exports++,
-                onPeriod: (value) => period = value,
+                body: ReportHeaderSection(
+                  labels: const ['Hari ini', 'Minggu ini', 'Bulan ini', 'Pilih tanggal'],
+                  selectedIndex: 1,
+                  message: 'Laporan siap diekspor.',
+                  onExport: () => exports++,
+                  onPeriod: (value) => period = value,
+                ),
               ),
             ),
           ),
