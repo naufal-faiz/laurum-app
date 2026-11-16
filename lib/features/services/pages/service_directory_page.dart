@@ -10,6 +10,7 @@ import 'package:laurum/features/services/widgets/service_directory_content_secti
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/footer_bar.dart';
 import 'package:laurum/shared/widgets/templates/sub_scaffold.dart';
@@ -21,9 +22,14 @@ class ServiceDirectoryPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final directory = ref.watch(serviceDirectoryProvider);
     final query = ref.watch(serviceDirectorySearchProvider);
+    final services = directory.value;
     return SubScaffold(
       title: 'Daftar layanan',
       backLabel: 'Kembali',
+      appBarVariant: AppBarSubVariant.detail,
+      subtitle: services == null
+          ? null
+          : '${services.length} layanan · ${services.where((service) => service.isActive).length} aktif',
       onBack: () => context.canPop() ? context.pop() : context.go('/lainnya'),
       body: Column(
         children: [

@@ -4,6 +4,7 @@ import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_molecule_tokens.dart';
+import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_switch.dart';
@@ -28,57 +29,72 @@ class ServiceRow extends StatelessWidget {
   final VoidCallback? onTap;
   final ValueChanged<bool>? onActiveChanged;
   @override
-  Widget build(BuildContext context) => InkWell(
+  Widget build(BuildContext context) => AppCard(
     onTap: onTap,
-    child: AppCard(
-      child: Row(
-        children: [
-          AppIcon(AppIcons.service, color: isActive ? AppColors.primary : AppColors.ink3),
-          const SizedBox(width: AppMoleculeTokens.gap),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: AppMoleculeTokens.smallGap,
-              children: [
-                Wrap(
-                  spacing: AppMoleculeTokens.gap,
-                  children: [
-                    AppText(name, variant: AppTextVariant.bodyStrong),
-                    AppText(
-                      kind == ServiceKind.kiloan ? 'Kiloan' : 'Satuan',
-                      variant: AppTextVariant.label,
-                      color: AppColors.primary,
-                    ),
-                    if (!isActive)
-                      const AppText(
-                        'Nonaktif',
+    padding: const EdgeInsets.all(AppSpacing.medium),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      spacing: AppMoleculeTokens.smallGap,
+      children: [
+        Row(
+          children: [
+            AppIcon(
+              AppIcons.service,
+              boxed: true,
+              color: isActive ? AppColors.primary : AppColors.ink3,
+            ),
+            const SizedBox(width: AppMoleculeTokens.gap),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: AppMoleculeTokens.smallGap,
+                children: [
+                  AppText(
+                    name,
+                    variant: AppTextVariant.bodyStrong,
+                    color: isActive ? AppColors.ink : AppColors.ink3,
+                  ),
+                  Wrap(
+                    spacing: AppMoleculeTokens.gap,
+                    children: [
+                      AppText(
+                        kind == ServiceKind.kiloan ? 'Kiloan' : 'Satuan',
                         variant: AppTextVariant.caption,
                         color: AppColors.ink3,
                       ),
-                  ],
-                ),
-                Wrap(
-                  spacing: AppMoleculeTokens.gap,
-                  children: [
-                    AppText(
-                      '${Formatters.rupiah(price)} / ${kind == ServiceKind.kiloan ? 'kg' : 'pcs'}',
-                      variant: AppTextVariant.bodyStrong,
-                      color: AppColors.primary,
-                    ),
-                    AppText(
-                      '$durationDays hari',
-                      variant: AppTextVariant.caption,
-                      color: AppColors.ink3,
-                    ),
-                  ],
-                ),
-              ],
+                      if (!isActive) ...[
+                        const AppText('·', variant: AppTextVariant.caption, color: AppColors.ink3),
+                        const AppText(
+                          'Nonaktif',
+                          variant: AppTextVariant.caption,
+                          color: AppColors.ink3,
+                        ),
+                      ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          if (showSwitch)
-            AppSwitch(value: isActive, label: 'Aktifkan $name', onChanged: onActiveChanged),
-        ],
-      ),
+            if (showSwitch)
+              AppSwitch(value: isActive, label: 'Aktifkan $name', onChanged: onActiveChanged),
+          ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              child: AppText(
+                '${Formatters.rupiah(price)} / ${kind == ServiceKind.kiloan ? 'kg' : 'pcs'}',
+                variant: AppTextVariant.bodyStrong,
+                color: isActive ? AppColors.primary : AppColors.ink3,
+              ),
+            ),
+            const SizedBox(width: AppMoleculeTokens.gap),
+            AppText('$durationDays hari', variant: AppTextVariant.caption, color: AppColors.ink3),
+          ],
+        ),
+      ],
     ),
   );
 }
