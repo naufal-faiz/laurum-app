@@ -6,6 +6,7 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/customers/state/customer_savings_data.dart';
 import 'package:laurum/features/customers/widgets/customer_savings_header_section.dart';
 import 'package:laurum/features/customers/widgets/customer_savings_list_section.dart';
+import 'package:laurum/features/sync/state/data_refresh_actions.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/templates/sub_scaffold.dart';
@@ -18,10 +19,17 @@ class CustomerSavingsHistoryPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final savings = ref.watch(customerSavingsProvider(customerId));
     return SubScaffold(
+      onRefresh: () => ref
+          .read(dataRefreshActionsProvider.notifier)
+          .refresh(
+            extra: [customerSavingsProvider(customerId).future],
+          ),
+      refreshScrollable: savings.value != null || savings.isLoading,
       title: 'Riwayat tabungan',
       backLabel: 'Kembali',
       onBack: () => context.canPop() ? context.pop() : context.go('/pelanggan'),
       body: savings.when(
+        skipLoadingOnReload: true,
         loading: () => ListView(
           padding: const EdgeInsets.all(AppSpacing.screenPadding),
           children: [for (var i = 0; i < 3; i++) const AppSkeleton(height: 120)],

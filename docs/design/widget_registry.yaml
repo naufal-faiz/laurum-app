@@ -59,6 +59,7 @@ molecules:
   - NavItem
   - CreateAction
 organisms:
+  - AppDataRefresh
   - AppRangeCalendar
   - AppPageHeader
   - CustomerContactCard

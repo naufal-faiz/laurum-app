@@ -7,6 +7,7 @@ import 'package:laurum/features/expenses/state/expense_directory.dart';
 import 'package:laurum/features/expenses/state/expense_form_controller.dart';
 import 'package:laurum/features/expenses/widgets/expense_list_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/sync/state/data_refresh_actions.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -22,6 +23,8 @@ class ExpenseDirectoryPage extends ConsumerWidget {
     final syncState = SyncState.values.byName(ref.watch(shellSyncStatusProvider).name);
     final count = data.value?.expenses.length;
     return SubScaffold(
+      onRefresh: ref.read(dataRefreshActionsProvider.notifier).refresh,
+      refreshScrollable: data.value != null,
       title: 'Pengeluaran',
       backLabel: 'Kembali',
       subtitle: count == null ? 'Ringkasan bulan ini' : '$count transaksi bulan ini',
@@ -34,6 +37,7 @@ class ExpenseDirectoryPage extends ConsumerWidget {
         context.push('/lainnya/pengeluaran/baru');
       },
       body: data.when(
+        skipLoadingOnReload: true,
         loading: () => const Center(child: AppText('Memuat pengeluaran...')),
         error: (_, _) => Center(
           child: EmptyState(

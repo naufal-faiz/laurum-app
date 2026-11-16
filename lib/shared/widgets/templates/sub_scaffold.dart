@@ -7,6 +7,7 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
+import 'package:laurum/shared/widgets/organisms/app_data_refresh.dart';
 
 class SubScaffold extends StatelessWidget {
   const SubScaffold({
@@ -19,6 +20,8 @@ class SubScaffold extends StatelessWidget {
     this.fabLabel,
     this.onFab,
     this.subtitle,
+    this.onRefresh,
+    this.refreshScrollable = true,
     this.appBarVariant = AppBarSubVariant.standard,
   }) : assert((fabLabel == null) == (onFab == null));
 
@@ -29,6 +32,8 @@ class SubScaffold extends StatelessWidget {
   final Widget? trailing;
   final String? subtitle;
   final AppBarSubVariant appBarVariant;
+  final Future<void> Function()? onRefresh;
+  final bool refreshScrollable;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +46,16 @@ class SubScaffold extends StatelessWidget {
       subtitle: subtitle,
       variant: appBarVariant,
     );
-    final content = SafeArea(top: false, child: body);
+    final content = SafeArea(
+      top: false,
+      child: onRefresh == null
+          ? body
+          : AppDataRefresh(
+              onRefresh: onRefresh!,
+              hasScrollableChild: refreshScrollable,
+              child: body,
+            ),
+    );
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: detail

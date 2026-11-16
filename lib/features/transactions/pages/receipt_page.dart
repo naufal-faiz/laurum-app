@@ -9,6 +9,7 @@ import 'package:laurum/features/orders/pages/payment_record_flow.dart';
 import 'package:laurum/features/orders/state/order_completion_controller.dart';
 import 'package:laurum/features/printer/state/printer_connection.dart';
 import 'package:laurum/features/printer/state/printer_reconnect.dart';
+import 'package:laurum/features/sync/state/data_refresh_actions.dart';
 import 'package:laurum/features/transactions/state/receipt_download.dart';
 import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
 import 'package:laurum/features/transactions/state/receipt_view.dart';
@@ -41,6 +42,11 @@ class ReceiptPage extends ConsumerWidget {
     final printer = ref.watch(printServiceProvider);
     final controller = ref.read(receiptPrintProvider.notifier);
     return FormScaffold(
+      onRefresh: () => ref
+          .read(dataRefreshActionsProvider.notifier)
+          .refresh(
+            extra: [receiptViewProvider(orderId).future],
+          ),
       title: 'Struk Pembayaran',
       backLabel: 'Kembali',
       appBarVariant: AppBarSubVariant.detail,

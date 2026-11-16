@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/reports/pages/report_range_flow.dart';
@@ -15,6 +14,7 @@ import 'package:laurum/features/reports/widgets/report_body_section.dart';
 import 'package:laurum/features/reports/widgets/report_header_section.dart';
 import 'package:laurum/features/reports/widgets/report_sync_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/sync/state/data_refresh_actions.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
@@ -26,26 +26,23 @@ class ReportPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final snapshot = ref.watch(reportViewProvider);
-    final data = snapshot.asData?.value;
-    final orders = ref.watch(reportOrdersProvider).asData?.value;
+    final data = snapshot.value;
+    final orders = ref.watch(reportOrdersProvider).value;
     final exporting = ref.watch(reportExportProvider);
     final custom = ref.watch(reportCustomRangeProvider);
     final useStatus = ref.watch(businessProfileProvider).value?.useOrderStatus ?? true;
     final period = ref.watch(reportPeriodProvider);
-    final labels = [...reportPeriodLabels.take(3), 'Pilih tanggal'];
-    if (custom != null) {
-      labels[3] = Formatters.rentangTanggal(
-        custom.start,
-        custom.end.subtract(const Duration(days: 1)),
-      );
-    }
+    final labels = reportPeriodTabs(custom);
     final narrow =
         MediaQuery.sizeOf(context).width < AppSpacing.touchTarget * 7 ||
         MediaQuery.textScalerOf(context).scale(1) > 1.2;
-    final onExport = data == null || data.isEmpty || exporting.busy
+    final onExport =
+        data == null || data.isEmpty || exporting.busy || snapshot.isLoading || snapshot.hasError
         ? null
         : () => ref.read(reportExportProvider.notifier).export(data, orders: orders);
     return SubScaffold(
+      onRefresh: ref.read(dataRefreshActionsProvider.notifier).refresh,
+      refreshScrollable: !snapshot.hasError || data != null,
       title: 'Laporan',
       backLabel: 'Kembali',
       subtitle: 'Ringkasan usaha · ${labels[period]}',
@@ -74,8 +71,8 @@ class ReportPage extends ConsumerWidget {
           ),
           Expanded(
             child: snapshot.when(
-              skipLoadingOnReload: false,
-              skipLoadingOnRefresh: false,
+              skipLoadingOnReload: data?.period == period && (period != 3 || data?.range == custom),
+              skipLoadingOnRefresh: true,
               loading: () => ListView(
                 padding: const EdgeInsets.all(AppSpacing.screenPadding),
                 children: [for (var i = 0; i < 4; i++) const AppSkeleton()],

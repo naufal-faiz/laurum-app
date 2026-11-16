@@ -3,7 +3,7 @@
 Dibuat otomatis oleh `dart run tool/repo_map.dart`. Jangan diedit manual.
 Baca berkas ini sebagai pengganti memindai folder.
 
-## Registry widget: 88/88 dibuat
+## Registry widget: 89/89 dibuat
 
 Semua widget sudah dibuat.
 
@@ -135,6 +135,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_failure.dart (8): AuthFailureKind, AuthFailure
 - auth_service.dart (32): AuthService
 - contact_source.dart (31): ContactItem, ContactSource, ContactPermissionDenied, FakeContactSource
+- data_refresh_failure.dart (8): DataRefreshFailure
 - device_contact_source.dart (55): DeviceContactSource
 - device_external_launcher.dart (83): DeviceExternalLauncher
 - dummy_history.dart (13): DummyHistory, dummyHistoryEnabledProvider, dummyHistoryProvider
@@ -334,11 +335,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/customers/pages/
 - customer_deposit_page.dart (71): CustomerDepositPage
-- customer_detail_page.dart (83): CustomerDetailPage
+- customer_detail_page.dart (91): CustomerDetailPage
 - customer_directory_page.dart (71): CustomerDirectoryPage
 - customer_edit_sheet.dart (68): CustomerEditSheet
 - customer_import_page.dart (68): CustomerImportPage
-- customer_savings_history_page.dart (63): CustomerSavingsHistoryPage
+- customer_savings_history_page.dart (71): CustomerSavingsHistoryPage
 
 ### lib/features/customers/state/
 - customer_deposit_controller.dart (80): CustomerDepositController, customerDepositProvider
@@ -389,7 +390,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - expense_category_sheet.dart (46): ExpenseCategorySheet
 - expense_date_flow.dart (20):
 - expense_detail_sheet.dart (71): ExpenseDetailSheet
-- expense_directory_page.dart (56): ExpenseDirectoryPage
+- expense_directory_page.dart (60): ExpenseDirectoryPage
 - expense_form_page.dart (100): ExpenseFormPage
 
 ### lib/features/expenses/state/
@@ -444,7 +445,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_cancel_flow.dart (24):
 - order_completion_flow.dart (19):
 - order_detail_menu_flow.dart (22):
-- order_detail_page.dart (100): OrderDetailPage
+- order_detail_page.dart (107): OrderDetailPage
 - order_edit_page.dart (84): OrderEditPage
 - order_menu_sheet.dart (60): OrderMenuAction, OrderMenuSheet
 - order_status_sheet.dart (67): OrderStatusSheet
@@ -576,8 +577,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_samples.dart (31):
 
 ### lib/features/reports/pages/
-- outstanding_page.dart (73): OutstandingPage
-- report_page.dart (109): ReportPage
+- outstanding_page.dart (80): OutstandingPage
+- report_page.dart (106): ReportPage
 - report_range_flow.dart (39):
 - report_range_sheet.dart (96): ReportRangeSheet
 
@@ -588,7 +589,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_export.dart (97): ReportExportState, ReportExport, reportExportProvider
 - report_orders_controller.dart (24): ReportOrdersFilter, ReportOrdersSearch, reportOrdersFilterProvider, reportOrdersSearchProvider
 - report_orders_data.dart (68): ReportOrdersData, reportOrdersProvider
-- report_period.dart (30): ReportPeriod, reportPeriodProvider
+- report_period.dart (39): ReportPeriod, reportPeriodProvider
 - report_range_controller.dart (48): ReportRangeController, reportRangeDraftProvider
 - report_range_draft.dart (20): ReportRangeDraft
 - report_view.dart (81): ReportView, reportViewProvider, weeklyReportViewProvider
@@ -608,7 +609,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_storage_mapping.dart (58):
 
 ### lib/features/services/pages/
-- service_directory_page.dart (77): ServiceDirectoryPage
+- service_directory_page.dart (81): ServiceDirectoryPage
 - service_edit_page.dart (74): ServiceEditPage
 
 ### lib/features/services/state/
@@ -645,7 +646,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (7):
-- root_shell_page.dart (106): RootShellPage
+- root_shell_page.dart (107): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (27): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, shellSyncStatusProvider, whatsappConnectionProvider
@@ -657,6 +658,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sync_page.dart (33): SyncPage
 
 ### lib/features/sync/state/
+- data_refresh_actions.dart (61): DataRefreshActions, dataRefreshActionsProvider
+- data_refresh_queries.dart (29): DataRefreshQuery, dataRefreshQueriesProvider
 - sync_view.dart (45): SyncView, SyncActions, syncViewProvider, syncActionsProvider
 
 ### lib/features/sync/widgets/
@@ -670,7 +673,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - discount_sheet.dart (74): DiscountSheet
 - payment_flow.dart (19):
 - payment_page.dart (100): PaymentPage
-- receipt_page.dart (104): ReceiptPage
+- receipt_page.dart (110): ReceiptPage
 - service_picker_page.dart (54): ServicePickerPage
 - transaction_leave_flow.dart (22):
 - transaction_line_sheet.dart (76): TransactionLineSheet
@@ -784,6 +787,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/organisms/
 - app_bottom_sheet.dart (95): AppBottomSheet
+- app_data_refresh.dart (59): AppDataRefresh
 - app_page_header.dart (82): AppPageHeader
 - app_range_calendar.dart (110): AppRangeCalendar
 - auth_card.dart (21): AuthCard
@@ -810,11 +814,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/shared/widgets/templates/
 - auth_scaffold.dart (42): AuthScaffold
-- form_scaffold.dart (64): FormScaffold
+- form_scaffold.dart (70): FormScaffold
 - modal_scaffold.dart (80): ModalScaffold
-- root_scaffold.dart (90): RootScaffold
+- root_scaffold.dart (103): RootScaffold
 - sheet_scaffold.dart (40): SheetScaffold
-- sub_scaffold.dart (82): SubScaffold
+- sub_scaffold.dart (96): SubScaffold
 
 ### test/
 - account_actions_test.dart (60):
@@ -842,6 +846,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_button_test.dart (119):
 - app_card_test.dart (96):
 - app_chip_test.dart (41):
+- app_data_refresh_test.dart (85):
 - app_divider_test.dart (41):
 - app_gap_test.dart (33):
 - app_icon_button_test.dart (120):
@@ -948,6 +953,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - customer_profile_section_test.dart (34):
 - customer_row_test.dart (72):
 - customer_savings_section_test.dart (48):
+- data_refresh_pages_test.dart (68):
 - date_group_header_test.dart (24):
 - detail_form_scaffold_test.dart (93):
 - detail_molecules_golden_test.dart (49):
@@ -1280,10 +1286,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### test/sync/
 - account_initial_fetch_test.dart (55): RestoringCycle
 - canonical_json_test.dart (35):
+- data_refresh_actions_test.dart (107):
+- data_refresh_two_devices_test.dart (89):
 - fake_sync_transport.dart (62): FakeSyncTransport
+- held_refresh_sync.dart (17): HeldRefreshSync
 - in_memory_outbox_store_test.dart (13):
 - local_account_devices.dart (62): LocalAccountDevices
 - multidevice_supabase_local_test.dart (110):
+- refresh_memory_server.dart (47): RefreshMemoryServer
 - supabase_sync_local_test.dart (281):
 - sync_bindings_test.dart (59): _FakeMonitor
 - sync_coordinator_test.dart (82): _RecordingPullTransport, _MemoryCursors, _NoopApplier

@@ -1,7 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:laurum/core/domain/report_range.dart';
+import 'package:laurum/core/formatters/formatters.dart';
 
 const reportPeriodLabels = ['Hari ini', 'Minggu ini', 'Bulan ini', 'Pilih tanggal'];
+
+List<String> reportPeriodTabs(ReportRange? custom) => [
+  ...reportPeriodLabels.take(3),
+  if (custom == null)
+    'Pilih tanggal'
+  else
+    Formatters.rentangTanggal(custom.start, custom.end.subtract(const Duration(days: 1))),
+];
 
 class ReportPeriod extends Notifier<int> {
   @override

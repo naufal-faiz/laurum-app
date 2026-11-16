@@ -16,6 +16,7 @@ import 'package:laurum/features/orders/state/order_detail_data.dart';
 import 'package:laurum/features/orders/widgets/order_detail_content_section.dart';
 import 'package:laurum/features/orders/widgets/order_detail_footer_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/sync/state/data_refresh_actions.dart';
 import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
@@ -37,8 +38,14 @@ class OrderDetailPage extends ConsumerWidget {
         actions.pending.contains(orderId) ||
         completion.busy ||
         printing.printing ||
-        profile == null;
+        profile == null ||
+        snapshot.isLoading;
     return FormScaffold(
+      onRefresh: () => ref
+          .read(dataRefreshActionsProvider.notifier)
+          .refresh(
+            extra: [orderDetailProvider(orderId).future],
+          ),
       title: 'Detail order',
       subtitle: data == null
           ? null

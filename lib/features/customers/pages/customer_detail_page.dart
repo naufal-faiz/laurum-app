@@ -10,6 +10,7 @@ import 'package:laurum/features/customers/state/customer_order_expansion.dart';
 import 'package:laurum/features/customers/widgets/customer_orders_section.dart';
 import 'package:laurum/features/customers/widgets/customer_profile_section.dart';
 import 'package:laurum/features/customers/widgets/customer_savings_section.dart';
+import 'package:laurum/features/sync/state/data_refresh_actions.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
@@ -23,12 +24,19 @@ class CustomerDetailPage extends ConsumerWidget {
     final snapshot = ref.watch(customerDetailProvider(customerId));
     final summary = snapshot.value?.summary;
     return SubScaffold(
+      onRefresh: () => ref
+          .read(dataRefreshActionsProvider.notifier)
+          .refresh(
+            extra: [customerDetailProvider(customerId).future],
+          ),
+      refreshScrollable: snapshot.value != null || snapshot.isLoading,
       title: 'Detail pelanggan',
       subtitle: summary == null ? null : '${summary.customer.name} · ${summary.orderCount} order',
       appBarVariant: AppBarSubVariant.detail,
       backLabel: 'Kembali',
       onBack: () => context.canPop() ? context.pop() : context.go('/pelanggan'),
       body: snapshot.when(
+        skipLoadingOnReload: true,
         loading: () => ListView(
           padding: const EdgeInsets.all(AppSpacing.screenPadding),
           children: [for (var i = 0; i < 4; i++) const AppSkeleton()],
