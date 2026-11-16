@@ -37,6 +37,7 @@ molecules:
   - StepperField
   - NominalChips
   - PeriodTabs
+  - SegmentedControl
   - ProgressRow
   - ChipBar
   - AppBarRoot

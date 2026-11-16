@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:laurum/core/icons/app_icons.dart';
+import 'package:laurum/core/services/print_service.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/printer/data/receipt_demo.dart';
 import 'package:laurum/features/printer/pages/printer_device_sheet.dart';
@@ -9,10 +10,12 @@ import 'package:laurum/features/printer/state/printer_connection.dart';
 import 'package:laurum/features/printer/state/printer_restore.dart';
 import 'package:laurum/features/printer/state/printer_settings.dart';
 import 'package:laurum/features/printer/widgets/printer_connection_section.dart';
+import 'package:laurum/features/printer/widgets/printer_footer_section.dart';
 import 'package:laurum/features/printer/widgets/printer_preview_section.dart';
 import 'package:laurum/features/printer/widgets/printer_settings_section.dart';
-import 'package:laurum/shared/widgets/atoms/app_button.dart';
+import 'package:laurum/shared/widgets/atoms/app_badge.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 
@@ -27,22 +30,24 @@ class PrinterPage extends ConsumerWidget {
     ref.watch(printerRestoreProvider);
     return FormScaffold(
       title: 'Printer dan struk',
+      subtitle: 'Koneksi & format nota kasir',
       backLabel: 'Kembali',
+      appBarVariant: AppBarSubVariant.detail,
       onBack: () => context.pop(),
-      footer: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        spacing: AppSpacing.cardGap,
-        children: [
-          AppButton(
-            'Simpan pengaturan',
-            onPressed: () => ref.read(printerSettingsProvider.notifier).save(),
-          ),
-          AppButton(
-            'Cetak uji',
-            variant: AppButtonVariant.secondary,
-            onPressed: connection.busy ? null : () => _testPrint(ref),
-          ),
-        ],
+      trailing: AppBadge(
+        connection.status == PrintStatus.bluetoothOff
+            ? 'Bluetooth mati'
+            : connection.connected != null
+            ? 'Terhubung'
+            : 'BT aktif',
+        variant: connection.status == PrintStatus.bluetoothOff
+            ? AppBadgeVariant.dibatalkan
+            : AppBadgeVariant.siap,
+      ),
+      footer: PrinterFooterSection(
+        busy: connection.busy,
+        onSave: controller.save,
+        onTestPrint: () => _testPrint(ref),
       ),
       body: settings.when(
         skipLoadingOnReload: true,
@@ -60,7 +65,7 @@ class PrinterPage extends ConsumerWidget {
         ),
         data: (printer) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: AppSpacing.screenPadding,
+          spacing: AppSpacing.cardGap,
           children: [
             PrinterConnectionSection(
               printer: connection,
@@ -84,7 +89,10 @@ class PrinterPage extends ConsumerWidget {
     await ref
         .read(printerConnectionProvider.notifier)
         .testPrint(
-          demoReceiptLines(business: printer.profile, settings: printer.settings),
+          demoReceiptLines(
+            business: printer.profile,
+            settings: printer.settings,
+          ),
           paperMm: printer.settings.paperMm,
           fontSize: printer.settings.fontSize,
         );

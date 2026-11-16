@@ -3,12 +3,13 @@ Rute: /lainnya/printer   Fase: 4   Frame .pen: "Lainnya - Printer dan Struk"
 Template: FormScaffold (AppBarSub + body gulir + FooterBar sticky)
 
 Komposisi:
-- AppBarSub(title: 'Printer dan struk', backLabel: 'Kembali').
+- AppBarSub varian detail: back bulat, judul 'Printer dan struk', subjudul
+  'Koneksi & format nota kasir', badge status di kanan.
 - PrinterConnectionSection: BannerMessage warning 'Printer belum terhubung.' + AppButton
   'Cari printer'; atau AppCard berisi nama printer + 'Terhubung dan siap mencetak' + Ganti.
-- PrinterSettingsSection: AppChip '58 mm'/'80 mm' (mengetuk '80 mm' hanya
+- PrinterSettingsSection: SegmentedControl '58 mm'/'80 mm' (mengetuk '80 mm' hanya
   menampilkan BannerMessage 'Printer 80 mm masih coming soon...' dan ukuran tetap
-  58 mm), AppChip 'Normal'/'Besar',
+  58 mm), SegmentedControl 'Normal'/'Besar',
   ReceiptToggleList (alamat, pelanggan, tabungan, catatan; dua baris terkunci),
   LabeledField + AppTextField 'Teks penutup struk' dan 'Catatan khusus nota'.
 - PrinterPreviewSection: ReceiptPreview (lebar 320 untuk 58 mm, 384 untuk 80 mm) memakai
@@ -62,6 +63,68 @@ iOS: printer thermal banyak memakai Bluetooth Classic (SPP) yang tidak tersedia 
 aksesori non-MFi; adapter hanya memakai BLE (`flutter_blue_plus`) sehingga Classic
 tidak didukung. Fitur ini **belum diuji di iOS**.
 
+
+## Redesign 14 Nov 2026 (frame LAURUM · Printer & Struk)
+
+Frame: `LAURUM · Printer & Struk` (4294969167), `LAURUM · Cari Printer Bluetooth`
+(4294969275), `LAURUM · Printer & Struk — Terhubung` (4294969351). Tampilan saja.
+
+### Paritas redesign
+
+| Butir | Sumber lama | Ada di UI baru |
+|---|---|---|
+| Data printerSettingsProvider (settings, profile, notice) | Page | ya |
+| Data printerConnectionProvider (status, connected, busy, notice) | Page | ya |
+| printerRestoreProvider saat halaman dibuka | Page | ya |
+| demoReceiptLines + ReceiptPreview | Preview | ya |
+| Memuat skeleton / gagal + Coba lagi | Page | ya |
+| Belum terhubung (kartu status) | Banner + tombol | ya (status di kartu) |
+| Terhubung + nama printer + id perangkat | Kartu | ya |
+| Busy koneksi ("Memproses koneksi printer...") | Kartu | ya |
+| Bluetooth mati (banner warning) | Banner | ya |
+| Tombol Cari printer / Ganti | Section | ya |
+| Chip 58/80 mm + notice coming soon | Settings | ya |
+| Chip Normal/Besar | Settings | ya |
+| Toggle alamat, pelanggan, tabungan, catatan | ReceiptToggleList | ya |
+| Info "nomor nota & rincian selalu tampil" | 2 LockedRow | ya (keterangan bawah judul kartu) |
+| Field teks penutup + catatan khusus | Settings | ya |
+| Pratinjau struk + lebar 320/384 + catatan belum diuji | Preview | ya |
+| Simpan pengaturan | Footer | ya |
+| Cetak uji + banner sukses/gagal | Footer | ya |
+| Sheet: printer tersimpan, hasil pindai, dedup, busy | DeviceSheet | ya |
+| Sheet: Bluetooth mati tanpa modal aktivasi | DeviceSheet | ya |
+| Sheet: Cari lagi | DeviceSheet | ya |
+| Key/golden host (`antrean-golden`) | tes | ya |
+
+### Selisih desain
+
+- Tombol header "Putus" tidak dibuat: state tidak punya aksi putuskan; aksi yang ada
+  (Ganti) dipertahankan (UI-9/UI-10).
+- Banner "Cetak otomatis aktif setelah pembayaran" tidak dirender: cetak otomatis
+  belum ada di PRD/state (UI-9).
+- Indikator baterai/sinyal tidak ditampilkan: PrinterDevice hanya punya id dan nama.
+- Badge hijau "Terhubung" memakai AppBadge varian `siap` (biru); varian sukses belum
+  ada di registry (tanpa token/varian baru).
+- Kartu terhubung memakai AppCardStyle.success (#E9F5EE, tanpa garis hijau); Figma
+  #F0FDF4 bergaris #86EFAC.
+- Kontrol 58/80 dan Normal/Besar memakai SegmentedControl (molekul baru, proposal 032)
+  mengikuti track+pil Figma; ukuran teks segmen memakai token label 13 (Figma 10),
+  lebar track mengikuti sisa baris kartu (Figma 198). Label tetap "58 mm", "80 mm",
+  "Normal", "Besar" agar perilaku/tes tidak berubah.
+- Subjudul header memakai teks ringkas 'Koneksi & format nota kasir' agar muat satu
+  baris dengan badge di header detail bersama.
+- Device list memakai MenuRow di dalam AppCard (bukan kartu + tombol per baris), tanpa
+  badge "Memindai..." karena loader + teks busy sudah ada.
+- Label Figma Title Case tidak diadopsi; teks pesan mengikuti spec.
+
+### Tes yang disesuaikan (finder/visual)
+
+- `printer_page_test.dart`: finder status awal `Printer belum terhubung.` menjadi
+  `Belum terhubung`; finder judul pratinjau menjadi teks judul baru. Assertion perilaku
+  lain tidak berubah. Golden `printer_page.png` diperbarui.
+- `printer_sections_feedback_test.dart`: finder ketuk `AppChip` 'Besar'/'80 mm' menjadi
+  `find.text(...)` karena kontrol kini SegmentedControl; assertion (font 13, notice
+  coming soon) tidak berubah.
 
 ## Audit penyelesaian UI - prompt 100
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
