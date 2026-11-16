@@ -1,42 +1,47 @@
 # STATE Laurum
-Diperbarui: 2026-11-16 | Cabang review/android-ui-20261116
+Diperbarui: 2026-11-16 | Cabang newdesign (hasil juga di review/android-ui-20261116)
 
 ## Sesi aktif
-Integrasi Android: layanan d46e62e/c00909d dan printer 13a1741/2918491.
-Dasar bersama 7e85870; pengguna meminta merge layanan ke newdesign pada 16 Nov.
+Penyatuan tampilan Tambah/Edit layanan; dasar1417f57.
+Referensi snapshot frame4294968237 dan komposisi Tambah yang sudah disetujui.
+Pengguna meminta Edit memakai ulang form Tambah, tanpa duplikasi kode.
 
 ## Status irisan
-- Tambah layanan dan revisi daftar layanan tergabung dengan printer/struk.
-- Konflik hanya catatan STATE, digabung dengan mempertahankan kedua pekerjaan.
-- Regresi printer terkonfirmasi: overflow 111 px pada 320 dp/font 2x, diperbaiki.
-- Kontrol kini minimum 44 dp dan bertumbuh sesuai teks; format tersusun adaptif.
-- Golden printer diperbarui dan ditinjau; belum diverifikasi manual di Android/iOS.
+- ServiceFormSection dan ServiceFormFooterSection dipakai kedua mode.
+- ServiceEditFieldsSection lama dihapus; Page tidak memiliki dua cabang layout.
+- Nilai awal original/name/kind/priceText/duration/isActive dari controller lama.
+- Catatan harga nota lama tetap; tombol Simpan perubahan dan busy tetap.
+- Header detail, preview, input, durasi/status dan footer sama dengan Tambah.
+- Tidak ada perubahan state/data/rute/token/registry/dependensi.
+- Dua tes edit lulus: nilai awal, reuse, selectAll, font1x/2x dan keyboard300dp.
+- Golden Edit1x/2x baru ditinjau; check_all SEMUA HIJAU:1317 lulus/2skip.
+- Visual belum diverifikasi manual di HP; iOS belum diuji.
 
 ## Keputusan pengguna terbaru
-- Pengguna meminta analisis commit printer dan satu branch untuk tinjauan Android.
-- Merge seluruh branch review ke newdesign disetujui pengguna 16 Nov 2026.
-- Jangan push; merge backend-newdesign tetap perlu izin tersendiri.
+- Reuse implementasi Tambah untuk Edit; tidak menulis ulang field/form.
+- Penyatuan branch ke newdesign diizinkan pengguna pada16Nov2026.
+- Merge backend-newdesign perlu izin tersendiri; jangan push.
 - Jangan uninstall atau menghapus DB/outbox perangkat.
 - Draf FigCraft lokal tidak masuk commit.
 
 ## Belum di-commit
-Draf FigCraft, figma_map dan spec20 dipulihkan; tidak masuk commit integrasi.
-Stash ddd0c6a tetap sebagai salinan pengaman draf lokal.
-android/build/ tetap artefak lokal, tidak disertakan Git.
+Kode/tes/golden/spec21/STATE/REPO_MAP dicakup commit irisan reusable.
+Draf lokal FigCraft, figma_map dan spec20 dipertahankan di luar commit.
+android/build/ artefak lokal tidak dilacak.
 
 ## Langkah berikutnya
-1. Tinjau newdesign atau branch review di Android; kedua branch memuat revisi layanan.
-2. Uji cetak Bluetooth sungguhan; iOS belum diuji.
+1. Pengguna meninjau Edit dari newdesign dengan data lokal dan font besar.
+2. iOS dan visual manual di HP belum diuji; tidak ada push.
 
 ## Blocker
 Tidak ada.
 
 ## Bukti terakhir
-- Verifikasi ulang sebelum merge newdesign: directory 4 + ServiceRow 2 = 6 lulus.
-- Sebelum integrasi: check_arch OK.
-- Tambah layanan: check_all 1314 lulus/2 skip pada commit d46e62e.
-- Printer integrasi: 7 tes terarah lulus, termasuk regresi font2x dan callback.
-- dart run tool/check_all.dart: SEMUA HIJAU; 1315 lulus/2 skip, exit 0.
-- Format1159 tanpa perubahan; flutter analyze/dart analyze bersih; check_arch OK.
-- REPO_MAP1237 berkas; skip2 perlu Supabase lokal; semua golden lulus.
-- newdesign dan ui/pelanggan keduanya ancestor HEAD; state/data/rute/deps tidak berubah.
+- flutter test test/service_edit_reusable_test.dart --update-goldens:2 lulus.
+- Verifikasi lengkap dasar1417f57:1315 lulus/2skip, check_all SEMUA HIJAU.
+- Tes lama form/footer hanya menyesuaikan import/nama; assertion tetap.
+- Worktree agen lain kini ui/pengeluaran; branch itu tidak diubah/digabung irisan ini.
+
+- dart run tool/check_all.dart:1317 lulus/2skip, SEMUA HIJAU, exit0; REPO_MAP1237.
+- Format1159 tanpa perubahan; analyzer/lint/check_arch bersih; seluruh golden lulus.
+- Satu timeout database pada percobaan awal:tes terpisah3 lulus dan suite ulang lulus.

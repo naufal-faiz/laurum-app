@@ -9,8 +9,8 @@ import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_text.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 
-class ServiceCreateFormSection extends StatelessWidget {
-  const ServiceCreateFormSection({
+class ServiceFormSection extends StatelessWidget {
+  const ServiceFormSection({
     required this.state,
     required this.onName,
     required this.onKind,
@@ -30,6 +30,11 @@ class ServiceCreateFormSection extends StatelessWidget {
     spacing: AppSpacing.mediumLarge,
     children: [
       ServicePreviewSection(state: state),
+      if (state.isEdit)
+        const AppText(
+          'Perubahan harga tidak memengaruhi nota yang sudah tercetak.',
+          variant: AppTextVariant.caption,
+        ),
       const AppText('Informasi layanan', variant: AppTextVariant.label, color: AppColors.ink3),
       AppCard(
         padding: const EdgeInsets.all(AppSpacing.mediumLarge),

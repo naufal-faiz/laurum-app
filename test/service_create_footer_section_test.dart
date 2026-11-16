@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:laurum/features/services/widgets/service_create_footer_section.dart';
+import 'package:laurum/features/services/widgets/service_form_footer_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 
 import 'service_create_test_host.dart';
@@ -10,7 +10,7 @@ void main() {
   testWidgets('footer preserves save then cancel focus despite visual order', (tester) async {
     await pumpServiceSection(
       tester,
-      ServiceCreateFooterSection(busy: false, onSave: () {}, onCancel: () {}),
+      ServiceFormFooterSection(busy: false, onSave: () {}, onCancel: () {}),
     );
     await tester.sendKeyEvent(LogicalKeyboardKey.tab);
     await tester.pump();
@@ -19,13 +19,13 @@ void main() {
     await tester.pump();
     expect(Focus.of(tester.element(find.text('Batal'))).hasPrimaryFocus, isTrue);
   });
-  testWidgets('ServiceCreateFooterSection maps actions, aligns and disables while busy', (
+  testWidgets('ServiceFormFooterSection maps actions, aligns and disables while busy', (
     tester,
   ) async {
     var saves = 0, cancels = 0;
     await pumpServiceSection(
       tester,
-      ServiceCreateFooterSection(busy: false, onSave: () => saves++, onCancel: () => cancels++),
+      ServiceFormFooterSection(busy: false, onSave: () => saves++, onCancel: () => cancels++),
     );
     final save = find.widgetWithText(AppButton, 'Simpan layanan');
     final cancel = find.widgetWithText(AppButton, 'Batal');
@@ -38,7 +38,7 @@ void main() {
       tester,
       MediaQuery(
         data: const MediaQueryData(textScaler: TextScaler.linear(2)),
-        child: ServiceCreateFooterSection(
+        child: ServiceFormFooterSection(
           busy: true,
           onSave: () => saves++,
           onCancel: () => cancels++,

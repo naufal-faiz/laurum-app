@@ -3,14 +3,15 @@ import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 
-class ServiceCreateFooterSection extends StatelessWidget {
-  const ServiceCreateFooterSection({
+class ServiceFormFooterSection extends StatelessWidget {
+  const ServiceFormFooterSection({
     required this.busy,
     required this.onSave,
     required this.onCancel,
     super.key,
+    this.isEdit = false,
   });
-  final bool busy;
+  final bool busy, isEdit;
   final VoidCallback onSave, onCancel;
 
   @override
@@ -27,7 +28,7 @@ class ServiceCreateFooterSection extends StatelessWidget {
     final save = FocusTraversalOrder(
       order: const NumericFocusOrder(0),
       child: AppButton(
-        'Simpan layanan',
+        isEdit ? 'Simpan perubahan' : 'Simpan layanan',
         icon: AppIcons.check,
         size: AppButtonSize.large,
         onPressed: busy ? null : onSave,

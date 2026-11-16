@@ -602,7 +602,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/services/pages/
 - service_directory_page.dart (77): ServiceDirectoryPage
-- service_edit_page.dart (103): ServiceEditPage
+- service_edit_page.dart (74): ServiceEditPage
 
 ### lib/features/services/state/
 - service_copy.dart (25):
@@ -612,12 +612,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_edit_state.dart (55): ServiceEditState
 
 ### lib/features/services/widgets/
-- service_create_footer_section.dart (61): ServiceCreateFooterSection
-- service_create_form_section.dart (53): ServiceCreateFormSection
 - service_directory_content_section.dart (68): ServiceDirectoryContentSection
 - service_directory_list_section.dart (37): ServiceDirectoryListSection
 - service_duration_section.dart (63): ServiceDurationSection
-- service_edit_fields_section.dart (100): ServiceEditFieldsSection
+- service_form_footer_section.dart (62): ServiceFormFooterSection
+- service_form_section.dart (58): ServiceFormSection
 - service_information_section.dart (82): ServiceInformationSection
 - service_preview_section.dart (71): ServicePreviewSection
 - service_type_section.dart (43): ServiceTypeSection
@@ -1241,10 +1240,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - service_create_keyboard_test.dart (22):
 - service_create_responsive_test.dart (67):
 - service_create_sections_test.dart (41):
-- service_create_test_host.dart (55):
+- service_create_test_host.dart (56):
 - service_creation_components_test.dart (71):
 - service_directory_page_test.dart (110):
 - service_duration_section_test.dart (40):
+- service_edit_reusable_test.dart (49):
 - service_information_section_test.dart (49):
 - service_picker_list_section_test.dart (38):
 - service_picker_test.dart (53):

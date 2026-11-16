@@ -11,6 +11,7 @@ Future<ProviderContainer> pumpServiceCreateUnscaled(
   WidgetTester tester, {
   double width = 390,
   double scale = 1,
+  String serviceId = '',
 }) async {
   await loadTestFonts();
   tester.view.physicalSize = Size(width, 844);
@@ -32,9 +33,9 @@ Future<ProviderContainer> pumpServiceCreateUnscaled(
           data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(scale)),
           child: child!,
         ),
-        home: const RepaintBoundary(
-          key: ValueKey('service-create-golden'),
-          child: ServiceEditPage(),
+        home: RepaintBoundary(
+          key: const ValueKey('service-create-golden'),
+          child: ServiceEditPage(serviceId: serviceId),
         ),
       ),
     ),

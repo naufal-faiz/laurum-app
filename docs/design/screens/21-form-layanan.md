@@ -1,7 +1,7 @@
-﻿# Redesign Tambah layanan031 — 14Nov2026
+# Redesign Tambah layanan031 — 14Nov2026
 Frame pilihan4294968237 LAURUM · Tambah Layanan dibaca sekali dari FigCraft aktif.
 Dasar0e81c8d; proposal031 disetujui14Nov2026 melalui jawaban "Ya lakukan".
-Irisan hanya /lainnya/layanan/baru; form Edit tetap memakai komposisi lama.
+Pembaruan16Nov2026: Tambah dan Edit memakai ServiceFormSection dan ServiceFormFooterSection yang sama.
 
 ## Snapshot dan pemetaan
 - Kanvas390×844: header x24/y56/w342/h44; AppBarSub detail melalui FormScaffold.
@@ -49,7 +49,7 @@ Irisan hanya /lainnya/layanan/baru; form Edit tetap memakai komposisi lama.
 - Kartu pratinjau memakai draft aktual, tanpa data baru atau aksi tambahan.
 - Label Tipe dan Harga mengikuti frame; tes lama boleh menyesuaikan finder struktur
   dan label, seluruh assertion nominal/simpan/katalog/error tetap dipertahankan.
-- Varian baru dipakai hanya pada form Tambah; Edit tidak ikut berubah.
+- Atas permintaan16Nov2026, varian dan komposisi Tambah dipakai ulang pada Edit.
 - Prefix Rp selalu tampak melalui slot prefixIcon pada mode field biasa/padat; nilai
   input tetap kosong. Rp, nilai dan suffix unit sejajar vertikal.
 - Scroll field padat mendapat ruang atas24 dari token xlarge agar tepi field tidak
@@ -77,7 +77,7 @@ Template: FormScaffold (satu form dipakai keduanya).
 
 Audit 100: harga baru kosong dengan hint 0 (bukan contoh 9000); mengikuti AGENTS 16a.
 
-Komposisi lama (tetap untuk Edit, Tambah mengikuti snapshot031 di atas):
+Komposisi lama berikut adalah riwayat sebelum penyatuan16Nov2026 (digantikan snapshot031):
 - AppBarSub: 'Tambah layanan' atau 'Edit layanan'.
 - Form Edit: AppText 'Perubahan harga tidak memengaruhi nota yang sudah tercetak.'.
 - LabeledField Nama layanan (wajib).
@@ -100,7 +100,7 @@ Validasi dan state:
 - Busy menonaktifkan field/tombol; gagal simpan menampilkan BannerMessage.
 - Layanan tidak ditemukan -> EmptyState; loading memakai AppSkeleton.
 
-Selisih Edit terhadap .pen (layout lama, tidak diubah031):
+Selisih Edit terhadap .pen berikut adalah riwayat layout lama (digantikan16Nov2026):
 - Tanpa badge 'Wajib' dan tanpa awalan Rp di dalam field; nilai terformat tampil
   di helper.
 - Tanpa 'Paket' dan dropdown satuan, sesuai prompt.
@@ -116,3 +116,28 @@ lulus pemeriksaan SDK pada 31 Oktober 2026 (387 tes total).
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.
+
+## Penyatuan Tambah/Edit — 16Nov2026
+Referensi: snapshot frame4294968237 di atas dan implementasi Tambah yang sudah disetujui;
+pengguna meminta reuse komposisi tersebut untuk Edit, tanpa desain/komponen bersama baru.
+Form dan footer generik menggantikan dua cabang layout; Section lama duplikat dihapus.
+Header detail, padding, preview, informasi, durasi/status dan footer sama pada kedua mode.
+Edit menampilkan nama usaha dari businessProfileProvider yang sama; tidak menambah sumber data.
+
+### Paritas Edit
+| Butir | Implementasi | Verifikasi |
+|---|---|---|
+| Nilai awal | original/name/kind/priceText/durationDays/isActive dari provider(id) lama | [x] tes edit |
+| Aksi | setName/setKind/setPrice/setDuration/setActive/save dengan argumen lama | [x] suite lama |
+| Identitas | id/createdAt dipertahankan controller; state/data tidak diubah | [x] suite lama |
+| Catatan | Perubahan harga tidak memengaruhi nota yang sudah tercetak. tetap | [x] tes edit |
+| Footer | Simpan perubahan/Batal; busy nonaktif; urutan fokus Simpan lalu Batal | [x] footer/suite |
+| Keadaan | loading, error tidak ditemukan, validasi dan error simpan tetap | [x] suite lama |
+| Input | nama sebelum harga, harga awal selectAllOnFocus; digit/hint0 tetap | [x] tes edit |
+| Aksesibilitas | font1x/2x, lebar280/390dp, keyboard300dp, field dan simpan terlihat | [x] tes edit |
+| Key | Key produksi tidak ditambah/dihapus; golden host tes tetap | [x] tes edit |
+
+Tes lama form/footer hanya mengganti nama/import kelas; assertion perilaku dipertahankan.
+Tes baru service_edit_reusable_test memverifikasi instance komponen sama, nilai awal,
+catatan harga, selectAllOnFocus, keyboard dan golden Edit1x/2x.
+Verifikasi akhir16Nov2026: check_all SEMUA HIJAU,1317 lulus/2skip,exit0.
