@@ -32,7 +32,12 @@ class ReceiptPage extends ConsumerWidget {
     final connecting = ref.watch(printerConnectionProvider).busy;
     final completing = GoRouterState.of(context).uri.queryParameters['complete'] == '1';
     final busy =
-        printing.printing || completion.busy || download.busy || reconnect.busy || connecting;
+        printing.printing ||
+        completion.busy ||
+        download.busy ||
+        reconnect.busy ||
+        connecting ||
+        view.isLoading;
     final printer = ref.watch(printServiceProvider);
     final controller = ref.read(receiptPrintProvider.notifier);
     return FormScaffold(
@@ -44,6 +49,7 @@ class ReceiptPage extends ConsumerWidget {
           : '${view.value!.order.orderNo} · ${view.value!.customer.name}',
       onBack: () => context.canPop() ? context.pop() : context.go('/antrean'),
       footer: view.maybeWhen(
+        skipLoadingOnReload: true,
         data: (receipt) => receipt == null
             ? const SizedBox.shrink()
             : ReceiptActionsSection(
@@ -59,6 +65,7 @@ class ReceiptPage extends ConsumerWidget {
         orElse: () => const SizedBox.shrink(),
       ),
       body: view.when(
+        skipLoadingOnReload: true,
         loading: () => Column(children: [for (var i = 0; i < 6; i++) const AppSkeleton()]),
         error: (_, _) => const EmptyState(title: 'Gagal memuat nota', icon: AppIcons.alert),
         data: (receipt) => receipt == null

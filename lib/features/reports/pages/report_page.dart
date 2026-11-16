@@ -13,6 +13,7 @@ import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/reports/widgets/report_body_section.dart';
 import 'package:laurum/features/reports/widgets/report_header_section.dart';
+import 'package:laurum/features/reports/widgets/report_sync_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
@@ -62,6 +63,7 @@ class ReportPage extends ConsumerWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          ReportSyncSection(status: ref.watch(shellSyncStatusProvider)),
           ReportHeaderSection(
             labels: labels,
             selectedIndex: period,
