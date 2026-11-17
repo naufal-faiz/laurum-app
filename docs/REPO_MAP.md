@@ -246,7 +246,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_routes.dart (39):
 - change_password_sheet.dart (52): ChangePasswordSheet
 - check_email_page.dart (43): CheckEmailPage
-- manage_account_page.dart (53): ManageAccountPage
+- manage_account_page.dart (69): ManageAccountPage
 - new_password_page.dart (36): NewPasswordPage
 - password_reset_page.dart (26): PasswordResetPage
 - sign_in_page.dart (67): SignInPage
@@ -267,9 +267,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - password_reset_view.dart (29): PasswordResetView
 
 ### lib/features/auth/widgets/
-- account_danger_section.dart (45): AccountDangerSection
+- account_danger_section.dart (64): AccountDangerSection
 - account_edit_field_section.dart (34): AccountEditFieldSection
-- account_profile_section.dart (63): AccountProfileSection
+- account_identity_section.dart (80): AccountIdentitySection
+- account_profile_section.dart (83): AccountProfileSection
+- account_security_section.dart (89): AccountSecuritySection
 - auth_email_field_section.dart (46): AuthEmailFieldSection
 - auth_identity_section.dart (55): AuthIdentitySection
 - auth_name_field_section.dart (45): AuthNameFieldSection
@@ -310,11 +312,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - in_memory_business_repository.dart (52): BusinessState, InMemoryBusinessRepository, inMemoryBusinessRepositoryProvider
 
 ### lib/features/business/pages/
-- business_info_page.dart (105): BusinessInfoPage
+- business_info_page.dart (81): BusinessInfoPage
 
 ### lib/features/business/state/
 - business_info_controller.dart (79): BusinessInfoController, businessInfoProvider
 - business_info_state.dart (40): BusinessInfoState
+
+### lib/features/business/widgets/
+- business_form_section.dart (92): BusinessFormSection
+- business_note_section.dart (11): BusinessNoteSection
+- business_preview_section.dart (61): BusinessPreviewSection
 
 ### lib/features/customers/data/
 - contact_fixtures.dart (8):
@@ -821,7 +828,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sub_scaffold.dart (96): SubScaffold
 
 ### test/
-- account_actions_test.dart (60):
+- account_actions_test.dart (61):
 - account_rollback_test.dart (56): FailingClearSync
 - add_customer_test.dart (56):
 - ai_golden_test.dart (52):
@@ -896,6 +903,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - bottom_nav_bar_test.dart (104):
 - bp0_id_flow_test.dart (61):
 - brand_lockup_test.dart (25):
+- business_info_golden_test.dart (22):
 - business_info_page_test.dart (59):
 - callout_ai_test.dart (20):
 - checkout_controller_test.dart (90):
@@ -1148,7 +1156,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - proposal_weight_validation_test.dart (62):
 - r10_account_flow_test.dart (64):
 - r10_account_keyboard_test.dart (32):
-- r10_account_sections_test.dart (64):
+- r10_account_sections_test.dart (84):
 - r10_auth_form_test.dart (51): FailingPasswordAuth
 - r10_auth_keyboard_test.dart (40):
 - r10_auth_service_test.dart (83):

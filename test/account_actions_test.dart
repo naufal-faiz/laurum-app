@@ -38,6 +38,7 @@ void main() {
     await tester.pumpAndSettle();
     final button = find.text('Hapus akun');
     await tester.ensureVisible(button);
+    await tester.pumpAndSettle();
     await tester.tap(button);
     await tester.pumpAndSettle();
     expect(find.text('Hapus akun?'), findsOneWidget);

@@ -14,9 +14,9 @@ void main() {
     final host = await pumpAntrean(tester, location: '/lainnya/info-usaha');
     expect(find.text('Info usaha'), findsOneWidget);
     expect(find.text('Berkah Laundry'), findsOneWidget);
-    expect(find.text('Jl. Melati No. 4, Sukajadi, Bandung'), findsOneWidget);
-    expect(find.text('0812-3456-7890'), findsOneWidget);
-    expect(find.text('Terima kasih atas kepercayaan Anda'), findsOneWidget);
+    expect(find.text('Jl. Melati No. 4, Sukajadi, Bandung'), findsWidgets);
+    expect(find.text('0812-3456-7890'), findsWidgets);
+    expect(find.text('Terima kasih atas kepercayaan Anda'), findsWidgets);
     expect(find.text('Nomor telepon ditampilkan di struk.'), findsOneWidget);
 
     await tester.enterText(find.byType(TextField).first, 'Laundry Bersih');

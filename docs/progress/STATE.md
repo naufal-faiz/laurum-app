@@ -1,48 +1,52 @@
 # STATE Laurum
-Diperbarui: 2026-11-16 | Cabang newdesign
+Diperbarui: 2026-11-17 | Cabang newdesign (merge ui/akun-usaha 84459af)
 
 ## Sesi aktif
-Tarik-refresh033 setelah commit batch00721e9 dan fix kedipan c5c6087.
-Dasar c5c6087; implementasi refresh selesai, check_all akhir SEMUA HIJAU.
+Irisan layar 33 Kelola akun dan 22 Info usaha. Frame: `LAURUM · Kelola Akun`
+(ID 4294968821) dan `LAURUM · Info Usaha` (ID 4294968909). Spec 33 dan 22 memuat
+tabel paritas + selisih desain; figma_map baris 22/33 terisi.
 
 ## Status irisan
-- Batch00721e9: Laporan mandiri tanpa navbar/logo, empty state Nota, batas14hari;
-  logo lingkaran, teks laporan ringkas, pembatasan multijendela Android.
-- c5c6087: echo metadata sync tidak menginvalidasi query bisnis; perubahan nyata tetap masuk.
-- Struk mempertahankan konten saat reload, aksi nonaktif selama pembacaan ulang.
-- Banner offline/gagal Laporan dipulihkan setelah rute keluar dari shell.
-- AppDataRefresh terdaftar; callback opsional pada Root/Sub/FormScaffold yang ada.
-- Gesture: Beranda/Antrean/Pelanggan/Lainnya, Laporan/Piutang/Pengeluaran/Layanan,
-  Detail pelanggan/order/struk, Riwayat tabungan. Form tambah/edit tidak dipasangi gesture.
-- DataRefreshActions menunggu sync push/pull lalu query baca-saja, menggabungkan request.
-- Filter/search/draft/store tetap; pesan offline/gagal/belum siap aman tanpa detail transport.
-- Respons terlambat tidak membaca akun pengganti; widget aman saat meninggalkan layar.
-- Physics refresh stabil: identitas ScrollPosition dan offset tetap saat berpindah tab cepat.
+- Kelola akun: SubScaffold detail + subtitle 'Profil & keamanan akun'; 4 Section
+  baru/ubah: AccountIdentitySection (avatar inisial, nama, email, pil
+  'Tertaut dengan Google' memakai assets/icons/google.svg asli),
+  AccountProfileSection (PROFIL: Nama, Email baca-saja + keterangan, No. telp),
+  AccountSecuritySection (KEAMANAN: Ganti password atau keterangan Google,
+  baris Akun Google + status), AccountDangerSection (Keluar outline + kartu
+  ZONA BERBAHAYA ber-rail merah).
+- Info usaha: FormScaffold detail + subtitle 'Data toko di struk & profil';
+  BusinessPreviewSection (pratinjau struk dari draf), BusinessFormSection
+  (DETAIL USAHA, 4 field + helper lama), BusinessNoteSection (banner info).
+  Footer Simpan dan alur simpan tidak berubah.
+- Tidak ada perubahan state, repository, skema, migrasi, token, atom/molecule,
+  atau dependensi. Data/aksi/provider/Key tetap sama.
+- Berkas: 3 Page/2 Page bisnis+auth, 5 Section baru, 2 Section dirombak,
+  6 tes, 1 tes golden baru, 7 golden, spec 22/33, figma_map, STATE.
 
 ## Keputusan pengguna terbaru
-- Commit pembaruan sebelumnya dahulu; fix kedipan dahulu, baru tarik-refresh.
-- Proposal033 disetujui16Nov2026; komponen refresh reusable dan registry diizinkan.
-- Tanpa uninstall/penghapusan DB/outbox; jangan push atau merge backend-newdesign.
-- Laporan tetap memakai SubScaffold lama tanpa navbar, tanpa template/opsi navbar baru.
+- Desain diterapkan di kode aplikasi (bukan mengulang FigCraft), patokan frame di atas.
+- Logo Google memakai `assets/icons/google.svg`, bukan huruf "G".
+- Baris 'Struk & Printer' pada frame Info Usaha tidak dibuat (tidak menambah perilaku).
+- Status Tertaut tampil sebagai teks berwarna karena AppBadge belum punya varian hijau.
+- Pengguna mengizinkan merge irisan ini ke `newdesign` dan stash sementara 3 berkas
+  WIP di worktree utama, lalu dipulihkan.
 
 ## Belum di-commit
-Implementasi033, registry, callback template/Page, tes dan dokumen masuk commit fitur sesi ini.
-Draf FigCraft/figma_map/spec20 dan android/build milik pekerjaan lain tetap di luar commit.
+Tidak ada di worktree ini; seluruh irisan masuk satu commit feat(ui).
 
 ## Langkah berikutnya
-1. Tinjau commit fitur033 di newdesign; tanpa push/merge ke branch lain.
-2. Pengguna uji2HP dengan Supabase lokal: buat antrean/impor kontakA, tarik data diB.
-3. Verifikasi manual Android: tidak berkedip, filter tetap, offline/reconnect dan font besar.
+1. Merge commit irisan ke newdesign, lalu pulihkan stash WIP worktree utama.
+2. Pengguna meninjau `r10_account.png`, `info_usaha.png`, atau `flutter run -t lib/main_dummy.dart`.
+3. Sisa selisih visual (pil Tertaut, MenuRow berikon, LabeledField bold, isi field
+   abu muda, ikon tombol) hanya bisa ditutup lewat proposal komponen bersama.
+4. Jangan push ke remote tanpa izin pengguna.
 
 ## Blocker
-Tidak ada blocker kode; Supabase lokal/dua HP belum diuji manual.
-Visual belum diverifikasi manual; tidak mengambil screenshot perangkat.
+Tidak ada.
 
 ## Bukti terakhir
-- c5c6087: check_all SEMUA HIJAU,1338lulus/2skip Supabase lokal,exit0.
-- Refresh:40tes terarah lulus; flutter analyze bersih; check_arch OK.
-- Check lengkap pertama dihentikan setelah regresi ScrollPosition; perbaikan26tes lulus.
-- Check akhir: dart run tool/check_all.dart SEMUA HIJAU,1364lulus/2skip,exit0.
-- Simulasi2SQLite: pushA lalu tarik-refreshB memperbarui pelanggan+antrean tanpa login.
-- Gesture12layar,4form tanpa gesture; empty/short font2x, gagal/navigasi aman.
-- Batch sebelumnya:75tes UI terarah; native manifest merge BUILD SUCCESSFUL.
+- dart run tool/check_all.dart ui/akun-usaha: SEMUA HIJAU, 1323 tes lulus, 2 skip.
+- dart analyze lib/features/auth lib/features/business: No issues found. check_arch: OK.
+- Golden diperbarui: r10_account, r10_account_320_2x, r10_name, r10_phone,
+  r10_password, r10_password_320_2x; golden baru info_usaha.png.
+- Visual belum diverifikasi manual di perangkat; verifikasi lewat golden.
