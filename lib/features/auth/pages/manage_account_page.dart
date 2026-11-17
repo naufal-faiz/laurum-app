@@ -41,6 +41,8 @@ class ManageAccountPage extends ConsumerWidget {
                 name: data.name,
                 email: data.email,
                 googleLinked: data.googleLinked,
+                busy: session.busy,
+                onEdit: () => AccountEditSheet.show(context, AccountField.name),
               ),
               AccountProfileSection(
                 data: data,

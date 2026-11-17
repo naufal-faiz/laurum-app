@@ -5,6 +5,42 @@ import 'package:laurum/core/theme/app_theme.dart';
 import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
 
 void main() {
+  testWidgets('state echoes preserve middle edits, selection and IME composition', (tester) async {
+    final value = ValueNotifier('abcd');
+    addTearDown(value.dispose);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: ValueListenableBuilder<String>(
+            valueListenable: value,
+            builder: (_, text, _) => AppTextField(
+              label: 'Nama',
+              value: text,
+              onChanged: (text) => value.value = text,
+            ),
+          ),
+        ),
+      ),
+    );
+    final field = find.byType(TextField);
+    await tester.showKeyboard(field);
+    final controller = tester.widget<TextField>(field).controller!;
+    for (final edit in const [
+      TextEditingValue(
+        text: 'abXcd',
+        selection: TextSelection.collapsed(offset: 3),
+        composing: TextRange(start: 2, end: 3),
+      ),
+      TextEditingValue(text: 'abXYcd', selection: TextSelection.collapsed(offset: 4)),
+      TextEditingValue(text: 'abYcd', selection: TextSelection.collapsed(offset: 2)),
+      TextEditingValue(text: 'aZcd', selection: TextSelection(baseOffset: 1, extentOffset: 2)),
+    ]) {
+      tester.testTextInput.updateEditingValue(edit);
+      await tester.pump();
+      expect(value.value, edit.text);
+      expect(controller.value, edit);
+    }
+  });
   testWidgets('field edits, submits, syncs values and disposes owned controller', (tester) async {
     String? changed, submitted;
     await tester.pumpWidget(

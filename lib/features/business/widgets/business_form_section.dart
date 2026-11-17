@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
@@ -41,6 +42,8 @@ class BusinessFormSection extends StatelessWidget {
               errorText: nameError,
               child: AppTextField(
                 label: 'Nama usaha',
+                leadingIcon: AppIcons.bag,
+                dense: true,
                 value: name,
                 enabled: !busy,
                 selectAllOnFocus: true,
@@ -51,6 +54,8 @@ class BusinessFormSection extends StatelessWidget {
               label: 'Alamat',
               child: AppTextField(
                 label: 'Alamat',
+                leadingIcon: AppIcons.location,
+                dense: true,
                 value: address,
                 enabled: !busy,
                 selectAllOnFocus: true,
@@ -64,6 +69,8 @@ class BusinessFormSection extends StatelessWidget {
               helperText: 'Nomor telepon ditampilkan di struk.',
               child: AppTextField(
                 label: 'Nomor telepon',
+                leadingIcon: AppIcons.phone,
+                dense: true,
                 value: phone,
                 enabled: !busy,
                 selectAllOnFocus: true,
@@ -76,6 +83,8 @@ class BusinessFormSection extends StatelessWidget {
               helperText: 'Catatan tambahan struk diatur di layar Printer dan struk.',
               child: AppTextField(
                 label: 'Catatan kaki struk',
+                leadingIcon: AppIcons.receipt,
+                dense: true,
                 value: footer,
                 enabled: !busy,
                 selectAllOnFocus: true,

@@ -9,6 +9,7 @@ import 'package:laurum/features/business/state/business_info_controller.dart';
 import 'package:laurum/features/business/widgets/business_form_section.dart';
 import 'package:laurum/features/business/widgets/business_note_section.dart';
 import 'package:laurum/features/business/widgets/business_preview_section.dart';
+import 'package:laurum/features/business/widgets/business_printer_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
@@ -27,7 +28,7 @@ class BusinessInfoPage extends ConsumerWidget {
     final controller = ref.read(businessInfoProvider.notifier);
     return FormScaffold(
       title: 'Info usaha',
-      subtitle: 'Data toko di struk & profil',
+      subtitle: 'Detail usaha di struk & profil',
       backLabel: 'Kembali',
       appBarVariant: AppBarSubVariant.detail,
       onBack: setup
@@ -37,6 +38,7 @@ class BusinessInfoPage extends ConsumerWidget {
           ? const SizedBox.shrink()
           : AppButton(
               state.busy ? 'Menyimpan...' : 'Simpan',
+              icon: AppIcons.check,
               onPressed: state.busy ? null : controller.save,
             ),
       body: async.when(
@@ -72,6 +74,7 @@ class BusinessInfoPage extends ConsumerWidget {
               onPhone: controller.setPhone,
               onFooter: controller.setFooter,
             ),
+            BusinessPrinterSection(onTap: () => context.push('/lainnya/printer')),
             const BusinessNoteSection(),
           ],
         ),

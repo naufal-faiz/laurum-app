@@ -6,6 +6,6 @@ class BusinessNoteSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const BannerMessage(
-    message: 'Perubahan tampil di struk dan nota setelah disimpan.',
+    message: 'Perubahan langsung tampil di struk berikutnya.',
   );
 }

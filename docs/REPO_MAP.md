@@ -246,7 +246,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_routes.dart (39):
 - change_password_sheet.dart (52): ChangePasswordSheet
 - check_email_page.dart (43): CheckEmailPage
-- manage_account_page.dart (69): ManageAccountPage
+- manage_account_page.dart (71): ManageAccountPage
 - new_password_page.dart (36): NewPasswordPage
 - password_reset_page.dart (26): PasswordResetPage
 - sign_in_page.dart (67): SignInPage
@@ -267,11 +267,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - password_reset_view.dart (29): PasswordResetView
 
 ### lib/features/auth/widgets/
-- account_danger_section.dart (64): AccountDangerSection
+- account_danger_section.dart (70): AccountDangerSection
 - account_edit_field_section.dart (34): AccountEditFieldSection
-- account_identity_section.dart (80): AccountIdentitySection
-- account_profile_section.dart (83): AccountProfileSection
-- account_security_section.dart (89): AccountSecuritySection
+- account_email_section.dart (49): AccountEmailSection
+- account_identity_section.dart (86): AccountIdentitySection
+- account_password_section.dart (62): AccountPasswordSection
+- account_profile_section.dart (81): AccountProfileSection
+- account_security_section.dart (88): AccountSecuritySection
 - auth_email_field_section.dart (46): AuthEmailFieldSection
 - auth_identity_section.dart (55): AuthIdentitySection
 - auth_name_field_section.dart (45): AuthNameFieldSection
@@ -312,16 +314,17 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - in_memory_business_repository.dart (52): BusinessState, InMemoryBusinessRepository, inMemoryBusinessRepositoryProvider
 
 ### lib/features/business/pages/
-- business_info_page.dart (81): BusinessInfoPage
+- business_info_page.dart (84): BusinessInfoPage
 
 ### lib/features/business/state/
 - business_info_controller.dart (79): BusinessInfoController, businessInfoProvider
 - business_info_state.dart (40): BusinessInfoState
 
 ### lib/features/business/widgets/
-- business_form_section.dart (92): BusinessFormSection
+- business_form_section.dart (101): BusinessFormSection
 - business_note_section.dart (11): BusinessNoteSection
-- business_preview_section.dart (61): BusinessPreviewSection
+- business_preview_section.dart (60): BusinessPreviewSection
+- business_printer_section.dart (33): BusinessPrinterSection
 
 ### lib/features/customers/data/
 - contact_fixtures.dart (8):
@@ -870,7 +873,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - app_svg_test.dart (45): SvgTestBundle
 - app_switch_test.dart (42):
 - app_text_field_focus_test.dart (53):
-- app_text_field_test.dart (70):
+- app_text_field_test.dart (106):
 - app_text_scaling_test.dart (35):
 - app_text_test.dart (40):
 - atom_gallery_test.dart (68):
@@ -905,6 +908,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - brand_lockup_test.dart (25):
 - business_info_golden_test.dart (22):
 - business_info_page_test.dart (59):
+- business_sections_test.dart (40):
 - callout_ai_test.dart (20):
 - checkout_controller_test.dart (90):
 - chip_bar_test.dart (30):
@@ -1156,7 +1160,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - proposal_weight_validation_test.dart (62):
 - r10_account_flow_test.dart (64):
 - r10_account_keyboard_test.dart (32):
-- r10_account_sections_test.dart (84):
+- r10_account_layout_test.dart (66):
+- r10_account_password_section_test.dart (42):
+- r10_account_sections_test.dart (111):
 - r10_auth_form_test.dart (51): FailingPasswordAuth
 - r10_auth_keyboard_test.dart (40):
 - r10_auth_service_test.dart (83):

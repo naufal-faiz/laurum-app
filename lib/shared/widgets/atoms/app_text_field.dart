@@ -29,7 +29,7 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   void didUpdateWidget(covariant AppTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.value == widget.value) return;
+    if (oldWidget.value == widget.value || _controller.text == widget.value) return;
     _controller.text = widget.value;
     _controller.selection = TextSelection.collapsed(offset: widget.value.length);
   }

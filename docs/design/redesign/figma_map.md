@@ -30,7 +30,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `18-laporan-ringkasan.md` (18 - Laporan - Ringkasan) | `LAURUM · Laporan` (ID:4294968337) | 029 selesai; check_all hijau1291tes/2skip; menunggu tinjauan | Bulanan tanpa grafik; Masuk/Keluar, gradasi cerah hari/minggu; lihat STATE/spec18 |
 | `18-laporan-ringkasan.md` (Pilih tanggal) | `LAURUM · Laporan · Pilih Tanggal` (ID:4294968452) | 030 selesai; check_all hijau1291tes/2skip; menunggu tinjauan | Popup tengah, Dari/Ke, kalender, Reset/Terapkan; batas tanggal/semantik range tetap |
 | `19-pengaturan-akun.md` (19 - Pengaturan dan Akun) | | Menunggu | |
-| `20-daftar-layanan.md` (20 - Daftar Layanan) | | Menunggu | |
+| `20-daftar-layanan.md` (20 - Daftar Layanan) | `LAURUM · Daftar Layanan` (ID: 4294969685) | Frame dibuat 14 Nov2026; menunggu tinjauan | Kartu layanan ringkas (ikon, nama/jenis, switch; harga/satuan + durasi), pencarian, footer Tambah layanan; lihat spec20 |
 | `21-form-layanan.md` (Tambah layanan) | `LAURUM · Tambah Layanan` (ID:4294968237) | 031 selesai; check_all hijau1314tes/2skip; menunggu tinjauan | Pratinjau reaktif, kartu informasi/durasi, prefix Rp dan footer responsif; Edit tetap |
 | `22-info-usaha.md` (22 - Info Usaha) | `LAURUM · Info Usaha` (ID: 4294968909) | Desain 17 Nov 2026 diterapkan di kode; golden ditambahkan | Pratinjau struk reaktif, kartu Detail Usaha, banner catatan simpan; field, validasi, dan helper lama tetap |
 | `23-daftar-pengeluaran.md` (23 - Daftar Pengeluaran) | `LAURUM · Pengeluaran` (ID 4294969797), x 2200 y 5302 | Desain 16 Nov 2026 diterapkan di kode; golden diperbarui; menunggu tinjauan | Header detail + tombol kembali, 3 sub-card kategori terbesar, tautan Laporan, FAB kanan bawah, tanpa nav; DateGroupHeader lama membungkus 2 baris; lihat spec 23 |
@@ -69,6 +69,7 @@ Daftar frame level teratas yang terbaca dari dokumen aktif FigCraft:
   spec19,proposal024 disetujui; implementasi Lainnya + menu Laporan ke /laporan,
   check_all hijau 1109 lulus,1skip. Kartu pendapatan Beranda membuka Laporan mingguan.
 - `LAURUM · Tambah Layanan` (ID: 4294968237)
+- `LAURUM · Daftar Layanan` (ID: 4294969685)
 - `LAURUM · Laporan` (ID: 4294968337)
 - `LAURUM · Laporan · Pilih Tanggal` (ID: 4294968452)
 - `LAURUM · Masuk` (ID: 4294968692)

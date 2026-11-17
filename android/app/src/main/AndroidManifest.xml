@@ -13,7 +13,7 @@
          to be typed twice. Only contacts the user checks are saved. -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <application
-        android:label="laurum"
+        android:label="Laurum"
         android:name="${applicationName}"
         android:resizeableActivity="false"
         android:icon="@mipmap/ic_launcher">
