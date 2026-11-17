@@ -44,6 +44,37 @@ Selisih .pen: halaman baru sesuai R10; Email dan label panjang disusun vertikal 
 teks besar tetap terbaca. Tidak mengubah atom/molecule/tema/registry.
 Android/iOS dan perubahan profil/autentikasi nyata belum diuji manual.
 
+## Redesign 17 Nov 2026 (frame `LAURUM · Kelola Akun`, ID 4294968821)
+AppBarSub varian detail + subjudul 'Profil & keamanan akun'. Komposisi baru:
+AccountIdentitySection (kartu identitas: avatar inisial, nama, email, pil
+'Tertaut dengan Google' memakai `assets/icons/google.svg`), AccountProfileSection
+(label PROFIL: Nama, Email hanya baca + keterangan, No. telp + keterangan),
+AccountSecuritySection (label KEAMANAN: Ganti password atau keterangan sesi Google,
+baris Akun Google dengan logo Google dan status Tertaut/Tidak tertaut),
+AccountDangerSection (Keluar destructiveOutline, kartu ZONA BERBAHAYA ber-rail merah).
+
+### Paritas redesign
+| Butir | Sumber lama | Di UI baru |
+|---|---|---|
+| Nama, email, status Google | AccountView | Kartu identitas + baris profil/keamanan |
+| Ubah nama | onName -> AccountEditSheet | MenuRow Nama |
+| Ubah nomor telepon | onPhone -> AccountEditSheet | MenuRow No. telp |
+| Email hanya baca + 'Ganti email belum tersedia' | AccountProfileSection | baris Email |
+| Ganti password / keterangan Google | onPassword | MenuRow atau AppText + keterangan |
+| Akun Google Tertaut/Tidak tertaut | InfoRow | baris Akun Google + status |
+| Keluar | onLogout -> confirmSignOut | AppButton destructiveOutline |
+| Hapus akun (dua konfirmasi) | onDelete -> confirmDeleteAccount | AppButton di kartu bahaya |
+| Nonaktif saat busy/offline | busy, offline | disabled + keterangan offline |
+| Error sesi | session.error | BannerMessage di atas tombol |
+
+### Selisih desain
+- Empat Section baru (identity/profile/security/danger) menggantikan dua Section lama.
+- Label seksi memakai teks kapital (PROFIL, KEAMANAN, ZONA BERBAHAYA) dan kartu
+  memakai AppCard; tidak ada token, atom, atau molecule baru.
+- Status Tertaut tampil sebagai teks berwarna, bukan pil berwarna, karena AppBadge
+  belum punya varian hijau.
+
+
 
 ## Audit penyelesaian UI - prompt 100
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.

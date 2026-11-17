@@ -244,7 +244,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - auth_routes.dart (39):
 - change_password_sheet.dart (52): ChangePasswordSheet
 - check_email_page.dart (43): CheckEmailPage
-- manage_account_page.dart (53): ManageAccountPage
+- manage_account_page.dart (69): ManageAccountPage
 - new_password_page.dart (36): NewPasswordPage
 - password_reset_page.dart (26): PasswordResetPage
 - sign_in_page.dart (67): SignInPage
@@ -265,9 +265,11 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - password_reset_view.dart (29): PasswordResetView
 
 ### lib/features/auth/widgets/
-- account_danger_section.dart (45): AccountDangerSection
+- account_danger_section.dart (64): AccountDangerSection
 - account_edit_field_section.dart (34): AccountEditFieldSection
-- account_profile_section.dart (63): AccountProfileSection
+- account_identity_section.dart (80): AccountIdentitySection
+- account_profile_section.dart (83): AccountProfileSection
+- account_security_section.dart (89): AccountSecuritySection
 - auth_email_field_section.dart (46): AuthEmailFieldSection
 - auth_identity_section.dart (55): AuthIdentitySection
 - auth_name_field_section.dart (45): AuthNameFieldSection
@@ -308,11 +310,16 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - in_memory_business_repository.dart (52): BusinessState, InMemoryBusinessRepository, inMemoryBusinessRepositoryProvider
 
 ### lib/features/business/pages/
-- business_info_page.dart (105): BusinessInfoPage
+- business_info_page.dart (81): BusinessInfoPage
 
 ### lib/features/business/state/
 - business_info_controller.dart (79): BusinessInfoController, businessInfoProvider
 - business_info_state.dart (40): BusinessInfoState
+
+### lib/features/business/widgets/
+- business_form_section.dart (92): BusinessFormSection
+- business_note_section.dart (11): BusinessNoteSection
+- business_preview_section.dart (61): BusinessPreviewSection
 
 ### lib/features/customers/data/
 - contact_fixtures.dart (8):
@@ -578,7 +585,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - outstanding_page.dart (73): OutstandingPage
 - report_page.dart (85): ReportPage
 - report_range_flow.dart (39):
-- report_range_sheet.dart (96): ReportRangeSheet
+- report_range_sheet.dart (85): ReportRangeSheet
 
 ### lib/features/reports/state/
 - outstanding_data.dart (69): OutstandingRow, OutstandingListData, OutstandingFilter, outstandingListProvider, outstandingFilterProvider
@@ -594,9 +601,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/reports/widgets/
 - outstanding_list_section.dart (76): OutstandingListSection
-- report_body_section.dart (94): ReportBodySection
+- report_body_section.dart (99): ReportBodySection
 - report_header_section.dart (76): ReportHeaderSection
-- report_orders_section.dart (110): ReportOrdersSection
+- report_orders_section.dart (104): ReportOrdersSection
 - report_range_summary_section.dart (47): ReportRangeSummarySection
 
 ### lib/features/services/data/
@@ -643,7 +650,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - lainnya_routes.dart (20):
 - placeholder_page.dart (31): PlaceholderPage
 - placeholder_routes.dart (7):
-- root_shell_page.dart (106): RootShellPage
+- root_shell_page.dart (104): RootShellPage
 
 ### lib/features/shell/state/
 - shell_state.dart (27): FakeWhatsappConnection, businessClockProvider, businessProfileProvider, shellSyncProvider, shellSyncStatusProvider, whatsappConnectionProvider
@@ -752,7 +759,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - empty_state.dart (48): EmptyState
 - feature_strip.dart (46): FeatureStrip
 - footer_bar.dart (28): FooterBar
-- icon_tile.dart (94): IconTile
+- icon_tile.dart (84): IconTile
 - info_row.dart (39): InfoRow
 - inline_link.dart (32): InlineLink
 - inline_link_row.dart (36): InlineLinkRow
@@ -815,7 +822,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - sub_scaffold.dart (82): SubScaffold
 
 ### test/
-- account_actions_test.dart (60):
+- account_actions_test.dart (61):
 - account_rollback_test.dart (56): FailingClearSync
 - add_customer_test.dart (56):
 - ai_golden_test.dart (52):
@@ -883,12 +890,13 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - banner_message_test.dart (23):
 - beranda_molecules_test.dart (113):
 - beranda_page_test.dart (70):
-- beranda_report_navigation_test.dart (74):
+- beranda_report_navigation_test.dart (33):
 - beranda_sections_test.dart (183):
 - beranda_view_test.dart (136):
 - bottom_nav_bar_test.dart (104):
 - bp0_id_flow_test.dart (61):
 - brand_lockup_test.dart (25):
+- business_info_golden_test.dart (22):
 - business_info_page_test.dart (59):
 - callout_ai_test.dart (20):
 - checkout_controller_test.dart (90):
@@ -1138,7 +1146,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - proposal_weight_validation_test.dart (62):
 - r10_account_flow_test.dart (64):
 - r10_account_keyboard_test.dart (32):
-- r10_account_sections_test.dart (64):
+- r10_account_sections_test.dart (84):
 - r10_auth_form_test.dart (51): FailingPasswordAuth
 - r10_auth_keyboard_test.dart (40):
 - r10_auth_service_test.dart (83):
@@ -1181,7 +1189,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - r5_custom_report_test.dart (65):
 - r5_picker_test.dart (65):
 - r5_range_test.dart (39):
-- r5_report_body_section_test.dart (70):
+- r5_report_body_section_test.dart (58):
 - r5_report_visual_test.dart (71):
 - r5_report_widgets_test.dart (108): HeldReportExport
 - r9_cards_test.dart (60):
@@ -1229,7 +1237,6 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - report_page_test.dart (80):
 - report_range_controller_test.dart (37):
 - report_range_dismiss_test.dart (50):
-- report_range_limit_test.dart (48):
 - report_range_modal_test.dart (78):
 - report_redesign_golden_test.dart (30):
 - report_redesign_host.dart (46):

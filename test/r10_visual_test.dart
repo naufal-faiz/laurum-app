@@ -61,7 +61,7 @@ void main() {
         }
         expect(tester.takeException(), isNull);
         if (small && target == 'account') {
-          expect(tester.getSize(find.text('ratna@example.com')).height, lessThan(100));
+          expect(tester.getSize(find.text('ratna@example.com').first).height, lessThan(100));
           expect(tester.getSize(find.text('Ganti password')).height, lessThan(100));
         }
         if (!small || ['account', 'signup', 'password', 'signin_error'].contains(target)) {
