@@ -1,5 +1,5 @@
 # B7b - Migrasi lokal skema AI WhatsApp
-Status: SELESAI lokal (2026-11-18). Berhenti di GATE: pengguna menerapkan ke cloud.
+Status: SELESAI lokal dan TERPASANG di cloud laurumdb (2026-11-18, izin pengguna).
 Migrasi: supabase/migrations/20261118090000_b7b_ai_tables.sql (606 baris).
 Tes: supabase/tests/b7b_test.sql (87 tes baru). Skema: docs/plans/B7a-skema.md.
 
@@ -36,20 +36,24 @@ Tes: supabase/tests/b7b_test.sql (87 tes baru). Skema: docs/plans/B7a-skema.md.
 - Bug yang ditemukan tes dan diperbaiki: service_role bisa mengubah kolom owner (immutable_content),
   auto-close bisa menutup usulan yang sudah diputuskan (sekarang hanya dari menunggu).
 
-## Langkah terapan cloud (PENGGUNA; agen dilarang, AI-2)
-1. Pastikan branch sudah di-merge/di-commit dan `supabase/migrations/20261118090000_b7b_ai_tables.sql`
-   ada. Cadangkan dulu: `supabase db dump --linked -f backup-b7b.sql` (opsional, hanya data skema public).
-2. `supabase link --project-ref <ref-laurumdb>` (sekali; jangan bagikan kunci ke agen).
-3. `supabase db push` -> hanya migrasi baru yang dijalankan; tidak ada DROP/TRUNCATE.
-4. Periksa: `select count(*) from public.ai_proposals;` (0 baris), `select count(*) from
-   public.wa_connections;` (0 baris), `select proname from pg_proc where proname in
-   ('ingest_ai_proposal','get_ai_context','set_wa_connection_status','set_ai_settings');` (4 baris),
-   `select relrowsecurity from pg_class where relname in ('ai_proposals','wa_connections');` (true,true).
-5. Jalankan `supabase test db --linked` bila ingin bukti pgTAP di cloud (opsional; butuh koneksi).
-6. Cara membatalkan (hanya bila benar-benar perlu, tabel masih kosong):
-   drop trigger guard_ai_proposal/guard_wa_connection/stamp_record, drop 4 RPC, drop table
-   wa_connections lalu ai_proposals, lalu pulihkan sync_push/sync_pull/purge/delete_my_account
-   dari migrasi b2a. Jangan lakukan setelah tabel berisi data.
+## Penerapan cloud (SUDAH dijalankan 2026-11-18, atas izin pengguna)
+Catatan aturan: AI-2 semula menaruh langkah ini di tangan pengguna; pengguna memerintahkan agen
+memakai project ref aktif dari .env.local (laurumdb, iczxtytiomlrpngitdlf = proyek yang sama
+dengan .temp/project-ref). Penerapan: lihat riwayat di bawah.
+1. Cadangan sebelum: `supabase db dump --linked` (skema) ke luar repo; data-only setelahnya.
+2. `supabase migration list --linked`: lima migrasi lama sudah ada, hanya 20261118090000 tertunda.
+3. `supabase db push --linked --dry-run`: satu migrasi. Lalu `supabase db push --linked --yes`.
+   Hasil: "Applying migration 20261118090000_b7b_ai_tables.sql".
+4. Verifikasi dari dump skema cloud: 2 tabel, 4 indeks, RLS true keduanya, 4 trigger
+   (stamp_record x2, guard_ai_proposal, guard_wa_connection), 3 policy per tabel, 4 RPC dengan
+   grant service_role/authenticated, dan `migration list` mencatat remote = 20261118090000.
+5. Tidak ada DROP/TRUNCATE; tabel lama dan datanya tidak disentuh. Kedua tabel baru kosong.
+
+## Bila perlu membatalkan (hanya selama kedua tabel masih kosong)
+Drop trigger guard_ai_proposal/guard_wa_connection/stamp_record, drop 4 RPC, drop table
+wa_connections lalu ai_proposals, lalu pulihkan sync_push/sync_pull/purge/delete_my_account
+dari migrasi b2a dan hapus baris 20261118090000 dari supabase_migrations.schema_migrations.
+Jangan lakukan setelah tabel berisi data.
 
 ## Catatan untuk B7c (aplikasi Flutter)
 - Drift lokal TIDAK boleh punya kolom decided_at: payload sync harus identik dengan baris server
