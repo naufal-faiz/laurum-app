@@ -12,7 +12,7 @@ Dasar: PRD B (bagian 3.1-3.3, 14, 16) dan audit dev1rev. Prinsip: lokal dulu, se
 | B3 | Auth nyata, pemulihan, hapus akun | Sedang | B2 | Buat proyek Supabase cloud (gratis), OAuth client Google + SHA-1, pilih penyedia SMTP |
 | B5 | Printer nyata | Sedang | B1f | Printer 58 mm fisik |
 | B6 | Persiapan Play Store | Sedang | B3, B5 | Akun Play Console |
-| B7 | AI | Besar | B3 | Putuskan jalur WhatsApp |
+| B7 | AI | Besar (B7a-B7h) | B3 | Jalur diputuskan 18 Nov 2026: Evolution API hanya uji; rincian dan GATE di docs/plans/B7-ai-integrasi.md |
 | B8 | Pro | Kecil-sedang | B6 | - |
 
 B0 dan B1 tidak saling bergantung. Urutan di INDEX: B1 dulu (hasilnya langsung terlihat: data bertahan setelah aplikasi ditutup), lalu B0 (butuh Docker). B2 butuh keduanya.

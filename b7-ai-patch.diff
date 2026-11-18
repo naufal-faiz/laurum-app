@@ -1,0 +1,151 @@
+diff --git a/AGENTS.md b/AGENTS.md
+index 583d9af..b54ee91 100644
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -117,6 +117,21 @@ BE-7. Berhenti dan tanya bila: skema atau migrasi baru, penghapusan kode atau te
+ BE-8. Verifikasi: method repository baru = suite kontrak InMemory* dan Drift* (aturan 21); skema berubah = migrasi + tes migrasi (aturan 19); check_all sekali per tugas; alur uang diuji asap oleh pengguna di backend sungguhan (Supabase lokal) sebelum dianggap selesai.
+ BE-9. Handoff: STATE.md (format UI-34) dan PARITY.md diperbarui di akhir tugas; satu commit per tugas backend.
+ 
++## Mode Integrasi AI WhatsApp (B7) (AKTIF di branch ai-whatsapp)
++Tujuan: pesan WhatsApp pelanggan dibaca worker, disaring AI, masuk sebagai usulan (ai_proposals) ke akun pemilik yang benar, lalu muncul di aplikasi untuk disetujui atau ditolak (PRD B 12). Rencana, nama, kontrak, dan fase: docs/plans/B7-ai-integrasi.md (baca hanya bagian fase yang dikerjakan). Mode ini MENUMPANG Mode Backend: BE-1 sampai BE-9 dan aturan keras 1-22 tetap berlaku; AI-1 sampai AI-12 hanya menambah. Branch kerja: ai-whatsapp (dari backend-newdesign, dibuat pengguna). git branch --show-current harus ai-whatsapp; main/master/newdesign/backend-newdesign = berhenti dan lapor. Dilarang push atau merge tanpa izin. Mode ini tidak membaca Figma.
++AI-1. SATU FASE per sesi (B7a, B7b, dst). Selesai satu fase = berhenti di GATE-nya: perbarui STATE.md (UI-34) dan INDEX.md, commit, lapor, tunggu pengguna. Dilarang memulai fase berikutnya. Prompt fase berikutnya ditulis SETELAH fase ini selesai, memakai temuan nyata, bukan sebelumnya.
++AI-2. Batas cloud (aturan 19 dan supabase/README.md): agen HANYA bekerja di Supabase LOKAL (Docker). Dilarang supabase link, db push, --remote, functions deploy, secrets set ke proyek cloud, atau memakai URL/kunci cloud. Penerapan ke cloud dilakukan pengguna; agen menulis langkah persisnya di docs/progress/b7<huruf>.md (perintah, urutan, cara memeriksa hasil, cara membatalkan). Migrasi hanya maju dan aditif: tanpa DROP, TRUNCATE, atau perubahan tabel yang sudah ada.
++AI-3. Rahasia tidak lewat agen: dilarang meminta, membaca, mencetak, atau menempelkan nilai API key LLM, kunci Supabase cloud, kunci Evolution, webhook secret, atau URL tunnel ke chat, log, tes, atau berkas yang masuk repo. Saat fase butuh kunci: berhenti di GATE, sebut NAMA variabel, TEMPAT menyimpannya (tabel Rahasia di plan), dan LANGKAH pengguna; lanjut setelah pengguna menjawab "sudah", tanpa nilai. Aplikasi tetap hanya memakai URL dan kunci publik lewat --dart-define (aturan 22).
++AI-4. Isolasi pemilik (inti mode ini): (a) owner_id usulan TIDAK PERNAH berasal dari LLM atau isi pesan; server menentukannya dari wa_connections.instance_id yang dipetakan saat penautan dari JWT pemilik. (b) LLM hanya mengubah teks menjadi JSON terstruktur: tanpa tool, tanpa akses database, tanpa melihat owner_id. Nomor pengirim diambil node biasa dari webhook, bukan dari LLM. (c) Worker menulis usulan hanya lewat satu RPC service-role yang memvalidasi bentuk data, menolak instance_id tak dikenal, dan idempoten (unik owner_id + wa_message_id). (d) Klien tidak punya INSERT ke ai_proposals; RLS: baca milik sendiri, ubah hanya kolom keputusan dan kolom yang diedit pemilik. (e) Tes pgTAP lintas akun wajib: pemilik B tidak bisa membaca atau mengubah usulan A, dan RPC dengan instance A tidak pernah menulis ke B.
++AI-5. AI hanya MEMBACA. Dilarang kode atau flow yang mengirim pesan WhatsApp (send, reply, presence, tanda baca) di aplikasi, Edge Function, maupun worker. Grup, pesan sendiri, non-teks, dan pesan lebih lama dari connected_at dibuang sebelum LLM. Pesan mentah tidak disimpan utuh: hanya source_text usulan order (PRD A); pesan non-order tidak disimpan dan tidak masuk log.
++AI-6. Model tetap satu: tabel dan kolom mengikuti domain Proposal (lib/core/domain/proposal.dart) dan PRD B 5/12; nama ai_proposals dan wa_connections. Kolom tambahan (wa_message_id, chat_id, confidence, dst) diusulkan di B7a dan disetujui pengguna (BE-7) sebelum migrasi. Persetujuan usulan tetap lewat TransactionRunner (aturan 17c) dengan ID order UUID v5 turunan proposal (PRD B 3.3); tidak ada perubahan perilaku uang.
++AI-7. Penyambungan aplikasi mengikuti pola yang ada (aturan 19 dan 21): ProposalRepository nyata punya suite kontrak InMemory dan Drift; skema Drift berubah = migrasi + tes migrasi. FakeWhatsappConnection (default connected), proposalSeedProvider demo, dan akurasi demo TIDAK boleh tampil sebagai data nyata di build backend (BE-6): sambungkan ke sumber nyata atau jangan dirender, dan catat di PARITY.md. Build dummy (main_dummy) tetap berjalan dengan data dummy.
++AI-8. Tanpa perubahan tampilan (BE-1). Penautan lewat kode pasangan (nomor telepon lalu kode 8 karakter) butuh input dan tampilan yang belum ada di layar Hubungkan WhatsApp (spec 28 hanya QR; QR tidak bisa dipindai dari HP yang sama): berhenti dan tanya SATU kali dengan usulan penempatan memakai komponen yang ada. Dilarang membuat widget baru.
++AI-9. Worker (Evolution API + n8n) hidup di repo TERPISAH laurum-infra (PRD B 3.1), bukan di repo ini. Di repo ini hanya: migrasi, Edge Function dan tesnya, kode aplikasi, dan dokumen. Dilarang menaruh compose, workflow n8n, atau .env worker di sini. Kontrak antar-repo (payload, bentuk JSON, kode galat RPC) hanya ada di docs/plans/B7-ai-integrasi.md bagian Kontrak; perubahan kontrak = berhenti dan tanya.
++AI-10. Edge Function mengikuti pola supabase/functions/delete-account: handler.ts murni + tes, autentikasi diverifikasi ke server (/auth/v1/user) bukan dengan membaca klaim JWT, galat tanpa isi upstream, entri di supabase/config.toml. URL Evolution (Quick Tunnel berubah tiap restart) adalah secret fungsi, bukan konstanta kode.
++AI-11. Verifikasi per fase dengan bukti perintah dan angka: check_all (Dart), supabase test db, npm test --prefix supabase. Bagian worker dan WhatsApp dibuktikan lewat tes asap pengguna di GATE (kirim chat dari HP kedua), bukan klaim agen. Sampel chat uji berasal dari pengguna dan sudah disamarkan; dilarang mengarang sampel lalu melaporkan angka akurasi.
++AI-12. Berhenti dan tanya (tambahan BE-7): kunci, akun, atau layanan berbayar baru; dependensi pubspec/npm baru; skema di luar yang disetujui B7a; jalur WhatsApp selain Evolution API; menyimpan pesan mentah; atau apa pun yang membuat agen mengirim pesan.
++
+ ## Skill dan memori (ringkas; detail di SKILLS.md)
+ - Pilih skill lewat tabel niat di SKILLS.md, sekali di awal tugas. Tugas kecil (sekitar 20 baris atau kurang), status, dan pertanyaan singkat tidak perlu skill.
+ - Subagen, eksekusi paralel, dan git worktree MATI kecuali pengguna memintanya.
+diff --git a/docs/backend/ROADMAP.md b/docs/backend/ROADMAP.md
+index 8345fa3..e6aacb9 100644
+--- a/docs/backend/ROADMAP.md
++++ b/docs/backend/ROADMAP.md
+@@ -12,7 +12,7 @@ Dasar: PRD B (bagian 3.1-3.3, 14, 16) dan audit dev1rev. Prinsip: lokal dulu, se
+ | B3 | Auth nyata, pemulihan, hapus akun | Sedang | B2 | Buat proyek Supabase cloud (gratis), OAuth client Google + SHA-1, pilih penyedia SMTP |
+ | B5 | Printer nyata | Sedang | B1f | Printer 58 mm fisik |
+ | B6 | Persiapan Play Store | Sedang | B3, B5 | Akun Play Console |
+-| B7 | AI | Besar | B3 | Putuskan jalur WhatsApp |
++| B7 | AI | Besar (B7a-B7h) | B3 | Jalur diputuskan 18 Nov 2026: Evolution API hanya uji; rincian dan GATE di docs/plans/B7-ai-integrasi.md |
+ | B8 | Pro | Kecil-sedang | B6 | - |
+ 
+ B0 dan B1 tidak saling bergantung. Urutan di INDEX: B1 dulu (hasilnya langsung terlihat: data bertahan setelah aplikasi ditutup), lalu B0 (butuh Docker). B2 butuh keduanya.
+diff --git a/docs/plans/B7-ai-integrasi.md b/docs/plans/B7-ai-integrasi.md
+new file mode 100644
+index 0000000..0ca4595
+--- /dev/null
++++ b/docs/plans/B7-ai-integrasi.md
+@@ -0,0 +1,62 @@
++# B7 - Integrasi AI pembaca WhatsApp
++
++Status: dirancang 18 Nov 2026, dikerjakan bertahap B7a sampai B7h, satu fase per sesi, berhenti di tiap GATE.
++Dasar: PRD B 5, 12, 16.3; docs/backend/ROADMAP.md baris B7; AGENTS.md bagian Mode Integrasi AI WhatsApp (AI-1 sampai AI-12). Branch: ai-whatsapp.
++
++## Keadaan saat ini (diperiksa 18 Nov 2026)
++- UI AI dummy sudah lengkap (prompt 80): AiSettingsPage, WhatsappLinkPage (QR placeholder, kedaluwarsa 1 menit), ProposalDetail/History, setujui/tolak/batal idempoten. Spec 25-28.
++- ProposalRepository hanya InMemory, juga di mode Drift (drift_repository_overrides.dart); usulan demo hanya untuk akun demo.
++- whatsappConnectionProvider = FakeWhatsappConnection (default connected). AiSettings 3 saklar hanya di memori.
++- Server: 13 tabel + sync_push grup atomik + pull kursor; ai_proposals dan wa_connections BELUM ada (PRD B 5 menunda).
++- Migrasi cloud diterapkan pemilik (INDEX 9 Nov); supabase/README.md: agen hanya lokal.
++
++## Keputusan pengguna (14-18 Nov 2026)
++- Jalur WhatsApp: Evolution API (Baileys, tidak resmi) HANYA untuk uji internal; rilis publik wajib dievaluasi ulang ke Cloud API resmi (PRD B 16.3).
++- Satu flow n8n untuk semua pengguna; isolasi ditegakkan server (AI-4), bukan prompt.
++- Uji: PC lokal (Docker Desktop), Supabase cloud yang ada, Quick Tunnel Cloudflare, nomor WhatsApp biasa cadangan, AI hanya membaca.
++- Keamanan/privasi lanjutan ditunda; AI-3, AI-4, AI-5 tetap wajib. Cadangan rahasia (password manager) belakangan.
++
++## Arsitektur
++WhatsApp pelanggan -> Evolution API (laurum-infra) -> webhook -> n8n -> [node biasa: cari instance, saring, ambil nomor pengirim] -> LLM (hanya JSON) -> [node biasa: validasi] -> RPC ingest_ai_proposal (Supabase, service role) -> ai_proposals -> sinkron pull -> aplikasi (usulan Menunggu) -> pemilik setuju/tolak -> TransactionRunner membuat order (source whatsappAi) dan status usulan berubah.
++Penautan: aplikasi -> Edge Function wa-connect (JWT pemilik) -> Evolution API (via tunnel) -> kode pasangan/QR -> pemilik memasukkannya di WhatsApp -> event connection.update -> n8n -> RPC set_wa_connection_status -> wa_connections.
++
++## Kontrak (usulan awal; DIKUNCI setelah B7a disetujui, perubahan = AI-9)
++Tabel (PRD B 5; kolom umum id, owner_id, created_at, updated_at, deleted_at):
++- ai_proposals: status (menunggu/disetujui/ditolak/ditutup_otomatis, padanan ProposalStatus), source_text, customer_name, phone, address, service_id, cancel_requested, uncertain_address, customer_id, order_id; tambahan usulan: wa_message_id, chat_id, confidence. Unik (owner_id, wa_message_id).
++- wa_connections: satu baris per akun (v1), instance_id unik, status (belum/menunggu/terhubung/terputus), connected_at, pengaturan worker (read_messages, ignore_groups, detect_cancellation).
++RPC khusus service role (tidak dapat dipanggil klien):
++- ingest_ai_proposal(p_instance_id text, p_wa_message_id text, p_chat_id text, p_received_at timestamptz, p_payload jsonb) -> {code}: created | duplicate | ignored | unknown_instance | invalid.
++- get_ai_context(p_instance_id text) -> connected_at, tiga pengaturan, daftar layanan aktif (nama, jenis) untuk prompt.
++- set_wa_connection_status(p_instance_id text, p_status text) -> {code}.
++Payload p_payload (hasil LLM yang sudah divalidasi n8n): source_text (maks 2000), customer_name, address, service_hint, uncertain_address, cancel_requested, confidence 0..1. Nomor telepon dan wa_message_id diisi node biasa dari webhook, bukan LLM.
++Edge Function (JWT pemilik): wa-connect, wa-disconnect. Pengaturan AI dari aplikasi disimpan ke wa_connections lewat jalur sinkron/RPC yang diputuskan di B7a.
++
++## Fase
++| Fase | Hasil | Selesai bila | GATE (tindakanmu) |
++| --- | --- | --- | --- |
++| B7a | Audit + rancangan skema (dokumen saja): docs/plans/B7a-skema.md, maks 60 baris | Keputusan terbuka terjawab (lihat prompt B7a) | Setujui skema dan kontrak |
++| B7b | Migrasi lokal: dua tabel, RLS, tiga RPC, tes pgTAP lintas akun, idempotensi, instance tak dikenal | supabase test db hijau | Terapkan migrasi ke cloud sesuai docs/progress/b7b.md |
++| B7c | Aplikasi: tabel Drift + DriftProposalRepository + kontrak + pull sinkron; hapus usulan demo dari akun nyata; skrip simulasi worker (curl/SQL ke RPC) | check_all hijau | Jalankan skrip: usulan muncul di HP setelah sinkron, setujui, order terbentuk |
++| B7d | Repo laurum-infra: compose Evolution+Postgres+Redis+n8n (versi dikunci), flow n8n tunggal multi-user, prompt + JSON schema; diuji dengan payload webhook tiruan | Payload tiruan jadi usulan di akun benar, akun lain kosong | Isi kunci LLM dan kunci Supabase di Credentials n8n (UI), impor flow |
++| B7e | Penautan WhatsApp manual lewat Evolution API + webhook ke n8n | Chat dari HP kedua tiba di n8n | Masukkan kode pasangan di HP (nomor cadangan), kirim chat uji |
++| B7f | Edge Function wa-connect/wa-disconnect + status koneksi nyata di aplikasi (ganti Fake) + pengaturan AI tersimpan; kode pasangan (AI-8) | Layar Hubungkan WhatsApp berjalan nyata | Pasang cloudflared, jalankan Quick Tunnel, set secret fungsi, deploy fungsi |
++| B7g | Penyetelan prompt dengan sampel chat asli + skrip evaluasi di laurum-infra | Laporan akurasi apa adanya | Sediakan 15-20 chat tersamarkan beserta label |
++| B7h | Uji end-to-end dan isolasi (disusun bersama pengguna setelah B7f) | Skenario lulus | Jalankan uji |
++Prompt tiap fase ditulis setelah fase sebelumnya SELESAI. Hanya B7a yang sudah ditulis.
++
++## Rahasia (AI-3)
++| Nama | Dipakai oleh | Disimpan di | Yang mengisi |
++| --- | --- | --- | --- |
++| URL + publishable key Supabase | aplikasi | .env.local (--dart-define-from-file) | sudah ada |
++| Secret key Supabase cloud | n8n | Credentials n8n (UI) | pengguna |
++| API key LLM | n8n | Credentials n8n (UI) | pengguna |
++| AUTHENTICATION_API_KEY, N8N_ENCRYPTION_KEY, WEBHOOK_SECRET | laurum-infra | laurum-infra/.env (gitignore) | dibuat otomatis lokal, tanpa dicetak |
++| EVOLUTION_URL (tunnel), EVOLUTION_API_KEY | Edge Function | secrets Supabase cloud | pengguna, tanpa lewat chat |
++EVOLUTION_URL berubah tiap Quick Tunnel dimulai ulang: B7f menyiapkan langkah pembaruan tanpa mengubah kode.
++
++## Risiko dan catatan
++- Jalur tidak resmi: nomor bisa diblokir; pakai nomor cadangan, jangan mengirim pesan (AI-5).
++- PC harus menyala; sesi WhatsApp putus bila gateway mati lama. Status Terputus + Hubungkan ulang wajib ada.
++- Status koneksi lewat pull sinkron mungkin terlalu lambat untuk layar penautan: B7a memilih antara polling singkat dan Realtime.
++- Mode campuran dilarang: usulan nyata dan demo tidak tampil bersamaan (AI-7).
++- Di luar lingkup B7: membalas pelanggan, multi-nomor per akun, voice note/gambar, Cloud API resmi, Pro/entitlement.
+diff --git a/docs/prompts/B7a-audit-skema-ai.md b/docs/prompts/B7a-audit-skema-ai.md
+new file mode 100644
+index 0000000..09df6ef
+--- /dev/null
++++ b/docs/prompts/B7a-audit-skema-ai.md
+@@ -0,0 +1,23 @@
++# B7a - Audit dan rancangan skema AI WhatsApp
++
++Ikuti _COMMON.md bagian A (kecuali A.3 dan A.4) dan F. Rencana: docs/plans/B7-ai-integrasi.md. Aturan: AGENTS.md Mode Integrasi AI WhatsApp (AI-1 sampai AI-12) di atas Mode Backend.
++Pengecualian A.3: B3b berstatus BELUM dan TIDAK memblokir B7 (keputusan pengguna 18 Nov 2026). A.4 tidak berlaku (tidak membaca Figma/.pen).
++Prasyarat: branch ai-whatsapp sudah dibuat pengguna dari backend-newdesign dan check_all hijau; selain itu berhenti dan lapor.
++Fase ini DOKUMEN SAJA: tanpa kode Dart, tanpa migrasi, tanpa Edge Function, tanpa dependensi, tanpa menyentuh Supabase cloud.
++
++## Hasil yang diminta
++1. Audit singkat (baca terarah lewat REPO_MAP.md, tanpa membaca PRD utuh): Proposal, ProposalRepository, InMemoryProposalRepository, drift_repository_overrides.dart, proposal_*.dart di state, ai_settings.dart, whatsapp_link.dart, shell_state.dart (FakeWhatsappConnection), supabase/migrations 0001-0004 + b2a (pola owner_id, RLS, stamp_record, sync_push, daftar tabel yang boleh disinkron), pola supabase/functions/delete-account, cara tabel baru didaftarkan di core/sync dan core/persistence (wire schema, Drift schema_migration, kontrak repository). Laporkan sebagai tabel: file yang akan berubah per fase B7b-B7f. Maksimal 40 baris.
++2. Tulis docs/plans/B7a-skema.md (maks 60 baris): kolom, tipe, constraint, dan indeks ai_proposals dan wa_connections; RLS per operasi; padanan setiap field Proposal ke kolom; padanan ProposalStatus ke nilai database; rancangan tiga RPC service-role (tanda tangan, kode galat, idempotensi); cara keputusan pemilik (setujui, tolak, batal, edit nama/telepon/alamat/layanan) sampai ke server tanpa memberi klien INSERT; pengaturan AI (3 saklar) disimpan di mana.
++3. Jawab dengan rekomendasi dan alasan (satu baris tiap butir), lalu TANYA pengguna maksimal 5 pertanyaan sekaligus:
++   a. Keputusan pemilik dikirim lewat sync_push (tabel baru masuk daftar) atau RPC khusus?
++   b. Status koneksi di layar penautan: polling singkat atau Realtime?
++   c. Retensi source_text usulan yang sudah disetujui/ditolak (hapus otomatis setelah berapa hari, atau disimpan)?
++   d. Kolom tambahan wa_message_id, chat_id, confidence: diterima atau diubah?
++   e. Satu koneksi per akun (v1) cukup, atau sediakan kunci unik yang memungkinkan lebih dari satu nanti?
++4. Daftar temuan yang membuat rencana B7 perlu diubah (bila ada) dan risiko migrasi pada database cloud yang sudah berisi data.
++5. Perbarui STATE.md (format UI-34) dan baris B7a di INDEX.md. Commit docs: "docs(b7a): rancangan skema AI". BERHENTI di GATE: tunggu pengguna menyetujui skema. Jangan menulis prompt B7b.
++
++## Larangan khusus
++- Tidak menulis SQL migrasi sungguhan; contoh SQL di dokumen hanya sketsa kolom.
++- Tidak menyentuh docs/prd (usulan perubahan PRD ditulis sebagai catatan di B7a-skema.md, pengguna yang memutuskan).
++- Tidak meminta, membaca, atau menulis kunci apa pun (AI-3).
+diff --git a/docs/prompts/INDEX.md b/docs/prompts/INDEX.md
+index d6cc45c..4da2e67 100644
+--- a/docs/prompts/INDEX.md
++++ b/docs/prompts/INDEX.md
+@@ -57,7 +57,9 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
+ | B3a | B3a-auth-fondasi.md | Fondasi Auth nyata: konfigurasi, sesi aman, gateway Supabase, deep link | SELESAI (2026-11-09) | check_all hijau (960 tes), 17 tes Auth lulus; `flutter_secure_storage` + `google_sign_in`; tanpa konfigurasi tetap dummy. Cloud belum punya migrasi, akun uji, dan Google Web Client ID. Lihat docs/progress/b3a.md |
+ | B3b | B3b-konfirmasi-pemulihan.md | Konfirmasi email nyata, penyegaran via deep link, layar password baru | BELUM | Dikerjakan setelah B3c (prioritas pengguna: sinkron); butuh akun uji/peti surat untuk verifikasi manual |
+ | B3c | B3c-hapus-akun-sinkron.md | Hapus akun lewat Edge, gerbang SyncCoordinator, devices, workmanager | SELESAI (2026-11-09) | check_all hijau (965 tes); gerbang sinkron + devices + hapus akun nyata; `workmanager 0.10.10` terpasang tetapi belum diuji di perangkat, iOS belum. Lihat docs/progress/b3c.md |
+-| B5-B8 | (belum ditulis) | Printer nyata, Play Store, AI, Pro | MENUNGGU | Lihat docs/backend/ROADMAP.md |
++| B7a | B7a-audit-skema-ai.md | AI WhatsApp: audit dan rancangan skema (dokumen saja) | BELUM | Diambil lewat perintah khusus B7 (docs/plans/B7-ai-integrasi.md), BUKAN LANJUT biasa, karena B3b masih BELUM. Berhenti di GATE: setujui skema |
++| B7b-B7h | (belum ditulis) | AI WhatsApp: migrasi, aplikasi, worker, penautan, Edge Function, penyetelan, uji | MENUNGGU | Ditulis satu per satu setelah fase sebelumnya SELESAI; lihat docs/plans/B7-ai-integrasi.md |
++| B5, B6, B8 | (belum ditulis) | Printer nyata, Play Store, Pro | MENUNGGU | Lihat docs/backend/ROADMAP.md |
+ 
+ Setelah No 21 selesai, kerjakan backend: BP0, lalu B1a-B1f (B0 setelah B1f, karena hasil B1 langsung terlihat di HP), rencana di docs/backend/ROADMAP.md. Baris berstatus MENUNGGU belum punya prompt dan jangan diambil; minta penyusunannya setelah B1f SELESAI.
+ 

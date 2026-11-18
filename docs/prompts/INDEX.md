@@ -57,7 +57,9 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | B3a | B3a-auth-fondasi.md | Fondasi Auth nyata: konfigurasi, sesi aman, gateway Supabase, deep link | SELESAI (2026-11-09) | check_all hijau (960 tes), 17 tes Auth lulus; `flutter_secure_storage` + `google_sign_in`; tanpa konfigurasi tetap dummy. Cloud belum punya migrasi, akun uji, dan Google Web Client ID. Lihat docs/progress/b3a.md |
 | B3b | B3b-konfirmasi-pemulihan.md | Konfirmasi email nyata, penyegaran via deep link, layar password baru | BELUM | Dikerjakan setelah B3c (prioritas pengguna: sinkron); butuh akun uji/peti surat untuk verifikasi manual |
 | B3c | B3c-hapus-akun-sinkron.md | Hapus akun lewat Edge, gerbang SyncCoordinator, devices, workmanager | SELESAI (2026-11-09) | check_all hijau (965 tes); gerbang sinkron + devices + hapus akun nyata; `workmanager 0.10.10` terpasang tetapi belum diuji di perangkat, iOS belum. Lihat docs/progress/b3c.md |
-| B5-B8 | (belum ditulis) | Printer nyata, Play Store, AI, Pro | MENUNGGU | Lihat docs/backend/ROADMAP.md |
+| B7a | B7a-audit-skema-ai.md | AI WhatsApp: audit dan rancangan skema (dokumen saja) | BELUM | Diambil lewat perintah khusus B7 (docs/plans/B7-ai-integrasi.md), BUKAN LANJUT biasa, karena B3b masih BELUM. Berhenti di GATE: setujui skema |
+| B7b-B7h | (belum ditulis) | AI WhatsApp: migrasi, aplikasi, worker, penautan, Edge Function, penyetelan, uji | MENUNGGU | Ditulis satu per satu setelah fase sebelumnya SELESAI; lihat docs/plans/B7-ai-integrasi.md |
+| B5, B6, B8 | (belum ditulis) | Printer nyata, Play Store, Pro | MENUNGGU | Lihat docs/backend/ROADMAP.md |
 
 Setelah No 21 selesai, kerjakan backend: BP0, lalu B1a-B1f (B0 setelah B1f, karena hasil B1 langsung terlihat di HP), rencana di docs/backend/ROADMAP.md. Baris berstatus MENUNGGU belum punya prompt dan jangan diambil; minta penyusunannya setelah B1f SELESAI.
 
