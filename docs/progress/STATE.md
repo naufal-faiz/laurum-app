@@ -2,40 +2,38 @@
 Diperbarui: 2026-11-18 | Cabang ai-whatsapp (dari backend-newdesign). Mode Integrasi AI WhatsApp.
 
 ## Sesi aktif
-B7a (audit + rancangan skema AI, dokumen saja), dasar commit 72b3685. Tidak membaca Figma.
+B7b (migrasi lokal skema AI), dasar commit a4ab138. Tidak membaca Figma.
 
 ## Status irisan
-- Selesai: docs/plans/B7a-skema.md (60 baris: kolom/tipe/constraint/indeks dua tabel, RLS per
-  operasi, padanan Proposal dan ProposalStatus, 4 RPC, alur keputusan tanpa INSERT klien,
-  lokasi pengaturan AI).
-- Selesai: docs/progress/b7a.md (audit berkas per fase B7b-B7f, 8 temuan, risiko migrasi cloud,
-  rekomendasi + 5 pertanyaan GATE, catatan PRD).
-- Tanpa kode Dart, migrasi, Edge Function, dependensi, atau sentuhan Supabase cloud (AI-2/AI-3).
-- B7b belum ditulis dan tidak boleh dimulai sebelum GATE disetujui.
+- Selesai: supabase/migrations/20261118090000_b7b_ai_tables.sql (dua tabel, 4 indeks, RLS
+  per operasi, 4 trigger guard/stamp, 4 RPC, sync_push/pull dan purge dibuat ulang).
+- Selesai: supabase/tests/b7b_test.sql (87 tes: isolasi dua akun, ingest idempoten/invalid/ignored,
+  transisi dan immutable, grant, retensi, auto-close, sync_push/pull, purge).
+- Selesai: docs/progress/b7b.md (objek, hasil tes, langkah cloud untuk pengguna, catatan B7c).
+- Tanpa kode Dart, Edge Function, dependensi, atau sentuhan Supabase cloud (AI-2/AI-3).
 
 ## Keputusan pengguna terbaru
-- B7 dikerjakan satu fase per sesi, berhenti di tiap GATE (docs/plans/B7-ai-integrasi.md).
-- B3b BELUM dan tidak memblokir B7 (18 Nov 2026). Jalur Evolution API hanya untuk uji internal.
-- Satu flow n8n multi-user; isolasi ditegakkan server (AI-4). AI hanya membaca (AI-5).
-- Skema ai_proposals/wa_connections: MENUNGGU persetujuan di GATE B7a.
+- B7a disetujui seluruhnya: keputusan lewat sync_push, polling status 2 dtk/60 dtk, retensi
+  source_text 30 hari, kolom wa_message_id/chat_id/confidence, satu koneksi per akun.
+- B3b BELUM dan tidak memblokir B7. Satu flow n8n multi-user; isolasi di server (AI-4).
+- AI hanya membaca (AI-5); tanpa perubahan perilaku uang di fase migrasi.
 
 ## Belum di-commit
-Tidak ada; commit docs(b7a) mencakup B7a-skema.md, b7a.md, INDEX.md, dan STATE.md.
+Tidak ada setelah commit feat(b7b).
 
 ## Langkah berikutnya
-1. GATE B7a: setujui docs/plans/B7a-skema.md dan jawab pertanyaan a-e di docs/progress/b7a.md.
-2. Setelah disetujui: tulis prompt B7b (migrasi lokal + RLS + RPC + pgTAP lintas akun), lalu
-   docs/progress/b7b.md berisi langkah terapan cloud untuk pengguna.
-3. B7c: Drift v6 dua tabel, DriftProposalRepository + suite kontrak, sinkron pull, lepas usulan
-   demo di akun nyata, skrip simulasi worker.
-4. B7d/B7e di repo laurum-infra; B7f Edge wa-connect/wa-disconnect + set_ai_settings + status
-   koneksi nyata (ganti FakeWhatsappConnection) + kode pasangan (AI-8, perlu keputusan UI).
-5. B3b menunggu akun uji/peti surat; B2e foto pengeluaran tertunda.
+1. GATE B7b: pengguna menerapkan migrasi ke cloud lewat docs/progress/b7b.md dan melapor "sudah".
+2. B7c (setelah GATE): Drift v6 dua tabel tanpa decided_at, DriftProposalRepository + kontrak,
+   sinkron push/pull, lepas usulan demo di akun nyata, skrip simulasi worker.
+3. B7d/B7e di repo laurum-infra; B7f Edge wa-connect/wa-disconnect + set_ai_settings + status
+   nyata (ganti FakeWhatsappConnection) + kode pasangan (AI-8, perlu keputusan UI).
+4. B3b menunggu akun uji/peti surat; B2e foto pengeluaran tertunda.
 
 ## Blocker
-- Supabase lokal (Docker Desktop) belum tersedia saat pemeriksaan; B7b butuh `supabase test db`.
+- Cloud belum menerima migrasi B7b (wajib pengguna; agen dilarang `db push`/`--remote`).
 - APK terakhir 1.0.2 code 3 (build/app/outputs/flutter-apk), belum dibangun ulang.
 
 ## Bukti terakhir
-- check_all SEMUA HIJAU (baseline B7a): 1216 tes lulus, 2 skip (Supabase lokal), REPO_MAP 1179.
-- Hanya berkas docs yang ditambah setelah baseline; repo_map dijalankan ulang setelah commit.
+- `supabase db reset --workdir .`: 6 migrasi dari nol, exit 0.
+- `supabase test db --workdir .`: Files=3, Tests=306, Result PASS (baseline 219 -> 306).
+- Tanpa perubahan kode Dart: check_all baseline B7a tetap berlaku (1216 lulus, 2 skip).
