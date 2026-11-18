@@ -155,7 +155,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_download_service.dart (22): ReceiptDownloadService, FileReceiptDownloadService
 - receipt_pdf.dart (90):
 - receipt_pdf_rows.dart (49):
-- receipt_png.dart (67):
+- receipt_png.dart (77):
 - repository_providers.dart (51): businessRepositoryProvider, receiptSettingsRepositoryProvider, customerRepositoryProvider, serviceRepositoryProvider, orderRepositoryProvider, savingsRepositoryProvider, expenseRepositoryProvider, proposalRepositoryProvider, reportRepositoryProvider, transactionRunnerProvider
 - service_providers.dart (41): printServiceProvider, externalLauncherProvider, contactSourceProvider, photoPickerProvider, exportServiceProvider, authServiceProvider, localDataServiceProvider, syncServiceProvider
 - store_configuration.dart (10):
@@ -1170,7 +1170,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - receipt_formatter_test.dart (70):
 - receipt_icon_tiles_test.dart (38):
 - receipt_page_test.dart (77):
-- receipt_png_preview_test.dart (105):
+- receipt_png_preview_test.dart (109):
 - receipt_preview_test.dart (32):
 - receipt_reconnect_page_test.dart (61): SlowReceiptPrinter
 - receipt_template_lines.dart (29):
