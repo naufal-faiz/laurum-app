@@ -38,6 +38,19 @@ decided_at null, phone 081234567890, confidence 0.90. Sisa GATE: sinkron dan set
 Catatan: Supabase menolak secret key bila User-Agent mirip browser; skrip memakai
 `-UserAgent 'laurum-worker/1.0'` (tanpa itu: "Forbidden use of secret API key in browser").
 
+## Diagnosis kegagalan sinkron di HP (19 Nov 2026)
+- Gejala pengguna: banner "Gagal sinkron", tombol aktif lagi, usulan belum tampil.
+- Dugaan penyebab: APK di HP dibangun sebelum `36afd11` (canonical JSON menolak
+  `confidence` pecahan). Push keputusan usulan gagal lokal sebelum jaringan
+  (`attempts=0`), jadi tidak ada data yang dikirim.
+- Verifikasi kode HEAD: tes integrasi baru
+  `test/sync/ai_proposal_sync_local_test.dart` menjalankan alur nyata di Supabase
+  lokal — pull usulan `confidence 0.9`, ubah status lewat OutboxWriter, push, lalu
+  memeriksa baris server: `status=disetujui`, `confidence=0.9`. LULUS.
+- Tindakan: APK release dibangun ulang dari HEAD (`--dart-define-from-file=.env.local`)
+  dan dipasang di SM-N975F dengan `adb install -r` (data lokal tidak dihapus).
+  Sisa: pengguna menekan "Sinkron sekarang" untuk mengonfirmasi.
+
 ## Catatan untuk fase berikutnya
 - B7d/B7e (laurum-infra) memakai kontrak yang sama; skrip simulasi ini adalah pengganti sementara.
 - B7f: `wa_connections` sudah tersinkron ke klien tetapi belum dipakai UI; FakeWhatsappConnection

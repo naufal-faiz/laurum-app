@@ -168,7 +168,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/core/sync/
 - background_sync.dart (47):
-- canonical_json.dart (16):
+- canonical_json.dart (27):
 - connection_monitor.dart (20): ConnectionMonitor, NoopConnectionMonitor
 - connectivity_connection_monitor.dart (37): ConnectivityConnectionMonitor
 - in_memory_outbox_store.dart (104): InMemoryOutboxStore, _Row
@@ -1217,7 +1217,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### test/sync/
 - account_initial_fetch_test.dart (55): RestoringCycle
-- canonical_json_test.dart (35):
+- ai_proposal_sync_local_test.dart (124):
+- canonical_json_test.dart (38):
 - fake_sync_transport.dart (62): FakeSyncTransport
 - in_memory_outbox_store_test.dart (13):
 - local_account_devices.dart (62): LocalAccountDevices
