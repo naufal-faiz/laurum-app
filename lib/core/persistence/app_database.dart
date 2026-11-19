@@ -11,11 +11,13 @@ import 'package:laurum/core/persistence/order_item_records.dart';
 import 'package:laurum/core/persistence/order_records.dart';
 import 'package:laurum/core/persistence/outbox_records.dart';
 import 'package:laurum/core/persistence/payment_records.dart';
+import 'package:laurum/core/persistence/proposal_records.dart';
 import 'package:laurum/core/persistence/receipt_setting_records.dart';
 import 'package:laurum/core/persistence/savings_records.dart';
 import 'package:laurum/core/persistence/schema_migration.dart';
 import 'package:laurum/core/persistence/service_records.dart';
 import 'package:laurum/core/persistence/sync_cursor_records.dart';
+import 'package:laurum/core/persistence/wa_connection_records.dart';
 
 part 'app_database.g.dart';
 
@@ -37,12 +39,14 @@ part 'app_database.g.dart';
     OutboxRecords,
     LocalSettingRecords,
     SyncCursorRecords,
+    AiProposalRecords,
+    WaConnectionRecords,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase(super.e);
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 6;
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (m) => m.createAll(),

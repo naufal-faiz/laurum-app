@@ -16,13 +16,14 @@ class InMemoryProposalRepository extends Notifier<List<Proposal>>
 
   @override
   Future<List<Proposal>> getProposals({ProposalStatus? status}) async {
-    if (status == null) return state;
-    return state.where((p) => p.status == status).toList();
+    final rows = state.where((p) => p.deletedAt == null);
+    if (status == null) return List.unmodifiable(rows);
+    return rows.where((p) => p.status == status).toList();
   }
 
   @override
   Future<Proposal?> getProposalById(String id) async {
-    final match = state.where((p) => p.id == id);
+    final match = state.where((p) => p.id == id && p.deletedAt == null);
     return match.isEmpty ? null : match.first;
   }
 
@@ -45,6 +46,7 @@ class InMemoryProposalRepository extends Notifier<List<Proposal>>
     ProposalStatus status, {
     String? orderId,
   }) async {
+    if (!state.any((p) => p.id == id)) throw StateError('Proposal not found');
     state = List.unmodifiable([
       for (final p in state)
         if (p.id == id) p.withStatus(status, orderId: orderId) else p,

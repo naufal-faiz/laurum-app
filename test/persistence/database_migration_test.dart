@@ -7,6 +7,7 @@ import 'package:laurum/core/persistence/drift_local_settings_repository.dart';
 import 'generated/schema.dart';
 import 'generated/schema_v1.dart' as v1;
 import 'generated/schema_v4.dart' as v4;
+import 'generated/schema_v5.dart' as v5;
 
 void main() {
   test('frozen v1 migrates to current schema and retains its data', () async {
@@ -21,7 +22,7 @@ void main() {
     await oldDb.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 5);
+    await verifier.migrateAndValidate(db, 6);
     final settings = DriftLocalSettingsRepository(db);
     await db.validateDatabaseSchema();
     expect(await settings.getInt('counter'), 143);
@@ -46,11 +47,28 @@ void main() {
     await oldDb.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 5);
+    await verifier.migrateAndValidate(db, 6);
     final row = await db.select(db.outboxRecords).getSingle();
     expect(row.groupId, isNull);
     expect(row.groupSeq, isNull);
     expect(row.requiresRecovery, isTrue);
     expect(row.conflictCode, isNull);
+  });
+
+  test('frozen v5 gains the AI tables without touching existing rows', () async {
+    final verifier = SchemaVerifier(GeneratedHelper());
+    final schema = await verifier.schemaAt(5);
+    final oldDb = v5.DatabaseAtV5(schema.newConnection());
+    await oldDb
+        .into(oldDb.localSettings)
+        .insert(v5.LocalSettingsCompanion.insert(key: 'counter', intValue: const Value(7)));
+    await oldDb.close();
+    final db = AppDatabase(schema.newConnection());
+    addTearDown(db.close);
+    await verifier.migrateAndValidate(db, 6);
+    await db.validateDatabaseSchema();
+    expect(await DriftLocalSettingsRepository(db).getInt('counter'), 7);
+    expect(await db.select(db.aiProposalRecords).get(), isEmpty);
+    expect(await db.select(db.waConnectionRecords).get(), isEmpty);
   });
 }

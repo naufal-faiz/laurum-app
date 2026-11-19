@@ -53,8 +53,17 @@ List<Override> driftRepositoryOverrides({AuthService? auth, bool demoProposals =
         !ref.read(authServiceProvider).needsBusinessSetup,
   ),
   proposalRepositoryProvider.overrideWith((ref) {
-    ref.watch(activeOwnerProvider);
-    ref.listen(inMemoryProposalRepositoryProvider, (_, _) => ref.notifyListeners());
-    return ref.read(inMemoryProposalRepositoryProvider.notifier);
+    final owner = ref.watch(activeOwnerProvider);
+    final demo =
+        demoSeedEnabled &&
+        owner == demoOwnerId &&
+        demoProposals &&
+        !ref.read(authServiceProvider).needsBusinessSetup;
+    if (demo) {
+      ref.listen(inMemoryProposalRepositoryProvider, (_, _) => ref.notifyListeners());
+      return ref.read(inMemoryProposalRepositoryProvider.notifier);
+    }
+    ref.listen(accountChangesProvider, (_, _) => ref.notifyListeners());
+    return requireAccountStore(ref, observe: false).proposals;
   }),
 ];

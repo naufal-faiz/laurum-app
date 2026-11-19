@@ -24,7 +24,7 @@ void main() {
     }
   }
 
-  test('all thirteen owner tables map wire rows into local tables', () async {
+  test('all fifteen owner tables map wire rows into local tables', () async {
     await applyAll();
     for (final table in syncPullOrder) {
       final count = await db.customSelect('SELECT COUNT(*) AS n FROM "$table"').getSingle();

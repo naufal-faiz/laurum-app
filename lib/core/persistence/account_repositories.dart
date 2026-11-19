@@ -10,6 +10,7 @@ import 'package:laurum/features/customers/data/drift_savings_repository.dart';
 import 'package:laurum/features/expenses/data/drift_expense_repository.dart';
 import 'package:laurum/features/expenses/data/expense_photo_store.dart';
 import 'package:laurum/features/orders/data/drift_order_repository.dart';
+import 'package:laurum/features/proposals/data/drift_proposal_repository.dart';
 import 'package:laurum/features/reports/data/drift_report_repository.dart';
 import 'package:laurum/features/services/data/drift_service_repository.dart';
 
@@ -36,6 +37,7 @@ class AccountRepositories {
       photos: ExpensePhotoStore(ownerId, directory: directory),
     );
     reports = DriftReportRepository(db, ownerId);
+    proposals = DriftProposalRepository(db, ownerId, writer, clock: clock);
   }
   final AppDatabase db;
   final String ownerId;
@@ -48,4 +50,5 @@ class AccountRepositories {
   late final DriftSavingsRepository savings;
   late final DriftExpenseRepository expenses;
   late final DriftReportRepository reports;
+  late final DriftProposalRepository proposals;
 }

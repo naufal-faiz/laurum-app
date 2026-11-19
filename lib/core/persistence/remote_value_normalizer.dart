@@ -11,6 +11,8 @@ const _timestampColumns = {
   'spent_at',
   'last_seen_at',
   'valid_until',
+  'received_at',
+  'connected_at',
 };
 
 Object? normalizeRemoteValue(String name, String type, Object? value) {

@@ -13,6 +13,8 @@ const wireExpense = '10000000-0000-4000-8000-000000000010';
 const wireReceipt = '10000000-0000-4000-8000-000000000011';
 const wireDevice = '10000000-0000-4000-8000-000000000012';
 const wireEntitlement = '10000000-0000-4000-8000-000000000013';
+const wireProposal = '10000000-0000-4000-8000-000000000014';
+const wireConnection = '10000000-0000-4000-8000-000000000015';
 const wireAt = '2026-11-06T06:29:12.123456Z';
 
 Map<String, Object?> customerRow({String name = ' Sari ', String? owner = wireOwner}) => {
@@ -181,5 +183,39 @@ List<Map<String, Object?>> allWireRows() => [
     'note': '',
     'spent_at': wireAt,
     'photo_path': null,
+  },
+  {
+    'id': wireProposal,
+    'owner_id': wireOwner,
+    'created_at': wireAt,
+    'updated_at': wireAt,
+    'deleted_at': null,
+    'status': 'menunggu',
+    'source_text': 'Cuci 2 kg',
+    'customer_name': 'Sari',
+    'phone': '081234567890',
+    'address': 'Jl. Mawar',
+    'service_id': null,
+    'cancel_requested': false,
+    'uncertain_address': true,
+    'customer_id': null,
+    'order_id': null,
+    'wa_message_id': 'wam-1',
+    'chat_id': '62812@c.us',
+    'confidence': 0.87,
+    'received_at': wireAt,
+  },
+  {
+    'id': wireConnection,
+    'owner_id': wireOwner,
+    'created_at': wireAt,
+    'updated_at': wireAt,
+    'deleted_at': null,
+    'instance_id': 'laurum-wire',
+    'status': 'terhubung',
+    'connected_at': wireAt,
+    'read_messages': true,
+    'ignore_groups': true,
+    'detect_cancellation': true,
   },
 ];

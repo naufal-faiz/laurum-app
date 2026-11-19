@@ -108,9 +108,13 @@ void main() {
         DriftSyncRemoteApplier(dbA2, ownerA),
       ).run();
       expect(pullA.status, SyncPullStatus.selesai);
-      for (final table in syncPullOrder) {
+      for (final table in syncPullOrder.where(
+        (t) => t != 'ai_proposals' && t != 'wa_connections',
+      )) {
         expect(await _count(dbA2, table), 1, reason: table);
       }
+      expect(await _count(dbA2, 'ai_proposals'), 0);
+      expect(await _count(dbA2, 'wa_connections'), 0);
       final pulled = await dbA2.select(dbA2.customerRecords).getSingle();
       expect(pulled.id, customer);
       expect(pulled.name, 'Sari Wire');

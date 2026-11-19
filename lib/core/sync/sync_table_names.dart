@@ -1,4 +1,5 @@
 // Owner tables accepted by sync_push. Entitlements stay pull-only on purpose.
+// wa_connections is pull-only too: pairing and AI settings travel through RPCs.
 const syncPushTables = <String>{
   'businesses',
   'customers',
@@ -12,9 +13,10 @@ const syncPushTables = <String>{
   'expenses',
   'receipt_settings',
   'devices',
+  'ai_proposals',
 };
 
-const syncPullTables = <String>{...syncPushTables, 'entitlements'};
+const syncPullTables = <String>{...syncPushTables, 'entitlements', 'wa_connections'};
 
 // Applied in dependency order so SQLite foreign keys never point at a missing row.
 const syncPullOrder = <String>[
@@ -31,4 +33,6 @@ const syncPullOrder = <String>[
   'savings_entries',
   'order_events',
   'expenses',
+  'ai_proposals',
+  'wa_connections',
 ];

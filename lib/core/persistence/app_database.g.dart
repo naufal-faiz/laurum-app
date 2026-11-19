@@ -10181,6 +10181,1798 @@ class SyncCursorRecordsCompanion extends UpdateCompanion<SyncCursorRow> {
   }
 }
 
+class $AiProposalRecordsTable extends AiProposalRecords
+    with TableInfo<$AiProposalRecordsTable, AiProposalRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AiProposalRecordsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _ownerIdMeta = const VerificationMeta(
+    'ownerId',
+  );
+  @override
+  late final GeneratedColumn<String> ownerId = GeneratedColumn<String>(
+    'owner_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _syncStateMeta = const VerificationMeta(
+    'syncState',
+  );
+  @override
+  late final GeneratedColumn<String> syncState = GeneratedColumn<String>(
+    'sync_state',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('pending'),
+  );
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
+    'deleted_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumn<String> status = GeneratedColumn<String>(
+    'status',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('menunggu'),
+  );
+  static const VerificationMeta _sourceTextMeta = const VerificationMeta(
+    'sourceText',
+  );
+  @override
+  late final GeneratedColumn<String> sourceText = GeneratedColumn<String>(
+    'source_text',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _customerNameMeta = const VerificationMeta(
+    'customerName',
+  );
+  @override
+  late final GeneratedColumn<String> customerName = GeneratedColumn<String>(
+    'customer_name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _phoneMeta = const VerificationMeta('phone');
+  @override
+  late final GeneratedColumn<String> phone = GeneratedColumn<String>(
+    'phone',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _addressMeta = const VerificationMeta(
+    'address',
+  );
+  @override
+  late final GeneratedColumn<String> address = GeneratedColumn<String>(
+    'address',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _serviceIdMeta = const VerificationMeta(
+    'serviceId',
+  );
+  @override
+  late final GeneratedColumn<String> serviceId = GeneratedColumn<String>(
+    'service_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _cancelRequestedMeta = const VerificationMeta(
+    'cancelRequested',
+  );
+  @override
+  late final GeneratedColumn<bool> cancelRequested = GeneratedColumn<bool>(
+    'cancel_requested',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("cancel_requested" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _uncertainAddressMeta = const VerificationMeta(
+    'uncertainAddress',
+  );
+  @override
+  late final GeneratedColumn<bool> uncertainAddress = GeneratedColumn<bool>(
+    'uncertain_address',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("uncertain_address" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _customerIdMeta = const VerificationMeta(
+    'customerId',
+  );
+  @override
+  late final GeneratedColumn<String> customerId = GeneratedColumn<String>(
+    'customer_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _orderIdMeta = const VerificationMeta(
+    'orderId',
+  );
+  @override
+  late final GeneratedColumn<String> orderId = GeneratedColumn<String>(
+    'order_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _waMessageIdMeta = const VerificationMeta(
+    'waMessageId',
+  );
+  @override
+  late final GeneratedColumn<String> waMessageId = GeneratedColumn<String>(
+    'wa_message_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _chatIdMeta = const VerificationMeta('chatId');
+  @override
+  late final GeneratedColumn<String> chatId = GeneratedColumn<String>(
+    'chat_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _confidenceMeta = const VerificationMeta(
+    'confidence',
+  );
+  @override
+  late final GeneratedColumn<double> confidence = GeneratedColumn<double>(
+    'confidence',
+    aliasedName,
+    true,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _receivedAtMeta = const VerificationMeta(
+    'receivedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> receivedAt = GeneratedColumn<DateTime>(
+    'received_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    ownerId,
+    createdAt,
+    updatedAt,
+    syncState,
+    deletedAt,
+    status,
+    sourceText,
+    customerName,
+    phone,
+    address,
+    serviceId,
+    cancelRequested,
+    uncertainAddress,
+    customerId,
+    orderId,
+    waMessageId,
+    chatId,
+    confidence,
+    receivedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'ai_proposals';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<AiProposalRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('owner_id')) {
+      context.handle(
+        _ownerIdMeta,
+        ownerId.isAcceptableOrUnknown(data['owner_id']!, _ownerIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_ownerIdMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sync_state')) {
+      context.handle(
+        _syncStateMeta,
+        syncState.isAcceptableOrUnknown(data['sync_state']!, _syncStateMeta),
+      );
+    }
+    if (data.containsKey('deleted_at')) {
+      context.handle(
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
+      );
+    }
+    if (data.containsKey('status')) {
+      context.handle(
+        _statusMeta,
+        status.isAcceptableOrUnknown(data['status']!, _statusMeta),
+      );
+    }
+    if (data.containsKey('source_text')) {
+      context.handle(
+        _sourceTextMeta,
+        sourceText.isAcceptableOrUnknown(data['source_text']!, _sourceTextMeta),
+      );
+    }
+    if (data.containsKey('customer_name')) {
+      context.handle(
+        _customerNameMeta,
+        customerName.isAcceptableOrUnknown(
+          data['customer_name']!,
+          _customerNameMeta,
+        ),
+      );
+    }
+    if (data.containsKey('phone')) {
+      context.handle(
+        _phoneMeta,
+        phone.isAcceptableOrUnknown(data['phone']!, _phoneMeta),
+      );
+    }
+    if (data.containsKey('address')) {
+      context.handle(
+        _addressMeta,
+        address.isAcceptableOrUnknown(data['address']!, _addressMeta),
+      );
+    }
+    if (data.containsKey('service_id')) {
+      context.handle(
+        _serviceIdMeta,
+        serviceId.isAcceptableOrUnknown(data['service_id']!, _serviceIdMeta),
+      );
+    }
+    if (data.containsKey('cancel_requested')) {
+      context.handle(
+        _cancelRequestedMeta,
+        cancelRequested.isAcceptableOrUnknown(
+          data['cancel_requested']!,
+          _cancelRequestedMeta,
+        ),
+      );
+    }
+    if (data.containsKey('uncertain_address')) {
+      context.handle(
+        _uncertainAddressMeta,
+        uncertainAddress.isAcceptableOrUnknown(
+          data['uncertain_address']!,
+          _uncertainAddressMeta,
+        ),
+      );
+    }
+    if (data.containsKey('customer_id')) {
+      context.handle(
+        _customerIdMeta,
+        customerId.isAcceptableOrUnknown(data['customer_id']!, _customerIdMeta),
+      );
+    }
+    if (data.containsKey('order_id')) {
+      context.handle(
+        _orderIdMeta,
+        orderId.isAcceptableOrUnknown(data['order_id']!, _orderIdMeta),
+      );
+    }
+    if (data.containsKey('wa_message_id')) {
+      context.handle(
+        _waMessageIdMeta,
+        waMessageId.isAcceptableOrUnknown(
+          data['wa_message_id']!,
+          _waMessageIdMeta,
+        ),
+      );
+    }
+    if (data.containsKey('chat_id')) {
+      context.handle(
+        _chatIdMeta,
+        chatId.isAcceptableOrUnknown(data['chat_id']!, _chatIdMeta),
+      );
+    }
+    if (data.containsKey('confidence')) {
+      context.handle(
+        _confidenceMeta,
+        confidence.isAcceptableOrUnknown(data['confidence']!, _confidenceMeta),
+      );
+    }
+    if (data.containsKey('received_at')) {
+      context.handle(
+        _receivedAtMeta,
+        receivedAt.isAcceptableOrUnknown(data['received_at']!, _receivedAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AiProposalRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AiProposalRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      ownerId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}owner_id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      ),
+      syncState: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}sync_state'],
+      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      ),
+      status: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}status'],
+      )!,
+      sourceText: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source_text'],
+      ),
+      customerName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}customer_name'],
+      )!,
+      phone: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}phone'],
+      )!,
+      address: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}address'],
+      )!,
+      serviceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}service_id'],
+      ),
+      cancelRequested: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}cancel_requested'],
+      )!,
+      uncertainAddress: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}uncertain_address'],
+      )!,
+      customerId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}customer_id'],
+      ),
+      orderId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}order_id'],
+      ),
+      waMessageId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}wa_message_id'],
+      ),
+      chatId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}chat_id'],
+      ),
+      confidence: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}confidence'],
+      ),
+      receivedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}received_at'],
+      ),
+    );
+  }
+
+  @override
+  $AiProposalRecordsTable createAlias(String alias) {
+    return $AiProposalRecordsTable(attachedDatabase, alias);
+  }
+}
+
+class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
+  final String id;
+  final String ownerId;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
+  final String syncState;
+  final DateTime? deletedAt;
+  final String status;
+  final String? sourceText;
+  final String customerName;
+  final String phone;
+  final String address;
+  final String? serviceId;
+  final bool cancelRequested;
+  final bool uncertainAddress;
+  final String? customerId;
+  final String? orderId;
+  final String? waMessageId;
+  final String? chatId;
+  final double? confidence;
+  final DateTime? receivedAt;
+  const AiProposalRow({
+    required this.id,
+    required this.ownerId,
+    required this.createdAt,
+    this.updatedAt,
+    required this.syncState,
+    this.deletedAt,
+    required this.status,
+    this.sourceText,
+    required this.customerName,
+    required this.phone,
+    required this.address,
+    this.serviceId,
+    required this.cancelRequested,
+    required this.uncertainAddress,
+    this.customerId,
+    this.orderId,
+    this.waMessageId,
+    this.chatId,
+    this.confidence,
+    this.receivedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['owner_id'] = Variable<String>(ownerId);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    if (!nullToAbsent || updatedAt != null) {
+      map['updated_at'] = Variable<DateTime>(updatedAt);
+    }
+    map['sync_state'] = Variable<String>(syncState);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt);
+    }
+    map['status'] = Variable<String>(status);
+    if (!nullToAbsent || sourceText != null) {
+      map['source_text'] = Variable<String>(sourceText);
+    }
+    map['customer_name'] = Variable<String>(customerName);
+    map['phone'] = Variable<String>(phone);
+    map['address'] = Variable<String>(address);
+    if (!nullToAbsent || serviceId != null) {
+      map['service_id'] = Variable<String>(serviceId);
+    }
+    map['cancel_requested'] = Variable<bool>(cancelRequested);
+    map['uncertain_address'] = Variable<bool>(uncertainAddress);
+    if (!nullToAbsent || customerId != null) {
+      map['customer_id'] = Variable<String>(customerId);
+    }
+    if (!nullToAbsent || orderId != null) {
+      map['order_id'] = Variable<String>(orderId);
+    }
+    if (!nullToAbsent || waMessageId != null) {
+      map['wa_message_id'] = Variable<String>(waMessageId);
+    }
+    if (!nullToAbsent || chatId != null) {
+      map['chat_id'] = Variable<String>(chatId);
+    }
+    if (!nullToAbsent || confidence != null) {
+      map['confidence'] = Variable<double>(confidence);
+    }
+    if (!nullToAbsent || receivedAt != null) {
+      map['received_at'] = Variable<DateTime>(receivedAt);
+    }
+    return map;
+  }
+
+  AiProposalRecordsCompanion toCompanion(bool nullToAbsent) {
+    return AiProposalRecordsCompanion(
+      id: Value(id),
+      ownerId: Value(ownerId),
+      createdAt: Value(createdAt),
+      updatedAt: updatedAt == null && nullToAbsent ? const Value.absent() : Value(updatedAt),
+      syncState: Value(syncState),
+      deletedAt: deletedAt == null && nullToAbsent ? const Value.absent() : Value(deletedAt),
+      status: Value(status),
+      sourceText: sourceText == null && nullToAbsent ? const Value.absent() : Value(sourceText),
+      customerName: Value(customerName),
+      phone: Value(phone),
+      address: Value(address),
+      serviceId: serviceId == null && nullToAbsent ? const Value.absent() : Value(serviceId),
+      cancelRequested: Value(cancelRequested),
+      uncertainAddress: Value(uncertainAddress),
+      customerId: customerId == null && nullToAbsent ? const Value.absent() : Value(customerId),
+      orderId: orderId == null && nullToAbsent ? const Value.absent() : Value(orderId),
+      waMessageId: waMessageId == null && nullToAbsent ? const Value.absent() : Value(waMessageId),
+      chatId: chatId == null && nullToAbsent ? const Value.absent() : Value(chatId),
+      confidence: confidence == null && nullToAbsent ? const Value.absent() : Value(confidence),
+      receivedAt: receivedAt == null && nullToAbsent ? const Value.absent() : Value(receivedAt),
+    );
+  }
+
+  factory AiProposalRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AiProposalRow(
+      id: serializer.fromJson<String>(json['id']),
+      ownerId: serializer.fromJson<String>(json['ownerId']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime?>(json['updatedAt']),
+      syncState: serializer.fromJson<String>(json['syncState']),
+      deletedAt: serializer.fromJson<DateTime?>(json['deletedAt']),
+      status: serializer.fromJson<String>(json['status']),
+      sourceText: serializer.fromJson<String?>(json['sourceText']),
+      customerName: serializer.fromJson<String>(json['customerName']),
+      phone: serializer.fromJson<String>(json['phone']),
+      address: serializer.fromJson<String>(json['address']),
+      serviceId: serializer.fromJson<String?>(json['serviceId']),
+      cancelRequested: serializer.fromJson<bool>(json['cancelRequested']),
+      uncertainAddress: serializer.fromJson<bool>(json['uncertainAddress']),
+      customerId: serializer.fromJson<String?>(json['customerId']),
+      orderId: serializer.fromJson<String?>(json['orderId']),
+      waMessageId: serializer.fromJson<String?>(json['waMessageId']),
+      chatId: serializer.fromJson<String?>(json['chatId']),
+      confidence: serializer.fromJson<double?>(json['confidence']),
+      receivedAt: serializer.fromJson<DateTime?>(json['receivedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'ownerId': serializer.toJson<String>(ownerId),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime?>(updatedAt),
+      'syncState': serializer.toJson<String>(syncState),
+      'deletedAt': serializer.toJson<DateTime?>(deletedAt),
+      'status': serializer.toJson<String>(status),
+      'sourceText': serializer.toJson<String?>(sourceText),
+      'customerName': serializer.toJson<String>(customerName),
+      'phone': serializer.toJson<String>(phone),
+      'address': serializer.toJson<String>(address),
+      'serviceId': serializer.toJson<String?>(serviceId),
+      'cancelRequested': serializer.toJson<bool>(cancelRequested),
+      'uncertainAddress': serializer.toJson<bool>(uncertainAddress),
+      'customerId': serializer.toJson<String?>(customerId),
+      'orderId': serializer.toJson<String?>(orderId),
+      'waMessageId': serializer.toJson<String?>(waMessageId),
+      'chatId': serializer.toJson<String?>(chatId),
+      'confidence': serializer.toJson<double?>(confidence),
+      'receivedAt': serializer.toJson<DateTime?>(receivedAt),
+    };
+  }
+
+  AiProposalRow copyWith({
+    String? id,
+    String? ownerId,
+    DateTime? createdAt,
+    Value<DateTime?> updatedAt = const Value.absent(),
+    String? syncState,
+    Value<DateTime?> deletedAt = const Value.absent(),
+    String? status,
+    Value<String?> sourceText = const Value.absent(),
+    String? customerName,
+    String? phone,
+    String? address,
+    Value<String?> serviceId = const Value.absent(),
+    bool? cancelRequested,
+    bool? uncertainAddress,
+    Value<String?> customerId = const Value.absent(),
+    Value<String?> orderId = const Value.absent(),
+    Value<String?> waMessageId = const Value.absent(),
+    Value<String?> chatId = const Value.absent(),
+    Value<double?> confidence = const Value.absent(),
+    Value<DateTime?> receivedAt = const Value.absent(),
+  }) => AiProposalRow(
+    id: id ?? this.id,
+    ownerId: ownerId ?? this.ownerId,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt.present ? updatedAt.value : this.updatedAt,
+    syncState: syncState ?? this.syncState,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+    status: status ?? this.status,
+    sourceText: sourceText.present ? sourceText.value : this.sourceText,
+    customerName: customerName ?? this.customerName,
+    phone: phone ?? this.phone,
+    address: address ?? this.address,
+    serviceId: serviceId.present ? serviceId.value : this.serviceId,
+    cancelRequested: cancelRequested ?? this.cancelRequested,
+    uncertainAddress: uncertainAddress ?? this.uncertainAddress,
+    customerId: customerId.present ? customerId.value : this.customerId,
+    orderId: orderId.present ? orderId.value : this.orderId,
+    waMessageId: waMessageId.present ? waMessageId.value : this.waMessageId,
+    chatId: chatId.present ? chatId.value : this.chatId,
+    confidence: confidence.present ? confidence.value : this.confidence,
+    receivedAt: receivedAt.present ? receivedAt.value : this.receivedAt,
+  );
+  AiProposalRow copyWithCompanion(AiProposalRecordsCompanion data) {
+    return AiProposalRow(
+      id: data.id.present ? data.id.value : this.id,
+      ownerId: data.ownerId.present ? data.ownerId.value : this.ownerId,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      syncState: data.syncState.present ? data.syncState.value : this.syncState,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
+      status: data.status.present ? data.status.value : this.status,
+      sourceText: data.sourceText.present ? data.sourceText.value : this.sourceText,
+      customerName: data.customerName.present ? data.customerName.value : this.customerName,
+      phone: data.phone.present ? data.phone.value : this.phone,
+      address: data.address.present ? data.address.value : this.address,
+      serviceId: data.serviceId.present ? data.serviceId.value : this.serviceId,
+      cancelRequested: data.cancelRequested.present
+          ? data.cancelRequested.value
+          : this.cancelRequested,
+      uncertainAddress: data.uncertainAddress.present
+          ? data.uncertainAddress.value
+          : this.uncertainAddress,
+      customerId: data.customerId.present ? data.customerId.value : this.customerId,
+      orderId: data.orderId.present ? data.orderId.value : this.orderId,
+      waMessageId: data.waMessageId.present ? data.waMessageId.value : this.waMessageId,
+      chatId: data.chatId.present ? data.chatId.value : this.chatId,
+      confidence: data.confidence.present ? data.confidence.value : this.confidence,
+      receivedAt: data.receivedAt.present ? data.receivedAt.value : this.receivedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AiProposalRow(')
+          ..write('id: $id, ')
+          ..write('ownerId: $ownerId, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('syncState: $syncState, ')
+          ..write('deletedAt: $deletedAt, ')
+          ..write('status: $status, ')
+          ..write('sourceText: $sourceText, ')
+          ..write('customerName: $customerName, ')
+          ..write('phone: $phone, ')
+          ..write('address: $address, ')
+          ..write('serviceId: $serviceId, ')
+          ..write('cancelRequested: $cancelRequested, ')
+          ..write('uncertainAddress: $uncertainAddress, ')
+          ..write('customerId: $customerId, ')
+          ..write('orderId: $orderId, ')
+          ..write('waMessageId: $waMessageId, ')
+          ..write('chatId: $chatId, ')
+          ..write('confidence: $confidence, ')
+          ..write('receivedAt: $receivedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    ownerId,
+    createdAt,
+    updatedAt,
+    syncState,
+    deletedAt,
+    status,
+    sourceText,
+    customerName,
+    phone,
+    address,
+    serviceId,
+    cancelRequested,
+    uncertainAddress,
+    customerId,
+    orderId,
+    waMessageId,
+    chatId,
+    confidence,
+    receivedAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AiProposalRow &&
+          other.id == this.id &&
+          other.ownerId == this.ownerId &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.syncState == this.syncState &&
+          other.deletedAt == this.deletedAt &&
+          other.status == this.status &&
+          other.sourceText == this.sourceText &&
+          other.customerName == this.customerName &&
+          other.phone == this.phone &&
+          other.address == this.address &&
+          other.serviceId == this.serviceId &&
+          other.cancelRequested == this.cancelRequested &&
+          other.uncertainAddress == this.uncertainAddress &&
+          other.customerId == this.customerId &&
+          other.orderId == this.orderId &&
+          other.waMessageId == this.waMessageId &&
+          other.chatId == this.chatId &&
+          other.confidence == this.confidence &&
+          other.receivedAt == this.receivedAt);
+}
+
+class AiProposalRecordsCompanion extends UpdateCompanion<AiProposalRow> {
+  final Value<String> id;
+  final Value<String> ownerId;
+  final Value<DateTime> createdAt;
+  final Value<DateTime?> updatedAt;
+  final Value<String> syncState;
+  final Value<DateTime?> deletedAt;
+  final Value<String> status;
+  final Value<String?> sourceText;
+  final Value<String> customerName;
+  final Value<String> phone;
+  final Value<String> address;
+  final Value<String?> serviceId;
+  final Value<bool> cancelRequested;
+  final Value<bool> uncertainAddress;
+  final Value<String?> customerId;
+  final Value<String?> orderId;
+  final Value<String?> waMessageId;
+  final Value<String?> chatId;
+  final Value<double?> confidence;
+  final Value<DateTime?> receivedAt;
+  final Value<int> rowid;
+  const AiProposalRecordsCompanion({
+    this.id = const Value.absent(),
+    this.ownerId = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.syncState = const Value.absent(),
+    this.deletedAt = const Value.absent(),
+    this.status = const Value.absent(),
+    this.sourceText = const Value.absent(),
+    this.customerName = const Value.absent(),
+    this.phone = const Value.absent(),
+    this.address = const Value.absent(),
+    this.serviceId = const Value.absent(),
+    this.cancelRequested = const Value.absent(),
+    this.uncertainAddress = const Value.absent(),
+    this.customerId = const Value.absent(),
+    this.orderId = const Value.absent(),
+    this.waMessageId = const Value.absent(),
+    this.chatId = const Value.absent(),
+    this.confidence = const Value.absent(),
+    this.receivedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  AiProposalRecordsCompanion.insert({
+    required String id,
+    required String ownerId,
+    required DateTime createdAt,
+    this.updatedAt = const Value.absent(),
+    this.syncState = const Value.absent(),
+    this.deletedAt = const Value.absent(),
+    this.status = const Value.absent(),
+    this.sourceText = const Value.absent(),
+    this.customerName = const Value.absent(),
+    this.phone = const Value.absent(),
+    this.address = const Value.absent(),
+    this.serviceId = const Value.absent(),
+    this.cancelRequested = const Value.absent(),
+    this.uncertainAddress = const Value.absent(),
+    this.customerId = const Value.absent(),
+    this.orderId = const Value.absent(),
+    this.waMessageId = const Value.absent(),
+    this.chatId = const Value.absent(),
+    this.confidence = const Value.absent(),
+    this.receivedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       ownerId = Value(ownerId),
+       createdAt = Value(createdAt);
+  static Insertable<AiProposalRow> custom({
+    Expression<String>? id,
+    Expression<String>? ownerId,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<String>? syncState,
+    Expression<DateTime>? deletedAt,
+    Expression<String>? status,
+    Expression<String>? sourceText,
+    Expression<String>? customerName,
+    Expression<String>? phone,
+    Expression<String>? address,
+    Expression<String>? serviceId,
+    Expression<bool>? cancelRequested,
+    Expression<bool>? uncertainAddress,
+    Expression<String>? customerId,
+    Expression<String>? orderId,
+    Expression<String>? waMessageId,
+    Expression<String>? chatId,
+    Expression<double>? confidence,
+    Expression<DateTime>? receivedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (ownerId != null) 'owner_id': ownerId,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (syncState != null) 'sync_state': syncState,
+      if (deletedAt != null) 'deleted_at': deletedAt,
+      if (status != null) 'status': status,
+      if (sourceText != null) 'source_text': sourceText,
+      if (customerName != null) 'customer_name': customerName,
+      if (phone != null) 'phone': phone,
+      if (address != null) 'address': address,
+      if (serviceId != null) 'service_id': serviceId,
+      if (cancelRequested != null) 'cancel_requested': cancelRequested,
+      if (uncertainAddress != null) 'uncertain_address': uncertainAddress,
+      if (customerId != null) 'customer_id': customerId,
+      if (orderId != null) 'order_id': orderId,
+      if (waMessageId != null) 'wa_message_id': waMessageId,
+      if (chatId != null) 'chat_id': chatId,
+      if (confidence != null) 'confidence': confidence,
+      if (receivedAt != null) 'received_at': receivedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  AiProposalRecordsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? ownerId,
+    Value<DateTime>? createdAt,
+    Value<DateTime?>? updatedAt,
+    Value<String>? syncState,
+    Value<DateTime?>? deletedAt,
+    Value<String>? status,
+    Value<String?>? sourceText,
+    Value<String>? customerName,
+    Value<String>? phone,
+    Value<String>? address,
+    Value<String?>? serviceId,
+    Value<bool>? cancelRequested,
+    Value<bool>? uncertainAddress,
+    Value<String?>? customerId,
+    Value<String?>? orderId,
+    Value<String?>? waMessageId,
+    Value<String?>? chatId,
+    Value<double?>? confidence,
+    Value<DateTime?>? receivedAt,
+    Value<int>? rowid,
+  }) {
+    return AiProposalRecordsCompanion(
+      id: id ?? this.id,
+      ownerId: ownerId ?? this.ownerId,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      syncState: syncState ?? this.syncState,
+      deletedAt: deletedAt ?? this.deletedAt,
+      status: status ?? this.status,
+      sourceText: sourceText ?? this.sourceText,
+      customerName: customerName ?? this.customerName,
+      phone: phone ?? this.phone,
+      address: address ?? this.address,
+      serviceId: serviceId ?? this.serviceId,
+      cancelRequested: cancelRequested ?? this.cancelRequested,
+      uncertainAddress: uncertainAddress ?? this.uncertainAddress,
+      customerId: customerId ?? this.customerId,
+      orderId: orderId ?? this.orderId,
+      waMessageId: waMessageId ?? this.waMessageId,
+      chatId: chatId ?? this.chatId,
+      confidence: confidence ?? this.confidence,
+      receivedAt: receivedAt ?? this.receivedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (ownerId.present) {
+      map['owner_id'] = Variable<String>(ownerId.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (syncState.present) {
+      map['sync_state'] = Variable<String>(syncState.value);
+    }
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt.value);
+    }
+    if (status.present) {
+      map['status'] = Variable<String>(status.value);
+    }
+    if (sourceText.present) {
+      map['source_text'] = Variable<String>(sourceText.value);
+    }
+    if (customerName.present) {
+      map['customer_name'] = Variable<String>(customerName.value);
+    }
+    if (phone.present) {
+      map['phone'] = Variable<String>(phone.value);
+    }
+    if (address.present) {
+      map['address'] = Variable<String>(address.value);
+    }
+    if (serviceId.present) {
+      map['service_id'] = Variable<String>(serviceId.value);
+    }
+    if (cancelRequested.present) {
+      map['cancel_requested'] = Variable<bool>(cancelRequested.value);
+    }
+    if (uncertainAddress.present) {
+      map['uncertain_address'] = Variable<bool>(uncertainAddress.value);
+    }
+    if (customerId.present) {
+      map['customer_id'] = Variable<String>(customerId.value);
+    }
+    if (orderId.present) {
+      map['order_id'] = Variable<String>(orderId.value);
+    }
+    if (waMessageId.present) {
+      map['wa_message_id'] = Variable<String>(waMessageId.value);
+    }
+    if (chatId.present) {
+      map['chat_id'] = Variable<String>(chatId.value);
+    }
+    if (confidence.present) {
+      map['confidence'] = Variable<double>(confidence.value);
+    }
+    if (receivedAt.present) {
+      map['received_at'] = Variable<DateTime>(receivedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AiProposalRecordsCompanion(')
+          ..write('id: $id, ')
+          ..write('ownerId: $ownerId, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('syncState: $syncState, ')
+          ..write('deletedAt: $deletedAt, ')
+          ..write('status: $status, ')
+          ..write('sourceText: $sourceText, ')
+          ..write('customerName: $customerName, ')
+          ..write('phone: $phone, ')
+          ..write('address: $address, ')
+          ..write('serviceId: $serviceId, ')
+          ..write('cancelRequested: $cancelRequested, ')
+          ..write('uncertainAddress: $uncertainAddress, ')
+          ..write('customerId: $customerId, ')
+          ..write('orderId: $orderId, ')
+          ..write('waMessageId: $waMessageId, ')
+          ..write('chatId: $chatId, ')
+          ..write('confidence: $confidence, ')
+          ..write('receivedAt: $receivedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $WaConnectionRecordsTable extends WaConnectionRecords
+    with TableInfo<$WaConnectionRecordsTable, WaConnectionRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $WaConnectionRecordsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _ownerIdMeta = const VerificationMeta(
+    'ownerId',
+  );
+  @override
+  late final GeneratedColumn<String> ownerId = GeneratedColumn<String>(
+    'owner_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _syncStateMeta = const VerificationMeta(
+    'syncState',
+  );
+  @override
+  late final GeneratedColumn<String> syncState = GeneratedColumn<String>(
+    'sync_state',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('pending'),
+  );
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
+    'deleted_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _instanceIdMeta = const VerificationMeta(
+    'instanceId',
+  );
+  @override
+  late final GeneratedColumn<String> instanceId = GeneratedColumn<String>(
+    'instance_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumn<String> status = GeneratedColumn<String>(
+    'status',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('belum'),
+  );
+  static const VerificationMeta _connectedAtMeta = const VerificationMeta(
+    'connectedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> connectedAt = GeneratedColumn<DateTime>(
+    'connected_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _readMessagesMeta = const VerificationMeta(
+    'readMessages',
+  );
+  @override
+  late final GeneratedColumn<bool> readMessages = GeneratedColumn<bool>(
+    'read_messages',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("read_messages" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  static const VerificationMeta _ignoreGroupsMeta = const VerificationMeta(
+    'ignoreGroups',
+  );
+  @override
+  late final GeneratedColumn<bool> ignoreGroups = GeneratedColumn<bool>(
+    'ignore_groups',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("ignore_groups" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  static const VerificationMeta _detectCancellationMeta = const VerificationMeta(
+    'detectCancellation',
+  );
+  @override
+  late final GeneratedColumn<bool> detectCancellation = GeneratedColumn<bool>(
+    'detect_cancellation',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("detect_cancellation" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    ownerId,
+    createdAt,
+    updatedAt,
+    syncState,
+    deletedAt,
+    instanceId,
+    status,
+    connectedAt,
+    readMessages,
+    ignoreGroups,
+    detectCancellation,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'wa_connections';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<WaConnectionRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('owner_id')) {
+      context.handle(
+        _ownerIdMeta,
+        ownerId.isAcceptableOrUnknown(data['owner_id']!, _ownerIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_ownerIdMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    }
+    if (data.containsKey('sync_state')) {
+      context.handle(
+        _syncStateMeta,
+        syncState.isAcceptableOrUnknown(data['sync_state']!, _syncStateMeta),
+      );
+    }
+    if (data.containsKey('deleted_at')) {
+      context.handle(
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
+      );
+    }
+    if (data.containsKey('instance_id')) {
+      context.handle(
+        _instanceIdMeta,
+        instanceId.isAcceptableOrUnknown(data['instance_id']!, _instanceIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_instanceIdMeta);
+    }
+    if (data.containsKey('status')) {
+      context.handle(
+        _statusMeta,
+        status.isAcceptableOrUnknown(data['status']!, _statusMeta),
+      );
+    }
+    if (data.containsKey('connected_at')) {
+      context.handle(
+        _connectedAtMeta,
+        connectedAt.isAcceptableOrUnknown(
+          data['connected_at']!,
+          _connectedAtMeta,
+        ),
+      );
+    }
+    if (data.containsKey('read_messages')) {
+      context.handle(
+        _readMessagesMeta,
+        readMessages.isAcceptableOrUnknown(
+          data['read_messages']!,
+          _readMessagesMeta,
+        ),
+      );
+    }
+    if (data.containsKey('ignore_groups')) {
+      context.handle(
+        _ignoreGroupsMeta,
+        ignoreGroups.isAcceptableOrUnknown(
+          data['ignore_groups']!,
+          _ignoreGroupsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('detect_cancellation')) {
+      context.handle(
+        _detectCancellationMeta,
+        detectCancellation.isAcceptableOrUnknown(
+          data['detect_cancellation']!,
+          _detectCancellationMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  WaConnectionRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return WaConnectionRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      ownerId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}owner_id'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      ),
+      syncState: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}sync_state'],
+      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      ),
+      instanceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}instance_id'],
+      )!,
+      status: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}status'],
+      )!,
+      connectedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}connected_at'],
+      ),
+      readMessages: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}read_messages'],
+      )!,
+      ignoreGroups: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}ignore_groups'],
+      )!,
+      detectCancellation: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}detect_cancellation'],
+      )!,
+    );
+  }
+
+  @override
+  $WaConnectionRecordsTable createAlias(String alias) {
+    return $WaConnectionRecordsTable(attachedDatabase, alias);
+  }
+}
+
+class WaConnectionRow extends DataClass implements Insertable<WaConnectionRow> {
+  final String id;
+  final String ownerId;
+  final DateTime createdAt;
+  final DateTime? updatedAt;
+  final String syncState;
+  final DateTime? deletedAt;
+  final String instanceId;
+  final String status;
+  final DateTime? connectedAt;
+  final bool readMessages;
+  final bool ignoreGroups;
+  final bool detectCancellation;
+  const WaConnectionRow({
+    required this.id,
+    required this.ownerId,
+    required this.createdAt,
+    this.updatedAt,
+    required this.syncState,
+    this.deletedAt,
+    required this.instanceId,
+    required this.status,
+    this.connectedAt,
+    required this.readMessages,
+    required this.ignoreGroups,
+    required this.detectCancellation,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['owner_id'] = Variable<String>(ownerId);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    if (!nullToAbsent || updatedAt != null) {
+      map['updated_at'] = Variable<DateTime>(updatedAt);
+    }
+    map['sync_state'] = Variable<String>(syncState);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt);
+    }
+    map['instance_id'] = Variable<String>(instanceId);
+    map['status'] = Variable<String>(status);
+    if (!nullToAbsent || connectedAt != null) {
+      map['connected_at'] = Variable<DateTime>(connectedAt);
+    }
+    map['read_messages'] = Variable<bool>(readMessages);
+    map['ignore_groups'] = Variable<bool>(ignoreGroups);
+    map['detect_cancellation'] = Variable<bool>(detectCancellation);
+    return map;
+  }
+
+  WaConnectionRecordsCompanion toCompanion(bool nullToAbsent) {
+    return WaConnectionRecordsCompanion(
+      id: Value(id),
+      ownerId: Value(ownerId),
+      createdAt: Value(createdAt),
+      updatedAt: updatedAt == null && nullToAbsent ? const Value.absent() : Value(updatedAt),
+      syncState: Value(syncState),
+      deletedAt: deletedAt == null && nullToAbsent ? const Value.absent() : Value(deletedAt),
+      instanceId: Value(instanceId),
+      status: Value(status),
+      connectedAt: connectedAt == null && nullToAbsent ? const Value.absent() : Value(connectedAt),
+      readMessages: Value(readMessages),
+      ignoreGroups: Value(ignoreGroups),
+      detectCancellation: Value(detectCancellation),
+    );
+  }
+
+  factory WaConnectionRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return WaConnectionRow(
+      id: serializer.fromJson<String>(json['id']),
+      ownerId: serializer.fromJson<String>(json['ownerId']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime?>(json['updatedAt']),
+      syncState: serializer.fromJson<String>(json['syncState']),
+      deletedAt: serializer.fromJson<DateTime?>(json['deletedAt']),
+      instanceId: serializer.fromJson<String>(json['instanceId']),
+      status: serializer.fromJson<String>(json['status']),
+      connectedAt: serializer.fromJson<DateTime?>(json['connectedAt']),
+      readMessages: serializer.fromJson<bool>(json['readMessages']),
+      ignoreGroups: serializer.fromJson<bool>(json['ignoreGroups']),
+      detectCancellation: serializer.fromJson<bool>(json['detectCancellation']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'ownerId': serializer.toJson<String>(ownerId),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime?>(updatedAt),
+      'syncState': serializer.toJson<String>(syncState),
+      'deletedAt': serializer.toJson<DateTime?>(deletedAt),
+      'instanceId': serializer.toJson<String>(instanceId),
+      'status': serializer.toJson<String>(status),
+      'connectedAt': serializer.toJson<DateTime?>(connectedAt),
+      'readMessages': serializer.toJson<bool>(readMessages),
+      'ignoreGroups': serializer.toJson<bool>(ignoreGroups),
+      'detectCancellation': serializer.toJson<bool>(detectCancellation),
+    };
+  }
+
+  WaConnectionRow copyWith({
+    String? id,
+    String? ownerId,
+    DateTime? createdAt,
+    Value<DateTime?> updatedAt = const Value.absent(),
+    String? syncState,
+    Value<DateTime?> deletedAt = const Value.absent(),
+    String? instanceId,
+    String? status,
+    Value<DateTime?> connectedAt = const Value.absent(),
+    bool? readMessages,
+    bool? ignoreGroups,
+    bool? detectCancellation,
+  }) => WaConnectionRow(
+    id: id ?? this.id,
+    ownerId: ownerId ?? this.ownerId,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt.present ? updatedAt.value : this.updatedAt,
+    syncState: syncState ?? this.syncState,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+    instanceId: instanceId ?? this.instanceId,
+    status: status ?? this.status,
+    connectedAt: connectedAt.present ? connectedAt.value : this.connectedAt,
+    readMessages: readMessages ?? this.readMessages,
+    ignoreGroups: ignoreGroups ?? this.ignoreGroups,
+    detectCancellation: detectCancellation ?? this.detectCancellation,
+  );
+  WaConnectionRow copyWithCompanion(WaConnectionRecordsCompanion data) {
+    return WaConnectionRow(
+      id: data.id.present ? data.id.value : this.id,
+      ownerId: data.ownerId.present ? data.ownerId.value : this.ownerId,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      syncState: data.syncState.present ? data.syncState.value : this.syncState,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
+      instanceId: data.instanceId.present ? data.instanceId.value : this.instanceId,
+      status: data.status.present ? data.status.value : this.status,
+      connectedAt: data.connectedAt.present ? data.connectedAt.value : this.connectedAt,
+      readMessages: data.readMessages.present ? data.readMessages.value : this.readMessages,
+      ignoreGroups: data.ignoreGroups.present ? data.ignoreGroups.value : this.ignoreGroups,
+      detectCancellation: data.detectCancellation.present
+          ? data.detectCancellation.value
+          : this.detectCancellation,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('WaConnectionRow(')
+          ..write('id: $id, ')
+          ..write('ownerId: $ownerId, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('syncState: $syncState, ')
+          ..write('deletedAt: $deletedAt, ')
+          ..write('instanceId: $instanceId, ')
+          ..write('status: $status, ')
+          ..write('connectedAt: $connectedAt, ')
+          ..write('readMessages: $readMessages, ')
+          ..write('ignoreGroups: $ignoreGroups, ')
+          ..write('detectCancellation: $detectCancellation')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    ownerId,
+    createdAt,
+    updatedAt,
+    syncState,
+    deletedAt,
+    instanceId,
+    status,
+    connectedAt,
+    readMessages,
+    ignoreGroups,
+    detectCancellation,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is WaConnectionRow &&
+          other.id == this.id &&
+          other.ownerId == this.ownerId &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.syncState == this.syncState &&
+          other.deletedAt == this.deletedAt &&
+          other.instanceId == this.instanceId &&
+          other.status == this.status &&
+          other.connectedAt == this.connectedAt &&
+          other.readMessages == this.readMessages &&
+          other.ignoreGroups == this.ignoreGroups &&
+          other.detectCancellation == this.detectCancellation);
+}
+
+class WaConnectionRecordsCompanion extends UpdateCompanion<WaConnectionRow> {
+  final Value<String> id;
+  final Value<String> ownerId;
+  final Value<DateTime> createdAt;
+  final Value<DateTime?> updatedAt;
+  final Value<String> syncState;
+  final Value<DateTime?> deletedAt;
+  final Value<String> instanceId;
+  final Value<String> status;
+  final Value<DateTime?> connectedAt;
+  final Value<bool> readMessages;
+  final Value<bool> ignoreGroups;
+  final Value<bool> detectCancellation;
+  final Value<int> rowid;
+  const WaConnectionRecordsCompanion({
+    this.id = const Value.absent(),
+    this.ownerId = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.syncState = const Value.absent(),
+    this.deletedAt = const Value.absent(),
+    this.instanceId = const Value.absent(),
+    this.status = const Value.absent(),
+    this.connectedAt = const Value.absent(),
+    this.readMessages = const Value.absent(),
+    this.ignoreGroups = const Value.absent(),
+    this.detectCancellation = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  WaConnectionRecordsCompanion.insert({
+    required String id,
+    required String ownerId,
+    required DateTime createdAt,
+    this.updatedAt = const Value.absent(),
+    this.syncState = const Value.absent(),
+    this.deletedAt = const Value.absent(),
+    required String instanceId,
+    this.status = const Value.absent(),
+    this.connectedAt = const Value.absent(),
+    this.readMessages = const Value.absent(),
+    this.ignoreGroups = const Value.absent(),
+    this.detectCancellation = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       ownerId = Value(ownerId),
+       createdAt = Value(createdAt),
+       instanceId = Value(instanceId);
+  static Insertable<WaConnectionRow> custom({
+    Expression<String>? id,
+    Expression<String>? ownerId,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+    Expression<String>? syncState,
+    Expression<DateTime>? deletedAt,
+    Expression<String>? instanceId,
+    Expression<String>? status,
+    Expression<DateTime>? connectedAt,
+    Expression<bool>? readMessages,
+    Expression<bool>? ignoreGroups,
+    Expression<bool>? detectCancellation,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (ownerId != null) 'owner_id': ownerId,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (syncState != null) 'sync_state': syncState,
+      if (deletedAt != null) 'deleted_at': deletedAt,
+      if (instanceId != null) 'instance_id': instanceId,
+      if (status != null) 'status': status,
+      if (connectedAt != null) 'connected_at': connectedAt,
+      if (readMessages != null) 'read_messages': readMessages,
+      if (ignoreGroups != null) 'ignore_groups': ignoreGroups,
+      if (detectCancellation != null) 'detect_cancellation': detectCancellation,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  WaConnectionRecordsCompanion copyWith({
+    Value<String>? id,
+    Value<String>? ownerId,
+    Value<DateTime>? createdAt,
+    Value<DateTime?>? updatedAt,
+    Value<String>? syncState,
+    Value<DateTime?>? deletedAt,
+    Value<String>? instanceId,
+    Value<String>? status,
+    Value<DateTime?>? connectedAt,
+    Value<bool>? readMessages,
+    Value<bool>? ignoreGroups,
+    Value<bool>? detectCancellation,
+    Value<int>? rowid,
+  }) {
+    return WaConnectionRecordsCompanion(
+      id: id ?? this.id,
+      ownerId: ownerId ?? this.ownerId,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      syncState: syncState ?? this.syncState,
+      deletedAt: deletedAt ?? this.deletedAt,
+      instanceId: instanceId ?? this.instanceId,
+      status: status ?? this.status,
+      connectedAt: connectedAt ?? this.connectedAt,
+      readMessages: readMessages ?? this.readMessages,
+      ignoreGroups: ignoreGroups ?? this.ignoreGroups,
+      detectCancellation: detectCancellation ?? this.detectCancellation,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (ownerId.present) {
+      map['owner_id'] = Variable<String>(ownerId.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (syncState.present) {
+      map['sync_state'] = Variable<String>(syncState.value);
+    }
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt.value);
+    }
+    if (instanceId.present) {
+      map['instance_id'] = Variable<String>(instanceId.value);
+    }
+    if (status.present) {
+      map['status'] = Variable<String>(status.value);
+    }
+    if (connectedAt.present) {
+      map['connected_at'] = Variable<DateTime>(connectedAt.value);
+    }
+    if (readMessages.present) {
+      map['read_messages'] = Variable<bool>(readMessages.value);
+    }
+    if (ignoreGroups.present) {
+      map['ignore_groups'] = Variable<bool>(ignoreGroups.value);
+    }
+    if (detectCancellation.present) {
+      map['detect_cancellation'] = Variable<bool>(detectCancellation.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('WaConnectionRecordsCompanion(')
+          ..write('id: $id, ')
+          ..write('ownerId: $ownerId, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('syncState: $syncState, ')
+          ..write('deletedAt: $deletedAt, ')
+          ..write('instanceId: $instanceId, ')
+          ..write('status: $status, ')
+          ..write('connectedAt: $connectedAt, ')
+          ..write('readMessages: $readMessages, ')
+          ..write('ignoreGroups: $ignoreGroups, ')
+          ..write('detectCancellation: $detectCancellation, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $BusinessRecordsTable businessRecords = $BusinessRecordsTable(
@@ -10207,6 +11999,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $OutboxRecordsTable outboxRecords = $OutboxRecordsTable(this);
   late final $LocalSettingRecordsTable localSettingRecords = $LocalSettingRecordsTable(this);
   late final $SyncCursorRecordsTable syncCursorRecords = $SyncCursorRecordsTable(this);
+  late final $AiProposalRecordsTable aiProposalRecords = $AiProposalRecordsTable(this);
+  late final $WaConnectionRecordsTable waConnectionRecords = $WaConnectionRecordsTable(this);
   late final Index devicesOwnerCode = Index(
     'devices_owner_code',
     'CREATE UNIQUE INDEX devices_owner_code ON devices (owner_id, code)',
@@ -10295,6 +12089,18 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     'outbox_group',
     'CREATE INDEX outbox_group ON outbox (group_id, group_seq)',
   );
+  late final Index aiProposalsOwnerUpdated = Index(
+    'ai_proposals_owner_updated',
+    'CREATE INDEX ai_proposals_owner_updated ON ai_proposals (owner_id, updated_at)',
+  );
+  late final Index aiProposalsOwnerStatus = Index(
+    'ai_proposals_owner_status',
+    'CREATE INDEX ai_proposals_owner_status ON ai_proposals (owner_id, status)',
+  );
+  late final Index waConnectionsOwnerUpdated = Index(
+    'wa_connections_owner_updated',
+    'CREATE INDEX wa_connections_owner_updated ON wa_connections (owner_id, updated_at)',
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -10316,6 +12122,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     outboxRecords,
     localSettingRecords,
     syncCursorRecords,
+    aiProposalRecords,
+    waConnectionRecords,
     devicesOwnerCode,
     customersActivePhone,
     customersNamePrefix,
@@ -10338,6 +12146,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     eventsOrderTime,
     outboxCreated,
     outboxGroup,
+    aiProposalsOwnerUpdated,
+    aiProposalsOwnerStatus,
+    waConnectionsOwnerUpdated,
   ];
   @override
   DriftDatabaseOptions get options => const DriftDatabaseOptions(storeDateTimeAsText: true);
