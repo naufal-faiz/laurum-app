@@ -30,6 +30,9 @@ void main() {
     );
   });
   test('non-integer numbers are rejected instead of silently rounded', () {
-    expect(() => canonicalJson(1.5), throwsFormatException);
+    expect(canonicalJson(1.5), '1.5');
+    expect(canonicalJson({'confidence': 0.9}), '{"confidence":0.9}');
+    expect(() => canonicalJson(double.nan), throwsFormatException);
+    expect(() => canonicalJson(double.infinity), throwsFormatException);
   });
 }
