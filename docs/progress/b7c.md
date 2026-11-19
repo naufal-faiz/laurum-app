@@ -32,6 +32,12 @@ Migrasi server acuan: docs/progress/b7b.md. Prompt: docs/prompts/B7c-aplikasi-ai
 4. Setujui usulan: order terbentuk, status menjadi Disetujui, dan usulan hilang dari Antrean.
 5. Laporkan: `code=created`, usulan tampil, order terbentuk (atau galat apa adanya).
 
+Hasil 19 Nov 2026 (sisi server, sudah dijalankan): owner 8ceb3d1b (naufalfaiz6381@gmail.com),
+instance laurum-sim-8ceb3d1b, `code=created` proposal 0edc99b7, baris server `menunggu`,
+decided_at null, phone 081234567890, confidence 0.90. Sisa GATE: sinkron dan setujui di HP.
+Catatan: Supabase menolak secret key bila User-Agent mirip browser; skrip memakai
+`-UserAgent 'laurum-worker/1.0'` (tanpa itu: "Forbidden use of secret API key in browser").
+
 ## Catatan untuk fase berikutnya
 - B7d/B7e (laurum-infra) memakai kontrak yang sama; skrip simulasi ini adalah pengganti sementara.
 - B7f: `wa_connections` sudah tersinkron ke klien tetapi belum dipakai UI; FakeWhatsappConnection

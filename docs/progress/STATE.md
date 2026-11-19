@@ -23,15 +23,18 @@ B7c (aplikasi: Drift v6, repository usulan, sinkron). Dasar commit 0dc8a65. Tida
 Tidak ada setelah commit feat(b7c).
 
 ## Langkah berikutnya
-1. GATE B7c: jalankan skrip simulasi (docs/progress/b7c.md), cek usulan di HP, setujui, order jadi.
+1. Sisa GATE B7c: tarik sinkron di HP, pastikan usulan tampil, lalu setujui (order terbentuk).
+   Bukti sisi server sudah ada di docs/progress/b7c.md.
 2. B7d: laurum-infra (compose Evolution+Postgres+Redis+n8n, flow n8n tunggal, prompt JSON).
+   Butuh path repo laurum-infra di mesin ini.
 3. B7e: penautan WhatsApp manual + webhook ke n8n.
 4. B7f: Edge wa-connect/wa-disconnect, status koneksi nyata (ganti Fake), set_ai_settings,
    kode pasangan (AI-8, perlu keputusan UI).
 5. B7g/B7h: penyetelan prompt dengan sampel tersamarkan, lalu uji end-to-end.
 
 ## Blocker
-- GATE B7c butuh service role key di mesin pengguna (tidak lewat agen, AI-3).
+- Sisa GATE B7c ada di HP pengguna (sinkron + setujui usulan).
+- B7d menunggu path repo laurum-infra di mesin ini.
 - APK terakhir 1.0.2 code 3 (build/app/outputs/flutter-apk), belum dibangun ulang.
 
 ## Bukti terakhir
