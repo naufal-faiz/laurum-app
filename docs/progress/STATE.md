@@ -30,7 +30,7 @@ Tidak membaca Figma.
 - Usulan demo tidak boleh tampil di akun nyata (AI-7); akurasi AI hanya di build dummy (BE-6).
 
 ## Belum di-commit
-Tidak ada setelah commit feat(b7c).
+Tidak ada setelah commit test(b7c) 5ccba44.
 
 ## Langkah berikutnya
 1. GATE B7c: dengan APK baru, tekan "Sinkron sekarang"; pastikan usulan tampil,
