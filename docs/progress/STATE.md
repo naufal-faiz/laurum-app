@@ -13,6 +13,9 @@ B7c (aplikasi: Drift v6, repository usulan, sinkron). Dasar commit 0dc8a65. Tida
   connected_at, fixture wire dan applier diperbarui.
 - Usulan demo hanya akun demo; akun nyata memakai Drift dan berubah lewat accountChangesProvider.
 - Skrip simulasi worker: supabase/scripts/simulate-worker.ps1 (kunci dari environment).
+- Perbaikan B7c: canonical JSON menolak double, sehingga push gagal sebelum jaringan
+  ("Gagal sinkron", attempts=0) begitu ada usulan dengan confidence pecahan. Sekarang
+  0.9 ditulis apa adanya, setara teks jsonb; NaN/tak hingga/eksponen tetap ditolak.
 
 ## Keputusan pengguna terbaru
 - B7a disetujui; B7b diterapkan ke cloud laurumdb oleh agen atas perintah pengguna (19 Nov 2026).
@@ -33,8 +36,9 @@ Tidak ada setelah commit feat(b7c).
 5. B7g/B7h: penyetelan prompt dengan sampel tersamarkan, lalu uji end-to-end.
 
 ## Blocker
-- Sisa GATE B7c ada di HP pengguna (sinkron + setujui usulan).
-- B7d menunggu path repo laurum-infra di mesin ini.
+- Sisa GATE B7c ada di HP pengguna (setujui usulan -> order terbentuk). Sinkron sudah
+  terbukti jalan 19 Nov 2026 05:44 UTC (outbox 0, kursor maju).
+- B7d: worker siap; enam kasus smoke menunggu kunci service role di environment pengguna.
 - APK terakhir 1.0.2 code 3 (build/app/outputs/flutter-apk), belum dibangun ulang.
 
 ## Bukti terakhir
