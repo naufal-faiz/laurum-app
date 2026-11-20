@@ -8,8 +8,10 @@ import 'package:laurum/features/services/state/service_copy.dart';
 import 'package:laurum/features/services/state/service_directory_providers.dart';
 import 'package:laurum/features/services/widgets/service_directory_content_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/sync/state/data_refresh_actions.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/molecules/footer_bar.dart';
 import 'package:laurum/shared/widgets/templates/sub_scaffold.dart';
@@ -21,14 +23,22 @@ class ServiceDirectoryPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final directory = ref.watch(serviceDirectoryProvider);
     final query = ref.watch(serviceDirectorySearchProvider);
+    final services = directory.value;
     return SubScaffold(
+      onRefresh: ref.read(dataRefreshActionsProvider.notifier).refresh,
+      refreshScrollable: !directory.hasError || services != null,
       title: 'Daftar layanan',
       backLabel: 'Kembali',
+      appBarVariant: AppBarSubVariant.detail,
+      subtitle: services == null
+          ? null
+          : '${services.length} layanan · ${services.where((service) => service.isActive).length} aktif',
       onBack: () => context.canPop() ? context.pop() : context.go('/lainnya'),
       body: Column(
         children: [
           Expanded(
             child: directory.when(
+              skipLoadingOnReload: true,
               loading: () => ListView(
                 padding: const EdgeInsets.all(AppSpacing.screenPadding),
                 children: [for (var i = 0; i < 4; i++) const AppSkeleton()],

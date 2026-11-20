@@ -38,6 +38,28 @@ membatasi throughput; revisi dan receipt server tetap melindungi perubahan bersa
 - Keempat tes integrasi yang skip dijalankan terpisah dengan Supabase lokal:
   confidence, isolasi akun, sinkron dua perangkat dan penerimaan offline; 4/4 lulus.
 
+## Uji Android lokal dengan UI terbaru (20 Nov 2026)
+Pengguna meminta dan menyetujui merge `newdesign` 7dd054f ke `ai-whatsapp` agar
+tarik-refresh ikut diuji. Kode tanpa konflik; konflik STATE/REPO_MAP diselesaikan
+dengan mempertahankan konteks AI dan membuat ulang indeks. Versi gabungan:
+check_all 1394 lulus/4 skip, keempat integrasi Supabase lokal 4/4 lulus.
+
+Salinan debug `com.cashier.laurum.b7dlocal`, label **Laurum B7d Uji**, diperbarui
+ke 1.0.3+4 tanpa menghapus data/login. Aplikasi asli tetap terpisah. Build berhasil
+1m3s; pemasangan Success, versi terpasang diperiksa lewat dumpsys.
+Android memakai Supabase lokal melalui `adb reverse tcp:54321 tcp:54321`.
+Jika debug nirkabel putus, sambungkan ulang lalu pulihkan reverse. Akun cloud
+tidak bisa dipakai login di lingkungan ini; fixture lokal sudah dimasukkan.
+
+Worker dengan model yang sudah ada: pesan belum jelas menghasilkan nol usulan,
+pesan order menghasilkan satu Menunggu untuk Ani, alamat Jalan Uji B7D nomor 1.
+Setelah pembaruan aplikasi, inspeksi UI Antrean menampilkan 1 perlu dicek dan
+kartu Ani dengan pesan sumber; status server tetap Menunggu, belum menjadi order.
+Konfirmasi pengguna atas gesture tarik-refresh masih menunggu. Berikutnya:
+pembaruan alamat, duplikat, penarikan, order baru; satu tahap per konfirmasi.
+Fixture dan workflow sementara dipertahankan sampai rangkaian manual selesai;
+lihat STATE.md untuk sesi harness dan cara membersihkannya.
+
 ## Penerapan cloud - dilakukan pemilik, bukan agen
 1. Cadangkan database dan ekspor versi published workflow n8n melalui UI; simpan
    ekspor berkredensial secara privat. Unpublish worker sampai migrasi selesai.

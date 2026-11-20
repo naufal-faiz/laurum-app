@@ -75,7 +75,7 @@ void main() {
     expect(after.totals.transactionCount, before.totals.transactionCount + 1);
     await tester.pumpAndSettle();
     expect(
-      find.textContaining('Pendapatan ${Formatters.rupiah(after.totals.revenue)}'),
+      find.text('Masuk ${Formatters.rupiah(after.totals.revenue)}'),
       findsOneWidget,
     );
     expect(tester.takeException(), isNull);

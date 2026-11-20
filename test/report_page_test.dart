@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/services/export_service.dart';
 import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/shared/widgets/molecules/period_tabs.dart';
+import 'package:laurum/shared/widgets/molecules/stat_tile.dart';
 import 'package:laurum/shared/widgets/organisms/report_summary.dart';
 import 'package:laurum/shared/widgets/organisms/top_services.dart';
 import 'package:laurum/shared/widgets/organisms/weekly_bar_chart.dart';
@@ -28,7 +29,7 @@ void main() {
     await tester.scrollUntilVisible(find.byType(TopServices), 300, scrollable: vertical);
     await tester.pumpAndSettle();
     expect(find.text('Rp301.500'), findsOneWidget);
-    await tester.tap(find.text('Ekspor Excel'));
+    await tester.tap(find.textContaining('Excel'));
     await tester.pumpAndSettle();
     expect(find.text('Laporan siap diekspor.'), findsOneWidget);
     final export = host.container.read(exportServiceProvider) as FakeExportService;
@@ -51,13 +52,16 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('-Rp986.000'), findsOneWidget);
     expect(find.byType(WeeklyBarChart), findsNothing);
+    expect(find.text('Grafik harian ditampilkan untuk rentang hingga 7 hari.'), findsNothing);
+    final debtTile = find.widgetWithText(StatTile, 'Piutang aktif');
     await tester.scrollUntilVisible(
-      find.textContaining('Piutang aktif Rp400.500'),
+      debtTile,
       200,
       scrollable: vertical,
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.textContaining('Piutang aktif Rp400.500'));
+    expect(find.descendant(of: debtTile, matching: find.text('Rp400.500')), findsOneWidget);
+    await tester.tap(debtTile);
     await tester.pumpAndSettle();
     expect(find.text('Daftar piutang'), findsWidgets);
   });

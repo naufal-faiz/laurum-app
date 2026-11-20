@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/printer/state/printer_settings.dart';
 import 'package:laurum/features/printer/state/printer_settings_edit.dart';
-import 'package:laurum/shared/widgets/atoms/app_chip.dart';
-import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
+import 'package:laurum/features/printer/widgets/printer_elements_section.dart';
+import 'package:laurum/features/printer/widgets/printer_format_section.dart';
+import 'package:laurum/features/printer/widgets/printer_message_section.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
-import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
-import 'package:laurum/shared/widgets/molecules/section_header.dart';
-import 'package:laurum/shared/widgets/organisms/receipt_toggle_list.dart';
 
 class PrinterSettingsSection extends StatelessWidget {
   const PrinterSettingsSection({
@@ -34,36 +32,13 @@ class PrinterSettingsSection extends StatelessWidget {
                 ? BannerMessageVariant.success
                 : BannerMessageVariant.info,
           ),
-        const SectionHeader(title: 'Ukuran kertas'),
-        Wrap(
-          spacing: AppSpacing.cardGap,
-          children: [
-            for (final paper in [58, 80])
-              AppChip(
-                '$paper mm',
-                selected: settings.paperMm == paper,
-                onPressed: paper == 80
-                    ? () => onNotice(
-                        'Printer 80 mm masih coming soon. Untuk sekarang gunakan 58 mm.',
-                      )
-                    : () => onEdit(paperMm: paper),
-              ),
-          ],
+        PrinterFormatSection(
+          paperMm: settings.paperMm,
+          fontSize: settings.fontSize,
+          onEdit: onEdit,
+          onNotice: onNotice,
         ),
-        const SectionHeader(title: 'Ukuran huruf'),
-        Wrap(
-          spacing: AppSpacing.cardGap,
-          children: [
-            for (final size in [11, 13])
-              AppChip(
-                size == 11 ? 'Normal' : 'Besar',
-                selected: settings.fontSize == size,
-                onPressed: () => onEdit(fontSize: size),
-              ),
-          ],
-        ),
-        const SectionHeader(title: 'Elemen tampilan nota'),
-        ReceiptToggleList(
+        PrinterElementsSection(
           showAddress: settings.showAddress,
           showCustomer: settings.showCustomer,
           showSavings: settings.showSavings,
@@ -73,25 +48,11 @@ class PrinterSettingsSection extends StatelessWidget {
           onSavingsChanged: (value) => onEdit(showSavings: value),
           onNoteChanged: (value) => onEdit(showNote: value),
         ),
-        LabeledField(
-          label: 'Teks penutup struk',
-          child: AppTextField(
-            label: 'Teks penutup struk',
-            hint: 'Terima kasih atas kepercayaan Anda',
-            value: printer.profile.receiptFooter,
-            maxLines: 2,
-            onChanged: (value) => onEdit(footer: value),
-          ),
-        ),
-        LabeledField(
-          label: 'Catatan khusus nota',
-          child: AppTextField(
-            label: 'Catatan khusus nota',
-            hint: 'Pakaian bersih, wangi & rapi',
-            value: printer.profile.receiptNote,
-            maxLines: 2,
-            onChanged: (value) => onEdit(note: value),
-          ),
+        PrinterMessageSection(
+          footer: printer.profile.receiptFooter,
+          note: printer.profile.receiptNote,
+          onFooterChanged: (value) => onEdit(footer: value),
+          onNoteChanged: (value) => onEdit(note: value),
         ),
       ],
     );

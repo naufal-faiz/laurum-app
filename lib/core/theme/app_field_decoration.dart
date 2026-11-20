@@ -9,22 +9,30 @@ abstract final class AppFieldDecoration {
     required bool dense,
     String? hint,
     String? error,
+    String? prefixText,
     bool enabled = true,
     Widget? prefixIcon,
     Widget? suffixIcon,
-  }) => dense
-      ? AppInputStyles.field(
-          hint: hint,
-          error: error,
-          enabled: enabled,
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
-        )
-      : AppInputStyles.decoration(
-          hint: hint,
-          error: error,
-          enabled: enabled,
-        ).copyWith(suffixIcon: suffixIcon);
+  }) =>
+      (dense
+              ? AppInputStyles.field(
+                  hint: hint,
+                  error: error,
+                  enabled: enabled,
+                  prefixIcon: prefixIcon,
+                  suffixIcon: suffixIcon,
+                )
+              : AppInputStyles.decoration(
+                  hint: hint,
+                  error: error,
+                  enabled: enabled,
+                ).copyWith(
+                  suffixIcon: suffixIcon,
+                  prefixIcon: prefixText != null ? prefixIcon : null,
+                ))
+          .copyWith(
+            contentPadding: dense && prefixText != null ? AppInputStyles.padding : null,
+          );
 
   static TextStyle style({required bool dense, required bool enabled}) => dense
       ? AppInputStyles.fieldTextStyle(enabled: enabled)

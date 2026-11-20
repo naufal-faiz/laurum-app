@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/core/services/repository_providers.dart';
 import 'package:laurum/shared/widgets/atoms/app_switch.dart';
+import 'package:laurum/shared/widgets/molecules/selection_tile.dart';
 
 import 'antrean_test_host.dart';
 
@@ -14,7 +15,6 @@ void main() {
     expect(find.text('Total 6 layanan (5 aktif)'), findsOneWidget);
     expect(find.text('Cuci kering lipat'), findsOneWidget);
     expect(find.text('Bed cover'), findsOneWidget);
-
     await tester.dragUntilVisible(
       find.text('Jas & gaun'),
       find.byType(ListView),
@@ -40,22 +40,22 @@ void main() {
     await tester.tap(find.text('Tambah layanan'));
     await tester.pumpAndSettle();
     expect(find.text('Tambah layanan'), findsOneWidget);
-
     await tester.tap(find.text('Simpan layanan'));
     await tester.pumpAndSettle();
     expect(find.text('Nama layanan wajib diisi.'), findsOneWidget);
     expect(find.text('Harga harus lebih dari Rp0.'), findsOneWidget);
-
     await tester.enterText(find.byType(TextField).at(0), 'Karpet');
     await tester.enterText(find.byType(TextField).at(1), '30000');
-    await tester.tap(find.text('Satuan (per pcs)'));
+    final type = find.widgetWithText(SelectionTile, 'Satuan');
+    await tester.ensureVisible(type);
+    await tester.tap(type);
     await tester.pumpAndSettle();
-    expect(find.text('Harga (per pcs)'), findsOneWidget);
+    expect(find.text('Harga per pcs'), findsOneWidget);
+    await tester.ensureVisible(find.text('5 hari'));
     await tester.tap(find.text('5 hari'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Simpan layanan'));
     await tester.pumpAndSettle();
-
     expect(find.text('Total 7 layanan (6 aktif)'), findsOneWidget);
     final services = await host.container
         .read(serviceRepositoryProvider)

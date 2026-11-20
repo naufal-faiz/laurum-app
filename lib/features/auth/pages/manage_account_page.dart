@@ -11,8 +11,11 @@ import 'package:laurum/features/auth/state/account_edit.dart';
 import 'package:laurum/features/auth/state/account_view.dart';
 import 'package:laurum/features/auth/state/auth_session.dart';
 import 'package:laurum/features/auth/widgets/account_danger_section.dart';
+import 'package:laurum/features/auth/widgets/account_identity_section.dart';
 import 'package:laurum/features/auth/widgets/account_profile_section.dart';
+import 'package:laurum/features/auth/widgets/account_security_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/templates/sub_scaffold.dart';
 
 class ManageAccountPage extends ConsumerWidget {
@@ -23,30 +26,45 @@ class ManageAccountPage extends ConsumerWidget {
     final data = accountView(ref.watch(authServiceProvider));
     return SubScaffold(
       title: 'Kelola akun',
+      subtitle: 'Profil & keamanan akun',
       backLabel: 'Kembali',
+      appBarVariant: AppBarSubVariant.detail,
       onBack: () => context.canPop() ? context.pop() : context.go('/lainnya'),
-      body: SingleChildScrollView(
+      body: ListView(
         padding: const EdgeInsets.all(AppSpacing.screenPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: AppSpacing.screenPadding,
-          children: [
-            AccountProfileSection(
-              data: data,
-              busy: session.busy,
-              onName: () => AccountEditSheet.show(context, AccountField.name),
-              onPhone: () => AccountEditSheet.show(context, AccountField.phone),
-              onPassword: () => ChangePasswordSheet.show(context),
-            ),
-            AccountDangerSection(
-              busy: session.busy,
-              offline: ref.watch(shellSyncProvider).value == SyncServiceStatus.offline,
-              error: session.error,
-              onLogout: () => confirmSignOut(context, ref),
-              onDelete: () => confirmDeleteAccount(context, ref),
-            ),
-          ],
-        ),
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: AppSpacing.large,
+            children: [
+              AccountIdentitySection(
+                name: data.name,
+                email: data.email,
+                googleLinked: data.googleLinked,
+                busy: session.busy,
+                onEdit: () => AccountEditSheet.show(context, AccountField.name),
+              ),
+              AccountProfileSection(
+                data: data,
+                busy: session.busy,
+                onName: () => AccountEditSheet.show(context, AccountField.name),
+                onPhone: () => AccountEditSheet.show(context, AccountField.phone),
+              ),
+              AccountSecuritySection(
+                data: data,
+                busy: session.busy,
+                onPassword: () => ChangePasswordSheet.show(context),
+              ),
+              AccountDangerSection(
+                busy: session.busy,
+                offline: ref.watch(shellSyncProvider).value == SyncServiceStatus.offline,
+                error: session.error,
+                onLogout: () => confirmSignOut(context, ref),
+                onDelete: () => confirmDeleteAccount(context, ref),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

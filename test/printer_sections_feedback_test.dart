@@ -6,7 +6,6 @@ import 'package:laurum/features/printer/state/printer_state.dart';
 import 'package:laurum/features/printer/widgets/printer_connection_section.dart';
 import 'package:laurum/features/printer/widgets/printer_settings_section.dart';
 import 'package:laurum/main_dummy.dart';
-import 'package:laurum/shared/widgets/atoms/app_chip.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 
 import 'r9_section_host.dart';
@@ -64,9 +63,9 @@ void main() {
       tester.widget<BannerMessage>(find.byType(BannerMessage)).variant,
       BannerMessageVariant.success,
     );
-    await tester.tap(find.widgetWithText(AppChip, 'Besar'));
+    await tester.tap(find.text('Besar'));
     expect(font, 13);
-    await tester.tap(find.widgetWithText(AppChip, '80 mm'));
+    await tester.tap(find.text('80 mm'));
     expect(notice, contains('coming soon'));
   });
 }

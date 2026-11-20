@@ -41,7 +41,34 @@ Prompt 90 - onboarding:
   dalam mode onboarding. Tidak ada Google atau penyimpanan kredensial nyata.
 
 
-## Audit penyelesaian UI - prompt 100
+## Redesign 17 Nov 2026 (frame `LAURUM · Info Usaha`, ID 4294968909)
+AppBarSub varian detail + subjudul 'Data toko di struk & profil'. Komposisi baru:
+BusinessPreviewSection (label PRATINJAU STRUK: pratinjau struk reaktif berisi nama
+kapital, alamat, telepon lewat Formatters.telepon, catatan kaki),
+BusinessFormSection (label DETAIL USAHA: empat LabeledField/AppTextField yang sama
+dengan helper lama), BusinessNoteSection (BannerMessage info). Footer Simpan tetap.
+
+### Paritas redesign
+| Butir | Sumber lama | Di UI baru |
+|---|---|---|
+| Nama usaha + validasi wajib | businessInfoProvider/name | field di kartu Detail Usaha |
+| Alamat 2 baris | address | field di kartu Detail Usaha |
+| Nomor telepon + helper | phone | field + helper di kartu Detail Usaha |
+| Catatan kaki struk + helper | receiptFooter | field + helper di kartu Detail Usaha |
+| Banner 'Info usaha disimpan.' | notice | BannerMessage di atas pratinjau |
+| Simpan / Menyimpan... | save() | footer FormScaffold |
+| Loading dan gagal muat | async.when | AppSkeleton / EmptyState |
+| Pratinjau struk | tidak ada | tampilan dari nilai draf yang sama |
+
+### Selisih desain
+- Pratinjau struk menampilkan nilai draf (belum disimpan) agar perubahan langsung
+  terlihat; bukan data baru dan tidak menulis repository.
+- Teks banner 'Perubahan tampil di struk dan nota setelah disimpan.' adalah teks
+  rancangan redesign ini.
+- Tanpa baris navigasi 'Struk & Printer' dari frame agar tidak menambah perilaku baru.
+- Tidak ada token, atom, atau molecule baru; banner memakai BannerMessage info.
+
+
 Rute terkait diperiksa pada 320 px dan skala teks 1,3; sheet input tetap melalui tes keyboard 300 dp.
 State relevan dan selisih terakhir terhadap .pen dirangkum pada [audit akhir UI](../../progress/fase-ui.md).
 APK Android menjalani smoke perangkat; ini tidak menyatakan semua alur layar diuji manual. iOS dan integrasi produksi belum diuji.

@@ -11,6 +11,7 @@ import 'package:laurum/features/orders/state/antrean_search.dart';
 import 'package:laurum/features/orders/widgets/antrean_header_section.dart';
 import 'package:laurum/features/settings/widgets/settings_header_section.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/sync/state/data_refresh_actions.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/sync_indicator.dart';
@@ -25,18 +26,21 @@ class RootShellPage extends ConsumerWidget {
     final sync = ref.watch(shellSyncProvider);
     final index = navigationShell.currentIndex;
     final settings = index == 3 && GoRouterState.of(context).uri.path == '/lainnya';
+    final reporting = GoRouterState.of(context).uri.path == '/laporan';
     final queue = index == 1 ? ref.watch(antreanDataProvider).value : null;
     final search = index == 1 ? ref.watch(antreanSearchProvider) : (open: false, query: '');
     final customers = index == 2 ? ref.watch(customerDirectoryProvider).value : null;
-    final syncState = sync.hasError
-        ? SyncState.gagal
-        : SyncState.values.byName(sync.value?.name ?? 'menyimpan');
+    final syncState = SyncState.values.byName(ref.watch(shellSyncStatusProvider).name);
     return RootScaffold(
+      onRefresh: ref.read(dataRefreshActionsProvider.notifier).refresh,
+      refreshScrollable: index == 1 ? queue != null : index != 2 || customers != null,
       title: profile.value?.name ?? 'Laurum',
       accountLabel: 'Usaha dan akun',
       activeIndex: navigationShell.currentIndex,
-      showAppBar: index > 1,
-      pageHeader: settings
+      showAppBar: index > 1 && !reporting,
+      pageHeader: reporting
+          ? null
+          : settings
           ? SettingsHeaderSection(
               name: profile.value?.name ?? 'Laurum',
               syncState: syncState,
@@ -60,7 +64,7 @@ class RootShellPage extends ConsumerWidget {
               onAccount: () => navigationShell.goBranch(3),
             )
           : null,
-      header: index == 0
+      header: index == 0 && !reporting
           ? const Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
               child: BerandaHeaderSection(),
@@ -71,7 +75,7 @@ class RootShellPage extends ConsumerWidget {
       onTabSelected: navigationShell.goBranch,
       onCreate: () => context.push('/transaksi/baru'),
       body: SafeArea(
-        top: false,
+        top: reporting,
         child: Column(
           children: [
             if (sync.value == SyncServiceStatus.offline)

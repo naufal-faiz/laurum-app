@@ -23,7 +23,7 @@ class BannerMessage extends StatelessWidget {
     };
     return Container(
       padding: AppMoleculeTokens.noticePadding,
-      decoration: BoxDecoration(color: background, borderRadius: AppRadius.numpad),
+      decoration: BoxDecoration(color: background, borderRadius: AppRadius.small),
       child: Row(
         children: [
           AppIcon(icon, size: AppDimensions.iconAction, color: foreground),

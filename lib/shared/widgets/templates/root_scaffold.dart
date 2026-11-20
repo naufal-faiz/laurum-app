@@ -4,6 +4,7 @@ import 'package:laurum/core/theme/app_dimensions.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_root.dart';
 import 'package:laurum/shared/widgets/molecules/sync_indicator.dart';
+import 'package:laurum/shared/widgets/organisms/app_data_refresh.dart';
 import 'package:laurum/shared/widgets/organisms/bottom_nav_bar.dart';
 
 class RootScaffold extends StatelessWidget {
@@ -22,6 +23,8 @@ class RootScaffold extends StatelessWidget {
     this.onCreate,
     this.subtitle,
     this.pageHeader,
+    this.onRefresh,
+    this.refreshScrollable = true,
   });
   final String title, accountLabel;
   final String? subtitle;
@@ -33,6 +36,8 @@ class RootScaffold extends StatelessWidget {
   final double headerHeight;
   final VoidCallback? onAccount, onCreate;
   final ValueChanged<int>? onTabSelected;
+  final Future<void> Function()? onRefresh;
+  final bool refreshScrollable;
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: AppColors.bg,
@@ -75,7 +80,15 @@ class RootScaffold extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               if (pageHeader != null) SafeArea(bottom: false, child: pageHeader!),
-              Expanded(child: body),
+              Expanded(
+                child: onRefresh == null
+                    ? body
+                    : AppDataRefresh(
+                        onRefresh: onRefresh!,
+                        hasScrollableChild: refreshScrollable,
+                        child: body,
+                      ),
+              ),
             ],
           ),
         );

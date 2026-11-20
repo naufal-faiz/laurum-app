@@ -1133,6 +1133,14 @@ memakai AppTextStyles.label. Data, callback submit, validasi dan busy tetap.
   keyboard terbuka; footer lama tetap di atas keyboard.
 - Varian standard mempertahankan appbar dan galeri lama; golden detail_form baru.
 
+## Tarik-refresh data (033)
+- AppDataRefresh(child, onRefresh, hasScrollableChild=true): RefreshIndicator dengan
+  overscroll untuk daftar pendek; false memberi area scroll bagi empty/error statis.
+- RootScaffold/SubScaffold/FormScaffold.onRefresh opsional, default null;
+  Root/Sub.refreshScrollable default true. Tidak ada perubahan layout saat idle.
+- Page memasok DataRefreshActions.refresh: sync server lalu query baca-saja;
+  widget bersama tidak membaca provider. Form input tidak dipasangi callback.
+
 ## Koreksi informasi dan header (021, arahan pengguna 11 Nov)
 - AppBarSub.detail: judul/subtitle tanpa gap tambahan; trailing center terhadap
   kelompok teks. Standard tetap.

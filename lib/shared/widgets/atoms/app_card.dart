@@ -4,6 +4,7 @@ import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/core/theme/app_shadows.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
+import 'package:laurum/core/theme/app_surface_styles.dart';
 
 enum AppCardRail { none, warning, error, info, success }
 
@@ -17,13 +18,14 @@ class AppCard extends StatelessWidget {
     this.style = AppCardStyle.outlined,
     this.rail = AppCardRail.none,
     this.bubble = false,
+    this.gradient = false,
     this.onTap,
     this.padding = const EdgeInsets.all(AppSpacing.cardPadding),
   });
   final Widget child;
   final AppCardStyle style;
   final AppCardRail rail;
-  final bool bubble;
+  final bool bubble, gradient;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
   @override
@@ -39,6 +41,7 @@ class AppCard extends StatelessWidget {
         : AppRadius.card;
     return DecoratedBox(
       decoration: BoxDecoration(
+        gradient: gradient && primary ? AppSurfaceStyles.primaryGradient : null,
         color: switch (style) {
           AppCardStyle.primary => AppColors.primary,
           AppCardStyle.success => AppColors.successTint,

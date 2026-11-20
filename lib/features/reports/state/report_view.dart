@@ -41,7 +41,7 @@ class ReportView {
       totals.revenue == 0 &&
       totals.expenses == 0 &&
       totals.cashIn == 0;
-  List<String> get dayLabels => period == 3
+  List<String> get dayLabels => period == 3 || period == 2
       ? [
           for (var i = 0; i < (daily?.length ?? 0); i++)
             Formatters.tanggal(range.start.add(Duration(days: i)), ringkas: true),
@@ -75,7 +75,7 @@ Future<ReportView> _loadReport(Ref ref, int period) async {
     range: range,
     totals: totals,
     unpaidCount: await reports.getUnpaidCount(),
-    daily: visibleDailyRevenue(range, amounts, now),
+    daily: period == 2 ? null : visibleDailyRevenue(range, amounts, now),
     services: services,
   );
 }

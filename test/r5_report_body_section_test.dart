@@ -6,10 +6,12 @@ import 'package:laurum/core/domain/report_range.dart';
 import 'package:laurum/core/domain/report_totals.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 import 'package:laurum/features/reports/state/report_custom_range.dart';
+import 'package:laurum/features/reports/state/report_orders_data.dart';
 import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/features/reports/state/report_view.dart';
 import 'package:laurum/features/reports/widgets/report_body_section.dart';
 import 'package:laurum/main_dummy.dart';
+import 'package:laurum/shared/widgets/molecules/empty_state.dart';
 import 'package:laurum/shared/widgets/organisms/report_summary.dart';
 
 void main() {
@@ -42,17 +44,27 @@ void main() {
       totals: const ReportTotals(activeOutstanding: 400500, savingsBalance: 430000),
       unpaidCount: 5,
     );
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: AppTheme.light,
-        home: Scaffold(
-          body: ReportBodySection(data: empty, onOutstanding: () => opens++),
+    for (final orders in [
+      null,
+      const ReportOrdersData(orders: [], customers: {}, items: {}, payments: []),
+    ]) {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.light,
+          home: Scaffold(
+            body: ReportBodySection(data: empty, orders: orders, onOutstanding: () => opens++),
+          ),
         ),
-      ),
-    );
-    await tester.pumpAndSettle();
-    expect(find.text('Belum ada data periode ini'), findsOneWidget);
-    expect(find.byType(ReportSummary), findsNothing);
-    expect(tester.takeException(), isNull);
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Belum ada data periode ini'), findsOneWidget);
+      expect(find.byType(EmptyState), findsOneWidget);
+      expect(
+        tester.getTopLeft(find.text('Nota (0)')).dy,
+        lessThan(tester.getTopLeft(find.byType(EmptyState)).dy),
+      );
+      expect(find.byType(ReportSummary), findsNothing);
+      expect(tester.takeException(), isNull);
+    }
   });
 }

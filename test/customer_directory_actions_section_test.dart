@@ -1,10 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:laurum/core/icons/app_icons.dart';
 import 'package:laurum/core/theme/app_theme.dart';
 import 'package:laurum/features/customers/widgets/customer_directory_actions_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 
 void main() {
+  testWidgets('customer actions share a row at the reference frame content width', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light,
+        home: Scaffold(
+          body: Center(
+            child: SizedBox(
+              width: 342,
+              child: CustomerDirectoryActionsSection(onImport: () {}, onAdd: () {}),
+            ),
+          ),
+        ),
+      ),
+    );
+    final imports = tester.getRect(find.widgetWithText(AppButton, 'Impor kontak'));
+    final adds = tester.getRect(find.widgetWithText(AppButton, 'Pelanggan baru'));
+    expect(imports.top, adds.top);
+    expect(imports.size, adds.size);
+    expect(imports.right, lessThan(adds.left));
+    final importButton = tester.widget<AppButton>(find.widgetWithText(AppButton, 'Impor kontak'));
+    expect(importButton.icon, AppIcons.download);
+    expect(importButton.size, AppButtonSize.small);
+    expect(
+      tester.widget<AppButton>(find.widgetWithText(AppButton, 'Pelanggan baru')).size,
+      AppButtonSize.small,
+    );
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('customer actions are compact, equal and keep callbacks at 320px 2x', (tester) async {
     var imports = 0;
     var adds = 0;

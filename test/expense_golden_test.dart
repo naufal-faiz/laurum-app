@@ -23,7 +23,9 @@ void main() {
       );
     });
   }
-  testWidgets('expense directory 320px 2x text keeps fixed CTA and navigation', (tester) async {
+  testWidgets('expense directory 320px 2x text keeps the add action and back navigation', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(320, 844);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -31,7 +33,7 @@ void main() {
     await pumpAntrean(tester, location: '/lainnya/pengeluaran', textScale: 2);
     expect(tester.takeException(), isNull);
     expect(find.text('Catat pengeluaran').hitTestable(), findsOneWidget);
-    await tester.tap(find.text('Lainnya'));
+    await tester.tap(find.byTooltip('Kembali'));
     await tester.pumpAndSettle();
     expect(find.text('PENGATURAN'), findsOneWidget);
   });

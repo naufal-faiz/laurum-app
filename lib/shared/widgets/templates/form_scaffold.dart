@@ -3,6 +3,7 @@ import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/footer_bar.dart';
+import 'package:laurum/shared/widgets/organisms/app_data_refresh.dart';
 
 class FormScaffold extends StatelessWidget {
   const FormScaffold({
@@ -12,6 +13,7 @@ class FormScaffold extends StatelessWidget {
     required this.footer,
     super.key,
     this.summary,
+    this.onRefresh,
     this.onBack,
     this.trailing,
     this.subtitle,
@@ -26,6 +28,7 @@ class FormScaffold extends StatelessWidget {
   final Widget? summary, trailing;
   final VoidCallback? onBack;
   final EdgeInsetsGeometry padding;
+  final Future<void> Function()? onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,10 @@ class FormScaffold extends StatelessWidget {
       subtitle: detail && MediaQuery.viewInsetsOf(context).bottom > 0 ? null : subtitle,
       variant: appBarVariant,
     );
-    final content = SingleChildScrollView(padding: padding, child: body);
+    final scroll = SingleChildScrollView(padding: padding, child: body);
+    final content = onRefresh == null
+        ? scroll
+        : AppDataRefresh(onRefresh: onRefresh!, child: scroll);
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: detail

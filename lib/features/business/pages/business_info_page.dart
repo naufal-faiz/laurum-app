@@ -6,12 +6,15 @@ import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/auth/pages/account_flow.dart';
 import 'package:laurum/features/auth/state/auth_session.dart';
 import 'package:laurum/features/business/state/business_info_controller.dart';
+import 'package:laurum/features/business/widgets/business_form_section.dart';
+import 'package:laurum/features/business/widgets/business_note_section.dart';
+import 'package:laurum/features/business/widgets/business_preview_section.dart';
+import 'package:laurum/features/business/widgets/business_printer_section.dart';
 import 'package:laurum/shared/widgets/atoms/app_button.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
-import 'package:laurum/shared/widgets/atoms/app_text_field.dart';
+import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/banner_message.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
-import 'package:laurum/shared/widgets/molecules/labeled_field.dart';
 import 'package:laurum/shared/widgets/templates/form_scaffold.dart';
 
 class BusinessInfoPage extends ConsumerWidget {
@@ -22,9 +25,12 @@ class BusinessInfoPage extends ConsumerWidget {
     final async = ref.watch(businessInfoProvider);
     final state = async.value;
     final setup = ref.watch(authSessionProvider).needsSetup;
+    final controller = ref.read(businessInfoProvider.notifier);
     return FormScaffold(
       title: 'Info usaha',
+      subtitle: 'Detail usaha di struk & profil',
       backLabel: 'Kembali',
+      appBarVariant: AppBarSubVariant.detail,
       onBack: setup
           ? () => confirmSignOut(context, ref)
           : () => context.canPop() ? context.pop() : context.go('/lainnya'),
@@ -32,7 +38,8 @@ class BusinessInfoPage extends ConsumerWidget {
           ? const SizedBox.shrink()
           : AppButton(
               state.busy ? 'Menyimpan...' : 'Simpan',
-              onPressed: state.busy ? null : () => ref.read(businessInfoProvider.notifier).save(),
+              icon: AppIcons.check,
+              onPressed: state.busy ? null : controller.save,
             ),
       body: async.when(
         loading: () => const Column(
@@ -49,54 +56,26 @@ class BusinessInfoPage extends ConsumerWidget {
           spacing: AppSpacing.cardGap,
           children: [
             if (value.notice != null) BannerMessage(message: value.notice!),
-            LabeledField(
-              label: 'Nama usaha',
-              errorText: value.nameError,
-              child: AppTextField(
-                label: 'Nama usaha',
-                value: value.name,
-                enabled: !value.busy,
-                selectAllOnFocus: true,
-                onChanged: ref.read(businessInfoProvider.notifier).setName,
-              ),
+            BusinessPreviewSection(
+              name: value.name,
+              address: value.address,
+              phone: value.phone,
+              footer: value.receiptFooter,
             ),
-            LabeledField(
-              label: 'Alamat',
-              child: AppTextField(
-                label: 'Alamat',
-                value: value.address,
-                enabled: !value.busy,
-                selectAllOnFocus: true,
-                minLines: 2,
-                maxLines: 2,
-                onChanged: ref.read(businessInfoProvider.notifier).setAddress,
-              ),
+            BusinessFormSection(
+              name: value.name,
+              address: value.address,
+              phone: value.phone,
+              footer: value.receiptFooter,
+              nameError: value.nameError,
+              busy: value.busy,
+              onName: controller.setName,
+              onAddress: controller.setAddress,
+              onPhone: controller.setPhone,
+              onFooter: controller.setFooter,
             ),
-            LabeledField(
-              label: 'Nomor telepon',
-              helperText: 'Nomor telepon ditampilkan di struk.',
-              child: AppTextField(
-                label: 'Nomor telepon',
-                value: value.phone,
-                enabled: !value.busy,
-                selectAllOnFocus: true,
-                keyboardType: TextInputType.phone,
-                onChanged: ref.read(businessInfoProvider.notifier).setPhone,
-              ),
-            ),
-            LabeledField(
-              label: 'Catatan kaki struk',
-              helperText: 'Catatan tambahan struk diatur di layar Printer dan struk.',
-              child: AppTextField(
-                label: 'Catatan kaki struk',
-                value: value.receiptFooter,
-                enabled: !value.busy,
-                selectAllOnFocus: true,
-                minLines: 2,
-                maxLines: 2,
-                onChanged: ref.read(businessInfoProvider.notifier).setFooter,
-              ),
-            ),
+            BusinessPrinterSection(onTap: () => context.push('/lainnya/printer')),
+            const BusinessNoteSection(),
           ],
         ),
       ),

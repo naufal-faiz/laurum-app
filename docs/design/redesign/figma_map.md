@@ -1,4 +1,4 @@
-# Peta Layar ke Frame Figma (Redesign UI Laurum)
+﻿# Peta Layar ke Frame Figma (Redesign UI Laurum)
 
 Dokumen ini memetakan spec layar di `docs/design/screens/` ke frame Figma/FigCraft.
 Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang menebak frame).
@@ -19,21 +19,22 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `08-nota-tersimpan.md` (08 - Nota Tersimpan) | `LAURUM · Struk Pembayaran` (ID: 4294967599) | Selesai; check_all hijau; siap ditinjau bersama pembayaran | Empat aksi Selesai/WhatsApp/Unduh/Cetak dan PDF nyata; teks besar responsif; snapshot desain 1; lihat spec 08 |
 | `09-detail-order.md` (09 - Detail Order) | `LAURUM · Detail Order` (ID: 612) | Persiapan 018–020 disetujui | Komponen bersama dahulu; seluruh mode/status/COD/aksi lama tetap |
 | `10-edit-order.md` (10 - Edit Order) | | Menunggu | |
-| `12-daftar-pelanggan.md` (12 - Pelanggan - Daftar Pelanggan) | | Menunggu | |
-| `13-detail-pelanggan.md` (13 - Detail Pelanggan & Tabungan) | | Menunggu | |
+| `12-daftar-pelanggan.md` (12 - Pelanggan - Daftar Pelanggan) | `LAURUM · Pelanggan` (ID: 4294969460) | 027 + revisi10/Lihat semua selesai; check_all1222lulus/2skip | Awal10; Lihat semua; ikon impor dan teks kecil; DP/Sisa tetap; lihat spec12 |
+| `13-detail-pelanggan.md` (13 - Detail Pelanggan & Tabungan) | `LAURUM · Detail Pelanggan` (ID: 4294969558) | 028 selesai; check_all1244lulus/2skip; menunggu tinjauan | Profil biru/statistik2×2 responsif/riwayat ringkas; font0,85–2× diuji; Lihat semua disetujui; lihat spec13 |
 | `14-edit-pelanggan.md` (14 - Edit Pelanggan) | | Menunggu | |
 | `15-setor-tabungan.md` (15 - Setor Tabungan) | | Menunggu | |
 | `16-riwayat-tabungan.md` (16 - Riwayat Tabungan) | | Menunggu | |
 | `19-pengaturan-akun.md` (Lainnya) | `LAURUM · Lainnya` (ID: 4294968100) | 024 selesai; check_all hijau; menunggu tinjauan | Menu padat, ikon boxed, akun rapat, Laporan ke /laporan; kartu Beranda membuka laporan mingguan |
 | `17-impor-kontak.md` (17 - Impor Kontak HP) | | Menunggu | |
 | `18-daftar-piutang.md` (18 - Daftar Piutang) | | Menunggu | |
-| `18-laporan-ringkasan.md` (18 - Laporan - Ringkasan) | | Menunggu | |
+| `18-laporan-ringkasan.md` (18 - Laporan - Ringkasan) | `LAURUM · Laporan` (ID:4294968337) | 029 selesai; check_all hijau1291tes/2skip; menunggu tinjauan | Bulanan tanpa grafik; Masuk/Keluar, gradasi cerah hari/minggu; lihat STATE/spec18 |
+| `18-laporan-ringkasan.md` (Pilih tanggal) | `LAURUM · Laporan · Pilih Tanggal` (ID:4294968452) | 030 selesai; check_all hijau1291tes/2skip; menunggu tinjauan | Popup tengah, Dari/Ke, kalender, Reset/Terapkan; batas tanggal/semantik range tetap |
 | `19-pengaturan-akun.md` (19 - Pengaturan dan Akun) | | Menunggu | |
-| `20-daftar-layanan.md` (20 - Daftar Layanan) | | Menunggu | |
-| `21-form-layanan.md` (21 - Tambah dan Edit Layanan) | | Menunggu | |
-| `22-info-usaha.md` (22 - Info Usaha) | | Menunggu | |
-| `23-daftar-pengeluaran.md` (23 - Daftar Pengeluaran) | | Menunggu | |
-| `24-catat-pengeluaran.md` (24 - Catat Pengeluaran) | | Menunggu | |
+| `20-daftar-layanan.md` (20 - Daftar Layanan) | `LAURUM · Daftar Layanan` (ID: 4294969685) | Frame dibuat 14 Nov2026; menunggu tinjauan | Kartu layanan ringkas (ikon, nama/jenis, switch; harga/satuan + durasi), pencarian, footer Tambah layanan; lihat spec20 |
+| `21-form-layanan.md` (Tambah layanan) | `LAURUM · Tambah Layanan` (ID:4294968237) | 031 selesai; check_all hijau1314tes/2skip; menunggu tinjauan | Pratinjau reaktif, kartu informasi/durasi, prefix Rp dan footer responsif; Edit tetap |
+| `22-info-usaha.md` (22 - Info Usaha) | `LAURUM · Info Usaha` (ID: 4294968909) | Desain 17 Nov 2026 diterapkan di kode; golden ditambahkan | Pratinjau struk reaktif, kartu Detail Usaha, banner catatan simpan; field, validasi, dan helper lama tetap |
+| `23-daftar-pengeluaran.md` (23 - Daftar Pengeluaran) | `LAURUM · Pengeluaran` (ID 4294969797), x 2200 y 5302 | Desain 16 Nov 2026 diterapkan di kode; golden diperbarui; menunggu tinjauan | Header detail + tombol kembali, 3 sub-card kategori terbesar, tautan Laporan, FAB kanan bawah, tanpa nav; DateGroupHeader lama membungkus 2 baris; lihat spec 23 |
+| `24-catat-pengeluaran.md` (24 - Catat Pengeluaran) | `LAURUM · Catat Pengeluaran` (ID 4294969900), x 2620 y 5302 | Desain 16 Nov 2026 diterapkan di kode; golden diperbarui; menunggu tinjauan | Nominal tidak dapat diketuk (input hanya numpad), nominal + numpad dalam kartu, rincian satu kartu, footer Batal + Simpan; numpad bersama lebih tinggi dari frame; lihat spec 24 |
 | `25-detail-usulan-ai.md` (25 - Detail Usulan AI) | `LAURUM · Detail Usulan AI` (ID: 512) | Selesai 018-020 | Android + keyboard diperiksa; 1060 tes lulus; tanpa fitur berat/jadwal baru |
 | `26-riwayat-usulan-ai.md` (26 - Riwayat Usulan AI) | | Menunggu | |
 | `27-pengaturan-ai.md` (27 - Pengaturan AI & WhatsApp) | | Menunggu | |
@@ -42,7 +43,7 @@ Sesuai aturan UI-4 di `AGENTS.md`: frame diisi oleh pengguna per sesi (dilarang 
 | `30-sinkronisasi.md` (30 - Sinkronisasi) | | Menunggu | |
 | `31-daftar.md` (31 - Daftar dan Cek email) | `LAURUM · Daftar` (ID: 4294968748) | Selesai (kode) | Hero 230 + kartu; Google ditambahkan; T&C ditunda |
 | `32-lupa-password.md` (32 - Lupa password) | | Menunggu | |
-| `33-kelola-akun.md` (33 - Kelola akun) | | Menunggu | |
+| `33-kelola-akun.md` (33 - Kelola akun) | `LAURUM · Kelola Akun` (ID: 4294968821) | Desain 17 Nov 2026 diterapkan di kode; golden diperbarui | Kartu identitas + pil Google, seksi PROFIL/KEAMANAN, Keluar outline, kartu ZONA BERBAHAYA; logo Google memakai aset google.svg |
 
 ---
 
@@ -68,6 +69,7 @@ Daftar frame level teratas yang terbaca dari dokumen aktif FigCraft:
   spec19,proposal024 disetujui; implementasi Lainnya + menu Laporan ke /laporan,
   check_all hijau 1109 lulus,1skip. Kartu pendapatan Beranda membuka Laporan mingguan.
 - `LAURUM · Tambah Layanan` (ID: 4294968237)
+- `LAURUM · Daftar Layanan` (ID: 4294969685)
 - `LAURUM · Laporan` (ID: 4294968337)
 - `LAURUM · Laporan · Pilih Tanggal` (ID: 4294968452)
 - `LAURUM · Masuk` (ID: 4294968692)

@@ -8,9 +8,11 @@ import 'package:laurum/features/reports/state/outstanding_data.dart';
 import 'package:laurum/features/reports/widgets/outstanding_list_section.dart';
 import 'package:laurum/features/shell/pages/placeholder_routes.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
+import 'package:laurum/features/sync/state/data_refresh_actions.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
 import 'package:laurum/shared/widgets/molecules/app_bar_sub.dart';
 import 'package:laurum/shared/widgets/molecules/empty_state.dart';
+import 'package:laurum/shared/widgets/organisms/app_data_refresh.dart';
 import 'package:laurum/shared/widgets/organisms/bottom_nav_bar.dart';
 
 class OutstandingPage extends ConsumerWidget {
@@ -29,39 +31,44 @@ class OutstandingPage extends ConsumerWidget {
           onBack: () => context.canPop() ? context.pop() : context.go('/beranda'),
         ),
       ),
-      body: outstanding.when(
-        loading: () => ListView(
-          padding: const EdgeInsets.all(AppSpacing.screenPadding),
-          children: [for (var i = 0; i < 4; i++) const AppSkeleton()],
-        ),
-        error: (_, _) => Center(
-          child: EmptyState(
-            title: 'Gagal memuat piutang',
-            icon: AppIcons.alert,
-            actionLabel: 'Coba lagi',
-            onAction: () => ref.invalidate(outstandingListProvider),
+      body: AppDataRefresh(
+        onRefresh: ref.read(dataRefreshActionsProvider.notifier).refresh,
+        hasScrollableChild: outstanding.value?.rows.isNotEmpty ?? outstanding.isLoading,
+        child: outstanding.when(
+          skipLoadingOnReload: true,
+          loading: () => ListView(
+            padding: const EdgeInsets.all(AppSpacing.screenPadding),
+            children: [for (var i = 0; i < 4; i++) const AppSkeleton()],
           ),
-        ),
-        data: (data) => data.rows.isEmpty
-            ? const Center(
-                child: EmptyState(
-                  title: 'Tidak ada piutang',
-                  icon: AppIcons.wallet,
-                  description: 'Semua nota sudah lunas.',
-                ),
-              )
-            : ListView(
-                padding: const EdgeInsets.all(AppSpacing.screenPadding),
-                children: [
-                  OutstandingListSection(
-                    data: data,
-                    filter: filter,
-                    now: ref.watch(businessClockProvider)(),
-                    onFilter: ref.read(outstandingFilterProvider.notifier).select,
-                    onPay: (row) => openOrderPayment(context, ref, row.order.id),
+          error: (_, _) => Center(
+            child: EmptyState(
+              title: 'Gagal memuat piutang',
+              icon: AppIcons.alert,
+              actionLabel: 'Coba lagi',
+              onAction: () => ref.invalidate(outstandingListProvider),
+            ),
+          ),
+          data: (data) => data.rows.isEmpty
+              ? const Center(
+                  child: EmptyState(
+                    title: 'Tidak ada piutang',
+                    icon: AppIcons.wallet,
+                    description: 'Semua nota sudah lunas.',
                   ),
-                ],
-              ),
+                )
+              : ListView(
+                  padding: const EdgeInsets.all(AppSpacing.screenPadding),
+                  children: [
+                    OutstandingListSection(
+                      data: data,
+                      filter: filter,
+                      now: ref.watch(businessClockProvider)(),
+                      onFilter: ref.read(outstandingFilterProvider.notifier).select,
+                      onPay: (row) => openOrderPayment(context, ref, row.order.id),
+                    ),
+                  ],
+                ),
+        ),
       ),
       bottomNavigationBar: BottomNavBar(
         activeIndex: 0,

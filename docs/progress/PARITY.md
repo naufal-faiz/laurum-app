@@ -4,6 +4,11 @@
 
 Addendum percakapan disetujui dan diimplementasikan lokal. Sumber: keputusan
 pengguna dan docs/plans/B7d-percakapan.md; kontrak di plan B7 utama.
+20 Nov: pengguna mengizinkan merge newdesign 7dd054f ke ai-whatsapp untuk uji
+tarik-refresh. Callback refresh membaca ulang antreanDataProvider, termasuk
+ProposalRepository; B7d tidak diganti. check_all 1394 lulus/4 skip; empat integrasi
+Supabase lokal lulus. Android debug lokal 1.0.3+4 menampilkan satu usulan Ani;
+konfirmasi gestur oleh pengguna masih menunggu. Tanpa perubahan cloud.
 Usulan Menunggu diperbarui lewat sinkron B7c; penarikan AI memakai status
 ditutup_otomatis sehingga hilang dari daftar aktif dan masuk riwayat yang sudah ada.
 Penerimaan offline tetap lewat TransactionRunner dan order UUID turunan usulan;
@@ -142,3 +147,9 @@ dari daftar diff di atas. Tidak ada kasus BE-7 pada daftar ini.
   aksi UI baru yang dihapus/ditambah, jadi tabel tidak berubah.
 - 12 Nov 2026, B3b irisan UI: layar "Buat password baru" (`/password-baru`) mengakhiri
   sesi recovery tanpa menanyakan password lama. Baris tabel di bawah ditambahkan.
+
+## Tarik-refresh lintas perangkat (033, 16 Nov 2026)
+
+| Layar | Aksi | Dasar | Sumber logika dan tujuan | Keputusan | Verifikasi |
+| --- | --- | --- | --- | --- | --- |
+| Semua layar data hidup | Tarik-refresh | Proposal033, disetujui pengguna | SyncService.syncNow: push lalu pull, muat query baca-saja; DataRefreshActions dan AppDataRefresh melalui Root/Sub/FormScaffold | Tanpa reset akun/draft/filter; pesan offline/gagal/belum siap; respons akun lama tidak membaca akun baru | data_refresh_actions_test, data_refresh_pages_test, data_refresh_two_devices_test, app_data_refresh_test |

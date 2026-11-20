@@ -1,4 +1,68 @@
 # 12 - Pelanggan - Daftar Pelanggan
+## Redesign FigCraft — persiapan 13 Nov 2026
+Frame pilihan: `LAURUM · Pelanggan` (`4294969460`, 390 × 844).
+Proposal027 disetujui pengguna 13 Nov 2026 ("ya lakukan"). Struktur frame dibaca sekali.
+
+### Paritas redesign
+Implementasi proposal027 selesai; semua butir paritas diverifikasi.
+
+| Butir | Data/aksi/keadaan yang dipertahankan | Verifikasi |
+|---|---|---|
+| Data | customerDirectoryProvider; nama/nomor/inisial/orderCount/historyTotal/debt/savings/paid | [x] |
+| Header | jumlah pelanggan dan indikator sinkron dari sumber yang sama | [x] |
+| Filter | customerDirectoryFilterProvider; Semua/Ada piutang/Punya tabungan; jumlah dari semua rows | [x] |
+| Cari | customerDirectorySearchProvider; normalisasi nama/nomor; hapus pencarian | [x] |
+| Lihat semua | awal10 hasil setelah filter/search; ekspansi semua hasil; reset saat query/filter berubah; izin eksplisit pengguna | [x] |
+| Impor | context.push('/pelanggan/impor') | [x] |
+| Tambah | AddCustomerSheet.show(forOrder: false); sukses mereset filter/search | [x] |
+| Buka | context.push('/pelanggan/$id') | [x] |
+| Kontak | launcher sama; phone pelanggan/message kosong; disabled jika nomor kosong | [x] |
+| Uang | Belum bayar atau DP + Sisa; tabungan; Formatters tetap | [x] |
+| Keadaan | 4 skeleton, gagal/retry, kosong, tidak ditemukan, terisi | [x] |
+| Key/fokus | Page/list/actions/header/CustomerRow tanpa Key eksplisit; host antrean-golden tetap | [x] |
+| Keyboard | pencarian inset300dp, viewport320, teks besar, semua aksi terjangkau | [x] |
+
+### Selisih desain
+- Header jumlah pemilik piutang belum tersedia pada API Section; jumlah pelanggan
+  dipertahankan dahulu tanpa mengubah pembacaan provider shell.
+- Angka/nama Figma hanya contoh; data tetap dari repository.
+- Revisi pengguna: tampil awal maksimal10 hasil; Lihat semua membuka seluruh hasil
+  di daftar yang sama, bukan rute baru. Batas diterapkan setelah filter/pencarian.
+- Informasi DP dan Sisa dipertahankan meski tidak tampil pada contoh Figma.
+- Margin24/gap10/12 memakai token; font minimum/area sentuh mengikuti keputusan global.
+- Tinggi aksi48 sesuai revisi sebelumnya; chip tetap horizontal dan dapat digulir.
+- Frame detail pelanggan4294969558 dipilih pengguna untuk irisan berikutnya.
+- Status memakai AppStatusText/AppText yang tersedia, bukan chip baru; DP/Sisa tetap.
+- Tombol WhatsApp memakai tileSuccess48, bukan tombol32 pada contoh frame.
+- Kedua tombol memakai AppButtonSize.small (teks label), tinggi sentuh tetap48;
+  impor memakai AppIcons.download. Pada layar acuan label tampil satu baris.
+
+### Revisi batas10 dan Lihat semua — disetujui pengguna
+- Pengguna secara eksplisit mengizinkan perubahan perilaku dan zona state terkait,
+  termasuk melewati batasan AGENTS.md yang diperlukan untuk permintaan ini.
+- CustomerDirectoryExpansion menyimpan status Lihat semua dalam Riverpod, dibaca Page;
+  Section menerima showAll/onShowAll. Tidak ada perubahan repository/skema/rute.
+- Perubahan filter atau pencarian mereset ekspansi. Jumlah chip tetap seluruh pelanggan.
+- Footer menampilkan jumlah hasil/total cocok; Lihat semua hanya jika hasil lebih10.
+- Hasil kosong tidak menampilkan footer; hasil10atau kurang tidak menampilkan link.
+- Tidak perlu proposal komponen baru: footer adalah Section sefitur, tersusun dari
+  AppText/InlineLink yang terdaftar; API shared, token dan dependensi tetap.
+- Tes terarah15lulus; check_all SEMUA HIJAU1222lulus/2skip Supabase lokal, exit0.
+- Tes lama tidak dilemahkan: actions_section_test menambah assertion ikon/ukuran;
+  limit_test menguji ekspansi10ke48, reset filter/search dan pencarian pelanggan terakhir;
+  footer_section_test menguji ringkasan dan callback pada lebar272.
+- Golden customer_directory diperbarui dan diperiksa; keyboard300dp lulus suite penuh.
+
+### Implementasi proposal027
+- CustomerRow: padding12, status Wrap berjarak8 dengan runSpacing6, WhatsApp tileSuccess;
+  ringkasan memakai AppCard muted/padding sync. API dan nilai uang tetap.
+- Daftar: horizontal24/vertikal12, gap10; tombol sejajar jika konten minimal320 dan
+  skala di bawah1,3; selain itu bertumpuk. Tinggi tetap48.
+- Tes lama tidak diubah/dilemahkan; customer_row_test menambah kasus DP/Sisa sempit,
+  customer_directory_actions_section_test menambah kasus aksi sejajar pada lebar342.
+- Dua golden diperbarui: customer_row dan customer_directory; keduanya diperiksa.
+- Tes terarah14lulus; analisis lima berkas bersih. check_all SEMUA HIJAU: 1218 lulus, 2 skip integrasi Supabase lokal; exit0.
+
 Rute: /pelanggan   Prompt: 50 (bagian pertama)
 Frame .pen: "Pelanggan - Daftar Pelanggan"; State Pelanggan kosong,
 Pencarian pelanggan kosong, Memuat Daftar Pelanggan, Gagal memuat data.

@@ -9,6 +9,7 @@ import 'package:laurum/features/orders/pages/payment_record_flow.dart';
 import 'package:laurum/features/orders/state/order_completion_controller.dart';
 import 'package:laurum/features/printer/state/printer_connection.dart';
 import 'package:laurum/features/printer/state/printer_reconnect.dart';
+import 'package:laurum/features/sync/state/data_refresh_actions.dart';
 import 'package:laurum/features/transactions/state/receipt_download.dart';
 import 'package:laurum/features/transactions/state/receipt_print_controller.dart';
 import 'package:laurum/features/transactions/state/receipt_view.dart';
@@ -32,10 +33,20 @@ class ReceiptPage extends ConsumerWidget {
     final connecting = ref.watch(printerConnectionProvider).busy;
     final completing = GoRouterState.of(context).uri.queryParameters['complete'] == '1';
     final busy =
-        printing.printing || completion.busy || download.busy || reconnect.busy || connecting;
+        printing.printing ||
+        completion.busy ||
+        download.busy ||
+        reconnect.busy ||
+        connecting ||
+        view.isLoading;
     final printer = ref.watch(printServiceProvider);
     final controller = ref.read(receiptPrintProvider.notifier);
     return FormScaffold(
+      onRefresh: () => ref
+          .read(dataRefreshActionsProvider.notifier)
+          .refresh(
+            extra: [receiptViewProvider(orderId).future],
+          ),
       title: 'Struk Pembayaran',
       backLabel: 'Kembali',
       appBarVariant: AppBarSubVariant.detail,
@@ -44,6 +55,7 @@ class ReceiptPage extends ConsumerWidget {
           : '${view.value!.order.orderNo} · ${view.value!.customer.name}',
       onBack: () => context.canPop() ? context.pop() : context.go('/antrean'),
       footer: view.maybeWhen(
+        skipLoadingOnReload: true,
         data: (receipt) => receipt == null
             ? const SizedBox.shrink()
             : ReceiptActionsSection(
@@ -59,6 +71,7 @@ class ReceiptPage extends ConsumerWidget {
         orElse: () => const SizedBox.shrink(),
       ),
       body: view.when(
+        skipLoadingOnReload: true,
         loading: () => Column(children: [for (var i = 0; i < 6; i++) const AppSkeleton()]),
         error: (_, _) => const EmptyState(title: 'Gagal memuat nota', icon: AppIcons.alert),
         data: (receipt) => receipt == null

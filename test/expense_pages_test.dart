@@ -63,4 +63,13 @@ void main() {
     await tester.enterText(find.descendant(of: vendor, matching: find.byType(TextField)), 'Toko');
     expect(tester.takeException(), isNull);
   });
+  testWidgets('directory report link opens reports and returns', (tester) async {
+    await pumpAntrean(tester, location: '/lainnya/pengeluaran');
+    await tester.tap(find.text('Lihat semua pengeluaran di Laporan'));
+    await tester.pumpAndSettle();
+    expect(find.text('Laporan'), findsOneWidget);
+    await tester.tap(find.byTooltip('Kembali'));
+    await tester.pumpAndSettle();
+    expect(find.text('Lihat semua pengeluaran di Laporan'), findsOneWidget);
+  });
 }

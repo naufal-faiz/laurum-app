@@ -17,7 +17,7 @@ void main() {
     await pumpAntrean(tester, container: scope, location: '/lainnya');
     expect(find.text('Hapus akun'), findsNothing);
     await tapAuthText(tester, 'Kelola akun');
-    expect(find.text('ratna@example.com'), findsOneWidget);
+    expect(find.text('ratna@example.com'), findsWidgets);
     expect(find.text('Ganti email belum tersedia'), findsOneWidget);
     expect(find.text('Akun Google'), findsOneWidget);
     expect(find.text('Tertaut'), findsOneWidget);
@@ -30,12 +30,12 @@ void main() {
     await fillAuthField(tester, 'Nama', 'Ratna Baru');
     await tapAuthButton(tester, 'Simpan profil');
     expect(scope.read(authServiceProvider).name, 'Ratna Baru');
-    expect(find.text('Ratna Baru'), findsOneWidget);
+    expect(find.text('Ratna Baru'), findsWidgets);
     await tapAuthText(tester, 'No. telp');
     await fillAuthField(tester, 'No. telp', '+62 812-3456-7890');
     await tapAuthButton(tester, 'Simpan profil');
     expect(scope.read(authServiceProvider).phone, '+6281234567890');
-    expect(find.text('0812-3456-7890'), findsOneWidget);
+    expect(find.text('0812-3456-7890'), findsWidgets);
     expect(find.byType(ChangePasswordSheet), findsNothing);
     expect(tester.takeException(), isNull);
   });

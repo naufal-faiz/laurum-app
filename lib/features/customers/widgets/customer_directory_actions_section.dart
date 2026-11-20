@@ -18,6 +18,8 @@ class CustomerDirectoryActionsSection extends StatelessWidget {
       height: AppSpacing.touchTarget,
       child: AppButton(
         'Impor kontak',
+        size: AppButtonSize.small,
+        icon: AppIcons.download,
         variant: AppButtonVariant.actionOutline,
         onPressed: onImport,
       ),
@@ -26,6 +28,7 @@ class CustomerDirectoryActionsSection extends StatelessWidget {
       height: AppSpacing.touchTarget,
       child: AppButton(
         'Pelanggan baru',
+        size: AppButtonSize.small,
         variant: AppButtonVariant.action,
         icon: AppIcons.add,
         onPressed: onAdd,
@@ -33,7 +36,8 @@ class CustomerDirectoryActionsSection extends StatelessWidget {
     );
     final scaled = MediaQuery.textScalerOf(context).scale(1) >= 1.3;
     return LayoutBuilder(
-      builder: (context, constraints) => scaled || constraints.maxWidth < 360
+      builder: (context, constraints) =>
+          scaled || constraints.maxWidth < AppSpacing.touchTarget * 6 + AppSpacing.xxlarge
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               spacing: AppSpacing.cardGap,
@@ -42,7 +46,7 @@ class CustomerDirectoryActionsSection extends StatelessWidget {
           : Row(
               children: [
                 Expanded(child: importButton),
-                const SizedBox(width: AppSpacing.cardGap),
+                const SizedBox(width: AppSpacing.smallMedium),
                 Expanded(child: addButton),
               ],
             ),

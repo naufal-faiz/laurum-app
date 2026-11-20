@@ -3,7 +3,6 @@ import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/icons/app_svgs.dart';
 import 'package:laurum/core/theme/app_colors.dart';
 import 'package:laurum/core/theme/app_molecule_tokens.dart';
-import 'package:laurum/core/theme/app_radius.dart';
 import 'package:laurum/shared/widgets/atoms/app_avatar.dart';
 import 'package:laurum/shared/widgets/atoms/app_card.dart';
 import 'package:laurum/shared/widgets/atoms/app_icon_button.dart';
@@ -31,72 +30,70 @@ class CustomerRow extends StatelessWidget {
   final int orderCount, historyTotal, savings, outstanding, paid;
   final VoidCallback? onTap, onContact;
   @override
-  Widget build(BuildContext context) => InkWell(
+  Widget build(BuildContext context) => AppCard(
     onTap: onTap,
-    child: AppCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        spacing: AppMoleculeTokens.gap,
-        children: [
-          Row(
+    padding: AppMoleculeTokens.noticePadding,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      spacing: AppMoleculeTokens.gap,
+      children: [
+        Row(
+          spacing: AppMoleculeTokens.gap,
+          children: [
+            AppAvatar(initials: initials),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText(name, variant: AppTextVariant.bodyStrong),
+                  AppText(Formatters.telepon(phone), color: AppColors.ink2),
+                ],
+              ),
+            ),
+            AppIconButton(
+              iconAsset: AppSvgs.whatsapp,
+              variant: AppIconButtonVariant.tileSuccess,
+              label: 'Hubungi $name',
+              onPressed: onContact,
+            ),
+          ],
+        ),
+        if (outstanding > 0 || savings > 0)
+          Wrap(
             spacing: AppMoleculeTokens.gap,
+            runSpacing: AppMoleculeTokens.labelGap,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              AppAvatar(initials: initials),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText(name, variant: AppTextVariant.bodyStrong),
-                    AppText(Formatters.telepon(phone), color: AppColors.ink2),
-                  ],
-                ),
-              ),
-              AppIconButton(
-                iconAsset: AppSvgs.whatsapp,
-                label: 'Hubungi $name',
-                onPressed: onContact,
-              ),
-            ],
-          ),
-          if (outstanding > 0)
-            Wrap(
-              spacing: AppMoleculeTokens.gap,
-              children: [
+              if (outstanding > 0)
                 AppStatusText(
                   paid > 0
                       ? 'DP ${Formatters.rupiah(paid)}'
                       : 'Belum bayar ${Formatters.rupiah(outstanding)}',
                   variant: paid > 0 ? AppStatusTextVariant.dp : AppStatusTextVariant.belumBayar,
                 ),
-                if (paid > 0)
-                  AppText(
-                    'Sisa ${Formatters.rupiah(outstanding)}',
-                    variant: AppTextVariant.caption,
-                  ),
-              ],
-            ),
-          if (savings > 0)
-            AppText(
-              'Tabungan ${Formatters.rupiah(savings)}',
-              variant: AppTextVariant.label,
-              color: AppColors.primary,
-            ),
-          DecoratedBox(
-            decoration: const BoxDecoration(
-              color: AppColors.chipIdle,
-              borderRadius: AppRadius.input,
-            ),
-            child: Padding(
-              padding: AppMoleculeTokens.syncPadding,
-              child: AppText(
-                '$orderCount order • Total: ${Formatters.rupiah(historyTotal)}',
-                variant: AppTextVariant.caption,
-                color: AppColors.ink2,
-              ),
-            ),
+              if (outstanding > 0 && paid > 0)
+                AppText(
+                  'Sisa ${Formatters.rupiah(outstanding)}',
+                  variant: AppTextVariant.caption,
+                ),
+              if (savings > 0)
+                AppText(
+                  'Tabungan ${Formatters.rupiah(savings)}',
+                  variant: AppTextVariant.label,
+                  color: AppColors.primary,
+                ),
+            ],
           ),
-        ],
-      ),
+        AppCard(
+          style: AppCardStyle.muted,
+          padding: AppMoleculeTokens.syncPadding,
+          child: AppText(
+            '$orderCount order • Total: ${Formatters.rupiah(historyTotal)}',
+            variant: AppTextVariant.caption,
+            color: AppColors.ink2,
+          ),
+        ),
+      ],
     ),
   );
 }

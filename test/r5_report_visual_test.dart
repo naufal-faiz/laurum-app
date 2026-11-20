@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:laurum/features/reports/pages/report_range_sheet.dart';
 import 'package:laurum/features/reports/state/report_custom_range.dart';
 import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/main_dummy.dart';
@@ -54,15 +55,15 @@ void main() {
       await tester.ensureVisible(dateTab);
       await tester.tap(dateTab);
       await tester.pumpAndSettle();
-      expect(find.byType(DateRangePickerDialog), findsOneWidget);
+      expect(find.byType(ReportRangeSheet), findsOneWidget);
       if (width == 390) {
         await expectLater(
           find.byKey(const ValueKey('antrean-golden')),
           matchesGoldenFile('goldens/r5_date_picker.png'),
         );
       }
-      final loc = MaterialLocalizations.of(tester.element(find.byType(DateRangePickerDialog)));
-      await tester.tap(find.byTooltip(loc.closeButtonTooltip));
+
+      await tester.tap(find.byTooltip('Tutup'));
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
     });

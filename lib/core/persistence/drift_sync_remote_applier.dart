@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:laurum/core/domain/customer_search.dart';
 import 'package:laurum/core/persistence/app_database.dart';
+import 'package:laurum/core/persistence/remote_row_changes.dart';
 import 'package:laurum/core/persistence/remote_value_normalizer.dart';
 import 'package:laurum/core/persistence/sql_timestamp.dart';
 import 'package:laurum/core/sync/sync_remote_applier.dart';
@@ -20,15 +21,16 @@ class DriftSyncRemoteApplier implements SyncRemoteApplier {
     if (!syncPullTables.contains(table)) throw ArgumentError('Unknown sync table: $table');
     if (rows.isEmpty) return;
     final columns = await _tableColumns(table);
+    var changed = false;
     await db.transaction(() async {
       for (final row in rows) {
-        await _applyRow(table, row, columns);
+        if (await _applyRow(table, row, columns)) changed = true;
       }
     });
-    db.notifyUpdates({TableUpdate(table)});
+    if (changed) db.notifyUpdates({TableUpdate(table)});
   }
 
-  Future<void> _applyRow(
+  Future<bool> _applyRow(
     String table,
     Map<String, Object?> row,
     Map<String, String> columns,
@@ -42,7 +44,7 @@ class DriftSyncRemoteApplier implements SyncRemoteApplier {
           variables: [Variable(table), Variable(id)],
         )
         .get();
-    if (pending.isNotEmpty) return;
+    if (pending.isNotEmpty) return false;
     final values = <String, Object?>{};
     for (final entry in row.entries) {
       final type = columns[entry.key];
@@ -60,6 +62,7 @@ class DriftSyncRemoteApplier implements SyncRemoteApplier {
       // Photos upload in B2e; a null server value must not erase a local attachment.
       values.remove('photo_path');
     }
+    final changed = await remoteRowChangesBusinessData(db, table, values, columns);
     final names = values.keys.toList();
     final updates = names
         .where((name) => name != 'id')
@@ -71,6 +74,7 @@ class DriftSyncRemoteApplier implements SyncRemoteApplier {
       'ON CONFLICT("id") DO UPDATE SET $updates',
       [for (final name in names) values[name]],
     );
+    return changed;
   }
 
   Future<Map<String, String>> _tableColumns(String table) async {

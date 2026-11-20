@@ -4,6 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:laurum/features/reports/state/report_custom_range.dart';
 import 'package:laurum/features/reports/state/report_period.dart';
 import 'package:laurum/shared/widgets/molecules/period_tabs.dart';
+import 'package:laurum/shared/widgets/organisms/app_range_calendar.dart';
 import 'package:laurum/shared/widgets/organisms/report_summary.dart';
 
 import 'antrean_test_host.dart';
@@ -18,11 +19,11 @@ void main() {
         await tester.ensureVisible(find.text('Pilih tanggal'));
         await tester.tap(find.text('Pilih tanggal'));
         await tester.pumpAndSettle();
-        final picker = tester.widget<DateRangePickerDialog>(find.byType(DateRangePickerDialog));
+        final picker = tester.widget<AppRangeCalendar>(find.byType(AppRangeCalendar));
         expect(picker.firstDate, DateTime(2026));
         expect(picker.lastDate, DateTime(2026, 10, 16));
-        expect(picker.initialEntryMode, DatePickerEntryMode.calendarOnly);
-        final locale = Localizations.localeOf(tester.element(find.byType(DateRangePickerDialog)));
+
+        final locale = Localizations.localeOf(tester.element(find.byType(AppRangeCalendar)));
         expect(locale.languageCode, 'id');
         expect(find.byType(TextField), findsNothing);
         await tester.tap(find.text(singleDay ? '16' : '14').first);
@@ -43,10 +44,8 @@ void main() {
           find.descendant(of: find.byType(PeriodTabs), matching: find.text(tabs.labels.last)),
         );
         await tester.pumpAndSettle();
-        final localizations = MaterialLocalizations.of(
-          tester.element(find.byType(DateRangePickerDialog)),
-        );
-        await tester.tap(find.byTooltip(localizations.closeButtonTooltip));
+
+        await tester.tap(find.byTooltip('Tutup'));
         await tester.pumpAndSettle();
         expect(host.container.read(reportPeriodProvider), 3);
         expect(host.container.read(reportCustomRangeProvider), before);
@@ -56,7 +55,7 @@ void main() {
           find.descendant(of: find.byType(PeriodTabs), matching: find.text(tabs.labels.last)),
         );
         await tester.pumpAndSettle();
-        await tester.tap(find.byTooltip(localizations.closeButtonTooltip));
+        await tester.tap(find.byTooltip('Tutup'));
         await tester.pumpAndSettle();
         expect(host.container.read(reportPeriodProvider), 0);
         expect(tester.takeException(), isNull);

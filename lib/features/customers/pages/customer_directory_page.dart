@@ -6,6 +6,7 @@ import 'package:laurum/core/services/service_providers.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/customers/state/customer_directory_controller.dart';
 import 'package:laurum/features/customers/state/customer_directory_data.dart';
+import 'package:laurum/features/customers/state/customer_directory_expansion.dart';
 import 'package:laurum/features/customers/widgets/customer_directory_list_section.dart';
 import 'package:laurum/features/transactions/pages/add_customer_sheet.dart';
 import 'package:laurum/shared/widgets/atoms/app_skeleton.dart';
@@ -23,6 +24,8 @@ class CustomerDirectoryPage extends ConsumerWidget {
         rows: rows,
         filter: ref.watch(customerDirectoryFilterProvider),
         search: ref.watch(customerDirectorySearchProvider),
+        showAll: ref.watch(customerDirectoryExpansionProvider),
+        onShowAll: ref.read(customerDirectoryExpansionProvider.notifier).showAll,
         onFilter: ref.read(customerDirectoryFilterProvider.notifier).select,
         onSearch: ref.read(customerDirectorySearchProvider.notifier).set,
         onImport: () => context.push('/pelanggan/impor'),

@@ -18,7 +18,7 @@ class IconTile extends StatelessWidget {
     this.imageAsset,
   });
 
-  /// White 38 logo tile of the auth hero (icon 18, radius 12).
+  /// White 38 circular logo tile of the auth hero (icon 18).
   const IconTile.logo({super.key})
     : icon = AppIcons.droplet,
       size = 38,
@@ -51,14 +51,24 @@ class IconTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final logo = imageAsset == 'assets/laurum-logo.png';
+    final image = imageAsset == null
+        ? null
+        : Image.asset(imageAsset!, width: size, height: size, fit: BoxFit.contain);
     final tile = DecoratedBox(
-      decoration: BoxDecoration(color: background, borderRadius: radius),
+      decoration: BoxDecoration(
+        color: background,
+        shape: logo ? BoxShape.circle : BoxShape.rectangle,
+        borderRadius: logo ? null : radius,
+      ),
       child: SizedBox.square(
         dimension: size,
         child: Center(
-          child: imageAsset == null
+          child: image == null
               ? AppIcon(icon, size: iconSize, color: foreground)
-              : Image.asset(imageAsset!, width: size, height: size, fit: BoxFit.contain),
+              : logo
+              ? ClipOval(child: image)
+              : image,
         ),
       ),
     );
