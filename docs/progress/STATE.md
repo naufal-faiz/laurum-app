@@ -20,6 +20,8 @@ ke n8n lokal 20 Nov 2026.
 - Kedua migrasi B7d telah diterapkan ke cloud `laurumdb`: riwayat remote cocok dengan lokal.
   Worker n8n sudah published dari infra f57bf4e (8 node, berat eksplisit), credential
   Supabase dan LLM dipertahankan, satu flow aktif untuk /wa-ingest. B7e belum dimulai.
+- `com.cashier.laurum` (bukan varian b7dlocal) sudah dibangun ulang dari HEAD: debug 1.0.3,
+  skema v7, sesi cloud lama utuh; dipakai untuk verifikasi UI berat 20 Nov 2026.
 
 ## Keputusan pengguna terbaru
 - Izin khusus ADD COLUMN ai_proposals, Drift dan perluasan kontrak diberikan.
@@ -30,13 +32,14 @@ ke n8n lokal 20 Nov 2026.
 Tidak ada perubahan kode aplikasi.
 
 ## Langkah berikutnya
-1. Sambungkan HP, kirim chat order `2 kg`, tarik sinkron, lalu pastikan berat terisi 2 kg.
-2. Kirim satu chat order baru tanpa penyebutan berat; field berat harus tetap kosong.
-3. Setelah GATE adopsi B7d ditutup, baru susun prompt B7e.
+1. Smoke infra enam kasus menunggu SUPABASE_SERVICE_ROLE_KEY di terminal pemilik.
+2. Setelah GATE adopsi B7d ditutup, baru susun prompt B7e.
 
 ## Blocker
-Tidak ada blocker kode atau migrasi cloud. Verifikasi di HP tertunda karena adb tidak
-menemukan perangkat pada sesi 20 Nov 2026.
+Tidak ada. Verifikasi UI 20 Nov 2026 (build debug 1.0.3, skema v7): usulan "2 kg"
+menampilkan BERAT 2 kg dan total Rp10.000; usulan tanpa berat menampilkan
+"Belum diketahui" dengan total belum dihitung. Dua usulan uji 081300000101 dan
+081300000102 masih Menunggu dan perlu diputuskan pemilik.
 
 ## Bukti terakhir
 - check_all hijau: 1.407 lulus, 4 dilewati.
