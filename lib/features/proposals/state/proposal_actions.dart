@@ -9,6 +9,10 @@ class ProposalActions extends Notifier<AsyncValue<void>> {
   final String id;
   @override
   AsyncValue<void> build() => const AsyncData(null);
+  void holdUnlinkedCancellation() {
+    if (!state.isLoading) state = AsyncError(const UnlinkedCancellation(), StackTrace.current);
+  }
+
   Future<String?> approve(ProposalDraft draft) async {
     if (state.isLoading) return null;
     state = const AsyncLoading();

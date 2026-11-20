@@ -19,11 +19,18 @@ Future<void> approveReviewedProposal(
 ) async {
   final p = review.proposal;
   if (p.cancelRequested) {
-    final order = await ref.read(orderRepositoryProvider).getOrderById(p.orderId!);
+    final orderId = p.orderId;
+    final order = orderId == null
+        ? null
+        : await ref.read(orderRepositoryProvider).getOrderById(orderId);
     if (!context.mounted) return;
+    if (order == null) {
+      ref.read(proposalActionsProvider(p.id).notifier).holdUnlinkedCancellation();
+      return;
+    }
     final confirmed = await ConfirmModal.show(
       context: context,
-      title: 'Batalkan order ${order?.orderNo ?? ''}?',
+      title: 'Batalkan order ${order.orderNo}?',
       message: 'Permintaan AI tidak membatalkan order tanpa persetujuan Anda.',
       confirmLabel: 'Ya, batalkan order',
       destructive: true,

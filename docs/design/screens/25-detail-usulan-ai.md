@@ -27,6 +27,11 @@ Interaksi:
 - Detail Order memperlihatkan pesan berat belum diisi dan tombol ke Edit Order.
 - Rudi: ConfirmModal Batalkan order A-0139?; konfirmasi memakai koreksi pembayaran
   dan ledger pembatalan yang ada. Batal dialog tidak mengubah order.
+- B7d (keputusan pengguna 20 Nov 2026): pembatalan tanpa order_id atau dengan order
+  yang tidak ditemukan tetap Menunggu. Ketuk Batalkan order menampilkan banner
+  "Order untuk pembatalan ini belum diketahui. Usulan tetap menunggu."
+  tanpa membuka konfirmasi atau mengubah order, pembayaran, maupun tabungan.
+  Jalur persetujuan langsung juga menolak dengan galat terkontrol yang sama.
 - Tolak lewat ConfirmModal Tolak usulan ini?, memindahkan usulan ke riwayat.
 - Order ID tetap per proposal. Retry setelah simpan order berhasil tetapi status
   usulan gagal memperbarui status saja; tidak membuat order/pelanggan ganda.

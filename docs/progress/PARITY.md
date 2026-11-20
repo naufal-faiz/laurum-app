@@ -1,5 +1,11 @@
 # Paritas Aksi: UI Baru dan Backend
 
+## Koreksi B7d (20 Nov 2026)
+
+| Layar | Aksi | Lama/baru | Sumber logika | Tujuan dan sumbernya | Keputusan |
+| --- | --- | --- | --- | --- | --- |
+| Detail usulan AI | Pembatalan tanpa order terkait | ada keduanya | proposal_review_flow, ProposalActions, acceptProposal | spec 25; keputusan pengguna 20 Nov 2026 | Usulan tetap Menunggu; banner yang ada menjelaskan penahanan, tanpa konfirmasi atau perubahan uang. Pembatalan valid tetap lewat alur lama. |
+
 ## Revisi visual dan gambar WhatsApp 13 Nov 2026
 - WhatsApp Struk memakai ReceiptDocument yang sama dengan preview untuk PNG lengkap
   2x (320/384 dp). Data, pesan/penerima, PDF, cetak dan guard COD tetap; sumber:

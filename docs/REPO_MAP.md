@@ -519,9 +519,9 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### lib/features/proposals/pages/
 - ai_routes.dart (15):
 - ai_settings_page.dart (86): AiSettingsPage
-- proposal_detail_page.dart (92): ProposalDetailPage
+- proposal_detail_page.dart (95): ProposalDetailPage
 - proposal_history_page.dart (48): ProposalHistoryPage
-- proposal_review_flow.dart (65):
+- proposal_review_flow.dart (72):
 - proposal_service_picker_flow.dart (33):
 - proposal_weight_flow.dart (15):
 - proposal_weight_sheet.dart (55): ProposalWeightSheet
@@ -529,8 +529,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 
 ### lib/features/proposals/state/
 - ai_settings.dart (25): AiPreferences, AiSettings, aiSettingsProvider
-- proposal_accept.dart (62):
-- proposal_actions.dart (73): ProposalActions, proposalActionsProvider
+- proposal_accept.dart (71): UnlinkedCancellation
+- proposal_actions.dart (77): ProposalActions, proposalActionsProvider
 - proposal_demo_accuracy.dart (4): proposalDemoAccuracyProvider
 - proposal_draft.dart (40): ProposalDraft
 - proposal_history.dart (46): ProposalHistory, ProposalHistoryFilter, proposalHistoryProvider, proposalHistoryFilterProvider
@@ -1099,6 +1099,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - proposal_pages_test.dart (89):
 - proposal_retry_test.dart (60): FailOnceProposalRepository
 - proposal_sections_test.dart (94):
+- proposal_unlinked_cancellation_test.dart (83):
 - proposal_weight_test.dart (55):
 - proposal_weight_validation_test.dart (62):
 - r10_account_flow_test.dart (64):

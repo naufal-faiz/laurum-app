@@ -9,11 +9,20 @@ import 'package:laurum/features/proposals/state/proposal_order.dart';
 import 'package:laurum/features/proposals/state/proposal_review.dart';
 import 'package:laurum/features/shell/state/shell_state.dart';
 
+class UnlinkedCancellation implements Exception {
+  const UnlinkedCancellation();
+  static const message = 'Order untuk pembatalan ini belum diketahui. Usulan tetap menunggu.';
+  @override
+  String toString() => message;
+}
+
 Future<String> acceptProposal(Ref ref, Proposal p, ProposalDraft draft) async {
   final orders = ref.read(orderRepositoryProvider);
   if (p.cancelRequested) {
-    final order = await orders.getOrderById(p.orderId!);
-    if (order == null) throw StateError('Order tidak ditemukan');
+    final orderId = p.orderId;
+    if (orderId == null) throw const UnlinkedCancellation();
+    final order = await orders.getOrderById(orderId);
+    if (order == null) throw const UnlinkedCancellation();
     if (order.status != OrderStatus.dibatalkan) {
       final savings = ref.read(savingsRepositoryProvider);
       final result = cancelOrder(

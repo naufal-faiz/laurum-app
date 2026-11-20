@@ -1,5 +1,5 @@
 # B7c - Aplikasi AI WhatsApp
-Status: SELESAI (2026-11-18). Berhenti di GATE: usulan muncul di HP setelah sinkron.
+Status: SELESAI; GATE HP dikonfirmasi pengguna (dicatat 20 Nov 2026): sinkron, setujui, usulan menjadi antrean berhasil.
 Migrasi server acuan: docs/progress/b7b.md. Prompt: docs/prompts/B7c-aplikasi-ai.md.
 
 ## Yang berubah
@@ -34,7 +34,7 @@ Migrasi server acuan: docs/progress/b7b.md. Prompt: docs/prompts/B7c-aplikasi-ai
 
 Hasil 19 Nov 2026 (sisi server, sudah dijalankan): owner 8ceb3d1b (naufalfaiz6381@gmail.com),
 instance laurum-sim-8ceb3d1b, `code=created` proposal 0edc99b7, baris server `menunggu`,
-decided_at null, phone 081234567890, confidence 0.90. Sisa GATE: sinkron dan setujui di HP.
+decided_at null, phone 081234567890, confidence 0.90. GATE dikonfirmasi pengguna (dicatat 20 Nov 2026): sinkron dan usulan menjadi antrean berhasil.
 Catatan: Supabase menolak secret key bila User-Agent mirip browser; skrip memakai
 `-UserAgent 'laurum-worker/1.0'` (tanpa itu: "Forbidden use of secret API key in browser").
 
@@ -49,13 +49,14 @@ Catatan: Supabase menolak secret key bila User-Agent mirip browser; skrip memaka
   memeriksa baris server: `status=disetujui`, `confidence=0.9`. LULUS.
 - Tindakan: APK release dibangun ulang dari HEAD (`--dart-define-from-file=.env.local`)
   dan dipasang di SM-N975F dengan `adb install -r` (data lokal tidak dihapus).
-  Sisa: pengguna menekan "Sinkron sekarang" untuk mengonfirmasi.
+  Konfirmasi pengguna (dicatat 20 Nov 2026): sinkron dan usulan menjadi antrean berhasil.
 
 ## Catatan untuk fase berikutnya
 - B7d/B7e (laurum-infra) memakai kontrak yang sama; skrip simulasi ini adalah pengganti sementara.
 - B7f: `wa_connections` sudah tersinkron ke klien tetapi belum dipakai UI; FakeWhatsappConnection
   dan pengaturan AI di memori belum diganti, `set_ai_settings` belum dipanggil aplikasi.
-- Gap tercatat: `cancel_requested=true` tanpa `order_id` masih gagal di `acceptProposal`
-  (`p.orderId!`); perlu keputusan B7d/B7f, bukan B7c.
+- Koreksi B7d (keputusan pengguna 20 Nov 2026): pembatalan tanpa order terkait ditahan
+  dengan pesan jelas dan tetap Menunggu, tanpa mengubah order atau uang. Pemetaan order
+  dari pesan masih belum tersedia; tidak ada penebakan atau pengaitan otomatis.
 - Retensi `source_text` server (30 hari) berarti teks bisa menjadi null pada usulan yang sudah
   diputuskan; UI membaca '' sehingga riwayat aman.

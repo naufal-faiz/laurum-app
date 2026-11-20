@@ -28,6 +28,10 @@ Tes: supabase/tests/b7b_test.sql (87 tes baru). Skema: docs/plans/B7a-skema.md.
   (+ai_proposals, wa_connections), private.purge_my_rows dan public.delete_my_account (+2 tabel).
 
 ## Hasil tes
+- Audit 20 Nov 2026 menemukan dua `DROP FUNCTION` untuk mengganti fungsi hapus akun
+  (baris 588-589), menyimpang dari AI-2 tanpa DROP. Tes tetap lulus; tidak ada DROP tabel.
+  Migrasi yang sudah diterapkan tidak ditulis ulang. Perubahan skema berikutnya harus
+  memakai migrasi baru yang maju/aditif, dengan persetujuan sesuai BE-7.
 - `supabase db reset --workdir .`: enam migrasi dari nol, tanpa galat.
 - `supabase test db --workdir .`: Files=3, Tests=306, Result PASS (baseline 219 -> 306, +87).
   Isi: isolasi dua akun (baca/ubah/tulis/delete), ingest idempoten dan penolakan payload,

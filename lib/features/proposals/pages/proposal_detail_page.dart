@@ -5,6 +5,7 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/formatters/formatters.dart';
 import 'package:laurum/core/theme/app_spacing.dart';
 import 'package:laurum/features/proposals/pages/proposal_review_flow.dart';
+import 'package:laurum/features/proposals/state/proposal_accept.dart';
 import 'package:laurum/features/proposals/state/proposal_actions.dart';
 import 'package:laurum/features/proposals/state/proposal_demo_accuracy.dart';
 import 'package:laurum/features/proposals/state/proposal_history.dart';
@@ -62,8 +63,10 @@ class ProposalDetailPage extends ConsumerWidget {
               spacing: AppSpacing.cardGap,
               children: [
                 if (action.hasError)
-                  const BannerMessage(
-                    message: 'Usulan gagal diproses. Coba lagi.',
+                  BannerMessage(
+                    message: action.error is UnlinkedCancellation
+                        ? UnlinkedCancellation.message
+                        : 'Usulan gagal diproses. Coba lagi.',
                     variant: BannerMessageVariant.error,
                   ),
                 if (!pending) AppText(proposalStatusLabel(review.proposal.status)),
