@@ -55,8 +55,24 @@ Worker dengan model yang sudah ada: pesan belum jelas menghasilkan nol usulan,
 pesan order menghasilkan satu Menunggu untuk Ani, alamat Jalan Uji B7D nomor 1.
 Setelah pembaruan aplikasi, inspeksi UI Antrean menampilkan 1 perlu dicek dan
 kartu Ani dengan pesan sumber; status server tetap Menunggu, belum menjadi order.
-Konfirmasi pengguna atas gesture tarik-refresh masih menunggu. Berikutnya:
-pembaruan alamat, duplikat, penarikan, order baru; satu tahap per konfirmasi.
+Pengguna mengonfirmasi Ani muncul dan meminta melanjutkan pengujian.
+Worker kemudian mengubah alamat dari Jalan Uji B7D nomor 1 menjadi nomor 2.
+Usulan tetap ID yang sama, berstatus Menunggu, jumlah satu, tanpa order baru.
+Pengguna mengonfirmasi alamat nomor 2 terlihat setelah refresh dan jumlah tetap satu.
+Pesan order awal kemudian dikirim ulang dengan ID pesan yang sama: RPC benar-benar
+mengembalikan `duplicate`, ID usulan tetap sama, alamat nomor 2 tidak tertimpa,
+jumlah Menunggu tetap satu. Setelah bukti duplikat lulus, pembatalan dikirim via worker:
+usulan yang sama menjadi `ditutup_otomatis`, Menunggu nol dan order_id tetap null.
+Pengguna mengonfirmasi refresh menjadi nol dan Ani keluar dari Menunggu.
+Order baru dari nomor sama membuat usulan `cf8f67c1-8116-4894-a67f-8b06dd4058fc`,
+alamat Jalan Uji B7D nomor 3, status Menunggu satu; usulan lama tetap ditutup.
+Pembatalan lama diulang: RPC `duplicate` merujuk usulan lama dan tidak menarik usulan baru.
+Pengguna mengonfirmasi usulan baru/alamat nomor 3 terlihat di Android.
+
+Temuan lanjutan: chat sumber menyebut 2 kg tetapi kolom berat kosong. Ini belum
+diimplementasikan pada kontrak worker, model Proposal, tabel server/Drift dan inisialisasi
+draf, bukan kegagalan penarikan atau duplikat. Tambahan belum diubah; persetujuan
+skema/kontrak diminta melalui `docs/plans/B7d-berat-usulan.md` sebelum implementasi.
 Fixture dan workflow sementara dipertahankan sampai rangkaian manual selesai;
 lihat STATE.md untuk sesi harness dan cara membersihkannya.
 
