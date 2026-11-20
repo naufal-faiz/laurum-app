@@ -1219,6 +1219,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### test/sync/
 - account_initial_fetch_test.dart (55): RestoringCycle
 - ai_proposal_sync_local_test.dart (124):
+- b7d_offline_accept_local_test.dart (94):
 - canonical_json_test.dart (38):
 - fake_sync_transport.dart (62): FakeSyncTransport
 - in_memory_outbox_store_test.dart (13):

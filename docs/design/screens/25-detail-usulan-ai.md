@@ -38,6 +38,10 @@ Interaksi:
 - Gagal simpan order baru menghapus pelanggan yang baru dibuat sebagai kompensasi.
   Atomicity lintas repository untuk pembatalan/tabungan tetap utang yang sudah ada.
 - Detail status final readonly, membuka order terkait bila tersedia.
+- Addendum B7d: pesan lanjutan memperbarui satu usulan Menunggu per nomor melalui
+  sinkron; pembatalan pelanggan menarik usulan ke riwayat (ditutup_otomatis).
+  Ini tidak membatalkan order yang sudah dibuat. Penerimaan dari cache offline
+  tetap disinkronkan dengan order valid; aturan pembatalan legacy di atas tetap.
 
 Selisih .pen: pilihan layanan dan berat memakai sheet registry (AppBottomSheet),
 bukan ChipBar/field inline; berat yang diisi dipakai untuk qty/total order. Penyesuaian

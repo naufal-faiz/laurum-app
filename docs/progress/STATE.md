@@ -2,47 +2,50 @@
 Diperbarui: 2026-11-20 | Cabang ai-whatsapp. Mode Integrasi AI WhatsApp.
 
 ## Sesi aktif
-Koreksi awal B7d sudah teruji. Addendum percakapan: perilaku disepakati, skema/RPC menunggu persetujuan.
-Dasar aplikasi 35270bb; worker laurum-infra commit 7839bc5. Tidak memulai B7e.
+Addendum percakapan B7d selesai diimplementasikan dan diuji lokal; GATE adopsi.
+Dasar aplikasi 6831cfa; worker laurum-infra 7839bc5. Tidak memulai B7e.
 
 ## Status irisan
-- B7a/B7b selesai. Migrasi terpasang dipertahankan; penyimpangan DROP FUNCTION dicatat.
-- B7c: pengguna mengonfirmasi sinkron dan usulan menjadi antrean berhasil (GATE lulus).
-- Worker: nomor hanya dari webhook; jawaban AI tidak bisa mengganti nomor pelanggan.
-- Smoke mengamati hasil 90 detik; mendeteksi usulan/duplikat terlambat, menjaga array,
-  dan mensyaratkan pengiriman pertama tersimpan sebelum uji duplikat.
-- Pembatalan tanpa order terkait tetap Menunggu dengan pesan jelas; tidak mengubah uang.
-  Pengaman di Page dan acceptProposal; konfirmasi pembatalan valid tetap.
-- n8n lokal sudah dipublikasikan dan direstart. Tiga Code node cocok dengan sumber,
-  seluruh referensi credential tetap, keempat layanan healthy.
-- APK release terbaru berhasil dibangun (78,6 MB); belum dipasang/diuji di HP pada sesi ini.
+- B7a/B7b selesai; B7c GATE lulus menurut pengujian sinkron/antrean oleh pengguna.
+- B7d: konteks terstruktur sebelum order jelas; satu Menunggu per pemilik+nomor;
+  pesan lanjutan memperbarui usulan, pembatalan menarik ke ditutup_otomatis.
+- Setelah final boleh order baru; receipt/generasi/revisi melindungi duplikat,
+  pesan lama dan konflik. Worker retry membaca ulang konteks/model maksimal 3 kali.
+- Penerimaan dari cache offline tetap tersinkron dengan order valid; AI tidak
+  membatalkan order/uang. Pengaman pembatalan legacy tetap dipertahankan.
+- Migrasi baru 20261120090000: dua tabel server-only, RPC/guard/cleanup dan indeks;
+  tidak mengubah migrasi lama, skema Drift, tampilan, dependensi atau logika uang.
+- Harness n8n terisolasi ke DB lokal; seluruh fixture/workflow sementara dibersihkan.
+- Workflow utama yang menuju cloud tetap versi sebelumnya; sumber addendum belum
+  dipublikasikan. Compose concurrency=1 menunggu adopsi, bukan throughput produksi.
 
 ## Keputusan pengguna terbaru
-- Terbaru: satu usulan Menunggu per akun+nomor; AI merangkum pesan bertahap dan memperbarui usulan yang sama.
-- Pelanggan batal: tarik usulan Menunggu; setelah final nomor boleh mengajukan order baru.
-- Penerimaan offline menjadi tanggung jawab pemilik; order tetap harus bisa sinkron, tanpa dibatalkan AI.
-- APK hanya saat diperlukan untuk uji HP atau diminta, bukan setiap coding.
-- Pengaman pembatalan tanpa order yang sudah dibuat tetap untuk data lama; belum ada penarikan otomatis.
-- Urut per fase; B7e hanya setelah GATE B7d lulus. AI hanya membaca.
-- Sampai addendum disetujui, kontrak/skema aktif tetap; dependensi/cloud/riwayat migrasi tidak diubah.
+- Satu usulan Menunggu per nomor; rangkum pesan, buat hanya bila niat order jelas.
+- Batal menarik usulan; setelah disetujui/ditolak/ditutup boleh usulan order baru.
+- Order dari persetujuan offline tetap milik keputusan pemilik, tanpa pembatalan AI.
+- Addendum skema/kontrak disetujui; agen hanya mengimplementasikan Supabase lokal.
+- Tidak membuat APK setiap coding. AI hanya membaca; urut GATE, B7e menunggu.
 
 ## Belum di-commit
-Tidak ada setelah commit rancangan addendum sesi ini; kode aplikasi dbb1ad1 dan worker 7839bc5.
+Tidak ada setelah commit tugas ini; implementasi dan bukti disimpan di kedua repo.
 
 ## Langkah berikutnya
-1. Tinjau/setujui docs/plans/B7d-percakapan.md (dua tabel server, RPC dan guard).
-2. Setelah persetujuan, perbarui Kontrak plan utama dan implementasikan addendum di lokal.
-3. Jalankan tes percakapan serta enam kasus GATE B7d; baru lanjut B7e/B7f.
+1. Pemilik menerapkan migrasi cloud dan publish worker sesuai docs/progress/b7d.md.
+2. Pemilik memeriksa usulan/penarikan di aplikasi; B7e setelah GATE B7d lulus.
+3. Penautan WhatsApp nyata dan pengaturan/koneksi aplikasi menunggu B7e/B7f.
 
 ## Blocker
-- Enam kasus worker aktif menuju cloud belum dibuktikan; agen dibatasi Supabase lokal.
-- Perangkuman percakapan dan penarikan usulan belum diimplementasikan; BE-7/AI-9 menunggu persetujuan teknis.
+Adopsi cloud harus dilakukan pemilik; tidak mengakses cloud atau membangun APK.
+Chat WhatsApp asli belum diuji; hasil fixture bukan angka akurasi.
 
 ## Bukti terakhir
-- check_all: SEMUA HIJAU; 1234 lulus, 3 skip; REPO_MAP 1189.
-- Ketiga skip dijalankan terpisah di Supabase lokal: 3/3 lulus (AI confidence pecahan,
-  isolasi dua akun, sinkron dua perangkat). Tes terarah pembatalan/rollback/retry 14/14.
-- supabase test db: Files=3, Tests=306, PASS. npm test --prefix supabase: 6/6 lulus.
-- Worker: test-flow-logic.js 20/20; test-smoke-logic.ps1 7/7; versi aktif terverifikasi.
-- flutter build apk --release --no-pub --dart-define-from-file=.env.local: berhasil.
-  APK: build/app/outputs/flutter-apk/app-release.apk (20 Nov 2026, 78,6 MB).
+- supabase test db: Files=4, Tests=375 PASS (69 tes B7d); npm test: 6/6.
+- Worker unit 26/26; smoke logic 9/9; n8n lokal 14/14 fixture, 11/11 LLM nyata
+  dengan credential yang sudah ada, tetap ke DB lokal (bukan benchmark akurasi).
+- Drift->sync_push->pull offline setelah penarikan AI: 1/1 lulus, outbox kosong.
+- 9 body fungsi runtime cocok dengan migrasi akhir; 4 layanan worker healthy;
+  workflow uji tersisa=0, workflow utama published=1.
+- check_all: SEMUA HIJAU, 1234 lulus/4 skip; REPO_MAP 1190 berkas.
+- Keempat skip dijalankan terpisah ke Supabase lokal: 4/4 lulus (confidence,
+  isolasi akun, dua perangkat, persetujuan offline setelah penarikan AI).
+- Tidak ada APK baru. Rincian dan panduan adopsi: docs/progress/b7d.md.

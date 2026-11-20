@@ -1,5 +1,5 @@
 # B7d - Addendum percakapan pelanggan
-Status: USULAN TEKNIS; perilaku disepakati 20 Nov 2026, skema/RPC belum disetujui; kontrak/kode aktif tetap.
+Status: DISETUJUI pengguna 20 Nov 2026; diimplementasikan lokal. Bukti dan GATE: docs/progress/b7d.md.
 
 ## Perilaku yang disepakati
 - Satu usulan Menunggu per akun + nomor pengirim yang dinormalisasi dari webhook.

@@ -3,12 +3,17 @@
 Status: dirancang 18 Nov 2026, dikerjakan bertahap B7a sampai B7h, satu fase per sesi, berhenti di tiap GATE.
 Dasar: PRD B 5, 12, 16.3; docs/backend/ROADMAP.md baris B7; AGENTS.md bagian Mode Integrasi AI WhatsApp (AI-1 sampai AI-12). Branch: ai-whatsapp.
 
-## Keadaan saat ini (diperiksa 18 Nov 2026)
+## Dasar rancangan (diperiksa 18 Nov 2026; historis sebelum B7b/B7c)
 - UI AI dummy sudah lengkap (prompt 80): AiSettingsPage, WhatsappLinkPage (QR placeholder, kedaluwarsa 1 menit), ProposalDetail/History, setujui/tolak/batal idempoten. Spec 25-28.
 - ProposalRepository hanya InMemory, juga di mode Drift (drift_repository_overrides.dart); usulan demo hanya untuk akun demo.
 - whatsappConnectionProvider = FakeWhatsappConnection (default connected). AiSettings 3 saklar hanya di memori.
 - Server: 13 tabel + sync_push grup atomik + pull kursor; ai_proposals dan wa_connections BELUM ada (PRD B 5 menunda).
 - Migrasi cloud diterapkan pemilik (INDEX 9 Nov); supabase/README.md: agen hanya lokal.
+
+Perkembangan 20 Nov: B7b terpasang oleh pemilik; B7c repository Drift/sinkron sudah
+diuji pengguna sampai usulan menjadi antrean. Addendum percakapan B7d diimplementasikan
+dan diuji lokal (docs/progress/b7d.md), belum diterapkan ke cloud. Penautan dan
+pengaturan/koneksi WhatsApp nyata dalam aplikasi menunggu fase berikutnya.
 
 ## Keputusan pengguna (14-18 Nov 2026)
 - Jalur WhatsApp: Evolution API (Baileys, tidak resmi) HANYA untuk uji internal; rilis publik wajib dievaluasi ulang ke Cloud API resmi (PRD B 16.3).
@@ -30,6 +35,28 @@ RPC khusus service role (tidak dapat dipanggil klien):
 - set_wa_connection_status(p_instance_id text, p_status text) -> {code}.
 Payload p_payload (hasil LLM yang sudah divalidasi n8n): source_text (maks 2000), customer_name, address, service_hint, uncertain_address, cancel_requested, confidence 0..1. Nomor telepon dan wa_message_id diisi node biasa dari webhook, bukan LLM.
 Edge Function (JWT pemilik): wa-connect, wa-disconnect. Pengaturan AI dari aplikasi disimpan ke wa_connections lewat jalur sinkron/RPC yang diputuskan di B7a.
+
+### Addendum percakapan B7d (disetujui pengguna 20 Nov 2026)
+- Satu usulan Menunggu per owner + nomor webhook; pesan lanjutan memperbarui usulan yang sama.
+  Setelah disetujui/ditolak/ditutup, permintaan baru boleh membuat usulan baru. Pembatalan
+  menarik usulan Menunggu menjadi ditutup_otomatis; AI tidak membatalkan order/uang.
+- Tabel server-only: ai_conversation_contexts (owner+phone unik, chat_id, generation_id,
+  revision, draft_context, proposal_id, last_received_at, created_at/updated_at) dan
+  ai_message_receipts (owner+wa_message_id unik, conversation_id, received_at, result_code,
+  proposal_id, created_at). ID UUID v4. RLS tanpa akses klien; ikut pembersihan akun.
+- get_ai_conversation_context(p_instance_id text,p_phone text) khusus service_role:
+  code, pengaturan/layanan, draft_context, proposal_status, conversation_generation,
+  context_revision. Identitas/versi ditangani node biasa, tidak diberikan ke LLM.
+- ingest_ai_proposal mempertahankan signature; payload menambah action (default order),
+  draft_context, conversation_generation, context_revision. Hasil: created | updated |
+  closed | collected | ignored | duplicate | stale | retry | unknown_instance | invalid.
+- Action LLM: collect | order | cancel | ignore. Konteks hanya customer_name, address,
+  service_hint, uncertain_address, confidence; nomor/owner/id/versi berasal dari node/server.
+  Pesan non-order tidak disimpan; receipt hanya metadata. source_text hanya untuk usulan order.
+- Versi konteks, generasi dan receipt mencegah penimpaan/pembatalan lama atau duplikat.
+  Penerimaan eksplisit pemilik dari cache offline tetap dapat disinkronkan melalui grup
+  order+usulan yang valid, meski usulan sudah ditutup AI. Logika uang tetap.
+- Rancangan dan batas: docs/plans/B7d-percakapan.md. Migrasi baru, tanpa mengubah riwayat.
 
 ## Fase
 | Fase | Hasil | Selesai bila | GATE (tindakanmu) |

@@ -2,6 +2,14 @@
 
 ## Koreksi B7d (20 Nov 2026)
 
+Addendum percakapan disetujui dan diimplementasikan lokal. Sumber: keputusan
+pengguna dan docs/plans/B7d-percakapan.md; kontrak di plan B7 utama.
+Usulan Menunggu diperbarui lewat sinkron B7c; penarikan AI memakai status
+ditutup_otomatis sehingga hilang dari daftar aktif dan masuk riwayat yang sudah ada.
+Penerimaan offline tetap lewat TransactionRunner dan order UUID turunan usulan;
+server menerima keputusan dengan order valid tanpa membatalkan order/uang.
+Tidak mengubah tampilan, golden, atau perilaku pembatalan order legacy.
+
 | Layar | Aksi | Lama/baru | Sumber logika | Tujuan dan sumbernya | Keputusan |
 | --- | --- | --- | --- | --- | --- |
 | Detail usulan AI | Pembatalan tanpa order terkait | ada keduanya | proposal_review_flow, ProposalActions, acceptProposal | spec 25; keputusan pengguna 20 Nov 2026 | Usulan tetap Menunggu; banner yang ada menjelaskan penahanan, tanpa konfirmasi atau perubahan uang. Pembatalan valid tetap lewat alur lama. |
