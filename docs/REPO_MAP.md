@@ -35,7 +35,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - payment.dart (37): Payment
 - payment_corrections.dart (44):
 - payment_excess.dart (22):
-- proposal.dart (70): Proposal
+- proposal.dart (74): Proposal
 - receipt_formatter.dart (86):
 - receipt_layout.dart (77): ReceiptLayout
 - receipt_settings.dart (38): ReceiptSettings
@@ -111,14 +111,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - outbox_records.dart (28): OutboxRecords
 - outbox_writer.dart (59): OutboxWriter
 - payment_records.dart (23): PaymentRecords
-- proposal_records.dart (28): AiProposalRecords
+- proposal_records.dart (30): AiProposalRecords
 - receipt_setting_records.dart (20): ReceiptSettingRecords
 - record_columns.dart (17): RecordColumns, SoftDeleteColumns
 - remote_row_changes.dart (26):
 - remote_value_normalizer.dart (33):
 - report_indexes_migration.dart (28):
 - savings_records.dart (29): SavingsRecords
-- schema_migration.dart (14):
+- schema_migration.dart (17):
 - secure_session_storage.dart (43): SecureSessionStorage, SecurePkceStorage
 - service_records.dart (21): ServiceRecords
 - sql_timestamp.dart (6):
@@ -544,7 +544,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - in_memory_proposal_repository.dart (60): InMemoryProposalRepository, proposalSeedProvider, inMemoryProposalRepositoryProvider
 - proposal_demo_accuracy_fixture.dart (2):
 - proposal_fixtures.dart (47):
-- proposal_storage_mapping.dart (85):
+- proposal_storage_mapping.dart (88):
 
 ### lib/features/proposals/pages/
 - ai_routes.dart (15):
@@ -562,10 +562,12 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - proposal_accept.dart (71): UnlinkedCancellation
 - proposal_actions.dart (77): ProposalActions, proposalActionsProvider
 - proposal_demo_accuracy.dart (4): proposalDemoAccuracyProvider
-- proposal_draft.dart (40): ProposalDraft
+- proposal_draft.dart (45): ProposalDraft
+- proposal_draft_controller.dart (62): ProposalDraftController
 - proposal_history.dart (46): ProposalHistory, ProposalHistoryFilter, proposalHistoryProvider, proposalHistoryFilterProvider
 - proposal_order.dart (70):
-- proposal_review.dart (84): ProposalReview, ProposalDraftController, proposalReviewProvider, proposalDraftProvider
+- proposal_review.dart (12): proposalDraftProvider
+- proposal_review_data.dart (48): ProposalReview, proposalReviewProvider
 - whatsapp_link.dart (38): WhatsappLinkStatus, WhatsappLink, whatsappLinkProvider
 
 ### lib/features/proposals/widgets/
@@ -933,7 +935,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - order_item_contract.dart (28):
 - order_payment_contract.dart (44):
 - order_values.dart (62):
-- proposal_contract.dart (94):
+- proposal_contract.dart (96):
+- proposal_weight_contract.dart (38):
 - receipt_settings_contract.dart (41):
 - record_values.dart (28):
 - report_contract.dart (98): ReportContractContext, ReportContractFactory
@@ -1096,13 +1099,14 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - failing_b1d_proposal.dart (15): FailingB1dProposal
 
 ### test/persistence/generated/
-- schema.dart (37): GeneratedHelper
+- schema.dart (40): GeneratedHelper
 - schema_v1.dart (8453): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV1
 - schema_v2.dart (8547): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV2
 - schema_v3.dart (8562): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV3
 - schema_v4.dart (8611): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV4
 - schema_v5.dart (8778): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, DatabaseAtV5
 - schema_v6.dart (2697): Businesses, Devices, Customers, Services, Orders, OrderItems, Payments, SavingsEntries, ExpenseCategories, Expenses, ReceiptSettings, Entitlements, OrderEvents, Outbox, LocalSettings, SyncCursors, AiProposals, WaConnections, DatabaseAtV6
+- schema_v7.dart (10357): Businesses, BusinessesData, BusinessesCompanion, Devices, DevicesData, DevicesCompanion, Customers, CustomersData, CustomersCompanion, Services, ServicesData, ServicesCompanion, Orders, OrdersData, OrdersCompanion, OrderItems, OrderItemsData, OrderItemsCompanion, Payments, PaymentsData, PaymentsCompanion, SavingsEntries, SavingsEntriesData, SavingsEntriesCompanion, ExpenseCategories, ExpenseCategoriesData, ExpenseCategoriesCompanion, Expenses, ExpensesData, ExpensesCompanion, ReceiptSettings, ReceiptSettingsData, ReceiptSettingsCompanion, Entitlements, EntitlementsData, EntitlementsCompanion, OrderEvents, OrderEventsData, OrderEventsCompanion, Outbox, OutboxData, OutboxCompanion, LocalSettings, LocalSettingsData, LocalSettingsCompanion, SyncCursors, SyncCursorsData, SyncCursorsCompanion, AiProposals, AiProposalsData, AiProposalsCompanion, WaConnections, WaConnectionsData, WaConnectionsCompanion, DatabaseAtV7
 
 ### test/persistence/
 - order_account_cleanup_test.dart (39):
@@ -1118,6 +1122,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - outbox_group_operation_test.dart (43):
 - outbox_writer_test.dart (97):
 - printer_repository_integration_test.dart (75):
+- proposal_weight_migration_test.dart (38):
 - pull_query_refresh_test.dart (34):
 - report_contracts_test.dart (30):
 - report_migration_test.dart (42):
@@ -1156,6 +1161,8 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 - proposal_alignment_test.dart (103):
 - proposal_card_test.dart (41):
 - proposal_detail_sections_test.dart (146):
+- proposal_estimate_approval_test.dart (56):
+- proposal_estimated_weight_test.dart (84):
 - proposal_footer_section_test.dart (83):
 - proposal_golden_test.dart (35):
 - proposal_history_page_test.dart (61):
@@ -1309,7 +1316,7 @@ flutter, cupertino_icons, flutter_riverpod, go_router, equatable, intl, ionicons
 ### test/sync/
 - account_initial_fetch_test.dart (55): RestoringCycle
 - ai_proposal_sync_local_test.dart (124):
-- b7d_offline_accept_local_test.dart (94):
+- b7d_offline_accept_local_test.dart (98):
 - canonical_json_test.dart (38):
 - data_refresh_actions_test.dart (107):
 - data_refresh_two_devices_test.dart (89):

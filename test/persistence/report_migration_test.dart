@@ -26,7 +26,7 @@ void main() {
     await old.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 6);
+    await verifier.migrateAndValidate(db, 7);
     final savings = await db
         .customSelect('SELECT created_at,created_key FROM savings_entries')
         .getSingle();

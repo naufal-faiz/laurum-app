@@ -5,10 +5,13 @@ import 'package:laurum/core/persistence/report_indexes_migration.dart';
 import 'package:laurum/core/persistence/sync_groups_migration.dart';
 
 Future<void> migrateSchema(AppDatabase db, Migrator m, int from, int to) async {
-  if (to != 6 || from < 1 || from > 5) {
+  if (to != 7 || from < 1 || from > 6) {
     throw UnsupportedError('Migration required from $from to $to');
   }
   if (from < 4) await migrateReportIndexes(db, m, from, 4);
   if (from < 5) await migrateSyncGroups(db, m, from < 4 ? 4 : from, 5);
-  await migrateAiTables(db, m);
+  if (from < 6) await migrateAiTables(db, m);
+  if (from == 6) {
+    await m.addColumn(db.aiProposalRecords, db.aiProposalRecords.estimatedWeightGrams);
+  }
 }

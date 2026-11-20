@@ -1,3 +1,8 @@
+import 'package:laurum/core/formatters/formatters.dart';
+
+String proposalWeightText(int? grams) =>
+    grams == null ? '' : Formatters.berat(grams).replaceFirst(' kg', '');
+
 String normalizeProposalWeight(String value) {
   final parts = value.replaceAll('.', ',').replaceAll(RegExp(r'[^0-9,]'), '').split(',');
   final text = '${parts.first}${parts.length > 1 ? ',${parts[1]}' : ''}'.replaceFirst(

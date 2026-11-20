@@ -34,6 +34,7 @@ Proposal proposalFromRow(AiProposalRow r) => Proposal(
   deletedAt: r.deletedAt,
   cancelRequested: r.cancelRequested,
   uncertainAddress: r.uncertainAddress,
+  estimatedWeightGrams: r.estimatedWeightGrams,
 );
 
 /// Worker columns (wa_message_id, chat_id, confidence, received_at) never come
@@ -59,6 +60,7 @@ AiProposalRecordsCompanion proposalToRow(Proposal p, AiProposalRow? old, DateTim
       waMessageId: Value(old?.waMessageId),
       chatId: Value(old?.chatId),
       confidence: Value(old?.confidence),
+      estimatedWeightGrams: Value(p.estimatedWeightGrams),
       receivedAt: Value(old?.receivedAt),
     );
 
@@ -81,5 +83,6 @@ Map<String, Object?> proposalPayload(Proposal p, AiProposalRow? old, DateTime at
   'wa_message_id': old?.waMessageId,
   'chat_id': old?.chatId,
   'confidence': old?.confidence,
+  'estimated_weight_grams': p.estimatedWeightGrams,
   'received_at': old?.receivedAt?.toUtc().toIso8601String(),
 };

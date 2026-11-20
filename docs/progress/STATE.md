@@ -2,54 +2,41 @@
 Diperbarui: 2026-11-20 | Cabang ai-whatsapp. Mode Integrasi AI WhatsApp.
 
 ## Sesi aktif
-Uji percakapan B7d di Android lulus; temuan berat dari chat belum diimplementasikan.
-Menunggu persetujuan docs/plans/B7d-berat-usulan.md. Kode aplikasi ccfbc38.
-Kode worker tetap 18e5105. Tidak memulai B7e, mengubah skema, atau mengakses cloud.
+Tambahan berat eksplisit B7d selesai diimplementasikan dan diuji secara lokal.
+Basis ee35403 (merge aplikasi ccfbc38). Worker basis 8444f13, kode lama 18e5105.
 
 ## Status irisan
-- B7c GATE usulan menjadi antrean sudah dikonfirmasi pengguna pada sesi sebelumnya.
-- Merge newdesign 7dd054f ke ai-whatsapp selesai, UI/refresh 1.0.3+4 sudah terpasang.
-- Salinan Android com.cashier.laurum.b7dlocal, label Laurum B7d Uji; data asli terpisah.
-- Login fixture lokal tetap aktif; akun cloud tidak berlaku di lingkungan lokal ini.
-- Android via adb reverse tcp:54321 tcp:54321; pulihkan setelah debug terputus.
-- Worker sementara b7d-test-b2772820a381 masih aktif, model LLM yang sudah ada.
-  Worker utama cloud tetap versi lama; migrasi B7d cloud belum diterapkan.
-- Pesan belum jelas: pending=0; order awal: Ani, Jalan Uji B7D nomor 1, pending=1.
-  ID awal f6e21432-0425-4a3f-9c31-d22955f98f08; tampil di Android dikonfirmasi pengguna.
-- Update nomor 2: ID sama, pending=1; refresh/kolom Alamat dikonfirmasi pengguna.
-- Duplikat order awal: RPC duplicate, ID/alamat nomor 2 tidak berubah, pending=1.
-- Pembatalan: ID awal ditutup_otomatis, pending=0; pengguna mengonfirmasi di Android.
-- Order baru dari nomor sama: ID cf8f67c1-8116-4894-a67f-8b06dd4058fc,
-  alamat nomor 3, pending=1; pengguna mengonfirmasi di Android. Kedua order_id null.
-- Pembatalan lama diulang: RPC duplicate mengarah ID lama; usulan baru tetap Menunggu.
-- Temuan pengguna: chat 2 kg belum mengisi berat. Prompt/Proposal/Drift tidak punya field
-  perkiraan berat; ProposalDraftController memulai weight kosong. Tidak diubah dulu.
+- User: isi berat hanya bila tertulis eksplisit dalam chat; tanpa atau ambigu memakai empty state lama.
+- Migrasi lokal 20261120100000 menambah `estimated_weight_grams` nullable positif tanpa backfill.
+  Fungsi context, ingest, guard, domain, Drift v7, pemetaan dan draf telah tersambung.
+- Berat AI mengikuti refresh bila pemilik belum mengeditnya. Koreksi pemilik dipertahankan; layanan pcs
+  tetap tidak memakai kg dan batas minimum berat lama tetap berlaku.
+- Worker hanya membaca angka+satuan eksplisit. Nilai tebakan dari model diabaikan; konteks dapat membawa
+  berat yang telah disebut, sedangkan order baru tanpa berat tetap kosong.
+- Snapshot v6 dilengkapi hanya untuk migrasi v6 ke v7; snapshot Dart v1-v6 dan migrasi lama tidak diubah.
+- Build Android lokal telah diperbarui: `com.cashier.laurum.b7dlocal` 1.0.3+4, skema v7, data uji utuh,
+  reverse `tcp:54321` aktif. Usulan Ani yang ada masih berasal dari workflow manual sebelum perubahan berat.
+- Workflow utama cloud tidak diubah dan cloud belum dimigrasi. B7e belum dimulai.
 
 ## Keputusan pengguna terbaru
-- Izin merge newdesign dan update debug untuk uji tarik-refresh sudah dilaksanakan.
-- Pengguna mengonfirmasi Ani awal, alamat nomor 2, penarikan, dan usulan baru nomor 3.
-- Pengguna menanyakan auto-isi perkiraan berat; persetujuan tambahan skema masih diminta.
-- AI hanya membaca; keputusan order tetap pemilik. APK hanya bila diminta/diperlukan.
+- Izin khusus ADD COLUMN ai_proposals, Drift dan perluasan kontrak diberikan.
+- Tanpa berat eksplisit gunakan empty state, bukan tebakan. Order tetap disetujui pemilik.
+- Merge newdesign dan debug lokal sudah diizinkan. AI hanya membaca.
 
 ## Belum di-commit
-Tidak ada setelah commit catatan sesi ini; kode produksi dan database tidak berubah.
+Implementasi berat, migrasi/snapshot, tes dan dokumen di kedua repo; commit setelah catatan ini.
 
 ## Langkah berikutnya
-1. Tunggu keputusan proposal berat (kolom nullable gram, kontrak worker dan Drift).
-2. Jika disetujui, implementasi dan tes lokal sesuai proposal, lalu uji Android 2 kg.
-3. Pertahankan fixture selama review; setelah rangkaian selesai: finish harness.
-4. Adopsi cloud oleh pemilik dan GATE B7d mendahului B7e/B7f.
+1. Terapkan kedua migrasi B7d ke cloud sesuai docs/progress/b7d.md, lalu terbitkan worker dari repo infra.
+2. Kirim chat nyata dari HP kedua: order dengan `2 kg`, lalu pastikan Periksa Ani mengisi 2 kg setelah refresh.
+3. Uji satu chat order tanpa berat untuk memastikan field tetap kosong.
+4. Setelah GATE adopsi B7d dilaporkan pengguna, baru susun prompt B7e.
 
 ## Blocker
-Auto-isi berat memerlukan izin BE-7/AI-9/AI-12 dan pengecualian AI-2 untuk ADD COLUMN.
-Chat WhatsApp asli belum diuji; fixture sintetis bukan angka akurasi.
+Tidak ada blocker kode. Verifikasi chat nyata/cloud dan keputusan GATE adalah langkah pemilik.
 
 ## Bukti terakhir
-- check_all hasil merge: SEMUA HIJAU, 1394 lulus/4 skip, REPO_MAP 1283 berkas.
-- Keempat integrasi lokal lulus; baseline DB 375, Edge 6, unit worker 26, smoke 9 lulus.
-- Build debug 1m3s; install Success, versionName=1.0.3 versionCode=4.
-- Rangkaian manual: awal/update/penarikan/baru dikonfirmasi pengguna; duplikat diverifikasi RPC.
-- Harness exec 20240: status/update/duplicate/cancel/fresh/finish; jangan ulang fresh untuk berat
-  karena ID pesan tetap. Gunakan pesan baru setelah implementasi berat disetujui dan diuji.
-- Skrip %TEMP%/laurum-b7d-android-test/{android-harness.js,android-manual.js}.
-  Jangan gunakan ui bawaan harness; baca hanya elemen paket uji dan sembunyikan input.
+- check_all hijau: 1.407 lulus, 4 dilewati.
+- Supabase SQL 405 lulus; 4 integrasi lokal lulus; Edge Function 6 lulus.
+- Worker unit 41/41 lulus; n8n lokal sebelumnya 19 fixture dan 16 dengan kredensial LLM yang ada lulus,
+  bukan pengukuran akurasi. Draf/kontrak/persetujuan terarah 26, migrasi 4, dan migrasi lama 8 lulus.

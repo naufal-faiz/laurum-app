@@ -24,5 +24,7 @@ class AiProposalRecords extends Table with RecordColumns, SoftDeleteColumns {
   TextColumn get waMessageId => text().nullable()();
   TextColumn get chatId => text().nullable()();
   RealColumn get confidence => real().nullable()();
+  IntColumn get estimatedWeightGrams =>
+      integer().nullable().customConstraint('CHECK (estimated_weight_grams > 0)')();
   DateTimeColumn get receivedAt => dateTime().nullable()();
 }

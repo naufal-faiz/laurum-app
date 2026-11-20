@@ -22,7 +22,7 @@ void main() {
     await oldDb.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 6);
+    await verifier.migrateAndValidate(db, 7);
     final settings = DriftLocalSettingsRepository(db);
     await db.validateDatabaseSchema();
     expect(await settings.getInt('counter'), 143);
@@ -47,7 +47,7 @@ void main() {
     await oldDb.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 6);
+    await verifier.migrateAndValidate(db, 7);
     final row = await db.select(db.outboxRecords).getSingle();
     expect(row.groupId, isNull);
     expect(row.groupSeq, isNull);
@@ -65,7 +65,7 @@ void main() {
     await oldDb.close();
     final db = AppDatabase(schema.newConnection());
     addTearDown(db.close);
-    await verifier.migrateAndValidate(db, 6);
+    await verifier.migrateAndValidate(db, 7);
     await db.validateDatabaseSchema();
     expect(await DriftLocalSettingsRepository(db).getInt('counter'), 7);
     expect(await db.select(db.aiProposalRecords).get(), isEmpty);

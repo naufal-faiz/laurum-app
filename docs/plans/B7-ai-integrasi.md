@@ -58,6 +58,19 @@ Edge Function (JWT pemilik): wa-connect, wa-disconnect. Pengaturan AI dari aplik
   order+usulan yang valid, meski usulan sudah ditutup AI. Logika uang tetap.
 - Rancangan dan batas: docs/plans/B7d-percakapan.md. Migrasi baru, tanpa mengubah riwayat.
 
+### Addendum berat (disetujui 20 Nov 2026, docs/plans/B7d-berat-usulan.md):
+- `ai_proposals.estimated_weight_grams` integer nullable, positif, maksimum 2147483647;
+  null berarti belum diketahui. Data lama tetap null. Drift v7/domain membawa nilai sama.
+- `draft_context.estimated_weight_grams` menerima integer gram atau null; key hilang
+  mempertahankan ringkasan, null menghapus perkiraan. RPC/guard menjaga metadata AI
+  saat keputusan pemilik memakai cache lama; isolasi dan idempotensi tetap.
+- Node validasi mengambil angka+satuan yang eksplisit di chat (termasuk sebutan jelas
+  seperti dua kilo); tebakan field dari LLM diabaikan. Pesan tanpa berat mempertahankan
+  berat yang sudah disebut dalam percakapan itu; order baru tanpa berat tetap null.
+- Rentang atau penyebutan ambigu tidak dipilih titik tengahnya. Draf layanan kiloan
+  memakai perkiraan ini, dapat diedit pemilik; tanpa data memakai empty state yang ada.
+  Persetujuan tetap eksplisit, memakai perhitungan/order/TransactionRunner yang sama.
+
 ## Fase
 | Fase | Hasil | Selesai bila | GATE (tindakanmu) |
 | --- | --- | --- | --- |

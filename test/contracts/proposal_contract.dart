@@ -3,6 +3,7 @@ import 'package:laurum/core/domain/domain_enums.dart';
 import 'package:laurum/core/domain/proposal.dart';
 import 'package:laurum/core/domain/repositories/proposal_repository.dart';
 
+import 'proposal_weight_contract.dart';
 import 'repository_factory.dart';
 
 Proposal contractProposal(
@@ -38,6 +39,7 @@ Proposal softDeleted(Proposal p, DateTime at) => Proposal(
 void runProposalRepositoryContract(RepositoryFactory<ProposalRepository> factory) {
   late ProposalRepository repo;
   setUp(() async => repo = await factory());
+  runProposalWeightContract(() => repo);
   test('empty list and missing lookup', () async {
     expect(await repo.getProposals(), isEmpty);
     expect(await repo.getProposalById('missing'), isNull);

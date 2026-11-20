@@ -2,6 +2,10 @@
 
 ## Koreksi B7d (20 Nov 2026)
 
+Tambahan berat disetujui: satu kolom gram opsional server/Drift, draf berat yang sama
+diisi dari penyebutan eksplisit pelanggan. Empty state dan validasi minimum tetap;
+koreksi pemilik dipertahankan. Sumber: docs/plans/B7d-berat-usulan.md dan spec 25.
+
 Addendum percakapan disetujui dan diimplementasikan lokal. Sumber: keputusan
 pengguna dan docs/plans/B7d-percakapan.md; kontrak di plan B7 utama.
 20 Nov: pengguna mengizinkan merge newdesign 7dd054f ke ai-whatsapp untuk uji

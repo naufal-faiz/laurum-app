@@ -1,5 +1,5 @@
 # B7d - Usulan pengisian perkiraan berat dari chat
-Status: MENUNGGU PERSETUJUAN. Temuan uji Android 20 Nov 2026.
+Status: DISETUJUI pengguna 20 Nov 2026; hanya jika berat ditulis di chat, selain itu kosong.
 
 ## Masalah dan hasil yang diminta
 Pesan order menyebut 2 kg, tetapi kontrak worker, Proposal dan Drift belum menyimpan berat.

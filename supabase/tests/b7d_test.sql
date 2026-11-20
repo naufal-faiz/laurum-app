@@ -46,25 +46,25 @@ select is(public.get_ai_conversation_context('missing','081200000001')->>'code',
 select is(public.get_ai_conversation_context('chat-a','bad')->>'code','invalid','Invalid sender rejected');
 select ok(not(public.get_ai_conversation_context('chat-a','081200000001')?'owner_id'),'LLM context hides owner');
 select is(pg_temp.event('ignore-1','ignore')->>'code','ignored','Non-order ignored');
-select is((select count(*) from ai_conversation_contexts),0::bigint,'Non-order creates no context');
-select is((select count(*) from ai_message_receipts),0::bigint,'Non-order creates no receipt');
+select is((select count(*) from ai_conversation_contexts where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),0::bigint,'Non-order creates no context');
+select is((select count(*) from ai_message_receipts where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),0::bigint,'Non-order creates no receipt');
 select is(pg_temp.event('bad-array','order','[]')->>'code','invalid','Array context is rejected without a server error');
 select is(pg_temp.event('bad-field','order','{"address":{}}')->>'code','invalid','Wrong field type is rejected');
 select ok(not has_table_privilege('service_role','public.ai_conversation_contexts','INSERT'),'Context writes require the RPC');
 select ok(not has_table_privilege('service_role','public.ai_message_receipts','UPDATE'),'Receipt writes require the RPC');
 select is(pg_temp.event('collect-1','collect','{"customer_name":"Ani"}')->>'code','collected','Incomplete intent collected');
-select is((select count(*) from ai_proposals),0::bigint,'Incomplete intent makes no proposal');
+select is((select count(*) from ai_proposals where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),0::bigint,'Incomplete intent makes no proposal');
 select is(pg_temp.event('collect-2','collect','{"address":"Alamat uji"}')->>'code','collected','Second message extends context');
 select is(public.get_ai_conversation_context('chat-a','081200000001')->'draft_context'->>'customer_name','Ani','Name retained across messages');
 select is(public.get_ai_conversation_context('chat-a','081200000001')->'draft_context'->>'address','Alamat uji','Address retained');
 insert into results values('first',pg_temp.event('order-1','order','{"service_hint":"Cuci","confidence":0.9}'));
 select is((select value->>'code' from results where name='first'),'created','Clear intent creates proposal');
-select is((select customer_name from ai_proposals),'Ani','Proposal carries accumulated name');
-select is((select address from ai_proposals),'Alamat uji','Proposal carries accumulated address');
-select is((select service_id::text from ai_proposals),'a2222222-2222-4222-8222-222222222222','Service belongs to owner');
+select is((select customer_name from ai_proposals where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),'Ani','Proposal carries accumulated name');
+select is((select address from ai_proposals where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),'Alamat uji','Proposal carries accumulated address');
+select is((select service_id::text from ai_proposals where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),'a2222222-2222-4222-8222-222222222222','Service belongs to owner');
 select is(pg_temp.event('update-1','order','{"address":"Alamat baru"}')->>'code','updated','Continuation updates same proposal');
-select is((select count(*) from ai_proposals),1::bigint,'Only one proposal exists');
-select is((select address from ai_proposals),'Alamat baru','Updated data visible');
+select is((select count(*) from ai_proposals where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),1::bigint,'Only one proposal exists');
+select is((select address from ai_proposals where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),'Alamat baru','Updated data visible');
 select is(pg_temp.event('order-1','order')->>'code','duplicate','Original event cannot be applied twice');
 insert into results values('version',public.get_ai_conversation_context('chat-a','081200000001'));
 select is(pg_temp.event('update-2','collect','{"customer_name":"Ani baru"}')->>'code','updated','Collect extends existing pending proposal');
@@ -75,10 +75,10 @@ select is(public.ingest_ai_proposal('chat-a','retry-1','081200000001@s.whatsapp.
 select is((select count(*) from ai_message_receipts where wa_message_id='retry-1'),0::bigint,'Retry is not marked processed');
 select is(pg_temp.event('retry-1','order')->>'code','updated','Retry with fresh context succeeds once');
 select is(pg_temp.event('cancel-1','cancel')->>'code','closed','Cancellation withdraws proposal');
-select is((select status from ai_proposals),'ditutup_otomatis','Withdrawn proposal goes to history');
-select is((select count(*) from orders),0::bigint,'AI creates no order');
-select is((select count(*) from payments),0::bigint,'AI writes no payments');
-select is((select count(*) from savings_entries),0::bigint,'AI writes no savings');
+select is((select status from ai_proposals where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),'ditutup_otomatis','Withdrawn proposal goes to history');
+select is((select count(*) from orders where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),0::bigint,'AI creates no order');
+select is((select count(*) from payments where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),0::bigint,'AI writes no payments');
+select is((select count(*) from savings_entries where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),0::bigint,'AI writes no savings');
 select is(pg_temp.event('cancel-1','cancel')->>'code','duplicate','Duplicate cancellation is harmless');
 insert into results values('second',pg_temp.event('order-2','order','{"customer_name":"Ani kedua"}'));
 select is((select value->>'code' from results where name='second'),'created','Fresh order after withdrawal creates a new proposal');
@@ -86,7 +86,7 @@ select isnt((select value->>'proposal_id' from results where name='first'),
   (select value->>'proposal_id' from results where name='second'),'New proposal has a new ID');
 select is(pg_temp.event('cancel-1','cancel')->>'code','duplicate','Old cancellation cannot withdraw fresh proposal');
 select is(pg_temp.event('late-cancel','cancel','{}','081200000001','chat-a','2001-01-01')->>'code','stale','Late cancellation ignored');
-select is((select count(*) from ai_proposals where status='menunggu'),1::bigint,'Fresh proposal still pending');
+select is((select count(*) from ai_proposals where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa' and status='menunggu'),1::bigint,'Fresh proposal still pending');
 select is(pg_temp.event('inject','order','{"owner_id":"evil"}')->>'code','invalid','Draft rejects owner injection');
 select is(pg_temp.event('unknown','order','{}','081200000001','missing')->>'code','unknown_instance','Ingest rejects unknown instance');
 select is(pg_temp.event('b-order','order','{"customer_name":"B","service_hint":"Cuci"}',
@@ -126,8 +126,8 @@ insert into results values('offline_receipt',public.sync_push(
 select is((select value->>'status' from results where name='offline_receipt'),'committed','Offline order and decision commit after AI withdrawal');
 select is((select status from ai_proposals where id=(select (value->>'proposal_id')::uuid from results where name='first')),
   'disetujui','Owner acceptance wins for the accepted proposal');
-select is((select count(*) from orders),1::bigint,'Accepted order remains');
-select is((select count(*) from payments),0::bigint,'No automatic refund');
+select is((select count(*) from orders where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),1::bigint,'Accepted order remains');
+select is((select count(*) from payments where owner_id='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),0::bigint,'No automatic refund');
 -- Stale AI metadata must not block a real owner decision on a refreshed pending draft.
 
 select is(pg_temp.accept((select (value->>'proposal_id')::uuid from results where name='second'),

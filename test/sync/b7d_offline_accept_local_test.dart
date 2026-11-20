@@ -33,7 +33,10 @@ void main() {
             'action': action,
             'phone': '6281200000001',
             'source_text': 'Fixture order',
-            'draft_context': {'confidence': confidence},
+            'draft_context': {
+              'confidence': confidence,
+              'estimated_weight_grams': confidence < 0.8 ? 2000 : 3000,
+            },
           },
         },
       );
@@ -83,6 +86,7 @@ void main() {
     final row = await a.db.select(a.db.aiProposalRecords).getSingle();
     expect(row.status, 'disetujui');
     expect(row.confidence, 0.9);
+    expect(row.estimatedWeightGrams, 3000);
     final remote = await h.admin
         .from('ai_proposals')
         .select('status,order_id')

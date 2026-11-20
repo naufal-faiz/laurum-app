@@ -19,6 +19,7 @@ class Proposal extends DomainRecord {
     this.serviceId = '',
     this.cancelRequested = false,
     this.uncertainAddress = false,
+    this.estimatedWeightGrams,
   });
   final ProposalStatus status;
   final String sourceText;
@@ -27,6 +28,7 @@ class Proposal extends DomainRecord {
   final DateTime? deletedAt;
   final String customerName, phone, address, serviceId;
   final bool cancelRequested, uncertainAddress;
+  final int? estimatedWeightGrams;
   Proposal withStatus(
     ProposalStatus value, {
     String? orderId,
@@ -51,6 +53,7 @@ class Proposal extends DomainRecord {
     serviceId: serviceId ?? this.serviceId,
     cancelRequested: cancelRequested,
     uncertainAddress: uncertainAddress,
+    estimatedWeightGrams: estimatedWeightGrams,
   );
   @override
   List<Object?> get props => [
@@ -66,5 +69,6 @@ class Proposal extends DomainRecord {
     serviceId,
     cancelRequested,
     uncertainAddress,
+    estimatedWeightGrams,
   ];
 }

@@ -10401,6 +10401,18 @@ class $AiProposalRecordsTable extends AiProposalRecords
     type: DriftSqlType.double,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _estimatedWeightGramsMeta = const VerificationMeta(
+    'estimatedWeightGrams',
+  );
+  @override
+  late final GeneratedColumn<int> estimatedWeightGrams = GeneratedColumn<int>(
+    'estimated_weight_grams',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: 'CHECK (estimated_weight_grams > 0)',
+  );
   static const VerificationMeta _receivedAtMeta = const VerificationMeta(
     'receivedAt',
   );
@@ -10433,6 +10445,7 @@ class $AiProposalRecordsTable extends AiProposalRecords
     waMessageId,
     chatId,
     confidence,
+    estimatedWeightGrams,
     receivedAt,
   ];
   @override
@@ -10576,6 +10589,15 @@ class $AiProposalRecordsTable extends AiProposalRecords
         confidence.isAcceptableOrUnknown(data['confidence']!, _confidenceMeta),
       );
     }
+    if (data.containsKey('estimated_weight_grams')) {
+      context.handle(
+        _estimatedWeightGramsMeta,
+        estimatedWeightGrams.isAcceptableOrUnknown(
+          data['estimated_weight_grams']!,
+          _estimatedWeightGramsMeta,
+        ),
+      );
+    }
     if (data.containsKey('received_at')) {
       context.handle(
         _receivedAtMeta,
@@ -10667,6 +10689,10 @@ class $AiProposalRecordsTable extends AiProposalRecords
         DriftSqlType.double,
         data['${effectivePrefix}confidence'],
       ),
+      estimatedWeightGrams: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}estimated_weight_grams'],
+      ),
       receivedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}received_at'],
@@ -10700,6 +10726,7 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
   final String? waMessageId;
   final String? chatId;
   final double? confidence;
+  final int? estimatedWeightGrams;
   final DateTime? receivedAt;
   const AiProposalRow({
     required this.id,
@@ -10721,6 +10748,7 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
     this.waMessageId,
     this.chatId,
     this.confidence,
+    this.estimatedWeightGrams,
     this.receivedAt,
   });
   @override
@@ -10763,6 +10791,9 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
     if (!nullToAbsent || confidence != null) {
       map['confidence'] = Variable<double>(confidence);
     }
+    if (!nullToAbsent || estimatedWeightGrams != null) {
+      map['estimated_weight_grams'] = Variable<int>(estimatedWeightGrams);
+    }
     if (!nullToAbsent || receivedAt != null) {
       map['received_at'] = Variable<DateTime>(receivedAt);
     }
@@ -10790,6 +10821,9 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
       waMessageId: waMessageId == null && nullToAbsent ? const Value.absent() : Value(waMessageId),
       chatId: chatId == null && nullToAbsent ? const Value.absent() : Value(chatId),
       confidence: confidence == null && nullToAbsent ? const Value.absent() : Value(confidence),
+      estimatedWeightGrams: estimatedWeightGrams == null && nullToAbsent
+          ? const Value.absent()
+          : Value(estimatedWeightGrams),
       receivedAt: receivedAt == null && nullToAbsent ? const Value.absent() : Value(receivedAt),
     );
   }
@@ -10819,6 +10853,9 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
       waMessageId: serializer.fromJson<String?>(json['waMessageId']),
       chatId: serializer.fromJson<String?>(json['chatId']),
       confidence: serializer.fromJson<double?>(json['confidence']),
+      estimatedWeightGrams: serializer.fromJson<int?>(
+        json['estimatedWeightGrams'],
+      ),
       receivedAt: serializer.fromJson<DateTime?>(json['receivedAt']),
     );
   }
@@ -10845,6 +10882,7 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
       'waMessageId': serializer.toJson<String?>(waMessageId),
       'chatId': serializer.toJson<String?>(chatId),
       'confidence': serializer.toJson<double?>(confidence),
+      'estimatedWeightGrams': serializer.toJson<int?>(estimatedWeightGrams),
       'receivedAt': serializer.toJson<DateTime?>(receivedAt),
     };
   }
@@ -10869,6 +10907,7 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
     Value<String?> waMessageId = const Value.absent(),
     Value<String?> chatId = const Value.absent(),
     Value<double?> confidence = const Value.absent(),
+    Value<int?> estimatedWeightGrams = const Value.absent(),
     Value<DateTime?> receivedAt = const Value.absent(),
   }) => AiProposalRow(
     id: id ?? this.id,
@@ -10890,6 +10929,9 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
     waMessageId: waMessageId.present ? waMessageId.value : this.waMessageId,
     chatId: chatId.present ? chatId.value : this.chatId,
     confidence: confidence.present ? confidence.value : this.confidence,
+    estimatedWeightGrams: estimatedWeightGrams.present
+        ? estimatedWeightGrams.value
+        : this.estimatedWeightGrams,
     receivedAt: receivedAt.present ? receivedAt.value : this.receivedAt,
   );
   AiProposalRow copyWithCompanion(AiProposalRecordsCompanion data) {
@@ -10917,6 +10959,9 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
       waMessageId: data.waMessageId.present ? data.waMessageId.value : this.waMessageId,
       chatId: data.chatId.present ? data.chatId.value : this.chatId,
       confidence: data.confidence.present ? data.confidence.value : this.confidence,
+      estimatedWeightGrams: data.estimatedWeightGrams.present
+          ? data.estimatedWeightGrams.value
+          : this.estimatedWeightGrams,
       receivedAt: data.receivedAt.present ? data.receivedAt.value : this.receivedAt,
     );
   }
@@ -10943,13 +10988,14 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
           ..write('waMessageId: $waMessageId, ')
           ..write('chatId: $chatId, ')
           ..write('confidence: $confidence, ')
+          ..write('estimatedWeightGrams: $estimatedWeightGrams, ')
           ..write('receivedAt: $receivedAt')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     id,
     ownerId,
     createdAt,
@@ -10969,8 +11015,9 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
     waMessageId,
     chatId,
     confidence,
+    estimatedWeightGrams,
     receivedAt,
-  );
+  ]);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -10994,6 +11041,7 @@ class AiProposalRow extends DataClass implements Insertable<AiProposalRow> {
           other.waMessageId == this.waMessageId &&
           other.chatId == this.chatId &&
           other.confidence == this.confidence &&
+          other.estimatedWeightGrams == this.estimatedWeightGrams &&
           other.receivedAt == this.receivedAt);
 }
 
@@ -11017,6 +11065,7 @@ class AiProposalRecordsCompanion extends UpdateCompanion<AiProposalRow> {
   final Value<String?> waMessageId;
   final Value<String?> chatId;
   final Value<double?> confidence;
+  final Value<int?> estimatedWeightGrams;
   final Value<DateTime?> receivedAt;
   final Value<int> rowid;
   const AiProposalRecordsCompanion({
@@ -11039,6 +11088,7 @@ class AiProposalRecordsCompanion extends UpdateCompanion<AiProposalRow> {
     this.waMessageId = const Value.absent(),
     this.chatId = const Value.absent(),
     this.confidence = const Value.absent(),
+    this.estimatedWeightGrams = const Value.absent(),
     this.receivedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   });
@@ -11062,6 +11112,7 @@ class AiProposalRecordsCompanion extends UpdateCompanion<AiProposalRow> {
     this.waMessageId = const Value.absent(),
     this.chatId = const Value.absent(),
     this.confidence = const Value.absent(),
+    this.estimatedWeightGrams = const Value.absent(),
     this.receivedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id),
@@ -11087,6 +11138,7 @@ class AiProposalRecordsCompanion extends UpdateCompanion<AiProposalRow> {
     Expression<String>? waMessageId,
     Expression<String>? chatId,
     Expression<double>? confidence,
+    Expression<int>? estimatedWeightGrams,
     Expression<DateTime>? receivedAt,
     Expression<int>? rowid,
   }) {
@@ -11110,6 +11162,7 @@ class AiProposalRecordsCompanion extends UpdateCompanion<AiProposalRow> {
       if (waMessageId != null) 'wa_message_id': waMessageId,
       if (chatId != null) 'chat_id': chatId,
       if (confidence != null) 'confidence': confidence,
+      if (estimatedWeightGrams != null) 'estimated_weight_grams': estimatedWeightGrams,
       if (receivedAt != null) 'received_at': receivedAt,
       if (rowid != null) 'rowid': rowid,
     });
@@ -11135,6 +11188,7 @@ class AiProposalRecordsCompanion extends UpdateCompanion<AiProposalRow> {
     Value<String?>? waMessageId,
     Value<String?>? chatId,
     Value<double?>? confidence,
+    Value<int?>? estimatedWeightGrams,
     Value<DateTime?>? receivedAt,
     Value<int>? rowid,
   }) {
@@ -11158,6 +11212,7 @@ class AiProposalRecordsCompanion extends UpdateCompanion<AiProposalRow> {
       waMessageId: waMessageId ?? this.waMessageId,
       chatId: chatId ?? this.chatId,
       confidence: confidence ?? this.confidence,
+      estimatedWeightGrams: estimatedWeightGrams ?? this.estimatedWeightGrams,
       receivedAt: receivedAt ?? this.receivedAt,
       rowid: rowid ?? this.rowid,
     );
@@ -11223,6 +11278,9 @@ class AiProposalRecordsCompanion extends UpdateCompanion<AiProposalRow> {
     if (confidence.present) {
       map['confidence'] = Variable<double>(confidence.value);
     }
+    if (estimatedWeightGrams.present) {
+      map['estimated_weight_grams'] = Variable<int>(estimatedWeightGrams.value);
+    }
     if (receivedAt.present) {
       map['received_at'] = Variable<DateTime>(receivedAt.value);
     }
@@ -11254,6 +11312,7 @@ class AiProposalRecordsCompanion extends UpdateCompanion<AiProposalRow> {
           ..write('waMessageId: $waMessageId, ')
           ..write('chatId: $chatId, ')
           ..write('confidence: $confidence, ')
+          ..write('estimatedWeightGrams: $estimatedWeightGrams, ')
           ..write('receivedAt: $receivedAt, ')
           ..write('rowid: $rowid')
           ..write(')'))

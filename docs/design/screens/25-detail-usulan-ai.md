@@ -25,6 +25,9 @@ Interaksi:
   profil R4. Layanan kg memakai berat draf bila diisi (qty/total lineTotal);
   tanpa berat qtyMilli 0/total 0. Layanan pcs 1 pcs.
 - Detail Order memperlihatkan pesan berat belum diisi dan tombol ke Edit Order.
+- B7d berat (disetujui 20 Nov): berat eksplisit dari chat mengisi draf layanan kiloan;
+  jika tidak diketahui/ambigu, tampil empty state berat yang sudah ada. Pemilik dapat
+  mengoreksi; refresh memperbarui perkiraan hanya jika kolom belum diedit pemilik.
 - Rudi: ConfirmModal Batalkan order A-0139?; konfirmasi memakai koreksi pembayaran
   dan ledger pembatalan yang ada. Batal dialog tidak mengubah order.
 - B7d (keputusan pengguna 20 Nov 2026): pembatalan tanpa order_id atau dengan order

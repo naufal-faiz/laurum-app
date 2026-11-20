@@ -71,8 +71,26 @@ Pengguna mengonfirmasi usulan baru/alamat nomor 3 terlihat di Android.
 
 Temuan lanjutan: chat sumber menyebut 2 kg tetapi kolom berat kosong. Ini belum
 diimplementasikan pada kontrak worker, model Proposal, tabel server/Drift dan inisialisasi
-draf, bukan kegagalan penarikan atau duplikat. Tambahan belum diubah; persetujuan
-skema/kontrak diminta melalui `docs/plans/B7d-berat-usulan.md` sebelum implementasi.
+draf, bukan kegagalan penarikan atau duplikat. Tambahan disetujui pengguna dengan
+syarat berat ditulis di chat; selain itu memakai empty state yang sudah ada.
+
+## Tambahan perkiraan berat (lokal)
+- Migrasi 20261120100000 menambah satu kolom nullable gram dan memperluas fungsi
+  ringkasan/ingest/guard; data lama tetap null. Metadata server dipertahankan saat
+  pemilik menyetujui cache lama. Tidak membuat order atau pembayaran dari worker.
+- Drift v7 mempertahankan data v6 dan mengisi draf layanan kiloan dari perkiraan.
+  Draf mengikuti pembaruan AI selama belum diedit; koreksi pemilik dipertahankan.
+  State dipisah ke berkas data/controller untuk batas 100 baris, API lama tetap diekspor.
+- Node biasa membaca angka+satuan yang eksplisit; field berat tebakan LLM diabaikan.
+  2 kg/dua kilo -> 2000 gram, 2,5 kg -> 2500 gram; rentang ambigu tetap kosong.
+  Pesan lanjutan mempertahankan berat yang sudah disebut, order baru tanpa berat null.
+- Snapshot Dart v1-v6 tetap; JSON v6 yang sebelumnya tidak tersimpan dilengkapi dari
+  v7 dengan menghapus hanya kolom baru. Migrasi diverifikasi memakai snapshot Dart v6
+  yang sudah ada, sehingga data/kolom lama diuji independen dari snapshot baru.
+- pgTAP 405 PASS; unit worker 41/41; n8n lokal 19 fixture/16 model nyata lulus
+  (bukan benchmark akurasi). Tes draf, kontrak, migrasi dan persetujuan terarah lulus.
+- Tes B7d lama kini membatasi query ke pemilik fixture agar data Android aktif tidak
+  dihitung sebagai hasil tes. Tidak menghapus data pengujian Android yang sedang direview.
 Fixture dan workflow sementara dipertahankan sampai rangkaian manual selesai;
 lihat STATE.md untuk sesi harness dan cara membersihkannya.
 
@@ -87,7 +105,8 @@ lihat STATE.md untuk sesi harness dan cara membersihkannya.
 3. Dari repo aplikasi, dengan login CLI milik Anda dan project ref yang sudah Anda
    periksa, jalankan (placeholder diganti sendiri, jangan kirim kunci ke agen):
    `supabase db push --remote=<project-ref> --dry-run --skip-vault --workdir .`
-   Pastikan hanya `20261120090000_b7d_conversations.sql` yang tertinggal. Jika migrasi
+   Pastikan hanya `20261120090000_b7d_conversations.sql`, lalu
+   `20261120100000_b7d_estimated_weight.sql` yang tertinggal. Jika migrasi
    lain muncul, berhenti dan cocokkan riwayat dahulu. Kemudian jalankan perintah
    yang sama tanpa `--dry-run`. Jangan memakai `--include-all` atau seed.
 4. Periksa kedua tabel sudah ada, RLS aktif, authenticated tidak punya SELECT/
