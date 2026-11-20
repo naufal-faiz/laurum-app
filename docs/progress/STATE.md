@@ -22,6 +22,9 @@ ke n8n lokal 20 Nov 2026.
   Supabase dan LLM dipertahankan, satu flow aktif untuk /wa-ingest. B7e belum dimulai.
 - `com.cashier.laurum` (bukan varian b7dlocal) sudah dibangun ulang dari HEAD: debug 1.0.3,
   skema v7, sesi cloud lama utuh; dipakai untuk verifikasi UI berat 20 Nov 2026.
+- Backlog pembatalan tanpa order sudah ditutup di dbb1ad1 (`UnlinkedCancellation`): usulan
+  tetap menunggu dan pemilik melihat pesan; tes proposal_unlinked_cancellation_test 4/4 lulus
+  (diverifikasi ulang 20 Nov 2026, tanpa perubahan kode).
 
 ## Keputusan pengguna terbaru
 - Izin khusus ADD COLUMN ai_proposals, Drift dan perluasan kontrak diberikan.
