@@ -94,7 +94,13 @@ syarat berat ditulis di chat; selain itu memakai empty state yang sudah ada.
 Fixture dan workflow sementara dipertahankan sampai rangkaian manual selesai;
 lihat STATE.md untuk sesi harness dan cara membersihkannya.
 
-## Penerapan cloud - dilakukan pemilik, bukan agen
+## Penerapan cloud
+
+Status 20 Nov 2026: `20261120090000_b7d_conversations.sql` dan
+`20261120100000_b7d_estimated_weight.sql` sudah diterapkan ke `laurumdb` dan riwayat
+migrasi remote cocok dengan lokal. Workflow published belum diperbarui; lakukan langkah 5
+sebelum mengirim chat nyata.
+
 1. Cadangkan database dan ekspor versi published workflow n8n melalui UI; simpan
    ekspor berkredensial secara privat. Unpublish worker sampai migrasi selesai.
 2. Di SQL Editor proyek tujuan, periksa duplikat tanpa menampilkan isi chat:
