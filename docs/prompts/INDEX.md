@@ -60,7 +60,7 @@ LANJUT. Ikuti AGENTS.md dan SKILLS.md. Baca docs/prompts/_COMMON.md, lalu docs/p
 | B7a | B7a-audit-skema-ai.md | AI WhatsApp: audit dan rancangan skema (dokumen saja) | SELESAI (2026-11-18) | GATE: setujui docs/plans/B7a-skema.md dan jawab pertanyaan a-e di docs/progress/b7a.md; B7b belum ditulis |
 | B7b | B7b-migrasi-lokal-ai.md | AI WhatsApp: migrasi lokal (dua tabel, RLS, 4 RPC, pgTAP) | SELESAI (2026-11-18) | supabase test db 306 tes PASS; terpasang di cloud laurumdb (terverifikasi dump skema); lihat docs/progress/b7b.md |
 | B7c | B7c-aplikasi-ai.md | AI WhatsApp: Drift v6, repository usulan, sinkron push/pull | SELESAI; GATE LULUS (2026-11-20) | Pengguna mengonfirmasi sinkron dan usulan menjadi antrean berhasil; lihat docs/progress/b7c.md |
-| B7d | laurum-infra/docs/B7d-setup.md | Worker dan koreksi hasil audit (nomor webhook, tes asinkron, pembatalan tertahan) | KOREKSI SELESAI; GATE MENUNGGU (2026-11-20) | check_all 1234 tes; tiga integrasi lokal lulus; worker 7839bc5 aktif. Enam kasus worker utuh masih menunggu |
+| B7d | B7d-percakapan.md (usulan di docs/plans) | Koreksi awal teruji; tambahan konteks percakapan, satu usulan per nomor dan penarikan | PERILAKU DISEPAKATI; SKEMA MENUNGGU (2026-11-20) | Tinjau addendum sebelum mengubah kontrak/RPC; GATE worker dan B7e masih menunggu |
 | B7e-B7h | (belum ditulis) | AI WhatsApp: penautan, Edge Function, penyetelan, uji | MENUNGGU | Mulai hanya setelah GATE B7d lulus; lihat docs/plans/B7-ai-integrasi.md |
 | B5, B6, B8 | (belum ditulis) | Printer nyata, Play Store, Pro | MENUNGGU | Lihat docs/backend/ROADMAP.md |
 

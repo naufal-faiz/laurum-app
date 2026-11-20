@@ -2,7 +2,7 @@
 Diperbarui: 2026-11-20 | Cabang ai-whatsapp. Mode Integrasi AI WhatsApp.
 
 ## Sesi aktif
-Koreksi audit B7d selesai dan teruji; berhenti sebelum GATE enam kasus worker.
+Koreksi awal B7d sudah teruji. Addendum percakapan: perilaku disepakati, skema/RPC menunggu persetujuan.
 Dasar aplikasi 35270bb; worker laurum-infra commit 7839bc5. Tidak memulai B7e.
 
 ## Status irisan
@@ -18,22 +18,25 @@ Dasar aplikasi 35270bb; worker laurum-infra commit 7839bc5. Tidak memulai B7e.
 - APK release terbaru berhasil dibangun (78,6 MB); belum dipasang/diuji di HP pada sesi ini.
 
 ## Keputusan pengguna terbaru
-- 20 Nov: simpan usulan pembatalan tanpa order; tahan persetujuan dengan pesan jelas.
+- Terbaru: satu usulan Menunggu per akun+nomor; AI merangkum pesan bertahap dan memperbarui usulan yang sama.
+- Pelanggan batal: tarik usulan Menunggu; setelah final nomor boleh mengajukan order baru.
+- Penerimaan offline menjadi tanggung jawab pemilik; order tetap harus bisa sinkron, tanpa dibatalkan AI.
+- APK hanya saat diperlukan untuk uji HP atau diminta, bukan setiap coding.
+- Pengaman pembatalan tanpa order yang sudah dibuat tetap untuk data lama; belum ada penarikan otomatis.
 - Urut per fase; B7e hanya setelah GATE B7d lulus. AI hanya membaca.
-- Tidak mengubah skema, kontrak, dependensi, cloud, atau riwayat migrasi.
+- Sampai addendum disetujui, kontrak/skema aktif tetap; dependensi/cloud/riwayat migrasi tidak diubah.
 
 ## Belum di-commit
-Tidak ada setelah commit koreksi B7d sesi ini; worker tersimpan pada 7839bc5.
+Tidak ada setelah commit rancangan addendum sesi ini; kode aplikasi dbb1ad1 dan worker 7839bc5.
 
 ## Langkah berikutnya
-1. Pasang APK terbaru agar pengaman pembatalan B7d tersedia di HP.
-2. GATE B7d: jalankan enam kasus scripts/smoke.ps1 di laurum-infra; kunci hanya di
-   environment pengguna. Kasus dua akun memerlukan instance pemilik kedua.
-3. Setelah GATE lulus, baru B7e penautan/chat nyata, lalu B7f koneksi/pengaturan nyata.
+1. Tinjau/setujui docs/plans/B7d-percakapan.md (dua tabel server, RPC dan guard).
+2. Setelah persetujuan, perbarui Kontrak plan utama dan implementasikan addendum di lokal.
+3. Jalankan tes percakapan serta enam kasus GATE B7d; baru lanjut B7e/B7f.
 
 ## Blocker
 - Enam kasus worker aktif menuju cloud belum dibuktikan; agen dibatasi Supabase lokal.
-- Pengaitan pembatalan ke order belum tersedia; usulan tersebut tetap tertahan sesuai pilihan pengguna.
+- Perangkuman percakapan dan penarikan usulan belum diimplementasikan; BE-7/AI-9 menunggu persetujuan teknis.
 
 ## Bukti terakhir
 - check_all: SEMUA HIJAU; 1234 lulus, 3 skip; REPO_MAP 1189.
