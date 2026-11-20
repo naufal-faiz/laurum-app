@@ -2,50 +2,52 @@
 Diperbarui: 2026-11-20 | Cabang ai-whatsapp. Mode Integrasi AI WhatsApp.
 
 ## Sesi aktif
-Addendum percakapan B7d selesai diimplementasikan dan diuji lokal; GATE adopsi.
-Dasar aplikasi 6831cfa; worker laurum-infra 7839bc5. Tidak memulai B7e.
+Uji Android lokal B7d sedang berjalan; usulan awal tersimpan, menunggu pemeriksaan.
+Kode aplikasi 8888ce3; worker 18e5105. Tidak memulai B7e atau menerapkan cloud.
 
 ## Status irisan
 - B7a/B7b selesai; B7c GATE lulus menurut pengujian sinkron/antrean oleh pengguna.
-- B7d: konteks terstruktur sebelum order jelas; satu Menunggu per pemilik+nomor;
-  pesan lanjutan memperbarui usulan, pembatalan menarik ke ditutup_otomatis.
-- Setelah final boleh order baru; receipt/generasi/revisi melindungi duplikat,
-  pesan lama dan konflik. Worker retry membaca ulang konteks/model maksimal 3 kali.
-- Penerimaan dari cache offline tetap tersinkron dengan order valid; AI tidak
-  membatalkan order/uang. Pengaman pembatalan legacy tetap dipertahankan.
-- Migrasi baru 20261120090000: dua tabel server-only, RPC/guard/cleanup dan indeks;
-  tidak mengubah migrasi lama, skema Drift, tampilan, dependensi atau logika uang.
-- Harness n8n terisolasi ke DB lokal; seluruh fixture/workflow sementara dibersihkan.
-- Workflow utama yang menuju cloud tetap versi sebelumnya; sumber addendum belum
-  dipublikasikan. Compose concurrency=1 menunggu adopsi, bukan throughput produksi.
+- B7d implementasi lokal selesai: konteks bertahap, satu Menunggu per nomor,
+  pembaruan, penarikan, order baru setelah final, dan penerimaan offline aman.
+- Migrasi baru 20261120090000 hanya lokal; cloud belum diterapkan menurut pengguna.
+- Debug terbaru dibangun atas permintaan pengguna dengan init Gradle sementara:
+  paket com.cashier.laurum.b7dlocal, label Laurum B7d Uji; data aplikasi asli terpisah.
+- Android memakai Supabase lokal via adb reverse tcp:54321 tcp:54321.
+  Reverse sempat hilang saat koneksi debug terputus; sudah dipulihkan.
+- Login fixture lokal berhasil; akun cloud memang tidak berlaku di lingkungan ini.
+- Worker sementara b7d-test-b2772820a381 aktif menuju lokal, model LLM yang sudah ada.
+  Workflow utama menuju cloud masih versi lama dan dipertahankan.
+- Pesan belum jelas: proposals=[], pending=0. Pesan order: satu Menunggu,
+  Ani, Jalan Uji B7D nomor 1; proposal f6e21432-0425-4a3f-9c31-d22955f98f08.
+- UI terakhir masih Antrean 0 sebelum sinkron; belum ada konfirmasi tampilan usulan.
+- newdesign HEAD 7dd054f punya tarik-refresh bf11776 dan fix kedipan c5c6087;
+  fitur belum ada pada ai-whatsapp. Belum merge; menunggu pilihan/izin pengguna.
 
 ## Keputusan pengguna terbaru
-- Satu usulan Menunggu per nomor; rangkum pesan, buat hanya bila niat order jelas.
-- Batal menarik usulan; setelah disetujui/ditolak/ditutup boleh usulan order baru.
-- Order dari persetujuan offline tetap milik keputusan pemilik, tanpa pembatalan AI.
-- Addendum skema/kontrak disetujui; agen hanya mengimplementasikan Supabase lokal.
-- Tidak membuat APK setiap coding. AI hanya membaca; urut GATE, B7e menunggu.
+- Uji melalui worker; pengguna memeriksa hasil di Android. Tidak memakai cloud.
+- Pengguna meminta memperbarui debug; salinan lokal dipasang tanpa menghapus app asli.
+- Satu Menunggu per nomor, rangkum konteks, tarik saat batal; boleh order baru setelah final.
+- Order persetujuan offline tetap tersinkron; AI tidak membatalkan uang/order atau mengirim WA.
+- APK tidak dibuat setiap coding; build ini diminta untuk pengujian perangkat.
 
 ## Belum di-commit
-Tidak ada setelah commit tugas ini; implementasi dan bukti disimpan di kedua repo.
+Tidak ada setelah commit catatan sesi ini; kode produksi tidak diubah.
 
 ## Langkah berikutnya
-1. Pemilik menerapkan migrasi cloud dan publish worker sesuai docs/progress/b7d.md.
-2. Pemilik memeriksa usulan/penarikan di aplikasi; B7e setelah GATE B7d lulus.
-3. Penautan WhatsApp nyata dan pengaturan/koneksi aplikasi menunggu B7e/B7f.
+1. Tunggu pilihan penggabungan lokal newdesign ke ai-whatsapp (izin diminta via tool).
+2. Jika tetap versi sekarang, sinkron manual dan pastikan satu usulan Ani terlihat.
+3. Lanjut update alamat -> duplikat -> batal -> order baru, satu tahap per konfirmasi.
+4. Setelah uji selesai, kirim finish ke harness agar fixture/workflow lokal dibersihkan.
+5. Adopsi cloud oleh pemilik dan GATE B7d mendahului B7e/B7f.
 
 ## Blocker
-Adopsi cloud harus dilakukan pemilik; tidak mengakses cloud atau membangun APK.
-Chat WhatsApp asli belum diuji; hasil fixture bukan angka akurasi.
+Belum ada izin merge. Tarik-refresh tidak tersedia di build AI saat ini.
+Chat WA asli belum diuji. Tidak mengklaim akurasi dari fixture sintetis.
 
 ## Bukti terakhir
-- supabase test db: Files=4, Tests=375 PASS (69 tes B7d); npm test: 6/6.
-- Worker unit 26/26; smoke logic 9/9; n8n lokal 14/14 fixture, 11/11 LLM nyata
-  dengan credential yang sudah ada, tetap ke DB lokal (bukan benchmark akurasi).
-- Drift->sync_push->pull offline setelah penarikan AI: 1/1 lulus, outbox kosong.
-- 9 body fungsi runtime cocok dengan migrasi akhir; 4 layanan worker healthy;
-  workflow uji tersisa=0, workflow utama published=1.
-- check_all: SEMUA HIJAU, 1234 lulus/4 skip; REPO_MAP 1190 berkas.
-- Keempat skip dijalankan terpisah ke Supabase lokal: 4/4 lulus (confidence,
-  isolasi akun, dua perangkat, persetujuan offline setelah penarikan AI).
-- Tidak ada APK baru. Rincian dan panduan adopsi: docs/progress/b7d.md.
+- Sebelum uji Android: check_all SEMUA HIJAU, 1234 lulus/4 skip; 4 integrasi lokal lulus.
+- DB 375 PASS; Edge 6/6; worker unit 26/26; smoke logic 9/9; n8n 14 fixture/11 LLM lulus.
+- Build debug lokal BUILD SUCCESSFUL 2m2s; install Success, paket lokal berjalan.
+- Harness interaktif exec session 20240 masih aktif; perintah status/update/duplicate/cancel/fresh/finish.
+- Skrip sementara: %TEMP%/laurum-b7d-android-test/android-harness.js dan android-manual.js.
+  Jangan memakai perintah ui bawaan harness (belum membatasi elemen ke paket uji).
