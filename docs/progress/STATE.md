@@ -35,6 +35,9 @@ Tidak ada.
 
 ## Blocker
 Tidak ada blocker kode. Uji cloud (fungsi + tunnel) belum dijalankan; itu tindakan pemilik.
+Sebelum reset PC (21 Nov 2026): branch ai-whatsapp, backend-newdesign, ui/*, dan dua backup
+stash sudah didorong ke origin; repo laurum-infra belum punya remote sehingga disimpan
+sebagai bundle + dump n8n/evolution di E:/Latihan Pemrograman/laurum-projects/_backup-20261121.
 
 ## Bukti terakhir
 - npm test --prefix supabase: 17/17 lulus (delete-account 6, wa-connect 6, wa-status 5).
