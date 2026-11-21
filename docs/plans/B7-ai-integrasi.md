@@ -71,6 +71,13 @@ Edge Function (JWT pemilik): wa-connect, wa-disconnect. Pengaturan AI dari aplik
   memakai perkiraan ini, dapat diedit pemilik; tanpa data memakai empty state yang ada.
   Persetujuan tetap eksplisit, memakai perhitungan/order/TransactionRunner yang sama.
 
+### Addendum B7e/B7f (disetujui pengguna 21 Nov 2026)
+- B7e: backend penautan. Edge Function `wa-connect` mengembalikan QR **dan** kode pasangan
+  sekaligus (WhatsApp Web), `wa-status` memetakan connectionState ke wa_connections.
+  Diuji `npm test` dan panggilan langsung ke Evolution lokal; tanpa perubahan UI.
+- B7f: layar Hubungkan WhatsApp memakai fungsi itu (QR | nomor telepon) dan deploy cloud
+  oleh pemilik. Langkah deploy ada di docs/progress/b7e.md.
+
 ## Fase
 | Fase | Hasil | Selesai bila | GATE (tindakanmu) |
 | --- | --- | --- | --- |

@@ -430,3 +430,15 @@ enabled = true
 verify_jwt = false
 entrypoint = "./functions/delete-account/index.ts"
 
+# Owner pairing: the handler verifies the bearer token with /auth/v1/user itself.
+# Secrets (not committed): EVOLUTION_URL, EVOLUTION_API_KEY.
+[functions.wa-connect]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/wa-connect/index.ts"
+
+[functions.wa-status]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/wa-status/index.ts"
+

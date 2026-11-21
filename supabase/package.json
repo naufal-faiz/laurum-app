@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test functions/delete-account/handler.test.ts"
+    "test": "node --test functions/delete-account/handler.test.ts functions/wa-connect/handler.test.ts functions/wa-status/handler.test.ts"
   },
   "description": "Pinned development CLI for the local Laurum Supabase stack",
   "devDependencies": {
